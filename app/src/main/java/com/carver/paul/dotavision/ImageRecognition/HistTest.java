@@ -1,5 +1,8 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.carver.paul.dotavision.MainActivity;
 
 import org.opencv.core.Core;
@@ -22,6 +25,8 @@ import java.io.File;
 import java.util.*;
 import java.util.List;
 
+import static org.opencv.android.Utils.bitmapToMat;
+
 // http://www.pyimagesearch.com/2014/01/22/clever-girl-a-guide-to-utilizing-color-histograms-for-computer-vision-and-image-search-engines/
 
 
@@ -30,7 +35,8 @@ public class HistTest {
 
     static {
         heroes = new ArrayList<>();
-        File folder = new File(MainActivity.getImagesLocation() + File.separator + "/hero icons med");
+        File folder = new File(MainActivity.getImagesLocation(), "/hero icons");
+        //System.out.println("loading files from: " + folder.getPath());
         File[] listOfFiles = folder.listFiles();
 
         for (File file : listOfFiles) {
@@ -45,7 +51,7 @@ public class HistTest {
     }
 
 
-    static public void FindMostSimilarHeroes(Mat image, String actualName) {
+/*    static public void FindMostSimilarHeroes(Mat image, String actualName) {
         FindMostSimilarHeroes(image, actualName, Imgproc.CV_COMP_BHATTACHARYYA, false);
     }
 
@@ -67,7 +73,7 @@ public class HistTest {
         if (positionOfSearchedHero > 1) {
             for (int i = similarityList.size() - 1; i >= similarityList.size() - positionOfSearchedHero; i--) {
                 System.out.println(i + ": " + similarityList.get(i).hero.name + ", " + similarityList.get(i).similarity);
-/*                HeroNameAndSimilarity hero = similarityList.get(i);
+*//*                HeroNameAndSimilarity hero = similarityList.get(i);
                 Path source = Paths.get(Main.imagesLoc + "/hero icons med/" + hero.name);
                 Path destination = Paths.get(Main.imagesLoc + "/matches/" + oneToLookFor.name + i + ".png");
                 try {
@@ -76,28 +82,28 @@ public class HistTest {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-*//*                 if(saveHist) {
+*//**//*                 if(saveHist) {
                      Mat singleCompHist = Histogram.DrawNewHueHistogram(photoHist);
                      Histogram.DrawHueHistogramOnTop(hero.hist, singleCompHist, new Scalar(60, 60, 0));
                      Imgcodecs.imwrite(Main.imagesLoc + "/matches/" + oneToLookFor.name + i + "hist.jpg", singleCompHist);
                      Histogram.DrawHueHistogramOnTop(hero.hist, drawnHist, new Scalar(60, 60, 0));
-                 }*/
+                 }*//*
             }
             System.out.println();
         } else {
             System.out.println("Found " + actualName + " first time!");
         }
 
-/*
+*//*
             HeroNameAndSimilarity detectedHero = similarityList.get(similarityList.size() - 1);
             nameOfDetectedHero.append(detectedHero.name);
-*/
+*//*
 
-/*        if(saveHist) {
+*//*        if(saveHist) {
             Histogram.DrawHueHistogramOnTop(oneToLookFor.hist, drawnHist, new Scalar(140, 140, 0));
             Histogram.DrawHueHistogramOnTop(photoHist, drawnHist);
             Imgcodecs.imwrite(Main.imagesLoc + "/combhists/" + actualName + "_hphover.png" + ".jpg", drawnHist);
-        }*/
+        }*//*
     }
 
     static public List<HeroHistAndSimilarity> OrderedListOfHueSimilarHeroes(Mat image) {
@@ -118,10 +124,10 @@ public class HistTest {
             similarityList.add(new HeroHistAndSimilarity(hero, value));
 //             if (hero.heroName.startsWith(actualName)) {
 //                 oneToLookFor = newOne;
-// /*                if(saveHist) {
+// *//*                if(saveHist) {
 //                     Histogram.DrawHueHistogramOnTop(hero.histogram, drawnHist, new Scalar(120, 120, 0));
 //                     Imgcodecs.imwrite(Main.GetImagesLoc() + "/combhists/" + hero.heroName + ".jpg", drawnHist);
-//                 }*/
+//                 }*//*
 //             }
         }
 
@@ -132,6 +138,10 @@ public class HistTest {
 
         return similarityList;
 
+    }*/
+
+    static public List<HeroHistAndSimilarity> OrderedListOfTemplateSimilarHeroes(Mat photo) {
+        return OrderedListOfTemplateSimilarHeroes(photo, 0, 210, 140, 2, 5, 5);
     }
 
     // the combination of threshold method 2 and template method 5 is incredible!!!!
@@ -221,15 +231,23 @@ public class HistTest {
     }
 }
 
+/*
+TODO: Give HeroWithHist a sensible name now that I don't use histograms!
+*/
+
 class HeroWithHist {
-    protected Mat histogram;
+    // protected Mat histogram;
     protected Mat image;
     protected String name;
 
     public HeroWithHist(String path, String filename) {
-        image = Imgcodecs.imread(path);
-        histogram = Histogram.CreateHueHistogram(image);
-        //Imgcodecs.imwrite(Main.imagesLoc + "/Hists/" + heroName + "hist.jpg", Histogram.DrawNewHueHistogram(histogram));
+        //image = Imgcodecs.imread(path);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        image = new Mat();
+        bitmapToMat(bitmap, image);
+        Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2BGRA);
+
         name = filename.substring(0, filename.indexOf("_hphover"));
     }
 

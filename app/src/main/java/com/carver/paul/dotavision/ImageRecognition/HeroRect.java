@@ -122,13 +122,13 @@ public class HeroRect {
         Imgproc.rectangle(img, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 2);
     }
 
-    public void FindClosenessOfDetection() {
+/*    public void FindClosenessOfDetection() {
         HistTest.FindMostSimilarHeroes(image, actualHeroName);
     }
 
     public void FindClosenessOfDetection(int method) {
         HistTest.FindMostSimilarHeroes(image, actualHeroName, method);
-    }
+    }*/
 
 
     public static List<HeroRect> CalculateHeroRects(List<Mat> linesList, Mat backgroundImage) {
@@ -260,7 +260,7 @@ class HeroLine {
     boolean isRealLine;
 
     public HeroLine(Mat lines) {
-        rect = new android.graphics.Rect(0, 0, -1, -1);
+        //rect = new android.graphics.Rect();//0, 0, -1, -1);
 
         if (lines.rows() == 0) {
             isRealLine = false;
@@ -268,10 +268,41 @@ class HeroLine {
             isRealLine = true;
             for (int i = 0; i < lines.rows(); i++) {
                 double[] val = lines.get(i, 0);
-                rect.union((int) val[0], (int) val[1]);
-                rect.union((int) val[2], (int) val[3]);
+                if (i == 0) {
+                    initialiseRect(val);
+                } else {
+                    rect.union((int) val[0], (int) val[1]);
+                    rect.union((int) val[2], (int) val[3]);
+                }
             }
+            System.out.println("Created rect with width: " + rect.width());
         }
+    }
+
+    // This is needed because rect.union doesn't check if the rectangle is emplty.
+    private void initialiseRect(double[] val) {
+        int left;
+        int right;
+        int top;
+        int bottom;
+
+        if ((int) val[0] < (int) val[2]) {
+            left = (int) val[0];
+            right = (int) val[2];
+        } else {
+            left = (int) val[2];
+            right = (int) val[0];
+        }
+
+        if ((int) val[1] < (int) val[3]) {
+            top = (int) val[1];
+            bottom = (int) val[3];
+        } else {
+            top = (int) val[3];
+            bottom = (int) val[1];
+        }
+
+        rect = new android.graphics.Rect(left, top, right, bottom);
     }
 
     public void Draw(Mat img) {
@@ -301,6 +332,8 @@ class HeroLine {
         int numImagesWithRealHeights = 0;
         for (HeroLine heroLine : heroLines) {
             if (heroLine.isRealLine == false || heroLine.rect.width() > MAX_ACCEPTABLE_WIDTH) {
+                int w = heroLine.rect.width();
+                System.out.println("W:" + w + ", max:" + MAX_ACCEPTABLE_WIDTH);
                 heroLine.isRealLine = false;
                 badLines.add(heroLine);
             } else {

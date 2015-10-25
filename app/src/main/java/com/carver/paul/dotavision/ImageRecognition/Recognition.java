@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.widget.ImageView;
 
+import com.carver.paul.dotavision.MainActivity;
 import com.carver.paul.dotavision.R;
 
 import org.opencv.core.CvType;
@@ -24,7 +25,9 @@ import static org.opencv.android.Utils.matToBitmap;
  */
 public class Recognition {
 
-    public static Bitmap Run(Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
+    public static Bitmap Run() { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
+
+        Bitmap bitmap = BitmapFactory.decodeFile(new File(MainActivity.getImagesLocation(), "dota.jpg").getPath());
 
         Mat load = new Mat();
 //        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
@@ -44,7 +47,11 @@ public class Recognition {
 
         List<HeroRect> heroes = HeroRect.CalculateHeroRects(linesList, load);
 
-      //  String savePath = ((Environment.DIRECTORY_PICTURES) + File.separator + "DOTA Vision" + File.separator + "dotalines.jpg");
+        for (HeroRect hero : heroes) {
+            List<HeroHistAndSimilarity> similarityList = HistTest.OrderedListOfTemplateSimilarHeroes(hero.image);
+            System.out.println("Found:" + similarityList.get(0).hero.name);
+        }
+
         Bitmap bitmap2 = Bitmap.createBitmap(load.cols(), load.rows(), Bitmap.Config.ARGB_8888);
         matToBitmap(load, bitmap2);
         return bitmap2;

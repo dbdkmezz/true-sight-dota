@@ -80,15 +80,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static String getImagesLocation() {
-        return new String ((Environment.DIRECTORY_PICTURES) + File.separator + "DOTA Vision");
+        return new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
     }
 
     private void testImageRecognition() {
 
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+/*        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "DOTA Vision");
         File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                "dota.jpg");
+                "dota.jpg");*/
 
         TextView tv = (TextView)findViewById(R.id.minH);
         int hMin = Integer.parseInt(tv.getText().toString());
@@ -108,7 +109,12 @@ public class MainActivity extends AppCompatActivity {
         tv = (TextView)findViewById(R.id.maxV);
         int vMax = Integer.parseInt(tv.getText().toString());
 
-        Bitmap bitmap = Recognition.Run(BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
+//        System.out.println(mediaFile.getPath());
+
+/*        String fname = new File(getImagesLocation(), "dota.jpg").getPath();
+        Bitmap bitmap = BitmapFactory.decodeFile(fname);*/
+
+        Bitmap bitmap = Recognition.Run(); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
 
         ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);

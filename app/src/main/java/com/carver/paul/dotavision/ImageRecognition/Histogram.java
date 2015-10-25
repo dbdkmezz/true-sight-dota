@@ -1,3 +1,4 @@
+/*
 package com.carver.paul.dotavision.ImageRecognition;
 
 import org.opencv.core.Core;
@@ -41,12 +42,14 @@ public final class Histogram {
 
         matList.add(hsvPlanes.get(0));
         Imgproc.calcHist(matList, new MatOfInt(0), new Mat(), hueHistogram, new MatOfInt(256), new MatOfFloat(0f, 256f), false);
+*/
 /*
         int HIST_W = 512;
         int HIST_H = 600;
 
         Mat dawnHist = new Mat(HIST_H, HIST_W, CvType.CV_8UC1);
-        Core.normalize(hueHistogram, hueHistogram, 3, dawnHist.rows(), Core.NORM_MINMAX);*/
+        Core.normalize(hueHistogram, hueHistogram, 3, dawnHist.rows(), Core.NORM_MINMAX);*//*
+
 
         return hueHistogram;
     }
@@ -97,8 +100,10 @@ public final class Histogram {
                 }
 
                 if (sigHeroWidth > (sigPhotoWidth + 1)) {
+*/
 /*                    double averageHeightDiff = totalSigHeightDiff / significantWidth;
-                    sigOfDifferences += averageHeightDiff * WEIGHT_OF_AV_HEIGHT_DIFF;*/
+                    sigOfDifferences += averageHeightDiff * WEIGHT_OF_AV_HEIGHT_DIFF;*//*
+
                     sigOfDifferences += totalSigHeightDiff * WEIGHT_OF_AV_HEIGHT_DIFF;
                     sigOfDifferences += WEIGHT_OF_ALL_SIG_PEAKS;
                 }
@@ -110,6 +115,7 @@ public final class Histogram {
 // The problem is that I want to also count cases where the origional has a hue peak wider than the photo's peak
 // (photo peaks get distorted wider, so if the other is wider it's due to not matching)
 
+*/
 /*            for (int i = 0; i < HIST_SIZE; i++) {
                 int significantWidth = 0;
                 double totalSigHeightDiff = 0;
@@ -138,16 +144,22 @@ public final class Histogram {
                 if (significantWidth > 0) {
                     i--;
 
-*//*                    double averageHeightDiff = totalSigHeightDiff / significantWidth;
+*//*
+*/
+/*                    double averageHeightDiff = totalSigHeightDiff / significantWidth;
                     sigOfDifferences += averageHeightDiff * WEIGHT_OF_AV_HEIGHT_DIFF;*//*
+*/
+/*
                     sigOfDifferences += totalSigHeightDiff * WEIGHT_OF_AV_HEIGHT_DIFF;
                     sigOfDifferences += WEIGHT_OF_ALL_SIG_PEAKS;
                 }
-            }*/
+            }*//*
 
 
 
 
+
+*/
 /*
             final int NUM_CHUNKS = 64;
             int chunkSize = HIST_SIZE / NUM_CHUNKS;
@@ -194,10 +206,12 @@ public final class Histogram {
 
                 }
             }
-            */
+            *//*
 
 
 
+
+*/
 /*                int bigav;
                 int smallav;
                 if(av1 > av2) {
@@ -219,7 +233,8 @@ public final class Histogram {
             }
 
 //          totalDiff = 0;
-*/
+*//*
+
             return sigOfDifferences + Imgproc.compareHist(heroHist, photoHist, Imgproc.CV_COMP_BHATTACHARYYA);
         } else {
             return Imgproc.compareHist(heroHist, photoHist, method);
@@ -251,27 +266,32 @@ public final class Histogram {
             Point p1 = new Point(BIN_W * (i - 1), HIST_H - Math.round(hueHistogramData.get(i - 1, 0)[0]));
             Point p2 = new Point(BIN_W * (i), HIST_H - Math.round(hueHistogramData.get(i, 0)[0]));
 
+*/
 /*
             // don't know why, but this seems to be needed to remove noise!
             if( p1.y >= HIST_H )
                 p1.y = HIST_H - 1;
             if( p2.y >= HIST_H )
-                p2.y = HIST_H - 1;*/
+                p2.y = HIST_H - 1;*//*
+
 
 
 
             Imgproc.line(hist, p1, p2, colour, 2, 8, 0);
 
-  /*          Point p3 = new Point(BIN_W * (i - 1), HIST_H - Math.round(s_hist.get(i - 1, 0)[0]));
+  */
+/*          Point p3 = new Point(BIN_W * (i - 1), HIST_H - Math.round(s_hist.get(i - 1, 0)[0]));
             Point p4 = new Point(BIN_W * (i), HIST_H - Math.round(s_hist.get(i, 0)[0]));
             Imgproc.line(histogram, p3, p4, new Scalar(0, 255, 0), 2, 8, 0);
 
             Point p5 = new Point(BIN_W * (i - 1), HIST_H - Math.round(v_hist.get(i - 1, 0)[0]));
             Point p6 = new Point(BIN_W * (i), HIST_H - Math.round(v_hist.get(i, 0)[0]));
-            Imgproc.line(histogram, p5, p6, new Scalar(0, 0, 255), 2, 8, 0);*/
+            Imgproc.line(histogram, p5, p6, new Scalar(0, 0, 255), 2, 8, 0);*//*
+
 
         }
 
+*/
 /*
         Imgproc.cvtColor(load, load, Imgproc.COLOR_BGR2RGB);
         List<Mat> matList = new ArrayList<>();
@@ -287,7 +307,8 @@ public final class Histogram {
                 new MatOfFloat(0,256,0,256,0,256));
 
              hist = cv2.normalize(hist).flatten()
-*/
+*//*
+
 
         //       # extract a 3D RGB color histogram from the image,
         //     # using 8 bins per channel, normalize, and update
@@ -300,6 +321,7 @@ public final class Histogram {
 
         //       System.out.println("histogram\n" + histogram.dump());
 
+*/
 /*
 
         Imgproc.cvtColor(load, load, Imgproc.COLOR_BGR2HSV);
@@ -358,11 +380,13 @@ public final class Histogram {
             Imgproc.line(histogram, p5, p6, new Scalar(0, 0, 255), 2, 8, 0);
 
         }
-*/
+*//*
+
 
 //        Imgcodecs.imwrite(Main.GetImagesLoc() + "/histogram.jpg", histogram);
 
-        /*
+        */
+/*
         List<Mat> loadInList = new ArrayList<Mat>();
         loadInList.add(load);
         hist = new Mat();
@@ -372,6 +396,8 @@ public final class Histogram {
         MatOfInt histSize = new MatOfInt( hBins,  sBins);
         MatOfFloat ranges =  new MatOfFloat( 0f,180f,0f,256f );
 
-        Imgproc.calcHist(loadInList, new MatOfInt(1), new Mat(), hist, histSize, ranges);*/
+        Imgproc.calcHist(loadInList, new MatOfInt(1), new Mat(), hist, histSize, ranges);*//*
+
     }
 }
+*/
