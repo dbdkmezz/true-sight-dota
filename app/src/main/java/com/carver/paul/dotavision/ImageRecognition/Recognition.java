@@ -39,9 +39,9 @@ public class Recognition {
 
         List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
 
-        for (Mat lines : linesList) {
+/*        for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
-        }
+        }*/
 
 
         List<HeroRect> heroes = HeroRect.CalculateHeroRects(linesList, load);
