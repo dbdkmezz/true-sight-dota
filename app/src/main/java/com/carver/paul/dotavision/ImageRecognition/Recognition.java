@@ -25,9 +25,8 @@ import static org.opencv.android.Utils.matToBitmap;
  */
 public class Recognition {
 
-    public static Bitmap Run() { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
+    public static Bitmap Run(Bitmap bitmap) { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
 
-        Bitmap bitmap = BitmapFactory.decodeFile(new File(MainActivity.getImagesLocation(), "dota.jpg").getPath());
 
         Mat load = new Mat();
 //        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);

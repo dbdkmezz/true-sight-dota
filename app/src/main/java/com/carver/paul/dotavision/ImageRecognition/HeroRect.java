@@ -332,8 +332,6 @@ class HeroLine {
         int numImagesWithRealHeights = 0;
         for (HeroLine heroLine : heroLines) {
             if (heroLine.isRealLine == false || heroLine.rect.width() > MAX_ACCEPTABLE_WIDTH) {
-                int w = heroLine.rect.width();
-                System.out.println("W:" + w + ", max:" + MAX_ACCEPTABLE_WIDTH);
                 heroLine.isRealLine = false;
                 badLines.add(heroLine);
             } else {
@@ -346,7 +344,7 @@ class HeroLine {
         }
 
         if (goodLines.size() < 2) {
-            System.out.println("After removing lines without lines, and overly wide lines I'm not left with enough good hero lines. So I'm giving up trying to fix them.");
+            System.out.println("After removing lines without lines, and overly wide lines I'm only left " + goodLines.size() + " hero lines. So I'm giving up trying to fix them.");
             return;
         }
 
@@ -374,7 +372,7 @@ class HeroLine {
         }
 
         if (goodLines.size() < 2) {
-            System.out.println("After getting ride of lines which are too tall I'm not left with enough good hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!");
+            System.out.println("After getting ride of lines which are too tall I'm only left with " + goodLines.size() + " hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!");
             return;
         }
 
@@ -459,10 +457,11 @@ class HeroLine {
         pos = 0;
         for (HeroLine heroLine : heroLines) {
             if (heroLine.isRealLine == false) {
-                heroLine.rect.left = firstGoodX + ((pos - firstGoodPos) * avGoodXDistance);
-                heroLine.rect.right = heroLine.rect.left + avGoodWidth;
-                heroLine.rect.top = avGoodY;
-                heroLine.rect.bottom = heroLine.rect.top + avGoodHeight;
+                int left = firstGoodX + ((pos - firstGoodPos) * avGoodXDistance);
+                int right = left + avGoodWidth;
+                int top = avGoodY;
+                int bottom = top + avGoodHeight;
+                heroLine.rect = new android.graphics.Rect(left, top, right, bottom);
                 heroLine.isRealLine = true;
             }
             pos++;

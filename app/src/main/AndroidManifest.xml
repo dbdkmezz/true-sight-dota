@@ -21,6 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DebugActivities.DebugLineDetectionActivity"
+            android:label="@string/title_activity_debug_line_detection"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.carver.paul.dotavision.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -13,25 +13,16 @@ public class Variables {
     private static final List<Integer> l3YellowRange = Arrays.asList(25, 35);
     private static final List<Integer> l4OrangeRange = Arrays.asList(8, 18);
 
-/*
     private static final List<Integer> r0PurpleRange = Arrays.asList(140, 180); //was 150,180 until 7 oct.
     private static final List<Integer> r1YellowRange = Arrays.asList(26, 35);
     private static final List<Integer> r2LightBlueRange = Arrays.asList(90, 100);
     private static final List<Integer> r3GreenRange = Arrays.asList(50, 68);
     private static final List<Integer> r4OrangeRange = Arrays.asList(8, 25);
-*/
-    private static final List<Integer> r0PurpleRange = Arrays.asList(130, 180); //was 150,180 until 7 oct.
-    private static final List<Integer> r1YellowRange = Arrays.asList(26, 35);
-    private static final List<Integer> r2LightBlueRange = Arrays.asList(90, 100);
-    private static final List<Integer> r3GreenRange = Arrays.asList(50, 68);
-    private static final List<Integer> r4OrangeRange = Arrays.asList(8, 25);
-
 
     public static final List<List<Integer>> leftColoursRanges = Arrays.asList(l0DarkBlueRange, l1CyanRange, l2PurpleRange, l3YellowRange, l4OrangeRange);
     public static final List<List<Integer>> rightColoursRanges = Arrays.asList(r0PurpleRange, r1YellowRange, r2LightBlueRange, r3GreenRange, r4OrangeRange);
 
-/*    public static final List<Integer> sRange = Arrays.asList(50, 255);
-    public static final List<Integer> vRange = Arrays.asList(34, 255);*/
-    public static final List<Integer> sRange = Arrays.asList(10, 255);
+    //    public static final List<Integer> sRange = Arrays.asList(50, 255);
+    public static final List<Integer> sRange = Arrays.asList(15, 255);
     public static final List<Integer> vRange = Arrays.asList(34, 255);
 }

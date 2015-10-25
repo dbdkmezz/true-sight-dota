@@ -1,42 +1,29 @@
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.DebugActivities;
 
-import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
+import com.carver.paul.dotavision.ImageRecognition.Debug.DebugLineDetection;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
-
-import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
+import com.carver.paul.dotavision.R;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-
-    static{ System.loadLibrary("opencv_java3"); }
+public class DebugLineDetectionActivity extends AppCompatActivity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
@@ -44,84 +31,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_debug_line_detection);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 takePhoto();
-/*                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();  */
             }
         });
-
-        //System.out.println("Welcome to OpenCV " + Core.VERSION);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void startDebugLineActivity(View view) {
-        Intent intent = new Intent(this, DebugLineDetectionActivity.class);
-        startActivity(intent);
+    public void testWithoutNewPhoto(View view) {
+        runTest(fileUri.getPath());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public static String getImagesLocation() {
-        return new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
-    }
-
-    private void testImageRecognition(String photoPath) {
-
-/*        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "DOTA Vision");
-        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                "dota.jpg");*/
-
-/*        TextView tv = (TextView)findViewById(R.id.minH);
+    private void runTest(String photoPath) {
+        TextView tv = (TextView) findViewById(R.id.minH);
         int hMin = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.maxH);
+        tv = (TextView) findViewById(R.id.maxH);
         int hMax = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.minS);
+        tv = (TextView) findViewById(R.id.minS);
         int sMin = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.maxS);
+        tv = (TextView) findViewById(R.id.maxS);
         int sMax = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.minV);
+        tv = (TextView) findViewById(R.id.minV);
         int vMin = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.maxV);
-        int vMax = Integer.parseInt(tv.getText().toString());*/
-
-//        System.out.println(mediaFile.getPath());
-
-/*        String fname = new File(getImagesLocation(), "dota.jpg").getPath();
-        Bitmap bitmap = BitmapFactory.decodeFile(fname);*/
+        tv = (TextView) findViewById(R.id.maxV);
+        int vMax = Integer.parseInt(tv.getText().toString());
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
@@ -131,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
         int newHeight = NEW_WIDTH * bitmap.getHeight() / bitmap.getWidth();
         bitmap = Bitmap.createScaledBitmap(bitmap, NEW_WIDTH, newHeight, false);
 
+        //DebugLineDetection.TestLines(bitmap, (ImageView) findViewById(R.id.imageViewMask));
+        DebugLineDetection.TestMask(bitmap, hMin, hMax, sMin, sMax, vMin, vMax, (ImageView) findViewById(R.id.imageViewMask));//, (ImageView) findViewById(R.id.imageViewLines));
 
-        bitmap = Recognition.Run(bitmap); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
-
-        ImageView mImageView;
-        mImageView = (ImageView) findViewById(R.id.imageView);
-        mImageView.setImageBitmap(bitmap);
+/*        ImageView mImageView;
+        mImageView = (ImageView) findViewById(R.id.imageViewLines);
+        mImageView.setImageBitmap(bitmap);*/
     }
 
     private void takePhoto() {
@@ -151,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
-                testImageRecognition(fileUri.getPath());
+                runTest(fileUri.getPath());
 /*                ImageView mImageView;
                 mImageView = (ImageView) findViewById(R.id.imageView);
                 mImageView.setImageBitmap(BitmapFactory.decodeFile(fileUri.getPath()));*/
@@ -164,15 +104,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /** Create a file Uri for saving an image or video */
-    private static Uri getOutputMediaFileUri(){
+    /**
+     * Create a file Uri for saving an image or video
+     */
+    private static Uri getOutputMediaFileUri() {
         return Uri.fromFile(getOutputMediaFile());
     }
 
     private static final int WRITE_EXTERNAL_STORAGE = 1;
 
-    /** Create a File for saving an image or video */
-    private static File getOutputMediaFile(){
+    /**
+     * Create a File for saving an image or video
+     */
+    private static File getOutputMediaFile() {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
@@ -188,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
         // https://developer.android.com/guide/topics/media/camera.html#saving-media
 
         // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
                 Log.d("DOTA Vision", "failed to create directory");
                 return null;
             }
@@ -198,9 +142,8 @@ public class MainActivity extends AppCompatActivity {
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "IMG_"+ timeStamp + ".jpg");
+                "IMG_" + timeStamp + ".jpg");
 
         return mediaFile;
     }
-
 }
