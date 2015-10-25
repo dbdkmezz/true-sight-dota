@@ -52,6 +52,8 @@ public class HeroRect {
 
     public String actualHeroName = "";
 
+    private List<HeroHistAndSimilarity> similarityList = null;
+
     // Uses the line above a hero image to create a new HeroIamge
     public HeroRect(HeroLine line, Mat backgroundImage) {
         if (line.isRealLine == false) {
@@ -93,6 +95,16 @@ public class HeroRect {
         ensureRectIsFitsInImage(newRect, backgroundImage);
         Mat rotatedImage = rotate(backgroundImage, newRect, angle);
         return new HeroRect(rotatedImage, newRect);
+    }
+
+    public void calcSimilarityList() {
+        similarityList = HistTest.OrderedListOfTemplateSimilarHeroes(image);
+    }
+
+    public List<HeroHistAndSimilarity> getSimilarityList() {
+        if (similarityList == null)
+            calcSimilarityList();
+        return similarityList;
     }
 
     private Mat rotate(Mat src, Rect newRect, double angle) {

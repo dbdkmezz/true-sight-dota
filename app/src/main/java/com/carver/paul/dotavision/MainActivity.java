@@ -14,16 +14,23 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
+import com.carver.paul.dotavision.ImageRecognition.HeroHistAndSimilarity;
+import com.carver.paul.dotavision.ImageRecognition.HeroRect;
+import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
 
 import org.opencv.android.OpenCVLoader;
@@ -93,6 +100,16 @@ public class MainActivity extends AppCompatActivity {
                 Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
     }
 
+    public static String getPhotoLocation() {
+        return new File(getImagesLocation(), "photo.jpg").getPath();
+
+    }
+
+    public void useExistingPictureButton(View view) {
+        File mediaFile = new File(getImagesLocation(), "dota.jpg");
+        testImageRecognition(mediaFile.getPath());
+    }
+
     private void testImageRecognition(String photoPath) {
 
 /*        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
@@ -132,17 +149,39 @@ public class MainActivity extends AppCompatActivity {
         bitmap = Bitmap.createScaledBitmap(bitmap, NEW_WIDTH, newHeight, false);
 
 
-        bitmap = Recognition.Run(bitmap); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
+        List<HeroRect> heroes = Recognition.Run(bitmap); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
 
-        ImageView mImageView;
+        LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
+        TextView infoText = (TextView) findViewById(R.id.infoText);
+        for (HeroRect hero : heroes) {
+            LinearLayout thisPictureLayout = new LinearLayout(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.CENTER_HORIZONTAL;
+            thisPictureLayout.setLayoutParams(params);
+
+            ImageView imageViewPhoto = new ImageView(this);
+            imageViewPhoto.setImageBitmap(ImageTools.GetBitmapFromMap(hero.image));
+            thisPictureLayout.addView(imageViewPhoto);
+
+            ImageView imageViewOriginal = new ImageView(this);
+            HeroHistAndSimilarity matchingHero = hero.getSimilarityList().get(0);
+            imageViewOriginal.setImageBitmap(ImageTools.GetBitmapFromMap(matchingHero.hero.image));
+            thisPictureLayout.addView(imageViewOriginal);
+
+            loadedPicturesLayout.addView(thisPictureLayout);
+
+            infoText.setText(infoText.getText() + matchingHero.hero.name + ", " + matchingHero.similarity + System.getProperty("line.separator"));
+        }
+
+/*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
-        mImageView.setImageBitmap(bitmap);
+        mImageView.setImageBitmap(bitmap);*/
     }
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileUri = getOutputMediaFileUri(); // create a file to save the image
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+        Uri photoFileUri = Uri.fromFile(new File(getPhotoLocation()));// getOutputMediaFileUri(); // create a file to save the image
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoFileUri); // set the image file name
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
 
@@ -151,7 +190,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
-                testImageRecognition(fileUri.getPath());
+                testImageRecognition(getPhotoLocation());
+//                testImageRecognition(fileUri.getPath());
 /*                ImageView mImageView;
                 mImageView = (ImageView) findViewById(R.id.imageView);
                 mImageView.setImageBitmap(BitmapFactory.decodeFile(fileUri.getPath()));*/

@@ -1,5 +1,7 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
+import android.graphics.Bitmap;
+
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -13,6 +15,9 @@ import java.util.List;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+
+import static org.opencv.android.Utils.bitmapToMat;
+import static org.opencv.android.Utils.matToBitmap;
 
 import java.util.List;
 
@@ -30,6 +35,25 @@ public class ImageTools {
         //      //Bitwise-AND mask and original image
         //    Mat res = new Mat();
         //  Core.bitwise_and(load, load, res, mask);
+    }
+
+    public static Bitmap GetBitmapFromMap(Mat mat) {
+/*        Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+        Mat rightColourMat = new Mat();
+        Imgproc.cvtColor(mat, rightColourMat, Imgproc.COLOR_BGRA2BGR);
+        matToBitmap(rightColourMat, bitmap);
+        return bitmap;*/
+
+        Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+        matToBitmap(mat, bitmap);
+        return bitmap;
+    }
+
+    public static Mat GetMatFromBitmap(Bitmap bitmap) {
+        Mat mat = new Mat();
+        bitmapToMat(bitmap, mat);
+        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_BGR2BGRA);
+        return mat;
     }
 
     public static void getLineFromTopRectMask(Mat mask, Mat lines, int minLineLength) {

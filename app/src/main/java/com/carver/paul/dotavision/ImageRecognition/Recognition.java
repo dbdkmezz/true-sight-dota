@@ -25,13 +25,14 @@ import static org.opencv.android.Utils.matToBitmap;
  */
 public class Recognition {
 
-    public static Bitmap Run(Bitmap bitmap) { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
+    public static List<HeroRect> Run(Bitmap bitmap) { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
 
+        Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
-        Mat load = new Mat();
+/*        Mat load = new Mat();
 //        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
         bitmapToMat(bitmap, load);
-        Imgproc.cvtColor(load, load, Imgproc.COLOR_BGR2BGRA);
+        Imgproc.cvtColor(load, load, Imgproc.COLOR_BGR2BGRA);*/
 
 /*        Scalar lowerHsv = new Scalar(hMin, sMin, vMin);
         Scalar upperHsv = new Scalar(hMax, sMax, vMax);
@@ -47,12 +48,14 @@ public class Recognition {
         List<HeroRect> heroes = HeroRect.CalculateHeroRects(linesList, load);
 
         for (HeroRect hero : heroes) {
-            List<HeroHistAndSimilarity> similarityList = HistTest.OrderedListOfTemplateSimilarHeroes(hero.image);
-            System.out.println("Found:" + similarityList.get(0).hero.name);
+            hero.calcSimilarityList(); //HistTest.OrderedListOfTemplateSimilarHeroes(hero.image);
+            //System.out.println("Found:" + similarityList.get(0).hero.name);
         }
 
-        Bitmap bitmap2 = Bitmap.createBitmap(load.cols(), load.rows(), Bitmap.Config.ARGB_8888);
+        return heroes;
+
+/*        Bitmap bitmap2 = Bitmap.createBitmap(load.cols(), load.rows(), Bitmap.Config.ARGB_8888);
         matToBitmap(load, bitmap2);
-        return bitmap2;
+        return bitmap2;*/
     }
 }
