@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     static{ System.loadLibrary("opencv_java3"); }
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-    private Uri fileUri;
+    //private Uri fileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,38 +111,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void testImageRecognition(String photoPath) {
-
-/*        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "DOTA Vision");
-        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                "dota.jpg");*/
-
-/*        TextView tv = (TextView)findViewById(R.id.minH);
-        int hMin = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.maxH);
-        int hMax = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.minS);
-        int sMin = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.maxS);
-        int sMax = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.minV);
-        int vMin = Integer.parseInt(tv.getText().toString());
-
-        tv = (TextView)findViewById(R.id.maxV);
-        int vMax = Integer.parseInt(tv.getText().toString());*/
-
-//        System.out.println(mediaFile.getPath());
-
-/*        String fname = new File(getImagesLocation(), "dota.jpg").getPath();
-        Bitmap bitmap = BitmapFactory.decodeFile(fname);*/
-
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
-        //options.outWidth = 200;
         Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);
         final int NEW_WIDTH = 800;
         int newHeight = NEW_WIDTH * bitmap.getHeight() / bitmap.getWidth();
@@ -179,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void takePhoto() {
+        EnsureMediaDirectoryExists();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         Uri photoFileUri = Uri.fromFile(new File(getPhotoLocation()));// getOutputMediaFileUri(); // create a file to save the image
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoFileUri); // set the image file name
@@ -204,21 +175,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /** Create a file Uri for saving an image or video */
+
+    private static void EnsureMediaDirectoryExists() {
+        File mediaStorageDir = new File(getPhotoLocation());
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("DOTA Vision", "failed to create directory");
+            }
+        }
+    }
+
+    /*
+
+    *//** Create a file Uri for saving an image or video *//*
     private static Uri getOutputMediaFileUri(){
         return Uri.fromFile(getOutputMediaFile());
     }
 
     private static final int WRITE_EXTERNAL_STORAGE = 1;
 
-    /** Create a File for saving an image or video */
+
+    *//** Create a File for saving an image or video *//*
     private static File getOutputMediaFile(){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
-   /*     ActivityCompat.requestPermissions(MainActivity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+   *//*     ActivityCompat.requestPermissions(MainActivity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 WRITE_EXTERNAL_STORAGE);
-*/
+*//*
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "DOTA Vision");
@@ -241,6 +225,6 @@ public class MainActivity extends AppCompatActivity {
                     "IMG_"+ timeStamp + ".jpg");
 
         return mediaFile;
-    }
+    }*/
 
 }
