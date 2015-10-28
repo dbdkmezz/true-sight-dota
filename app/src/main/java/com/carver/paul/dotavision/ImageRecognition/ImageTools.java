@@ -44,15 +44,18 @@ public class ImageTools {
         matToBitmap(rightColourMat, bitmap);
         return bitmap;*/
 
+        Mat finalColourMat = new Mat();
+        Imgproc.cvtColor(mat, finalColourMat, Imgproc.COLOR_BGR2RGB);
         Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
-        matToBitmap(mat, bitmap);
+        matToBitmap(finalColourMat, bitmap);
         return bitmap;
     }
 
     public static Mat GetMatFromBitmap(Bitmap bitmap) {
         Mat mat = new Mat();
         bitmapToMat(bitmap, mat);
-        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_BGR2BGRA);
+        // TODO: Test to see what colour conversion I need for getMatToBitmap
+        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_BGR2BGRA); //COLOR_RGB2BGR
         return mat;
     }
 

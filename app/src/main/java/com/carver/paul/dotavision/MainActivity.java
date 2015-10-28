@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -118,27 +120,60 @@ public class MainActivity extends AppCompatActivity {
         int newHeight = NEW_WIDTH * bitmap.getHeight() / bitmap.getWidth();
         bitmap = Bitmap.createScaledBitmap(bitmap, NEW_WIDTH, newHeight, false);
 
+        ImageView topImage = (ImageView) findViewById(R.id.topImage);
+        topImage.setImageBitmap(bitmap);
 
         List<HeroRect> heroes = Recognition.Run(bitmap); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
 
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int heroIconWidth = metrics.widthPixels * 2 / 6;
+
         LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
+        loadedPicturesLayout.removeAllViews();
         TextView infoText = (TextView) findViewById(R.id.infoText);
+        infoText.setText("");
+        infoText.setVisibility(View.VISIBLE);
+
         for (HeroRect hero : heroes) {
             LinearLayout thisPictureLayout = new LinearLayout(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.gravity = Gravity.CENTER_HORIZONTAL;
+            params.gravity = Gravity.CENTER;
             thisPictureLayout.setLayoutParams(params);
-
-            ImageView imageViewPhoto = new ImageView(this);
-            imageViewPhoto.setImageBitmap(ImageTools.GetBitmapFromMap(hero.image));
-            thisPictureLayout.addView(imageViewPhoto);
-
-            ImageView imageViewOriginal = new ImageView(this);
-            HeroHistAndSimilarity matchingHero = hero.getSimilarityList().get(0);
-            imageViewOriginal.setImageBitmap(ImageTools.GetBitmapFromMap(matchingHero.hero.image));
-            thisPictureLayout.addView(imageViewOriginal);
+            if (heroes.get(0) == hero) // i.e., this is the first hero
+                thisPictureLayout.setPadding(0, 16, 0, 16);
+            else
+                thisPictureLayout.setPadding(0, 0, 0, 16);
 
             loadedPicturesLayout.addView(thisPictureLayout);
+
+            //TODO: Don't work out the preview width and height this way! or at least don't scale the photo this way
+            ImageView imageViewPhoto = new ImageView(this);
+            Bitmap bitmapPhoto = ImageTools.GetBitmapFromMap(hero.image);
+            int height = heroIconWidth * bitmapPhoto.getHeight() / bitmapPhoto.getWidth();
+            bitmapPhoto = Bitmap.createScaledBitmap(bitmapPhoto, heroIconWidth, height, true);
+            imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageViewPhoto.setImageBitmap(bitmapPhoto);
+            imageViewPhoto.setPadding(0, 0, 16, 0);
+            thisPictureLayout.addView(imageViewPhoto);
+
+/*            imageViewPhoto.setMinimumWidth(thisPictureLayout.getWidth() * 2 / 6);
+            imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
+            imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageViewPhoto.setAdjustViewBounds(true);
+       //     imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
+            imageViewPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageViewPhoto.setImageBitmap(ImageTools.GetBitmapFromMap(hero.image));*/
+
+            ImageView imageViewOriginal = new ImageView(this);
+            // imageViewOriginal.setPadding(0, 0, 0, 0);
+            HeroHistAndSimilarity matchingHero = hero.getSimilarityList().get(0);
+            Bitmap bitmapOriginal = ImageTools.GetBitmapFromMap(matchingHero.hero.image);
+            height = heroIconWidth * bitmapOriginal.getHeight() / bitmapOriginal.getWidth();
+            bitmapOriginal = Bitmap.createScaledBitmap(bitmapOriginal, heroIconWidth, height, true);
+            imageViewOriginal.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageViewOriginal.setImageBitmap(bitmapOriginal);
+            thisPictureLayout.addView(imageViewOriginal);
 
             infoText.setText(infoText.getText() + matchingHero.hero.name + ", " + matchingHero.similarity + System.getProperty("line.separator"));
         }
