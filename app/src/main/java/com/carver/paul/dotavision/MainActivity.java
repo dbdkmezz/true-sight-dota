@@ -2,6 +2,7 @@ package com.carver.paul.dotavision;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -38,7 +39,10 @@ import com.carver.paul.dotavision.ImageRecognition.Recognition;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -108,8 +112,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void useExistingPictureButton(View view) {
-        File mediaFile = new File(getImagesLocation(), "dota.jpg");
-        testImageRecognition(mediaFile.getPath());
+
+
+        //TextView tv = (TextView)findViewById(R.id.textView1);
+        //tv.setText(s);
+
+/*        File mediaFile = new File(getImagesLocation(), "dota.jpg");
+        testImageRecognition(mediaFile.getPath());*/
     }
 
     private void testImageRecognition(String photoPath) {
