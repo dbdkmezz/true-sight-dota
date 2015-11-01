@@ -3,6 +3,7 @@ package com.carver.paul.dotavision;
 import android.Manifest;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -38,6 +39,8 @@ import com.carver.paul.dotavision.ImageRecognition.Recognition;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -72,6 +75,135 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //System.out.println("Welcome to OpenCV " + Core.VERSION);
+    }
+
+    private void LoadXML() {
+        System.out.println("start!");
+        String ns = null;
+
+        try {
+            System.out.println("starting!");
+            XmlResourceParser parser = getResources().getXml(R.xml.file);
+//            parser.nextTag();
+            // parser.require(XmlPullParser.START_TAG, ns, "listOfHeroInfo");
+
+            boolean keepGoing = true;
+            while (keepGoing == true) {
+                parser.next();
+
+                switch (parser.getEventType()) {
+                    case XmlPullParser.END_TAG:
+                        System.out.println("END_TAG: " + parser.getName());
+                        break;
+                    case XmlPullParser.END_DOCUMENT:
+                        System.out.println("END_DOCUMENT.");
+                        keepGoing = false;
+                        break;
+                    case XmlPullParser.START_TAG:
+                        System.out.println("START_TAG: " + parser.getName());
+                        break;
+                    case XmlPullParser.TEXT:
+                        System.out.println("TEXT: " + parser.getText());
+                        break;
+                    default:
+                        System.out.println("unknown tag: " + parser.getEventType());
+                        break;
+                }
+            }
+   /*             if(parser.getEventType() == XmlPullParser.END_TAG) {
+                    System.out.println("END_TAG");
+           //         break;
+                }
+
+                if(parser.getEventType() == XmlPullParser.END_DOCUMENT) {
+                    System.out.println("END_DOCUMENT");
+                    break;
+                }*/
+
+/*                if(parser.getEventType() == XmlPullParser.START_TAG) {
+                    System.out.println("START_TAG");
+                }
+
+                if(parser.getEventType() == XmlPullParser.TEXT) {
+                    System.out.println("TEXT");
+                }
+
+                System.out.println("name:" + parser.getName());
+                parser.getText();
+                System.out.println(" ");
+            }*/
+/*
+
+            while (parser.next() != XmlPullParser.END_TAG && parser.next() != XmlPullParser.END_DOCUMENT) {
+                System.out.println("" + i++);
+                if(i > 100) {
+                    System.out.println("i got too big!");
+                    break;
+                }
+                if (parser.getEventType() != XmlPullParser.START_TAG) {
+                    System.out.println("parser.getEventType() != XmlPullParser.START_TAG");
+                    continue;
+                }
+
+                String name = parser.getName();
+                System.out.println("name:" + name);
+                if (name.equals("listOfHeroInfo")) {
+                    readHero(parser);
+                } else {
+                    skip(parser);
+                }
+            } */
+        } catch (XmlPullParserException e) {
+            System.err.println("XmlPullParserException: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("IOException: " + e.getMessage());
+        }
+
+        System.out.println("done!");
+    }
+
+    private void readHero(XmlPullParser parser) throws IOException, XmlPullParserException {
+        String ns = null;
+        parser.require(XmlPullParser.START_TAG, ns, "listOfHeroInfo");
+
+
+    }
+
+    // Processes title tags in the feed.
+    private String readTitle(XmlPullParser parser) throws IOException, XmlPullParserException {
+        String ns = null;
+
+        parser.require(XmlPullParser.START_TAG, ns, "title");
+        String title = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "title");
+        return title;
+    }
+
+    // For the tags title and summary, extracts their text values.
+    private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
+        String result = "";
+        if (parser.next() == XmlPullParser.TEXT) {
+            result = parser.getText();
+            parser.nextTag();
+        }
+        return result;
+    }
+
+    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
+        if (parser.getEventType() != XmlPullParser.START_TAG) {
+            throw new IllegalStateException();
+        }
+        int depth = 1;
+        while (depth != 0) {
+            switch (parser.next()) {
+                case XmlPullParser.END_TAG:
+                    depth--;
+                    break;
+                case XmlPullParser.START_TAG:
+                    depth++;
+                    break;
+            }
+        }
     }
 
     public void startDebugLineActivity(View view) {
@@ -114,10 +246,10 @@ public class MainActivity extends AppCompatActivity {
     public void useExistingPictureButton(View view) {
 
 
-        //TextView tv = (TextView)findViewById(R.id.textView1);
-        //tv.setText(s);
+        System.out.println("heee");
+        LoadXML();
 
-/*        File mediaFile = new File(getImagesLocation(), "dota.jpg");
+  /*        File mediaFile = new File(getImagesLocation(), "dota.jpg");
         testImageRecognition(mediaFile.getPath());*/
     }
 
