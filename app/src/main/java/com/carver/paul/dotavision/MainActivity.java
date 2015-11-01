@@ -52,9 +52,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    static{ System.loadLibrary("opencv_java3"); }
-
+    private List<HeroInfo> heroInfoList;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
+    static{ System.loadLibrary("opencv_java3"); }
     //private Uri fileUri;
 
     @Override
@@ -74,21 +75,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        LoadXML();
+
         //System.out.println("Welcome to OpenCV " + Core.VERSION);
     }
 
     private void LoadXML() {
         XmlResourceParser parser = getResources().getXml(R.xml.file);
-        List<HeroInfo> heroInfoList = LoadHeroXml.Load(parser);
+        heroInfoList = LoadHeroXml.Load(parser);
     }
-
-    private void readHero(XmlPullParser parser) throws IOException, XmlPullParserException {
-        String ns = null;
-        parser.require(XmlPullParser.START_TAG, ns, "listOfHeroInfo");
-
-
-    }
-
 
     public void startDebugLineActivity(View view) {
         Intent intent = new Intent(this, DebugLineDetectionActivity.class);
@@ -128,10 +123,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void useExistingPictureButton(View view) {
-        LoadXML();
-
-  /*        File mediaFile = new File(getImagesLocation(), "dota.jpg");
-        testImageRecognition(mediaFile.getPath());*/
+        File mediaFile = new File(getImagesLocation(), "dota.jpg");
+        testImageRecognition(mediaFile.getPath());
     }
 
     private void testImageRecognition(String photoPath) {
@@ -197,12 +190,26 @@ public class MainActivity extends AppCompatActivity {
             imageViewOriginal.setImageBitmap(bitmapOriginal);
             thisPictureLayout.addView(imageViewOriginal);
 
-            infoText.setText(infoText.getText() + matchingHero.hero.name + ", " + matchingHero.similarity + System.getProperty("line.separator"));
+            HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
+            if (heroWithName != null) {
+                infoText.setText(infoText.getText() + matchingHero.hero.name + ", " + matchingHero.similarity + ". Stuns: " + heroWithName.CountStuns() + System.getProperty("line.separator"));
+            } else {
+                infoText.setText(infoText.getText() + matchingHero.hero.name + ", " + matchingHero.similarity + System.getProperty("line.separator"));
+            }
         }
 
 /*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(bitmap);*/
+    }
+
+    private HeroInfo FindHeroWithName(String name) {
+        for (HeroInfo hero : heroInfoList) {
+            if (hero.HasName(name)) {
+                return hero;
+            }
+        }
+        return null;
     }
 
     private void takePhoto() {

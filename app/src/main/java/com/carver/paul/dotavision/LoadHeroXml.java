@@ -14,57 +14,27 @@ public class LoadHeroXml {
     static final String ns = null;
 
     public static List<HeroInfo> Load(XmlResourceParser parser) {
-        List<HeroInfo> heroInfoList = new ArrayList<>();
+        System.out.println("Starting XML Load.");
 
+        List<HeroInfo> heroInfoList = new ArrayList<>();
 
         try {
             parser.next();
             parser.nextTag();
             parser.require(XmlPullParser.START_TAG, ns, "listOfHeroInfo");
-            // while(parser.nextTag() == XmlPullParser.START_TAG) {
-            parser.nextTag();
-            HeroInfo hero = LoadIndividualHeroInfo(parser);
-            heroInfoList.add(hero);
-            // }
+            while (parser.next() != XmlPullParser.END_TAG) {
+                parser.require(XmlPullParser.START_TAG, ns, "heroInfo");
+                heroInfoList.add(LoadIndividualHeroInfo(parser));
+                parser.require(XmlPullParser.END_TAG, ns, "heroInfo");
+            }
 
-/*
-            parser.require(XmlPullParser.START_TAG, ns, "heroInfo");
-            parser.nextTag();
-            int a = parser.getAttributeCount();
-            parser.require(XmlPullParser.START_TAG, ns, "name");
-            hero.name = parser.nextText();
-            parser.nextTag();
-            parser.require(XmlPullParser.END_TAG, ns, "name");
-*/
-
-/*            boolean keepGoing = true;
-            while (keepGoing == true) {
-                parser.next();
-
-                switch (parser.getEventType()) {
-                    case XmlPullParser.END_TAG:
-                        System.out.println("END_TAG: " + parser.getName());
-                        break;
-                    case XmlPullParser.END_DOCUMENT:
-                        System.out.println("END_DOCUMENT.");
-                        keepGoing = false;
-                        break;
-                    case XmlPullParser.START_TAG:
-                        System.out.println("START_TAG: " + parser.getName());
-                        break;
-                    case XmlPullParser.TEXT:
-                        System.out.println("TEXT: " + parser.getText());
-                        break;
-                    default:
-                        System.out.println("unknown tag: " + parser.getEventType());
-                        break;
-                }*/
         } catch (XmlPullParserException e) {
             System.err.println("XmlPullParserException: " + e.getMessage());
         } catch (IOException e) {
             System.err.println("IOException: " + e.getMessage());
         }
 
+        System.out.println("Loaded " + heroInfoList.size() + " heroes.");
         return heroInfoList;
     }
 
@@ -73,7 +43,7 @@ public class LoadHeroXml {
         HeroInfo hero = new HeroInfo();
 
         while (parser.next() != XmlPullParser.END_TAG) {
-            String name = parser.getName();
+            //String name = parser.getName();
             if (parser.getName().equals("name")) {
                 hero.name = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "name");
@@ -99,55 +69,75 @@ public class LoadHeroXml {
                 hero.defence = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "defence");
             } else if (parser.getName().equals("abilities")) {
-                int b = 6;
-                break;
+                hero.abilities.add(LoadHeroAbilities(parser));
+                parser.require(XmlPullParser.END_TAG, ns, "abilities");
+            } else {
+                throw new RuntimeException("Loading XML Error, in LoadIndividualHeroInfo. Name:" + parser.getName());
             }
         }
 
+        parser.require(XmlPullParser.END_TAG, ns, "heroInfo");
 
         return hero;
     }
 
 
-/*
-String ns = null;
-parser.require(XmlPullParser.START_TAG, ns, "listOfHeroInfo");*/
+    static private HeroAbility LoadHeroAbilities(XmlResourceParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "abilities");
+        HeroAbility ability = new HeroAbility();
 
 
-    // Processes title tags in the feed.
-    private String readTitle(XmlPullParser parser) throws IOException, XmlPullParserException {
-        String ns = null;
+        while (parser.next() != XmlPullParser.END_TAG) {
+            //String name = parser.getName();
+            if (parser.getName().equals("isStun")) {
+                if (readText(parser).equals("false"))
+                    ability.isStun = false;
+                else
+                    ability.isStun = true;
+                parser.require(XmlPullParser.END_TAG, ns, "isStun");
+            } else if (parser.getName().equals("name")) {
+                ability.name = readText(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "name");
+            } else if (parser.getName().equals("description")) {
+                ability.description = readText(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "description");
+            } else if (parser.getName().equals("manaCost")) {
+                ability.manaCost = readText(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "manaCost");
+            } else if (parser.getName().equals("abilityDetails")) {
+                ability.abilityDetails.add(readText(parser));
+                parser.require(XmlPullParser.END_TAG, ns, "abilityDetails");
+            } else {
+                throw new RuntimeException("Loading XML Error, in LoadHeroAbilities. Name:" + parser.getName());
+            }
+        }
 
-        parser.require(XmlPullParser.START_TAG, ns, "title");
-        String title = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "title");
-        return title;
+        parser.require(XmlPullParser.END_TAG, ns, "abilities");
+        return ability;
     }
 
-    // For the tags title and summary, extracts their text values.
+    private static boolean realBoolean(XmlPullParser parser) throws IOException, XmlPullParserException {
+        boolean result = false;
+        if (parser.next() == XmlPullParser.TEXT) {
+            if (parser.getText().equals("true")) {
+                result = true;
+            }
+            parser.nextTag();
+        } else {
+            throw new RuntimeException("Loading XML Error, in realBoolean. Text not found!");
+        }
+        return result;
+    }
+
+    // Extracts text values. and goes to tag following the text
     private static String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {
             result = parser.getText();
             parser.nextTag();
+        } else {
+            throw new RuntimeException("Loading XML Error, in readText. Text not found!");
         }
         return result;
-    }
-
-    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
-        if (parser.getEventType() != XmlPullParser.START_TAG) {
-            throw new IllegalStateException();
-        }
-        int depth = 1;
-        while (depth != 0) {
-            switch (parser.next()) {
-                case XmlPullParser.END_TAG:
-                    depth--;
-                    break;
-                case XmlPullParser.START_TAG:
-                    depth++;
-                    break;
-            }
-        }
     }
 }

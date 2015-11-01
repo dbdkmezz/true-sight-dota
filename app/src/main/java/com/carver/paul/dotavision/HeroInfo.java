@@ -1,5 +1,6 @@
 package com.carver.paul.dotavision;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class HeroInfo {
@@ -12,12 +13,34 @@ class HeroInfo {
     public String speed;
     public String defence;
     public List<HeroAbility> abilities;
+
+    public HeroInfo() {
+        abilities = new ArrayList<>();
+    }
+
+    public boolean HasName(String string) {
+        string = string.replace('_', ' ');
+        return string.equalsIgnoreCase(this.name);
+    }
+
+    public int CountStuns() {
+        int count = 0;
+        for (HeroAbility ability : abilities) {
+            if (ability.isStun)
+                count++;
+        }
+        return count;
+    }
 }
 
 class HeroAbility {
-    public boolean isStun = false;
+    public boolean isStun;
     public String name;
     public String description;
     public String manaCost;
     public List<String> abilityDetails;
+
+    public HeroAbility() {
+        abilityDetails = new ArrayList<>();
+    }
 }
