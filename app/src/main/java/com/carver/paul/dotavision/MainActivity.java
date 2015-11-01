@@ -52,7 +52,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<HeroInfo> heroInfoList;
+    private List<HeroInfo> heroInfoList = null;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     static{ System.loadLibrary("opencv_java3"); }
@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();  */
             }
         });
-
-        LoadXML();
 
         //System.out.println("Welcome to OpenCV " + Core.VERSION);
     }
@@ -128,6 +126,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void testImageRecognition(String photoPath) {
+        if (heroInfoList == null)
+            LoadXML();
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
         Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);

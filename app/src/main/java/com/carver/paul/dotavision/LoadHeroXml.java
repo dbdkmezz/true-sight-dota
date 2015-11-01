@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//TODO: Decide if I just want to load the XML for the heroes I've taken the photo of. That may be faster.
 public class LoadHeroXml {
 
     static final String ns = null;
