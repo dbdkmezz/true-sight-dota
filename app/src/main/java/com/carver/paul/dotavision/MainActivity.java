@@ -122,8 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //TODO-now change useExistingPictureButton back so it uses a saved image, it currently just uses the last photo!
     public void useExistingPictureButton(View view) {
-        File mediaFile = new File(getImagesLocation(), "dota.jpg");
+        File mediaFile = new File(getImagesLocation(), "photo.jpg");
         testImageRecognition(mediaFile.getPath());
     }
 

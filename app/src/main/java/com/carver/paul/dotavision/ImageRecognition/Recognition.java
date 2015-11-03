@@ -21,7 +21,8 @@ import static org.opencv.android.Utils.bitmapToMat;
 import static org.opencv.android.Utils.matToBitmap;
 
 //TODO: Implement arcana hero images too
-//TODO: repackage ImageRecgonition so that there's only one public class?
+//TODO-tidyCode: repackage ImageRecgonition so that there's only one public class?
+//TODO-soon: Put recognition work in another thread (https://developer.android.com/training/best-background.html)
 
 public class Recognition {
 

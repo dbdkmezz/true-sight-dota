@@ -31,6 +31,12 @@ class HeroInfo {
         }
         return count;
     }
+
+/*    public String StunSummary() {
+        for(HeroAbility ability : abilities) {
+
+        }
+    }*/
 }
 
 class HeroAbility {
