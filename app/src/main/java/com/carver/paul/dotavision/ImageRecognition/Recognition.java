@@ -20,12 +20,16 @@ import java.util.List;
 import static org.opencv.android.Utils.bitmapToMat;
 import static org.opencv.android.Utils.matToBitmap;
 
-/**
- * Created by paul on 24/10/15.
- */
+//TODO: Implement arcana hero images too
+//TODO: repackage ImageRecgonition so that there's only one public class?
+
 public class Recognition {
 
+    public static String debugString = "";
+
     public static List<HeroRect> Run(Bitmap bitmap) { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
+
+        if (MainActivity.debugMode) debugString = "";
 
         Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
@@ -38,7 +42,7 @@ public class Recognition {
         Scalar upperHsv = new Scalar(hMax, sMax, vMax);
         ImageTools.MaskAColourFromImage(load, lowerHsv, upperHsv, load);*/
 
-        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
+        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load);
 
 /*        for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);

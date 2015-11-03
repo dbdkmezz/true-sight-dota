@@ -20,6 +20,7 @@ import org.opencv.imgproc.Imgproc;
 import com.carver.paul.dotavision.ImageRecognition.HistTest;
 
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
+import com.carver.paul.dotavision.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -184,15 +185,16 @@ public class HeroRect {
 
         int totalLeftLines = countLinesInMats(leftLines);
         int totalRightLines = countLinesInMats(rightLines);
-        if (totalLeftLines > totalRightLines) {
-            System.out.println("Left image detected. L:" + totalLeftLines + ", R:" + totalRightLines);
-            return leftLines;
-        } else {
-            System.out.println("Right image detected. L:" + totalLeftLines + ", R:" + totalRightLines);
-            return rightLines;
+
+        if (MainActivity.debugMode) {
+            Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") + debugStringForLines(leftLines) + "-" + debugStringForLines(rightLines);
         }
+
+        if (totalLeftLines > totalRightLines) return leftLines;
+        else return rightLines;
     }
 
+/*
     public static boolean isLeftSide(Mat photo) {
         return isLeftSide(photo, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
     }
@@ -210,7 +212,7 @@ public class HeroRect {
             System.out.println("Right image detected. L:" + totalLeftLines + ", R:" + totalRightLines);
             return false;
         }
-    }
+    }*/
 
     private static List<Mat> findHeroTopLinesInImage(Mat photo, List<List<Integer>> colourRanges, int lowerHsvS, int lowerHsvV, int upperHsvS, int upperHsvV) {
         List<Mat> linesList = new ArrayList<>();
@@ -263,6 +265,18 @@ public class HeroRect {
         }
         return totalLines;
     }
+
+    // Creates a string to be used when debugging, showing a 1 for found lines, and a - for no line
+    private static String debugStringForLines(List<Mat> lines) {
+        String debugString = "";
+        for (Mat mat : lines) {
+            if (mat.rows() > 0)
+                debugString = debugString + "1";
+            else
+                debugString = debugString + "0";
+        }
+        return debugString;
+    }
 }
 
 // https://github.com/badlogic/opencv-fun/blob/master/src/pool/tests/HoughLines.java
@@ -287,7 +301,7 @@ class HeroLine {
                     rect.union((int) val[2], (int) val[3]);
                 }
             }
-            System.out.println("Created rect with width: " + rect.width());
+            //System.out.println("Created rect with width: " + rect.width());
         }
     }
 
@@ -356,7 +370,10 @@ class HeroLine {
         }
 
         if (goodLines.size() < 2) {
-            System.out.println("After removing lines without lines, and overly wide lines I'm only left " + goodLines.size() + " hero lines. So I'm giving up trying to fix them.");
+            if (MainActivity.debugMode) {
+                Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
+                        "After removing lines without lines, and overly wide lines I'm only left " + goodLines.size() + " hero lines. So I'm giving up trying to fix them.";
+            }
             return;
         }
 
@@ -384,7 +401,10 @@ class HeroLine {
         }
 
         if (goodLines.size() < 2) {
-            System.out.println("After getting ride of lines which are too tall I'm only left with " + goodLines.size() + " hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!");
+            if (MainActivity.debugMode) {
+                Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
+                        "After getting ride of lines which are too tall I'm only left with " + goodLines.size() + " hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
+            }
             return;
         }
 
@@ -402,7 +422,10 @@ class HeroLine {
         }
 
         if (goodLines.size() < 2) {
-            System.out.println("After getting ride of lines which are too wide I'm not left with enough good hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!");
+            if (MainActivity.debugMode) {
+                Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
+                        "After getting ride of lines which are too wide I'm not left with enough good hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
+            }
             return;
         }
 

@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private List<HeroInfo> heroInfoList = null;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
+    public static boolean debugMode = true;
+
     static{ System.loadLibrary("opencv_java3"); }
     //private Uri fileUri;
 
@@ -141,6 +143,12 @@ public class MainActivity extends AppCompatActivity {
 
         List<HeroRect> heroes = Recognition.Run(bitmap); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
 
+        if (debugMode) {
+            TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
+            imageDebugText.setVisibility(View.VISIBLE);
+            imageDebugText.setText(Recognition.debugString);
+        }
+
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int heroIconWidth = metrics.widthPixels * 2 / 6;
@@ -191,17 +199,34 @@ public class MainActivity extends AppCompatActivity {
             imageViewOriginal.setImageBitmap(bitmapOriginal);
             thisPictureLayout.addView(imageViewOriginal);
 
-            HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
-            if (heroWithName != null) {
-                infoText.setText(infoText.getText() + matchingHero.hero.name + ", " + matchingHero.similarity + ". Stuns: " + heroWithName.CountStuns() + System.getProperty("line.separator"));
-            } else {
-                infoText.setText(infoText.getText() + matchingHero.hero.name + ", " + matchingHero.similarity + System.getProperty("line.separator"));
-            }
+            SetInfoText(infoText, hero.getSimilarityList());
         }
 
 /*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(bitmap);*/
+    }
+
+    private void SetInfoText(TextView infoText, List<HeroHistAndSimilarity> similarityList) {
+        HeroHistAndSimilarity matchingHero = similarityList.get(0);
+
+        infoText.append(matchingHero.hero.name + ", " + matchingHero.similarity);
+
+        //TODO-now make it work with pictures who's names are wrong
+        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
+        if (heroWithName != null) {
+            infoText.append(". Stuns: " + heroWithName.CountStuns());
+        }
+
+        // poor result, so lets show some alteratives
+        if (matchingHero.similarity < 0.5) {
+            infoText.append("(Alternatives: ");
+            for (int i = 1; i < 6; i++) {
+                infoText.append(similarityList.get(i).hero.name + "," + similarityList.get(i).similarity + ". ");
+            }
+        }
+
+        infoText.append(System.getProperty("line.separator"));
     }
 
     private HeroInfo FindHeroWithName(String name) {
@@ -213,6 +238,9 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+
+    // TODO: Change permissions so it uses the Android 6 way, then can increase target API
+    // TODO: Make it save in the write media location, I think media store wasn't right
     private void takePhoto() {
         EnsureMediaDirectoryExists();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

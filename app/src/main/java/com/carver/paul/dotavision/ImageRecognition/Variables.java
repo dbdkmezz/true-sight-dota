@@ -3,9 +3,6 @@ package com.carver.paul.dotavision.ImageRecognition;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by paul on 24/10/15.
- */
 public class Variables {
     private static final List<Integer> l0DarkBlueRange = Arrays.asList(108, 117);
     private static final List<Integer> l1CyanRange = Arrays.asList(76, 88);
@@ -14,15 +11,14 @@ public class Variables {
     private static final List<Integer> l4OrangeRange = Arrays.asList(8, 18);
 
     private static final List<Integer> r0PurpleRange = Arrays.asList(140, 180); //was 150,180 until 7 oct.
-    private static final List<Integer> r1YellowRange = Arrays.asList(26, 35);
-    private static final List<Integer> r2LightBlueRange = Arrays.asList(90, 100);
-    private static final List<Integer> r3GreenRange = Arrays.asList(50, 68);
+    private static final List<Integer> r1YellowRange = Arrays.asList(26, 70);//35);
+    private static final List<Integer> r2LightBlueRange = Arrays.asList(90, 108);
+    private static final List<Integer> r3GreenRange = Arrays.asList(50, 75);//68);
     private static final List<Integer> r4OrangeRange = Arrays.asList(8, 25);
 
     public static final List<List<Integer>> leftColoursRanges = Arrays.asList(l0DarkBlueRange, l1CyanRange, l2PurpleRange, l3YellowRange, l4OrangeRange);
     public static final List<List<Integer>> rightColoursRanges = Arrays.asList(r0PurpleRange, r1YellowRange, r2LightBlueRange, r3GreenRange, r4OrangeRange);
 
-    //    public static final List<Integer> sRange = Arrays.asList(50, 255);
-    public static final List<Integer> sRange = Arrays.asList(15, 255);
+    public static final List<Integer> sRange = Arrays.asList(15, 255); //50, 255
     public static final List<Integer> vRange = Arrays.asList(34, 255);
 }

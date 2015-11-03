@@ -149,10 +149,6 @@ public class HistTest {
     // Also, templated matching is very sensitive to rotation, so work needed there
     static public List<HeroHistAndSimilarity> OrderedListOfTemplateSimilarHeroes(Mat photo, int photoCropPercent, int photoThreshold, int originalThreshold,
                                                                                  int thresholdType, int blurSize, int method) {
-
-        System.out.println("Method: " + method);
-
-
         Mat subMatOfPhoto = CropMatByPercentage(photo, photoCropPercent);
         subMatOfPhoto = EnsureMatSmallerThan(subMatOfPhoto, 126, 71);
         Mat preparedPhoto = BlurAndThresholdMat(subMatOfPhoto, photoThreshold, thresholdType, blurSize);

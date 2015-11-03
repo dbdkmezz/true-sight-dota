@@ -35,35 +35,47 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:elevation="4dp"
-                android:background="#FFFFFF">
-
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:id="@+id/topImage" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:elevation="4dp"
-                android:background="#FFFFFF">
+                android:background="#FFFFFF"
+                android:elevation="4dp">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/topImage"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter" />
+
+                    <TextView
+                        android:id="@+id/imageDebugText"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:singleLine="false"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:background="#FFFFFF"
+                android:elevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/loadedPicturesLayout"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/loadedPicturesLayout" />
+                    android:orientation="vertical" />
             </FrameLayout>
 
 
@@ -71,17 +83,17 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:elevation="4dp"
-                android:background="#FFFFFF">
+                android:background="#FFFFFF"
+                android:elevation="4dp">
 
                 <TextView
+                    android:id="@+id/infoText"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:singleLine="false"
-                    android:visibility="gone"
-                    android:id="@+id/infoText" />
+                    android:visibility="gone" />
             </FrameLayout>
 
         </LinearLayout>
