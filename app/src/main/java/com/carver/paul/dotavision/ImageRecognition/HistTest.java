@@ -141,7 +141,7 @@ public class HistTest {
     }*/
 
     static public List<HeroHistAndSimilarity> OrderedListOfTemplateSimilarHeroes(Mat photo) {
-        return OrderedListOfTemplateSimilarHeroes(photo, 0, 210, 140, 2, 5, 5);
+        return OrderedListOfTemplateSimilarHeroes(photo, 10, 210, 140, 2, 5, 5); // photo crop % was 0 until 2 Nov
     }
 
     // the combination of threshold method 2 and template method 5 is incredible!!!!

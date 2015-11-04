@@ -11,6 +11,8 @@ import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.opencv.android.Utils.bitmapToMat;
@@ -26,6 +28,7 @@ public class DebugLineDetection {
 
         Scalar lowerHsv = new Scalar(hMin, sMin, vMin);
         Scalar upperHsv = new Scalar(hMax, sMax, vMax);
+
         ImageTools.MaskAColourFromImage(load, lowerHsv, upperHsv, load);
 
         return ImageTools.GetBitmapFromMat(load, false);
@@ -41,10 +44,10 @@ public class DebugLineDetection {
         imageViewLines.setImageBitmap(linesBitmap);*/
     }
 
-    public static void TestLines(Bitmap bitmap, ImageView imageView) {
-        Mat load = new Mat();
-        bitmapToMat(bitmap, load);
-        Imgproc.cvtColor(load, load, Imgproc.COLOR_BGR2BGRA);
+
+
+/*    public static Bitmap TestLines(Bitmap bitmap) {
+        Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
         List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
 
@@ -52,8 +55,21 @@ public class DebugLineDetection {
             ImageTools.drawLinesOnImage(lines, load);
         }
 
-        Bitmap linesBitmap = Bitmap.createBitmap(load.cols(), load.rows(), Bitmap.Config.ARGB_8888);
-        matToBitmap(load, linesBitmap);
-        imageView.setImageBitmap(linesBitmap);
+        return ImageTools.GetBitmapFromMat(load, false);
+    }*/
+
+    public static Bitmap TestLines(Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
+        Mat load = ImageTools.GetMatFromBitmap(bitmap);
+
+//        List<Integer> colourRange = Arrays.asList(hMin, hMax);
+        List<List<Integer>> colourRanges = Arrays.asList(Arrays.asList(hMin, hMax));
+
+        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, colourRanges, sMin, vMin, sMax, vMax);
+
+        for (Mat lines : linesList) {
+            ImageTools.drawLinesOnImage(lines, load);
+        }
+
+        return ImageTools.GetBitmapFromMat(load);
     }
 }

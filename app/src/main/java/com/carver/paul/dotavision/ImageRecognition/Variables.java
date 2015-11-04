@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Variables {
-    private static final List<Integer> l0DarkBlueRange = Arrays.asList(108, 117);
-    private static final List<Integer> l1CyanRange = Arrays.asList(76, 88);
+    private static final List<Integer> l0DarkBlueRange = Arrays.asList(104, 117); //108, 117);
+    private static final List<Integer> l1CyanRange = Arrays.asList(88, 95); //88);
     private static final List<Integer> l2PurpleRange = Arrays.asList(135, 170); // went up to 154 until 4 Oct. was 148 until 14 oct
     private static final List<Integer> l3YellowRange = Arrays.asList(25, 35);
     private static final List<Integer> l4OrangeRange = Arrays.asList(8, 18);
 
     private static final List<Integer> r0PurpleRange = Arrays.asList(140, 180); //was 150,180 until 7 oct.
-    private static final List<Integer> r1YellowRange = Arrays.asList(26, 70);//35);
+    private static final List<Integer> r1YellowRange = Arrays.asList(26, 80);//70);//35);
     private static final List<Integer> r2LightBlueRange = Arrays.asList(90, 108);
     private static final List<Integer> r3GreenRange = Arrays.asList(50, 75);//68);
     private static final List<Integer> r4OrangeRange = Arrays.asList(8, 25);

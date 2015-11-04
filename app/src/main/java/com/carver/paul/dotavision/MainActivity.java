@@ -191,6 +191,9 @@ public class MainActivity extends AppCompatActivity
         final int NEW_WIDTH = 800;
         int newHeight = NEW_WIDTH * bitmap.getHeight() / bitmap.getWidth();
         bitmap = Bitmap.createScaledBitmap(bitmap, NEW_WIDTH, newHeight, false);
+
+        //crop the top and bottom thirds off
+        bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, NEW_WIDTH, newHeight / 3);
         return bitmap;
     }
 
@@ -281,14 +284,15 @@ public class MainActivity extends AppCompatActivity
         }
 
         // poor result, so lets show some alteratives
-        if (matchingHero.similarity < 0.5) {
-            infoText.append("(Alternatives: ");
+        if (matchingHero.similarity < 0.65) {
+            infoText.append(". (Alternatives: ");
             for (int i = 1; i < 6; i++) {
                 infoText.append(similarityList.get(i).hero.name + "," + similarityList.get(i).similarity + ". ");
             }
+            infoText.append(")");
         }
 
-        infoText.append(System.getProperty("line.separator"));
+        infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
     }
 
     private HeroInfo FindHeroWithName(String name) {

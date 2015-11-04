@@ -11,7 +11,11 @@
     tools:context="com.carver.paul.dotavision.DebugActivities.DebugLineDetection">
 
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -20,6 +24,8 @@
             android:id="@+id/imageViewMask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
@@ -28,6 +34,7 @@
             android:id="@+id/imageViewLines"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
@@ -135,5 +142,6 @@
         </LinearLayout>
     </LinearLayout>
 
+    </ScrollView>
 
 </RelativeLayout>

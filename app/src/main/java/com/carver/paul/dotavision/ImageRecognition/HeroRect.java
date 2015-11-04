@@ -183,12 +183,12 @@ public class HeroRect {
         List<Mat> leftLines = findHeroTopLinesInImage(photo, Variables.leftColoursRanges, lowerHsvS, lowerHsvV, upperHsvS, upperHsvV);
         List<Mat> rightLines = findHeroTopLinesInImage(photo, Variables.rightColoursRanges, lowerHsvS, lowerHsvV, upperHsvS, upperHsvV);
 
-        int totalLeftLines = countLinesInMats(leftLines);
-        int totalRightLines = countLinesInMats(rightLines);
-
         if (MainActivity.debugMode) {
             Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") + debugStringForLines(leftLines) + "-" + debugStringForLines(rightLines);
         }
+
+        int totalLeftLines = countLinesInMats(leftLines);
+        int totalRightLines = countLinesInMats(rightLines);
 
         if (totalLeftLines > totalRightLines) return leftLines;
         else return rightLines;
@@ -214,14 +214,25 @@ public class HeroRect {
         }
     }*/
 
-    private static List<Mat> findHeroTopLinesInImage(Mat photo, List<List<Integer>> colourRanges, int lowerHsvS, int lowerHsvV, int upperHsvS, int upperHsvV) {
+    public static List<Mat> findHeroTopLinesInImage(Mat photo, List<List<Integer>> colourRanges, int lowerHsvS, int lowerHsvV, int upperHsvS, int upperHsvV) {
         List<Mat> linesList = new ArrayList<>();
         int pos = 0;
         int photoWidth = photo.width();
 
         for (List<Integer> colourRange : colourRanges) {
-            int minX = pos * photoWidth / 6;
-            int maxX = (2 + pos) * photoWidth / 6;
+            int minX;
+            int maxX;
+
+            System.out.println("Photo width is " + photoWidth);
+
+            if (colourRanges.size() == 1) {
+                // pos = 1;
+                minX = 0;
+                maxX = photoWidth / 2;
+            } else {
+                minX = pos * photoWidth / 6;
+                maxX = (2 + pos) * photoWidth / 6;
+            }
 
             Scalar lowerHsv = new Scalar(colourRange.get(0), lowerHsvS, lowerHsvV);
             Scalar upperHsv = new Scalar(colourRange.get(1), upperHsvS, upperHsvV);
@@ -231,7 +242,7 @@ public class HeroRect {
             ImageTools.MaskAColourFromImage(subMat, lowerHsv, upperHsv, mask);
 
             Mat lines = new Mat();
-            ImageTools.getLineFromTopRectMask(mask, lines, photo.width() / 7); //USED TO BE 8!!!!
+            ImageTools.getLineFromTopRectMask(mask, lines, photoWidth / 7); //USED TO BE 8!!!!
             adjustXPosOfLines(lines, minX);
             // System.out.println(lines.rows() + " lines found.");
 
@@ -369,6 +380,9 @@ class HeroLine {
             }
         }
 
+        if (MainActivity.debugMode)
+            updateDebugStringForGoodLines(heroLines, goodLines, "w/o none or wide lines: ");
+
         if (goodLines.size() < 2) {
             if (MainActivity.debugMode) {
                 Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
@@ -380,7 +394,8 @@ class HeroLine {
 
         int totalGoodWidth = 0;
 
-        if (numImagesWithRealHeights > 1) {
+        // check there are more than 2 good lines, if not then there's no reason to try and reduce the number of lines!
+        if (goodLines.size() > 2 && numImagesWithRealHeights > 1) {
             int averageHeight = totalGoodHeight / numImagesWithRealHeights;
             int maxAcceptableHeight = averageHeight + (int) (averageHeight * MAX_ACCEPTABLE_PROPORTIONAL_DEVIANCE_FROM_AV_HEIGHT);
 
@@ -400,10 +415,14 @@ class HeroLine {
             }
         }
 
+        if (MainActivity.debugMode)
+            updateDebugStringForGoodLines(heroLines, goodLines, "w/o tall lines: ");
+
         if (goodLines.size() < 2) {
             if (MainActivity.debugMode) {
                 Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
-                        "After getting ride of lines which are too tall I'm only left with " + goodLines.size() + " hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
+                        "After getting ride of lines which are too tall I'm only left with " + goodLines.size() +
+                        " hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
             }
             return;
         }
@@ -421,6 +440,9 @@ class HeroLine {
             }
         }
 
+        if (MainActivity.debugMode)
+            updateDebugStringForGoodLines(heroLines, goodLines, "w/o wide lines: ");
+
         if (goodLines.size() < 2) {
             if (MainActivity.debugMode) {
                 Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
@@ -434,6 +456,18 @@ class HeroLine {
         }
 
         FixBadLines(heroLines);
+    }
+
+    // Creates a string to be used when debugging, showing a 1 for found lines, and a - for no line
+    private static void updateDebugStringForGoodLines(List<HeroLine> heroLines, List<HeroLine> goodLines, String description) {
+        Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") + description;
+
+        for (HeroLine line : heroLines) {
+            if (goodLines.contains(line))
+                Recognition.debugString = Recognition.debugString + "1";
+            else
+                Recognition.debugString = Recognition.debugString + "0";
+        }
     }
 
     // This function makes lines marked as not real in proportion to the good lines
