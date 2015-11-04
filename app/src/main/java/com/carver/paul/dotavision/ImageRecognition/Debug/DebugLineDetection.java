@@ -72,4 +72,18 @@ public class DebugLineDetection {
 
         return ImageTools.GetBitmapFromMat(load);
     }
+
+    public static Bitmap TestRects(Bitmap bitmap) {
+        Mat load = ImageTools.GetMatFromBitmap(bitmap);
+
+
+        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load);
+/*        for (Mat lines : linesList) {
+            ImageTools.drawLinesOnImage(lines, load);
+        }*/
+        List<HeroRect> heroes = HeroRect.CalculateHeroRects(linesList, load);
+
+
+        return ImageTools.GetBitmapFromMat(load);
+    }
 }

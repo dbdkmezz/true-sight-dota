@@ -82,6 +82,7 @@ public class ImageTools {
 //        Imgproc.threshold(gray, canny, 125, 255, 0);
 
         Imgproc.HoughLinesP(mask, lines, 1, Math.PI / 180, 80, minLineLength, 10);
+
     }
 
     public static void drawLinesOnImage(Mat lines, Mat image) {

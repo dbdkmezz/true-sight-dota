@@ -22,6 +22,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
+import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.ImageRecognition.HeroHistAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroRect;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
@@ -55,8 +57,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 //TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
 
@@ -115,19 +119,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.debug_last_image) {
+        if (id == R.id.debug_specific_hue) {
             startDebugLineActivity();
-        } /*else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
+        } else if (id == R.id.debug_whole_process) {
+            startDebugWholeProcessActivity();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -142,6 +138,11 @@ public class MainActivity extends AppCompatActivity
 
     public void startDebugLineActivity() {
         Intent intent = new Intent(this, DebugLineDetectionActivity.class);
+        startActivity(intent);
+    }
+
+    public void startDebugWholeProcessActivity() {
+        Intent intent = new Intent(this, DebugWholeProcessActivity.class);
         startActivity(intent);
     }
 
@@ -220,9 +221,10 @@ public class MainActivity extends AppCompatActivity
 
         LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
         loadedPicturesLayout.removeAllViews();
-        TextView infoText = (TextView) findViewById(R.id.infoText);
-        infoText.setText("");
-        infoText.setVisibility(View.VISIBLE);
+
+        ResetTextViews();
+        StringBuilder ultimatesString = new StringBuilder();
+        StringBuilder stunString = new StringBuilder();
 
         for (HeroRect hero : heroes) {
             LinearLayout thisPictureLayout = new LinearLayout(this);
@@ -264,15 +266,33 @@ public class MainActivity extends AppCompatActivity
             imageViewOriginal.setImageBitmap(bitmapOriginal);
             thisPictureLayout.addView(imageViewOriginal);
 
-            SetInfoText(infoText, hero.getSimilarityList());
+            SetInfoText(hero.getSimilarityList());
+            ultimatesString.append(GetUltimatesText(hero.getSimilarityList().get(0)));
+            stunString.append(GetStunText(hero.getSimilarityList().get(0)));
         }
+
+        TextView tv = (TextView) findViewById(R.id.ultimatesText);
+        tv.setText(Html.fromHtml(ultimatesString.toString()));
+        tv = (TextView) findViewById(R.id.stunsText);
+        tv.setText(Html.fromHtml(stunString.toString()));
 
 /*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(bitmap);*/
     }
 
-    private void SetInfoText(TextView infoText, List<HeroHistAndSimilarity> similarityList) {
+    private void ResetTextViews() {
+        List<Integer> ids = Arrays.asList(R.id.infoText, R.id.ultimatesText, R.id.stunsText);
+        for (Integer id : ids) {
+            TextView tv = (TextView) findViewById(id);
+            tv.setText("");
+            tv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void SetInfoText(List<HeroHistAndSimilarity> similarityList) {
+
+        TextView infoText = (TextView) findViewById(R.id.infoText);
         HeroHistAndSimilarity matchingHero = similarityList.get(0);
 
         infoText.append(matchingHero.hero.name + ", " + matchingHero.similarity);
@@ -293,6 +313,44 @@ public class MainActivity extends AppCompatActivity
         }
 
         infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
+    }
+
+    private StringBuilder GetUltimatesText(HeroHistAndSimilarity matchingHero) {
+        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
+        StringBuilder string = new StringBuilder();
+
+        if (heroWithName == null) return string;
+
+        HeroAbility ultimate = heroWithName.abilities.get(heroWithName.abilities.size() - 1);
+        string.append("<p><b>" + heroWithName.name + ", " + ultimate.name + "</b><br>" + ultimate.description);
+
+        if (ultimate.cooldown != null) {
+            string.append("<br>Cooldown: " + ultimate.cooldown);
+        }
+
+        return string;
+    }
+
+    private StringBuilder GetStunText(HeroHistAndSimilarity matchingHero) {
+        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
+        StringBuilder string = new StringBuilder();
+        if (heroWithName == null) return string;
+
+        for (HeroAbility ability : heroWithName.abilities) {
+            if (ability.isStun) {
+                string.append("<p>");
+                if (string.length() == 0) {
+                    string.append("<b>" + heroWithName.name + "</b>");
+                }
+                string.append("<br><b>" + ability.name + "</b>" + ability.description);
+                String stunDuration = ability.guessStunDuration();
+                if (stunDuration != null) {
+                    string.append(" " + stunDuration);
+                }
+            }
+        }
+
+        return string;
     }
 
     private HeroInfo FindHeroWithName(String name) {

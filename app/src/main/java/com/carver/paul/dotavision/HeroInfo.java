@@ -5,6 +5,7 @@ import java.util.List;
 
 class HeroInfo {
     public String name;
+    public String imageName;
     public String bioRoles;
     public String intelligence;
     public String agility;
@@ -19,8 +20,9 @@ class HeroInfo {
     }
 
     public boolean HasName(String string) {
-        string = string.replace('_', ' ');
-        return string.equalsIgnoreCase(this.name);
+        return string.equals(this.imageName);
+/*        string = string.replace('_', ' ');
+        return string.equalsIgnoreCase(this.name);*/
     }
 
     public int CountStuns() {
@@ -44,9 +46,24 @@ class HeroAbility {
     public String name;
     public String description;
     public String manaCost;
+    public String cooldown;
     public List<String> abilityDetails;
 
     public HeroAbility() {
         abilityDetails = new ArrayList<>();
     }
+
+
+    public String guessStunDuration() {
+        if (isStun != true) return null;
+
+        for (String detail : abilityDetails) {
+            if (detail.contains("STUN DURATION:"))
+                return detail;
+            else if (detail.contains("DURATION:"))
+                return detail;
+        }
+        return null;
+    }
+
 }

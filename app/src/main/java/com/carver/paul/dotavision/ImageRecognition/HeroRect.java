@@ -223,12 +223,9 @@ public class HeroRect {
             int minX;
             int maxX;
 
-            System.out.println("Photo width is " + photoWidth);
-
             if (colourRanges.size() == 1) {
-                // pos = 1;
                 minX = 0;
-                maxX = photoWidth / 2;
+                maxX = photoWidth;
             } else {
                 minX = pos * photoWidth / 6;
                 maxX = (2 + pos) * photoWidth / 6;

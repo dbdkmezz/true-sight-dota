@@ -9,9 +9,13 @@
                 <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
                     android:title="Slideshow" />-->
         <item
-            android:id="@+id/debug_last_image"
+            android:id="@+id/debug_whole_process"
             android:icon="@android:drawable/ic_menu_manage"
-            android:title="Debug last image" />
+            android:title="Debug whole process" />
+        <item
+            android:id="@+id/debug_specific_hue"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Debug specific hue" />
     </group>
 
     <!--    <item android:title="Communicate">

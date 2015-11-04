@@ -49,6 +49,9 @@ public class LoadHeroXml {
             if (parser.getName().equals("name")) {
                 hero.name = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "name");
+            } else if (parser.getName().equals("imageName")) {
+                hero.imageName = readText(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "imageName");
             } else if (parser.getName().equals("bioRoles")) {
                 hero.bioRoles = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "bioRoles");
@@ -106,6 +109,9 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("manaCost")) {
                 ability.manaCost = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "manaCost");
+            } else if (parser.getName().equals("cooldown")) {
+                ability.cooldown = readText(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "cooldown");
             } else if (parser.getName().equals("abilityDetails")) {
                 ability.abilityDetails.add(readText(parser));
                 parser.require(XmlPullParser.END_TAG, ns, "abilityDetails");

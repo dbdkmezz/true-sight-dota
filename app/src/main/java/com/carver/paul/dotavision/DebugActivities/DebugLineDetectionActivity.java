@@ -28,9 +28,6 @@ import java.util.Date;
 
 public class DebugLineDetectionActivity extends AppCompatActivity {
 
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-    private Uri fileUri;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
