@@ -37,17 +37,26 @@ public class ImageTools {
         //  Core.bitwise_and(load, load, res, mask);
     }
 
-    public static Bitmap GetBitmapFromMap(Mat mat) {
+    public static Bitmap GetBitmapFromMat(Mat mat) {
+        return GetBitmapFromMat(mat, true);
+    }
+
+    public static Bitmap GetBitmapFromMat(Mat mat, boolean convertColor) {
 /*        Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         Mat rightColourMat = new Mat();
         Imgproc.cvtColor(mat, rightColourMat, Imgproc.COLOR_BGRA2BGR);
         matToBitmap(rightColourMat, bitmap);
         return bitmap;*/
 
-        Mat finalColourMat = new Mat();
-        Imgproc.cvtColor(mat, finalColourMat, Imgproc.COLOR_BGR2RGB);
         Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
-        matToBitmap(finalColourMat, bitmap);
+        if (convertColor) {
+            Mat finalColourMat = new Mat();
+            Imgproc.cvtColor(mat, finalColourMat, Imgproc.COLOR_BGR2RGB);
+            matToBitmap(finalColourMat, bitmap);
+        } else {
+            matToBitmap(mat, bitmap);
+        }
+
         return bitmap;
     }
 
@@ -55,7 +64,7 @@ public class ImageTools {
         Mat mat = new Mat();
         bitmapToMat(bitmap, mat);
         // TODO: Test to see what colour conversion I need for getMatToBitmap
-        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_BGR2BGRA); //COLOR_RGB2BGR
+        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2BGR); //COLOR_RGB2BGR
         return mat;
     }
 

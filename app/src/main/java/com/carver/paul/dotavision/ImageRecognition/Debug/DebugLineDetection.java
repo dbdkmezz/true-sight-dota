@@ -20,19 +20,15 @@ import static org.opencv.android.Utils.matToBitmap;
  * Created by paul on 25/10/15.
  */
 public class DebugLineDetection {
-    public static void TestMask(Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax, ImageView imageViewMask) { //, ImageView imageViewLines) {
+    public static Bitmap TestMask(Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) { //, ImageView imageViewLines) {
 
-        Mat load = new Mat();
-        bitmapToMat(bitmap, load);
-        Imgproc.cvtColor(load, load, Imgproc.COLOR_BGR2BGRA);
+        Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
         Scalar lowerHsv = new Scalar(hMin, sMin, vMin);
         Scalar upperHsv = new Scalar(hMax, sMax, vMax);
         ImageTools.MaskAColourFromImage(load, lowerHsv, upperHsv, load);
 
-        Bitmap maskBitmap = Bitmap.createBitmap(load.cols(), load.rows(), Bitmap.Config.ARGB_8888);
-        matToBitmap(load, maskBitmap);
-        imageViewMask.setImageBitmap(maskBitmap);
+        return ImageTools.GetBitmapFromMat(load, false);
 
 /*        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
 

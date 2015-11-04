@@ -24,18 +24,10 @@
     <include layout="@layout/content_debug_line_detection" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/cameraFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_camera" />
-
-    <android.support.design.widget.FloatingActionButton
         android:id="@+id/processFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right"
+        android:layout_gravity="center|right"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_media_play"
         android:onClick="testWithoutNewPhoto" />

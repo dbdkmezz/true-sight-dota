@@ -58,6 +58,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+//TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -113,9 +115,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-/*        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.debug_last_image) {
+            startDebugLineActivity();
+        } /*else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -133,15 +135,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-
-
     private void LoadXML() {
         XmlResourceParser parser = getResources().getXml(R.xml.file);
         heroInfoList = LoadHeroXml.Load(parser);
     }
 
-    public void startDebugLineActivity(View view) {
+    public void startDebugLineActivity() {
         Intent intent = new Intent(this, DebugLineDetectionActivity.class);
         startActivity(intent);
     }
@@ -185,16 +184,21 @@ public class MainActivity extends AppCompatActivity
         testImageRecognition(mediaFile.getPath());
     }
 
-    private void testImageRecognition(String photoPath) {
-        if (heroInfoList == null)
-            LoadXML();
-
+    static public Bitmap CreateCroppedBitmap(String photoPath) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
         Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);
         final int NEW_WIDTH = 800;
         int newHeight = NEW_WIDTH * bitmap.getHeight() / bitmap.getWidth();
         bitmap = Bitmap.createScaledBitmap(bitmap, NEW_WIDTH, newHeight, false);
+        return bitmap;
+    }
+
+    private void testImageRecognition(String photoPath) {
+        if (heroInfoList == null)
+            LoadXML();
+
+        Bitmap bitmap = CreateCroppedBitmap(photoPath);
 
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
@@ -231,7 +235,7 @@ public class MainActivity extends AppCompatActivity
 
             //TODO: Don't work out the preview width and height this way! or at least don't scale the photo this way
             ImageView imageViewPhoto = new ImageView(this);
-            Bitmap bitmapPhoto = ImageTools.GetBitmapFromMap(hero.image);
+            Bitmap bitmapPhoto = ImageTools.GetBitmapFromMat(hero.image);
             int height = heroIconWidth * bitmapPhoto.getHeight() / bitmapPhoto.getWidth();
             bitmapPhoto = Bitmap.createScaledBitmap(bitmapPhoto, heroIconWidth, height, true);
             imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -250,7 +254,7 @@ public class MainActivity extends AppCompatActivity
             ImageView imageViewOriginal = new ImageView(this);
             // imageViewOriginal.setPadding(0, 0, 0, 0);
             HeroHistAndSimilarity matchingHero = hero.getSimilarityList().get(0);
-            Bitmap bitmapOriginal = ImageTools.GetBitmapFromMap(matchingHero.hero.image);
+            Bitmap bitmapOriginal = ImageTools.GetBitmapFromMat(matchingHero.hero.image);
             height = heroIconWidth * bitmapOriginal.getHeight() / bitmapOriginal.getWidth();
             bitmapOriginal = Bitmap.createScaledBitmap(bitmapOriginal, heroIconWidth, height, true);
             imageViewOriginal.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
