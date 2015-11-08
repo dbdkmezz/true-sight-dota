@@ -46,6 +46,7 @@ import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.ImageRecognition.HeroHistAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroRect;
+import com.carver.paul.dotavision.ImageRecognition.HistTest;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private List<HeroInfo> heroInfoList = null;
+    private HistTest histTest = null;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     public static boolean debugMode = true;
@@ -129,6 +131,10 @@ public class MainActivity extends AppCompatActivity
     private void LoadXML() {
         XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
         heroInfoList = LoadHeroXml.Load(parser);
+    }
+
+    private void loadHistTest() {
+        histTest = new HistTest(this);
     }
 
     public void startDebugLineActivity() {
@@ -197,13 +203,15 @@ public class MainActivity extends AppCompatActivity
     private void testImageRecognition(String photoPath) {
         if (heroInfoList == null)
             LoadXML();
+        if (histTest == null)
+            loadHistTest();
 
         Bitmap bitmap = CreateCroppedBitmap(photoPath);
 
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
 
-        List<HeroRect> heroes = Recognition.Run(bitmap); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
+        List<HeroRect> heroes = Recognition.Run(bitmap, histTest); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
 
         if (debugMode) {
             TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);

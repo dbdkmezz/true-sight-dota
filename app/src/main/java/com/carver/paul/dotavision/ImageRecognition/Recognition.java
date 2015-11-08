@@ -28,7 +28,7 @@ public class Recognition {
 
     public static String debugString = "";
 
-    public static List<HeroRect> Run(Bitmap bitmap) { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
+    public static List<HeroRect> Run(Bitmap bitmap, HistTest histTest) { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
 
         if (MainActivity.debugMode) debugString = "";
 
@@ -53,7 +53,7 @@ public class Recognition {
         List<HeroRect> heroes = HeroRect.CalculateHeroRects(linesList, load);
 
         for (HeroRect hero : heroes) {
-            hero.calcSimilarityList(); //HistTest.OrderedListOfTemplateSimilarHeroes(hero.image);
+            hero.calcSimilarityList(histTest); //HistTest.OrderedListOfTemplateSimilarHeroes(hero.image);
             //System.out.println("Found:" + similarityList.get(0).hero.name);
         }
 

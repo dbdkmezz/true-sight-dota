@@ -26,17 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-//TODO: fix alt-tabbing back into camera. It gets released and never restarted so crashes
-
-/**
- * Checking camera features
- *
- * Once you obtain access to a camera, you can get further information about
- * its capabilities using the Camera.getParameters() method and checking the
- * returned Camera.Parameters object for supported capabilities. When using API
- * Level 9 or higher, use the Camera.getCameraInfo() to determine if a camera
- * is on the front or back of the device, and the orientation of the image.
- */
+//TODO: crop camera preview and crop what the camera saves
 
  public class CameraActivity extends Activity {
     private Camera mCamera;

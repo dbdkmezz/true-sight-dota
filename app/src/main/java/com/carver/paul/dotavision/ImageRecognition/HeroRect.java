@@ -1,5 +1,7 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
+import android.content.Context;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
@@ -34,14 +36,14 @@ public class HeroRect {
     private static final double ratioToCutFromSide = 0.05;
     private static final double ratioToCutFromTop = 0.05;
     // This must be larger because a red box with MMR may obscure the image
-    private static final double ratioToCutFromBottom;
+    private static final double ratioToCutFromBottom = 0.05;
 
-    static {
-/*        if (Main.photoSource == Main.PhotoSource.HERO_SELECT)
+/*    static {
+*//*        if (Main.photoSource == Main.PhotoSource.HERO_SELECT)
             ratioToCutFromBottom = 0.2;
-        else*/
+        else*//*
             ratioToCutFromBottom = 0.05;
-    }
+    }*/
 
 /*    private static double ratioToCutFromSide = 0.05;
     private static double ratioToCutFromTop = 0.05;
@@ -98,13 +100,13 @@ public class HeroRect {
         return new HeroRect(rotatedImage, newRect);
     }
 
-    public void calcSimilarityList() {
-        similarityList = HistTest.OrderedListOfTemplateSimilarHeroes(image);
+    public void calcSimilarityList(HistTest histTest) {
+        similarityList = histTest.OrderedListOfTemplateSimilarHeroes(image);
     }
 
     public List<HeroHistAndSimilarity> getSimilarityList() {
         if (similarityList == null)
-            calcSimilarityList();
+            throw new RuntimeException("Can't get similarity list if not loaded!");
         return similarityList;
     }
 
