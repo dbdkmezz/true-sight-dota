@@ -8,4 +8,18 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This app needs camera permission.</string>
+
+    <string name="intro_message">
+        <![CDATA[
+
+
+            This sample demonstrates how to use the Camera2 API to capture RAW
+            camera buffers and save them as DNG files.
+
+
+        ]]>
+    </string>
 </resources>

@@ -21,4 +21,6 @@ public class Variables {
 
     public static final List<Integer> sRange = Arrays.asList(15, 255); //50, 255
     public static final List<Integer> vRange = Arrays.asList(34, 255);
+
+    public static final int SCALED_IMAGE_WIDTH = 800;
 }

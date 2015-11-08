@@ -46,6 +46,7 @@ import com.carver.paul.dotavision.ImageRecognition.HeroHistAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroRect;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
+import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
@@ -189,12 +190,12 @@ public class MainActivity extends AppCompatActivity
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
         Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);
-        final int NEW_WIDTH = 800;
-        int newHeight = NEW_WIDTH * bitmap.getHeight() / bitmap.getWidth();
-        bitmap = Bitmap.createScaledBitmap(bitmap, NEW_WIDTH, newHeight, false);
+        int newHeight = Variables.SCALED_IMAGE_WIDTH * bitmap.getHeight() / bitmap.getWidth();
+        bitmap = Bitmap.createScaledBitmap(bitmap, Variables.SCALED_IMAGE_WIDTH, newHeight, false);
 
-        //crop the top and bottom thirds off
-        bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, NEW_WIDTH, newHeight / 3);
+        //crop the top and bottom thirds off, if it's tall
+        if(newHeight > 190 * 3)
+            bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, Variables.SCALED_IMAGE_WIDTH, newHeight / 3);
         return bitmap;
     }
 
@@ -338,9 +339,11 @@ public class MainActivity extends AppCompatActivity
 
         for (HeroAbility ability : heroWithName.abilities) {
             if (ability.isStun) {
-                string.append("<p>");
                 if (string.length() == 0) {
-                    string.append("<b>" + heroWithName.name + "</b>");
+                    string.append("<p><b>" + heroWithName.name + "</b>");
+                }
+                else {
+                    string.append("<p>");
                 }
                 string.append("<br><b>" + ability.name + "</b>" + ability.description);
                 String stunDuration = ability.guessStunDuration();
