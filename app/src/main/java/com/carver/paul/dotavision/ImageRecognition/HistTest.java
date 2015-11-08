@@ -2,8 +2,10 @@ package com.carver.paul.dotavision.ImageRecognition;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 
 import com.carver.paul.dotavision.MainActivity;
+import com.carver.paul.dotavision.R;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -33,8 +35,14 @@ import static org.opencv.android.Utils.bitmapToMat;
 public class HistTest {
     static final private List<HeroWithHist> heroes;
 
+    //R.drawable.abaddon_hphover, R.drawable.alchemist_hphover, R.drawable.ancient_apparition_hphover, R.drawable.antimage_hphover, R.drawable.axe_hphover, R.drawable.bane_hphover, R.drawable.batrider_hphover, R.drawable.beastmaster_hphover, R.drawable.bloodseeker_hphover, R.drawable.bounty_hunter_hphover, R.drawable.brewmaster_hphover, R.drawable.bristleback_hphover, R.drawable.broodmother_hphover, R.drawable.centaur_hphover, R.drawable.chaos_knight_hphover, R.drawable.chen_hphover, R.drawable.clinkz_hphover, R.drawable.crystal_maiden_hphover, R.drawable.dark_seer_hphover, R.drawable.dazzle_hphover, R.drawable.death_prophet_hphover, R.drawable.disruptor_hphover, R.drawable.doom_bringer_hphover, R.drawable.dragon_knight_hphover, R.drawable.drow_ranger_hphover, R.drawable.earthshaker_hphover, R.drawable.earth_spirit_hphover, R.drawable.elder_titan_hphover, R.drawable.ember_spirit_hphover, R.drawable.enchantress_hphover, R.drawable.enigma_hphover, R.drawable.faceless_void_hphover, R.drawable.furion_hphover, R.drawable.gyrocopter_hphover, R.drawable.huskar_hphover, R.drawable.invoker_hphover, R.drawable.jakiro_hphover, R.drawable.juggernaut_hphover, R.drawable.keeper_of_the_light_hphover, R.drawable.kunkka_hphover, R.drawable.legion_commander_hphover, R.drawable.leshrac_hphover, R.drawable.lich_hphover, R.drawable.life_stealer_hphover, R.drawable.lina_hphover, R.drawable.lion_hphover, R.drawable.lone_druid_hphover, R.drawable.luna_hphover, R.drawable.lycan_hphover, R.drawable.magnataur_hphover, R.drawable.medusa_hphover, R.drawable.meepo_hphover, R.drawable.mirana_hphover, R.drawable.morphling_hphover, R.drawable.naga_siren_hphover, R.drawable.necrolyte_hphover, R.drawable.nevermore_hphover, R.drawable.night_stalker_hphover, R.drawable.nyx_assassin_hphover, R.drawable.obsidian_destroyer_hphover, R.drawable.ogre_magi_hphover, R.drawable.omniknight_hphover, R.drawable.oracle_hphover, R.drawable.phantom_assassin_hphover, R.drawable.phantom_lancer_hphover, R.drawable.phoenix_hphover, R.drawable.puck_hphover, R.drawable.pudge_hphover, R.drawable.pugna_hphover, R.drawable.queenofpain_hphover, R.drawable.rattletrap_hphover, R.drawable.razor_hphover, R.drawable.riki_hphover, R.drawable.rubick_hphover, R.drawable.sand_king_hphover, R.drawable.shadow_demon_hphover, R.drawable.shadow_shaman_hphover, R.drawable.shredder_hphover, R.drawable.silencer_hphover, R.drawable.skeleton_king_hphover, R.drawable.skywrath_mage_hphover, R.drawable.slardar_hphover, R.drawable.slark_hphover, R.drawable.sniper_hphover, R.drawable.spectre_hphover, R.drawable.spirit_breaker_hphover, R.drawable.storm_spirit_hphover, R.drawable.sven_hphover, R.drawable.techies_hphover, R.drawable.templar_assassin_hphover, R.drawable.terrorblade_hphover, R.drawable.tidehunter_hphover, R.drawable.tinker_hphover, R.drawable.tiny_hphover, R.drawable.treant_hphover, R.drawable.troll_warlord_hphover, R.drawable.tusk_hphover, R.drawable.undying_hphover, R.drawable.ursa_hphover, R.drawable.vengefulspirit_hphover, R.drawable.venomancer_hphover, R.drawable.viper_hphover, R.drawable.visage_hphover, R.drawable.warlock_hphover, R.drawable.weaver_hphover, R.drawable.windrunner_hphover, R.drawable.winter_wyvern_hphover, R.drawable.wisp_hphover, R.drawable.witch_doctor_hphover, R.drawable.zuus_hphover
+
+    //Drawable drawable = getResources().getDrawable(R.drawable.abaddon_hphover);
+
     static {
         heroes = new ArrayList<>();
+
+
         File folder = new File(MainActivity.getImagesLocation(), "/hero icons");
         //System.out.println("loading files from: " + folder.getPath());
         File[] listOfFiles = folder.listFiles();

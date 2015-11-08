@@ -155,27 +155,24 @@ import java.util.Vector;
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-
-//        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-//                FrameLayout.LayoutParams.MATCH_PARENT,
-//                FrameLayout.LayoutParams.WRAP_CONTENT);
-//        mPreview.setLayoutParams(layoutParams);
-
-
-
         showCaptureButton();
     }
 
-/*    @Override
+    @Override
     public void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_camera);
 
         if(mCamera == null) {
+            setContentView(R.layout.activity_camera);
+
             mCamera = getCameraInstance();
             setupCamera();
+
+            mPreview = new CameraPreview(this, mCamera);
+            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+            preview.addView(mPreview);
         }
-    }*/
+    }
 
     private void setupCamera() {
         if(mCamera != null) {

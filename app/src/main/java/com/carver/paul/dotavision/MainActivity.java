@@ -8,6 +8,7 @@ import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void LoadXML() {
-        XmlResourceParser parser = getResources().getXml(R.xml.file);
+        XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
         heroInfoList = LoadHeroXml.Load(parser);
     }
 
