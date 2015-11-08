@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
 import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
+import com.carver.paul.dotavision.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.ImageRecognition.HeroHistAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroRect;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
@@ -65,6 +66,8 @@ import java.util.Vector;
 
 //TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
 
+//TODO-essential: make sure I have a legal message saying it's Valve's trademark
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -82,16 +85,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                takePhoto();
-/*                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();  */
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -368,12 +361,16 @@ public class MainActivity extends AppCompatActivity
 
     // TODO: Change permissions so it uses the Android 6 way, then can increase target API
     // TODO: Make it save in the write media location, I think media store wasn't right
-    private void takePhoto() {
-        EnsureMediaDirectoryExists();
+    public void takePhoto(View view) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+
+
+/*        EnsureMediaDirectoryExists();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         Uri photoFileUri = Uri.fromFile(new File(getPhotoLocation()));// getOutputMediaFileUri(); // create a file to save the image
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoFileUri); // set the image file name
-        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
     }
 
     @Override
@@ -396,7 +393,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private static void EnsureMediaDirectoryExists() {
+    public static void EnsureMediaDirectoryExists() {
         File mediaStorageDir = new File(getPhotoLocation());
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
