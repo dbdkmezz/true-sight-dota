@@ -184,7 +184,8 @@ public class MainActivity extends AppCompatActivity
         options.inMutable = true;
         Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);
         int newHeight = Variables.SCALED_IMAGE_WIDTH * bitmap.getHeight() / bitmap.getWidth();
-        bitmap = Bitmap.createScaledBitmap(bitmap, Variables.SCALED_IMAGE_WIDTH, newHeight, false);
+        if(bitmap.getWidth() != Variables.SCALED_IMAGE_WIDTH)
+            bitmap = Bitmap.createScaledBitmap(bitmap, Variables.SCALED_IMAGE_WIDTH, newHeight, false);
 
         //crop the top and bottom thirds off, if it's tall
         if(newHeight > 190 * 3)

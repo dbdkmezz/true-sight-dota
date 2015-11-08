@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
+import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.MainActivity;
 import com.carver.paul.dotavision.R;
 
@@ -89,7 +91,44 @@ import java.util.Vector;
     }
 
     public void capturePhoto(View view) {
-        mCamera.takePicture(null, null, mPicture);
+        //mCamera.takePicture(null, null, mPicture);
+        if(mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+
+            Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
+                @Override
+                public void onAutoFocus(boolean success, Camera camera) {
+                    System.out.println("Auto focus success.");
+                    mCamera.takePicture(null, null, mPicture);
+                    mCamera.cancelAutoFocus();
+
+/*                        Camera.Parameters params = camera.getParameters();
+                        if (params.isAutoExposureLockSupported()) {
+                            params.setAutoExposureLock(true);
+                            camera.setParameters(params);
+
+                            params = camera.getParameters();
+                            params.setAutoExposureLock(false);
+                            camera.setParameters(params);
+                        }*//*
+*/
+/*
+*//*
+*/
+/*
+                        if (success)
+                        {
+
+                            globalFocusedBefore = true;
+                            takePicture();
+                        }*//*
+*/
+
+
+                }
+            };//end
+            mCamera.autoFocus(autoFocusCallback);
+        }
+
     }
 
     //TODO-soon: send intent back after taking photo
@@ -116,8 +155,27 @@ import java.util.Vector;
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
+
+//        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+//                FrameLayout.LayoutParams.MATCH_PARENT,
+//                FrameLayout.LayoutParams.WRAP_CONTENT);
+//        mPreview.setLayoutParams(layoutParams);
+
+
+
         showCaptureButton();
     }
+
+/*    @Override
+    public void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_camera);
+
+        if(mCamera == null) {
+            mCamera = getCameraInstance();
+            setupCamera();
+        }
+    }*/
 
     private void setupCamera() {
         if(mCamera != null) {
@@ -127,10 +185,10 @@ import java.util.Vector;
             List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
             int smallestAllowableHeight = 220;
             Camera.Size newSize = null;
-            for(Camera.Size size : sizes) {
-                if(size.width == 800 && size.height > smallestAllowableHeight) {
-                    if(newSize == null || newSize.height > size.height)
-                        newSize = size;
+            for(Camera.Size currentSize : sizes) {
+                if(currentSize.width == Variables.SCALED_IMAGE_WIDTH && currentSize.height > smallestAllowableHeight) {
+                    if(newSize == null || currentSize.height < newSize.height)
+                        newSize = currentSize;
                 }
             }
             if(newSize != null) {
@@ -141,6 +199,14 @@ import java.util.Vector;
             List<String> foc = parameters.getSupportedFocusModes();
             if(foc.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))
                 parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+
+            //TODO: fix camera exposure to make it auto
+            int maxExposure = parameters.getMaxExposureCompensation();
+            if(maxExposure != 0)
+                parameters.setExposureCompensation(maxExposure * 3 / 4);
+
+/*            if(parameters.getSupportedSceneModes().contains(Camera.Parameters.SCENE_MODE_NIGHT))
+                parameters.setSceneMode(Camera.Parameters.SCENE_MODE_NIGHT);*/
 
             mCamera.setParameters(parameters);
         }
@@ -208,40 +274,17 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
             mCamera.setPreviewDisplay(holder);
+
+
+
+
+        Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
+        ViewGroup.LayoutParams layoutParams = getLayoutParams();
+        layoutParams.height = (getWidth() * cameraSize.height / cameraSize.width);
+        setLayoutParams(layoutParams);
+
+
             mCamera.startPreview();
-
-
-            if(mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-
-                Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
-                    @Override
-                    public void onAutoFocus(boolean success, Camera camera) {
-                        System.out.println("Auto focus success.");
-
-                        Camera.Parameters params = camera.getParameters();
-                        if (params.isAutoExposureLockSupported()) {
-                            params.setAutoExposureLock(true);
-                            camera.setParameters(params);
-
-                            params = camera.getParameters();
-                            params.setAutoExposureLock(false);
-                            camera.setParameters(params);
-                        }
-/*
-                        if (success)
-                        {
-
-                            globalFocusedBefore = true;
-                            takePicture();
-                        }*/
-
-                    }
-                };//end
-                mCamera.autoFocus(autoFocusCallback);
-            }
-
-
-
         } catch (IOException e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }
