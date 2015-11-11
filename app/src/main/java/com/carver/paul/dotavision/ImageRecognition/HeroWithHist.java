@@ -18,6 +18,7 @@ import static org.opencv.android.Utils.bitmapToMat;
 TODO: Give HeroWithHist a sensible name now that I don't use histograms!
 */
 
+//TODO-beauty: seriously need to rename HeroHist! Probably split it into two classes
 public class HeroWithHist {
     // protected Mat histogram;
     public Mat image;

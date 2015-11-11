@@ -22,12 +22,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +49,7 @@ import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.ImageRecognition.HeroHistAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroRect;
+import com.carver.paul.dotavision.ImageRecognition.HeroWithHist;
 import com.carver.paul.dotavision.ImageRecognition.HistTest;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
@@ -61,10 +65,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+
+//TODO-beauty: tidy up layout files
 
 //TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
 
@@ -82,9 +89,11 @@ import java.util.Vector;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private List<HeroInfo> heroInfoList = null;
-    private HistTest histTest = null;
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    private static List<HeroInfo> heroInfoList = null;
+    private static HistTest histTest = null;
+
+
+    private RecyclerView mRecyclerView;
 
     public static boolean debugMode = true;
 
@@ -98,6 +107,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        createRecyclerView();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -106,6 +117,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void createRecyclerView() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.infoRecyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(null);
     }
 
 
@@ -283,10 +300,21 @@ public class MainActivity extends AppCompatActivity
             imageViewOriginal.setImageBitmap(bitmapOriginal);
             thisPictureLayout.addView(imageViewOriginal);
 
-            SetInfoText(hero.getSimilarityList());
+
+
+/*            SetInfoText(hero.getSimilarityList());
             ultimatesString.append(GetUltimatesText(hero.getSimilarityList().get(0)));
-            stunString.append(GetStunText(hero.getSimilarityList().get(0)));
+            stunString.append(GetStunText(hero.getSimilarityList().get(0)));*/
         }
+
+        List<HeroWithHist> heroesSeen = new ArrayList<>();
+        for(HeroRect heroRect : heroes) {
+            heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
+        }
+
+        mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
+
+//        mRecyclerView.setAdapter(mAdapter);
 
         TextView tv = (TextView) findViewById(R.id.ultimatesText);
         tv.setText(Html.fromHtml(ultimatesString.toString()));
@@ -372,7 +400,11 @@ public class MainActivity extends AppCompatActivity
         return string;
     }
 
-    private HeroInfo FindHeroWithName(String name) {
+    // TODO: replace FindHeroWithName to use the drawable id int instead of strings
+    public static HeroInfo FindHeroWithName(String name) {
+        if(heroInfoList == null)
+            throw new RuntimeException("heroInfoList is null");
+
         for (HeroInfo hero : heroInfoList) {
             if (hero.HasName(name)) {
                 return hero;
@@ -467,4 +499,69 @@ public class MainActivity extends AppCompatActivity
         return mediaFile;
     }*/
 
+}
+
+class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
+    private List<HeroAbility> stunAbilities;
+
+    // Provide a reference to the views for each data item
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView textView;
+
+        public ViewHolder(View v) {
+            super(v);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        Log.d("HeroInfoAdapter", "Element " + getPosition() + " clicked.");
+                }
+            });
+            textView = (TextView) v.findViewById(R.id.textView);
+        }
+
+        public TextView getTextView() {
+            return textView;
+        }
+    }
+
+    public HeroInfoAdapter() {
+        stunAbilities = new ArrayList<>();
+        return;
+    }
+
+    public HeroInfoAdapter(List<HeroWithHist> heroes) {
+        stunAbilities = new ArrayList<>();
+        for(HeroWithHist hero : heroes) {
+            for (HeroAbility ability : MainActivity.FindHeroWithName(hero.name).abilities) {
+                if (ability.isStun) {
+                    stunAbilities.add(ability);
+                }
+            }
+        }
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public HeroInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.stun_info_item, parent, false);
+        // google says that here you set the view's size, margins, paddings and layout parameters
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        holder.getTextView().setText(stunAbilities.get(position).description);
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return stunAbilities.size();
+    }
 }

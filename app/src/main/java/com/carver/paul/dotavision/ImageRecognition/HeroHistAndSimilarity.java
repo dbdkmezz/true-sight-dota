@@ -3,6 +3,8 @@ package com.carver.paul.dotavision.ImageRecognition;
 /**
  * Created by paul on 25/10/15.
  */
+
+//TODO-beauty: rename HeroHistAndSimilarity
 public class HeroHistAndSimilarity implements Comparable<HeroHistAndSimilarity> {
     public Double similarity;
     public HeroWithHist hero;
