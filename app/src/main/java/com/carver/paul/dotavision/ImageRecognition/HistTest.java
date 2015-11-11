@@ -34,11 +34,12 @@ import static org.opencv.android.Utils.bitmapToMat;
 
 // http://www.pyimagesearch.com/2014/01/22/clever-girl-a-guide-to-utilizing-color-histograms-for-computer-vision-and-image-search-engines/
 
-
 public class HistTest {
     private List<HeroWithHist> heroes = new ArrayList<>();
 
     static final private List<Pair<Integer, String>> heroIconDrawables = new ArrayList<>();
+
+    // TODO: replace hero icon R.drawaable string pairs with just having the R.draawable in the xml
 
     static {
         heroIconDrawables.add(new Pair<Integer, String>(R.drawable.abaddon_hphover, "abaddon"));

@@ -70,6 +70,15 @@ import java.util.Vector;
 
 //TODO-essential: make sure I have a legal message saying it's Valve's trademark
 
+//TODO-now: use sample image from package
+
+//TODO-essential: fix info reported on heroes. E.g. Zeus' lightning bolt is only a mini stun but the app reports the sight duration! -- test for other durations and not show them?
+
+//TODO: change system.out.println to log messages, where needed
+
+//TODO: learn about layout optimisation
+// http://developer.android.com/training/improving-layouts/optimizing-layout.html
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -170,6 +179,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO change so it saves images in the right location
     public static String getImagesLocation() {
         return new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
@@ -177,13 +187,18 @@ public class MainActivity extends AppCompatActivity
 
     public static String getPhotoLocation() {
         return new File(getImagesLocation(), "photo.jpg").getPath();
-
     }
 
     //TODO-now change useExistingPictureButton back so it uses a saved image, it currently just uses the last photo!
     public void useExistingPictureButton(View view) {
         File mediaFile = new File(getImagesLocation(), "photo.jpg");
-        testImageRecognition(mediaFile.getPath());
+        Bitmap bitmap;
+        if(mediaFile.exists()) {
+            bitmap = CreateCroppedBitmap(mediaFile.getPath());
+        } else {
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
+        }
+        testImageRecognition(bitmap);
     }
 
     static public Bitmap CreateCroppedBitmap(String photoPath) {
@@ -200,13 +215,11 @@ public class MainActivity extends AppCompatActivity
         return bitmap;
     }
 
-    private void testImageRecognition(String photoPath) {
+    private void testImageRecognition(Bitmap bitmap) {
         if (heroInfoList == null)
             LoadXML();
         if (histTest == null)
             loadHistTest();
-
-        Bitmap bitmap = CreateCroppedBitmap(photoPath);
 
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
@@ -307,7 +320,7 @@ public class MainActivity extends AppCompatActivity
             infoText.append(". Stuns: " + heroWithName.CountStuns());
         }
 
-        // poor result, so lets show some alteratives
+        // poor result, so lets show some alternatives
         if (matchingHero.similarity < 0.65) {
             infoText.append(". (Alternatives: ");
             for (int i = 1; i < 6; i++) {
@@ -317,6 +330,30 @@ public class MainActivity extends AppCompatActivity
         }
 
         infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
+    }
+
+    private StringBuilder GetStunText(HeroHistAndSimilarity matchingHero) {
+        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
+        StringBuilder string = new StringBuilder();
+        if (heroWithName == null) return string;
+
+        for (HeroAbility ability : heroWithName.abilities) {
+            if (ability.isStun) {
+                if (string.length() == 0) {
+                    string.append("<p><b>" + heroWithName.name + "</b>");
+                }
+                else {
+                    string.append("<p>");
+                }
+                string.append("<br><b>" + ability.name + "</b> " + ability.description);
+                String stunDuration = ability.guessStunDuration();
+                if (stunDuration != null) {
+                    string.append(" <b>" + stunDuration + "</b>");
+                }
+            }
+        }
+
+        return string;
     }
 
     private StringBuilder GetUltimatesText(HeroHistAndSimilarity matchingHero) {
@@ -335,30 +372,6 @@ public class MainActivity extends AppCompatActivity
         return string;
     }
 
-    private StringBuilder GetStunText(HeroHistAndSimilarity matchingHero) {
-        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
-        StringBuilder string = new StringBuilder();
-        if (heroWithName == null) return string;
-
-        for (HeroAbility ability : heroWithName.abilities) {
-            if (ability.isStun) {
-                if (string.length() == 0) {
-                    string.append("<p><b>" + heroWithName.name + "</b>");
-                }
-                else {
-                    string.append("<p>");
-                }
-                string.append("<br><b>" + ability.name + "</b>" + ability.description);
-                String stunDuration = ability.guessStunDuration();
-                if (stunDuration != null) {
-                    string.append(" " + stunDuration);
-                }
-            }
-        }
-
-        return string;
-    }
-
     private HeroInfo FindHeroWithName(String name) {
         for (HeroInfo hero : heroInfoList) {
             if (hero.HasName(name)) {
@@ -372,6 +385,7 @@ public class MainActivity extends AppCompatActivity
     // TODO: Change permissions so it uses the Android 6 way, then can increase target API
     // TODO: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
+        EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
 
@@ -383,16 +397,16 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
     }
 
-    @Override
+/*    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
                 testImageRecognition(getPhotoLocation());
 //                testImageRecognition(fileUri.getPath());
-/*                ImageView mImageView;
+*//*                ImageView mImageView;
                 mImageView = (ImageView) findViewById(R.id.imageView);
-                mImageView.setImageBitmap(BitmapFactory.decodeFile(fileUri.getPath()));*/
+                mImageView.setImageBitmap(BitmapFactory.decodeFile(fileUri.getPath()));*//*
 
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
@@ -400,11 +414,10 @@ public class MainActivity extends AppCompatActivity
                 // Image capture failed, advise user
             }
         }
-    }
-
+    }*/
 
     public static void EnsureMediaDirectoryExists() {
-        File mediaStorageDir = new File(getPhotoLocation());
+        File mediaStorageDir = new File(getImagesLocation());
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("DOTA Vision", "failed to create directory");

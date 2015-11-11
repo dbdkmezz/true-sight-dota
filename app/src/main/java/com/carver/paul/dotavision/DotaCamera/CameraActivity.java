@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Vector;
 
 //TODO: crop camera preview and crop what the camera saves
+//TODO: enable you to go back from camera without taking photo
+//TODO-now: make camera activity send intent back so you can use the photo immediately
 
  public class CameraActivity extends Activity {
     private Camera mCamera;
@@ -167,7 +169,6 @@ import java.util.Vector;
     private void setupCamera() {
         if(mCamera != null) {
             Camera.Parameters parameters = mCamera.getParameters();
-            String wb = parameters.getWhiteBalance();
 
             List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
             int smallestAllowableHeight = 220;
@@ -182,6 +183,22 @@ import java.util.Vector;
                 parameters.setPictureSize(newSize.width, newSize.height);
                 parameters.setPreviewSize(newSize.width, newSize.height);
             }
+
+/*            if(parameters.isAutoExposureLockSupported() == true)
+                parameters.setAutoExposureLock(true);*/
+
+            if(parameters.isAutoWhiteBalanceLockSupported() == true) {
+                parameters.setAutoWhiteBalanceLock(true);
+            } else {
+                System.out.println("Oh no, camera doesn't support white balance lock.");
+            }
+
+/*            List<String> supportedWhiteBalances = parameters.getSupportedWhiteBalance();
+            if(supportedWhiteBalances.contains("daylight")) {
+                parameters.setWhiteBalance("daylight");
+            } else {
+                System.out.println("Oh no, camera doesn't support daylight white balance.");
+            }*/
 
             List<String> foc = parameters.getSupportedFocusModes();
             if(foc.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))
