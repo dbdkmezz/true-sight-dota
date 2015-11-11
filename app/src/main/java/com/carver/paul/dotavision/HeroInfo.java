@@ -43,7 +43,9 @@ class HeroInfo {
 
 class HeroAbility {
     public boolean isStun;
+    public String heroName;
     public String name;
+    public String imageName;
     public String description;
     public String manaCost;
     public String cooldown;

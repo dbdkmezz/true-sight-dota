@@ -29,6 +29,7 @@ import android.text.Html;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,10 +92,6 @@ public class MainActivity extends AppCompatActivity
 
     private static List<HeroInfo> heroInfoList = null;
     private static HistTest histTest = null;
-
-
-    private RecyclerView mRecyclerView;
-
     public static boolean debugMode = true;
 
     static{ System.loadLibrary("opencv_java3"); }
@@ -107,7 +104,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+/*
         createRecyclerView();
+*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -119,11 +118,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+/*
     private void createRecyclerView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.infoRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(null);
     }
+*/
 
 
     @Override
@@ -257,8 +258,6 @@ public class MainActivity extends AppCompatActivity
         loadedPicturesLayout.removeAllViews();
 
         ResetTextViews();
-        StringBuilder ultimatesString = new StringBuilder();
-        StringBuilder stunString = new StringBuilder();
 
         for (HeroRect hero : heroes) {
             LinearLayout thisPictureLayout = new LinearLayout(this);
@@ -300,34 +299,81 @@ public class MainActivity extends AppCompatActivity
             imageViewOriginal.setImageBitmap(bitmapOriginal);
             thisPictureLayout.addView(imageViewOriginal);
 
-
-
-/*            SetInfoText(hero.getSimilarityList());
-            ultimatesString.append(GetUltimatesText(hero.getSimilarityList().get(0)));
-            stunString.append(GetStunText(hero.getSimilarityList().get(0)));*/
+            SetInfoText(hero.getSimilarityList());
         }
+
+        //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
 
         List<HeroWithHist> heroesSeen = new ArrayList<>();
         for(HeroRect heroRect : heroes) {
             heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
         }
-
-        mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
-
-//        mRecyclerView.setAdapter(mAdapter);
-
-        TextView tv = (TextView) findViewById(R.id.ultimatesText);
-        tv.setText(Html.fromHtml(ultimatesString.toString()));
-        tv = (TextView) findViewById(R.id.stunsText);
-        tv.setText(Html.fromHtml(stunString.toString()));
+        GenerateStunCards(heroesSeen);
+        GenerateUltimateCards(heroesSeen);
 
 /*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(bitmap);*/
     }
 
+    private void GenerateStunCards(List<HeroWithHist> heroes) {
+        List<HeroAbility> stunAbilities = new ArrayList<>();
+        for (HeroWithHist hero : heroes) {
+            for (HeroAbility ability : MainActivity.FindHeroWithName(hero.name).abilities) {
+                if (ability.isStun) {
+                    stunAbilities.add(ability);
+                }
+            }
+        }
+
+        GenerateAbilityCards(stunAbilities);
+    }
+
+    private void GenerateUltimateCards(List<HeroWithHist> heroes) {
+        List<HeroAbility> ultimates = new ArrayList<>();
+        for (HeroWithHist hero : heroes) {
+            HeroInfo heroInfo = MainActivity.FindHeroWithName(hero.name);
+            ultimates.add(heroInfo.abilities.get(heroInfo.abilities.size() - 1));
+        }
+        GenerateAbilityCards(ultimates);
+    }
+
+    private void GenerateAbilityCards(List<HeroAbility> abilities) {
+
+        LinearLayout parent = (LinearLayout) findViewById(R.id.linearLayout);
+        LayoutInflater inflater = getLayoutInflater();
+
+        for(HeroAbility ability : abilities) {
+            View v = inflater.inflate(R.layout.stun_info_item, parent, false);
+
+            ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
+            int drawable = GetDrawableFromString(ability.imageName);
+            if(drawable != -1)
+                imageView.setImageResource(drawable);
+
+            TextView textView = (TextView) v.findViewById(R.id.textView);
+            StringBuilder text = new StringBuilder();
+            text.append("<b>" + ability.heroName + ": " + ability.name + "</b><br>" + ability.description);
+            String stunDuration = ability.guessStunDuration();
+            if (stunDuration != null) {
+                text.append(" <b>" + stunDuration + "</b>");
+            }
+            textView.setText(Html.fromHtml(text.toString()));
+
+            parent.addView(v);
+        }
+    }
+
+    private static int GetDrawableFromString(String string) {
+        for(Pair<Integer, String> pair : Variables.abilityDrawables) {
+            if(pair.second.equals(string))
+                return pair.first;
+        }
+        return -1;
+    }
+
     private void ResetTextViews() {
-        List<Integer> ids = Arrays.asList(R.id.infoText, R.id.ultimatesText, R.id.stunsText);
+        List<Integer> ids = Arrays.asList(R.id.infoText);
         for (Integer id : ids) {
             TextView tv = (TextView) findViewById(id);
             tv.setText("");
@@ -501,6 +547,10 @@ public class MainActivity extends AppCompatActivity
 
 }
 
+
+
+
+/*
 class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
     private List<HeroAbility> stunAbilities;
 
@@ -565,3 +615,4 @@ class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
         return stunAbilities.size();
     }
 }
+*/

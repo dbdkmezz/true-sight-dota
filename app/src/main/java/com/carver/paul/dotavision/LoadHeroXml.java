@@ -81,6 +81,9 @@ public class LoadHeroXml {
             }
         }
 
+        for(HeroAbility ability : hero.abilities)
+            ability.heroName = hero.name;
+
         parser.require(XmlPullParser.END_TAG, ns, "heroInfo");
 
         return hero;
@@ -103,6 +106,9 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("name")) {
                 ability.name = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "name");
+            } else if (parser.getName().equals("imageName")) {
+                ability.imageName = readText(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "imageName");
             } else if (parser.getName().equals("description")) {
                 ability.description = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "description");

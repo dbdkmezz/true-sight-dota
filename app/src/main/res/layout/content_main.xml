@@ -16,14 +16,13 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:onClick="startDebugLineActivity" />-->
-<!--
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
--->
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
@@ -33,11 +32,11 @@
                             android:layout_height="wrap_content">
                         </SurfaceView>-->
 
-
+<!--
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/infoRecyclerView"
                 android:layout_width="fill_parent"
-                android:layout_height="250dp"/>
+                android:layout_height="250dp"/>-->
 
             <FrameLayout
                 android:layout_width="fill_parent"
@@ -105,47 +104,9 @@
                     android:visibility="gone" />
             </FrameLayout>
 
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="#FFFFFF"
-                android:elevation="4dp">
-
-                <TextView
-                    android:id="@+id/stunsText"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:singleLine="false"
-                    android:visibility="gone" />
-            </FrameLayout>
-
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="#FFFFFF"
-                android:elevation="4dp">
-
-                <TextView
-                    android:id="@+id/ultimatesText"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:singleLine="false"
-                    android:visibility="gone" />
-            </FrameLayout>
-
         </LinearLayout>
 
-<!--
     </ScrollView>
--->
 
     <!--    <ImageView
             android:id="@+id/imageView"
