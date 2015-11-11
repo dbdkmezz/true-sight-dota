@@ -88,6 +88,7 @@ import java.util.Vector;
         //mCamera.takePicture(null, null, mPicture);
         if(mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
 
+            //TODO: Fix camera for when autoFocusCallback never happens
             Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean success, Camera camera) {
@@ -175,6 +176,7 @@ import java.util.Vector;
             List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
             int smallestAllowableHeight = 220;
             Camera.Size newSize = null;
+            // TODO: make camera take smaller pictures when it doesn't support my particular SCALED_IMAGE_WIDTH
             for(Camera.Size currentSize : sizes) {
                 if(currentSize.width == Variables.SCALED_IMAGE_WIDTH && currentSize.height > smallestAllowableHeight) {
                     if(newSize == null || currentSize.height < newSize.height)
