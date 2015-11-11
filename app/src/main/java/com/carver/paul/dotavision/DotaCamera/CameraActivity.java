@@ -27,8 +27,10 @@ import java.util.List;
 import java.util.Vector;
 
 //TODO: crop camera preview and crop what the camera saves
+//TODO: make camera pretty
 //TODO: enable you to go back from camera without taking photo
 //TODO-now: make camera activity send intent back so you can use the photo immediately
+//TODO: I think opening the camera needs to be a separate thread
 
  public class CameraActivity extends Activity {
     private Camera mCamera;

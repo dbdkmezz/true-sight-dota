@@ -62,6 +62,8 @@ class HeroAbility {
         for (String detail : abilityDetails) {
             if (detail.contains("STUN DURATION:"))
                 return detail;
+            else if (detail.contains("MAX STUN:"))
+                return detail;
             else if (detail.contains("DURATION:"))
                 return detail;
         }

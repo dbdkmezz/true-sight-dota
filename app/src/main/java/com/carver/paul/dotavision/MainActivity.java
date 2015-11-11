@@ -1,7 +1,9 @@
 package com.carver.paul.dotavision;
 
 import android.Manifest;
+import android.animation.LayoutTransition;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
@@ -39,6 +41,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -94,7 +97,9 @@ public class MainActivity extends AppCompatActivity
     private static HistTest histTest = null;
     public static boolean debugMode = true;
 
-    static{ System.loadLibrary("opencv_java3"); }
+    static {
+        System.loadLibrary("opencv_java3");
+    }
     //private Uri fileUri;
 
     @Override
@@ -211,7 +216,7 @@ public class MainActivity extends AppCompatActivity
     public void useExistingPictureButton(View view) {
         File mediaFile = new File(getImagesLocation(), "photo.jpg");
         Bitmap bitmap;
-        if(mediaFile.exists()) {
+        if (mediaFile.exists()) {
             bitmap = CreateCroppedBitmap(mediaFile.getPath());
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
@@ -224,15 +229,16 @@ public class MainActivity extends AppCompatActivity
         options.inMutable = true;
         Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);
         int newHeight = Variables.SCALED_IMAGE_WIDTH * bitmap.getHeight() / bitmap.getWidth();
-        if(bitmap.getWidth() != Variables.SCALED_IMAGE_WIDTH)
+        if (bitmap.getWidth() != Variables.SCALED_IMAGE_WIDTH)
             bitmap = Bitmap.createScaledBitmap(bitmap, Variables.SCALED_IMAGE_WIDTH, newHeight, false);
 
         //crop the top and bottom thirds off, if it's tall
-        if(newHeight > 190 * 3)
+        if (newHeight > 190 * 3)
             bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, Variables.SCALED_IMAGE_WIDTH, newHeight / 3);
         return bitmap;
     }
 
+    //TODO: make image recognition threaded
     private void testImageRecognition(Bitmap bitmap) {
         if (heroInfoList == null)
             LoadXML();
@@ -305,18 +311,35 @@ public class MainActivity extends AppCompatActivity
         //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
 
         List<HeroWithHist> heroesSeen = new ArrayList<>();
-        for(HeroRect heroRect : heroes) {
+        for (HeroRect heroRect : heroes) {
             heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
         }
-        GenerateStunCards(heroesSeen);
-        GenerateUltimateCards(heroesSeen);
+        AddAbilityHeading("Stuns");
+        AddStunCards(heroesSeen);
+        AddAbilityHeading("Ultimates");
+        AddUltimateCards(heroesSeen);
+
+        LayoutTransition transition = new LayoutTransition();
+        transition.enableTransitionType(LayoutTransition.CHANGING);
+        transition.setDuration(250);
+        LinearLayout parent = (LinearLayout) findViewById(R.id.linearLayout);
+        parent.setLayoutTransition(transition);
 
 /*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(bitmap);*/
     }
 
-    private void GenerateStunCards(List<HeroWithHist> heroes) {
+    private void AddAbilityHeading(String string) {
+        LinearLayout parent = (LinearLayout) findViewById(R.id.linearLayout);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.heading_item, parent, false);
+        TextView textView = (TextView) v.findViewById(R.id.textView);
+        textView.setText(string);
+        parent.addView(v);
+    }
+
+    private void AddStunCards(List<HeroWithHist> heroes) {
         List<HeroAbility> stunAbilities = new ArrayList<>();
         for (HeroWithHist hero : heroes) {
             for (HeroAbility ability : MainActivity.FindHeroWithName(hero.name).abilities) {
@@ -326,47 +349,32 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        GenerateAbilityCards(stunAbilities);
+        AddAbilityCards(stunAbilities, true);
     }
 
-    private void GenerateUltimateCards(List<HeroWithHist> heroes) {
+    //TODO: make cards cards with rounded edges
+    private void AddUltimateCards(List<HeroWithHist> heroes) {
         List<HeroAbility> ultimates = new ArrayList<>();
         for (HeroWithHist hero : heroes) {
             HeroInfo heroInfo = MainActivity.FindHeroWithName(hero.name);
             ultimates.add(heroInfo.abilities.get(heroInfo.abilities.size() - 1));
         }
-        GenerateAbilityCards(ultimates);
+        AddAbilityCards(ultimates, false);
     }
 
-    private void GenerateAbilityCards(List<HeroAbility> abilities) {
-
+    private void AddAbilityCards(List<HeroAbility> abilities, boolean showStunDuration) {
         LinearLayout parent = (LinearLayout) findViewById(R.id.linearLayout);
-        LayoutInflater inflater = getLayoutInflater();
 
-        for(HeroAbility ability : abilities) {
-            View v = inflater.inflate(R.layout.stun_info_item, parent, false);
-
-            ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
-            int drawable = GetDrawableFromString(ability.imageName);
-            if(drawable != -1)
-                imageView.setImageResource(drawable);
-
-            TextView textView = (TextView) v.findViewById(R.id.textView);
-            StringBuilder text = new StringBuilder();
-            text.append("<b>" + ability.heroName + ": " + ability.name + "</b><br>" + ability.description);
-            String stunDuration = ability.guessStunDuration();
-            if (stunDuration != null) {
-                text.append(" <b>" + stunDuration + "</b>");
-            }
-            textView.setText(Html.fromHtml(text.toString()));
-
-            parent.addView(v);
+        for (HeroAbility ability : abilities) {
+            AbilityCard card = new AbilityCard(this, ability, showStunDuration);
+            parent.addView(card);
         }
     }
 
-    private static int GetDrawableFromString(String string) {
-        for(Pair<Integer, String> pair : Variables.abilityDrawables) {
-            if(pair.second.equals(string))
+    //TODO: move GetDrawableFromString to imagetools?
+    public static int GetDrawableFromString(String string) {
+        for (Pair<Integer, String> pair : Variables.abilityDrawables) {
+            if (pair.second.equals(string))
                 return pair.first;
         }
         return -1;
@@ -415,8 +423,7 @@ public class MainActivity extends AppCompatActivity
             if (ability.isStun) {
                 if (string.length() == 0) {
                     string.append("<p><b>" + heroWithName.name + "</b>");
-                }
-                else {
+                } else {
                     string.append("<p>");
                 }
                 string.append("<br><b>" + ability.name + "</b> " + ability.description);
@@ -448,7 +455,7 @@ public class MainActivity extends AppCompatActivity
 
     // TODO: replace FindHeroWithName to use the drawable id int instead of strings
     public static HeroInfo FindHeroWithName(String name) {
-        if(heroInfoList == null)
+        if (heroInfoList == null)
             throw new RuntimeException("heroInfoList is null");
 
         for (HeroInfo hero : heroInfoList) {
