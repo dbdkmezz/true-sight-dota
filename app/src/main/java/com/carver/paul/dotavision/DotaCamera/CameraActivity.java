@@ -25,6 +25,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 //TODO: crop camera preview and crop what the camera saves
 //TODO: make camera pretty
@@ -32,7 +36,7 @@ import java.util.Vector;
 //TODO-now: make camera activity send intent back so you can use the photo immediately
 //TODO: I think opening the camera needs to be a separate thread
 
- public class CameraActivity extends Activity {
+public class CameraActivity extends Activity {
     private Camera mCamera;
     private SurfaceView mPreview;
     private static final String TAG = "Camera Activity";
@@ -44,7 +48,7 @@ import java.util.Vector;
 
             MainActivity.EnsureMediaDirectoryExists();
             File pictureFile = getOutputMediaFile();
-            if (pictureFile == null){
+            if (pictureFile == null) {
                 Log.d(TAG, "Error creating media file, check storage permissions: ");// + e.getMessage());
                 return;
             }
@@ -84,46 +88,40 @@ import java.util.Vector;
         takeAgainButton.setVisibility(View.GONE);
     }
 
+    private final ScheduledExecutorService mScheduledExecutorService =
+            Executors.newScheduledThreadPool(1);
+
     public void capturePhoto(View view) {
         //mCamera.takePicture(null, null, mPicture);
-        if(mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+        if (mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
 
-            //TODO: Fix camera for when autoFocusCallback never happens
+//https://stackoverflow.com/questions/6658868/camera-autofocus-callback-not-happening
+            final ScheduledFuture<?> focusTimeoutFuture = mScheduledExecutorService.schedule(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "Autofocus didn't succeed after 3 seconds, taking photo anyway.");
+                    mCamera.takePicture(null, null, mPicture);
+                    mCamera.cancelAutoFocus();
+                }
+            }, 3, TimeUnit.SECONDS);// add a 3 second timeout to autofocus
+
             Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean success, Camera camera) {
-                    System.out.println("Auto focus success.");
-                    mCamera.takePicture(null, null, mPicture);
-                    mCamera.cancelAutoFocus();
-
-/*                        Camera.Parameters params = camera.getParameters();
-                        if (params.isAutoExposureLockSupported()) {
-                            params.setAutoExposureLock(true);
-                            camera.setParameters(params);
-
-                            params = camera.getParameters();
-                            params.setAutoExposureLock(false);
-                            camera.setParameters(params);
-                        }*//*
-*/
-/*
-*//*
-*/
-/*
-                        if (success)
-                        {
-
-                            globalFocusedBefore = true;
-                            takePicture();
-                        }*//*
-*/
-
-
+                    // cancel the timeout future if it didn't run already
+                    boolean canceledFuture = focusTimeoutFuture.cancel(false);
+                    if (canceledFuture) {
+                        Log.d(TAG, "Taking pciture with correct autofocus.");
+                        mCamera.takePicture(null, null, mPicture);
+                        mCamera.cancelAutoFocus();
+                    }
                 }
-            };//end
+            };
             mCamera.autoFocus(autoFocusCallback);
+        } else {
+            Log.d(TAG, "Taking piture outside focus mode");
+            mCamera.takePicture(null, null, mPicture);
         }
-
     }
 
     //TODO-soon: send intent back after taking photo
@@ -157,7 +155,7 @@ import java.util.Vector;
     public void onResume() {
         super.onResume();
 
-        if(mCamera == null) {
+        if (mCamera == null) {
             setContentView(R.layout.activity_camera);
 
             mCamera = getCameraInstance();
@@ -170,20 +168,20 @@ import java.util.Vector;
     }
 
     private void setupCamera() {
-        if(mCamera != null) {
+        if (mCamera != null) {
             Camera.Parameters parameters = mCamera.getParameters();
 
             List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
             int smallestAllowableHeight = 220;
             Camera.Size newSize = null;
             // TODO: make camera take smaller pictures when it doesn't support my particular SCALED_IMAGE_WIDTH
-            for(Camera.Size currentSize : sizes) {
-                if(currentSize.width == Variables.SCALED_IMAGE_WIDTH && currentSize.height > smallestAllowableHeight) {
-                    if(newSize == null || currentSize.height < newSize.height)
+            for (Camera.Size currentSize : sizes) {
+                if (currentSize.width == Variables.SCALED_IMAGE_WIDTH && currentSize.height > smallestAllowableHeight) {
+                    if (newSize == null || currentSize.height < newSize.height)
                         newSize = currentSize;
                 }
             }
-            if(newSize != null) {
+            if (newSize != null) {
                 parameters.setPictureSize(newSize.width, newSize.height);
                 parameters.setPreviewSize(newSize.width, newSize.height);
             }
@@ -191,10 +189,10 @@ import java.util.Vector;
 /*            if(parameters.isAutoExposureLockSupported() == true)
                 parameters.setAutoExposureLock(true);*/
 
-            if(parameters.isAutoWhiteBalanceLockSupported() == true) {
+            if (parameters.isAutoWhiteBalanceLockSupported() == true) {
                 parameters.setAutoWhiteBalanceLock(true);
             } else {
-                System.out.println("Oh no, camera doesn't support white balance lock.");
+                Log.d(TAG, "Oh no, camera doesn't support white balance lock.");
             }
 
 /*            List<String> supportedWhiteBalances = parameters.getSupportedWhiteBalance();
@@ -205,13 +203,13 @@ import java.util.Vector;
             }*/
 
             List<String> foc = parameters.getSupportedFocusModes();
-            if(foc.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))
+            if (foc.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))
                 parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
-            //TODO: fix camera exposure to make it auto
+/*            //TODO: fix camera exposure to make it auto
             int maxExposure = parameters.getMaxExposureCompensation();
-            if(maxExposure != 0)
-                parameters.setExposureCompensation(maxExposure * 3 / 4);
+            if (maxExposure != 0)
+                parameters.setExposureCompensation(maxExposure * 3 / 4);*/
 
 /*            if(parameters.getSupportedSceneModes().contains(Camera.Parameters.SCENE_MODE_NIGHT))
                 parameters.setSceneMode(Camera.Parameters.SCENE_MODE_NIGHT);*/
@@ -226,17 +224,19 @@ import java.util.Vector;
         releaseCamera();              // release the camera immediately on pause event
     }
 
-    private void releaseCamera(){
-        if (mCamera != null){
+    private void releaseCamera() {
+        if (mCamera != null) {
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
     }
 
-    /** Check if this device has a camera
-     * Shouldn't be needed because my AndroidManifest requires a camera */
+    /**
+     * Check if this device has a camera
+     * Shouldn't be needed because my AndroidManifest requires a camera
+     */
     private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             // this device has a camera
             return true;
         } else {
@@ -246,13 +246,14 @@ import java.util.Vector;
         }
     }
 
-    /** A safe way to get an instance of the Camera object. */
-    private static Camera getCameraInstance(){
+    /**
+     * A safe way to get an instance of the Camera object.
+     */
+    private static Camera getCameraInstance() {
         Camera c = null;
         try {
             c = Camera.open(); // attempt to get a Camera instance
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             // Camera is not available (in use or does not exist)
         }
         return c; // returns null if camera is unavailable
@@ -260,7 +261,9 @@ import java.util.Vector;
 }
 
 
-/** A basic Camera preview class */
+/**
+ * A basic Camera preview class
+ */
 class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
@@ -284,12 +287,10 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.setPreviewDisplay(holder);
 
 
-
-
-        Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
-        ViewGroup.LayoutParams layoutParams = getLayoutParams();
-        layoutParams.height = (getWidth() * cameraSize.height / cameraSize.width);
-        setLayoutParams(layoutParams);
+            Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
+            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            layoutParams.height = (getWidth() * cameraSize.height / cameraSize.width);
+            setLayoutParams(layoutParams);
 
 
             mCamera.startPreview();
@@ -305,18 +306,18 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
 
     //TODO-now remove surfaceChanged class?
 
-/*
-    If you want to set a specific size for your camera preview,
-    set this in the surfaceChanged() method as noted in the comments
-    above. When setting preview size, you must use values from
-    getSupportedPreviewSizes(). Do not set arbitrary values in
-    the setPreviewSize() method.
-*/
+    /*
+        If you want to set a specific size for your camera preview,
+        set this in the surfaceChanged() method as noted in the comments
+        above. When setting preview size, you must use values from
+        getSupportedPreviewSizes(). Do not set arbitrary values in
+        the setPreviewSize() method.
+    */
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         // If your preview can change or rotate, take care of those events here.
         // Make sure to stop the preview before resizing or reformatting it.
 
-        if (mHolder.getSurface() == null){
+        if (mHolder.getSurface() == null) {
             // preview surface does not exist
             return;
         }
@@ -324,7 +325,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         // stop preview before making changes
         try {
             mCamera.stopPreview();
-        } catch (Exception e){
+        } catch (Exception e) {
             // ignore: tried to stop a non-existent preview
         }
 
@@ -336,7 +337,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
     }

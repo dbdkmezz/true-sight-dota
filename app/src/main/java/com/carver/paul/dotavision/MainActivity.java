@@ -28,6 +28,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.transition.Scene;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
+import android.transition.TransitionValues;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -75,7 +80,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+//TODO: remove unecessary depedencies
+
 //TODO-beauty: tidy up layout files
+
+//TODO: modifications to layouts for a few phone sizes
+
+//TODO: test all spells, e.g. do the stun summaries show the right information?
+
+//TODO: understand what lines like xmlns:app= do in the layout files
 
 //TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
 
@@ -84,8 +97,6 @@ import java.util.Vector;
 //TODO-now: use sample image from package
 
 //TODO-essential: fix info reported on heroes. E.g. Zeus' lightning bolt is only a mini stun but the app reports the sight duration! -- test for other durations and not show them?
-
-//TODO: change system.out.println to log messages, where needed
 
 //TODO: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
@@ -470,9 +481,23 @@ public class MainActivity extends AppCompatActivity
     // TODO: Change permissions so it uses the Android 6 way, then can increase target API
     // TODO: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
-        EnsureMediaDirectoryExists();
+
+
+        ViewGroup sceneRoot = (ViewGroup) findViewById(R.id.scene_root);
+
+// Create the scenes
+        Scene startingScene = Scene.getSceneForLayout(sceneRoot, R.layout.main_starting_scene, this);
+        Scene showInfoScene = Scene.getSceneForLayout(sceneRoot, R.layout.main_showinfo_scene, this);
+
+        Transition autoTransition = TransitionInflater.from(this).
+                        inflateTransition(R.transition.auto_transition);
+
+        //TODO I swtiched api level up to 19 to use transition manager, want it back down to api level 16 so do alternative animations
+        TransitionManager.go(showInfoScene, autoTransition);
+
+/*        EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);
+        startActivity(intent);*/
 
 
 /*        EnsureMediaDirectoryExists();

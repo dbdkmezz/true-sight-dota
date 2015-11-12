@@ -64,7 +64,7 @@ class HeroAbility {
                 return detail;
             else if (detail.contains("MAX STUN:"))
                 return detail;
-            else if (detail.contains("DURATION:"))
+            else if (detail.contains("DURATION:") && !detail.contains("DAMAGE"))
                 return detail;
         }
         return null;

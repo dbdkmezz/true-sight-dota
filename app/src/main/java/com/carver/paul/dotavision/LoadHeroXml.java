@@ -1,6 +1,7 @@
 package com.carver.paul.dotavision;
 
 import android.content.res.XmlResourceParser;
+import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -15,8 +16,10 @@ public class LoadHeroXml {
 
     static final String ns = null;
 
+    private static final String TAG = "LoadHeroXml";
+
     public static List<HeroInfo> Load(XmlResourceParser parser) {
-        System.out.println("Starting XML Load.");
+        Log.d(TAG, "Starting XML Load.");
 
         List<HeroInfo> heroInfoList = new ArrayList<>();
 
@@ -36,7 +39,7 @@ public class LoadHeroXml {
             System.err.println("IOException: " + e.getMessage());
         }
 
-        System.out.println("Loaded " + heroInfoList.size() + " heroes.");
+        Log.d(TAG, "Loaded " + heroInfoList.size() + " heroes.");
         return heroInfoList;
     }
 
