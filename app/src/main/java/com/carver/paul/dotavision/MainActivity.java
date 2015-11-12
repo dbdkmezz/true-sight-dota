@@ -1,7 +1,10 @@
 package com.carver.paul.dotavision;
 
 import android.Manifest;
+import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +46,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -482,18 +487,20 @@ public class MainActivity extends AppCompatActivity
     // TODO: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+/*        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.2f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.2f);
+        scaleX.setDuration(300);
+        scaleY.setDuration(300);
+        animatorSet.play(scaleX).with(scaleY);
+        animatorSet.start();*/
 
-        ViewGroup sceneRoot = (ViewGroup) findViewById(R.id.scene_root);
+        TimeInterpolator interpolator = new OvershootInterpolator();
 
-// Create the scenes
-        Scene startingScene = Scene.getSceneForLayout(sceneRoot, R.layout.main_starting_scene, this);
-        Scene showInfoScene = Scene.getSceneForLayout(sceneRoot, R.layout.main_showinfo_scene, this);
+        fab.animate().scaleX(0.2f).scaleY(0.2f).setDuration(300).setInterpolator(interpolator);
 
-        Transition autoTransition = TransitionInflater.from(this).
-                        inflateTransition(R.transition.auto_transition);
 
-        //TODO I swtiched api level up to 19 to use transition manager, want it back down to api level 16 so do alternative animations
-        TransitionManager.go(showInfoScene, autoTransition);
 
 /*        EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
