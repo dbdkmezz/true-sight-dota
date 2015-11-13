@@ -1,42 +1,21 @@
 package com.carver.paul.dotavision;
 
-import android.Manifest;
-import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
-import android.animation.ObjectAnimator;
-import android.animation.TimeInterpolator;
-import android.app.Fragment;
+import android.app.IntentService;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.hardware.Camera;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.transition.Scene;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.transition.TransitionManager;
-import android.transition.TransitionValues;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Pair;
@@ -46,17 +25,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
-import android.view.animation.OvershootInterpolator;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
 import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
@@ -69,23 +40,15 @@ import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 
-import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 //TODO: remove unecessary depedencies
+
+//TODO: reduce package size. Smaller images?
 
 //TODO-beauty: tidy up layout files
 
@@ -99,19 +62,16 @@ import java.util.Vector;
 
 //TODO-essential: make sure I have a legal message saying it's Valve's trademark
 
-//TODO-now: use sample image from package
-
-//TODO-essential: fix info reported on heroes. E.g. Zeus' lightning bolt is only a mini stun but the app reports the sight duration! -- test for other durations and not show them?
-
 //TODO: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static List<HeroInfo> heroInfoList = null;
-    private static HistTest histTest = null;
     public static boolean debugMode = true;
+    private static int CAMERA_ACTIVITY_REQUEST_CODE = 100;
+    public static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
+    public static Bitmap recognitionBitmap = null;
 
     static {
         System.loadLibrary("opencv_java3");
@@ -175,16 +135,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
-    private void LoadXML() {
-        XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
-        heroInfoList = LoadHeroXml.Load(parser);
-    }
-
-    private void loadHistTest() {
-        histTest = new HistTest(this);
-    }
-
     public void startDebugLineActivity() {
         Intent intent = new Intent(this, DebugLineDetectionActivity.class);
         startActivity(intent);
@@ -230,6 +180,10 @@ public class MainActivity extends AppCompatActivity
 
     //TODO-now change useExistingPictureButton back so it uses a saved image, it currently just uses the last photo!
     public void useExistingPictureButton(View view) {
+        doImageRecognition();
+    }
+
+    private void doImageRecognition() {
         File mediaFile = new File(getImagesLocation(), "photo.jpg");
         Bitmap bitmap;
         if (mediaFile.exists()) {
@@ -237,7 +191,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
         }
-        testImageRecognition(bitmap);
+        doImageRecognition(bitmap);
     }
 
     static public Bitmap CreateCroppedBitmap(String photoPath) {
@@ -255,16 +209,28 @@ public class MainActivity extends AppCompatActivity
     }
 
     //TODO: make image recognition threaded
-    private void testImageRecognition(Bitmap bitmap) {
-        if (heroInfoList == null)
-            LoadXML();
-        if (histTest == null)
-            loadHistTest();
+    //TODO: move image recognitiion into separate class
+    private void doImageRecognition(Bitmap bitmap) {
+        recognitionBitmap = bitmap;
 
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
 
-        List<HeroRect> heroes = Recognition.Run(bitmap, histTest); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
+        Intent intent = new Intent(this, RecognitionService.class);
+        startService(intent);
+
+/*        Intent intent = new Intent(this, RecognitionService.class);
+        //TODO-someday: make it possible to specify image save location by sending camera activity an intent
+        startActivityForResult(intent, RECOGNITION_ACTIVITY_REQUEST_CODE);*/
+    }
+
+//        mServiceIntent = new Intent(getActivity(), RecognitionService.class);
+//        mServiceIntent.setData(Uri.parse(dataUrl));
+
+
+    private void showConsequencesOfImageRecognition()
+    {
+        List<HeroRect> heroes = RecognitionService.result;
 
         if (debugMode) {
             TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
@@ -430,48 +396,11 @@ public class MainActivity extends AppCompatActivity
         infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
     }
 
-    private StringBuilder GetStunText(HeroHistAndSimilarity matchingHero) {
-        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
-        StringBuilder string = new StringBuilder();
-        if (heroWithName == null) return string;
-
-        for (HeroAbility ability : heroWithName.abilities) {
-            if (ability.isStun) {
-                if (string.length() == 0) {
-                    string.append("<p><b>" + heroWithName.name + "</b>");
-                } else {
-                    string.append("<p>");
-                }
-                string.append("<br><b>" + ability.name + "</b> " + ability.description);
-                String stunDuration = ability.guessStunDuration();
-                if (stunDuration != null) {
-                    string.append(" <b>" + stunDuration + "</b>");
-                }
-            }
-        }
-
-        return string;
-    }
-
-    private StringBuilder GetUltimatesText(HeroHistAndSimilarity matchingHero) {
-        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
-        StringBuilder string = new StringBuilder();
-
-        if (heroWithName == null) return string;
-
-        HeroAbility ultimate = heroWithName.abilities.get(heroWithName.abilities.size() - 1);
-        string.append("<p><b>" + heroWithName.name + ", " + ultimate.name + "</b><br>" + ultimate.description);
-
-        if (ultimate.cooldown != null) {
-            string.append("<br>Cooldown: " + ultimate.cooldown);
-        }
-
-        return string;
-    }
-
     // TODO: replace FindHeroWithName to use the drawable id int instead of strings
     public static HeroInfo FindHeroWithName(String name) {
-        if (heroInfoList == null)
+        List<HeroInfo> heroInfoList = RecognitionService.getHeroInfoList();
+
+        if (heroInfoList== null)
             throw new RuntimeException("heroInfoList is null");
 
         for (HeroInfo hero : heroInfoList) {
@@ -487,7 +416,12 @@ public class MainActivity extends AppCompatActivity
     // TODO: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+
+        TimeInterpolator interpolator = new OvershootInterpolator();
+        //TODO: remove the scenes xmls I started working on
+        fab.animate().scaleX(0.2f).scaleY(0.2f).setDuration(300).setInterpolator(interpolator);*/
+
 /*        AnimatorSet animatorSet = new AnimatorSet();
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.2f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.2f);
@@ -496,15 +430,11 @@ public class MainActivity extends AppCompatActivity
         animatorSet.play(scaleX).with(scaleY);
         animatorSet.start();*/
 
-        TimeInterpolator interpolator = new OvershootInterpolator();
-
-        fab.animate().scaleX(0.2f).scaleY(0.2f).setDuration(300).setInterpolator(interpolator);
-
-
-
-/*        EnsureMediaDirectoryExists();
+        EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);*/
+        //TODO-someday: make it possible to specify image save location by sending camera activity an intent
+        startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
+        //startActivity(intent);
 
 
 /*        EnsureMediaDirectoryExists();
@@ -514,16 +444,15 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
     }
 
-/*    @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
-                testImageRecognition(getPhotoLocation());
-//                testImageRecognition(fileUri.getPath());
-*//*                ImageView mImageView;
+                doImageRecognition();
+/*                ImageView mImageView;
                 mImageView = (ImageView) findViewById(R.id.imageView);
-                mImageView.setImageBitmap(BitmapFactory.decodeFile(fileUri.getPath()));*//*
+                mImageView.setImageBitmap(BitmapFactory.decodeFile(fileUri.getPath()));*/
 
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
@@ -531,13 +460,37 @@ public class MainActivity extends AppCompatActivity
                 // Image capture failed, advise user
             }
         }
-    }*/
+        if(requestCode == RECOGNITION_ACTIVITY_REQUEST_CODE) {
+            //if(resultCode == RESULT_OK) {
+                showConsequencesOfImageRecognition();
+            //}
+        }
+    }
 
     public static void EnsureMediaDirectoryExists() {
         File mediaStorageDir = new File(getImagesLocation());
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("DOTA Vision", "failed to create directory");
+            }
+        }
+
+        // Broadcast receiver for receiving status updates from the IntentService
+            private class ResponseReceiver extends BroadcastReceiver
+        {
+            // Prevents instantiation
+            private ResponseReceiver() {
+            }
+            // Called when the BroadcastReceiver gets an Intent it's registered to receive
+            @
+            public void onReceive(Context context, Intent intent) {
+                if(intent.getAction().equals(RecognitionService.BROADCAST_ACTION)) {
+
+                    Intent resultIntent = new Intent();
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+//                    showConsequencesOfImageRecognition();
+                }
             }
         }
     }
@@ -655,3 +608,4 @@ class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
     }
 }
 */
+

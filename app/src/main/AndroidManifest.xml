@@ -42,6 +42,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.carver.paul.dotavision.MainActivity" />
         </activity>
+        <service android:name=".RecognitionService"
+            android:exported="false"/>
     </application>
 
 </manifest>

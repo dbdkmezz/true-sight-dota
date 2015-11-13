@@ -2,6 +2,7 @@ package com.carver.paul.dotavision.DotaCamera;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -124,9 +125,11 @@ public class CameraActivity extends Activity {
         }
     }
 
-    //TODO-soon: send intent back after taking photo
+    // runs when confirm button is pressed.
     public void confirmPhoto(View view) {
-        super.onBackPressed();
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 
     public void takePhotoAgain(View view) {
