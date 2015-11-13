@@ -2,8 +2,6 @@ package com.carver.paul.dotavision;
 
 import android.animation.LayoutTransition;
 import android.app.IntentService;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
@@ -68,9 +66,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static List<HeroInfo> heroInfoList = null;
+    private static HistTest histTest = null;
     public static boolean debugMode = true;
     private static int CAMERA_ACTIVITY_REQUEST_CODE = 100;
-    public static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
+    private static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
     public static Bitmap recognitionBitmap = null;
 
     static {
@@ -211,31 +211,21 @@ public class MainActivity extends AppCompatActivity
     //TODO: make image recognition threaded
     //TODO: move image recognitiion into separate class
     private void doImageRecognition(Bitmap bitmap) {
-        recognitionBitmap = bitmap;
+        if (heroInfoList == null)
+            LoadXML();
+        if (histTest == null)
+            loadHistTest();
 
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
 
-        Intent intent = new Intent(this, RecognitionService.class);
-        startService(intent);
-
-/*        Intent intent = new Intent(this, RecognitionService.class);
-        //TODO-someday: make it possible to specify image save location by sending camera activity an intent
-        startActivityForResult(intent, RECOGNITION_ACTIVITY_REQUEST_CODE);*/
-    }
-
-//        mServiceIntent = new Intent(getActivity(), RecognitionService.class);
-//        mServiceIntent.setData(Uri.parse(dataUrl));
-
-
-    private void showConsequencesOfImageRecognition()
-    {
-        List<HeroRect> heroes = RecognitionService.result;
+        List<HeroRect> heroes = Recognition.Run(bitmap, histTest); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
 
         if (debugMode) {
             TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
             imageDebugText.setVisibility(View.VISIBLE);
-            imageDebugText.setText(Recognition.debugString);
+            imageDebugText.setText(Recognition.debugString + System.getProperty("line.separator") +
+                    "Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve and this app is not affiliated with Valve Corporation.");
         }
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -296,6 +286,11 @@ public class MainActivity extends AppCompatActivity
         for (HeroRect heroRect : heroes) {
             heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
         }
+
+        LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+        resultsInfoLayout.removeAllViews();
+
+        //TODO: pass the Layout to functions adding the ability cards
         AddAbilityHeading("Stuns");
         AddStunCards(heroesSeen);
         AddAbilityHeading("Ultimates");
@@ -304,16 +299,25 @@ public class MainActivity extends AppCompatActivity
         LayoutTransition transition = new LayoutTransition();
         transition.enableTransitionType(LayoutTransition.CHANGING);
         transition.setDuration(250);
-        LinearLayout parent = (LinearLayout) findViewById(R.id.linearLayout);
-        parent.setLayoutTransition(transition);
+        resultsInfoLayout.setLayoutTransition(transition);
 
 /*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(bitmap);*/
     }
 
+
+    private void LoadXML() {
+        XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
+        heroInfoList = LoadHeroXml.Load(parser);
+    }
+
+    private void loadHistTest() {
+        histTest = new HistTest(this);
+    }
+
     private void AddAbilityHeading(String string) {
-        LinearLayout parent = (LinearLayout) findViewById(R.id.linearLayout);
+        LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.heading_item, parent, false);
         TextView textView = (TextView) v.findViewById(R.id.textView);
@@ -345,7 +349,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void AddAbilityCards(List<HeroAbility> abilities, boolean showStunDuration) {
-        LinearLayout parent = (LinearLayout) findViewById(R.id.linearLayout);
+        LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
 
         for (HeroAbility ability : abilities) {
             AbilityCard card = new AbilityCard(this, ability, showStunDuration);
@@ -398,10 +402,10 @@ public class MainActivity extends AppCompatActivity
 
     // TODO: replace FindHeroWithName to use the drawable id int instead of strings
     public static HeroInfo FindHeroWithName(String name) {
-        List<HeroInfo> heroInfoList = RecognitionService.getHeroInfoList();
-
+        //List<HeroInfo> heroInfoList = RecognitionService.getHeroInfoList();
+/*
         if (heroInfoList== null)
-            throw new RuntimeException("heroInfoList is null");
+            throw new RuntimeException("heroInfoList is null");*/
 
         for (HeroInfo hero : heroInfoList) {
             if (hero.HasName(name)) {
@@ -460,11 +464,11 @@ public class MainActivity extends AppCompatActivity
                 // Image capture failed, advise user
             }
         }
-        if(requestCode == RECOGNITION_ACTIVITY_REQUEST_CODE) {
+/*        if(requestCode == RECOGNITION_ACTIVITY_REQUEST_CODE) {
             //if(resultCode == RESULT_OK) {
                 showConsequencesOfImageRecognition();
             //}
-        }
+        }*/
     }
 
     public static void EnsureMediaDirectoryExists() {
@@ -472,25 +476,6 @@ public class MainActivity extends AppCompatActivity
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("DOTA Vision", "failed to create directory");
-            }
-        }
-
-        // Broadcast receiver for receiving status updates from the IntentService
-            private class ResponseReceiver extends BroadcastReceiver
-        {
-            // Prevents instantiation
-            private ResponseReceiver() {
-            }
-            // Called when the BroadcastReceiver gets an Intent it's registered to receive
-            @
-            public void onReceive(Context context, Intent intent) {
-                if(intent.getAction().equals(RecognitionService.BROADCAST_ACTION)) {
-
-                    Intent resultIntent = new Intent();
-                    setResult(RESULT_OK, resultIntent);
-                    finish();
-//                    showConsequencesOfImageRecognition();
-                }
             }
         }
     }
