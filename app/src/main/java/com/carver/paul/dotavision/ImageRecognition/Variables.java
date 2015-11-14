@@ -28,6 +28,7 @@ public class Variables {
     public static final List<Integer> vRange = Arrays.asList(34, 255);
 
     public static final int SCALED_IMAGE_WIDTH = 800;
+    public static final int SCALED_IMAGE_HEIGHT = 170;
 
 
     static final public List<Pair<Integer, String>> abilityDrawables;

@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.hardware.Camera;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -13,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.MainActivity;
@@ -25,13 +26,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-//TODO: crop camera preview and crop what the camera saves
+//TODO: crop camera preview and crop what the mCamera saves
 //TODO: make camera pretty
 //TODO: enable you to go back from camera without taking photo
 //TODO-now: make camera activity send intent back so you can use the photo immediately
@@ -113,8 +113,8 @@ public class CameraActivity extends Activity {
                     boolean canceledFuture = focusTimeoutFuture.cancel(false);
                     if (canceledFuture) {
                         Log.d(TAG, "Taking pciture with correct autofocus.");
-                        mCamera.takePicture(null, null, mPicture);
-                        mCamera.cancelAutoFocus();
+                        CameraActivity.this.mCamera.takePicture(null, null, mPicture);
+                        CameraActivity.this.mCamera.cancelAutoFocus();
                     }
                 }
             };
@@ -143,16 +143,23 @@ public class CameraActivity extends Activity {
         setContentView(R.layout.activity_camera);
 
         // Create an instance of Camera
+
+
+        new CameraOpeningTask(this).execute();
+/*
         mCamera = getCameraInstance();
         setupCamera();
 
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-
-        showCaptureButton();
+        preview.addView(mPreview);*/
     }
+
+/*    private int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(dp * displayMetrics.density);
+    }*/
 
     @Override
     public void onResume() {
@@ -161,55 +168,114 @@ public class CameraActivity extends Activity {
         if (mCamera == null) {
             setContentView(R.layout.activity_camera);
 
+
+            new CameraOpeningTask(this).execute();
+            /*
             mCamera = getCameraInstance();
             setupCamera();
 
             mPreview = new CameraPreview(this, mCamera);
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-            preview.addView(mPreview);
+            preview.addView(mPreview);*/
+        }
+        showCaptureButton();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        releaseCamera();              // release the mCamera immediately on pause event
+    }
+
+    private void releaseCamera() {
+        if (mCamera != null) {
+            mCamera.release();        // release the mCamera for other applications
+            mCamera = null;
         }
     }
 
-    private void setupCamera() {
-        if (mCamera != null) {
-            Camera.Parameters parameters = mCamera.getParameters();
+    /**
+     * Check if this device has a mCamera
+     * Shouldn't be needed because my AndroidManifest requires a mCamera
+     */
+    private boolean checkCameraHardware(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            // this device has a mCamera
+            return true;
+        } else {
+            // no mCamera on this device
+            throw new RuntimeException("This device doesn't have a mCamera");
+            //return false;
+        }
+    }
 
-            List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
-            int smallestAllowableHeight = 220;
-            Camera.Size newSize = null;
-            // TODO: make camera take smaller pictures when it doesn't support my particular SCALED_IMAGE_WIDTH
-            for (Camera.Size currentSize : sizes) {
-                if (currentSize.width == Variables.SCALED_IMAGE_WIDTH && currentSize.height > smallestAllowableHeight) {
-                    if (newSize == null || currentSize.height < newSize.height)
-                        newSize = currentSize;
+    private class CameraOpeningTask extends AsyncTask<Void, Void, Camera> {
+
+        private Context context;
+
+        public CameraOpeningTask(Context context) {
+            this.context = context;
+        }
+
+        // This is where the hard work happens which needs to be off the UI thread
+        protected Camera doInBackground(Void... params) {
+            Camera camera = getCameraInstance();
+            setupCamera(camera);
+            return camera;
+        }
+
+        protected void onPostExecute(Camera camera) {
+            mCamera = camera;
+
+            mPreview = new CameraPreview(context, mCamera);
+            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+            preview.addView(mPreview);
+
+          //  setupPreviewLetterbox();
+        }
+
+        private Camera getCameraInstance() {
+            Camera c = null;
+            try {
+                c = Camera.open();
+            } catch (Exception e) {
+                // Camera is not available (in use or does not exist)
+                Log.e(TAG, "failed to open Camera");
+            }
+            return c;
+        }
+
+        private void setupCamera(Camera camera) {
+            if (camera != null) {
+                Camera.Parameters parameters = camera.getParameters();
+
+                Camera.Size size = findSmallestGoodCameraSize(parameters.getSupportedPictureSizes());
+                if (size != null) {
+                    parameters.setPictureSize(size.width, size.height);
+                    parameters.setPreviewSize(size.width, size.height);
                 }
-            }
-            if (newSize != null) {
-                parameters.setPictureSize(newSize.width, newSize.height);
-                parameters.setPreviewSize(newSize.width, newSize.height);
-            }
 
 /*            if(parameters.isAutoExposureLockSupported() == true)
                 parameters.setAutoExposureLock(true);*/
 
-            if (parameters.isAutoWhiteBalanceLockSupported() == true) {
-                parameters.setAutoWhiteBalanceLock(true);
-            } else {
-                Log.d(TAG, "Oh no, camera doesn't support white balance lock.");
-            }
+                if (parameters.isAutoWhiteBalanceLockSupported() == true) {
+                    parameters.setAutoWhiteBalanceLock(true);
+                } else {
+                    Log.d(TAG, "Oh no, mCamera doesn't support white balance lock.");
+                }
 
 /*            List<String> supportedWhiteBalances = parameters.getSupportedWhiteBalance();
             if(supportedWhiteBalances.contains("daylight")) {
                 parameters.setWhiteBalance("daylight");
             } else {
-                System.out.println("Oh no, camera doesn't support daylight white balance.");
+                System.out.println("Oh no, mCamera doesn't support daylight white balance.");
             }*/
 
-            List<String> foc = parameters.getSupportedFocusModes();
-            if (foc.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))
-                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                List<String> foc = parameters.getSupportedFocusModes();
+                if (foc.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))
+                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
-/*            //TODO: fix camera exposure to make it auto
+/*            //TODO: fix mCamera exposure to make it auto
             int maxExposure = parameters.getMaxExposureCompensation();
             if (maxExposure != 0)
                 parameters.setExposureCompensation(maxExposure * 3 / 4);*/
@@ -217,48 +283,65 @@ public class CameraActivity extends Activity {
 /*            if(parameters.getSupportedSceneModes().contains(Camera.Parameters.SCENE_MODE_NIGHT))
                 parameters.setSceneMode(Camera.Parameters.SCENE_MODE_NIGHT);*/
 
-            mCamera.setParameters(parameters);
+                camera.setParameters(parameters);
+            }
         }
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        releaseCamera();              // release the camera immediately on pause event
-    }
+        private Camera.Size findSmallestGoodCameraSize(List<Camera.Size> sizes) {
+            List<Camera.Size> sizesWithGoodWidth = new ArrayList<>();
 
-    private void releaseCamera() {
-        if (mCamera != null) {
-            mCamera.release();        // release the camera for other applications
-            mCamera = null;
+            //get a list of all the sizes with the smallest width at lest SCALED_IMAGE_WIDTH
+            for (Camera.Size currentSize : sizes) {
+                if (currentSize.width >= Variables.SCALED_IMAGE_WIDTH) {
+                    if (sizesWithGoodWidth.isEmpty()) {
+                        sizesWithGoodWidth.add(currentSize);
+                    } else if (sizesWithGoodWidth.get(0).width == currentSize.width) {
+                        sizesWithGoodWidth.add(currentSize);
+                    } else if (sizesWithGoodWidth.get(0).width > currentSize.width) {
+                        sizesWithGoodWidth.clear();
+                        sizesWithGoodWidth.add(currentSize);
+                    }
+                }
+            }
+
+            Camera.Size result = null;
+
+            // of the sizes with good witdth, find the one with the smallest height at least SCALED_IMAGE_HEIGHT
+            for (Camera.Size currentSize : sizesWithGoodWidth) {
+                if (currentSize.height >= Variables.SCALED_IMAGE_HEIGHT &&
+                        (result == null || result.height > currentSize.height)) {
+                    result = currentSize;
+                }
+            }
+
+            if (result == null) {
+                Log.d(TAG, "Failed to find appropriate mCamera size.");
+                if (!sizes.isEmpty()) {
+                    result = sizes.get(0);
+                }
+            }
+
+            return result;
         }
-    }
 
-    /**
-     * Check if this device has a camera
-     * Shouldn't be needed because my AndroidManifest requires a camera
-     */
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            throw new RuntimeException("This device doesn't have a camera");
-            //return false;
+        private void setupPreviewLetterbox() {
+
+            View aboveLetterbox = findViewById(R.id.above_camera_preview_letterbox);
+            View belowLetterbox = findViewById(R.id.below_camera_preview_letterbox);
+            int cameraButtonsWidth = /*dpToPx( */(int) getResources().getDimension(R.dimen.camera_buttons_width);
+
+            Point size = new Point();
+            getWindowManager().getDefaultDisplay().getSize(size);
+            int screenWidth = size.x;
+            int cameraPreviewWidth = screenWidth - cameraButtonsWidth;
+
+            int targetPreviewHeight = cameraPreviewWidth * Variables.SCALED_IMAGE_HEIGHT / Variables.SCALED_IMAGE_WIDTH;
+            //   int heightOfPreviewCovers = (parent.getHeight() - targetPreviewHeight) / 2;
+
+/*        aboveLetterbox.setMinimumHeight(350);
+        belowLetterbox.setMinimumHeight(30);*/
+
         }
-    }
-
-
-    private static Camera getCameraInstance() {
-        Camera c = null;
-        try {
-            c = Camera.open();
-        } catch (Exception e) {
-            // Camera is not available (in use or does not exist)
-            Log.e(TAG, "failed to open Camera");
-        }
-        return c;
     }
 }
 
@@ -284,20 +367,19 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
-        // The Surface has been created, now tell the camera where to draw the preview.
+        // The Surface has been created, now tell the mCamera where to draw the preview.
         try {
             mCamera.setPreviewDisplay(holder);
-
 
             Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
             layoutParams.height = (getWidth() * cameraSize.height / cameraSize.width);
             setLayoutParams(layoutParams);
 
-
             mCamera.startPreview();
+
         } catch (IOException e) {
-            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+            Log.d(TAG, "Error setting mCamera preview: " + e.getMessage());
         }
     }
 
@@ -309,7 +391,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     //TODO-now remove surfaceChanged class?
 
     /*
-        If you want to set a specific size for your camera preview,
+        If you want to set a specific size for your mCamera preview,
         set this in the surfaceChanged() method as noted in the comments
         above. When setting preview size, you must use values from
         getSupportedPreviewSizes(). Do not set arbitrary values in
@@ -340,7 +422,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.startPreview();
 
         } catch (Exception e) {
-            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+            Log.d(TAG, "Error starting mCamera preview: " + e.getMessage());
         }
     }
 }

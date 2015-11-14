@@ -1,44 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
 
-    <FrameLayout
-        android:id="@+id/camera_preview"
-        android:layout_centerInParent="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/camera_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"/>
+
+        <FrameLayout
+            android:id="@+id/above_camera_preview_letterbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#000000"/>
+
+        <FrameLayout
+            android:id="@+id/below_camera_preview_letterbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
 
     <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_width="200dp"
-        android:layout_height="fill_parent">
+        android:layout_gravity="center_vertical" >
 
         <Button
             android:id="@+id/button_capture"
-            android:text="Capture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="capturePhoto"/>
+            android:onClick="capturePhoto"
+            android:text="Capture"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:id="@+id/button_confirm"
-            android:text="Confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="confirmPhoto"
-            android:visibility="gone"/>
+            android:text="Confirm"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/button_take_again"
-            android:text="Take again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="takePhotoAgain"
-            android:visibility="gone"/>
+            android:text="Take again"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

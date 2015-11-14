@@ -9,4 +9,5 @@
     <dimen name="large_text">22sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
+    <dimen name="camera_buttons_width">150dp</dimen>
 </resources>

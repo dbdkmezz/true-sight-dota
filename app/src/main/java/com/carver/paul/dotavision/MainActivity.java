@@ -599,9 +599,13 @@ public class MainActivity extends AppCompatActivity
         }
 
         private float dpToPx(float dp) {
-            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+
+            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            return dp * displayMetrics.density;
+
+/*            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
             float px = dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT);
-            return px;
+            return px;*/
         }
 
         private void LoadXML() {
