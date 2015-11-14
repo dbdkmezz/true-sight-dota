@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
+        android:id="@+id/mainCoordinatorLayout"
         tools:context=".MainActivity">
 
         <!--    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,12 +40,16 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/scene_root">
-        <include layout="@layout/main_starting_scene" />
-        </FrameLayout>
+        <include layout="@layout/content_main" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/cameraFab"
+            android:layout_width="@dimen/big_photo_fab_size"
+            android:layout_height="@dimen/big_photo_fab_size"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="takePhoto"
+            android:src="@android:drawable/ic_menu_camera" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/useExistingPictureButton"
@@ -53,7 +58,7 @@
             android:layout_gravity="bottom|left"
             android:layout_margin="@dimen/fab_margin"
             android:onClick="useExistingPictureButton"
-            android:src="@android:drawable/ic_dialog_email" />
+            android:src="@android:drawable/ic_menu_revert" />
 
     </android.support.design.widget.CoordinatorLayout>
 

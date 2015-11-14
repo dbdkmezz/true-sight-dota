@@ -1,6 +1,7 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
 import android.graphics.Bitmap;
+import android.util.Pair;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -83,6 +84,14 @@ public class ImageTools {
 
         Imgproc.HoughLinesP(mask, lines, 1, Math.PI / 180, 80, minLineLength, 10);
 
+    }
+
+    public static int GetDrawableFromString(String string) {
+        for (Pair<Integer, String> pair : Variables.abilityDrawables) {
+            if (pair.second.equals(string))
+                return pair.first;
+        }
+        return -1;
     }
 
     public static void drawLinesOnImage(Mat lines, Mat image) {

@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 //TODO: make camera pretty
 //TODO: enable you to go back from camera without taking photo
 //TODO-now: make camera activity send intent back so you can use the photo immediately
-//TODO: I think opening the camera needs to be a separate thread
+//TODO: open the camera in a seperate thread
 
 public class CameraActivity extends Activity {
     private Camera mCamera;
@@ -249,17 +249,16 @@ public class CameraActivity extends Activity {
         }
     }
 
-    /**
-     * A safe way to get an instance of the Camera object.
-     */
+
     private static Camera getCameraInstance() {
         Camera c = null;
         try {
-            c = Camera.open(); // attempt to get a Camera instance
+            c = Camera.open();
         } catch (Exception e) {
             // Camera is not available (in use or does not exist)
+            Log.e(TAG, "failed to open Camera");
         }
-        return c; // returns null if camera is unavailable
+        return c;
     }
 }
 

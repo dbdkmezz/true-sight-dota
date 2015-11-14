@@ -1,7 +1,8 @@
 package com.carver.paul.dotavision;
 
+import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
-import android.app.IntentService;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
@@ -10,6 +11,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,13 +21,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -78,8 +83,8 @@ public class MainActivity extends AppCompatActivity
 
     public static boolean debugMode = true;
     private static int CAMERA_ACTIVITY_REQUEST_CODE = 100;
-    private static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
-    public static Bitmap recognitionBitmap = null;
+/*    private static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
+    public static Bitmap recognitionBitmap = null;*/
 
     static {
         System.loadLibrary("opencv_java3");
@@ -191,6 +196,7 @@ public class MainActivity extends AppCompatActivity
         doImageRecognition();
     }
 
+    //TODO: move image recognitiion into separate class. Make MainActivity class tiny
     private void doImageRecognition() {
         File mediaFile = new File(getImagesLocation(), "photo.jpg");
         Bitmap bitmap;
@@ -199,7 +205,11 @@ public class MainActivity extends AppCompatActivity
         } else {
             bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
         }
-        doImageRecognition(bitmap);
+
+        ImageView topImage = (ImageView) findViewById(R.id.topImage);
+        topImage.setImageBitmap(bitmap);
+
+        new RecognitionTask(this).execute(bitmap);
     }
 
     static public Bitmap CreateCroppedBitmap(String photoPath) {
@@ -216,29 +226,11 @@ public class MainActivity extends AppCompatActivity
         return bitmap;
     }
 
-    //TODO: make image recognition threaded
-    //TODO: move image recognitiion into separate class
-    private void doImageRecognition(Bitmap bitmap) {
-        ImageView topImage = (ImageView) findViewById(R.id.topImage);
-        topImage.setImageBitmap(bitmap);
-
-        new RecognitionTask(this).execute(bitmap);
-    }
-
-    //TODO: move GetDrawableFromString to imagetools?
-    public static int GetDrawableFromString(String string) {
-        for (Pair<Integer, String> pair : Variables.abilityDrawables) {
-            if (pair.second.equals(string))
-                return pair.first;
-        }
-        return -1;
-    }
-
     // TODO: Change permissions so it uses the Android 6 way, then can increase target API
     // TODO: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
 
-/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
 
         TimeInterpolator interpolator = new OvershootInterpolator();
         //TODO: remove the scenes xmls I started working on
@@ -282,11 +274,6 @@ public class MainActivity extends AppCompatActivity
                 // Image capture failed, advise user
             }
         }
-/*        if(requestCode == RECOGNITION_ACTIVITY_REQUEST_CODE) {
-            //if(resultCode == RESULT_OK) {
-                showConsequencesOfImageRecognition();
-            //}
-        }*/
     }
 
     public static void EnsureMediaDirectoryExists() {
@@ -344,23 +331,98 @@ public class MainActivity extends AppCompatActivity
         return mediaFile;
     }*/
 
-
-
-        //TODO: make it so RecognitionTask gets passed heroInfoList and histTest by MainActivity so I don't have to load them every time.
+    //TODO: make it so RecognitionTask gets passed heroInfoList and histTest by MainActivity so I don't have to load them every time.
     private class RecognitionTask extends AsyncTask<Bitmap, Void, List<HeroRect>> {
 
         private List<HeroInfo> heroInfoList = null;
         private HistTest histTest = null;
         private Context context;
 
-        public RecognitionTask (Context context){
+        public RecognitionTask(Context context) {
             this.context = context;
         }
 
-        /**
-         * The system calls this to perform work in a worker thread and
-         * delivers it the parameters given to AsyncTask.execute()
-         */
+
+        // work to do in the UI thread before doing the hard work
+        protected void onPreExecute() {
+            resetInfo();
+            pulseCameraFab();
+        }
+
+        private void resetInfo() {
+            LinearLayout layout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            layout.removeAllViews();
+            layout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
+            layout.removeAllViews();
+
+            if(debugMode) {
+                List<Integer> textViewIds = Arrays.asList(R.id.similarityInfoText, R.id.imageDebugText);
+                ResetTextViews(textViewIds);
+            }
+        }
+
+        private void pulseCameraFab() {
+
+/*            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
+            AnimatorSet animatorSet = new AnimatorSet();
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.8f);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.8f);
+            animatorSet.playTogether(scaleX, scaleY);
+            animatorSet.setDuration(250);
+
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    animation.start();
+                }
+            });
+
+            animatorSet.start();*/
+
+
+            //Code using the old Animation class, rather than the new ViewPropertyAnimator
+            //Infinite repeat is easier to implement this way
+            View view = findViewById(R.id.cameraFab);
+            moveViewBackToStartingPosAndScale(view);
+
+            ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            pulse.setDuration(250);
+            pulse.setRepeatCount(Animation.INFINITE);
+            pulse.setRepeatMode(Animation.REVERSE);
+            view.startAnimation(pulse);
+
+
+/*            RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,
+                    0.5f,  Animation.RELATIVE_TO_SELF, 0.5f);
+            rotate.setDuration(300);
+            rotate.setRepeatCount(Animation.INFINITE);
+
+            rotate.setInterpolator(context, R.anim.linear_interpolator);
+            imageview.startAnimation(rotate);*/
+
+/*                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
+
+        TimeInterpolator interpolator = new OvershootInterpolator();
+        fab.animate().scaleX(0.2f).scaleY(0.2f).setDuration(300).setInterpolator(interpolator);*/
+
+            /*        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.2f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.2f);
+        scaleX.setDuration(300);
+        scaleY.setDuration(300);
+        animatorSet.play(scaleX).with(scaleY);
+        animatorSet.start();*/
+        }
+
+        private void moveViewBackToStartingPosAndScale(View view) {
+            view.setTranslationX(0f);
+            view.setTranslationY(0f);
+            view.setScaleX(1f);
+            view.setScaleY(1f);
+        }
+
+        // This is where the hard work happens which needs to be off the UI thread
         protected List<HeroRect> doInBackground(Bitmap... bitmaps) {
             if (heroInfoList == null)
                 LoadXML();
@@ -370,11 +432,34 @@ public class MainActivity extends AppCompatActivity
             return Recognition.Run(bitmaps[0], histTest);
         }
 
-        /**
-         * The system calls this to perform work in the UI thread and delivers
-         * the result from doInBackground()
-         */
-        protected void onPostExecute(List<HeroRect> heroes) {
+        // work to do in the UI thread after the hard work
+        protected void onPostExecute(final List<HeroRect> heroes) {
+            // Stop the camera button pulsing by making it finish the current animation and then run the code in onAnimationEnd
+            ImageView imageview = (ImageView) findViewById(R.id.cameraFab);
+            Animation animation = imageview.getAnimation();
+            animation.setRepeatCount(0);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    moveCameraFabToBottomRight();
+                    showResult(heroes);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+        }
+
+        private void showResult(final List<HeroRect> heroes) {
+
+            //TODO-beauty: tidy up all the UI code that's run after image recognition
 
             if (debugMode) {
                 TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
@@ -388,9 +473,6 @@ public class MainActivity extends AppCompatActivity
             int heroIconWidth = metrics.widthPixels * 2 / 6;
 
             LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
-            loadedPicturesLayout.removeAllViews();
-
-            ResetTextViews();
 
             for (HeroRect hero : heroes) {
                 LinearLayout thisPictureLayout = new LinearLayout(context);
@@ -432,7 +514,8 @@ public class MainActivity extends AppCompatActivity
                 imageViewOriginal.setImageBitmap(bitmapOriginal);
                 thisPictureLayout.addView(imageViewOriginal);
 
-                SetInfoText(hero.getSimilarityList());
+                if(debugMode)
+                    showSimilarityInfo(hero.getSimilarityList());
             }
 
             //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
@@ -441,9 +524,6 @@ public class MainActivity extends AppCompatActivity
             for (HeroRect heroRect : heroes) {
                 heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
             }
-
-            LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
-            resultsInfoLayout.removeAllViews();
 
             //TODO: pass the Layout to functions adding the ability cards
             AddAbilityHeading("Stuns");
@@ -454,12 +534,74 @@ public class MainActivity extends AppCompatActivity
             LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
             transition.setDuration(250);
+            LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
             resultsInfoLayout.setLayoutTransition(transition);
 
 /*        ImageView mImageView;
         mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(bitmap);*/
 
+        }
+
+        private void moveCameraFabToBottomRight() {
+            //TODO-beauty: put my complex animation into XML
+            //TODO-beauty: seriously, sort out the camera fab button animation code. It's a mess and goes to the wrong place!
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
+            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
+            FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
+            float finalWidth = otherFab.getWidth();
+//            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
+
+//            int finalMargin = otherFab.getLayoutParams().
+            float currentWidth = fab.getWidth();
+            AnimatorSet animatorSet = new AnimatorSet();
+            float farRight = coordinatorLayout.getRight();
+            float startX = fab.getX();
+
+            float marginPx = dpToPx(getResources().getDimension(R.dimen.fab_margin));
+
+
+            float endX = coordinatorLayout.getWidth() - (currentWidth + finalWidth + marginPx) / 2f;
+            float endY = coordinatorLayout.getHeight() - (currentWidth + finalWidth + marginPx) / 2f;
+            //ObjectAnimator translationX = ObjectAnimator.ofFloat(fab, "translationX", 100f + farRight - startX );//coordinatorLayout.getRight() - finalWidth - fab.getX());
+            ObjectAnimator x = ObjectAnimator.ofFloat(fab, "x", endX);
+            ObjectAnimator y = ObjectAnimator.ofFloat(fab, "y", endY);
+           // ObjectAnimator translationY = ObjectAnimator.ofFloat(fab, "translationY", coordinatorLayout.getHeight() - finalWidth - fab.getY());
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", finalWidth/currentWidth);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", finalWidth/currentWidth);
+            animatorSet.playTogether(x, y, scaleX, scaleY);
+            //animatorSet.play(x);
+            animatorSet.setDuration(300);
+            animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+            animatorSet.start();
+/*
+            animatorSet.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    showResult(heroes);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });*/
+        }
+
+        private float dpToPx(float dp) {
+            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+            float px = dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT);
+            return px;
         }
 
         private void LoadXML() {
@@ -512,27 +654,21 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        private void ResetTextViews() {
-            List<Integer> ids = Arrays.asList(R.id.infoText);
+        private void ResetTextViews(List<Integer> ids) {
             for (Integer id : ids) {
                 TextView tv = (TextView) findViewById(id);
                 tv.setText("");
-                tv.setVisibility(View.VISIBLE);
+                tv.setVisibility(View.GONE);
             }
         }
 
-        private void SetInfoText(List<HeroHistAndSimilarity> similarityList) {
-
-            TextView infoText = (TextView) findViewById(R.id.infoText);
+        private void showSimilarityInfo(List<HeroHistAndSimilarity> similarityList) {
+            TextView infoText = (TextView) findViewById(R.id.similarityInfoText);
+            infoText.setText("");
+            infoText.setVisibility(View.VISIBLE);
             HeroHistAndSimilarity matchingHero = similarityList.get(0);
 
             infoText.append(matchingHero.hero.name + ", " + matchingHero.similarity);
-
-            //TODO-now make it work with pictures who's names are wrong
-            HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
-            if (heroWithName != null) {
-                infoText.append(". Stuns: " + heroWithName.CountStuns());
-            }
 
             // poor result, so lets show some alternatives
             if (matchingHero.similarity < 0.65) {
