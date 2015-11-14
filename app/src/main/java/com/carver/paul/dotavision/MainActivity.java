@@ -2,10 +2,12 @@ package com.carver.paul.dotavision;
 
 import android.animation.LayoutTransition;
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.NavigationView;
@@ -48,9 +50,11 @@ import java.util.List;
 
 //TODO: reduce package size. Smaller images?
 
+//TODO: make new icon and screenshotsf for the play store
+
 //TODO-beauty: tidy up layout files
 
-//TODO: modifications to layouts for a few phone sizes
+//TODO-beauty: modifications to layouts for a few phone sizes
 
 //TODO: test all spells, e.g. do the stun summaries show the right information?
 
@@ -58,7 +62,13 @@ import java.util.List;
 
 //TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
 
-//TODO-essential: make sure I have a legal message saying it's Valve's trademark
+//TODO: but trademark info elsewhere
+
+//TODO: work out why the preview is so small on verity's phone
+
+//TODO: add debug option to UI, and turn off my default (do trademark stuff first!)
+
+//TODO: slide to change hero!!
 
 //TODO: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
@@ -66,8 +76,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static List<HeroInfo> heroInfoList = null;
-    private static HistTest histTest = null;
     public static boolean debugMode = true;
     private static int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     private static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
@@ -211,150 +219,10 @@ public class MainActivity extends AppCompatActivity
     //TODO: make image recognition threaded
     //TODO: move image recognitiion into separate class
     private void doImageRecognition(Bitmap bitmap) {
-        if (heroInfoList == null)
-            LoadXML();
-        if (histTest == null)
-            loadHistTest();
-
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
 
-        List<HeroRect> heroes = Recognition.Run(bitmap, histTest); //BitmapFactory.decodeFile(mediaFile.getPath()), hMin, hMax, sMin, sMax, vMin, vMax);
-
-        if (debugMode) {
-            TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
-            imageDebugText.setVisibility(View.VISIBLE);
-            imageDebugText.setText(Recognition.debugString + System.getProperty("line.separator") +
-                    "Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve and this app is not affiliated with Valve Corporation.");
-        }
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int heroIconWidth = metrics.widthPixels * 2 / 6;
-
-        LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
-        loadedPicturesLayout.removeAllViews();
-
-        ResetTextViews();
-
-        for (HeroRect hero : heroes) {
-            LinearLayout thisPictureLayout = new LinearLayout(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.gravity = Gravity.CENTER;
-            thisPictureLayout.setLayoutParams(params);
-            if (heroes.get(0) == hero) // i.e., this is the first hero
-                thisPictureLayout.setPadding(0, 16, 0, 16);
-            else
-                thisPictureLayout.setPadding(0, 0, 0, 16);
-
-            loadedPicturesLayout.addView(thisPictureLayout);
-
-            //TODO: Don't work out the preview width and height this way! or at least don't scale the photo this way
-            ImageView imageViewPhoto = new ImageView(this);
-            Bitmap bitmapPhoto = ImageTools.GetBitmapFromMat(hero.image);
-            int height = heroIconWidth * bitmapPhoto.getHeight() / bitmapPhoto.getWidth();
-            bitmapPhoto = Bitmap.createScaledBitmap(bitmapPhoto, heroIconWidth, height, true);
-            imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageViewPhoto.setImageBitmap(bitmapPhoto);
-            imageViewPhoto.setPadding(0, 0, 16, 0);
-            thisPictureLayout.addView(imageViewPhoto);
-
-/*            imageViewPhoto.setMinimumWidth(thisPictureLayout.getWidth() * 2 / 6);
-            imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
-            imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageViewPhoto.setAdjustViewBounds(true);
-       //     imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
-            imageViewPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageViewPhoto.setImageBitmap(ImageTools.GetBitmapFromMap(hero.image));*/
-
-            ImageView imageViewOriginal = new ImageView(this);
-            // imageViewOriginal.setPadding(0, 0, 0, 0);
-            HeroHistAndSimilarity matchingHero = hero.getSimilarityList().get(0);
-            Bitmap bitmapOriginal = ImageTools.GetBitmapFromMat(matchingHero.hero.image);
-            height = heroIconWidth * bitmapOriginal.getHeight() / bitmapOriginal.getWidth();
-            bitmapOriginal = Bitmap.createScaledBitmap(bitmapOriginal, heroIconWidth, height, true);
-            imageViewOriginal.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageViewOriginal.setImageBitmap(bitmapOriginal);
-            thisPictureLayout.addView(imageViewOriginal);
-
-            SetInfoText(hero.getSimilarityList());
-        }
-
-        //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
-
-        List<HeroWithHist> heroesSeen = new ArrayList<>();
-        for (HeroRect heroRect : heroes) {
-            heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
-        }
-
-        LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
-        resultsInfoLayout.removeAllViews();
-
-        //TODO: pass the Layout to functions adding the ability cards
-        AddAbilityHeading("Stuns");
-        AddStunCards(heroesSeen);
-        AddAbilityHeading("Ultimates");
-        AddUltimateCards(heroesSeen);
-
-        LayoutTransition transition = new LayoutTransition();
-        transition.enableTransitionType(LayoutTransition.CHANGING);
-        transition.setDuration(250);
-        resultsInfoLayout.setLayoutTransition(transition);
-
-/*        ImageView mImageView;
-        mImageView = (ImageView) findViewById(R.id.imageView);
-        mImageView.setImageBitmap(bitmap);*/
-    }
-
-
-    private void LoadXML() {
-        XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
-        heroInfoList = LoadHeroXml.Load(parser);
-    }
-
-    private void loadHistTest() {
-        histTest = new HistTest(this);
-    }
-
-    private void AddAbilityHeading(String string) {
-        LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.heading_item, parent, false);
-        TextView textView = (TextView) v.findViewById(R.id.textView);
-        textView.setText(string);
-        parent.addView(v);
-    }
-
-    private void AddStunCards(List<HeroWithHist> heroes) {
-        List<HeroAbility> stunAbilities = new ArrayList<>();
-        for (HeroWithHist hero : heroes) {
-            for (HeroAbility ability : MainActivity.FindHeroWithName(hero.name).abilities) {
-                if (ability.isStun) {
-                    stunAbilities.add(ability);
-                }
-            }
-        }
-
-        AddAbilityCards(stunAbilities, true);
-    }
-
-    //TODO: make cards cards with rounded edges
-    private void AddUltimateCards(List<HeroWithHist> heroes) {
-        List<HeroAbility> ultimates = new ArrayList<>();
-        for (HeroWithHist hero : heroes) {
-            HeroInfo heroInfo = MainActivity.FindHeroWithName(hero.name);
-            ultimates.add(heroInfo.abilities.get(heroInfo.abilities.size() - 1));
-        }
-        AddAbilityCards(ultimates, false);
-    }
-
-    private void AddAbilityCards(List<HeroAbility> abilities, boolean showStunDuration) {
-        LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
-
-        for (HeroAbility ability : abilities) {
-            AbilityCard card = new AbilityCard(this, ability, showStunDuration);
-            parent.addView(card);
-        }
+        new RecognitionTask(this).execute(bitmap);
     }
 
     //TODO: move GetDrawableFromString to imagetools?
@@ -365,56 +233,6 @@ public class MainActivity extends AppCompatActivity
         }
         return -1;
     }
-
-    private void ResetTextViews() {
-        List<Integer> ids = Arrays.asList(R.id.infoText);
-        for (Integer id : ids) {
-            TextView tv = (TextView) findViewById(id);
-            tv.setText("");
-            tv.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void SetInfoText(List<HeroHistAndSimilarity> similarityList) {
-
-        TextView infoText = (TextView) findViewById(R.id.infoText);
-        HeroHistAndSimilarity matchingHero = similarityList.get(0);
-
-        infoText.append(matchingHero.hero.name + ", " + matchingHero.similarity);
-
-        //TODO-now make it work with pictures who's names are wrong
-        HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
-        if (heroWithName != null) {
-            infoText.append(". Stuns: " + heroWithName.CountStuns());
-        }
-
-        // poor result, so lets show some alternatives
-        if (matchingHero.similarity < 0.65) {
-            infoText.append(". (Alternatives: ");
-            for (int i = 1; i < 6; i++) {
-                infoText.append(similarityList.get(i).hero.name + "," + similarityList.get(i).similarity + ". ");
-            }
-            infoText.append(")");
-        }
-
-        infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
-    }
-
-    // TODO: replace FindHeroWithName to use the drawable id int instead of strings
-    public static HeroInfo FindHeroWithName(String name) {
-        //List<HeroInfo> heroInfoList = RecognitionService.getHeroInfoList();
-/*
-        if (heroInfoList== null)
-            throw new RuntimeException("heroInfoList is null");*/
-
-        for (HeroInfo hero : heroInfoList) {
-            if (hero.HasName(name)) {
-                return hero;
-            }
-        }
-        return null;
-    }
-
 
     // TODO: Change permissions so it uses the Android 6 way, then can increase target API
     // TODO: Make it save in the write media location, I think media store wasn't right
@@ -490,7 +308,11 @@ public class MainActivity extends AppCompatActivity
     private static final int WRITE_EXTERNAL_STORAGE = 1;
 
 
-    *//** Create a File for saving an image or video *//*
+    */
+
+    /**
+     * Create a File for saving an image or video
+     *//*
     private static File getOutputMediaFile(){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
@@ -521,6 +343,220 @@ public class MainActivity extends AppCompatActivity
 
         return mediaFile;
     }*/
+
+
+
+        //TODO: make it so RecognitionTask gets passed heroInfoList and histTest by MainActivity so I don't have to load them every time.
+    private class RecognitionTask extends AsyncTask<Bitmap, Void, List<HeroRect>> {
+
+        private List<HeroInfo> heroInfoList = null;
+        private HistTest histTest = null;
+        private Context context;
+
+        public RecognitionTask (Context context){
+            this.context = context;
+        }
+
+        /**
+         * The system calls this to perform work in a worker thread and
+         * delivers it the parameters given to AsyncTask.execute()
+         */
+        protected List<HeroRect> doInBackground(Bitmap... bitmaps) {
+            if (heroInfoList == null)
+                LoadXML();
+            if (histTest == null)
+                loadHistTest();
+
+            return Recognition.Run(bitmaps[0], histTest);
+        }
+
+        /**
+         * The system calls this to perform work in the UI thread and delivers
+         * the result from doInBackground()
+         */
+        protected void onPostExecute(List<HeroRect> heroes) {
+
+            if (debugMode) {
+                TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
+                imageDebugText.setVisibility(View.VISIBLE);
+                imageDebugText.setText(Recognition.debugString + System.getProperty("line.separator") +
+                        "Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve and this app is not affiliated with Valve Corporation.");
+            }
+
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            int heroIconWidth = metrics.widthPixels * 2 / 6;
+
+            LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
+            loadedPicturesLayout.removeAllViews();
+
+            ResetTextViews();
+
+            for (HeroRect hero : heroes) {
+                LinearLayout thisPictureLayout = new LinearLayout(context);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.gravity = Gravity.CENTER;
+                thisPictureLayout.setLayoutParams(params);
+                if (heroes.get(0) == hero) // i.e., this is the first hero
+                    thisPictureLayout.setPadding(0, 16, 0, 16);
+                else
+                    thisPictureLayout.setPadding(0, 0, 0, 16);
+
+                loadedPicturesLayout.addView(thisPictureLayout);
+
+                //TODO: Don't work out the preview width and height this way! or at least don't scale the photo this way
+                ImageView imageViewPhoto = new ImageView(context);
+                Bitmap bitmapPhoto = ImageTools.GetBitmapFromMat(hero.image);
+                int height = heroIconWidth * bitmapPhoto.getHeight() / bitmapPhoto.getWidth();
+                bitmapPhoto = Bitmap.createScaledBitmap(bitmapPhoto, heroIconWidth, height, true);
+                imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                imageViewPhoto.setImageBitmap(bitmapPhoto);
+                imageViewPhoto.setPadding(0, 0, 16, 0);
+                thisPictureLayout.addView(imageViewPhoto);
+
+/*            imageViewPhoto.setMinimumWidth(thisPictureLayout.getWidth() * 2 / 6);
+            imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
+            imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            imageViewPhoto.setAdjustViewBounds(true);
+       //     imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
+            imageViewPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageViewPhoto.setImageBitmap(ImageTools.GetBitmapFromMap(hero.image));*/
+
+                ImageView imageViewOriginal = new ImageView(context);
+                // imageViewOriginal.setPadding(0, 0, 0, 0);
+                HeroHistAndSimilarity matchingHero = hero.getSimilarityList().get(0);
+                Bitmap bitmapOriginal = ImageTools.GetBitmapFromMat(matchingHero.hero.image);
+                height = heroIconWidth * bitmapOriginal.getHeight() / bitmapOriginal.getWidth();
+                bitmapOriginal = Bitmap.createScaledBitmap(bitmapOriginal, heroIconWidth, height, true);
+                imageViewOriginal.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                imageViewOriginal.setImageBitmap(bitmapOriginal);
+                thisPictureLayout.addView(imageViewOriginal);
+
+                SetInfoText(hero.getSimilarityList());
+            }
+
+            //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
+
+            List<HeroWithHist> heroesSeen = new ArrayList<>();
+            for (HeroRect heroRect : heroes) {
+                heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
+            }
+
+            LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            resultsInfoLayout.removeAllViews();
+
+            //TODO: pass the Layout to functions adding the ability cards
+            AddAbilityHeading("Stuns");
+            AddStunCards(heroesSeen);
+            AddAbilityHeading("Ultimates");
+            AddUltimateCards(heroesSeen);
+
+            LayoutTransition transition = new LayoutTransition();
+            transition.enableTransitionType(LayoutTransition.CHANGING);
+            transition.setDuration(250);
+            resultsInfoLayout.setLayoutTransition(transition);
+
+/*        ImageView mImageView;
+        mImageView = (ImageView) findViewById(R.id.imageView);
+        mImageView.setImageBitmap(bitmap);*/
+
+        }
+
+        private void LoadXML() {
+            XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
+            heroInfoList = LoadHeroXml.Load(parser);
+        }
+
+        private void loadHistTest() {
+            histTest = new HistTest(context);
+        }
+
+        private void AddAbilityHeading(String string) {
+            LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            LayoutInflater inflater = getLayoutInflater();
+            View v = inflater.inflate(R.layout.heading_item, parent, false);
+            TextView textView = (TextView) v.findViewById(R.id.textView);
+            textView.setText(string);
+            parent.addView(v);
+        }
+
+        private void AddStunCards(List<HeroWithHist> heroes) {
+            List<HeroAbility> stunAbilities = new ArrayList<>();
+            for (HeroWithHist hero : heroes) {
+                for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
+                    if (ability.isStun) {
+                        stunAbilities.add(ability);
+                    }
+                }
+            }
+
+            AddAbilityCards(stunAbilities, true);
+        }
+
+        //TODO: make cards cards with rounded edges
+        private void AddUltimateCards(List<HeroWithHist> heroes) {
+            List<HeroAbility> ultimates = new ArrayList<>();
+            for (HeroWithHist hero : heroes) {
+                HeroInfo heroInfo = FindHeroWithName(hero.name);
+                ultimates.add(heroInfo.abilities.get(heroInfo.abilities.size() - 1));
+            }
+            AddAbilityCards(ultimates, false);
+        }
+
+        private void AddAbilityCards(List<HeroAbility> abilities, boolean showStunDuration) {
+            LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+
+            for (HeroAbility ability : abilities) {
+                AbilityCard card = new AbilityCard(context, ability, showStunDuration);
+                parent.addView(card);
+            }
+        }
+
+        private void ResetTextViews() {
+            List<Integer> ids = Arrays.asList(R.id.infoText);
+            for (Integer id : ids) {
+                TextView tv = (TextView) findViewById(id);
+                tv.setText("");
+                tv.setVisibility(View.VISIBLE);
+            }
+        }
+
+        private void SetInfoText(List<HeroHistAndSimilarity> similarityList) {
+
+            TextView infoText = (TextView) findViewById(R.id.infoText);
+            HeroHistAndSimilarity matchingHero = similarityList.get(0);
+
+            infoText.append(matchingHero.hero.name + ", " + matchingHero.similarity);
+
+            //TODO-now make it work with pictures who's names are wrong
+            HeroInfo heroWithName = FindHeroWithName(matchingHero.hero.name);
+            if (heroWithName != null) {
+                infoText.append(". Stuns: " + heroWithName.CountStuns());
+            }
+
+            // poor result, so lets show some alternatives
+            if (matchingHero.similarity < 0.65) {
+                infoText.append(". (Alternatives: ");
+                for (int i = 1; i < 6; i++) {
+                    infoText.append(similarityList.get(i).hero.name + "," + similarityList.get(i).similarity + ". ");
+                }
+                infoText.append(")");
+            }
+
+            infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
+        }
+
+        // TODO: replace FindHeroWithName to use the drawable id int instead of strings
+        private HeroInfo FindHeroWithName(String name) {
+            for (HeroInfo hero : heroInfoList) {
+                if (hero.HasName(name)) {
+                    return hero;
+                }
+            }
+            return null;
+        }
+
+    }
 
 }
 
@@ -593,4 +629,3 @@ class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
     }
 }
 */
-
