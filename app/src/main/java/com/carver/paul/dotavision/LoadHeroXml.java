@@ -101,11 +101,11 @@ public class LoadHeroXml {
         while (parser.next() != XmlPullParser.END_TAG) {
             //String name = parser.getName();
             if (parser.getName().equals("isStun")) {
-                if (readText(parser).equals("false"))
-                    ability.isStun = false;
-                else
-                    ability.isStun = true;
+                ability.isStun = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "isStun");
+            } else if (parser.getName().equals("isUltimate")) {
+                ability.isUltimate = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "isUltimate");
             } else if (parser.getName().equals("name")) {
                 ability.name = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "name");
@@ -133,7 +133,7 @@ public class LoadHeroXml {
         return ability;
     }
 
-    private static boolean realBoolean(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private static boolean readBoolean(XmlPullParser parser) throws IOException, XmlPullParserException {
         boolean result = false;
         if (parser.next() == XmlPullParser.TEXT) {
             if (parser.getText().equals("true")) {

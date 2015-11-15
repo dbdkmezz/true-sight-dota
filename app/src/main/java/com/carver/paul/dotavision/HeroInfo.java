@@ -43,6 +43,7 @@ class HeroInfo {
 
 class HeroAbility {
     public boolean isStun;
+    public boolean isUltimate;
     public String heroName;
     public String name;
     public String imageName;

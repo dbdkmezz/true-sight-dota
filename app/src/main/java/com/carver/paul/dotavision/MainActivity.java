@@ -53,9 +53,11 @@ import java.util.List;
 
 //TODO: sort out preview moving when processing
 
+//TODO: add demo button for first load
+
 //TODO: remove unecessary depedencies
 
-//TODO-now: put source on github and make it compile on new installs
+//TODO-now: put source on github and make it compile on new installs, and add OSS code headings
 
 //TODO: reduce package size. Smaller images? Crop test image
 
@@ -507,7 +509,9 @@ public class MainActivity extends AppCompatActivity
 
             List<HeroWithHist> heroesSeen = new ArrayList<>();
             for (HeroRect heroRect : heroes) {
-                heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
+                if(!heroesSeen.contains(heroRect.getSimilarityList().get(0).hero)) {
+                    heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
+                }
             }
 
             //TODO: pass the Layout to functions adding the ability cards
@@ -625,13 +629,17 @@ public class MainActivity extends AppCompatActivity
             AddAbilityCards(stunAbilities, true);
         }
 
-        //TODO: make cards cards with rounded edges
+        //TODO: make ability cards have rounded edges
         private void AddUltimateCards(List<HeroWithHist> heroes) {
             List<HeroAbility> ultimates = new ArrayList<>();
             for (HeroWithHist hero : heroes) {
-                HeroInfo heroInfo = FindHeroWithName(hero.name);
-                ultimates.add(heroInfo.abilities.get(heroInfo.abilities.size() - 1));
+                for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
+                    if (ability.isUltimate) {
+                        ultimates.add(ability);
+                    }
+                }
             }
+
             AddAbilityCards(ultimates, false);
         }
 
