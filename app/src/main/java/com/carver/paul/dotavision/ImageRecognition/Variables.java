@@ -33,8 +33,7 @@ public class Variables {
 
     static final public List<Pair<Integer, String>> abilityDrawables;
 
-    // TODO: replace hero icon R.drawaable string pairs with just having the R.draawable in the xml
-
+    // TODO-someday: There's got to be a better way of saving the ability drawables other than a huge list of int and String pairs!
     static {
         abilityDrawables = Arrays.asList(new Pair<>(R.drawable.earthshaker_fissure_hp2, "earthshaker_fissure_hp2"),
                 new Pair<>(R.drawable.earthshaker_enchant_totem_hp2, "earthshaker_enchant_totem_hp2"),

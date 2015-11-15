@@ -31,11 +31,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-//TODO: crop camera preview and crop what the mCamera saves
-//TODO: make camera pretty
-//TODO: enable you to go back from camera without taking photo
-//TODO-now: make camera activity send intent back so you can use the photo immediately
-//TODO: open the camera in a seperate thread
+//TODO-someday: crop what the Camera saves
 
 public class CameraActivity extends Activity {
     private Camera mCamera;
@@ -283,8 +279,9 @@ public class CameraActivity extends Activity {
                 if (foc.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))
                     parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
-/*            //TODO: fix mCamera exposure to make it auto
-            int maxExposure = parameters.getMaxExposureCompensation();
+
+            //TODO-someday: make camera exposure auto
+/*          int maxExposure = parameters.getMaxExposureCompensation();
             if (maxExposure != 0)
                 parameters.setExposureCompensation(maxExposure * 3 / 4);*/
 
@@ -332,7 +329,7 @@ public class CameraActivity extends Activity {
             return result;
         }
 
-        //TODO: replace camera letterbox code with just doing it in xml, this is too unreliable
+        //TODO-now: replace camera letterbox code with just doing it in xml, this is too unreliable
         private void setupPreviewLetterbox() {
             int cameraPreviewWidth = findViewById(R.id.camera_preview).getWidth();
             int cameraParentHeight = findViewById(R.id.camera_preview_parent).getHeight();
@@ -395,12 +392,9 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    //TODO-now remove surfaceDestroyed class?
     public void surfaceDestroyed(SurfaceHolder holder) {
-        // empty. Take care of releasing the Camera preview in your activity.
+        //don't need to do anything here, camera is released when the Activity is paused anyway
     }
-
-    //TODO-now remove surfaceChanged class?
 
     /*
         If you want to set a specific size for your mCamera preview,

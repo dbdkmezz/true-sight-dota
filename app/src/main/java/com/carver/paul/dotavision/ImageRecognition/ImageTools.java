@@ -64,8 +64,7 @@ public class ImageTools {
     public static Mat GetMatFromBitmap(Bitmap bitmap) {
         Mat mat = new Mat();
         bitmapToMat(bitmap, mat);
-        // TODO: Test to see what colour conversion I need for getMatToBitmap
-        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2BGR); //COLOR_RGB2BGR
+        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2BGR);
         return mat;
     }
 

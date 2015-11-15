@@ -55,33 +55,25 @@ import java.util.List;
 
 //TODO: sort out preview moving when processing
 
-//TODO: add demo button for first load
-
-//TODO: remove unecessary depedencies
+//TODO-beauty: remove unecessary depedencies
 
 //TODO-now: put source on github and make it compile on new installs, and add OSS code headings
 
-//TODO: reduce package size. Smaller images? Crop test image
+//TODO-now: reduce package size. Smaller images? Crop test image
 
-//TODO: make new icon and screenshots for the play store
+//TODO-now: make new icon and screenshots for the play store
 
 //TODO-beauty: tidy up layout files
 
 //TODO-beauty: modifications to layouts for a few phone sizes
 
-//TODO: test all spells, e.g. do the stun summaries show the right information? Also, some of the ultimates aren't ultimates!
+//TODO-prebeta: test all spells, e.g. do the stun summaries show the right information? Also, some of the ultimates aren't ultimates!
 
-//TODO: understand what lines like xmlns:app= do in the layout files
-
-//TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
-
-//TODO: work out why the preview is so small on verity's phone
-
-//TODO: add debug option to UI, and turn off my default (do trademark stuff first!)
+//TODO-someday: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
 
 //TODO: slide to change hero!!
 
-//TODO: learn about layout optimisation
+//TODO-someday: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
 
 public class MainActivity extends AppCompatActivity
@@ -172,7 +164,6 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    //TODO change so it saves images in the right location
     public static String getImagesLocation() {
         return new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
@@ -201,7 +192,7 @@ public class MainActivity extends AppCompatActivity
         doImageRecognition(bitmap);
     }
 
-    //TODO: move image recognition into separate class. Make MainActivity class tiny
+    //TODO-beauty: move image recognition into separate class. Make MainActivity class tiny
     private void doImageRecognition(Bitmap bitmap) {
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
@@ -224,7 +215,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     // TODO: Change permissions so it uses the Android 6 way, then can increase target API
-    // TODO: Make it save in the write media location, I think media store wasn't right
+    // TODO-prebeta: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
         EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
@@ -281,7 +272,6 @@ public class MainActivity extends AppCompatActivity
                 Environment.DIRECTORY_PICTURES), "DOTA Vision");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
-        // TODO: Change location to Context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         // https://developer.android.com/guide/topics/media/camera.html#saving-media
 
         // Create the storage directory if it does not exist
@@ -300,7 +290,7 @@ public class MainActivity extends AppCompatActivity
         return mediaFile;
     }*/
 
-    //TODO: make it so RecognitionTask gets passed heroInfoList and histTest by MainActivity so I don't have to load them every time.
+    //TODO-prebeta: make it so RecognitionTask gets passed heroInfoList and histTest by MainActivity so I don't have to load them every time.
     private class RecognitionTask extends AsyncTask<Bitmap, Void, List<HeroRect>> {
 
         private List<HeroInfo> heroInfoList = null;
@@ -310,7 +300,6 @@ public class MainActivity extends AppCompatActivity
         public RecognitionTask(Context context) {
             this.context = context;
         }
-
 
         // work to do in the UI thread before doing the hard work
         protected void onPreExecute() {
@@ -325,7 +314,7 @@ public class MainActivity extends AppCompatActivity
             layout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
             layout.removeAllViews();
 
-            if(debugMode) {
+            if (debugMode) {
                 List<Integer> textViewIds = Arrays.asList(R.id.similarityInfoText, R.id.imageDebugText);
                 ResetTextViews(textViewIds);
             }
@@ -336,8 +325,7 @@ public class MainActivity extends AppCompatActivity
          */
         private void slideDemoButtonsOffScreen() {
             View view = findViewById(R.id.demoAndsLastPhotoButtonsLayout);
-            if(view.getTranslationX() == 0)
-            {
+            if (view.getTranslationX() == 0) {
                 view.animate().x(-1f * view.getWidth()).setDuration(150).setInterpolator(new AccelerateInterpolator());
             }
         }
@@ -495,7 +483,7 @@ public class MainActivity extends AppCompatActivity
                 imageViewOriginal.setImageBitmap(bitmapOriginal);
                 thisPictureLayout.addView(imageViewOriginal);
 
-                if(debugMode)
+                if (debugMode)
                     showSimilarityInfo(hero.getSimilarityList());
             }
 
@@ -503,7 +491,7 @@ public class MainActivity extends AppCompatActivity
 
             List<HeroWithHist> heroesSeen = new ArrayList<>();
             for (HeroRect heroRect : heroes) {
-                if(!heroesSeen.contains(heroRect.getSimilarityList().get(0).hero)) {
+                if (!heroesSeen.contains(heroRect.getSimilarityList().get(0).hero)) {
                     heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
                 }
             }
@@ -531,7 +519,7 @@ public class MainActivity extends AppCompatActivity
             //TODO-beauty: seriously, sort out the camera fab button animation code. It's a mess and goes to the wrong place!
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
-       //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
+            //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
             float finalWidth = dpToPx(56);
 //            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
 
@@ -549,9 +537,9 @@ public class MainActivity extends AppCompatActivity
             //ObjectAnimator translationX = ObjectAnimator.ofFloat(fab, "translationX", 100f + farRight - startX );//coordinatorLayout.getRight() - finalWidth - fab.getX());
             ObjectAnimator x = ObjectAnimator.ofFloat(fab, "x", endX);
             ObjectAnimator y = ObjectAnimator.ofFloat(fab, "y", endY);
-           // ObjectAnimator translationY = ObjectAnimator.ofFloat(fab, "translationY", coordinatorLayout.getHeight() - finalWidth - fab.getY());
-            ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", finalWidth/currentWidth);
-            ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", finalWidth/currentWidth);
+            // ObjectAnimator translationY = ObjectAnimator.ofFloat(fab, "translationY", coordinatorLayout.getHeight() - finalWidth - fab.getY());
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", finalWidth / currentWidth);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", finalWidth / currentWidth);
             animatorSet.playTogether(x, y, scaleX, scaleY);
             //animatorSet.play(x);
             animatorSet.setDuration(300);
@@ -581,7 +569,7 @@ public class MainActivity extends AppCompatActivity
             });*/
         }
 
-        //TODO: I don't trust the dpToPx function, test it on other screen sizes
+        //TODO-prebeta: I don't trust the dpToPx function, test it on other screen sizes
         private float dpToPx(float dp) {
 
             DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -623,7 +611,7 @@ public class MainActivity extends AppCompatActivity
             AddAbilityCards(stunAbilities, true);
         }
 
-        //TODO: make ability cards have rounded edges
+        //TODO-prebeta: make ability cards have rounded edges
         private void AddUltimateCards(List<HeroWithHist> heroes) {
             List<HeroAbility> ultimates = new ArrayList<>();
             for (HeroWithHist hero : heroes) {
@@ -674,7 +662,7 @@ public class MainActivity extends AppCompatActivity
             infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
         }
 
-        // TODO: replace FindHeroWithName to use the drawable id int instead of strings
+        // TODO-prebeta: replace FindHeroWithName to use the drawable id int instead of strings
         private HeroInfo FindHeroWithName(String name) {
             for (HeroInfo hero : heroInfoList) {
                 if (hero.HasName(name)) {
