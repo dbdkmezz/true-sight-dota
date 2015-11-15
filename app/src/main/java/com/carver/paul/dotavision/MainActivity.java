@@ -51,11 +51,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//TODO: sort out preview moving when processing
+
 //TODO: remove unecessary depedencies
 
-//TODO: reduce package size. Smaller images?
+//TODO-now: put source on github and make it compile on new installs
 
-//TODO: make new icon and screenshotsf for the play store
+//TODO: reduce package size. Smaller images? Crop test image
+
+//TODO: make new icon and screenshots for the play store
 
 //TODO-beauty: tidy up layout files
 
@@ -66,8 +70,6 @@ import java.util.List;
 //TODO: understand what lines like xmlns:app= do in the layout files
 
 //TODO: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
-
-//TODO: but trademark info elsewhere
 
 //TODO: work out why the preview is so small on verity's phone
 
@@ -163,29 +165,6 @@ public class MainActivity extends AppCompatActivity
     public void startAboutActivity() {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     //TODO change so it saves images in the right location
