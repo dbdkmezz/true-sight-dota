@@ -24,14 +24,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,17 +51,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//TODO: add silences
-
-//TODO: sort out preview moving when processing
+//TODO: fix bug where preview moving when processing
 
 //TODO-beauty: remove unecessary depedencies
+
+//TODO-now: fix demo!
 
 //TODO-now: put source on github and make it compile on new installs, and add OSS code headings
 
 //TODO-now: reduce package size. Smaller images? Crop test image
 
 //TODO-now: make new icon and screenshots for the play store
+
+//TODO: show all ability details when opening them up
+
+//TODO-prebeta: add tab view so you can see the spells of all the heroes
 
 //TODO-beauty: tidy up layout files
 
@@ -216,7 +218,7 @@ public class MainActivity extends AppCompatActivity
         return bitmap;
     }
 
-    // TODO: Change permissions so it uses the Android 6 way, then can increase target API
+    // TODO-beauty: Change permissions so it uses the Android 6 way, then can increase target API
     // TODO-prebeta: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
         EnsureMediaDirectoryExists();
@@ -498,30 +500,23 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
-            //TODO: pass the Layout to functions adding the ability cards
             //TODO-prebeta: add "no silences found" text when none found
             AddAbilityHeading("Stuns");
-            AddStunCards(heroesSeen);
+            AddAbilityCards(heroesSeen, HeroAbility.STUN);
             AddAbilityHeading("Silences");
-            AddSilenceCards(heroesSeen);
+            AddAbilityCards(heroesSeen, HeroAbility.SILENCE);
             AddAbilityHeading("Ultimates");
-            AddUltimateCards(heroesSeen);
+            AddAbilityCards(heroesSeen, HeroAbility.ULTIMATE);
 
             LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
             transition.setDuration(250);
             LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
             resultsInfoLayout.setLayoutTransition(transition);
-
-/*        ImageView mImageView;
-        mImageView = (ImageView) findViewById(R.id.imageView);
-        mImageView.setImageBitmap(bitmap);*/
-
         }
 
         private void moveCameraFabToBottomRight() {
-            //TODO-beauty: put my complex animation into XML
-            //TODO-beauty: seriously, sort out the camera fab button animation code. It's a mess and goes to the wrong place!
+            //TODO-beauty: seriously, sort out the camera fab button animation code. It's a mess and goes to the wrong place! Ideally put the animation into an XML
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
             //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
@@ -603,54 +598,24 @@ public class MainActivity extends AppCompatActivity
             parent.addView(v);
         }
 
-        //TODO-beauty: AddStunCards, AddSilenceCards, and AddUltimateCards are all very similar. Make a generic function
-        private boolean AddStunCards(List<HeroWithHist> heroes) {
-            List<HeroAbility> stunAbilities = new ArrayList<>();
+        private boolean AddAbilityCards(List<HeroWithHist> heroes, int abilityType) {
+            List<HeroAbility> abilities = new ArrayList<>();
             for (HeroWithHist hero : heroes) {
                 for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
-                    if (ability.isStun) {
-                        stunAbilities.add(ability);
-                    }
+                    if(abilityType == HeroAbility.STUN && ability.isStun)
+                        abilities.add(ability);
+                    else if(abilityType == HeroAbility.SILENCE && ability.isSilence)
+                        abilities.add(ability);
+                    else if(abilityType == HeroAbility.ULTIMATE && ability.isUltimate)
+                        abilities.add(ability);
                 }
             }
 
-            return AddAbilityCards(stunAbilities, true);
-        }
-
-        private boolean AddSilenceCards(List<HeroWithHist> heroes) {
-            List<HeroAbility> silenceAbilities = new ArrayList<>();
-            for (HeroWithHist hero : heroes) {
-                for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
-                    if (ability.isSilence) {
-                        silenceAbilities.add(ability);
-                    }
-                }
-            }
-
-            return AddAbilityCards(silenceAbilities, false);
-        }
-
-        //TODO-prebeta: make ability cards have rounded edges
-        private boolean AddUltimateCards(List<HeroWithHist> heroes) {
-            List<HeroAbility> ultimates = new ArrayList<>();
-            for (HeroWithHist hero : heroes) {
-                for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
-                    if (ability.isUltimate) {
-                        ultimates.add(ability);
-                    }
-                }
-            }
-
-            return AddAbilityCards(ultimates, false);
-        }
-
-        //TODO: make it show silence durations too
-        private boolean AddAbilityCards(List<HeroAbility> abilities, boolean showStunDuration) {
             LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
             boolean cardsAdded = false;
 
             for (HeroAbility ability : abilities) {
-                AbilityCard card = new AbilityCard(context, ability, showStunDuration);
+                AbilityCard card = new AbilityCard(context, ability, abilityType);
                 parent.addView(card);
                 cardsAdded = true;
             }

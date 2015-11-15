@@ -42,6 +42,10 @@ class HeroInfo {
 }
 
 class HeroAbility {
+    public static final int STUN = 0;
+    public static final int SILENCE = 1;
+    public static final int ULTIMATE = 2;
+
     public boolean isUltimate;
     public boolean isStun;
     public boolean isSilence;
@@ -58,14 +62,23 @@ class HeroAbility {
         abilityDetails = new ArrayList<>();
     }
 
+    public String guessAbilityDuration(int abilityType) {
+        if(abilityType != STUN && abilityType != SILENCE)
+            throw new RuntimeException("guessAbilityDuration passed wrong abilityType");
 
-    public String guessStunDuration() {
-        if (isStun != true) return null;
+        if (abilityType == STUN && isStun != true) return null;
+        if (abilityType == SILENCE && isSilence != true) return null;
+
+        String abilityDescription = "";
+        if (abilityType == STUN)
+            abilityDescription = "STUN";
+        else if (abilityType == SILENCE)
+            abilityDescription = "SILENCE";
 
         for (String detail : abilityDetails) {
-            if (detail.contains("STUN DURATION:"))
+            if (detail.contains(abilityDescription + " DURATION:"))
                 return detail;
-            else if (detail.contains("MAX STUN:"))
+            else if (detail.contains("MAX " + abilityDescription + ":"))
                 return detail;
             else if (detail.startsWith("DURATION:"))
                 return detail;
