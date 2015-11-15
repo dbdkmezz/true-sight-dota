@@ -38,6 +38,9 @@ public class CameraActivity extends Activity {
     private SurfaceView mPreview;
     private static final String TAG = "Camera Activity";
 
+    private final ScheduledExecutorService mScheduledExecutorService =
+            Executors.newScheduledThreadPool(1);
+
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
 
         @Override
@@ -85,14 +88,12 @@ public class CameraActivity extends Activity {
         takeAgainButton.setVisibility(View.GONE);
     }
 
-    private final ScheduledExecutorService mScheduledExecutorService =
-            Executors.newScheduledThreadPool(1);
-
     public void capturePhoto(View view) {
         //mCamera.takePicture(null, null, mPicture);
         if (mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
 
-//https://stackoverflow.com/questions/6658868/camera-autofocus-callback-not-happening
+            // add a 3 second timeout to autofocus
+            //https://stackoverflow.com/questions/6658868/camera-autofocus-callback-not-happening
             final ScheduledFuture<?> focusTimeoutFuture = mScheduledExecutorService.schedule(new Runnable() {
                 @Override
                 public void run() {
@@ -100,7 +101,7 @@ public class CameraActivity extends Activity {
                     mCamera.takePicture(null, null, mPicture);
                     mCamera.cancelAutoFocus();
                 }
-            }, 3, TimeUnit.SECONDS);// add a 3 second timeout to autofocus
+            }, 3, TimeUnit.SECONDS);
 
             Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
                 @Override
@@ -137,43 +138,18 @@ public class CameraActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-
-        // Create an instance of Camera
-
-
-        new CameraOpeningTask(this).execute();
-/*
-        mCamera = getCameraInstance();
-        setupCamera();
-
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this, mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);*/
     }
-
-/*    private int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        return Math.round(dp * displayMetrics.density);
-    }*/
 
     @Override
     public void onResume() {
         super.onResume();
+        setContentView(R.layout.activity_camera);
 
+        // Setup the camera
         if (mCamera == null) {
-            setContentView(R.layout.activity_camera);
-
-
             new CameraOpeningTask(this).execute();
-            /*
-            mCamera = getCameraInstance();
-            setupCamera();
-
-            mPreview = new CameraPreview(this, mCamera);
-            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-            preview.addView(mPreview);*/
         }
+
         showCaptureButton();
     }
 
@@ -227,14 +203,15 @@ public class CameraActivity extends Activity {
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
 
+            // THIS CODE WAS SO DODGY. GONE!
             // need to delay setting up the letterbox, because right now the camera hasn't been drawn, so we can't find out its width
             // I worry this will go wrong on slower phones, needs testing
-            final ScheduledFuture<?> setupLetterboxFuture = mScheduledExecutorService.schedule(new Runnable() {
+/*            final ScheduledFuture<?> setupLetterboxFuture = mScheduledExecutorService.schedule(new Runnable() {
                 @Override
                 public void run() {
                     setupPreviewLetterbox();
                 }
-            }, 500, TimeUnit.MILLISECONDS);
+            }, 500, TimeUnit.MILLISECONDS);*/
 
         }
 
@@ -329,7 +306,8 @@ public class CameraActivity extends Activity {
             return result;
         }
 
-        //TODO-now: replace camera letterbox code with just doing it in xml, this is too unreliable
+        //Removed, calling this code from a ScheduledExecutorService caused horrible things to happen
+/*
         private void setupPreviewLetterbox() {
             int cameraPreviewWidth = findViewById(R.id.camera_preview).getWidth();
             int cameraParentHeight = findViewById(R.id.camera_preview_parent).getHeight();
@@ -340,11 +318,14 @@ public class CameraActivity extends Activity {
             View belowLetterbox = findViewById(R.id.below_camera_preview_letterbox);
             aboveLetterbox.setMinimumHeight(heightOfPreviewCovers);
             belowLetterbox.setMinimumHeight(heightOfPreviewCovers);
+*/
 /*
             aboveLetterbox.bringToFront();
             belowLetterbox.bringToFront();
-*/
+*//*
+
         }
+*/
     }
 }
 
@@ -374,7 +355,6 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         try {
             mCamera.setPreviewDisplay(holder);
 
-
             // No idea why, but if this is not run then I don't get the bottom edge of the letterbox!
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
             setLayoutParams(layoutParams);
@@ -383,7 +363,6 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
             layoutParams.height = (getWidth() * cameraSize.height / cameraSize.width);
             setLayoutParams(layoutParams);*/
-
 
             mCamera.startPreview();
 

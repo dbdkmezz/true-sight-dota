@@ -40,7 +40,6 @@
             android:onClick="takePhoto"
             android:src="@android:drawable/ic_menu_camera" />
 
-
         <LinearLayout
             android:id="@+id/demoAndsLastPhotoButtonsLayout"
             android:layout_width="wrap_content"

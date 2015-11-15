@@ -55,13 +55,13 @@ import java.util.List;
 
 //TODO-beauty: remove unecessary depedencies
 
+//TODO-now: more photo text
+
 //TODO-now: fix crash on verity phone
 
 //TODO-now: put source on github and make it compile on new installs, and add OSS code headings
 
 //TODO-now: reduce package size. Smaller images? Crop test image
-
-//TODO-now: make new icon and screenshots for the play store
 
 //TODO-prebeta: add tab view so you can see the spells of all the heroes
 
@@ -518,7 +518,7 @@ public class MainActivity extends AppCompatActivity
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
             //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
-            float finalWidth = dpToPx(60);
+            float finalWidth = dpToPx(64);
 //            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
 
 //            int finalMargin = otherFab.getLayoutParams().
@@ -528,7 +528,7 @@ public class MainActivity extends AppCompatActivity
             float startX = fab.getX();
 
 //            float marginPx = dpToPx(getResources().getDimension(R.dimen.fab_margin));
-            float marginPx = dpToPx(16);
+            float marginPx = dpToPx(18);
 
 
             float endX = coordinatorLayout.getWidth() - (currentWidth + finalWidth + marginPx) / 2f;
