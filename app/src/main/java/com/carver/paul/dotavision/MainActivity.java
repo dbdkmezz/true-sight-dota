@@ -53,6 +53,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//TODO: add silences
+
 //TODO: sort out preview moving when processing
 
 //TODO-beauty: remove unecessary depedencies
@@ -497,8 +499,11 @@ public class MainActivity extends AppCompatActivity
             }
 
             //TODO: pass the Layout to functions adding the ability cards
+            //TODO-prebeta: add "no silences found" text when none found
             AddAbilityHeading("Stuns");
             AddStunCards(heroesSeen);
+            AddAbilityHeading("Silences");
+            AddSilenceCards(heroesSeen);
             AddAbilityHeading("Ultimates");
             AddUltimateCards(heroesSeen);
 
@@ -598,7 +603,8 @@ public class MainActivity extends AppCompatActivity
             parent.addView(v);
         }
 
-        private void AddStunCards(List<HeroWithHist> heroes) {
+        //TODO-beauty: AddStunCards, AddSilenceCards, and AddUltimateCards are all very similar. Make a generic function
+        private boolean AddStunCards(List<HeroWithHist> heroes) {
             List<HeroAbility> stunAbilities = new ArrayList<>();
             for (HeroWithHist hero : heroes) {
                 for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
@@ -608,11 +614,24 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
-            AddAbilityCards(stunAbilities, true);
+            return AddAbilityCards(stunAbilities, true);
+        }
+
+        private boolean AddSilenceCards(List<HeroWithHist> heroes) {
+            List<HeroAbility> silenceAbilities = new ArrayList<>();
+            for (HeroWithHist hero : heroes) {
+                for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
+                    if (ability.isSilence) {
+                        silenceAbilities.add(ability);
+                    }
+                }
+            }
+
+            return AddAbilityCards(silenceAbilities, false);
         }
 
         //TODO-prebeta: make ability cards have rounded edges
-        private void AddUltimateCards(List<HeroWithHist> heroes) {
+        private boolean AddUltimateCards(List<HeroWithHist> heroes) {
             List<HeroAbility> ultimates = new ArrayList<>();
             for (HeroWithHist hero : heroes) {
                 for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
@@ -622,16 +641,21 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
-            AddAbilityCards(ultimates, false);
+            return AddAbilityCards(ultimates, false);
         }
 
-        private void AddAbilityCards(List<HeroAbility> abilities, boolean showStunDuration) {
+        //TODO: make it show silence durations too
+        private boolean AddAbilityCards(List<HeroAbility> abilities, boolean showStunDuration) {
             LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            boolean cardsAdded = false;
 
             for (HeroAbility ability : abilities) {
                 AbilityCard card = new AbilityCard(context, ability, showStunDuration);
                 parent.addView(card);
+                cardsAdded = true;
             }
+
+            return cardsAdded;
         }
 
         private void ResetTextViews(List<Integer> ids) {

@@ -106,6 +106,12 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("isUltimate")) {
                 ability.isUltimate = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "isUltimate");
+            } else if (parser.getName().equals("isSilence")) {
+                ability.isSilence = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "isSilence");
+            } else if (parser.getName().equals("isMute")) {
+                ability.isMute = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, ns, "isMute");
             } else if (parser.getName().equals("name")) {
                 ability.name = readText(parser);
                 parser.require(XmlPullParser.END_TAG, ns, "name");

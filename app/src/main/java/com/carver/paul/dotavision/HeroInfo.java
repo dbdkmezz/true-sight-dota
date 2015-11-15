@@ -42,8 +42,10 @@ class HeroInfo {
 }
 
 class HeroAbility {
-    public boolean isStun;
     public boolean isUltimate;
+    public boolean isStun;
+    public boolean isSilence;
+    public boolean isMute;
     public String heroName;
     public String name;
     public String imageName;
