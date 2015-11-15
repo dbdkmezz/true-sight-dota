@@ -8,14 +8,15 @@
                     android:title="Gallery" />
                 <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
                     android:title="Slideshow" />-->
-        <item
+<!--        <item
             android:id="@+id/debug_whole_process"
-            android:icon="@android:drawable/ic_menu_manage"
             android:title="Debug whole process" />
         <item
             android:id="@+id/debug_specific_hue"
-            android:icon="@android:drawable/ic_menu_manage"
-            android:title="Debug specific hue" />
+            android:title="Debug specific hue" />-->
+        <item
+            android:id="@+id/about"
+            android:title="About"/>
     </group>
 
     <!--    <item android:title="Communicate">

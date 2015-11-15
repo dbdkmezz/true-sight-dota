@@ -61,7 +61,7 @@ import java.util.List;
 
 //TODO-beauty: modifications to layouts for a few phone sizes
 
-//TODO: test all spells, e.g. do the stun summaries show the right information?
+//TODO: test all spells, e.g. do the stun summaries show the right information? Also, some of the ultimates aren't ultimates!
 
 //TODO: understand what lines like xmlns:app= do in the layout files
 
@@ -81,7 +81,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static boolean debugMode = true;
+    public static boolean debugMode = false;
     private static int CAMERA_ACTIVITY_REQUEST_CODE = 100;
 /*    private static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
     public static Bitmap recognitionBitmap = null;*/
@@ -137,11 +137,13 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.debug_specific_hue) {
+        if (id == R.id.about) {
+            startAboutActivity();
+        }
+/*        if (id == R.id.debug_specific_hue) {
             startDebugLineActivity();
         } else if (id == R.id.debug_whole_process) {
-            startDebugWholeProcessActivity();
-        }
+            startDebugWholeProcessActivity();*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -155,6 +157,11 @@ public class MainActivity extends AppCompatActivity
 
     public void startDebugWholeProcessActivity() {
         Intent intent = new Intent(this, DebugWholeProcessActivity.class);
+        startActivity(intent);
+    }
+
+    public void startAboutActivity() {
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
@@ -221,7 +228,7 @@ public class MainActivity extends AppCompatActivity
             bitmap = Bitmap.createScaledBitmap(bitmap, Variables.SCALED_IMAGE_WIDTH, newHeight, false);
 
         //crop the top and bottom thirds off, if it's tall
-        if (newHeight > 190 * 3)
+        if (newHeight > Variables.SCALED_IMAGE_HEIGHT)
             bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, Variables.SCALED_IMAGE_WIDTH, newHeight / 3);
         return bitmap;
     }
@@ -464,8 +471,7 @@ public class MainActivity extends AppCompatActivity
             if (debugMode) {
                 TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
                 imageDebugText.setVisibility(View.VISIBLE);
-                imageDebugText.setText(Recognition.debugString + System.getProperty("line.separator") +
-                        "Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve and this app is not affiliated with Valve Corporation.");
+                imageDebugText.setText(Recognition.debugString);
             }
 
             DisplayMetrics metrics = new DisplayMetrics();
@@ -598,6 +604,7 @@ public class MainActivity extends AppCompatActivity
             });*/
         }
 
+        //TODO: I don't trust the dpToPx function, test it on other screen sizes
         private float dpToPx(float dp) {
 
             DisplayMetrics displayMetrics = getResources().getDisplayMetrics();

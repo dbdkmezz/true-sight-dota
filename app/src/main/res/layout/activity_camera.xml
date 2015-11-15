@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#000000">
 
     <RelativeLayout
+        android:id="@+id/camera_preview_parent"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_weight="1">
@@ -20,15 +22,24 @@
             android:id="@+id/above_camera_preview_letterbox"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="#000000"/>
+            android:background="#000000"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="Position the 5 enemy hero portraits so that they fill the box below."
+                android:textColor="#ffffff"
+                android:textSize="@dimen/large_text"/>
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/below_camera_preview_letterbox"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#000000"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 
@@ -38,29 +49,32 @@
         android:orientation="vertical"
         android:layout_gravity="center_vertical" >
 
-        <Button
+        <ImageButton
             android:id="@+id/button_capture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:onClick="capturePhoto"
-            android:text="Capture"
-            android:layout_gravity="center_horizontal" />
+            android:src="@android:drawable/ic_menu_camera"
+            android:background="#00000000"
+            android:layout_gravity="center_horizontal"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:onClick="confirmPhoto"
-            android:text="Confirm"
+            android:src="@android:drawable/ic_media_play"
+            android:background="#00000000"
             android:layout_gravity="center_horizontal"
             android:visibility="gone" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_take_again"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:onClick="takePhotoAgain"
-            android:text="Take again"
+            android:src="@android:drawable/ic_menu_revert"
+            android:background="#00000000"
             android:layout_gravity="center_horizontal"
             android:visibility="gone" />
     </LinearLayout>

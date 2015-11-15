@@ -13,8 +13,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.MainActivity;
@@ -72,18 +72,18 @@ public class CameraActivity extends Activity {
     }
 
     private void showPhotoConfirmButtons() {
-        Button captureButton = (Button) findViewById(R.id.button_capture);
-        Button confirmButton = (Button) findViewById(R.id.button_confirm);
-        Button takeAgainButton = (Button) findViewById(R.id.button_take_again);
+        ImageButton captureButton = (ImageButton) findViewById(R.id.button_capture);
+        ImageButton confirmButton = (ImageButton) findViewById(R.id.button_confirm);
+        ImageButton takeAgainButton = (ImageButton) findViewById(R.id.button_take_again);
         captureButton.setVisibility(View.GONE);
         confirmButton.setVisibility(View.VISIBLE);
         takeAgainButton.setVisibility(View.VISIBLE);
     }
 
     private void showCaptureButton() {
-        Button captureButton = (Button) findViewById(R.id.button_capture);
-        Button confirmButton = (Button) findViewById(R.id.button_confirm);
-        Button takeAgainButton = (Button) findViewById(R.id.button_take_again);
+        ImageButton captureButton = (ImageButton) findViewById(R.id.button_capture);
+        ImageButton confirmButton = (ImageButton) findViewById(R.id.button_confirm);
+        ImageButton takeAgainButton = (ImageButton) findViewById(R.id.button_take_again);
         captureButton.setVisibility(View.VISIBLE);
         confirmButton.setVisibility(View.GONE);
         takeAgainButton.setVisibility(View.GONE);
@@ -231,7 +231,15 @@ public class CameraActivity extends Activity {
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
 
-          //  setupPreviewLetterbox();
+            // need to delay setting up the letterbox, because right now the camera hasn't been drawn, so we can't find out its width
+            // I worry this will go wrong on slower phones, needs testing
+            final ScheduledFuture<?> setupLetterboxFuture = mScheduledExecutorService.schedule(new Runnable() {
+                @Override
+                public void run() {
+                    setupPreviewLetterbox();
+                }
+            }, 500, TimeUnit.MILLISECONDS);
+
         }
 
         private Camera getCameraInstance() {
@@ -325,22 +333,19 @@ public class CameraActivity extends Activity {
         }
 
         private void setupPreviewLetterbox() {
+            int cameraPreviewWidth = findViewById(R.id.camera_preview).getWidth();
+            int cameraParentHeight = findViewById(R.id.camera_preview_parent).getHeight();
+            int targetPreviewHeight = cameraPreviewWidth * Variables.SCALED_IMAGE_HEIGHT / Variables.SCALED_IMAGE_WIDTH;
+            int heightOfPreviewCovers = (cameraParentHeight - targetPreviewHeight) / 2;
 
             View aboveLetterbox = findViewById(R.id.above_camera_preview_letterbox);
             View belowLetterbox = findViewById(R.id.below_camera_preview_letterbox);
-            int cameraButtonsWidth = /*dpToPx( */(int) getResources().getDimension(R.dimen.camera_buttons_width);
-
-            Point size = new Point();
-            getWindowManager().getDefaultDisplay().getSize(size);
-            int screenWidth = size.x;
-            int cameraPreviewWidth = screenWidth - cameraButtonsWidth;
-
-            int targetPreviewHeight = cameraPreviewWidth * Variables.SCALED_IMAGE_HEIGHT / Variables.SCALED_IMAGE_WIDTH;
-            //   int heightOfPreviewCovers = (parent.getHeight() - targetPreviewHeight) / 2;
-
-/*        aboveLetterbox.setMinimumHeight(350);
-        belowLetterbox.setMinimumHeight(30);*/
-
+            aboveLetterbox.setMinimumHeight(heightOfPreviewCovers);
+            belowLetterbox.setMinimumHeight(heightOfPreviewCovers);
+/*
+            aboveLetterbox.bringToFront();
+            belowLetterbox.bringToFront();
+*/
         }
     }
 }
@@ -371,10 +376,16 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         try {
             mCamera.setPreviewDisplay(holder);
 
-            Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
+
+            // No idea why, but if this is not run then I don't get the bottom edge of the letterbox!
+            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            setLayoutParams(layoutParams);
+
+/*            Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
             layoutParams.height = (getWidth() * cameraSize.height / cameraSize.width);
-            setLayoutParams(layoutParams);
+            setLayoutParams(layoutParams);*/
+
 
             mCamera.startPreview();
 

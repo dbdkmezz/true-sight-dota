@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Vision Companion App for Dota 2</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_debug_line_detection">DebugLineDetection</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
@@ -10,6 +9,8 @@
 
     <string name="picture">Picture</string>
     <string name="request_permission">This app needs camera permission.</string>
+
+    <string name="about_text">Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve and this app is not affiliated with Valve Corporation.</string>
 
     <string name="cooldown">COOLDOWN</string>
 </resources>
