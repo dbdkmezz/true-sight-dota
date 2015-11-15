@@ -28,8 +28,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -86,7 +88,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static boolean debugMode = false;
-    private static int CAMERA_ACTIVITY_REQUEST_CODE = 100;
+    private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
+    public static final String PHOTO_FILE_NAME = "photo.jpg";
 /*    private static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
     public static Bitmap recognitionBitmap = null;*/
 
@@ -176,24 +179,30 @@ public class MainActivity extends AppCompatActivity
     }
 
     public static String getPhotoLocation() {
-        return new File(getImagesLocation(), "photo.jpg").getPath();
+        return new File(getImagesLocation(), PHOTO_FILE_NAME).getPath();
     }
 
-    //TODO-now change useExistingPictureButton back so it uses a saved image, it currently just uses the last photo!
-    public void useExistingPictureButton(View view) {
-        doImageRecognition();
+    public void demoButton(View view) {
+        Bitmap sampleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
+        doImageRecognition(sampleBitmap);
     }
 
-    //TODO: move image recognitiion into separate class. Make MainActivity class tiny
-    private void doImageRecognition() {
-        File mediaFile = new File(getImagesLocation(), "photo.jpg");
-        Bitmap bitmap;
-        if (mediaFile.exists()) {
-            bitmap = CreateCroppedBitmap(mediaFile.getPath());
-        } else {
-            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
+    public void useLastPhotoButton(View view) {
+        doImageRecognitionOnPhoto();
+    }
+
+    private void doImageRecognitionOnPhoto() {
+        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
+        if (!mediaFile.exists()) {
+            throw new RuntimeException("Trying to recognise photo, but I can't find file at " + getImagesLocation() + PHOTO_FILE_NAME);
         }
 
+        Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
+        doImageRecognition(bitmap);
+    }
+
+    //TODO: move image recognition into separate class. Make MainActivity class tiny
+    private void doImageRecognition(Bitmap bitmap) {
         ImageView topImage = (ImageView) findViewById(R.id.topImage);
         topImage.setImageBitmap(bitmap);
 
@@ -217,45 +226,17 @@ public class MainActivity extends AppCompatActivity
     // TODO: Change permissions so it uses the Android 6 way, then can increase target API
     // TODO: Make it save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
-
-/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
-
-        TimeInterpolator interpolator = new OvershootInterpolator();
-        //TODO: remove the scenes xmls I started working on
-        fab.animate().scaleX(0.2f).scaleY(0.2f).setDuration(300).setInterpolator(interpolator);*/
-
-/*        AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.2f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.2f);
-        scaleX.setDuration(300);
-        scaleY.setDuration(300);
-        animatorSet.play(scaleX).with(scaleY);
-        animatorSet.start();*/
-
         EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
         //TODO-someday: make it possible to specify image save location by sending camera activity an intent
         startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
-        //startActivity(intent);
-
-
-/*        EnsureMediaDirectoryExists();
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Uri photoFileUri = Uri.fromFile(new File(getPhotoLocation()));// getOutputMediaFileUri(); // create a file to save the image
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoFileUri); // set the image file name
-        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);*/
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // Image captured and saved to fileUri specified in the Intent
-                doImageRecognition();
-/*                ImageView mImageView;
-                mImageView = (ImageView) findViewById(R.id.imageView);
-                mImageView.setImageBitmap(BitmapFactory.decodeFile(fileUri.getPath()));*/
-
+                doImageRecognitionOnPhoto();
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {
@@ -334,6 +315,7 @@ public class MainActivity extends AppCompatActivity
         // work to do in the UI thread before doing the hard work
         protected void onPreExecute() {
             resetInfo();
+            slideDemoButtonsOffScreen();
             pulseCameraFab();
         }
 
@@ -349,7 +331,31 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        /**
+         * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
+         */
+        private void slideDemoButtonsOffScreen() {
+            View view = findViewById(R.id.demoAndsLastPhotoButtonsLayout);
+            if(view.getTranslationX() == 0)
+            {
+                view.animate().x(-1f * view.getWidth()).setDuration(150).setInterpolator(new AccelerateInterpolator());
+            }
+        }
+
+        /**
+         * Makes the camera FAB pulse infinitely (will be stopped when loading complete)
+         */
         private void pulseCameraFab() {
+            //Code using the old Animation class, rather than the new ViewPropertyAnimator
+            //Infinite repeat is easier to implement this way
+            View view = findViewById(R.id.cameraFab);
+            moveViewBackToStartingPosAndScale(view);
+
+            ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            pulse.setDuration(250);
+            pulse.setRepeatCount(Animation.INFINITE);
+            pulse.setRepeatMode(Animation.REVERSE);
+            view.startAnimation(pulse);
 
 /*            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             AnimatorSet animatorSet = new AnimatorSet();
@@ -367,18 +373,6 @@ public class MainActivity extends AppCompatActivity
             });
 
             animatorSet.start();*/
-
-
-            //Code using the old Animation class, rather than the new ViewPropertyAnimator
-            //Infinite repeat is easier to implement this way
-            View view = findViewById(R.id.cameraFab);
-            moveViewBackToStartingPosAndScale(view);
-
-            ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            pulse.setDuration(250);
-            pulse.setRepeatCount(Animation.INFINITE);
-            pulse.setRepeatMode(Animation.REVERSE);
-            view.startAnimation(pulse);
 
 
 /*            RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,
@@ -537,8 +531,8 @@ public class MainActivity extends AppCompatActivity
             //TODO-beauty: seriously, sort out the camera fab button animation code. It's a mess and goes to the wrong place!
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
-            FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
-            float finalWidth = otherFab.getWidth();
+       //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
+            float finalWidth = dpToPx(56);
 //            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
 
 //            int finalMargin = otherFab.getLayoutParams().

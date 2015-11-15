@@ -11,10 +11,10 @@
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mainCoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:id="@+id/mainCoordinatorLayout"
         tools:context=".MainActivity">
 
         <!--    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,14 +40,47 @@
             android:onClick="takePhoto"
             android:src="@android:drawable/ic_menu_camera" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/useExistingPictureButton"
+
+        <LinearLayout
+            android:id="@+id/demoAndsLastPhotoButtonsLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
-            android:layout_margin="@dimen/fab_margin"
-            android:onClick="useExistingPictureButton"
-            android:src="@android:drawable/ic_menu_revert" />
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/demoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="DEMO"
+                android:textColor="#FFFFFF"
+                android:onClick="demoButton"/>
+
+            <Button
+                android:id="@+id/useLastPhotoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_spacing"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:background="@color/colorPrimary"
+                android:text="USE LAST PHOTO"
+                android:textColor="#FFFFFF"
+                android:onClick="useLastPhotoButton"/>
+
+        </LinearLayout>
+
+        <!--        <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/useExistingPictureButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:onClick="useExistingPictureButton"
+                    android:src="@android:drawable/ic_menu_revert" />-->
 
     </android.support.design.widget.CoordinatorLayout>
 

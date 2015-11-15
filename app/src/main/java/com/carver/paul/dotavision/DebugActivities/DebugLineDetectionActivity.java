@@ -46,7 +46,7 @@ public class DebugLineDetectionActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        File mediaFile = new File(MainActivity.getImagesLocation(), "photo.jpg");
+        File mediaFile = new File(MainActivity.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
         runTest(mediaFile.getPath());
     }
 

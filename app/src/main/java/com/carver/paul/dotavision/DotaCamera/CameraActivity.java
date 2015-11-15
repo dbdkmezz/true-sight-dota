@@ -68,7 +68,7 @@ public class CameraActivity extends Activity {
     };
 
     private static File getOutputMediaFile() {
-        return new File(MainActivity.getImagesLocation(), "photo.jpg");
+        return new File(MainActivity.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
     }
 
     private void showPhotoConfirmButtons() {
@@ -332,6 +332,7 @@ public class CameraActivity extends Activity {
             return result;
         }
 
+        //TODO: replace camera letterbox code with just doing it in xml, this is too unreliable
         private void setupPreviewLetterbox() {
             int cameraPreviewWidth = findViewById(R.id.camera_preview).getWidth();
             int cameraParentHeight = findViewById(R.id.camera_preview_parent).getHeight();
