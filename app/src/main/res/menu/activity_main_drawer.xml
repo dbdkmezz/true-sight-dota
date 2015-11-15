@@ -10,10 +10,10 @@
                     android:title="Slideshow" />-->
 <!--        <item
             android:id="@+id/debug_whole_process"
-            android:title="Debug whole process" />
-        <item
+            android:title="Debug whole process" />-->
+<!--        <item
             android:id="@+id/debug_specific_hue"
-            android:title="Debug specific hue" />-->
+            android:title="Debug specific hue"/>-->
         <item
             android:id="@+id/about"
             android:title="About"/>

@@ -66,6 +66,8 @@ public class DebugLineDetectionActivity extends AppCompatActivity {
 
         Bitmap bitmap = MainActivity.CreateCroppedBitmap(photoPath);
 
+/*        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);*/
+
         //DebugLineDetection.TestLines(bitmap, (ImageView) findViewById(R.id.imageViewMask));
         Bitmap linesBitmap = DebugLineDetection.TestLines(bitmap, hMin, hMax, sMin, sMax, vMin, vMax);
         Bitmap maskBitmap = DebugLineDetection.TestMask(bitmap, hMin, hMax, sMin, sMax, vMin, vMax);//, (ImageView) findViewById(R.id.imageViewLines));

@@ -393,6 +393,10 @@ class HeroLine {
 
         int totalGoodWidth = 0;
 
+        //TODO-prebeta: improve code dealing with lines which are the wrong height, perhaps just remove the points with the wrong height and recalculate the rect again
+        // (see what happens with lion in the demo picture)
+
+
         // check there are more than 2 good lines, if not then there's no reason to try and reduce the number of lines!
         if (goodLines.size() > 2 && numImagesWithRealHeights > 1) {
             int averageHeight = totalGoodHeight / numImagesWithRealHeights;

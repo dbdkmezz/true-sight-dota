@@ -16,7 +16,7 @@ public class Variables {
     private static final List<Integer> l4OrangeRange = Arrays.asList(8, 18);
 
     private static final List<Integer> r0PurpleRange = Arrays.asList(140, 180); //was 150,180 until 7 oct.
-    private static final List<Integer> r1YellowRange = Arrays.asList(26, 85);//70);//35);
+    private static final List<Integer> r1YellowRange = Arrays.asList(26, 75); //85);//70);//35);
     private static final List<Integer> r2LightBlueRange = Arrays.asList(90, 108);
     private static final List<Integer> r3GreenRange = Arrays.asList(50, 75);//68);
     private static final List<Integer> r4OrangeRange = Arrays.asList(8, 25);

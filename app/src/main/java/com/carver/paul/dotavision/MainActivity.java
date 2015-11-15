@@ -55,15 +55,13 @@ import java.util.List;
 
 //TODO-beauty: remove unecessary depedencies
 
-//TODO-now: fix demo!
+//TODO-now: fix crash on verity phone
 
 //TODO-now: put source on github and make it compile on new installs, and add OSS code headings
 
 //TODO-now: reduce package size. Smaller images? Crop test image
 
 //TODO-now: make new icon and screenshots for the play store
-
-//TODO: show all ability details when opening them up
 
 //TODO-prebeta: add tab view so you can see the spells of all the heroes
 
@@ -86,8 +84,6 @@ public class MainActivity extends AppCompatActivity
     public static boolean debugMode = false;
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     public static final String PHOTO_FILE_NAME = "photo.jpg";
-/*    private static int RECOGNITION_ACTIVITY_REQUEST_CODE = 101;
-    public static Bitmap recognitionBitmap = null;*/
 
     static {
         System.loadLibrary("opencv_java3");
@@ -134,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+   // @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -143,8 +139,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.about) {
             startAboutActivity();
         }
-/*        if (id == R.id.debug_specific_hue) {
+/*        } else if (id == R.id.debug_specific_hue) {
             startDebugLineActivity();
+        }*/
+        /*
         } else if (id == R.id.debug_whole_process) {
             startDebugWholeProcessActivity();*/
 
@@ -520,7 +518,7 @@ public class MainActivity extends AppCompatActivity
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
             //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
-            float finalWidth = dpToPx(56);
+            float finalWidth = dpToPx(60);
 //            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
 
 //            int finalMargin = otherFab.getLayoutParams().
@@ -529,7 +527,8 @@ public class MainActivity extends AppCompatActivity
             float farRight = coordinatorLayout.getRight();
             float startX = fab.getX();
 
-            float marginPx = dpToPx(getResources().getDimension(R.dimen.fab_margin));
+//            float marginPx = dpToPx(getResources().getDimension(R.dimen.fab_margin));
+            float marginPx = dpToPx(16);
 
 
             float endX = coordinatorLayout.getWidth() - (currentWidth + finalWidth + marginPx) / 2f;
@@ -545,28 +544,6 @@ public class MainActivity extends AppCompatActivity
             animatorSet.setDuration(300);
             animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
             animatorSet.start();
-/*
-            animatorSet.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    showResult(heroes);
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });*/
         }
 
         //TODO-prebeta: I don't trust the dpToPx function, test it on other screen sizes
