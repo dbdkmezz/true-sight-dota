@@ -27,8 +27,10 @@ public class Variables {
     public static final List<Integer> sRange = Arrays.asList(15, 255); //50, 255
     public static final List<Integer> vRange = Arrays.asList(34, 255);
 
+    //WARNING! DO NOT CHANGE THESE VARIABLES. WILL HAVE TO CHANGE @dimen/camera_letterbox_cover_height for all sizes too!
     public static final int SCALED_IMAGE_WIDTH = 800;
     public static final int SCALED_IMAGE_HEIGHT = 170;
+    //WARNING! DO NOT CHANGE THESE VARIABLES. WILL HAVE TO CHANGE @dimen/camera_letterbox_cover_height for all sizes too!
 
 
     static final public List<Pair<Integer, String>> abilityDrawables;

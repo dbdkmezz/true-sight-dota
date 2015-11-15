@@ -9,37 +9,33 @@
     <RelativeLayout
         android:id="@+id/camera_preview_parent"
         android:layout_width="@dimen/camera_preview_width"
-        android:layout_height="@dimen/camera_preview_height">
+        android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/camera_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Position the 5 enemy hero portraits to fill the box below. Ensure the rectangles above them are visible."
+                android:textColor="#ffffff"
+                android:textSize="@dimen/large_text"/>
 
         <FrameLayout
             android:id="@+id/camera_preview"
-            android:layout_width="fill_parent"
+            android:layout_width="@dimen/camera_preview_width"
+            android:layout_height="@dimen/camera_preview_height"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/camera_text"/>
+
+        <!--This text view is here to make everything line up nicely. It's invisible :)-->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"/>
-
-        <FrameLayout
-            android:id="@+id/above_camera_preview_letterbox"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/camera_letterbox_cover_height"
-            android:background="#00FF00"
-            android:layout_alignParentTop="true">
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:text="Position the 5 enemy hero portraits so that they fill the box below."
-                android:textColor="#ffffff"
-                android:textSize="@dimen/large_text"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/below_camera_preview_letterbox"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/camera_letterbox_cover_height"
-            android:background="#FF0000"
-            android:layout_alignParentBottom="true" />
+            android:gravity="center_horizontal"
+            android:text="Position the 5 enemy hero portraits to fill the box below. Ensure the rectangles above them are visible."
+            android:textColor="#00000000"
+            android:textSize="@dimen/large_text"
+            android:layout_below="@id/camera_preview"/>
 
     </RelativeLayout>
 
