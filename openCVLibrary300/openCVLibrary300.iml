@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":openCVLibrary300" external.linked.project.path="/home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="DOTAVision" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":openCVLibrary300" />
+      </configuration>
+    </facet>
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugAndroidTest" />
+        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileDebugAndroidTestSources" />
+        <afterSyncTasks>
+          <task>generateDebugAndroidTestSources</task>
+          <task>generateDebugSources</task>
+        </afterSyncTasks>
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
+        <option name="LIBRARY_PROJECT" value="true" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+    <output url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/classes/debug" />
+    <output-test url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/classes/androidTest/debug" />
+    <exclude-output />
+    <content url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300">
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/r/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/aidl/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/rs/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/res/rs/debug" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/res/resValues/debug" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/r/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/buildConfig/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/debug/res" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/debug/resources" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/debug/assets" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/debug/aidl" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/debug/java" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/debug/jni" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/debug/rs" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/res" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/resources" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/assets" type="java-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/aidl" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/java" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/jni" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/main/rs" isTestSource="false" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/androidTest/res" type="java-test-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/androidTest/resources" type="java-test-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/androidTest/assets" type="java-test-resource" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/androidTest/aidl" isTestSource="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/androidTest/java" isTestSource="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/androidTest/jni" isTestSource="true" />
+      <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/src/androidTest/rs" isTestSource="true" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/assets" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/bundles" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/classes" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/coverage-instrumented-classes" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/dependency-cache" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/dex" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/dex-cache" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/incremental" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/jacoco" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/javaResources" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/libs" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/lint" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/manifests" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/ndk" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/pre-dexed" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/proguard" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/res" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/rs" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/intermediates/symbols" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/outputs" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/DOTAVision/openCVLibrary300/build/tmp" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
