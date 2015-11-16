@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--    need to leave space for the navigation bar, the width is always 48 (unfortunately you can't access it in code!)-->
-    <dimen name="camera_preview_width">362dp</dimen>
-    <dimen name="camera_preview_height">77dp</dimen>
-    <dimen name="camera_buttons_width">60dp</dimen>
-</resources>

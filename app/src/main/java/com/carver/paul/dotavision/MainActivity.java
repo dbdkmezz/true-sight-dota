@@ -51,6 +51,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//TODO-now: make sure all the res files are on git, I don't think they are!
+
 //TODO: fix bug where preview moving when processing
 
 //TODO-beauty: remove unecessary depedencies
@@ -409,24 +411,31 @@ public class MainActivity extends AppCompatActivity
             // Stop the camera button pulsing by making it finish the current animation and then run the code in onAnimationEnd
             ImageView imageview = (ImageView) findViewById(R.id.cameraFab);
             Animation animation = imageview.getAnimation();
-            animation.setRepeatCount(0);
-            animation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
+            if(animation == null) {
+                // I don't understand how this happens, but it does
+                //TODO: fix null animation issue
+                moveCameraFabToBottomRight();
+                showResult(heroes);
+            } else {
+                animation.setRepeatCount(0);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
 
-                }
+                    }
 
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    moveCameraFabToBottomRight();
-                    showResult(heroes);
-                }
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        moveCameraFabToBottomRight();
+                        showResult(heroes);
+                    }
 
-                @Override
-                public void onAnimationRepeat(Animation animation) {
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
 
-                }
-            });
+                    }
+                });
+            }
         }
 
         private void showResult(final List<HeroRect> heroes) {
@@ -500,11 +509,13 @@ public class MainActivity extends AppCompatActivity
 
             //TODO-prebeta: add "no silences found" text when none found
             AddAbilityHeading("Stuns");
-            AddAbilityCards(heroesSeen, HeroAbility.STUN);
+            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
             AddAbilityHeading("Silences");
-            AddAbilityCards(heroesSeen, HeroAbility.SILENCE);
+            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
             AddAbilityHeading("Ultimates");
-            AddAbilityCards(heroesSeen, HeroAbility.ULTIMATE);
+            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.ULTIMATE);
+
+            AddAbilityCardsForAllHeroAbilities(heroesSeen);
 
             LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
@@ -566,7 +577,9 @@ public class MainActivity extends AppCompatActivity
             histTest = new HistTest(context);
         }
 
+        //TODO-beauty: move the add abilty cards and add ability heading code elsewhere, also rename the functions!
         private void AddAbilityHeading(String string) {
+            if(string == null) return;
             LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
             LayoutInflater inflater = getLayoutInflater();
             View v = inflater.inflate(R.layout.heading_item, parent, false);
@@ -575,7 +588,13 @@ public class MainActivity extends AppCompatActivity
             parent.addView(v);
         }
 
-        private boolean AddAbilityCards(List<HeroWithHist> heroes, int abilityType) {
+        /**
+         * Adds ability cards for these heroes which are of the specified abilityType
+         * @param heroes
+         * @param abilityType
+         * @return returns true if any cards have been added
+         */
+        private boolean AddAbilityCardsForHeroesList(List<HeroWithHist> heroes, int abilityType) {
             List<HeroAbility> abilities = new ArrayList<>();
             for (HeroWithHist hero : heroes) {
                 for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
@@ -588,6 +607,14 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
+            return AddAbilityCards(abilities, abilityType);
+        }
+
+        private boolean AddAbilityCards(List<HeroAbility> abilities) {
+            return AddAbilityCards(abilities, -1);
+        }
+
+      private boolean AddAbilityCards(List<HeroAbility> abilities, int abilityType) {
             LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
             boolean cardsAdded = false;
 
@@ -598,6 +625,14 @@ public class MainActivity extends AppCompatActivity
             }
 
             return cardsAdded;
+        }
+
+        private void AddAbilityCardsForAllHeroAbilities(List<HeroWithHist> heroes) {
+            for(HeroWithHist heroWithHist : heroes) {
+                HeroInfo hero = FindHeroWithName(heroWithHist.name);
+                AddAbilityHeading(hero.name);
+                AddAbilityCards(hero.abilities);
+            }
         }
 
         private void ResetTextViews(List<Integer> ids) {

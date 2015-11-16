@@ -3,8 +3,6 @@ package com.carver.paul.dotavision.DotaCamera;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.MainActivity;
@@ -40,6 +39,7 @@ public class CameraActivity extends Activity {
 
     private final ScheduledExecutorService mScheduledExecutorService =
             Executors.newScheduledThreadPool(1);
+    private CameraOpeningTask cameraOpeningTask = null;
 
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
 
@@ -145,9 +145,15 @@ public class CameraActivity extends Activity {
         super.onResume();
         setContentView(R.layout.activity_camera);
 
+        //TODO: ensure I'm using the camera opening task correctly
         // Setup the camera
         if (mCamera == null) {
-            new CameraOpeningTask(this).execute();
+            if(cameraOpeningTask != null) {
+            //    throw new RuntimeException("I don't understand something, I don't think this can happen.");
+                cameraOpeningTask.cancel(true);
+            }
+            cameraOpeningTask = new CameraOpeningTask(this);
+            cameraOpeningTask.execute();
         }
 
         showCaptureButton();
@@ -156,6 +162,10 @@ public class CameraActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        mScheduledExecutorService.shutdown();
+        //TODO: check that when I cancel the camerOpeningTask I want to stop it even if it's running
+        cameraOpeningTask.cancel(true);
+        cameraOpeningTask = null;
         releaseCamera();              // release the mCamera immediately on pause event
     }
 
@@ -166,23 +176,7 @@ public class CameraActivity extends Activity {
         }
     }
 
-    /**
-     * Check if this device has a mCamera
-     * Shouldn't be needed because my AndroidManifest requires a mCamera
-     */
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            // this device has a mCamera
-            return true;
-        } else {
-            // no mCamera on this device
-            throw new RuntimeException("This device doesn't have a mCamera");
-            //return false;
-        }
-    }
-
     private class CameraOpeningTask extends AsyncTask<Void, Void, Camera> {
-
         private Context context;
 
         public CameraOpeningTask(Context context) {
@@ -202,6 +196,7 @@ public class CameraActivity extends Activity {
             mPreview = new CameraPreview(context, mCamera);
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
+            setupPreviewLetterbox();
 
             // THIS CODE WAS SO DODGY. GONE!
             // need to delay setting up the letterbox, because right now the camera hasn't been drawn, so we can't find out its width
@@ -306,6 +301,54 @@ public class CameraActivity extends Activity {
             return result;
         }
 
+        /**
+         * This covers up the top and bottom of the camera preview in order to ensure that what's visible is
+         * what will be used in the app and is of the ratio Variables.SCALED_IMAGE_WIDTH : Variables.SCALED_IMAGE_HEIGHT
+         */
+        private void setupPreviewLetterbox() {
+            if(mCamera == null) {
+                Log.d(TAG, "Not settingup preview letterbox because camera is null. I don't think that should ever happen!");
+                return;
+            }
+
+            Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
+            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+            RelativeLayout parent = (RelativeLayout) findViewById(R.id.camera_preview_parent);
+            int totalPhotoHeight = parent.getWidth() * cameraSize.height / cameraSize.width;
+
+            ViewGroup.LayoutParams previewParams = preview.getLayoutParams();
+            ViewGroup.LayoutParams parentParams = parent.getLayoutParams();
+
+            previewParams.width = parent.getWidth();
+            previewParams.height = totalPhotoHeight;
+            preview.setLayoutParams(previewParams);
+
+            parentParams.height = totalPhotoHeight;
+            parent.setLayoutParams(parentParams);
+/*
+            previewParent.setLayoutParams(parentParams);
+*/
+/*            preview.setMinimumHeight(totalPhotoHeight);
+            previewParent.setMinimumHeight(totalPhotoHeight);*/
+
+            int targetVisiblePhotoHeight = preview.getWidth() * Variables.SCALED_IMAGE_HEIGHT / Variables.SCALED_IMAGE_WIDTH;
+            int heightOfEachLetterBoxCover = (totalPhotoHeight - targetVisiblePhotoHeight) / 2;
+
+            View aboveLetterbox = findViewById(R.id.above_camera_preview_letterbox);
+            View belowLetterbox = findViewById(R.id.below_camera_preview_letterbox);
+
+            ViewGroup.LayoutParams aboveLetterboxParams = aboveLetterbox.getLayoutParams();
+            aboveLetterboxParams.height = heightOfEachLetterBoxCover;
+            aboveLetterbox.setLayoutParams(aboveLetterboxParams);
+
+            ViewGroup.LayoutParams belowLetterboxParams = belowLetterbox.getLayoutParams();
+            belowLetterboxParams.height = heightOfEachLetterBoxCover;
+            belowLetterbox.setLayoutParams(belowLetterboxParams);
+
+/*            aboveLetterbox.setMinimumHeight(heightOfEachLetterBoxCover);
+            belowLetterbox.setMinimumHeight(heightOfEachLetterBoxCover);*/
+        }
+
         //Removed, calling this code from a ScheduledExecutorService caused horrible things to happen
 /*
         private void setupPreviewLetterbox() {
@@ -356,8 +399,8 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.setPreviewDisplay(holder);
 
             // No idea why, but if this is not run then I don't get the bottom edge of the letterbox!
-            ViewGroup.LayoutParams layoutParams = getLayoutParams();
-            setLayoutParams(layoutParams);
+/*            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            setLayoutParams(layoutParams);*/
 
 /*            Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
