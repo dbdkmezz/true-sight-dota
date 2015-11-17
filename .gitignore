@@ -1,3 +1,5 @@
+#ignore
+
 .gradle
 /local.properties
 /.idea/workspace.xml
@@ -6,4 +8,8 @@
 /build
 /captures
 /app/src/main/jniLibs/*
+/openCVLibrary/build
 *apk
+
+# don't ignore
+!libopencv_java3.so
