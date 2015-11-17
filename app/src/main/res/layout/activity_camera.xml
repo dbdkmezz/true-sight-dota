@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- TODO: find a way to not have to use a camera_preview_width dimen and just make the preview fill the remaining space. -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="#000000"
     android:gravity="center">
 
-<!--
-    android:layout_width="@dimen/camera_preview_width"
--->
     <RelativeLayout
         android:id="@+id/camera_preview_parent"
         android:layout_width="@dimen/camera_preview_width"
@@ -29,8 +29,8 @@
             android:layout_alignParentTop="true">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/camera_help_text"
                 android:textColor="#ffffff"/>
@@ -60,7 +60,7 @@
             android:layout_height="@dimen/camera_buttons_width"
             android:onClick="capturePhoto"
             android:src="@android:drawable/ic_menu_camera"
-            android:background="#00000000"
+            android:background="#000000"
             android:layout_gravity="center_horizontal"/>
 
         <ImageButton
@@ -69,7 +69,7 @@
             android:layout_height="@dimen/camera_buttons_width"
             android:onClick="confirmPhoto"
             android:src="@android:drawable/ic_media_play"
-            android:background="#00000000"
+            android:background="#000000"
             android:layout_gravity="center_horizontal"
             android:visibility="gone" />
 
@@ -79,7 +79,7 @@
             android:layout_height="@dimen/camera_buttons_width"
             android:onClick="takePhotoAgain"
             android:src="@android:drawable/ic_menu_revert"
-            android:background="#00000000"
+            android:background="#000000"
             android:layout_gravity="center_horizontal"
             android:visibility="gone" />
     </LinearLayout>

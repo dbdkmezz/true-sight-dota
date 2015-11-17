@@ -1,6 +1,6 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
-import android.content.Context;
+import com.carver.paul.dotavision.MainActivity;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -8,21 +8,6 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import com.carver.paul.dotavision.ImageRecognition.Variables;
-
-import org.opencv.core.*;
-import org.opencv.core.Point;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import com.carver.paul.dotavision.ImageRecognition.HistTest;
-
-import com.carver.paul.dotavision.ImageRecognition.ImageTools;
-import com.carver.paul.dotavision.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Iterator;

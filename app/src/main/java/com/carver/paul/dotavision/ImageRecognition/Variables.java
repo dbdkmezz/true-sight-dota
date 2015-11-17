@@ -4,7 +4,6 @@ import android.util.Pair;
 
 import com.carver.paul.dotavision.R;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -23,8 +23,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
@@ -45,17 +45,12 @@ import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//TODO-now: make sure all the res files are on git, I don't think they are!
-
 //TODO: fix bug where preview moving when processing
-
-//TODO-beauty: remove unecessary depedencies
 
 //TODO-now: more photo text
 

@@ -1,30 +1,20 @@
 package com.carver.paul.dotavision.DebugActivities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.carver.paul.dotavision.ImageRecognition.Debug.DebugLineDetection;
-import com.carver.paul.dotavision.ImageRecognition.Recognition;
 import com.carver.paul.dotavision.MainActivity;
 import com.carver.paul.dotavision.R;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class DebugLineDetectionActivity extends AppCompatActivity {
 

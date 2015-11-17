@@ -3,18 +3,14 @@ package com.carver.paul.dotavision;
 import android.animation.LayoutTransition;
 import android.content.Context;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.carver.paul.dotavision.ImageRecognition.HeroWithHist;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class AbilityCard extends FrameLayout {

@@ -7,20 +7,12 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
-import org.opencv.core.Size;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.List;
-
-import org.opencv.core.*;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 
 import static org.opencv.android.Utils.bitmapToMat;
 import static org.opencv.android.Utils.matToBitmap;
-
-import java.util.List;
 
 public class ImageTools {
     public static void MaskAColourFromImage(Mat image, Scalar lowerHsv, Scalar upperHsv, Mat mask) {

@@ -1,24 +1,12 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-import android.widget.ImageView;
 
 import com.carver.paul.dotavision.MainActivity;
-import com.carver.paul.dotavision.R;
 
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 
-import java.io.File;
 import java.util.List;
-
-import static org.opencv.android.Utils.bitmapToMat;
-import static org.opencv.android.Utils.matToBitmap;
 
 //TODO-prebeta: Implement arcana hero images too
 //TODO-beauty: repackage ImageRecgonition so that there's only one public class?

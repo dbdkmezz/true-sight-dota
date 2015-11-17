@@ -1,22 +1,15 @@
 package com.carver.paul.dotavision.ImageRecognition.Debug;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 import com.carver.paul.dotavision.ImageRecognition.HeroRect;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
-import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.opencv.android.Utils.bitmapToMat;
-import static org.opencv.android.Utils.matToBitmap;
 
 /**
  * Created by paul on 25/10/15.

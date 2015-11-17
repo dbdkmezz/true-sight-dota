@@ -3,13 +3,8 @@ package com.carver.paul.dotavision.ImageRecognition;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-
-import static org.opencv.android.Utils.bitmapToMat;
 
 /**
  * Created by paul on 25/10/15.
