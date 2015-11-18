@@ -30,7 +30,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,12 +37,12 @@ import android.widget.TextView;
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
 import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
-import com.carver.paul.dotavision.ImageRecognition.HeroHistAndSimilarity;
-import com.carver.paul.dotavision.ImageRecognition.HeroRect;
-import com.carver.paul.dotavision.ImageRecognition.HeroWithHist;
-import com.carver.paul.dotavision.ImageRecognition.HistTest;
+import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
+import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
+import com.carver.paul.dotavision.ImageRecognition.LoadedHeroImage;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
+import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import java.io.File;
@@ -55,15 +54,11 @@ import java.util.List;
 
 //TODO-prebeta: test much more for crashes, there is something wrong somewhere. The camera threading??
 
-//TODO-now: put source on github and make it compile on new installs, and add OSS code headings
-
-//TODO-now: reduce package size. Smaller images? Crop test image
+//TODO-prebeta: reduce package size. Smaller images? Crop test image
 
 //TODO: make the heroes info separated somehow. Just a dividing line for now? It's a mess
 
 //TODO-prebeta: add tab view so you can slide to change hero rather them all being piled up in one place
-
-//TODO-beauty: tidy up layout files
 
 //TODO-prebeta: find out whether it's ok to have Valve's images on github
 
@@ -106,13 +101,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        setupTakePhotoFab();
     }
 
 /*
@@ -199,25 +187,6 @@ public class MainActivity extends AppCompatActivity
         if (newHeight > Variables.SCALED_IMAGE_HEIGHT)
             bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, Variables.SCALED_IMAGE_WIDTH, newHeight / 3);
         return bitmap;
-    }
-
-    /**
-     * This puts the take photo fab into the middle of the screen and makes it big.
-     *
-     * I do that with a function rather than putting it there to start with to make the animation
-     * to the bottom right more straightforward. The bottom right is the button's normal home, but
-     * I want to start with the fab in the middle to draw attention to it.
-     */
-    private void setupTakePhotoFab() {
-        FrameLayout largePosition = (FrameLayout) findViewById(R.id.layout_take_photo_large_position);
-        ViewGroup.LayoutParams params = largePosition.getLayoutParams();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
-        fab.setTranslationX(largePosition.getX() - fab.getX());
-        fab.setXDelta
-        fab.setY(largePosition.getY());
-        fab.setMinimumWidth(largePosition.getWidth());
-        fab.setMinimumHeight(largePosition.getHeight());
- //       fab.setLayoutParams(params);
     }
 
     // TODO-beauty: Change permissions so it uses the Android 6 way, then can increase target API
@@ -314,11 +283,13 @@ public class MainActivity extends AppCompatActivity
         return mediaFile;
     }*/
 
-    //TODO-prebeta: make it so RecognitionTask gets passed heroInfoList and histTest by MainActivity so I don't have to load them every time.
-    private class RecognitionTask extends AsyncTask<Bitmap, Void, List<HeroRect>> {
+    //TODO-prebeta: make it so RecognitionTask gets passed heroInfoList and similarityTest by MainActivity so I don't have to load them every time.
+    private class RecognitionTask extends AsyncTask<Bitmap, Void, List<HeroFromPhoto>> {
+
+        static final String TAG = "RecognitionTask";
 
         private List<HeroInfo> heroInfoList = null;
-        private HistTest histTest = null;
+        private SimilarityTest similarityTest = null;
         private Context context;
 
         public RecognitionTask(Context context) {
@@ -358,7 +329,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         /**
-         * Makes the camera FAB pulse infinitely (will be stopped when loading complete)
+         * Makes the camera FAB pulse infinitely (will be stopped when loading completes)
          */
         private void pulseCameraFab() {
             //Code using the old Animation class, rather than the new ViewPropertyAnimator
@@ -424,23 +395,27 @@ public class MainActivity extends AppCompatActivity
         }
 
         // This is where the hard work happens which needs to be off the UI thread
-        protected List<HeroRect> doInBackground(Bitmap... bitmaps) {
+        protected List<HeroFromPhoto> doInBackground(Bitmap... bitmaps) {
             if (heroInfoList == null)
                 LoadXML();
-            if (histTest == null)
+            if (similarityTest == null)
                 loadHistTest();
 
-            return Recognition.Run(bitmaps[0], histTest);
+            // do the hard work of the image recognition
+            return Recognition.Run(bitmaps[0], similarityTest);
         }
 
         // work to do in the UI thread after the hard work
-        protected void onPostExecute(final List<HeroRect> heroes) {
+        protected void onPostExecute(final List<HeroFromPhoto> heroes) {
             // Stop the camera button pulsing by making it finish the current animation and then run the code in onAnimationEnd
             ImageView imageview = (ImageView) findViewById(R.id.button_fab_take_photo);
             Animation animation = imageview.getAnimation();
             if(animation == null) {
                 // I don't understand how this happens, but it does
                 //TODO: fix null animation issue
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
+                }
                 moveCameraFabToBottomRight();
                 showResult(heroes);
             } else {
@@ -465,14 +440,14 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        private void showResult(final List<HeroRect> heroes) {
+        private void showResult(final List<HeroFromPhoto> heroes) {
 
             //TODO-beauty: tidy up all the UI code that's run after image recognition
 
             if (sDebugMode) {
                 TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
                 imageDebugText.setVisibility(View.VISIBLE);
-                imageDebugText.setText(Recognition.debugString);
+                imageDebugText.setText(Recognition.mDebugString);
             }
 
             DisplayMetrics metrics = new DisplayMetrics();
@@ -481,7 +456,7 @@ public class MainActivity extends AppCompatActivity
 
             LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
 
-            for (HeroRect hero : heroes) {
+            for (HeroFromPhoto hero : heroes) {
                 LinearLayout thisPictureLayout = new LinearLayout(context);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.gravity = Gravity.CENTER;
@@ -513,7 +488,7 @@ public class MainActivity extends AppCompatActivity
 
                 ImageView imageViewOriginal = new ImageView(context);
                 // imageViewOriginal.setPadding(0, 0, 0, 0);
-                HeroHistAndSimilarity matchingHero = hero.getSimilarityList().get(0);
+                HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
                 Bitmap bitmapOriginal = ImageTools.GetBitmapFromMat(matchingHero.hero.image);
                 height = heroIconWidth * bitmapOriginal.getHeight() / bitmapOriginal.getWidth();
                 bitmapOriginal = Bitmap.createScaledBitmap(bitmapOriginal, heroIconWidth, height, true);
@@ -527,10 +502,10 @@ public class MainActivity extends AppCompatActivity
 
             //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
 
-            List<HeroWithHist> heroesSeen = new ArrayList<>();
-            for (HeroRect heroRect : heroes) {
-                if (!heroesSeen.contains(heroRect.getSimilarityList().get(0).hero)) {
-                    heroesSeen.add(heroRect.getSimilarityList().get(0).hero);
+            List<LoadedHeroImage> heroesSeen = new ArrayList<>();
+            for (HeroFromPhoto heroFromPhoto : heroes) {
+                if (!heroesSeen.contains(heroFromPhoto.getSimilarityList().get(0).hero)) {
+                    heroesSeen.add(heroFromPhoto.getSimilarityList().get(0).hero);
                 }
             }
 
@@ -552,14 +527,10 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void moveCameraFabToBottomRight() {
+            //TODO-beauty: completely change how I move the take photo fab to the bottom right, current solution is UGLY
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
-            fab.animate().
-                    scaleX(1).
-                    scaleY(1).
-                    translationX(0).
-                    translationY(0);
 
-/*            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
+            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
             //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
             float finalWidth = dpToPx(64);
 //            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
@@ -586,7 +557,7 @@ public class MainActivity extends AppCompatActivity
             //animatorSet.play(x);
             animatorSet.setDuration(300);
             animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-            animatorSet.start();*/
+            animatorSet.start();
         }
 
         //TODO-prebeta: I don't trust the dpToPx function, test it on other screen sizes
@@ -606,7 +577,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void loadHistTest() {
-            histTest = new HistTest(context);
+            similarityTest = new SimilarityTest(context);
         }
 
         //TODO-beauty: move the add abilty cards and add ability heading code elsewhere, also rename the functions!
@@ -626,9 +597,9 @@ public class MainActivity extends AppCompatActivity
          * @param abilityType
          * @return returns true if any cards have been added
          */
-        private boolean AddAbilityCardsForHeroesList(List<HeroWithHist> heroes, int abilityType) {
+        private boolean AddAbilityCardsForHeroesList(List<LoadedHeroImage> heroes, int abilityType) {
             List<HeroAbility> abilities = new ArrayList<>();
-            for (HeroWithHist hero : heroes) {
+            for (LoadedHeroImage hero : heroes) {
                 for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
                     if(abilityType == HeroAbility.STUN && ability.isStun)
                         abilities.add(ability);
@@ -659,9 +630,9 @@ public class MainActivity extends AppCompatActivity
             return cardsAdded;
         }
 
-        private void AddAbilityCardsForAllHeroAbilities(List<HeroWithHist> heroes) {
-            for(HeroWithHist heroWithHist : heroes) {
-                HeroInfo hero = FindHeroWithName(heroWithHist.name);
+        private void AddAbilityCardsForAllHeroAbilities(List<LoadedHeroImage> heroes) {
+            for(LoadedHeroImage loadedHeroImage : heroes) {
+                HeroInfo hero = FindHeroWithName(loadedHeroImage.name);
                 AddAbilityHeading(hero.name);
                 AddAbilityCards(hero.abilities);
             }
@@ -675,11 +646,11 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        private void showSimilarityInfo(List<HeroHistAndSimilarity> similarityList) {
+        private void showSimilarityInfo(List<HeroAndSimilarity> similarityList) {
             TextView infoText = (TextView) findViewById(R.id.text_similarity_info);
             infoText.setText("");
             infoText.setVisibility(View.VISIBLE);
-            HeroHistAndSimilarity matchingHero = similarityList.get(0);
+            HeroAndSimilarity matchingHero = similarityList.get(0);
 
             infoText.append(matchingHero.hero.name + ", " + matchingHero.similarity);
 
@@ -741,9 +712,9 @@ class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
         return;
     }
 
-    public HeroInfoAdapter(List<HeroWithHist> heroes) {
+    public HeroInfoAdapter(List<LoadedHeroImage> heroes) {
         stunAbilities = new ArrayList<>();
-        for(HeroWithHist hero : heroes) {
+        for(LoadedHeroImage hero : heroes) {
             for (HeroAbility ability : MainActivity.FindHeroWithName(hero.name).abilities) {
                 if (ability.isStun) {
                     stunAbilities.add(ability);

@@ -2,8 +2,9 @@ package com.carver.paul.dotavision.ImageRecognition.Debug;
 
 import android.graphics.Bitmap;
 
-import com.carver.paul.dotavision.ImageRecognition.HeroRect;
+import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
+import com.carver.paul.dotavision.ImageRecognition.Recognition;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
@@ -11,9 +12,6 @@ import org.opencv.core.Scalar;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by paul on 25/10/15.
- */
 public class DebugLineDetection {
     public static Bitmap TestMask(Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) { //, ImageView imageViewLines) {
 
@@ -26,7 +24,7 @@ public class DebugLineDetection {
 
         return ImageTools.GetBitmapFromMat(load, false);
 
-/*        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
+/*        List<Mat> linesList = HeroFromPhoto.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
 
         for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
@@ -42,7 +40,7 @@ public class DebugLineDetection {
 /*    public static Bitmap TestLines(Bitmap bitmap) {
         Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
-        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
+        List<Mat> linesList = HeroFromPhoto.findHeroTopLinesInImage(load, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
 
         for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
@@ -57,7 +55,7 @@ public class DebugLineDetection {
 //        List<Integer> colourRange = Arrays.asList(hMin, hMax);
         List<List<Integer>> colourRanges = Arrays.asList(Arrays.asList(hMin, hMax));
 
-        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load, colourRanges, sMin, vMin, sMax, vMax);
+        List<Mat> linesList = Recognition.findHeroTopLinesInImage(load, colourRanges, sMin, vMin, sMax, vMax);
 
         for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
@@ -70,11 +68,11 @@ public class DebugLineDetection {
         Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
 
-        List<Mat> linesList = HeroRect.findHeroTopLinesInImage(load);
+        List<Mat> linesList = Recognition.findHeroTopLinesInImage(load);
 /*        for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
         }*/
-        List<HeroRect> heroes = HeroRect.CalculateHeroRects(linesList, load);
+        List<HeroFromPhoto> heroes = Recognition.CalculateHeroRects(linesList, load);
 
 
         return ImageTools.GetBitmapFromMat(load);

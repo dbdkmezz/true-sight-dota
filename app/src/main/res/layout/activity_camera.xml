@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- TODO: find a way to not have to use a camera_preview_width dimen and just make the preview fill the remaining space. -->
+<!-- TODO-prebeta: find a way to not have to use a camera_preview_width dimen and just make the preview fill the remaining space. -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
