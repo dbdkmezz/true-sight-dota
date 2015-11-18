@@ -30,6 +30,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -105,6 +106,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setupTakePhotoFab();
     }
 
 /*
@@ -191,6 +199,25 @@ public class MainActivity extends AppCompatActivity
         if (newHeight > Variables.SCALED_IMAGE_HEIGHT)
             bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, Variables.SCALED_IMAGE_WIDTH, newHeight / 3);
         return bitmap;
+    }
+
+    /**
+     * This puts the take photo fab into the middle of the screen and makes it big.
+     *
+     * I do that with a function rather than putting it there to start with to make the animation
+     * to the bottom right more straightforward. The bottom right is the button's normal home, but
+     * I want to start with the fab in the middle to draw attention to it.
+     */
+    private void setupTakePhotoFab() {
+        FrameLayout largePosition = (FrameLayout) findViewById(R.id.layout_take_photo_large_position);
+        ViewGroup.LayoutParams params = largePosition.getLayoutParams();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
+        fab.setTranslationX(largePosition.getX() - fab.getX());
+        fab.setXDelta
+        fab.setY(largePosition.getY());
+        fab.setMinimumWidth(largePosition.getWidth());
+        fab.setMinimumHeight(largePosition.getHeight());
+ //       fab.setLayoutParams(params);
     }
 
     // TODO-beauty: Change permissions so it uses the Android 6 way, then can increase target API
@@ -336,7 +363,7 @@ public class MainActivity extends AppCompatActivity
         private void pulseCameraFab() {
             //Code using the old Animation class, rather than the new ViewPropertyAnimator
             //Infinite repeat is easier to implement this way
-            View view = findViewById(R.id.cameraFab);
+            View view = findViewById(R.id.button_fab_take_photo);
             moveViewBackToStartingPosAndScale(view);
 
             ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -409,7 +436,7 @@ public class MainActivity extends AppCompatActivity
         // work to do in the UI thread after the hard work
         protected void onPostExecute(final List<HeroRect> heroes) {
             // Stop the camera button pulsing by making it finish the current animation and then run the code in onAnimationEnd
-            ImageView imageview = (ImageView) findViewById(R.id.cameraFab);
+            ImageView imageview = (ImageView) findViewById(R.id.button_fab_take_photo);
             Animation animation = imageview.getAnimation();
             if(animation == null) {
                 // I don't understand how this happens, but it does
@@ -525,9 +552,14 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void moveCameraFabToBottomRight() {
-            //TODO-beauty: seriously, sort out the camera fab button animation code. It's a mess and goes to the wrong place! Ideally put the animation into an XML
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
+            fab.animate().
+                    scaleX(1).
+                    scaleY(1).
+                    translationX(0).
+                    translationY(0);
+
+/*            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
             //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
             float finalWidth = dpToPx(64);
 //            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
@@ -554,7 +586,7 @@ public class MainActivity extends AppCompatActivity
             //animatorSet.play(x);
             animatorSet.setDuration(300);
             animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-            animatorSet.start();
+            animatorSet.start();*/
         }
 
         //TODO-prebeta: I don't trust the dpToPx function, test it on other screen sizes

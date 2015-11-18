@@ -31,11 +31,18 @@
 
         <include layout="@layout/content_main" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/cameraFab"
+        <FrameLayout
+            android:id="@+id/layout_take_photo_large_position"
             android:layout_width="@dimen/big_photo_fab_size"
             android:layout_height="@dimen/big_photo_fab_size"
-            android:layout_gravity="center"
+            android:layout_gravity="center">
+        </FrameLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_fab_take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:layout_margin="@dimen/fab_margin"
             android:onClick="takePhoto"
             android:src="@android:drawable/ic_menu_camera" />
