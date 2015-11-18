@@ -148,10 +148,14 @@ public class CameraActivity extends Activity {
         setContentView(R.layout.activity_camera);
 
         //TODO: ensure I'm using the camera opening task correctly
+
+
+
         // Setup the camera
         if (mCamera == null) {
             if(cameraOpeningTask != null) {
-            //    throw new RuntimeException("I don't understand something, I don't think this can happen.");
+                Log.w(TAG, "Running onResume, but ther cameraOpeningTask is already running. " +
+                        "I don't think this can happen, so I must have missed soemthing!");
                 cameraOpeningTask.cancel(true);
             }
             cameraOpeningTask = new CameraOpeningTask(this);

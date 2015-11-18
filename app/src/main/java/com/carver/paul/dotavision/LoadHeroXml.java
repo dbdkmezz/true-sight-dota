@@ -34,9 +34,9 @@ public class LoadHeroXml {
             }
 
         } catch (XmlPullParserException e) {
-            System.err.println("XmlPullParserException: " + e.getMessage());
+            Log.e(TAG, "XmlPullParserException: " + e.getMessage());
         } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
+            Log.e(TAG, "IOException: " + e.getMessage());
         }
 
         Log.d(TAG, "Loaded " + heroInfoList.size() + " heroes.");

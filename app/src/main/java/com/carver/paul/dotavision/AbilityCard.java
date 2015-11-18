@@ -44,7 +44,7 @@ class AbilityCard extends FrameLayout {
         transition.setDuration(300);
         setLayoutTransition(transition);
 
-        inflate(getContext(), R.layout.stun_info_item, this);
+        inflate(getContext(), R.layout.item_ability_info, this);
 
         imageView = (ImageView) findViewById(R.id.imageView);
         int drawable = ImageTools.GetDrawableFromString(ability.imageName);

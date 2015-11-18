@@ -64,6 +64,10 @@ import java.util.List;
 
 //TODO-beauty: tidy up layout files
 
+//TODO-prebeta: find out whether it's ok to have Valve's images on github
+
+//TODO-prebeta: make screenshots in the Google Play Store higher defintion
+
 //TODO-prebeta: test all spells, e.g. do the stun summaries show the right information? Also, some of the ultimates aren't ultimates!
 
 //TODO-someday: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
@@ -573,7 +577,7 @@ public class MainActivity extends AppCompatActivity
             if(string == null) return;
             LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
             LayoutInflater inflater = getLayoutInflater();
-            View v = inflater.inflate(R.layout.heading_item, parent, false);
+            View v = inflater.inflate(R.layout.item_abilty_info_heading, parent, false);
             TextView textView = (TextView) v.findViewById(R.id.textView);
             textView.setText(string);
             parent.addView(v);
@@ -716,7 +720,7 @@ class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
     public HeroInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.stun_info_item, parent, false);
+                .inflate(R.layout.item_ability_info, parent, false);
         // google says that here you set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
