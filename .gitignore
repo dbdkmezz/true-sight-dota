@@ -7,7 +7,7 @@
 .DS_Store
 /build
 /captures
-/app/src/main/jniLibs/*
+/app/src/main/jniLibs/
 /openCVLibrary/build
 *apk
 
