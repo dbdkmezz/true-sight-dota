@@ -22,7 +22,7 @@
         android:layout_height="fill_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/layout_photo_and_info"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
@@ -51,14 +51,14 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/topImage"
+                        android:id="@+id/image_top"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter" />
 
                     <TextView
-                        android:id="@+id/imageDebugText"
+                        android:id="@+id/text_image_debug"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -94,7 +94,7 @@
                 android:elevation="4dp">
 
                 <TextView
-                    android:id="@+id/similarityInfoText"
+                    android:id="@+id/text_similarity_info"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -104,7 +104,7 @@
             </FrameLayout>
 
             <LinearLayout
-                android:id="@+id/resultsInfoLayout"
+                android:id="@+id/layout_results_info"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical"/>

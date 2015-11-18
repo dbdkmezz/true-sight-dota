@@ -41,7 +41,7 @@
             android:src="@android:drawable/ic_menu_camera" />
 
         <LinearLayout
-            android:id="@+id/demoAndsLastPhotoButtonsLayout"
+            android:id="@+id/layout_demo_and_last_photo_buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
@@ -50,7 +50,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/demoButton"
+                android:id="@+id/button_demo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
@@ -60,7 +60,7 @@
                 android:onClick="demoButton"/>
 
             <Button
-                android:id="@+id/useLastPhotoButton"
+                android:id="@+id/button_use_last_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_spacing"

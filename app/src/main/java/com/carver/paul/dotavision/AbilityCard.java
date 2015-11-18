@@ -15,18 +15,18 @@ import java.util.List;
 
 class AbilityCard extends FrameLayout {
 
-    private TextView textView;
-    private ImageView imageView;
-    private HeroAbility ability;
-    private int abilityType = -1;
+    private TextView mTextView;
+    private ImageView mImageView;
+    private HeroAbility mAbility;
+    private int mAbilityType = -1;
 
     //bool to say if the card has full info or not (full info is toggled when clicked)
     private boolean isExtended = false;
 
     public AbilityCard(Context context, HeroAbility ability, int abilityType) {
         super(context);
-        this.ability = ability;
-        this.abilityType = abilityType;
+        mAbility = ability;
+        mAbilityType = abilityType;
         init();
     }
 
@@ -46,46 +46,46 @@ class AbilityCard extends FrameLayout {
 
         inflate(getContext(), R.layout.item_ability_info, this);
 
-        imageView = (ImageView) findViewById(R.id.imageView);
-        int drawable = ImageTools.GetDrawableFromString(ability.imageName);
+        mImageView = (ImageView) findViewById(R.id.imageView);
+        int drawable = ImageTools.GetDrawableFromString(mAbility.imageName);
         if (drawable != -1)
-            imageView.setImageResource(drawable);
+            mImageView.setImageResource(drawable);
 
-        textView = (TextView) findViewById(R.id.textView);
+        mTextView = (TextView) findViewById(R.id.textView);
         setupTextView();
     }
 
     private void setupTextView() {
         StringBuilder text = new StringBuilder();
-        text.append("<b>" + ability.heroName + ": " + ability.name + "</b>");
+        text.append("<b>" + mAbility.heroName + ": " + mAbility.name + "</b>");
 
         if(isExtended) {
-            text.append("<br>" + ability.description);
+            text.append("<br>" + mAbility.description);
 
             //TODO-prebeta: on larger phone sizes show the extended ability details in two columns
             List<String> abilityDetailsToShow = new ArrayList<>();
-            abilityDetailsToShow.add(getContext().getString(R.string.cooldown) + ": " + ability.cooldown);
-            abilityDetailsToShow.add(getContext().getString(R.string.mana_cost) + ": " + ability.manaCost);
-            abilityDetailsToShow.addAll(ability.abilityDetails);
+            abilityDetailsToShow.add(getContext().getString(R.string.cooldown) + ": " + mAbility.cooldown);
+            abilityDetailsToShow.add(getContext().getString(R.string.mana_cost) + ": " + mAbility.manaCost);
+            abilityDetailsToShow.addAll(mAbility.abilityDetails);
 
             text.append("<br>");
             for(String detail : abilityDetailsToShow) {
                 text.append("<br>" + detail);
             }
         } else {
-            if (abilityType == HeroAbility.STUN || abilityType == HeroAbility.SILENCE) {
-                String abilityDuration = ability.guessAbilityDuration(abilityType);
+            if (mAbilityType == HeroAbility.STUN || mAbilityType == HeroAbility.SILENCE) {
+                String abilityDuration = mAbility.guessAbilityDuration(mAbilityType);
                 if (abilityDuration != null) {
                     text.append("<br>" + abilityDuration);
                 }
             }
 
-            if (ability.cooldown != null) {
-                text.append("<br>" + getContext().getString(R.string.cooldown) + ": " + ability.cooldown);
+            if (mAbility.cooldown != null) {
+                text.append("<br>" + getContext().getString(R.string.cooldown) + ": " + mAbility.cooldown);
             }
         }
 
-        textView.setText(Html.fromHtml(text.toString()));
+        mTextView.setText(Html.fromHtml(text.toString()));
     }
 
     /**

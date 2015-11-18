@@ -170,7 +170,7 @@ public class HeroRect {
         List<Mat> leftLines = findHeroTopLinesInImage(photo, Variables.leftColoursRanges, lowerHsvS, lowerHsvV, upperHsvS, upperHsvV);
         List<Mat> rightLines = findHeroTopLinesInImage(photo, Variables.rightColoursRanges, lowerHsvS, lowerHsvV, upperHsvS, upperHsvV);
 
-        if (MainActivity.debugMode) {
+        if (MainActivity.sDebugMode) {
             Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") + debugStringForLines(leftLines) + "-" + debugStringForLines(rightLines);
         }
 
@@ -364,11 +364,11 @@ class HeroLine {
             }
         }
 
-        if (MainActivity.debugMode)
+        if (MainActivity.sDebugMode)
             updateDebugStringForGoodLines(heroLines, goodLines, "w/o none or wide lines: ");
 
         if (goodLines.size() < 2) {
-            if (MainActivity.debugMode) {
+            if (MainActivity.sDebugMode) {
                 Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
                         "After removing lines without lines, and overly wide lines I'm only left " + goodLines.size() + " hero lines. So I'm giving up trying to fix them.";
             }
@@ -403,11 +403,11 @@ class HeroLine {
             }
         }
 
-        if (MainActivity.debugMode)
+        if (MainActivity.sDebugMode)
             updateDebugStringForGoodLines(heroLines, goodLines, "w/o tall lines: ");
 
         if (goodLines.size() < 2) {
-            if (MainActivity.debugMode) {
+            if (MainActivity.sDebugMode) {
                 Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
                         "After getting ride of lines which are too tall I'm only left with " + goodLines.size() +
                         " hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
@@ -428,11 +428,11 @@ class HeroLine {
             }
         }
 
-        if (MainActivity.debugMode)
+        if (MainActivity.sDebugMode)
             updateDebugStringForGoodLines(heroLines, goodLines, "w/o wide lines: ");
 
         if (goodLines.size() < 2) {
-            if (MainActivity.debugMode) {
+            if (MainActivity.sDebugMode) {
                 Recognition.debugString = Recognition.debugString + System.getProperty("line.separator") +
                         "After getting ride of lines which are too wide I'm not left with enough good hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
             }

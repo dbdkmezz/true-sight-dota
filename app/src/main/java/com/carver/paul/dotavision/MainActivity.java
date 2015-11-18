@@ -78,14 +78,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static boolean debugMode = false;
+    public static boolean sDebugMode = false;
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     public static final String PHOTO_FILE_NAME = "photo.jpg";
 
     static {
         System.loadLibrary("opencv_java3");
     }
-    //private Uri fileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +114,6 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setAdapter(null);
     }
 */
-
 
     @Override
     public void onBackPressed() {
@@ -181,24 +179,6 @@ public class MainActivity extends AppCompatActivity
         doImageRecognitionOnPhoto();
     }
 
-    private void doImageRecognitionOnPhoto() {
-        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
-        if (!mediaFile.exists()) {
-            throw new RuntimeException("Trying to recognise photo, but I can't find file at " + getImagesLocation() + PHOTO_FILE_NAME);
-        }
-
-        Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
-        doImageRecognition(bitmap);
-    }
-
-    //TODO-beauty: move image recognition into separate class. Make MainActivity class tiny
-    private void doImageRecognition(Bitmap bitmap) {
-        ImageView topImage = (ImageView) findViewById(R.id.topImage);
-        topImage.setImageBitmap(bitmap);
-
-        new RecognitionTask(this).execute(bitmap);
-    }
-
     static public Bitmap CreateCroppedBitmap(String photoPath) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
@@ -222,6 +202,15 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
     }
 
+    public static void EnsureMediaDirectoryExists() {
+        File mediaStorageDir = new File(getImagesLocation());
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.e("DOTA Vision", "failed to create media directory.");
+            }
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
@@ -235,13 +224,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public static void EnsureMediaDirectoryExists() {
-        File mediaStorageDir = new File(getImagesLocation());
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("DOTA Vision", "failed to create directory");
-            }
+    private void doImageRecognitionOnPhoto() {
+        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
+        if (!mediaFile.exists()) {
+            throw new RuntimeException("Trying to recognise photo, but I can't find file at " + getImagesLocation() + PHOTO_FILE_NAME);
         }
+
+        Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
+        doImageRecognition(bitmap);
+    }
+
+    //TODO-beauty: move image recognition into separate class. Make MainActivity class tiny
+    private void doImageRecognition(Bitmap bitmap) {
+        ImageView topImage = (ImageView) findViewById(R.id.image_top);
+        topImage.setImageBitmap(bitmap);
+
+        new RecognitionTask(this).execute(bitmap);
     }
 
     /*
@@ -308,13 +306,13 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void resetInfo() {
-            LinearLayout layout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            LinearLayout layout = (LinearLayout) findViewById(R.id.layout_results_info);
             layout.removeAllViews();
             layout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
             layout.removeAllViews();
 
-            if (debugMode) {
-                List<Integer> textViewIds = Arrays.asList(R.id.similarityInfoText, R.id.imageDebugText);
+            if (sDebugMode) {
+                List<Integer> textViewIds = Arrays.asList(R.id.text_similarity_info, R.id.text_image_debug);
                 ResetTextViews(textViewIds);
             }
         }
@@ -323,9 +321,12 @@ public class MainActivity extends AppCompatActivity
          * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
          */
         private void slideDemoButtonsOffScreen() {
-            View view = findViewById(R.id.demoAndsLastPhotoButtonsLayout);
+            View view = findViewById(R.id.layout_demo_and_last_photo_buttons);
             if (view.getTranslationX() == 0) {
-                view.animate().x(-1f * view.getWidth()).setDuration(150).setInterpolator(new AccelerateInterpolator());
+                view.animate()
+                        .x(-1f * view.getWidth())
+                        .setDuration(150)
+                        .setInterpolator(new AccelerateInterpolator());
             }
         }
 
@@ -373,7 +374,11 @@ public class MainActivity extends AppCompatActivity
 /*                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
 
         TimeInterpolator interpolator = new OvershootInterpolator();
-        fab.animate().scaleX(0.2f).scaleY(0.2f).setDuration(300).setInterpolator(interpolator);*/
+        fab.animate().
+                scaleX(0.2f).
+                scaleY(0.2f).
+                setDuration(300).
+                setInterpolator(interpolator);*/
 
             /*        AnimatorSet animatorSet = new AnimatorSet();
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.2f);
@@ -437,8 +442,8 @@ public class MainActivity extends AppCompatActivity
 
             //TODO-beauty: tidy up all the UI code that's run after image recognition
 
-            if (debugMode) {
-                TextView imageDebugText = (TextView) findViewById(R.id.imageDebugText);
+            if (sDebugMode) {
+                TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
                 imageDebugText.setVisibility(View.VISIBLE);
                 imageDebugText.setText(Recognition.debugString);
             }
@@ -489,7 +494,7 @@ public class MainActivity extends AppCompatActivity
                 imageViewOriginal.setImageBitmap(bitmapOriginal);
                 thisPictureLayout.addView(imageViewOriginal);
 
-                if (debugMode)
+                if (sDebugMode)
                     showSimilarityInfo(hero.getSimilarityList());
             }
 
@@ -515,7 +520,7 @@ public class MainActivity extends AppCompatActivity
             LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
             transition.setDuration(250);
-            LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.layout_results_info);
             resultsInfoLayout.setLayoutTransition(transition);
         }
 
@@ -575,7 +580,7 @@ public class MainActivity extends AppCompatActivity
         //TODO-beauty: move the add abilty cards and add ability heading code elsewhere, also rename the functions!
         private void AddAbilityHeading(String string) {
             if(string == null) return;
-            LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            LinearLayout parent = (LinearLayout) findViewById(R.id.layout_results_info);
             LayoutInflater inflater = getLayoutInflater();
             View v = inflater.inflate(R.layout.item_abilty_info_heading, parent, false);
             TextView textView = (TextView) v.findViewById(R.id.textView);
@@ -610,7 +615,7 @@ public class MainActivity extends AppCompatActivity
         }
 
       private boolean AddAbilityCards(List<HeroAbility> abilities, int abilityType) {
-            LinearLayout parent = (LinearLayout) findViewById(R.id.resultsInfoLayout);
+            LinearLayout parent = (LinearLayout) findViewById(R.id.layout_results_info);
             boolean cardsAdded = false;
 
             for (HeroAbility ability : abilities) {
@@ -639,7 +644,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void showSimilarityInfo(List<HeroHistAndSimilarity> similarityList) {
-            TextView infoText = (TextView) findViewById(R.id.similarityInfoText);
+            TextView infoText = (TextView) findViewById(R.id.text_similarity_info);
             infoText.setText("");
             infoText.setVisibility(View.VISIBLE);
             HeroHistAndSimilarity matchingHero = similarityList.get(0);

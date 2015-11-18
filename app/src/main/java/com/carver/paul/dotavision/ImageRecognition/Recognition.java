@@ -17,7 +17,7 @@ public class Recognition {
 
     public static List<HeroRect> Run(Bitmap bitmap, HistTest histTest) { //Bitmap bitmap, int hMin, int hMax, int sMin, int sMax, int vMin, int vMax) {
 
-        if (MainActivity.debugMode) debugString = "";
+        if (MainActivity.sDebugMode) debugString = "";
 
         Mat load = ImageTools.GetMatFromBitmap(bitmap);
 

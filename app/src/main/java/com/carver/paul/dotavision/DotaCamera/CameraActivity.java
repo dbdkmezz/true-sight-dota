@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.BuildConfig;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -41,7 +42,106 @@ public class CameraActivity extends Activity {
 
     private final ScheduledExecutorService mScheduledExecutorService =
             Executors.newScheduledThreadPool(1);
-    private CameraOpeningTask cameraOpeningTask = null;
+    private CameraOpeningTask mCameraOpeningTask = null;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_camera);
+
+        //TODO: ensure I'm using the camera opening task correctly
+
+
+
+        // Setup the camera
+        if (mCamera == null) {
+            if(mCameraOpeningTask != null) {
+                Log.w(TAG, "Running onResume, but ther mCameraOpeningTask is already running. " +
+                        "I don't think this can happen, so I must have missed soemthing!");
+                mCameraOpeningTask.cancel(true);
+            }
+            mCameraOpeningTask = new CameraOpeningTask(this);
+            mCameraOpeningTask.execute();
+        }
+
+        showCaptureButton();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mScheduledExecutorService.shutdown();
+        //TODO: check that when I cancel the camerOpeningTask I want to stop it even if it's running
+        mCameraOpeningTask.cancel(true);
+        mCameraOpeningTask = null;
+        releaseCamera();              // release the mCamera immediately on pause event
+    }
+
+    /**
+     * called when the capture photo buttin is pressed
+     * @param view
+     */
+    public void capturePhoto(View view) {
+        //mCamera.takePicture(null, null, mPicture);
+        if (mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+
+            // add a 3 second timeout to autofocus
+            //https://stackoverflow.com/questions/6658868/camera-autofocus-callback-not-happening
+            final ScheduledFuture<?> focusTimeoutFuture = mScheduledExecutorService.schedule(new Runnable() {
+                @Override
+                public void run() {
+                    if (BuildConfig.DEBUG) {
+                        Log.d(TAG, "Autofocus didn't succeed after 3 seconds, taking photo anyway.");
+                    }
+                    mCamera.takePicture(null, null, mPicture);
+                    mCamera.cancelAutoFocus();
+                }
+            }, 3, TimeUnit.SECONDS);
+
+            Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
+                @Override
+                public void onAutoFocus(boolean success, Camera camera) {
+                    // cancel the timeout future if it didn't run already
+                    boolean canceledFuture = focusTimeoutFuture.cancel(false);
+                    if (canceledFuture) {
+                        if (BuildConfig.DEBUG) {
+                            Log.d(TAG, "Taking picture with successful autofocus.");
+                        }
+                        CameraActivity.this.mCamera.takePicture(null, null, mPicture);
+                        CameraActivity.this.mCamera.cancelAutoFocus();
+                    }
+                }
+            };
+            mCamera.autoFocus(autoFocusCallback);
+        } else {
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Taking piture outside focus mode");
+            }
+            mCamera.takePicture(null, null, mPicture);
+        }
+    }
+
+
+    /**
+     * called with the confirm capture photo buttin is pressed
+      * @param view
+     */
+    public void confirmPhoto(View view) {
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
+
+    public void takePhotoAgain(View view) {
+        mCamera.startPreview();
+        showCaptureButton();
+    }
 
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
 
@@ -51,7 +151,7 @@ public class CameraActivity extends Activity {
             MainActivity.EnsureMediaDirectoryExists();
             File pictureFile = getOutputMediaFile();
             if (pictureFile == null) {
-                Log.d(TAG, "Error creating media file, check storage permissions: ");// + e.getMessage());
+                Log.e(TAG, "Error creating media file, check storage permissions: ");
                 return;
             }
 
@@ -61,7 +161,7 @@ public class CameraActivity extends Activity {
                 fos.close();
                 showPhotoConfirmButtons();
             } catch (FileNotFoundException e) {
-                Log.d(TAG, "File not found: " + e.getMessage());
+                Log.w(TAG, "File not found: " + e.getMessage());
             } catch (IOException e) {
                 Log.d(TAG, "Error accessing file: " + e.getMessage());
             }
@@ -90,90 +190,6 @@ public class CameraActivity extends Activity {
         takeAgainButton.setVisibility(View.GONE);
     }
 
-    public void capturePhoto(View view) {
-        //mCamera.takePicture(null, null, mPicture);
-        if (mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-
-            // add a 3 second timeout to autofocus
-            //https://stackoverflow.com/questions/6658868/camera-autofocus-callback-not-happening
-            final ScheduledFuture<?> focusTimeoutFuture = mScheduledExecutorService.schedule(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d(TAG, "Autofocus didn't succeed after 3 seconds, taking photo anyway.");
-                    mCamera.takePicture(null, null, mPicture);
-                    mCamera.cancelAutoFocus();
-                }
-            }, 3, TimeUnit.SECONDS);
-
-            Camera.AutoFocusCallback autoFocusCallback = new Camera.AutoFocusCallback() {
-                @Override
-                public void onAutoFocus(boolean success, Camera camera) {
-                    // cancel the timeout future if it didn't run already
-                    boolean canceledFuture = focusTimeoutFuture.cancel(false);
-                    if (canceledFuture) {
-                        Log.d(TAG, "Taking pciture with correct autofocus.");
-                        CameraActivity.this.mCamera.takePicture(null, null, mPicture);
-                        CameraActivity.this.mCamera.cancelAutoFocus();
-                    }
-                }
-            };
-            mCamera.autoFocus(autoFocusCallback);
-        } else {
-            Log.d(TAG, "Taking piture outside focus mode");
-            mCamera.takePicture(null, null, mPicture);
-        }
-    }
-
-    // runs when confirm button is pressed.
-    public void confirmPhoto(View view) {
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        finish();
-    }
-
-    public void takePhotoAgain(View view) {
-        mCamera.startPreview();
-        showCaptureButton();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setContentView(R.layout.activity_camera);
-
-        //TODO: ensure I'm using the camera opening task correctly
-
-
-
-        // Setup the camera
-        if (mCamera == null) {
-            if(cameraOpeningTask != null) {
-                Log.w(TAG, "Running onResume, but ther cameraOpeningTask is already running. " +
-                        "I don't think this can happen, so I must have missed soemthing!");
-                cameraOpeningTask.cancel(true);
-            }
-            cameraOpeningTask = new CameraOpeningTask(this);
-            cameraOpeningTask.execute();
-        }
-
-        showCaptureButton();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mScheduledExecutorService.shutdown();
-        //TODO: check that when I cancel the camerOpeningTask I want to stop it even if it's running
-        cameraOpeningTask.cancel(true);
-        cameraOpeningTask = null;
-        releaseCamera();              // release the mCamera immediately on pause event
-    }
 
     private void releaseCamera() {
         if (mCamera != null) {
@@ -183,10 +199,10 @@ public class CameraActivity extends Activity {
     }
 
     private class CameraOpeningTask extends AsyncTask<Void, Void, Camera> {
-        private Context context;
+        private Context mContext;
 
         public CameraOpeningTask(Context context) {
-            this.context = context;
+            mContext = context;
         }
 
         // This is where the hard work happens which needs to be off the UI thread
@@ -199,7 +215,7 @@ public class CameraActivity extends Activity {
         protected void onPostExecute(Camera camera) {
             mCamera = camera;
 
-            mPreview = new CameraPreview(context, mCamera);
+            mPreview = new CameraPreview(mContext, mCamera);
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
             preview.addView(mPreview);
             setupPreviewLetterbox();
@@ -243,7 +259,7 @@ public class CameraActivity extends Activity {
                 if (parameters.isAutoWhiteBalanceLockSupported() == true) {
                     parameters.setAutoWhiteBalanceLock(true);
                 } else {
-                    Log.d(TAG, "Oh no, mCamera doesn't support white balance lock.");
+                    if (BuildConfig.DEBUG) Log.v(TAG, "Camera doesn't support white balance lock.");
                 }
 
 /*            List<String> supportedWhiteBalances = parameters.getSupportedWhiteBalance();
@@ -298,9 +314,13 @@ public class CameraActivity extends Activity {
             }
 
             if (result == null) {
-                Log.d(TAG, "Failed to find appropriate mCamera size.");
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "Failed to find appropriate camera size.");
+                }
                 if (!sizes.isEmpty()) {
                     result = sizes.get(0);
+                } else {
+                    Log.e(TAG, "Can't se a camear size because there are none!");
                 }
             }
 
@@ -313,7 +333,10 @@ public class CameraActivity extends Activity {
          */
         private void setupPreviewLetterbox() {
             if(mCamera == null) {
-                Log.d(TAG, "Not settingup preview letterbox because camera is null. I don't think that should ever happen!");
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "Not setting up preview letterbox because camera is null. " +
+                            "I don't think that should ever happen!");
+                }
                 return;
             }
 
@@ -416,7 +439,9 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.startPreview();
 
         } catch (IOException e) {
-            Log.d(TAG, "Error setting mCamera preview: " + e.getMessage());
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Error setting mCamera preview: " + e.getMessage());
+            }
         }
     }
 
@@ -456,7 +481,9 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.startPreview();
 
         } catch (Exception e) {
-            Log.d(TAG, "Error starting mCamera preview: " + e.getMessage());
+            if (BuildConfig.DEBUG) {
+                Log.w(TAG, "Error starting mCamera preview: " + e.getMessage());
+            }
         }
     }
 }
