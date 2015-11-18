@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.carver.paul.dotavision.DebugActivities.DebugLineDetection">
 
-    <include layout="@layout/appbar_and_toolbar" />
+    <include layout="@layout/partial_appbar_and_toolbar" />
 
     <ScrollView
         android:layout_width="fill_parent"

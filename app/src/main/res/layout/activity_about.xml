@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.carver.paul.dotavision.DebugActivities.DebugLineDetection">
 
-    <include layout="@layout/appbar_and_toolbar" />
+    <include layout="@layout/partial_appbar_and_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,6 +25,11 @@
                 android:text="@string/about_text"
                 android:autoLink="web"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_open_cv"
+                android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
             <TextView
                 android:layout_width="match_parent"

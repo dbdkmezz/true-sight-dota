@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.carver.paul.dotavision.DebugActivities.DebugLineDetection">
 
-    <include layout="@layout/appbar_and_toolbar" />
+    <include layout="@layout/partial_appbar_and_toolbar" />
     <include layout="@layout/content_debug_line_detection" />
 
     <android.support.design.widget.FloatingActionButton

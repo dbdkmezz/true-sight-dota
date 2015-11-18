@@ -27,7 +27,7 @@
                 tools:context=".MainActivity">-->
 
 
-        <include layout="@layout/appbar_and_toolbar" />
+        <include layout="@layout/partial_appbar_and_toolbar" />
 
         <include layout="@layout/content_main" />
 
@@ -90,6 +90,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
+        app:headerLayout="@layout/partial_nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 </android.support.v4.widget.DrawerLayout>

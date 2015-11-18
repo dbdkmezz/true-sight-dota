@@ -15,7 +15,7 @@
     <string name="request_permission">This app needs camera permission.</string>
 
     <string name="about_text">&appname; is free software license under the GNU General Public License v3. The source code is freely available on github: https://github.com/dbdkmezz/true-sight-dota</string>
-
+    <string name="about_open_cv">&appname; uses the OpenCV (Open Source Computer Vision Library) for image detection and image recognition. Thanks to the OpenCV team for their excellent library :)</string>
     <string name="dota_trademark">Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve Corporation. This app is not affiliated with Valve Corporation.</string>
 
     <string name="cooldown">COOLDOWN</string>
