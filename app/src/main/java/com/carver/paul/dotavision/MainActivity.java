@@ -52,25 +52,21 @@ import java.util.List;
 
 //TODO: fix bug where preview moving when processing
 
-//TODO-now: more photo text
-
-//TODO-now: fix crash on verity phone
+//TODO-prebeta: test much more for crashes, there is something wrong somewhere. The camera threading??
 
 //TODO-now: put source on github and make it compile on new installs, and add OSS code headings
 
 //TODO-now: reduce package size. Smaller images? Crop test image
 
-//TODO-prebeta: add tab view so you can see the spells of all the heroes
+//TODO: make the heroes info separated somehow. Just a dividing line for now? It's a mess
+
+//TODO-prebeta: add tab view so you can slide to change hero rather them all being piled up in one place
 
 //TODO-beauty: tidy up layout files
-
-//TODO-beauty: modifications to layouts for a few phone sizes
 
 //TODO-prebeta: test all spells, e.g. do the stun summaries show the right information? Also, some of the ultimates aren't ultimates!
 
 //TODO-someday: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
-
-//TODO: slide to change hero!!
 
 //TODO-someday: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html

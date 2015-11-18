@@ -32,6 +32,8 @@ import java.util.concurrent.TimeUnit;
 
 //TODO-someday: crop what the Camera saves
 
+//TODO-prebeta: add in example photo for caerma activity (blurred cartoony style?)
+
 public class CameraActivity extends Activity {
     private Camera mCamera;
     private SurfaceView mPreview;

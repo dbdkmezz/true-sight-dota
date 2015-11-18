@@ -1,5 +1,9 @@
+
+<!DOCTYPE resources [
+    <!ENTITY appname "True Sight for Dota 2">
+    ]>
 <resources>
-    <string name="app_name">True Sight for Dota 2</string>
+    <string name="app_name">&appname;</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
@@ -10,7 +14,9 @@
     <string name="camera_help_text">Position the 5 enemy hero portraits to fill the box below. Ensure the colored lines above them are visible.</string>
     <string name="request_permission">This app needs camera permission.</string>
 
-    <string name="about_text">Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve Corporation. This app is not affiliated with Valve Corporation.</string>
+    <string name="about_text">&appname; is free software license under the GNU General Public License v3. The source code is freely available on github: https://github.com/dbdkmezz/true-sight-dota</string>
+
+    <string name="dota_trademark">Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve Corporation. This app is not affiliated with Valve Corporation.</string>
 
     <string name="cooldown">COOLDOWN</string>
     <string name="mana_cost">MANA COST</string>

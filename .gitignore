@@ -8,7 +8,7 @@
 /build
 /captures
 /app/src/main/jniLibs/
-/openCVLibrary/build
+/openCVLibrary300/build/
 *apk
 
 # don't ignore
