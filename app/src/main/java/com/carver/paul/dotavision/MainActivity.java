@@ -463,48 +463,18 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void moveCameraFabToBottomRight() {
-            //TODO-beauty: completely change how I move the take photo fab to the bottom right, current solution is UGLY
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
+            View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
 
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.mainCoordinatorLayout);
-            //     FloatingActionButton otherFab = (FloatingActionButton) findViewById(R.id.useExistingPictureButton);
-            float finalWidth = dpToPx(64);
-//            float finalMargin = (float) getResources().getDimension(R.dimen.fab_margin);
+            int xTrans = (int)((fabEndLocation.getX() + fabEndLocation.getWidth() / 2) - (fab.getX() + fab.getWidth() / 2));
+            int yTrans = (int)((fabEndLocation.getY() + fabEndLocation.getHeight() / 2) - (fab.getY() + fab.getHeight() / 2));
 
-//            int finalMargin = otherFab.getLayoutParams().
-            float currentWidth = fab.getWidth();
-            AnimatorSet animatorSet = new AnimatorSet();
-            float farRight = coordinatorLayout.getRight();
-            float startX = fab.getX();
-
-//            float marginPx = dpToPx(getResources().getDimension(R.dimen.fab_margin));
-            float marginPx = dpToPx(18);
-
-
-            float endX = coordinatorLayout.getWidth() - (currentWidth + finalWidth + marginPx) / 2f;
-            float endY = coordinatorLayout.getHeight() - (currentWidth + finalWidth + marginPx) / 2f;
-            //ObjectAnimator translationX = ObjectAnimator.ofFloat(fab, "translationX", 100f + farRight - startX );//coordinatorLayout.getRight() - finalWidth - fab.getX());
-            ObjectAnimator x = ObjectAnimator.ofFloat(fab, "x", endX);
-            ObjectAnimator y = ObjectAnimator.ofFloat(fab, "y", endY);
-            // ObjectAnimator translationY = ObjectAnimator.ofFloat(fab, "translationY", coordinatorLayout.getHeight() - finalWidth - fab.getY());
-            ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", finalWidth / currentWidth);
-            ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", finalWidth / currentWidth);
-            animatorSet.playTogether(x, y, scaleX, scaleY);
-            //animatorSet.play(x);
-            animatorSet.setDuration(300);
-            animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-            animatorSet.start();
-        }
-
-        //TODO-prebeta: I don't trust the dpToPx function, test it on other screen sizes
-        private float dpToPx(float dp) {
-
-            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            return dp * displayMetrics.density;
-
-/*            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-            float px = dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT);
-            return px;*/
+            fab.animate()
+                    .translationX(xTrans)
+                    .translationY(yTrans)
+                    .scaleX((float) fabEndLocation.getWidth() / (float)fab.getWidth())
+                    .scaleY((float) fabEndLocation.getHeight() / (float)fab.getHeight())
+                    .setInterpolator(new AccelerateDecelerateInterpolator());
         }
 
         private void LoadXML() {
