@@ -171,7 +171,7 @@ public class SimilarityTest {
         List<HeroAndSimilarity> similarityList = new ArrayList<>();
         for (LoadedHeroImage hero : mHeroes) {
             // note, will be inefficient to do this every time!
-            Mat preparedOriginal = BlurAndThresholdMat(hero.image, originalThreshold, thresholdType, blurSize);
+            Mat preparedOriginal = BlurAndThresholdMat(hero.mat, originalThreshold, thresholdType, blurSize);
             Double value = CompareTemplate(preparedPhoto, preparedOriginal, method);
             similarityList.add(new HeroAndSimilarity(hero, value));
         }

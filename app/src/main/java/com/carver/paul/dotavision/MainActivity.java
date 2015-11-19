@@ -74,9 +74,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // sDebugMode is true if I want to show extra debug information. It is ignored when
+    // BuildConfig.DEBUG is false (i.e. the app is compiled for release)
     public static boolean sDebugMode = false;
-    private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     public static final String PHOTO_FILE_NAME = "photo.jpg";
+
+    private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
+    private static final String TAG = "MainActivity";
 
     static {
         System.loadLibrary("opencv_java3");
@@ -121,7 +125,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-   // @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -166,11 +169,20 @@ public class MainActivity extends AppCompatActivity
         return new File(getImagesLocation(), PHOTO_FILE_NAME).getPath();
     }
 
+    /**
+     * Called when the demo buttin is pressed
+     * Runs the image recognition on a sample photo which is part of the app
+     * @param view
+     */
     public void demoButton(View view) {
         Bitmap sampleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
         doImageRecognition(sampleBitmap);
     }
 
+    /**
+     * Runs the image recognition code on the last photo which was taken by the camera
+     * @param view
+     */
     public void useLastPhotoButton(View view) {
         doImageRecognitionOnPhoto();
     }
@@ -189,8 +201,8 @@ public class MainActivity extends AppCompatActivity
         return bitmap;
     }
 
-    // TODO-beauty: Change permissions so it uses the Android 6 way, then can increase target API
-    // TODO-prebeta: Make it save in the write media location, I think media store wasn't right
+    // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
+    // TODO-prebeta: Make takePhoto save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
         EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
@@ -202,7 +214,7 @@ public class MainActivity extends AppCompatActivity
         File mediaStorageDir = new File(getImagesLocation());
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.e("DOTA Vision", "failed to create media directory.");
+                Log.e(TAG, "failed to create media directory.");
             }
         }
     }
@@ -238,51 +250,6 @@ public class MainActivity extends AppCompatActivity
         new RecognitionTask(this).execute(bitmap);
     }
 
-    /*
-
-    *//** Create a file Uri for saving an image or video *//*
-    private static Uri getOutputMediaFileUri(){
-        return Uri.fromFile(getOutputMediaFile());
-    }
-
-    private static final int WRITE_EXTERNAL_STORAGE = 1;
-
-
-    */
-
-    /**
-     * Create a File for saving an image or video
-     *//*
-    private static File getOutputMediaFile(){
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-
-   *//*     ActivityCompat.requestPermissions(MainActivity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                WRITE_EXTERNAL_STORAGE);
-*//*
-
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "DOTA Vision");
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
-        // https://developer.android.com/guide/topics/media/camera.html#saving-media
-
-        // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
-                Log.d("DOTA Vision", "failed to create directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "IMG_"+ timeStamp + ".jpg");
-
-        return mediaFile;
-    }*/
-
     //TODO-prebeta: make it so RecognitionTask gets passed heroInfoList and similarityTest by MainActivity so I don't have to load them every time.
     private class RecognitionTask extends AsyncTask<Bitmap, Void, List<HeroFromPhoto>> {
 
@@ -306,10 +273,10 @@ public class MainActivity extends AppCompatActivity
         private void resetInfo() {
             LinearLayout layout = (LinearLayout) findViewById(R.id.layout_results_info);
             layout.removeAllViews();
-            layout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
+            layout = (LinearLayout) findViewById(R.id.layout_show_found_hero_pictures);
             layout.removeAllViews();
 
-            if (sDebugMode) {
+            if (BuildConfig.DEBUG && sDebugMode) {
                 List<Integer> textViewIds = Arrays.asList(R.id.text_similarity_info, R.id.text_image_debug);
                 ResetTextViews(textViewIds);
             }
@@ -325,6 +292,58 @@ public class MainActivity extends AppCompatActivity
                         .x(-1f * view.getWidth())
                         .setDuration(150)
                         .setInterpolator(new AccelerateInterpolator());
+            }
+        }
+
+        // This is where the hard work happens which needs to be off the UI thread
+        protected List<HeroFromPhoto> doInBackground(Bitmap... bitmaps) {
+            if (heroInfoList == null)
+                LoadXML();
+            if (similarityTest == null)
+                loadHistTest();
+
+            // do the hard work of the image recognition
+            return Recognition.Run(bitmaps[0], similarityTest);
+        }
+
+        /**
+         * This is where you do the work in the UI thread after the hard work of image recognition.
+         * <p/>
+         * This lets the cameraFab do one final pulse, and the moves it to the bottom right and
+         * shows the result of the recognition.
+         *
+         * @param heroes
+         */
+        protected void onPostExecute(final List<HeroFromPhoto> heroes) {
+            ImageView imageview = (ImageView) findViewById(R.id.button_fab_take_photo);
+            Animation animation = imageview.getAnimation();
+            if (animation == null) {
+                // I don't understand how this happens, but it does
+                //TODO: fix null animation issue
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
+                }
+                moveCameraFabToBottomRight();
+                showResult(heroes);
+            } else {
+                animation.setRepeatCount(0);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        moveCameraFabToBottomRight();
+                        showResult(heroes);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
             }
         }
 
@@ -394,130 +413,47 @@ public class MainActivity extends AppCompatActivity
             view.setScaleY(1f);
         }
 
-        // This is where the hard work happens which needs to be off the UI thread
-        protected List<HeroFromPhoto> doInBackground(Bitmap... bitmaps) {
-            if (heroInfoList == null)
-                LoadXML();
-            if (similarityTest == null)
-                loadHistTest();
-
-            // do the hard work of the image recognition
-            return Recognition.Run(bitmaps[0], similarityTest);
-        }
-
-        // work to do in the UI thread after the hard work
-        protected void onPostExecute(final List<HeroFromPhoto> heroes) {
-            // Stop the camera button pulsing by making it finish the current animation and then run the code in onAnimationEnd
-            ImageView imageview = (ImageView) findViewById(R.id.button_fab_take_photo);
-            Animation animation = imageview.getAnimation();
-            if(animation == null) {
-                // I don't understand how this happens, but it does
-                //TODO: fix null animation issue
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
-                }
-                moveCameraFabToBottomRight();
-                showResult(heroes);
-            } else {
-                animation.setRepeatCount(0);
-                animation.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        moveCameraFabToBottomRight();
-                        showResult(heroes);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-            }
-        }
-
+        /**
+         * showResult shows all the information about the heroes I've seen in the photo
+         *
+         * @param heroes
+         */
         private void showResult(final List<HeroFromPhoto> heroes) {
 
-            //TODO-beauty: tidy up all the UI code that's run after image recognition
-
-            if (sDebugMode) {
+            if (BuildConfig.DEBUG && sDebugMode) {
                 TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
                 imageDebugText.setVisibility(View.VISIBLE);
                 imageDebugText.setText(Recognition.mDebugString);
             }
 
-            DisplayMetrics metrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            int heroIconWidth = metrics.widthPixels * 2 / 6;
+            //A list of the heroes we've seen, for use when adding the ability cards
+            List<LoadedHeroImage> heroesSeen = new ArrayList<>();
 
-            LinearLayout loadedPicturesLayout = (LinearLayout) findViewById(R.id.loadedPicturesLayout);
+            LinearLayout parent = (LinearLayout) findViewById(R.id.layout_show_found_hero_pictures);
+            LayoutInflater inflater = getLayoutInflater();
 
             for (HeroFromPhoto hero : heroes) {
-                LinearLayout thisPictureLayout = new LinearLayout(context);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.gravity = Gravity.CENTER;
-                thisPictureLayout.setLayoutParams(params);
-                if (heroes.get(0) == hero) // i.e., this is the first hero
-                    thisPictureLayout.setPadding(0, 16, 0, 16);
-                else
-                    thisPictureLayout.setPadding(0, 0, 0, 16);
+                LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
+                ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
+                leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
 
-                loadedPicturesLayout.addView(thisPictureLayout);
-
-                //TODO: Don't work out the preview width and height this way! or at least don't scale the photo this way
-                ImageView imageViewPhoto = new ImageView(context);
-                Bitmap bitmapPhoto = ImageTools.GetBitmapFromMat(hero.image);
-                int height = heroIconWidth * bitmapPhoto.getHeight() / bitmapPhoto.getWidth();
-                bitmapPhoto = Bitmap.createScaledBitmap(bitmapPhoto, heroIconWidth, height, true);
-                imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                imageViewPhoto.setImageBitmap(bitmapPhoto);
-                imageViewPhoto.setPadding(0, 0, 16, 0);
-                thisPictureLayout.addView(imageViewPhoto);
-
-/*            imageViewPhoto.setMinimumWidth(thisPictureLayout.getWidth() * 2 / 6);
-            imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
-            imageViewPhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageViewPhoto.setAdjustViewBounds(true);
-       //     imageViewPhoto.setMaxWidth(thisPictureLayout.getWidth() * 2 / 6);
-            imageViewPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageViewPhoto.setImageBitmap(ImageTools.GetBitmapFromMap(hero.image));*/
-
-                ImageView imageViewOriginal = new ImageView(context);
-                // imageViewOriginal.setPadding(0, 0, 0, 0);
                 HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
-                Bitmap bitmapOriginal = ImageTools.GetBitmapFromMat(matchingHero.hero.image);
-                height = heroIconWidth * bitmapOriginal.getHeight() / bitmapOriginal.getWidth();
-                bitmapOriginal = Bitmap.createScaledBitmap(bitmapOriginal, heroIconWidth, height, true);
-                imageViewOriginal.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                imageViewOriginal.setImageBitmap(bitmapOriginal);
-                thisPictureLayout.addView(imageViewOriginal);
+                ImageView rightImage = (ImageView) foundPicturesView.findViewById(R.id.image_right);
+                rightImage.setImageBitmap(matchingHero.hero.getBitmap(this.context));
 
-                if (sDebugMode)
+                parent.addView(foundPicturesView);
+
+                if (!heroesSeen.contains(hero.getSimilarityList().get(0).hero)) {
+                    heroesSeen.add(hero.getSimilarityList().get(0).hero);
+                }
+
+                if (BuildConfig.DEBUG && sDebugMode)
                     showSimilarityInfo(hero.getSimilarityList());
             }
 
+            AddAllCardsAboutHeroes(heroesSeen);
+
             //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
-
-            List<LoadedHeroImage> heroesSeen = new ArrayList<>();
-            for (HeroFromPhoto heroFromPhoto : heroes) {
-                if (!heroesSeen.contains(heroFromPhoto.getSimilarityList().get(0).hero)) {
-                    heroesSeen.add(heroFromPhoto.getSimilarityList().get(0).hero);
-                }
-            }
-
-            //TODO-prebeta: add "no silences found" text when none found
-            AddAbilityHeading("Stuns");
-            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
-            AddAbilityHeading("Silences");
-            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
-            AddAbilityHeading("Ultimates");
-            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.ULTIMATE);
-
-            AddAbilityCardsForAllHeroAbilities(heroesSeen);
 
             LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
@@ -582,13 +518,27 @@ public class MainActivity extends AppCompatActivity
 
         //TODO-beauty: move the add abilty cards and add ability heading code elsewhere, also rename the functions!
         private void AddAbilityHeading(String string) {
-            if(string == null) return;
+            if (string == null) return;
             LinearLayout parent = (LinearLayout) findViewById(R.id.layout_results_info);
             LayoutInflater inflater = getLayoutInflater();
             View v = inflater.inflate(R.layout.item_abilty_info_heading, parent, false);
             TextView textView = (TextView) v.findViewById(R.id.textView);
             textView.setText(string);
             parent.addView(v);
+        }
+
+        private void AddAllCardsAboutHeroes(List<LoadedHeroImage>heroesSeen) {
+            //TODO-prebeta: add "no silences found" text when none found
+            AddAbilityHeading("Stuns");
+            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
+
+            AddAbilityHeading("Silences");
+            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
+
+            AddAbilityHeading("Ultimates");
+            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.ULTIMATE);
+
+            AddAbilityCardsForAllHeroAbilities(heroesSeen);
         }
 
         /**

@@ -78,13 +78,11 @@
                 android:elevation="4dp">
 
                 <LinearLayout
-                    android:id="@+id/loadedPicturesLayout"
+                    android:id="@+id/layout_show_found_hero_pictures"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </FrameLayout>
-
-
 
             <FrameLayout
                 android:layout_width="fill_parent"

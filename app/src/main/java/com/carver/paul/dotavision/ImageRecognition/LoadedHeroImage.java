@@ -9,13 +9,21 @@ import org.opencv.core.Mat;
 /**
  * The image of a hero loaded from the appropriate drawable
  */
+
 public class LoadedHeroImage {
-    public Mat image;
+    public Mat mat;
     public String name;
+
+    private int mDrawableId;
 
     public LoadedHeroImage(Context context, int drawableId, String name) {
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableId);
-        image = ImageTools.GetMatFromBitmap(bitmap);
+        mat = ImageTools.GetMatFromBitmap(bitmap);
         this.name = name;
+        mDrawableId = drawableId;
+    }
+
+    public Bitmap getBitmap(Context context) {
+        return BitmapFactory.decodeResource(context.getResources(), mDrawableId);
     }
 }
