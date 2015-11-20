@@ -432,6 +432,8 @@ public class MainActivity extends AppCompatActivity
             LinearLayout parent = (LinearLayout) findViewById(R.id.layout_show_found_hero_pictures);
             LayoutInflater inflater = getLayoutInflater();
 
+            //TODO-prebeta: remove margine from bottom item_found_hero_picture
+
             for (HeroFromPhoto hero : heroes) {
                 LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
                 ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
