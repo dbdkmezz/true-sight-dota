@@ -17,16 +17,6 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
-        <!--    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#EEEEEE"
-                android:fitsSystemWindows="true"
-                tools:context=".MainActivity">-->
-
-
         <include layout="@layout/partial_appbar_and_toolbar" />
 
         <include layout="@layout/content_main" />
@@ -39,7 +29,7 @@
             android:onClick="takePhoto"
             android:src="@android:drawable/ic_menu_camera"/>
 
-        This is an invisible fab, used to know where to put the fab in the end
+<!--This is an invisible fab, used to know where to put the fab after its first press-->
         <View
             android:id="@+id/button_fab_take_photo_final_location"
             android:layout_width="@dimen/fab_width"
