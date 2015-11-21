@@ -41,6 +41,10 @@ public class LoadedHeroImage {
         mDrawableId = drawableId;
     }
 
+    public int getImageResource() {
+        return mDrawableId;
+    }
+
     public Bitmap getBitmap(Context context) {
         return BitmapFactory.decodeResource(context.getResources(), mDrawableId);
     }

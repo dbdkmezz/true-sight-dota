@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2015 Paul Broadbent
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -33,11 +33,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -94,6 +97,12 @@ public class MainActivity extends AppCompatActivity
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     private static final String TAG = "MainActivity";
 
+/*
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mRecyclerAdapter;
+    private RecyclerView.LayoutManager mRecyclerLayoutManager;
+*/
+
     static {
         System.loadLibrary("opencv_java3");
     }
@@ -105,9 +114,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-/*
-        createRecyclerView();
-*/
+/*        createRecyclerView();*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -118,14 +125,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
-/*
-    private void createRecyclerView() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.infoRecyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(null);
-    }
-*/
 
     @Override
     public void onBackPressed() {
@@ -269,10 +268,10 @@ public class MainActivity extends AppCompatActivity
 
         private List<HeroInfo> heroInfoList = null;
         private SimilarityTest similarityTest = null;
-        private Context context;
+        private Context mContext;
 
         public RecognitionTask(Context context) {
-            this.context = context;
+            mContext = context;
         }
 
         // work to do in the UI thread before doing the hard work
@@ -444,16 +443,23 @@ public class MainActivity extends AppCompatActivity
             LinearLayout parent = (LinearLayout) findViewById(R.id.layout_show_found_hero_pictures);
             LayoutInflater inflater = getLayoutInflater();
 
-            //TODO-prebeta: remove margine from bottom item_found_hero_picture
-
             for (HeroFromPhoto hero : heroes) {
                 LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
                 ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
                 leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
 
+                RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
+
+/*
                 HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
                 ImageView rightImage = (ImageView) foundPicturesView.findViewById(R.id.image_right);
-                rightImage.setImageBitmap(matchingHero.hero.getBitmap(this.context));
+                //rightImage.setImageBitmap(matchingHero.hero.getBitmap(this.context));
+                rightImage.setImageResource(matchingHero.hero.getImageResource());
+*/
 
                 parent.addView(foundPicturesView);
 
@@ -480,14 +486,14 @@ public class MainActivity extends AppCompatActivity
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
             View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
 
-            int xTrans = (int)((fabEndLocation.getX() + fabEndLocation.getWidth() / 2) - (fab.getX() + fab.getWidth() / 2));
-            int yTrans = (int)((fabEndLocation.getY() + fabEndLocation.getHeight() / 2) - (fab.getY() + fab.getHeight() / 2));
+            int xTrans = (int) ((fabEndLocation.getX() + fabEndLocation.getWidth() / 2) - (fab.getX() + fab.getWidth() / 2));
+            int yTrans = (int) ((fabEndLocation.getY() + fabEndLocation.getHeight() / 2) - (fab.getY() + fab.getHeight() / 2));
 
             fab.animate()
                     .translationX(xTrans)
                     .translationY(yTrans)
-                    .scaleX((float) fabEndLocation.getWidth() / (float)fab.getWidth())
-                    .scaleY((float) fabEndLocation.getHeight() / (float)fab.getHeight())
+                    .scaleX((float) fabEndLocation.getWidth() / (float) fab.getWidth())
+                    .scaleY((float) fabEndLocation.getHeight() / (float) fab.getHeight())
                     .setInterpolator(new AccelerateDecelerateInterpolator());
         }
 
@@ -497,7 +503,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void loadHistTest() {
-            similarityTest = new SimilarityTest(context);
+            similarityTest = new SimilarityTest(mContext);
         }
 
         //TODO-beauty: move the add abilty cards and add ability heading code elsewhere, also rename the functions!
@@ -511,7 +517,7 @@ public class MainActivity extends AppCompatActivity
             parent.addView(v);
         }
 
-        private void AddAllCardsAboutHeroes(List<LoadedHeroImage>heroesSeen) {
+        private void AddAllCardsAboutHeroes(List<LoadedHeroImage> heroesSeen) {
             //TODO-prebeta: add "no silences found" text when none found
             AddAbilityHeading("Stuns");
             AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
@@ -535,11 +541,11 @@ public class MainActivity extends AppCompatActivity
             List<HeroAbility> abilities = new ArrayList<>();
             for (LoadedHeroImage hero : heroes) {
                 for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
-                    if(abilityType == HeroAbility.STUN && ability.isStun)
+                    if (abilityType == HeroAbility.STUN && ability.isStun)
                         abilities.add(ability);
-                    else if(abilityType == HeroAbility.SILENCE && ability.isSilence)
+                    else if (abilityType == HeroAbility.SILENCE && ability.isSilence)
                         abilities.add(ability);
-                    else if(abilityType == HeroAbility.ULTIMATE && ability.isUltimate)
+                    else if (abilityType == HeroAbility.ULTIMATE && ability.isUltimate)
                         abilities.add(ability);
                 }
             }
@@ -551,12 +557,12 @@ public class MainActivity extends AppCompatActivity
             return AddAbilityCards(abilities, -1);
         }
 
-      private boolean AddAbilityCards(List<HeroAbility> abilities, int abilityType) {
+        private boolean AddAbilityCards(List<HeroAbility> abilities, int abilityType) {
             LinearLayout parent = (LinearLayout) findViewById(R.id.layout_results_info);
             boolean cardsAdded = false;
 
             for (HeroAbility ability : abilities) {
-                AbilityCard card = new AbilityCard(context, ability, abilityType);
+                AbilityCard card = new AbilityCard(mContext, ability, abilityType);
                 parent.addView(card);
                 cardsAdded = true;
             }
@@ -565,7 +571,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void AddAbilityCardsForAllHeroAbilities(List<LoadedHeroImage> heroes) {
-            for(LoadedHeroImage loadedHeroImage : heroes) {
+            for (LoadedHeroImage loadedHeroImage : heroes) {
                 HeroInfo hero = FindHeroWithName(loadedHeroImage.name);
                 AddAbilityHeading(hero.name);
                 AddAbilityCards(hero.abilities);
@@ -615,54 +621,44 @@ public class MainActivity extends AppCompatActivity
 }
 
 
-
-
-/*
-class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
-    private List<HeroAbility> stunAbilities;
+class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder> {
+    private List<HeroAndSimilarity> mHeroes;
 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private final ImageView imageView;
 
         public ViewHolder(View v) {
             super(v);
-            v.setOnClickListener(new View.OnClickListener() {
+            imageView = (ImageView) v.findViewById(R.id.image);
+/*            v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        Log.d("HeroInfoAdapter", "Element " + getPosition() + " clicked.");
+                        Log.d("HeroImageAdapter", "Element " + getPosition() + " clicked.");
                 }
-            });
-            textView = (TextView) v.findViewById(R.id.textView);
+            });*/
         }
 
-        public TextView getTextView() {
-            return textView;
+        public ImageView getImageView() {
+            return imageView;
         }
     }
 
-    public HeroInfoAdapter() {
-        stunAbilities = new ArrayList<>();
+    public HeroImageAdapter() {
+        mHeroes = new ArrayList<>();
         return;
     }
 
-    public HeroInfoAdapter(List<LoadedHeroImage> heroes) {
-        stunAbilities = new ArrayList<>();
-        for(LoadedHeroImage hero : heroes) {
-            for (HeroAbility ability : MainActivity.FindHeroWithName(hero.name).abilities) {
-                if (ability.isStun) {
-                    stunAbilities.add(ability);
-                }
-            }
-        }
+    public HeroImageAdapter(List<HeroAndSimilarity> heroes) {
+        mHeroes = heroes;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public HeroInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public HeroImageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                          int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_ability_info, parent, false);
+                .inflate(R.layout.item_hero_recycler_image, parent, false);
         // google says that here you set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -673,13 +669,13 @@ class HeroInfoAdapter extends RecyclerView.Adapter<HeroInfoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.getTextView().setText(stunAbilities.get(position).description);
+        holder.getImageView().setImageResource(mHeroes.get(position).hero.getImageResource());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return stunAbilities.size();
+        return mHeroes.size();
     }
 }
-*/
+
