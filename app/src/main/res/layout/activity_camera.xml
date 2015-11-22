@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- TODO-prebeta: find a way to not have to use a camera_preview_width dimen and just make the preview fill the remaining space. -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,8 +9,9 @@
 
     <RelativeLayout
         android:id="@+id/camera_preview_parent"
-        android:layout_width="@dimen/camera_preview_width"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <FrameLayout
             android:id="@+id/camera_preview"
@@ -31,6 +30,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:gravity="center"
                 android:text="@string/camera_help_text"
                 android:textColor="#ffffff"/>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="camera_preview_width">512dp</dimen>
     <dimen name="camera_buttons_width">80dp</dimen>
 </resources>
