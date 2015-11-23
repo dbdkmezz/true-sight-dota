@@ -30,6 +30,9 @@ import java.util.List;
 
 
 //TODO-someday: Decide if I just want to load the XML for the heroes I've taken the photo of. That may be faster.
+
+//TODO-someday: Look into using a database (sqlite?) for hero info instead of an XML file
+
 public class LoadHeroXml {
 
     static final String sNullString = null;

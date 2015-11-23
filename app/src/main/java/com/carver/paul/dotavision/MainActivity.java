@@ -43,7 +43,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -373,6 +375,9 @@ public class MainActivity extends AppCompatActivity
             pulse.setRepeatMode(Animation.REVERSE);
             view.startAnimation(pulse);
 
+            View processingText = findViewById(R.id.text_processing_image);
+            processingText.setVisibility(View.VISIBLE);
+
 /*            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             AnimatorSet animatorSet = new AnimatorSet();
             ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.8f);
@@ -448,18 +453,15 @@ public class MainActivity extends AppCompatActivity
                 ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
                 leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
 
-                RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image);
+/*                RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
+                recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));*/
 
-/*
                 HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
                 ImageView rightImage = (ImageView) foundPicturesView.findViewById(R.id.image_right);
-                //rightImage.setImageBitmap(matchingHero.hero.getBitmap(this.context));
                 rightImage.setImageResource(matchingHero.hero.getImageResource());
-*/
 
                 parent.addView(foundPicturesView);
 
@@ -483,6 +485,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void moveCameraFabToBottomRight() {
+            // First hide the text to say that the image is being processed
+            View processingText = findViewById(R.id.text_processing_image);
+            processingText.setVisibility(View.GONE);
+
+//TODO: fix bug where fab goes beyond bottom of screen, and so scrolls it down somehow.
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
             View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
 

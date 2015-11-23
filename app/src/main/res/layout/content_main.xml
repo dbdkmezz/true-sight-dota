@@ -8,15 +8,6 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <!--    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Debug Line Detection"
-            android:id="@+id/debugLineButton"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:onClick="startDebugLineActivity" />-->
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -26,17 +17,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
-
-            <!--            <SurfaceView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content">
-                        </SurfaceView>-->
-
-<!--
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/infoRecyclerView"
-                android:layout_width="fill_parent"
-                android:layout_height="250dp"/>-->
 
             <FrameLayout
                 android:layout_width="fill_parent"

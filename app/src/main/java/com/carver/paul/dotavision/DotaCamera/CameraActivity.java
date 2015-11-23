@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2015 Paul Broadbent
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -76,10 +76,9 @@ public class CameraActivity extends Activity {
         //TODO: ensure I'm using the camera opening task correctly
 
 
-
         // Setup the camera
         if (mCamera == null) {
-            if(mCameraOpeningTask != null) {
+            if (mCameraOpeningTask != null) {
                 Log.w(TAG, "Running onResume, but ther mCameraOpeningTask is already running. " +
                         "I don't think this can happen, so I must have missed soemthing!");
                 mCameraOpeningTask.cancel(true);
@@ -103,6 +102,7 @@ public class CameraActivity extends Activity {
 
     /**
      * called when the capture photo buttin is pressed
+     *
      * @param view
      */
     public void capturePhoto(View view) {
@@ -148,7 +148,8 @@ public class CameraActivity extends Activity {
 
     /**
      * called with the confirm capture photo buttin is pressed
-      * @param view
+     *
+     * @param view
      */
     public void confirmPhoto(View view) {
         Intent resultIntent = new Intent();
@@ -265,7 +266,8 @@ public class CameraActivity extends Activity {
             if (camera != null) {
                 Camera.Parameters parameters = camera.getParameters();
 
-                Camera.Size size = findSmallestGoodCameraSize(parameters.getSupportedPictureSizes());
+                Camera.Size size = findSmallestGoodCameraSize(parameters.getSupportedPictureSizes(),
+                        parameters.getSupportedPreviewSizes());
                 if (size != null) {
                     parameters.setPictureSize(size.width, size.height);
                     parameters.setPreviewSize(size.width, size.height);
@@ -292,7 +294,7 @@ public class CameraActivity extends Activity {
                     parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
 
-            //TODO-someday: make camera exposure auto
+                //TODO-someday: make camera exposure auto
 /*          int maxExposure = parameters.getMaxExposureCompensation();
             if (maxExposure != 0)
                 parameters.setExposureCompensation(maxExposure * 3 / 4);*/
@@ -304,30 +306,47 @@ public class CameraActivity extends Activity {
             }
         }
 
-        private Camera.Size findSmallestGoodCameraSize(List<Camera.Size> sizes) {
+        /**
+         * Returns the smallest Size which is in both input lists and bigger than
+         * SCALED_IMAGE_WIDTH x SCALED_IMAGE_HEIGHT.
+         *
+         * @param pictureSizes
+         * @param previewSizes
+         * @return
+         */
+        private Camera.Size findSmallestGoodCameraSize(List<Camera.Size> pictureSizes,
+                                                       List<Camera.Size> previewSizes) {
+
+            if(pictureSizes.isEmpty() || previewSizes.isEmpty()) {
+                Log.e(TAG, "Can't set a camera size because there are none supported!");
+                return null;
+            }
+
             List<Camera.Size> sizesWithGoodWidth = new ArrayList<>();
 
-            //get a list of all the sizes with the smallest width at lest SCALED_IMAGE_WIDTH
-            for (Camera.Size currentSize : sizes) {
-                if (currentSize.width >= Variables.SCALED_IMAGE_WIDTH) {
+            //get a list of all the sizes with the smallest width which is at least SCALED_IMAGE_WIDTH
+            for (Camera.Size size : previewSizes) {
+                if (pictureSizes.contains(size)
+                        && (size.width >= Variables.SCALED_IMAGE_WIDTH)) {
                     if (sizesWithGoodWidth.isEmpty()) {
-                        sizesWithGoodWidth.add(currentSize);
-                    } else if (sizesWithGoodWidth.get(0).width == currentSize.width) {
-                        sizesWithGoodWidth.add(currentSize);
-                    } else if (sizesWithGoodWidth.get(0).width > currentSize.width) {
+                        sizesWithGoodWidth.add(size);
+                    } else if (sizesWithGoodWidth.get(0).width == size.width) {
+                        sizesWithGoodWidth.add(size);
+                    } else if (sizesWithGoodWidth.get(0).width > size.width) {
                         sizesWithGoodWidth.clear();
-                        sizesWithGoodWidth.add(currentSize);
+                        sizesWithGoodWidth.add(size);
                     }
                 }
             }
 
             Camera.Size result = null;
 
-            // of the sizes with good witdth, find the one with the smallest height at least SCALED_IMAGE_HEIGHT
-            for (Camera.Size currentSize : sizesWithGoodWidth) {
-                if (currentSize.height >= Variables.SCALED_IMAGE_HEIGHT &&
-                        (result == null || result.height > currentSize.height)) {
-                    result = currentSize;
+            // of the sizes with a good width, find the one with the smallest height which is at
+            // least SCALED_IMAGE_HEIGHT
+            for (Camera.Size size : sizesWithGoodWidth) {
+                if (size.height >= Variables.SCALED_IMAGE_HEIGHT
+                        && (result == null || result.height > size.height)) {
+                    result = size;
                 }
             }
 
@@ -335,11 +354,16 @@ public class CameraActivity extends Activity {
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "Failed to find appropriate camera size.");
                 }
-                if (!sizes.isEmpty()) {
-                    result = sizes.get(0);
-                } else {
-                    Log.e(TAG, "Can't se a camear size because there are none!");
+
+                // Can't find a good size, so I'll just return any old one
+                for (Camera.Size size : previewSizes) {
+                    if (pictureSizes.contains(size)) {
+                        return size;
+                    }
                 }
+
+                //TODO-someday: find out if should ever be the case that there are no common sizes in preview and picture
+                Log.e(TAG, "Failed to any camera sizes which I can use for the preview and the picture.");
             }
 
             return result;
@@ -350,7 +374,7 @@ public class CameraActivity extends Activity {
          * what will be used in the app and is of the ratio Variables.SCALED_IMAGE_WIDTH : Variables.SCALED_IMAGE_HEIGHT
          */
         private void setupPreviewLetterbox() {
-            if(mCamera == null) {
+            if (mCamera == null) {
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "Not setting up preview letterbox because camera is null. " +
                             "I don't think that should ever happen!");

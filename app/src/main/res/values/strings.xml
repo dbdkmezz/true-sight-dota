@@ -14,6 +14,7 @@
     <string name="picture">Picture</string>
     <string name="camera_help_text">Position the 5 enemy hero portraits to fill the box below. Ensure the colored lines above them are visible.</string>
     <string name="request_permission">This app needs camera permission.</string>
+    <string name="processing_image">Detecting heroes...</string>
 
     <string name="about_text">&appname; is free software. You can redistribute it and/or modify
         it under the terms of the GNU General Public License v3. The source code is freely

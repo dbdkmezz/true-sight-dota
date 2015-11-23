@@ -27,17 +27,28 @@
             android:layout_height="@dimen/big_photo_fab_size"
             android:layout_gravity="center"
             android:onClick="takePhoto"
-            android:src="@android:drawable/ic_menu_camera"/>
+            android:src="@android:drawable/ic_menu_camera" />
 
-<!--This is an invisible fab, used to know where to put the fab after its first press-->
+        <TextView
+            android:id="@+id/text_processing_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_triple_vertical_margin"
+            android:paddingTop="@dimen/big_photo_fab_size"
+            android:text="@string/processing_image"
+            android:textSize="@dimen/large_text"
+            android:visibility="gone" />
+
+        <!--This is an invisible fab, used to know where to put the fab after its first press-->
         <View
             android:id="@+id/button_fab_take_photo_final_location"
             android:layout_width="@dimen/fab_width"
             android:layout_height="@dimen/fab_width"
             android:layout_gravity="bottom|right"
-            android:layout_marginRight="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:visibility="gone"/>
+            android:layout_marginRight="@dimen/fab_margin"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/layout_demo_and_last_photo_buttons"
@@ -48,7 +59,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
-<!--            TODO: Fix demo and last photo button elevations. only top one seems to be showing-->
+            <!--            TODO: Fix demo and last photo button elevations. only top one seems to have a shadow-->
 
             <Button
                 android:id="@+id/button_demo"

@@ -47,10 +47,7 @@ public class HeroFromPhoto {
     public HeroFromPhoto(HeroLine line, Mat backgroundImage) {
 
         if (line.isRealLine == false) {
-//            throw new RuntimeException("Trying to create HeroFromPhoto with invalid HeroLine!");
-            Rect rect = new Rect(0, 0, 10, 10);
-            image = new Mat(backgroundImage, rect);
-//            System.out.println("ERROR, trying to create HeroFromPhoto with invalid HeroLine.");
+            setupFakeHeroFromPhoto(backgroundImage);
             return;
         }
 
@@ -65,9 +62,14 @@ public class HeroFromPhoto {
         if (top + finalHeight > backgroundImage.height())
             finalHeight = backgroundImage.height() - top;
 
-        Rect rect = new Rect(left, top, width, finalHeight);
 
-        image = new Mat(backgroundImage, rect);
+        if(left < 0 || left > backgroundImage.width() || top < 0 || top >  backgroundImage.height()) {
+            setupFakeHeroFromPhoto(backgroundImage);
+            return;
+        } else {
+            Rect rect = new Rect(left, top, width, finalHeight);
+            image = new Mat(backgroundImage, rect);
+        }
     }
 
     public void calcSimilarityList(SimilarityTest similarityTest) {
@@ -78,5 +80,13 @@ public class HeroFromPhoto {
         if (similarityList == null)
             throw new RuntimeException("Can't get similarity list if not loaded!");
         return similarityList;
+    }
+
+    private void setupFakeHeroFromPhoto(Mat backgroundImage) {
+        int width = 10;
+        int height = (int) (width / rationHeightToWidthbeforeCuts);
+        Rect rect = new Rect(0, 0, width, height);
+
+        image = new Mat(backgroundImage, rect);
     }
 }
