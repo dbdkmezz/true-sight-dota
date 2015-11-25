@@ -60,9 +60,10 @@
             android:layout_width="@dimen/camera_buttons_width"
             android:layout_height="@dimen/camera_buttons_width"
             android:onClick="capturePhoto"
-            android:src="@android:drawable/ic_menu_camera"
+            android:src="@drawable/button_camera_small"
             android:background="#000000"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"/>
 
         <ImageButton
             android:id="@+id/button_confirm"

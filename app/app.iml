@@ -77,6 +77,7 @@
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/incremental" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/manifests" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/pre-dexed" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/release" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/res" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/rs" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/symbols" />
