@@ -27,8 +27,12 @@
             android:layout_height="@dimen/big_photo_fab_size"
             android:layout_gravity="center"
             android:onClick="takePhoto"
-            android:src="@android:drawable/ic_menu_camera" />
+            android:src="@drawable/button_camera" />
 
+<!--
+        android:src="@drawable/button_camera" />
+        android:src="@android:drawable/ic_menu_camera" />
+-->
         <TextView
             android:id="@+id/text_processing_image"
             android:layout_width="wrap_content"
