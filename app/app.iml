@@ -65,6 +65,7 @@
       <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/src/androidTest/rs" isTestSource="true" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/assets" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/blame" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/classes" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/debug" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/dependency-cache" />
@@ -75,13 +76,21 @@
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/incremental" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/incremental-classes" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/incremental-runtime-classes" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/incremental-verifier" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/instant-run-support" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/jniLibs" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/manifests" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/pre-dexed" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/release" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/reload-dex" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/res" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/restart-dex" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/rs" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/symbols" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/tmp" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/intermediates/transforms" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/outputs" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/app/build/tmp" />
     </content>

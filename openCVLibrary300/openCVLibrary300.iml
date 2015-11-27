@@ -66,14 +66,18 @@
       <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/src/androidTest/rs" isTestSource="true" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/assets" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/blame" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/bundles" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/classes" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/dependency-cache" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/incremental" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/jniLibs" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/lint" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/res" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/restart-dex" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/rs" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/symbols" />
+      <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/intermediates/transforms" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/outputs" />
       <excludeFolder url="file:///home-ssd/paul/programming/AndroidStudioProjects/true-sight-dota/openCVLibrary300/build/tmp" />
     </content>

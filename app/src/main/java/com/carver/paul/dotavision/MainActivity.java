@@ -36,6 +36,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -443,7 +444,7 @@ public class MainActivity extends AppCompatActivity
             }
 
             //A list of the heroes we've seen, for use when adding the ability cards
-            List<LoadedHeroImage> heroesSeen = new ArrayList<>();
+            List<HeroInfo> heroesSeen = new ArrayList<>();
 
             LinearLayout parent = (LinearLayout) findViewById(R.id.layout_show_found_hero_pictures);
             LayoutInflater inflater = getLayoutInflater();
@@ -453,20 +454,37 @@ public class MainActivity extends AppCompatActivity
                 ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
                 leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
 
-/*                RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image);
+                RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));*/
+                recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
 
-                HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
+
+                HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name);
+                TextView heroName = (TextView) foundPicturesView.findViewById(R.id.text_hero_name);
+                heroName.setText(heroInfo.name);
+
+
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+                // This makes the recyclerView automatically lock on the image which has been
+                // scrolled to. Thanks stackoverflow and Github :)
+                int center = (11 * metrics.widthPixels / 24);
+                recyclerView.setOnScrollListener(new CenterLockListener(mContext, center, heroName,
+                        heroInfo, heroesSeen, hero.getSimilarityList(),
+                        (LinearLayout) findViewById(R.id.layout_results_info)));
+
+/*                HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
                 ImageView rightImage = (ImageView) foundPicturesView.findViewById(R.id.image_right);
-                rightImage.setImageResource(matchingHero.hero.getImageResource());
+                rightImage.setImageResource(matchingHero.hero.getImageResource());*/
 
                 parent.addView(foundPicturesView);
 
-                if (!heroesSeen.contains(hero.getSimilarityList().get(0).hero)) {
-                    heroesSeen.add(hero.getSimilarityList().get(0).hero);
+
+                if (!heroesSeen.contains(heroInfo)) {
+                    heroesSeen.add(heroInfo);
                 }
 
                 if (BuildConfig.DEBUG && sDebugMode)
@@ -474,8 +492,6 @@ public class MainActivity extends AppCompatActivity
             }
 
             AddAllCardsAboutHeroes(heroesSeen);
-
-            //mRecyclerView.setAdapter(new HeroInfoAdapter(heroesSeen));
 
             LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
@@ -516,6 +532,7 @@ public class MainActivity extends AppCompatActivity
         //TODO-beauty: move the add abilty cards and add ability heading code elsewhere, also rename the functions!
         private void AddAbilityHeading(String string) {
             if (string == null) return;
+
             LinearLayout parent = (LinearLayout) findViewById(R.id.layout_results_info);
             LayoutInflater inflater = getLayoutInflater();
             View v = inflater.inflate(R.layout.item_abilty_info_heading, parent, false);
@@ -524,7 +541,7 @@ public class MainActivity extends AppCompatActivity
             parent.addView(v);
         }
 
-        private void AddAllCardsAboutHeroes(List<LoadedHeroImage> heroesSeen) {
+        private void AddAllCardsAboutHeroes(List<HeroInfo> heroesSeen) {
             //TODO-prebeta: add "no silences found" text when none found
             AddAbilityHeading("Stuns");
             AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
@@ -544,10 +561,10 @@ public class MainActivity extends AppCompatActivity
          * @param abilityType
          * @return returns true if any cards have been added
          */
-        private boolean AddAbilityCardsForHeroesList(List<LoadedHeroImage> heroes, int abilityType) {
+        private boolean AddAbilityCardsForHeroesList(List<HeroInfo> heroes, int abilityType) {
             List<HeroAbility> abilities = new ArrayList<>();
-            for (LoadedHeroImage hero : heroes) {
-                for (HeroAbility ability : FindHeroWithName(hero.name).abilities) {
+            for (HeroInfo hero : heroes) {
+                for (HeroAbility ability : hero.abilities) {
                     if (abilityType == HeroAbility.STUN && ability.isStun)
                         abilities.add(ability);
                     else if (abilityType == HeroAbility.SILENCE && ability.isSilence)
@@ -577,9 +594,8 @@ public class MainActivity extends AppCompatActivity
             return cardsAdded;
         }
 
-        private void AddAbilityCardsForAllHeroAbilities(List<LoadedHeroImage> heroes) {
-            for (LoadedHeroImage loadedHeroImage : heroes) {
-                HeroInfo hero = FindHeroWithName(loadedHeroImage.name);
+        private void AddAbilityCardsForAllHeroAbilities(List<HeroInfo> heroes) {
+            for (HeroInfo hero : heroes) {
                 AddAbilityHeading(hero.name);
                 AddAbilityCards(hero.abilities);
             }
@@ -622,9 +638,7 @@ public class MainActivity extends AppCompatActivity
             }
             return null;
         }
-
     }
-
 }
 
 

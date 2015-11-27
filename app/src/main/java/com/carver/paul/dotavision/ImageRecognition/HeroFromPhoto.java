@@ -63,13 +63,16 @@ public class HeroFromPhoto {
             finalHeight = backgroundImage.height() - top;
 
 
-        if(left < 0 || left > backgroundImage.width() || top < 0 || top >  backgroundImage.height()) {
+        if (left < 0) left = 0;
+        if (top < 0) top = 0;
+
+        if (left > backgroundImage.width() || top > backgroundImage.height()) {
             setupFakeHeroFromPhoto(backgroundImage);
             return;
-        } else {
-            Rect rect = new Rect(left, top, width, finalHeight);
-            image = new Mat(backgroundImage, rect);
         }
+
+        Rect rect = new Rect(left, top, width, finalHeight);
+        image = new Mat(backgroundImage, rect);
     }
 
     public void calcSimilarityList(SimilarityTest similarityTest) {
