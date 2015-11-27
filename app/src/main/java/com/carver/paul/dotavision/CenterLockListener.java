@@ -9,13 +9,9 @@
 
 package com.carver.paul.dotavision;
 
-
-import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 
@@ -27,30 +23,20 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
     private boolean mAutoSet = true;
 
     //The pivot to be snapped to
-    private Context mContext;
     private int mCenterPivot;
-    private TextView mTextViewHeroName;
-    private List<HeroAndSimilarity> mSimilarityList;
-    private HeroInfo mHero;
-    private List<HeroInfo> mHeroesSeen;
-    private LinearLayout mResultsLayout;
 
-    public CenterLockListener(Context context,
-                              int center,
-                              TextView heroNameTextView,
-                              HeroInfo hero,
-                              //TODO: NO! don't pass heroesSeen, memory leeeeeeeeeeeak!
-                              List<HeroInfo> heroesSeen,
+    FoundHeroesFragment.OnHeroChangedListener mHeroChangedListener;
+    HeroAndSimilarity mHero;
+    List<HeroAndSimilarity> mSimilarityList;
+
+    public CenterLockListener(int center,
+                              FoundHeroesFragment.OnHeroChangedListener heroChangedListener,
                               List<HeroAndSimilarity> similarityList,
-                              LinearLayout resultsLayout){
-        mContext = context;
-        this.mCenterPivot = center;
-
-        mTextViewHeroName = heroNameTextView;
-        mHeroesSeen = heroesSeen;
-        mHero = hero;
+                              HeroAndSimilarity hero){
+        mCenterPivot = center;
+        mHeroChangedListener = heroChangedListener;
         mSimilarityList = similarityList;
-        mResultsLayout = resultsLayout;
+        mHero = hero;
     }
 
     @Override
@@ -88,7 +74,6 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
             }
         }
         if( newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING ){
-
             mAutoSet =false;
         }
     }
@@ -127,36 +112,15 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
         }
 
         if(foundPos != -1) {
-            setHero(foundPos - 1);
+            reportHeroChange(foundPos - 1);
         }
 
         return returnView;
     }
 
-    private void setHero(int pos) {
-        mTextViewHeroName.setText(mSimilarityList.get(pos).hero.name);
-        mResultsLayout.removeAllViews();
-/*        ReplaceSeenHero(mHero, heroFound);
-        mHero = heroFound;*/
-    }
-
-
-    /**
-     * Removes a hero from the list of heroes seen, and reaplces it with another
-     * Then redraws the hero Abilities
-     * @param heroToRemove
-     * @param heroToAdd
-     */
-    public void ReplaceSeenHero(HeroInfo heroToRemove, HeroInfo heroToAdd) {
-        if(mHeroesSeen == null ) return;
-
-        if(mHeroesSeen.contains(heroToRemove)) {
-            mHeroesSeen.remove(heroToRemove);
-            mHeroesSeen.add(heroToAdd);
-
-            mResultsLayout.removeAllViews();
-/*
-            AddAllCardsAboutHeroes();*/
-        }
+    private void reportHeroChange(int pos) {
+        HeroAndSimilarity newHero = mSimilarityList.get(pos);
+        mHeroChangedListener.onHeroChanged(mHero, newHero);
+        mHero = newHero;
     }
 }

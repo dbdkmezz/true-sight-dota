@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2015 Paul Broadbent
- * <p>
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p>
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p>
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -33,10 +33,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -44,9 +42,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,8 +53,6 @@ import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
-import com.carver.paul.dotavision.ImageRecognition.ImageTools;
-import com.carver.paul.dotavision.ImageRecognition.LoadedHeroImage;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
@@ -90,7 +84,8 @@ import java.util.List;
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        FoundHeroesFragment.OnHeroChangedListener {
 
     // sDebugMode is true if I want to show extra debug information. It is ignored when
     // BuildConfig.DEBUG is false (i.e. the app is compiled for release)
@@ -99,6 +94,9 @@ public class MainActivity extends AppCompatActivity
 
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     private static final String TAG = "MainActivity";
+
+    private List<HeroInfo> mHeroInfoList = null;
+    List<HeroInfo> mHeroesSeen;
 
 /*
     private RecyclerView mRecyclerView;
@@ -157,6 +155,25 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void onHeroChanged(HeroAndSimilarity oldHero, HeroAndSimilarity newHero) {
+        if (mHeroesSeen == null || mHeroInfoList == null) return;
+
+        HeroInfo heroInfoOldHero = FindHeroWithName(oldHero.hero.name, mHeroInfoList);
+        if (mHeroesSeen.contains(heroInfoOldHero)) {
+            mHeroesSeen.remove(heroInfoOldHero);
+            mHeroesSeen.add(FindHeroWithName(newHero.hero.name, mHeroInfoList));
+
+            //TODO-now: need to put ability cards into a fragment, and make resetting them something
+            //I can call from here. Also, need to load the XML for mHeroInfoList at some point. In
+            // another thread? And also need to pass it to the identifiying thread
+            // The xml loading IS NOT WORKING YET, because it isn't getting returned...
+            LinearLayout layout = (LinearLayout) findViewById(R.id.layout_results_info);
+            layout.removeAllViews();
+
+            AddAllCardsAboutHeroes(mHeroesSeen);
+        }
     }
 
     public void startDebugLineActivity() {
@@ -233,6 +250,19 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    // TODO-prebeta: replace FindHeroWithName to use the drawable id int instead of strings
+    public static HeroInfo FindHeroWithName(String name, List<HeroInfo> heroInfoList) {
+        if(heroInfoList == null)
+            throw new RuntimeException("Called FindHeroWithName when mHeroInfoList is not initialised.");
+
+        for (HeroInfo hero : heroInfoList) {
+            if (hero.HasName(name)) {
+                return hero;
+            }
+        }
+        return null;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
@@ -261,16 +291,22 @@ public class MainActivity extends AppCompatActivity
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
         topImage.setImageBitmap(bitmap);
 
-        new RecognitionTask(this).execute(bitmap);
+        if(mHeroInfoList == null) {
+            mHeroInfoList = new ArrayList<>();
+        }
+        RecognitionTaskParams params = new RecognitionTaskParams(bitmap, mHeroInfoList);
+
+        new RecognitionTask(this).execute(params);
     }
 
     //TODO-prebeta: make it so RecognitionTask gets passed heroInfoList and similarityTest by MainActivity so I don't have to load them every time.
-    private class RecognitionTask extends AsyncTask<Bitmap, Void, List<HeroFromPhoto>> {
+    private class RecognitionTask extends AsyncTask<RecognitionTaskParams, Void, List<HeroFromPhoto>> {
 
         static final String TAG = "RecognitionTask";
 
-        private List<HeroInfo> heroInfoList = null;
         private SimilarityTest similarityTest = null;
+        // TODO: should I pass mHeroInfoList around rather than make it a member variable?
+        private List<HeroInfo> mHeroInfoList;
         private Context mContext;
 
         public RecognitionTask(Context context) {
@@ -287,11 +323,11 @@ public class MainActivity extends AppCompatActivity
         private void resetInfo() {
             LinearLayout layout = (LinearLayout) findViewById(R.id.layout_results_info);
             layout.removeAllViews();
-            layout = (LinearLayout) findViewById(R.id.layout_show_found_hero_pictures);
+            layout = (LinearLayout) findViewById(R.id.layout_found_hero_pictures);
             layout.removeAllViews();
 
             if (BuildConfig.DEBUG && sDebugMode) {
-                List<Integer> textViewIds = Arrays.asList(R.id.text_similarity_info, R.id.text_image_debug);
+                List<Integer> textViewIds = Arrays.asList(R.id.text_debug_similarity_info, R.id.text_image_debug);
                 ResetTextViews(textViewIds);
             }
         }
@@ -310,14 +346,20 @@ public class MainActivity extends AppCompatActivity
         }
 
         // This is where the hard work happens which needs to be off the UI thread
-        protected List<HeroFromPhoto> doInBackground(Bitmap... bitmaps) {
-            if (heroInfoList == null)
+        protected List<HeroFromPhoto> doInBackground(RecognitionTaskParams ... params) {
+            mHeroInfoList = params[0].heroInfoList;
+
+            if(mHeroInfoList == null) {
+                throw new RuntimeException("mHeroInfoList has not been instantiated as a list.");
+            }
+
+            if (mHeroInfoList.isEmpty())
                 LoadXML();
             if (similarityTest == null)
                 loadHistTest();
 
             // do the hard work of the image recognition
-            return Recognition.Run(bitmaps[0], similarityTest);
+            return Recognition.Run(params[0].bitmap, similarityTest);
         }
 
         /**
@@ -444,54 +486,19 @@ public class MainActivity extends AppCompatActivity
             }
 
             //A list of the heroes we've seen, for use when adding the ability cards
-            List<HeroInfo> heroesSeen = new ArrayList<>();
+            mHeroesSeen = new ArrayList<>();
 
-            LinearLayout parent = (LinearLayout) findViewById(R.id.layout_show_found_hero_pictures);
-            LayoutInflater inflater = getLayoutInflater();
+            FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes_frag);
+            foundHeroesFragment.showFoundHeroes(heroes);
 
             for (HeroFromPhoto hero : heroes) {
-                LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
-                ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
-                leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
-
-                RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
-
-
-                HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name);
-                TextView heroName = (TextView) foundPicturesView.findViewById(R.id.text_hero_name);
-                heroName.setText(heroInfo.name);
-
-
-                DisplayMetrics metrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-                // This makes the recyclerView automatically lock on the image which has been
-                // scrolled to. Thanks stackoverflow and Github :)
-                int center = (11 * metrics.widthPixels / 24);
-                recyclerView.setOnScrollListener(new CenterLockListener(mContext, center, heroName,
-                        heroInfo, heroesSeen, hero.getSimilarityList(),
-                        (LinearLayout) findViewById(R.id.layout_results_info)));
-
-/*                HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
-                ImageView rightImage = (ImageView) foundPicturesView.findViewById(R.id.image_right);
-                rightImage.setImageResource(matchingHero.hero.getImageResource());*/
-
-                parent.addView(foundPicturesView);
-
-
-                if (!heroesSeen.contains(heroInfo)) {
-                    heroesSeen.add(heroInfo);
+                HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name, mHeroInfoList);
+                if (!mHeroesSeen.contains(heroInfo)) {
+                    mHeroesSeen.add(heroInfo);
                 }
-
-                if (BuildConfig.DEBUG && sDebugMode)
-                    showSimilarityInfo(hero.getSimilarityList());
             }
 
-            AddAllCardsAboutHeroes(heroesSeen);
+            AddAllCardsAboutHeroes(mHeroesSeen);
 
             LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
@@ -522,7 +529,7 @@ public class MainActivity extends AppCompatActivity
 
         private void LoadXML() {
             XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
-            heroInfoList = LoadHeroXml.Load(parser);
+            mHeroInfoList = LoadHeroXml.Load(parser);
         }
 
         private void loadHistTest() {
@@ -608,39 +615,20 @@ public class MainActivity extends AppCompatActivity
                 tv.setVisibility(View.GONE);
             }
         }
-
-        private void showSimilarityInfo(List<HeroAndSimilarity> similarityList) {
-            TextView infoText = (TextView) findViewById(R.id.text_similarity_info);
-            infoText.setText("");
-            infoText.setVisibility(View.VISIBLE);
-            HeroAndSimilarity matchingHero = similarityList.get(0);
-
-            infoText.append(matchingHero.hero.name + ", " + matchingHero.similarity);
-
-            // poor result, so lets show some alternatives
-            if (matchingHero.similarity < 0.65) {
-                infoText.append(". (Alternatives: ");
-                for (int i = 1; i < 6; i++) {
-                    infoText.append(similarityList.get(i).hero.name + "," + similarityList.get(i).similarity + ". ");
-                }
-                infoText.append(")");
-            }
-
-            infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
-        }
-
-        // TODO-prebeta: replace FindHeroWithName to use the drawable id int instead of strings
-        private HeroInfo FindHeroWithName(String name) {
-            for (HeroInfo hero : heroInfoList) {
-                if (hero.HasName(name)) {
-                    return hero;
-                }
-            }
-            return null;
-        }
     }
 }
 
+
+//TODO-someday: find a way to put the RecognitionTaskParams inside that class?
+class RecognitionTaskParams {
+    Bitmap bitmap;
+    List<HeroInfo> heroInfoList;
+
+    RecognitionTaskParams(Bitmap bitmap, List<HeroInfo> heroInfoList) {
+        this.bitmap = bitmap;
+        this.heroInfoList = heroInfoList;
+    }
+}
 
 class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder> {
     private List<HeroAndSimilarity> mHeroes;
