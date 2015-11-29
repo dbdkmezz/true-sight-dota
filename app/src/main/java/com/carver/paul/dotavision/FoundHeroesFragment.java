@@ -28,6 +28,8 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,8 +45,9 @@ import java.util.List;
  * Shows the heroes which have been seen in the image, and allows the user to change them.
  */
 public class FoundHeroesFragment extends Fragment {
-    OnHeroChangedListener mHeroChangedListener;
-    List<TextView> mHeroNamesTextViews;
+    private OnHeroChangedListener mHeroChangedListener;
+    private List<TextView> mHeroNamesTextViews;
+/*    private List<String> mAllHeroNames;*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,12 +78,17 @@ public class FoundHeroesFragment extends Fragment {
         public void onHeroChanged(int posInList, HeroAndSimilarity newHero);
     }
 
-    public void showFoundHeroes(List<HeroFromPhoto> heroes, List<HeroInfo> heroInfoList) {
+    public void showFoundHeroes(List<HeroFromPhoto> heroes,
+                                List<HeroInfo> heroInfoList,
+                                List<HeroInfo> heroInfoFromXml) {
         LinearLayout parent = (LinearLayout) getActivity().findViewById(
                 R.id.layout_found_hero_pictures);
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         mHeroNamesTextViews = new ArrayList<>();
+
+/*        if(mAllHeroNames == null)
+            mAllHeroNames = getHeroNames(heroInfoFromXml);*/
 
         int posInList = 0;
         for (HeroFromPhoto hero : heroes) {
@@ -96,13 +104,25 @@ public class FoundHeroesFragment extends Fragment {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
 
+
+            //TODO: make it so you can change the hero found by changing the text
+/*            AutoCompleteTextView heroNameTextView
+                    = (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name);
+            heroNameTextView.setText(heroInfoList.get(posInList).name);
+            mHeroNamesTextViews.add(heroNameTextView);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                    android.R.layout.simple_dropdown_item_1line, mAllHeroNames);
+            heroNameTextView.setAdapter(adapter);*/
+
+
             TextView heroNameTextView = (TextView) foundPicturesView.findViewById(
                     R.id.text_hero_name);
             heroNameTextView.setText(heroInfoList.get(posInList).name);
             mHeroNamesTextViews.add(heroNameTextView);
 
             //TODO-someday: make the FoundHeroesFragment not depend on the screen width for finding
-            // its centre, should instead use the Fragment's width
+            // its centre, should instead use the Fragment's width. It also goes wrong if the
+            // image on the left hand side is too wide! I don't really understand the math here!
             DisplayMetrics metrics = new DisplayMetrics();
             getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
             // This makes the recyclerView automatically lock on the image which has been
@@ -123,6 +143,14 @@ public class FoundHeroesFragment extends Fragment {
     public void changeHeroName(int posInList, String newName) {
         mHeroNamesTextViews.get(posInList).setText(newName);
     }
+
+/*    private List<String> getHeroNames(List<HeroInfo> heroInfoFromXml) {
+        List<String> names = new ArrayList<>();
+        for(HeroInfo heroInfo : heroInfoFromXml) {
+            names.add(heroInfo.name);
+        }
+        return names;
+    }*/
 
     private void showSimilarityInfo(List<HeroAndSimilarity> similarityList) {
         TextView infoText = (TextView) getActivity().findViewById(R.id.text_debug_similarity_info);

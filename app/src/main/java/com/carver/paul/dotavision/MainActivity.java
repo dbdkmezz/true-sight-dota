@@ -496,7 +496,7 @@ public class MainActivity extends AppCompatActivity
             }
 
             FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen);
+            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mHeroInfoFromXml);
 
             AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
             abilityInfoFragment.showHeroAbilities(mHeroesSeen);

@@ -18,6 +18,8 @@
 
 package com.carver.paul.dotavision.ImageRecognition;
 
+import android.util.Log;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 
@@ -57,6 +59,8 @@ public class HeroFromPhoto {
         int top = line.rect.top + line.rect.height() + (int) (heightWithoutCuts * ratioToCutFromTop);
         int finalHeight = (int) heightWithoutCuts - (int) (heightWithoutCuts * ratioToCutFromBottom);
 
+        Log.d("AA", "width " + width + ", height" + finalHeight);
+
         if (left + width > backgroundImage.width())
             width = backgroundImage.width() - left;
         if (top + finalHeight > backgroundImage.height())
@@ -86,8 +90,8 @@ public class HeroFromPhoto {
     }
 
     private void setupFakeHeroFromPhoto(Mat backgroundImage) {
-        int width = 10;
-        int height = (int) (width / rationHeightToWidthbeforeCuts);
+        int width = 26;
+        int height = 15;//(int) (width / rationHeightToWidthbeforeCuts);
         Rect rect = new Rect(0, 0, width, height);
 
         image = new Mat(backgroundImage, rect);
