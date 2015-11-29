@@ -26,21 +26,18 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
     //The pivot to be snapped to
     private int mCenterPivot;
 
-    FoundHeroesFragment.OnHeroChangedListener mHeroChangedListener;
-    HeroAndSimilarity mHero;
-    List<HeroAndSimilarity> mSimilarityList;
-    TextView mHeroNameTextView;
+    private final FoundHeroesFragment.OnHeroChangedListener mHeroChangedListener;
+    private final int mPosInHeroList;
+    private final List<HeroAndSimilarity> mSimilarityList;
 
     public CenterLockListener(int center,
                               FoundHeroesFragment.OnHeroChangedListener heroChangedListener,
                               List<HeroAndSimilarity> similarityList,
-                              HeroAndSimilarity hero,
-                              TextView heroNameTextView){
+                              int posInHeroList){
         mCenterPivot = center;
         mHeroChangedListener = heroChangedListener;
         mSimilarityList = similarityList;
-        mHero = hero;
-        mHeroNameTextView = heroNameTextView;
+        mPosInHeroList = posInHeroList;
     }
 
     @Override
@@ -124,7 +121,6 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
 
     private void reportHeroChange(int pos) {
         HeroAndSimilarity newHero = mSimilarityList.get(pos);
-        mHeroChangedListener.onHeroChanged(mHero, newHero);
-        mHero = newHero;
+        mHeroChangedListener.onHeroChanged(mPosInHeroList, newHero);
     }
 }

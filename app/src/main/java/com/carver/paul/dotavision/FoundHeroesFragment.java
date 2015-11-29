@@ -44,6 +44,7 @@ import java.util.List;
  */
 public class FoundHeroesFragment extends Fragment {
     OnHeroChangedListener mHeroChangedListener;
+    List<TextView> mHeroNamesTextViews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,13 +72,15 @@ public class FoundHeroesFragment extends Fragment {
      * For use when the user scrolls to select a different hero, changing from oldHero to newHero
      */
     public interface OnHeroChangedListener {
-        public void onHeroChanged(HeroAndSimilarity oldHero, HeroAndSimilarity newHero);
+        public void onHeroChanged(int posInList, HeroAndSimilarity newHero);
     }
 
     public void showFoundHeroes(List<HeroFromPhoto> heroes, List<HeroInfo> heroInfoList) {
         LinearLayout parent = (LinearLayout) getActivity().findViewById(
                 R.id.layout_found_hero_pictures);
         LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        mHeroNamesTextViews = new ArrayList<>();
 
         int posInList = 0;
         for (HeroFromPhoto hero : heroes) {
@@ -96,6 +99,7 @@ public class FoundHeroesFragment extends Fragment {
             TextView heroNameTextView = (TextView) foundPicturesView.findViewById(
                     R.id.text_hero_name);
             heroNameTextView.setText(heroInfoList.get(posInList).name);
+            mHeroNamesTextViews.add(heroNameTextView);
 
             //TODO-someday: make the FoundHeroesFragment not depend on the screen width for finding
             // its centre, should instead use the Fragment's width
@@ -105,8 +109,7 @@ public class FoundHeroesFragment extends Fragment {
             // scrolled to. Thanks stackoverflow and Github :)
             int center = (11 * metrics.widthPixels / 24);
             recyclerView.addOnScrollListener(new CenterLockListener(center, mHeroChangedListener,
-                    hero.getSimilarityList(), hero.getSimilarityList().get(0),
-                    heroNameTextView));
+                    hero.getSimilarityList(), posInList));
 
             parent.addView(foundPicturesView);
 
@@ -115,6 +118,10 @@ public class FoundHeroesFragment extends Fragment {
 
             posInList++;
         }
+    }
+
+    public void changeHeroName(int posInList, String newName) {
+        mHeroNamesTextViews.get(posInList).setText(newName);
     }
 
     private void showSimilarityInfo(List<HeroAndSimilarity> similarityList) {

@@ -161,18 +161,18 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onHeroChanged(HeroAndSimilarity oldHero, HeroAndSimilarity newHero) {
+    public void onHeroChanged(int posInList, HeroAndSimilarity newHero) {
         if (mHeroesSeen == null || mHeroInfoFromXml == null) return;
 
-        HeroInfo heroInfoOldHero = FindHeroWithName(oldHero.hero.name, mHeroInfoFromXml);
-        if (mHeroesSeen.contains(heroInfoOldHero)) {
-            mHeroesSeen.remove(heroInfoOldHero);
-            mHeroesSeen.add(FindHeroWithName(newHero.hero.name, mHeroInfoFromXml));
+        HeroInfo newHeroInfo = FindHeroWithName(newHero.hero.name, mHeroInfoFromXml);
+        mHeroesSeen.set(posInList, newHeroInfo);
 
-            AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-            abilityInfoFragment.reset();
-            abilityInfoFragment.showHeroAbilities(mHeroesSeen);
-        }
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+        abilityInfoFragment.reset();
+        abilityInfoFragment.showHeroAbilities(mHeroesSeen);
+
+        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
+        foundHeroesFragment.changeHeroName(posInList, newHeroInfo.name);
     }
 
     public void startDebugLineActivity() {
@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * Called when the demo buttin is pressed
      * Runs the image recognition on a sample photo which is part of the app
+     *
      * @param view
      */
     public void demoButton(View view) {
@@ -211,6 +212,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Runs the image recognition code on the last photo which was taken by the camera
+     *
      * @param view
      */
     public void useLastPhotoButton(View view) {
@@ -251,7 +253,7 @@ public class MainActivity extends AppCompatActivity
 
     // TODO-prebeta: replace FindHeroWithName to use the drawable id int instead of strings
     public static HeroInfo FindHeroWithName(String name, List<HeroInfo> heroInfoList) {
-        if(heroInfoList == null)
+        if (heroInfoList == null)
             throw new RuntimeException("Called FindHeroWithName when mHeroInfoFromXml is not initialised.");
 
         for (HeroInfo hero : heroInfoList) {
@@ -349,10 +351,10 @@ public class MainActivity extends AppCompatActivity
         }
 
         // This is where the hard work happens which needs to be off the UI thread
-        protected List<HeroFromPhoto> doInBackground(RecognitionTaskParams ... params) {
+        protected List<HeroFromPhoto> doInBackground(RecognitionTaskParams... params) {
             mHeroInfoList = params[0].heroInfoList;
 
-            if(mHeroInfoList == null) {
+            if (mHeroInfoList == null) {
                 throw new RuntimeException("mHeroInfoFromXml has not been instantiated as a list.");
             }
 
