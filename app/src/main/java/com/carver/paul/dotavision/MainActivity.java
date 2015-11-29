@@ -18,7 +18,6 @@
 
 package com.carver.paul.dotavision;
 
-import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
@@ -95,8 +94,10 @@ public class MainActivity extends AppCompatActivity
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     private static final String TAG = "MainActivity";
 
-    private List<HeroInfo> mHeroInfoList = null;
-    List<HeroInfo> mHeroesSeen;
+    // This is where the hero data from the XML gets saved
+    private List<HeroInfo> mHeroInfoFromXml = null;
+
+    private List<HeroInfo> mHeroesSeen = null;
 
 /*
     private RecyclerView mRecyclerView;
@@ -125,6 +126,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (mHeroInfoFromXml == null)
+            mHeroInfoFromXml = LoadXML();
     }
 
     @Override
@@ -158,21 +162,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onHeroChanged(HeroAndSimilarity oldHero, HeroAndSimilarity newHero) {
-        if (mHeroesSeen == null || mHeroInfoList == null) return;
+        if (mHeroesSeen == null || mHeroInfoFromXml == null) return;
 
-        HeroInfo heroInfoOldHero = FindHeroWithName(oldHero.hero.name, mHeroInfoList);
+        HeroInfo heroInfoOldHero = FindHeroWithName(oldHero.hero.name, mHeroInfoFromXml);
         if (mHeroesSeen.contains(heroInfoOldHero)) {
             mHeroesSeen.remove(heroInfoOldHero);
-            mHeroesSeen.add(FindHeroWithName(newHero.hero.name, mHeroInfoList));
+            mHeroesSeen.add(FindHeroWithName(newHero.hero.name, mHeroInfoFromXml));
 
-            //TODO-now: need to put ability cards into a fragment, and make resetting them something
-            //I can call from here. Also, need to load the XML for mHeroInfoList at some point. In
-            // another thread? And also need to pass it to the identifiying thread
-            // The xml loading IS NOT WORKING YET, because it isn't getting returned...
-            LinearLayout layout = (LinearLayout) findViewById(R.id.layout_results_info);
-            layout.removeAllViews();
-
-            AddAllCardsAboutHeroes(mHeroesSeen);
+            AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+            abilityInfoFragment.reset();
+            abilityInfoFragment.showHeroAbilities(mHeroesSeen);
         }
     }
 
@@ -253,7 +252,7 @@ public class MainActivity extends AppCompatActivity
     // TODO-prebeta: replace FindHeroWithName to use the drawable id int instead of strings
     public static HeroInfo FindHeroWithName(String name, List<HeroInfo> heroInfoList) {
         if(heroInfoList == null)
-            throw new RuntimeException("Called FindHeroWithName when mHeroInfoList is not initialised.");
+            throw new RuntimeException("Called FindHeroWithName when mHeroInfoFromXml is not initialised.");
 
         for (HeroInfo hero : heroInfoList) {
             if (hero.HasName(name)) {
@@ -276,6 +275,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private List<HeroInfo> LoadXML() {
+        XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
+        return LoadHeroXml.Load(parser);
+    }
+
     private void doImageRecognitionOnPhoto() {
         File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
         if (!mediaFile.exists()) {
@@ -291,10 +295,7 @@ public class MainActivity extends AppCompatActivity
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
         topImage.setImageBitmap(bitmap);
 
-        if(mHeroInfoList == null) {
-            mHeroInfoList = new ArrayList<>();
-        }
-        RecognitionTaskParams params = new RecognitionTaskParams(bitmap, mHeroInfoList);
+        RecognitionTaskParams params = new RecognitionTaskParams(bitmap, mHeroInfoFromXml);
 
         new RecognitionTask(this).execute(params);
     }
@@ -305,7 +306,6 @@ public class MainActivity extends AppCompatActivity
         static final String TAG = "RecognitionTask";
 
         private SimilarityTest similarityTest = null;
-        // TODO: should I pass mHeroInfoList around rather than make it a member variable?
         private List<HeroInfo> mHeroInfoList;
         private Context mContext;
 
@@ -321,9 +321,12 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void resetInfo() {
-            LinearLayout layout = (LinearLayout) findViewById(R.id.layout_results_info);
-            layout.removeAllViews();
-            layout = (LinearLayout) findViewById(R.id.layout_found_hero_pictures);
+            //TODO: need to move resetInfo into the individual fragments?
+
+            AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+            abilityInfoFragment.reset();
+
+            LinearLayout layout = (LinearLayout) findViewById(R.id.layout_found_hero_pictures);
             layout.removeAllViews();
 
             if (BuildConfig.DEBUG && sDebugMode) {
@@ -350,11 +353,9 @@ public class MainActivity extends AppCompatActivity
             mHeroInfoList = params[0].heroInfoList;
 
             if(mHeroInfoList == null) {
-                throw new RuntimeException("mHeroInfoList has not been instantiated as a list.");
+                throw new RuntimeException("mHeroInfoFromXml has not been instantiated as a list.");
             }
 
-            if (mHeroInfoList.isEmpty())
-                LoadXML();
             if (similarityTest == null)
                 loadHistTest();
 
@@ -488,23 +489,23 @@ public class MainActivity extends AppCompatActivity
             //A list of the heroes we've seen, for use when adding the ability cards
             mHeroesSeen = new ArrayList<>();
 
-            FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes_frag);
-            foundHeroesFragment.showFoundHeroes(heroes);
-
             for (HeroFromPhoto hero : heroes) {
                 HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name, mHeroInfoList);
-                if (!mHeroesSeen.contains(heroInfo)) {
-                    mHeroesSeen.add(heroInfo);
-                }
+                mHeroesSeen.add(heroInfo);
             }
 
-            AddAllCardsAboutHeroes(mHeroesSeen);
+            FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
+            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen);
 
-            LayoutTransition transition = new LayoutTransition();
+            AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+            abilityInfoFragment.showHeroAbilities(mHeroesSeen);
+
+            //TODO: bring back animation when loading the hero images and abilities?
+/*            LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
             transition.setDuration(250);
             LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.layout_results_info);
-            resultsInfoLayout.setLayoutTransition(transition);
+            resultsInfoLayout.setLayoutTransition(transition);*/
         }
 
         private void moveCameraFabToBottomRight() {
@@ -527,85 +528,8 @@ public class MainActivity extends AppCompatActivity
                     .setInterpolator(new AccelerateDecelerateInterpolator());
         }
 
-        private void LoadXML() {
-            XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
-            mHeroInfoList = LoadHeroXml.Load(parser);
-        }
-
         private void loadHistTest() {
             similarityTest = new SimilarityTest(mContext);
-        }
-
-        //TODO-beauty: move the add abilty cards and add ability heading code elsewhere, also rename the functions!
-        private void AddAbilityHeading(String string) {
-            if (string == null) return;
-
-            LinearLayout parent = (LinearLayout) findViewById(R.id.layout_results_info);
-            LayoutInflater inflater = getLayoutInflater();
-            View v = inflater.inflate(R.layout.item_abilty_info_heading, parent, false);
-            TextView textView = (TextView) v.findViewById(R.id.textView);
-            textView.setText(string);
-            parent.addView(v);
-        }
-
-        private void AddAllCardsAboutHeroes(List<HeroInfo> heroesSeen) {
-            //TODO-prebeta: add "no silences found" text when none found
-            AddAbilityHeading("Stuns");
-            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
-
-            AddAbilityHeading("Silences");
-            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
-
-            AddAbilityHeading("Ultimates");
-            AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.ULTIMATE);
-
-            AddAbilityCardsForAllHeroAbilities(heroesSeen);
-        }
-
-        /**
-         * Adds ability cards for these heroes which are of the specified abilityType
-         * @param heroes
-         * @param abilityType
-         * @return returns true if any cards have been added
-         */
-        private boolean AddAbilityCardsForHeroesList(List<HeroInfo> heroes, int abilityType) {
-            List<HeroAbility> abilities = new ArrayList<>();
-            for (HeroInfo hero : heroes) {
-                for (HeroAbility ability : hero.abilities) {
-                    if (abilityType == HeroAbility.STUN && ability.isStun)
-                        abilities.add(ability);
-                    else if (abilityType == HeroAbility.SILENCE && ability.isSilence)
-                        abilities.add(ability);
-                    else if (abilityType == HeroAbility.ULTIMATE && ability.isUltimate)
-                        abilities.add(ability);
-                }
-            }
-
-            return AddAbilityCards(abilities, abilityType);
-        }
-
-        private boolean AddAbilityCards(List<HeroAbility> abilities) {
-            return AddAbilityCards(abilities, -1);
-        }
-
-        private boolean AddAbilityCards(List<HeroAbility> abilities, int abilityType) {
-            LinearLayout parent = (LinearLayout) findViewById(R.id.layout_results_info);
-            boolean cardsAdded = false;
-
-            for (HeroAbility ability : abilities) {
-                AbilityCard card = new AbilityCard(mContext, ability, abilityType);
-                parent.addView(card);
-                cardsAdded = true;
-            }
-
-            return cardsAdded;
-        }
-
-        private void AddAbilityCardsForAllHeroAbilities(List<HeroInfo> heroes) {
-            for (HeroInfo hero : heroes) {
-                AddAbilityHeading(hero.name);
-                AddAbilityCards(hero.abilities);
-            }
         }
 
         private void ResetTextViews(List<Integer> ids) {

@@ -52,15 +52,15 @@
 
             <fragment
                 android:name="com.carver.paul.dotavision.FoundHeroesFragment"
-                android:id="@+id/fragment_found_heroes_frag"
+                android:id="@+id/fragment_found_heroes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:id="@+id/layout_results_info"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical"/>
+            <fragment
+                android:name="com.carver.paul.dotavision.AbilityInfoFragment"
+                android:id="@+id/fragment_ability_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

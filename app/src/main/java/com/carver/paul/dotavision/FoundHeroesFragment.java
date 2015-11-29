@@ -36,6 +36,7 @@ import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +62,8 @@ public class FoundHeroesFragment extends Fragment {
         try {
             mHeroChangedListener = (OnHeroChangedListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnHeroChangedListener");
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeroChangedListener");
         }
     }
 
@@ -72,48 +74,46 @@ public class FoundHeroesFragment extends Fragment {
         public void onHeroChanged(HeroAndSimilarity oldHero, HeroAndSimilarity newHero);
     }
 
-    public void showFoundHeroes(List<HeroFromPhoto> heroes) {
-        LinearLayout parent = (LinearLayout) getActivity().findViewById(R.id.layout_found_hero_pictures);
+    public void showFoundHeroes(List<HeroFromPhoto> heroes, List<HeroInfo> heroInfoList) {
+        LinearLayout parent = (LinearLayout) getActivity().findViewById(
+                R.id.layout_found_hero_pictures);
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
+        int posInList = 0;
         for (HeroFromPhoto hero : heroes) {
-            LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
+            LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(
+                    R.layout.item_found_hero_picture, parent, false);
             ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
             leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
 
-            RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image);
+            RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(
+                    R.id.recycler_correct_image);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
 
+            TextView heroNameTextView = (TextView) foundPicturesView.findViewById(
+                    R.id.text_hero_name);
+            heroNameTextView.setText(heroInfoList.get(posInList).name);
 
-/*
-            HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name);
-            TextView heroName = (TextView) foundPicturesView.findViewById(R.id.text_hero_name);
-            heroName.setText(heroInfo.name);
-*/
-
-            TextView heroName = (TextView) foundPicturesView.findViewById(R.id.text_hero_name);
-            heroName.setText(hero.getSimilarityList().get(0).hero.name);
-
+            //TODO-someday: make the FoundHeroesFragment not depend on the screen width for finding
+            // its centre, should instead use the Fragment's width
             DisplayMetrics metrics = new DisplayMetrics();
             getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
             // This makes the recyclerView automatically lock on the image which has been
             // scrolled to. Thanks stackoverflow and Github :)
             int center = (11 * metrics.widthPixels / 24);
-            recyclerView.addOnScrollListener(new CenterLockListener(center, mHeroChangedListener, hero.getSimilarityList(), hero.getSimilarityList().get(0)));
-
-/*                HeroAndSimilarity matchingHero = hero.getSimilarityList().get(0);
-                ImageView rightImage = (ImageView) foundPicturesView.findViewById(R.id.image_right);
-                rightImage.setImageResource(matchingHero.hero.getImageResource());*/
+            recyclerView.addOnScrollListener(new CenterLockListener(center, mHeroChangedListener,
+                    hero.getSimilarityList(), hero.getSimilarityList().get(0),
+                    heroNameTextView));
 
             parent.addView(foundPicturesView);
 
-
             if (BuildConfig.DEBUG && MainActivity.sDebugMode)
                 showSimilarityInfo(hero.getSimilarityList());
+
+            posInList++;
         }
     }
 
@@ -129,11 +129,13 @@ public class FoundHeroesFragment extends Fragment {
         if (matchingHero.similarity < 0.65) {
             infoText.append(". (Alternatives: ");
             for (int i = 1; i < 6; i++) {
-                infoText.append(similarityList.get(i).hero.name + "," + similarityList.get(i).similarity + ". ");
+                infoText.append(similarityList.get(i).hero.name + ","
+                        + similarityList.get(i).similarity + ". ");
             }
             infoText.append(")");
         }
 
-        infoText.append(System.getProperty("line.separator") + System.getProperty("line.separator"));
+        infoText.append(System.getProperty("line.separator")
+                + System.getProperty("line.separator"));
     }
 }

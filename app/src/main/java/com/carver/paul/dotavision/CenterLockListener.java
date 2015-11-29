@@ -12,6 +12,7 @@ package com.carver.paul.dotavision;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 
@@ -28,15 +29,18 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
     FoundHeroesFragment.OnHeroChangedListener mHeroChangedListener;
     HeroAndSimilarity mHero;
     List<HeroAndSimilarity> mSimilarityList;
+    TextView mHeroNameTextView;
 
     public CenterLockListener(int center,
                               FoundHeroesFragment.OnHeroChangedListener heroChangedListener,
                               List<HeroAndSimilarity> similarityList,
-                              HeroAndSimilarity hero){
+                              HeroAndSimilarity hero,
+                              TextView heroNameTextView){
         mCenterPivot = center;
         mHeroChangedListener = heroChangedListener;
         mSimilarityList = similarityList;
         mHero = hero;
+        mHeroNameTextView = heroNameTextView;
     }
 
     @Override
