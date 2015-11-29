@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "MainActivity";
 
     // This is where the hero data from the XML gets saved
-    private List<HeroInfo> mHeroInfoFromXml = null;
+    private List<HeroInfo> mHeroInfoFromXml = new ArrayList<>();
 
     private List<HeroInfo> mHeroesSeen = null;
 
@@ -126,9 +126,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        if (mHeroInfoFromXml == null)
-            mHeroInfoFromXml = LoadXML();
     }
 
     @Override
@@ -277,11 +274,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private List<HeroInfo> LoadXML() {
-        XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
-        return LoadHeroXml.Load(parser);
-    }
-
     private void doImageRecognitionOnPhoto() {
         File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
         if (!mediaFile.exists()) {
@@ -354,9 +346,11 @@ public class MainActivity extends AppCompatActivity
         protected List<HeroFromPhoto> doInBackground(RecognitionTaskParams... params) {
             mHeroInfoList = params[0].heroInfoList;
 
-            if (mHeroInfoList == null) {
+            if (mHeroInfoList == null)
                 throw new RuntimeException("mHeroInfoFromXml has not been instantiated as a list.");
-            }
+
+            if(mHeroInfoList.isEmpty())
+                LoadXML();
 
             if (similarityTest == null)
                 loadHistTest();
@@ -404,6 +398,11 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
             }
+        }
+
+        private void LoadXML() {
+            XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
+            LoadHeroXml.Load(parser, mHeroInfoList);
         }
 
         /**

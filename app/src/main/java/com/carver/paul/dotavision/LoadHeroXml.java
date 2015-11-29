@@ -41,10 +41,15 @@ public class LoadHeroXml {
 
     private LoadHeroXml() {}
 
-    public static List<HeroInfo> Load(XmlResourceParser parser) {
+    public static void Load(XmlResourceParser parser, List<HeroInfo> heroInfoList) {
         if (BuildConfig.DEBUG) Log.d(TAG, "Starting XML Load.");
 
-        List<HeroInfo> heroInfoList = new ArrayList<>();
+        if(heroInfoList == null)
+            throw new RuntimeException("Trying to load XML, but the list to store it in hasn't " +
+                    "been initialised");
+
+        if(!heroInfoList.isEmpty())
+            heroInfoList.clear();
 
         try {
             parser.next();
@@ -63,7 +68,6 @@ public class LoadHeroXml {
         }
 
         if (BuildConfig.DEBUG) Log.d(TAG, "Loaded " + heroInfoList.size() + " heroes from XML.");
-        return heroInfoList;
     }
 
     static private HeroInfo LoadIndividualHeroInfo(XmlResourceParser parser) throws IOException, XmlPullParserException {
