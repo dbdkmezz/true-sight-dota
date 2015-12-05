@@ -30,4 +30,5 @@
 
     <string name="cooldown">COOLDOWN</string>
     <string name="mana_cost">MANA COST</string>
+    <string name="passive">Passive ability</string>
 </resources>

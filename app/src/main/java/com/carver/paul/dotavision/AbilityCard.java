@@ -80,10 +80,13 @@ class AbilityCard extends FrameLayout {
         if(isExtended) {
             text.append("<br>" + mAbility.description);
 
-            //TODO-prebeta: on larger phone sizes show the extended ability details in two columns
+            //TODO-someday: on larger phone sizes show the extended ability details in two columns
             List<String> abilityDetailsToShow = new ArrayList<>();
-            abilityDetailsToShow.add(getContext().getString(R.string.cooldown) + ": " + mAbility.cooldown);
-            abilityDetailsToShow.add(getContext().getString(R.string.mana_cost) + ": " + mAbility.manaCost);
+
+            if(mAbility.cooldown != null)
+                abilityDetailsToShow.add(getContext().getString(R.string.cooldown) + ": " + mAbility.cooldown);
+            if(mAbility.manaCost != null)
+                abilityDetailsToShow.add(getContext().getString(R.string.mana_cost) + ": " + mAbility.manaCost);
             abilityDetailsToShow.addAll(mAbility.abilityDetails);
 
             text.append("<br>");
@@ -102,6 +105,14 @@ class AbilityCard extends FrameLayout {
 
             if (mAbility.cooldown != null) {
                 text.append("<br>" + getContext().getString(R.string.cooldown) + ": " + mAbility.cooldown);
+            } else {
+                //TODO-prebeta: put passive abilities in XML, rather than calculating them in app
+                for(String abilityDetail : mAbility.abilityDetails) {
+                    if(abilityDetail.endsWith("Passive")) {
+                        text.append("<br><i>" + getContext().getString(R.string.passive) + "</i>");
+                        break;
+                    }
+                }
             }
         }
 

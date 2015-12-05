@@ -79,13 +79,15 @@ import java.util.List;
 
 //TODO: Can hit use last photo multiple times! Fix all buttons
 
+//TODO-prebeta: give the first screen a background?
+
 //TODO-someday: Add details for escape and invisibility abilities:
 // http://dota2.gamepedia.com/Teleport
 // http://dota2.gamepedia.com/Invisibility
 
 //TODO-prebeta: find out whether it's ok to have Valve's images on github
 
-//TODO-prebeta: make screenshots in the Google Play Store higher defintion
+//TODO-prebeta: make screenshots in the Google Play Store higher definition
 
 //TODO-someday: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html

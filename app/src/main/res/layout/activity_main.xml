@@ -6,7 +6,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true" >
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,6 +16,13 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
+
+<!--        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:src="@drawable/stormbg3"
+            android:scaleType="centerCrop"/>-->
 
         <include layout="@layout/partial_appbar_and_toolbar" />
 
