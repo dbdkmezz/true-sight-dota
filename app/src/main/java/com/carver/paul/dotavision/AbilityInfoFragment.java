@@ -67,22 +67,22 @@ public class AbilityInfoFragment extends Fragment {
 
     private void AddAllCardsAboutHeroes(List<HeroInfo> heroesSeen) {
         //TODO-prebeta: don't show disables heading when there aren't any other disables
-        AddAbilityHeading("Stuns");
+        AddAbilityHeading(getString(R.string.stuns));
         boolean cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
         if(!cardsAdded)
-            AddAbilityText("No stuns found!");
+            AddAbilityText(getString(R.string.no_stuns_found));
 
-        AddAbilityHeading("Disables");
+        AddAbilityHeading(getString(R.string.disables));
         cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.DISABLE_NOT_STUN);
         if(!cardsAdded)
-            AddAbilityText("No other disables found!");
+            AddAbilityText(getString(R.string.no_disables_found));
 
-        AddAbilityHeading("Silences");
+        AddAbilityHeading(getString(R.string.silences));
         cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
         if(!cardsAdded)
-            AddAbilityText("No silences found!");
+            AddAbilityText(getString(R.string.no_silences_found));
 
-        AddAbilityHeading("Ultimates");
+        AddAbilityHeading(getString(R.string.ultimates));
         AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.ULTIMATE);
 
         AddAbilityCardsForAllHeroAbilities(heroesSeen);

@@ -61,23 +61,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//TODO: fix bug where preview moving when processing
-
 //TODO-prebeta: test much more for crashes, there is something wrong somewhere. The camera threading??
 
 //TODO-prebeta: reduce package size. Smaller images? Crop test image
 
-//TODO: make the heroes info separated somehow. Just a dividing line for now? It's a mess
+//TODO-prebeta: make the heroes info separated somehow. Just a dividing line for now? It's a mess.
+// Perhaps just draw their image?
 
 //TODO-someday: add tab view so you can slide to change hero rather them all being piled up in one place
 
 //TODO-prebeta: Make card borders 0 on small displays
 
-//TODO: If no cooldown and "ability: passive" then say so
+//TODO-now: Detect empty box for when no hero picked yet
 
-//TODO: Detect empty box for when no hero picked yet
-
-//TODO: Can hit use last photo multiple times! Fix all buttons
+//TODO-now: Can hit use last photo multiple times! Fix all buttons
 
 //TODO-prebeta: give the first screen a background?
 
@@ -294,7 +291,6 @@ public class MainActivity extends AppCompatActivity
         doImageRecognition(bitmap);
     }
 
-    //TODO-beauty: move image recognition into separate class. Make MainActivity class tiny
     private void doImageRecognition(Bitmap bitmap) {
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
         topImage.setImageBitmap(bitmap);
@@ -325,18 +321,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void resetInfo() {
-            //TODO: need to move resetInfo into the individual fragments?
+            FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
+            foundHeroesFragment.reset();
 
             AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
             abilityInfoFragment.reset();
-
-            LinearLayout layout = (LinearLayout) findViewById(R.id.layout_found_hero_pictures);
-            layout.removeAllViews();
-
-            if (BuildConfig.DEBUG && sDebugMode) {
-                List<Integer> textViewIds = Arrays.asList(R.id.text_debug_similarity_info, R.id.text_image_debug);
-                ResetTextViews(textViewIds);
-            }
         }
 
         /**
@@ -541,14 +530,6 @@ public class MainActivity extends AppCompatActivity
 
         private void loadHistTest() {
             similarityTest = new SimilarityTest(mContext);
-        }
-
-        private void ResetTextViews(List<Integer> ids) {
-            for (Integer id : ids) {
-                TextView tv = (TextView) findViewById(id);
-                tv.setText("");
-                tv.setVisibility(View.GONE);
-            }
         }
     }
 }
