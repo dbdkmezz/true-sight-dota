@@ -91,7 +91,9 @@ class AbilityCard extends FrameLayout {
                 text.append("<br>" + detail);
             }
         } else {
-            if (mAbilityType == HeroAbility.STUN || mAbilityType == HeroAbility.SILENCE) {
+            if (mAbilityType == HeroAbility.STUN
+                    || mAbilityType == HeroAbility.DISABLE_NOT_STUN
+                    || mAbilityType == HeroAbility.SILENCE) {
                 String abilityDuration = mAbility.guessAbilityDuration(mAbilityType);
                 if (abilityDuration != null) {
                     text.append("<br>" + abilityDuration);

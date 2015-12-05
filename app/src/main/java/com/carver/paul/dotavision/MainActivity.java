@@ -79,15 +79,9 @@ import java.util.List;
 
 //TODO: Can hit use last photo multiple times! Fix all buttons
 
-//TODO: Other disables like hex
-
 //TODO-someday: Add details for escape and invisibility abilities:
 // http://dota2.gamepedia.com/Teleport
 // http://dota2.gamepedia.com/Invisibility
-
-//TODO: Max duration OK for stuns (Shadow Shaman shackles)
-
-//TODO: Hero duration may also be relevant (CM Frostbite)
 
 //TODO-prebeta: find out whether it's ok to have Valve's images on github
 

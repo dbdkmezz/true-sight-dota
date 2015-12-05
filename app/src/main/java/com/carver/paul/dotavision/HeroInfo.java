@@ -83,10 +83,11 @@ class HeroAbility {
     }
 
     public String guessAbilityDuration(int abilityType) {
-        if(abilityType != STUN && abilityType != SILENCE)
+        if(abilityType != STUN && abilityType != SILENCE && abilityType != DISABLE_NOT_STUN)
             throw new RuntimeException("guessAbilityDuration passed wrong abilityType");
 
         if (abilityType == STUN && isStun != true) return null;
+        if (abilityType == DISABLE_NOT_STUN && isDisable != true) return null;
         if (abilityType == SILENCE && isSilence != true) return null;
 
         String abilityDescription = "";
@@ -94,13 +95,21 @@ class HeroAbility {
             abilityDescription = "STUN";
         else if (abilityType == SILENCE)
             abilityDescription = "SILENCE";
+        else if (abilityType != DISABLE_NOT_STUN)
+            abilityDescription = "XXXXX";
 
         for (String detail : abilityDetails) {
-            if (detail.contains(abilityDescription + " DURATION:"))
+            if (abilityType != DISABLE_NOT_STUN
+                    && detail.contains(abilityDescription + " DURATION:"))
                 return detail;
-            else if (detail.contains("MAX " + abilityDescription + ":"))
+            else if (abilityType != DISABLE_NOT_STUN
+                    && detail.contains("MAX " + abilityDescription + ":"))
                 return detail;
             else if (detail.startsWith("DURATION:"))
+                return detail;
+            else if (detail.startsWith("HERO DURATION:"))
+                return detail;
+            else if (detail.startsWith("CHANNEL DURATION:"))
                 return detail;
         }
         return null;
