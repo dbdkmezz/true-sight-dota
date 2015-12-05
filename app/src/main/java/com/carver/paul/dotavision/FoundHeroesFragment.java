@@ -39,6 +39,7 @@ import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -90,6 +91,8 @@ public class FoundHeroesFragment extends Fragment {
 /*        if(mAllHeroNames == null)
             mAllHeroNames = getHeroNames(heroInfoFromXml);*/
 
+        //TODO-now: make hero previews animate in
+
         int posInList = 0;
         for (HeroFromPhoto hero : heroes) {
             LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(
@@ -105,7 +108,7 @@ public class FoundHeroesFragment extends Fragment {
             recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
 
 
-            //TODO: make it so you can change the hero found by changing the text
+            //TODO-now: make it so you can change the hero found by changing the text
 /*            AutoCompleteTextView heroNameTextView
                     = (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name);
             heroNameTextView.setText(heroInfoList.get(posInList).name);
@@ -144,6 +147,16 @@ public class FoundHeroesFragment extends Fragment {
         mHeroNamesTextViews.get(posInList).setText(newName);
     }
 
+    public void reset() {
+        LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.layout_found_hero_pictures);
+        layout.removeAllViews();
+
+        if (BuildConfig.DEBUG && MainActivity.sDebugMode) {
+            List<Integer> textViewIds = Arrays.asList(R.id.text_debug_similarity_info, R.id.text_image_debug);
+            ResetTextViews(textViewIds);
+        }
+    }
+
 /*    private List<String> getHeroNames(List<HeroInfo> heroInfoFromXml) {
         List<String> names = new ArrayList<>();
         for(HeroInfo heroInfo : heroInfoFromXml) {
@@ -172,5 +185,13 @@ public class FoundHeroesFragment extends Fragment {
 
         infoText.append(System.getProperty("line.separator")
                 + System.getProperty("line.separator"));
+    }
+
+    private void ResetTextViews(List<Integer> ids) {
+        for (Integer id : ids) {
+            TextView tv = (TextView) getActivity().findViewById(id);
+            tv.setText("");
+            tv.setVisibility(View.GONE);
+        }
     }
 }
