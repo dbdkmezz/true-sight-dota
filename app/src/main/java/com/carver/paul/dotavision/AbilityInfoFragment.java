@@ -66,12 +66,21 @@ public class AbilityInfoFragment extends Fragment {
     }
 
     private void AddAllCardsAboutHeroes(List<HeroInfo> heroesSeen) {
-        //TODO-prebeta: add "no silences found" text when none found
+        //TODO-prebeta: don't show disables heading when there aren't any other disables
         AddAbilityHeading("Stuns");
-        AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
+        boolean cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
+        if(!cardsAdded)
+            AddAbilityText("No stuns found!");
+
+        AddAbilityHeading("Disables");
+        cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.DISABLE_NOT_STUN);
+        if(!cardsAdded)
+            AddAbilityText("No other disables found!");
 
         AddAbilityHeading("Silences");
-        AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
+        cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
+        if(!cardsAdded)
+            AddAbilityText("No silences found!");
 
         AddAbilityHeading("Ultimates");
         AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.ULTIMATE);
@@ -84,7 +93,18 @@ public class AbilityInfoFragment extends Fragment {
 
         LinearLayout parent = (LinearLayout) getActivity().findViewById(R.id.layout_results_info);
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.item_abilty_info_heading, parent, false);
+        View v = inflater.inflate(R.layout.item_ability_info_heading, parent, false);
+        TextView textView = (TextView) v.findViewById(R.id.textView);
+        textView.setText(string);
+        parent.addView(v);
+    }
+
+    private void AddAbilityText(String string) {
+        if (string == null) return;
+
+        LinearLayout parent = (LinearLayout) getActivity().findViewById(R.id.layout_results_info);
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View v = inflater.inflate(R.layout.item_ability_info_text, parent, false);
         TextView textView = (TextView) v.findViewById(R.id.textView);
         textView.setText(string);
         parent.addView(v);
@@ -101,6 +121,9 @@ public class AbilityInfoFragment extends Fragment {
         for (HeroInfo hero : heroes) {
             for (HeroAbility ability : hero.abilities) {
                 if (abilityType == HeroAbility.STUN && ability.isStun)
+                    abilities.add(ability);
+                else if (abilityType == HeroAbility.DISABLE_NOT_STUN && ability.isDisable
+                        && !ability.isStun)
                     abilities.add(ability);
                 else if (abilityType == HeroAbility.SILENCE && ability.isSilence)
                     abilities.add(ability);

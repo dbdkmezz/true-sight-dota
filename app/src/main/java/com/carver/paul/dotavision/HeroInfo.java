@@ -61,11 +61,13 @@ class HeroInfo {
 
 class HeroAbility {
     public static final int STUN = 0;
-    public static final int SILENCE = 1;
-    public static final int ULTIMATE = 2;
+    public static final int DISABLE_NOT_STUN = 1;
+    public static final int SILENCE = 2;
+    public static final int ULTIMATE = 3;
 
     public boolean isUltimate;
     public boolean isStun;
+    public boolean isDisable;
     public boolean isSilence;
     public boolean isMute;
     public String heroName;

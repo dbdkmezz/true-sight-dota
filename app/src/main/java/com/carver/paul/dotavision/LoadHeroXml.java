@@ -130,6 +130,9 @@ public class LoadHeroXml {
             if (parser.getName().equals("isStun")) {
                 ability.isStun = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "isStun");
+            } else if (parser.getName().equals("isDisable")) {
+                ability.isDisable = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "isDisable");
             } else if (parser.getName().equals("isUltimate")) {
                 ability.isUltimate = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "isUltimate");

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/activity_horizontal_spacing"
+    android:layout_marginRight="@dimen/activity_horizontal_spacing"
+    android:elevation="0dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:textSize="@dimen/medium_text"
+        android:textStyle="italic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_spacing"
+        android:paddingLeft="@dimen/activity_horizontal_spacing"
+        android:paddingRight="@dimen/activity_horizontal_spacing"
+        android:paddingBottom="@dimen/activity_vertical_spacing"/>
+</FrameLayout>

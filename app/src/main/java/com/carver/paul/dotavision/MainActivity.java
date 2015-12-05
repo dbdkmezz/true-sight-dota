@@ -69,15 +69,29 @@ import java.util.List;
 
 //TODO: make the heroes info separated somehow. Just a dividing line for now? It's a mess
 
-//TODO-prebeta: add tab view so you can slide to change hero rather them all being piled up in one place
+//TODO-someday: add tab view so you can slide to change hero rather them all being piled up in one place
+
+//TODO-prebeta: Make card borders 0 on small displays
+
+//TODO: If no cooldown and "ability: passive" then say so
+
+//TODO: Detect empty box for when no hero picked yet
+
+//TODO: Can hit use last photo multiple times! Fix all buttons
+
+//TODO: Other disables like hex
+
+//TODO-someday: Add details for escape and invisibility abilities:
+// http://dota2.gamepedia.com/Teleport
+// http://dota2.gamepedia.com/Invisibility
+
+//TODO: Max duration OK for stuns (Shadow Shaman shackles)
+
+//TODO: Hero duration may also be relevant (CM Frostbite)
 
 //TODO-prebeta: find out whether it's ok to have Valve's images on github
 
 //TODO-prebeta: make screenshots in the Google Play Store higher defintion
-
-//TODO-prebeta: test all spells, e.g. do the stun summaries show the right information? Also, some of the ultimates aren't ultimates!
-
-//TODO-someday: change side menu xmls so that I don't use specific values, but they are based on variables (as in the example code from android)
 
 //TODO-someday: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
