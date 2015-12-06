@@ -32,6 +32,7 @@
     <string name="cooldown">COOLDOWN</string>
     <string name="mana_cost">MANA COST</string>
     <string name="passive">Passive ability</string>
+    <string name="passive_aura">Passive aura</string>
 
     <string name="stuns">Stuns</string>
     <string name="no_stuns_found">No stuns found!</string>

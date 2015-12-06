@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2015 Paul Broadbent
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -83,7 +83,7 @@ class HeroAbility {
     }
 
     public String guessAbilityDuration(int abilityType) {
-        if(abilityType != STUN && abilityType != SILENCE && abilityType != DISABLE_NOT_STUN)
+        if (abilityType != STUN && abilityType != SILENCE && abilityType != DISABLE_NOT_STUN)
             throw new RuntimeException("guessAbilityDuration passed wrong abilityType");
 
         if (abilityType == STUN && isStun != true) return null;
@@ -100,18 +100,27 @@ class HeroAbility {
 
         for (String detail : abilityDetails) {
             if (abilityType != DISABLE_NOT_STUN
-                    && detail.contains(abilityDescription + " DURATION:"))
+                    && detail.contains(abilityDescription + " DURATION:")) {
                 return detail;
-            else if (abilityType != DISABLE_NOT_STUN
-                    && detail.contains("MAX " + abilityDescription + ":"))
+            } else if (abilityType != DISABLE_NOT_STUN
+                    && detail.contains("MAX " + abilityDescription + ":")) {
                 return detail;
-            else if (detail.startsWith("DURATION:"))
+            } else if (detail.startsWith("DURATION:")) {
                 return detail;
-            else if (detail.startsWith("HERO DURATION:"))
+            } else if (detail.startsWith("HERO DURATION:")) {
                 return detail;
-            else if (detail.startsWith("CHANNEL DURATION:"))
+            } else if (detail.startsWith("CHANNEL DURATION:")) {
                 return detail;
+            }
         }
+
+        // If still not found the duration, then just use any old detail string with a DURATION
+        for (String detail : abilityDetails) {
+            if (detail.contains("DURATION")) {
+                return detail;
+            }
+        }
+
         return null;
     }
 

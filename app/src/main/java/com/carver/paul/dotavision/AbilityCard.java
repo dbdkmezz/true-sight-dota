@@ -111,6 +111,9 @@ class AbilityCard extends FrameLayout {
                     if(abilityDetail.endsWith("Passive")) {
                         text.append("<br><i>" + getContext().getString(R.string.passive) + "</i>");
                         break;
+                    } else if(abilityDetail.endsWith("Passive, Aura")) {
+                        text.append("<br><i>" + getContext().getString(R.string.passive_aura) + "</i>");
+                        break;
                     }
                 }
             }

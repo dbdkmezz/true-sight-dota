@@ -70,11 +70,13 @@ import java.util.List;
 
 //TODO-someday: add tab view so you can slide to change hero rather them all being piled up in one place
 
-//TODO-prebeta: Make card borders 0 on small displays
+//TODO-someday: Make card borders 0 on small displays
 
 //TODO-now: Detect empty box for when no hero picked yet
 
 //TODO-now: Can hit use last photo multiple times! Fix all buttons
+
+//TODO-prebeta: Add rate this app button
 
 //TODO-prebeta: give the first screen a background?
 
