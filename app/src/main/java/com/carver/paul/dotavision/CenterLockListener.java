@@ -89,16 +89,15 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
 
     }
 
+    //TODO-next: make hero changes scroll nicely
     public void setHero(String heroName) {
         // No need to do anything if the current hero has the new hero name
-        //TODO-now: fix it so that it works when the name isn't the image name. Change it to use
-        // the image id everywhere instead?
-        if(mSimilarityList.get(mPosInHeroList).hero.name.equalsIgnoreCase(heroName))
+        if(mSimilarityList.get(mPosInHeroList).hero.name.equals(heroName))
             return;
 
         int newPos = 0;
         for(HeroAndSimilarity hero : mSimilarityList) {
-            if(hero.hero.name.equalsIgnoreCase(heroName)) {
+            if(hero.hero.name.equals(heroName)) {
                 mLayoutManager.scrollToPositionWithOffset(newPos, 0);
                // recyclerView.smoothScrollBy(scrollNeeded, 0);
                 return;

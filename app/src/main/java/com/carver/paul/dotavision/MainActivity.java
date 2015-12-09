@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity
         abilityInfoFragment.showHeroAbilities(mHeroesSeen);
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-        foundHeroesFragment.changeHero(posInList, newHeroInfo.name);
+        foundHeroesFragment.changeHero(posInList, newHeroInfo.name, newHeroInfo.imageName);
     }
 
     public void startDebugLineActivity() {

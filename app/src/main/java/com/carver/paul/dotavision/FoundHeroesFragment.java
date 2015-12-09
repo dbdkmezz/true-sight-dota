@@ -151,9 +151,17 @@ public class FoundHeroesFragment extends Fragment {
         }
     }
 
-    public void changeHero(int posInList, String newName) {
-        mHeroNamesTextViews.get(posInList).setText(newName);
-        mHeroRecyclerViewListeners.get(posInList).setHero(newName);
+    /**
+     * Changes the hero which is posInList of those visible. niceHeroName specifies the name of the
+     * hero to display in the box. heroImageName is the name of the hero's image, for use when
+     * scrolling to the hero with the recyclerView.
+     * @param posInList
+     * @param niceHeroName
+     * @param heroImageName
+     */
+    public void changeHero(int posInList, String niceHeroName, String heroImageName) {
+        mHeroNamesTextViews.get(posInList).setText(niceHeroName);
+        mHeroRecyclerViewListeners.get(posInList).setHero(heroImageName);
     }
 
     public void reset() {
