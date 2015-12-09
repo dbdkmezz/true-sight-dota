@@ -17,12 +17,12 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
-<!--        <ImageView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
-            android:src="@drawable/stormbg3"
-            android:scaleType="centerCrop"/>-->
+            android:src="@drawable/background_river"
+            android:scaleType="centerCrop"/>
 
         <include layout="@layout/partial_appbar_and_toolbar" />
 
