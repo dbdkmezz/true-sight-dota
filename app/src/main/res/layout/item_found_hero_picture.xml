@@ -5,7 +5,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+    <AutoCompleteTextView
         android:id="@+id/text_hero_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

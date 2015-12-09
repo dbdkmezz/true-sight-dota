@@ -11,6 +11,7 @@ package com.carver.paul.dotavision;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,15 +28,20 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
     private int mCenterPivot;
 
     private final FoundHeroesFragment.OnHeroChangedListener mHeroChangedListener;
+    private final LinearLayoutManager mLayoutManager;
     private final int mPosInHeroList;
     private final List<HeroAndSimilarity> mSimilarityList;
 
+    private final String TAG = "CenterLockListener";
+
     public CenterLockListener(int center,
                               FoundHeroesFragment.OnHeroChangedListener heroChangedListener,
+                              LinearLayoutManager layoutManager,
                               List<HeroAndSimilarity> similarityList,
                               int posInHeroList){
         mCenterPivot = center;
         mHeroChangedListener = heroChangedListener;
+        mLayoutManager = layoutManager;
         mSimilarityList = similarityList;
         mPosInHeroList = posInHeroList;
     }
@@ -63,19 +69,17 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
                 int scrollNeeded = viewCenter - mCenterPivot; // Add or subtract any offsets you need here
 
                 if( lm.getOrientation() == LinearLayoutManager.HORIZONTAL ) {
-
                     recyclerView.smoothScrollBy(scrollNeeded, 0);
                 }
                 else
                 {
                     recyclerView.smoothScrollBy(0, (int) (scrollNeeded));
-
                 }
                 mAutoSet =true;
             }
         }
         if( newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING ){
-            mAutoSet =false;
+            mAutoSet = false;
         }
     }
 
@@ -84,6 +88,27 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
         super.onScrolled(recyclerView, dx, dy);
 
     }
+
+    public void setHero(String heroName) {
+        // No need to do anything if the current hero has the new hero name
+        //TODO-now: fix it so that it works when the name isn't the image name. Change it to use
+        // the image id everywhere instead?
+        if(mSimilarityList.get(mPosInHeroList).hero.name.equalsIgnoreCase(heroName))
+            return;
+
+        int newPos = 0;
+        for(HeroAndSimilarity hero : mSimilarityList) {
+            if(hero.hero.name.equalsIgnoreCase(heroName)) {
+                mLayoutManager.scrollToPositionWithOffset(newPos, 0);
+               // recyclerView.smoothScrollBy(scrollNeeded, 0);
+                return;
+            }
+            newPos++;
+        }
+
+        Log.e(TAG, "Attempting to scroll to " + heroName + " but can't find a hero with that name");
+    }
+
     private View findCenterView(LinearLayoutManager lm) {
 
         int minDistance = 0;
@@ -121,6 +146,6 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
 
     private void reportHeroChange(int pos) {
         HeroAndSimilarity newHero = mSimilarityList.get(pos);
-        mHeroChangedListener.onHeroChanged(mPosInHeroList, newHero);
+        mHeroChangedListener.onHeroChanged(mPosInHeroList, newHero.hero.name);
     }
 }

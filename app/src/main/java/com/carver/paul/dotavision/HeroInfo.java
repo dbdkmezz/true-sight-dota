@@ -38,7 +38,7 @@ class HeroInfo {
     }
 
     public boolean HasName(String string) {
-        return string.equals(this.imageName);
+        return (string.equals(imageName) || string.equalsIgnoreCase(name));
 /*        string = string.replace('_', ' ');
         return string.equalsIgnoreCase(this.name);*/
     }

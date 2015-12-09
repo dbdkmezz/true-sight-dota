@@ -24,7 +24,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +51,8 @@ import java.util.List;
 public class FoundHeroesFragment extends Fragment {
     private OnHeroChangedListener mHeroChangedListener;
     private List<TextView> mHeroNamesTextViews;
-/*    private List<String> mAllHeroNames;*/
+    private List<CenterLockListener> mHeroRecyclerViewListeners;
+    private List<String> mAllHeroNames;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,7 +80,7 @@ public class FoundHeroesFragment extends Fragment {
      * For use when the user scrolls to select a different hero, changing from oldHero to newHero
      */
     public interface OnHeroChangedListener {
-        public void onHeroChanged(int posInList, HeroAndSimilarity newHero);
+        public void onHeroChanged(int posInList, String newHero);
     }
 
     public void showFoundHeroes(List<HeroFromPhoto> heroes,
@@ -87,9 +91,10 @@ public class FoundHeroesFragment extends Fragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         mHeroNamesTextViews = new ArrayList<>();
+        mHeroRecyclerViewListeners = new ArrayList<>();
 
-/*        if(mAllHeroNames == null)
-            mAllHeroNames = getHeroNames(heroInfoFromXml);*/
+        if(mAllHeroNames == null)
+            mAllHeroNames = getHeroNames(heroInfoFromXml);
 
         //TODO-now: make hero previews animate in
 
@@ -100,30 +105,31 @@ public class FoundHeroesFragment extends Fragment {
             ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
             leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
 
+
+            //TODO-now do something for when losing focus? Change text back?
+            AutoCompleteTextView heroNameTextView
+                    = (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name);
+            mHeroNamesTextViews.add(heroNameTextView);
+
+            heroNameTextView.setText(heroInfoList.get(posInList).name);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                    android.R.layout.simple_dropdown_item_1line, mAllHeroNames);
+            heroNameTextView.setAdapter(adapter);
+
+            heroNameTextView.addTextChangedListener(new HeroTextWatcher(
+                    heroNameTextView.getText().toString(), mHeroChangedListener, mAllHeroNames,
+                    posInList));
+
+
             RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(
                     R.id.recycler_correct_image);
+
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
 
-
-            //TODO-now: make it so you can change the hero found by changing the text
-/*            AutoCompleteTextView heroNameTextView
-                    = (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name);
-            heroNameTextView.setText(heroInfoList.get(posInList).name);
-            mHeroNamesTextViews.add(heroNameTextView);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                    android.R.layout.simple_dropdown_item_1line, mAllHeroNames);
-            heroNameTextView.setAdapter(adapter);*/
-
-
-            TextView heroNameTextView = (TextView) foundPicturesView.findViewById(
-                    R.id.text_hero_name);
-            heroNameTextView.setText(heroInfoList.get(posInList).name);
-            mHeroNamesTextViews.add(heroNameTextView);
-
-            //TODO-someday: make the FoundHeroesFragment not depend on the screen width for finding
+            //TODO-beauty: make the FoundHeroesFragment not depend on the screen width for finding
             // its centre, should instead use the Fragment's width. It also goes wrong if the
             // image on the left hand side is too wide! I don't really understand the math here!
             DisplayMetrics metrics = new DisplayMetrics();
@@ -131,8 +137,10 @@ public class FoundHeroesFragment extends Fragment {
             // This makes the recyclerView automatically lock on the image which has been
             // scrolled to. Thanks stackoverflow and Github :)
             int center = (11 * metrics.widthPixels / 24);
-            recyclerView.addOnScrollListener(new CenterLockListener(center, mHeroChangedListener,
-                    hero.getSimilarityList(), posInList));
+            CenterLockListener recyclerViewListener = new CenterLockListener(center,
+                    mHeroChangedListener, layoutManager, hero.getSimilarityList(), posInList);
+            recyclerView.addOnScrollListener(recyclerViewListener);
+            mHeroRecyclerViewListeners.add(recyclerViewListener);
 
             parent.addView(foundPicturesView);
 
@@ -143,8 +151,9 @@ public class FoundHeroesFragment extends Fragment {
         }
     }
 
-    public void changeHeroName(int posInList, String newName) {
+    public void changeHero(int posInList, String newName) {
         mHeroNamesTextViews.get(posInList).setText(newName);
+        mHeroRecyclerViewListeners.get(posInList).setHero(newName);
     }
 
     public void reset() {
@@ -157,13 +166,13 @@ public class FoundHeroesFragment extends Fragment {
         }
     }
 
-/*    private List<String> getHeroNames(List<HeroInfo> heroInfoFromXml) {
+    private List<String> getHeroNames(List<HeroInfo> heroInfoFromXml) {
         List<String> names = new ArrayList<>();
         for(HeroInfo heroInfo : heroInfoFromXml) {
             names.add(heroInfo.name);
         }
         return names;
-    }*/
+    }
 
     private void showSimilarityInfo(List<HeroAndSimilarity> similarityList) {
         TextView infoText = (TextView) getActivity().findViewById(R.id.text_debug_similarity_info);
@@ -193,5 +202,50 @@ public class FoundHeroesFragment extends Fragment {
             tv.setText("");
             tv.setVisibility(View.GONE);
         }
+    }
+}
+
+class HeroTextWatcher implements TextWatcher {
+
+    private String mCurrentHeroName;
+    private final FoundHeroesFragment.OnHeroChangedListener mHeroChangedListener;
+    private final List<String> mAllHeroNames;
+    private final int mPosInHeroList;
+
+    HeroTextWatcher(String currentHeroName,
+                    FoundHeroesFragment.OnHeroChangedListener heroChangedListener,
+                    List<String> allHeroNames,
+                    int posInHeroList){
+        mCurrentHeroName = currentHeroName;
+        mHeroChangedListener = heroChangedListener;
+        mAllHeroNames = allHeroNames;
+        mPosInHeroList = posInHeroList;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if(!mCurrentHeroName.equalsIgnoreCase(s.toString())
+                && containsIgnoreCase(mAllHeroNames, (s.toString()))) {
+            mCurrentHeroName = s.toString();
+            mHeroChangedListener.onHeroChanged(mPosInHeroList, s.toString());
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    private boolean containsIgnoreCase(List<String> list, String string) {
+        for(String s : list)
+            if(s.equalsIgnoreCase(string))
+                return true;
+
+        return false;
     }
 }

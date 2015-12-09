@@ -56,7 +56,7 @@ class AbilityCard extends FrameLayout {
             }
         });
 
-        //TODO-someday: Fix AbilityCard animation so that the image on the card doesn't just jump but animates smoothly like the rest of the card
+        //TODO-beauty: Fix AbilityCard animation so that the image on the card doesn't just jump but animates smoothly like the rest of the card
         LayoutTransition transition = new LayoutTransition();
         transition.enableTransitionType(LayoutTransition.CHANGING);
         transition.setDuration(300);
@@ -80,7 +80,7 @@ class AbilityCard extends FrameLayout {
         if(isExtended) {
             text.append("<br>" + mAbility.description);
 
-            //TODO-someday: on larger phone sizes show the extended ability details in two columns
+            //TODO-beauty: on larger phone sizes show the extended ability details in two columns
             List<String> abilityDetailsToShow = new ArrayList<>();
 
             if(mAbility.cooldown != null)
@@ -106,7 +106,7 @@ class AbilityCard extends FrameLayout {
             if (mAbility.cooldown != null) {
                 text.append("<br>" + getContext().getString(R.string.cooldown) + ": " + mAbility.cooldown);
             } else {
-                //TODO-prebeta: put passive abilities in XML, rather than calculating them in app
+                //TODO-someday: put passive abilities in XML, rather than calculating them in app
                 for(String abilityDetail : mAbility.abilityDetails) {
                     if(abilityDetail.endsWith("Passive")) {
                         text.append("<br><i>" + getContext().getString(R.string.passive) + "</i>");

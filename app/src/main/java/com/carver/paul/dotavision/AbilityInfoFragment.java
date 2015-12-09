@@ -66,7 +66,7 @@ public class AbilityInfoFragment extends Fragment {
     }
 
     private void AddAllCardsAboutHeroes(List<HeroInfo> heroesSeen) {
-        //TODO-prebeta: don't show disables heading when there aren't any other disables
+        //TODO-someday: don't show disables heading when there aren't any other disables
         AddAbilityHeading(getString(R.string.stuns));
         boolean cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
         if(!cardsAdded)

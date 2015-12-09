@@ -61,11 +61,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//TODO-prebeta: test much more for crashes, there is something wrong somewhere. The camera threading??
+//TODO-next: test much more for crashes, there is something wrong somewhere. The camera threading??
 
-//TODO-prebeta: reduce package size. Smaller images? Crop test image
+//TODO-next: reduce package size. Smaller images? Crop test image
 
-//TODO-prebeta: make the heroes info separated somehow. Just a dividing line for now? It's a mess.
+//TODO-next: make the heroes info separated somehow. Just a dividing line for now? It's a mess.
 // Perhaps just draw their image?
 
 //TODO-someday: add tab view so you can slide to change hero rather them all being piled up in one place
@@ -74,19 +74,19 @@ import java.util.List;
 
 //TODO-now: Detect empty box for when no hero picked yet
 
-//TODO-now: Can hit use last photo multiple times! Fix all buttons
+//TODO-next: Can hit use last photo multiple times! Fix all buttons
 
-//TODO-prebeta: Add rate this app button
+//TODO-next: Add rate this app button
 
-//TODO-prebeta: give the first screen a background?
+//TODO-now: give the first screen a background?
 
 //TODO-someday: Add details for escape and invisibility abilities:
 // http://dota2.gamepedia.com/Teleport
 // http://dota2.gamepedia.com/Invisibility
 
-//TODO-prebeta: find out whether it's ok to have Valve's images on github
+//TODO-next: find out whether it's ok to have Valve's images on github
 
-//TODO-prebeta: make screenshots in the Google Play Store higher definition
+//TODO-next: make screenshots in the Google Play Store higher definition
 
 //TODO-someday: learn about layout optimisation
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
@@ -167,10 +167,17 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onHeroChanged(int posInList, HeroAndSimilarity newHero) {
+    public void onHeroChanged(int posInList, String newHero) {
         if (mHeroesSeen == null || mHeroInfoFromXml == null) return;
 
-        HeroInfo newHeroInfo = FindHeroWithName(newHero.hero.name, mHeroInfoFromXml);
+        HeroInfo newHeroInfo = FindHeroWithName(newHero, mHeroInfoFromXml);
+        if(newHeroInfo == null) {
+            Log.e(TAG, "Attempting to change hero to " + newHero + ", but I can't find a hero with that name.");
+            return;
+        }
+
+        if(mHeroesSeen.get(posInList) == newHeroInfo) return;
+
         mHeroesSeen.set(posInList, newHeroInfo);
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
@@ -178,7 +185,7 @@ public class MainActivity extends AppCompatActivity
         abilityInfoFragment.showHeroAbilities(mHeroesSeen);
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-        foundHeroesFragment.changeHeroName(posInList, newHeroInfo.name);
+        foundHeroesFragment.changeHero(posInList, newHeroInfo.name);
     }
 
     public void startDebugLineActivity() {
@@ -240,11 +247,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
-    // TODO-prebeta: Make takePhoto save in the write media location, I think media store wasn't right
+    // TODO-next: Make takePhoto save in the write media location, I think media store wasn't right
     public void takePhoto(View view) {
         EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
-        //TODO-someday: make it possible to specify image save location by sending camera activity an intent
+        //TODO-beauty: make it possible to specify image save location by sending camera activity an intent
         startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
     }
 
@@ -257,7 +264,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // TODO-prebeta: replace FindHeroWithName to use the drawable id int instead of strings
+    // TODO-beauty: replace FindHeroWithName to use the drawable id int instead of strings
     public static HeroInfo FindHeroWithName(String name, List<HeroInfo> heroInfoList) {
         if (heroInfoList == null)
             throw new RuntimeException("Called FindHeroWithName when mHeroInfoFromXml is not initialised.");
@@ -302,7 +309,8 @@ public class MainActivity extends AppCompatActivity
         new RecognitionTask(this).execute(params);
     }
 
-    //TODO-prebeta: make it so RecognitionTask gets passed heroInfoList and similarityTest by MainActivity so I don't have to load them every time.
+    //TODO-someday: work out if it's worth make it so RecognitionTask gets passed similarityTest
+    // by MainActivity so I don't have to load it every time.
     private class RecognitionTask extends AsyncTask<RecognitionTaskParams, Void, List<HeroFromPhoto>> {
 
         static final String TAG = "RecognitionTask";
@@ -373,7 +381,7 @@ public class MainActivity extends AppCompatActivity
             Animation animation = imageview.getAnimation();
             if (animation == null) {
                 // I don't understand how this happens, but it does
-                //TODO: fix null animation issue
+                //TODO-beauty: fix null animation issue
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
                 }
@@ -502,7 +510,7 @@ public class MainActivity extends AppCompatActivity
             AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
             abilityInfoFragment.showHeroAbilities(mHeroesSeen);
 
-            //TODO: bring back animation when loading the hero images and abilities?
+            //TODO-someday: bring back animation when loading the hero images and abilities?
 /*            LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
             transition.setDuration(250);
@@ -515,7 +523,6 @@ public class MainActivity extends AppCompatActivity
             View processingText = findViewById(R.id.text_processing_image);
             processingText.setVisibility(View.GONE);
 
-//TODO: fix bug where fab goes beyond bottom of screen, and so scrolls it down somehow.
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
             View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
 
@@ -536,8 +543,7 @@ public class MainActivity extends AppCompatActivity
     }
 }
 
-
-//TODO-someday: find a way to put the RecognitionTaskParams inside that class?
+//TODO-beauty: find a way to put the RecognitionTaskParams inside that class?
 class RecognitionTaskParams {
     Bitmap bitmap;
     List<HeroInfo> heroInfoList;
