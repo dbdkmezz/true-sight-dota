@@ -155,7 +155,6 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  100% / 150% / 200%</abilityDetails>
             <abilityDetails>SCEPTER ALLY AURA RADIUS:  900</abilityDetails>
-            <abilityDetails> SCEPTER ALLY BONUS DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER ALLY BONUS DAMAGE: 50% / 75% / 100%</abilityDetails>
         </abilities>
     </heroInfo>
@@ -236,13 +235,9 @@
             <abilityDetails>ATTACK SPEED LOSS:  20 / 35 / 50</abilityDetails>
             <abilityDetails>ADDED MOVE SPEED:  40 / 50 / 60</abilityDetails>
             <abilityDetails>TOSS BONUS:  35% / 50% / 65%</abilityDetails>
-            <abilityDetails> SCEPTER BONUS RANGE:</abilityDetails>
             <abilityDetails> SCEPTER BONUS RANGE: 107</abilityDetails>
-            <abilityDetails> SCEPTER CLEAVE DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER CLEAVE DAMAGE: 50%</abilityDetails>
-            <abilityDetails> SCEPTER BONUS BUILDING DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER BONUS BUILDING DAMAGE: 75%</abilityDetails>
-            <abilityDetails> SCEPTER TOSS BONUS:</abilityDetails>
             <abilityDetails> SCEPTER TOSS BONUS: 50% / 65% / 80%</abilityDetails>
         </abilities>
     </heroInfo>
@@ -447,9 +442,7 @@
             <abilityDetails>MOVEMENT SLOW:  50% / 50% / 50%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  50 / 50 / 50</abilityDetails>
             <abilityDetails>SLOW DURATION:  2 / 3 / 4</abilityDetails>
-            <abilityDetails> SCEPTER CAST RANGE:</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 950 / 950 / 950</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 45 / 45 / 45</abilityDetails>
         </abilities>
     </heroInfo>
@@ -612,7 +605,6 @@
             <abilityDetails>STUN DURATION:  1 / 1.5 / 2</abilityDetails>
             <abilityDetails>RANGE:  2000 / 2500 / 3000</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 200 / 300</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 12 / 12 / 12</abilityDetails>
         </abilities>
     </heroInfo>
@@ -691,7 +683,6 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  6 / 7 / 8</abilityDetails>
             <abilityDetails>RADIUS:  600 / 600 / 600</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 8 / 9 / 10</abilityDetails>
         </abilities>
     </heroInfo>
@@ -772,9 +763,7 @@
             <abilityDetails>DAMAGE TAKEN:  35%</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  40% / 50% / 60%</abilityDetails>
             <abilityDetails>SLOW DURATION:  4 / 5 / 6</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE DEALT:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE DEALT: 65%</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 4</abilityDetails>
         </abilities>
     </heroInfo>
@@ -1248,7 +1237,6 @@
             <abilityDetails>STRENGTH MULTIPLIER DAMAGE:  1 / 2 / 3</abilityDetails>
             <abilityDetails>STOP DURATION:  1.5</abilityDetails>
             <abilityDetails>TRAMPLE RADIUS:  105</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE REDUCTION:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE REDUCTION: 60%</abilityDetails>
         </abilities>
     </heroInfo>
@@ -1678,7 +1666,6 @@
             <abilityDetails>MOVEMENT SLOW:  30% / 40% / 50%</abilityDetails>
             <abilityDetails>SLOW DURATION:  3 / 4 / 5</abilityDetails>
             <abilityDetails>MAX HP AS DAMAGE:  35%</abilityDetails>
-            <abilityDetails> SCEPTER SLOW/DISARM DURATION:</abilityDetails>
             <abilityDetails> SCEPTER SLOW/DISARM DURATION: 4 / 5 / 6</abilityDetails>
         </abilities>
     </heroInfo>
@@ -1984,7 +1971,6 @@
             <abilityDetails>STUN DURATION:  1.5 / 2 / 2.5</abilityDetails>
             <abilityDetails>ATTACKS TO DESTROY:  5 / 8 / 11</abilityDetails>
             <abilityDetails>DURATION:  6</abilityDetails>
-            <abilityDetails> SCEPTER CAST RANGE:</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 500</abilityDetails>
         </abilities>
         <abilities>
@@ -2257,9 +2243,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>SLASHES:  3 / 6 / 9</abilityDetails>
             <abilityDetails>SLASH JUMP RADIUS:  425</abilityDetails>
-            <abilityDetails> SCEPTER SLASHES:</abilityDetails>
             <abilityDetails> SCEPTER SLASHES: 6 / 9 / 12</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 70</abilityDetails>
         </abilities>
     </heroInfo>
@@ -2622,7 +2606,6 @@
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RANGE:  700 / 950 / 1200</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 10</abilityDetails>
         </abilities>
     </heroInfo>
@@ -2945,13 +2928,9 @@
             <abilityDetails>MAX BEAMS PER UNIT:  5</abilityDetails>
             <abilityDetails>ECLIPSE DURATION:  2.4 / 4.2 / 6</abilityDetails>
             <abilityDetails>RADIUS:  675 / 675 / 675</abilityDetails>
-            <abilityDetails> SCEPTER TOTAL BEAMS:</abilityDetails>
             <abilityDetails> SCEPTER TOTAL BEAMS: 6 / 12 / 18</abilityDetails>
-            <abilityDetails> SCEPTER MAX BEAMS PER UNIT:</abilityDetails>
             <abilityDetails> SCEPTER MAX BEAMS PER UNIT: 6 / 12 / 18</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 3.6 / 7.2 / 10.8</abilityDetails>
-            <abilityDetails> SCEPTER CAST RANGE:</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 2500</abilityDetails>
         </abilities>
     </heroInfo>
@@ -3202,7 +3181,6 @@
             <abilityDetails>MISSILE ONE SLOW:  30%</abilityDetails>
             <abilityDetails>MISSILE TWO SLOW:  60%</abilityDetails>
             <abilityDetails>RADIUS:  600</abilityDetails>
-            <abilityDetails> SCEPTER MISSILE TWO DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER MISSILE TWO DAMAGE: 175 / 225 / 275</abilityDetails>
         </abilities>
     </heroInfo>
@@ -3388,7 +3366,6 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  1250 / 1250 / 1250</abilityDetails>
             <abilityDetails>DURATION:  7 / 7 / 7</abilityDetails>
-            <abilityDetails> SCEPTER HEALTH REGEN:</abilityDetails>
             <abilityDetails> SCEPTER HEALTH REGEN: 8%</abilityDetails>
         </abilities>
         <abilities>
@@ -3686,11 +3663,8 @@
             <abilityDetails>MOVEMENT SLOW:  30%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  30</abilityDetails>
             <abilityDetails>DAMAGE:  105 / 170 / 250</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 170 / 250 / 310</abilityDetails>
-            <abilityDetails> SCEPTER MOVEMENT SLOW:</abilityDetails>
             <abilityDetails> SCEPTER MOVEMENT SLOW: 50%</abilityDetails>
-            <abilityDetails> SCEPTER ATTACK SLOW:</abilityDetails>
             <abilityDetails> SCEPTER ATTACK SLOW: 50</abilityDetails>
         </abilities>
     </heroInfo>
@@ -3783,11 +3757,8 @@
             <abilityDetails>BREAK RADIUS:  600 / 600 / 600</abilityDetails>
             <abilityDetails>BREAK STUN DURATION:  1.5 / 2.25 / 3</abilityDetails>
             <abilityDetails>BREAK DAMAGE:  100 / 150 / 200</abilityDetails>
-            <abilityDetails> SCEPTER COIL DURATION:</abilityDetails>
             <abilityDetails> SCEPTER COIL DURATION: 8</abilityDetails>
-            <abilityDetails> SCEPTER BREAK DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER BREAK DAMAGE: 200 / 250 / 300</abilityDetails>
-            <abilityDetails> SCEPTER BREAK STUN DURATION:</abilityDetails>
             <abilityDetails> SCEPTER BREAK STUN DURATION: 1.5 / 3 / 4.5</abilityDetails>
         </abilities>
     </heroInfo>
@@ -3950,9 +3921,7 @@
             <abilityDetails>BONUS ATTACK SPEED:  500</abilityDetails>
             <abilityDetails>DAMAGE REDUCTION:  50% / 40% / 30%</abilityDetails>
             <abilityDetails>DURATION:  20</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 15 / 15 / 15</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE REDUCTION:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE REDUCTION: 30% / 15% / 0%</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4035,7 +4004,6 @@
             <abilityDetails>TRUE SIGHT RADIUS:  500</abilityDetails>
             <abilityDetails>DURATION:  3 / 3 / 3 / 3</abilityDetails>
             <abilityDetails>DAMAGE:  225 / 350 / 475</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 440 / 540 / 640</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4195,7 +4163,6 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>ATTACK DAMAGE:  45 / 60 / 75</abilityDetails>
             <abilityDetails>DURATION:  45 / 45 / 45</abilityDetails>
-            <abilityDetails> SCEPTER ATTACK DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER ATTACK DAMAGE: 90 / 110 / 130</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4352,9 +4319,7 @@
             <abilityDetails>MAX TARGETS:  16 / 16 / 16</abilityDetails>
             <abilityDetails>DAMAGE:  140 / 180 / 225</abilityDetails>
             <abilityDetails>DAMAGE ADDITION PER BOUNCE:  7%</abilityDetails>
-            <abilityDetails> SCEPTER MAX TARGETS:</abilityDetails>
             <abilityDetails> SCEPTER MAX TARGETS: 18 / 18 / 18</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 155 / 210 / 275</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4431,7 +4396,6 @@
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DISTANCE DAMAGE:  15% / 20% / 25%</abilityDetails>
-            <abilityDetails> SCEPTER BONUS RANGE:</abilityDetails>
             <abilityDetails> SCEPTER BONUS RANGE: 190 / 190 / 190</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4524,11 +4488,8 @@
             <abilityDetails>FLAME LENGTH:  900</abilityDetails>
             <abilityDetails>FLAME WIDTH:  240</abilityDetails>
             <abilityDetails>DURATION:  10</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE PER SECOND:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE PER SECOND: 125 / 175 / 225</abilityDetails>
-            <abilityDetails> SCEPTER FLAME LENGTH:</abilityDetails>
             <abilityDetails> SCEPTER FLAME LENGTH: 1800</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 20</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4623,9 +4584,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>HEAL:  200 / 300 / 400</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 30</abilityDetails>
-            <abilityDetails> SCEPTER HOLY PERSUASION ANCIENTS:</abilityDetails>
             <abilityDetails> SCEPTER HOLY PERSUASION ANCIENTS: 1 / 2 / 3</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4903,7 +4862,6 @@
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  180 / 240 / 300</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 2</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4988,9 +4946,7 @@
             <abilityDetails>PULSES:  20</abilityDetails>
             <abilityDetails>MAX DAMAGE PER SECOND:  200 / 250 / 300</abilityDetails>
             <abilityDetails>DURATION:  5</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 7</abilityDetails>
-            <abilityDetails> SCEPTER PULSES:</abilityDetails>
             <abilityDetails> SCEPTER PULSES: 28</abilityDetails>
         </abilities>
     </heroInfo>
@@ -5421,9 +5377,7 @@
             <abilityDetails>MINE DURATION:  600</abilityDetails>
             <abilityDetails>FADE TIME:  2</abilityDetails>
             <abilityDetails>CAST RANGE:  500</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 450 / 600 / 750</abilityDetails>
-            <abilityDetails> SCEPTER CAST RANGE:</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 700</abilityDetails>
         </abilities>
     </heroInfo>
@@ -5513,11 +5467,8 @@
             <abilityDetails>KILL ATTACK SPEED BONUS:  30</abilityDetails>
             <abilityDetails>KILL SPEED DURATION:  6</abilityDetails>
             <abilityDetails>KILL SPEED RADIUS:  900</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 6 / 6 / 6</abilityDetails>
-            <abilityDetails> SCEPTER KILL THRESHOLD:</abilityDetails>
             <abilityDetails> SCEPTER KILL THRESHOLD: 300 / 425 / 550</abilityDetails>
-            <abilityDetails> SCEPTER SPEED DURATION:</abilityDetails>
             <abilityDetails> SCEPTER SPEED DURATION: 10</abilityDetails>
         </abilities>
     </heroInfo>
@@ -5594,7 +5545,6 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  75 / 125 / 175</abilityDetails>
-            <abilityDetails> SCEPTER STRENGTH MULTIPLIER:</abilityDetails>
             <abilityDetails> SCEPTER STRENGTH MULTIPLIER: 1</abilityDetails>
         </abilities>
     </heroInfo>
@@ -5684,9 +5634,7 @@
             <abilityDetails>MOVEMENT SLOW:  30% / 30% / 30%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  30</abilityDetails>
             <abilityDetails>SLOW DURATION:  3</abilityDetails>
-            <abilityDetails> SCEPTER PULSES:</abilityDetails>
             <abilityDetails> SCEPTER PULSES: 8 / 10 / 12</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 120 / 100 / 80</abilityDetails>
         </abilities>
     </heroInfo>
@@ -5928,7 +5876,6 @@
             <abilityDetails>ATTACK SPEED SLOW:  75</abilityDetails>
             <abilityDetails>SLOW DURATION:  5</abilityDetails>
             <abilityDetails>SCEPTER ALLY DEATH DELAY:  7</abilityDetails>
-            <abilityDetails> SCEPTER DEATH DELAY RADIUS:</abilityDetails>
             <abilityDetails> SCEPTER DEATH DELAY RADIUS: 1200</abilityDetails>
         </abilities>
     </heroInfo>
@@ -6215,9 +6162,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  15</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  20 / 35 / 50</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 16 / 16 / 16</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE PER SECOND:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE PER SECOND: 20 / 35 / 50</abilityDetails>
         </abilities>
     </heroInfo>
@@ -6302,11 +6247,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  150 / 250 / 350</abilityDetails>
             <abilityDetails>RANGE:  700</abilityDetails>
-            <abilityDetails> SCEPTER RANGE:</abilityDetails>
             <abilityDetails> SCEPTER RANGE: 850</abilityDetails>
-            <abilityDetails> SCEPTER BASH RADIUS:</abilityDetails>
             <abilityDetails> SCEPTER BASH RADIUS: 250 / 250 / 250</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 20 / 20 / 20</abilityDetails>
         </abilities>
     </heroInfo>
@@ -6718,9 +6660,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>HP THRESHOLD:  400</abilityDetails>
             <abilityDetails>DURATION:  4 / 5 / 6</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 5 / 6 / 7</abilityDetails>
-            <abilityDetails> REDIRECT RANGE:</abilityDetails>
             <abilityDetails> REDIRECT RANGE: 900</abilityDetails>
         </abilities>
     </heroInfo>
@@ -6961,7 +6901,6 @@
             <abilityDetails>STRIKE INTERVAL:  0.7 / 0.6 / 0.5</abilityDetails>
             <abilityDetails>ARMOR REDUCTION:  1 / 1 / 1</abilityDetails>
             <abilityDetails>DAMAGE:  37 / 50 / 63</abilityDetails>
-            <abilityDetails> SCEPTER STRIKE INTERVAL:</abilityDetails>
             <abilityDetails> SCEPTER STRIKE INTERVAL: 0.6 / 0.5 / 0.4</abilityDetails>
         </abilities>
     </heroInfo>
@@ -7045,11 +6984,8 @@
             <abilityDetails>RADIUS:  830</abilityDetails>
             <abilityDetails>DURATION:  16</abilityDetails>
             <abilityDetails>DAMAGE:  30 / 55 / 80</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 140 / 120 / 60</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 16</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 60 / 85 / 110</abilityDetails>
         </abilities>
     </heroInfo>
@@ -7122,9 +7058,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  425</abilityDetails>
             <abilityDetails>DURATION:  4 / 4.5 / 5</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 4 / 5 / 6</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 60 / 60 / 60</abilityDetails>
         </abilities>
     </heroInfo>
@@ -7286,11 +7220,8 @@
             <abilityDetails>DAMAGE PER SECOND:  60 / 100 / 145</abilityDetails>
             <abilityDetails>MOVE SLOW:  40% / 60% / 80%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  40 / 60 / 80</abilityDetails>
-            <abilityDetails> SCEPTER MANA COST:</abilityDetails>
             <abilityDetails> SCEPTER MANA COST: 125 / 125 / 125</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 12</abilityDetails>
-            <abilityDetails> SCEPTER CAST RANGE:</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 900</abilityDetails>
         </abilities>
     </heroInfo>
@@ -7522,7 +7453,6 @@
             <cooldown>60/50/40</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Heroes</abilityDetails>
-            <abilityDetails>SCEPTER ALLY CAST RANGE:</abilityDetails>
             <abilityDetails>SCEPTER ALLY CAST RANGE: 1000</abilityDetails>
         </abilities>
     </heroInfo>
@@ -8115,11 +8045,8 @@
             <abilityDetails>MANA DRAIN:  5%</abilityDetails>
             <abilityDetails>DURATION:  5 / 5 / 5</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 155 / 215</abilityDetails>
-            <abilityDetails> SCEPTER MANA DRAIN:</abilityDetails>
             <abilityDetails> SCEPTER MANA DRAIN: 10%</abilityDetails>
-            <abilityDetails> SCEPTER DURATION:</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 7</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 155 / 215 / 270</abilityDetails>
         </abilities>
         <abilities>
@@ -8220,9 +8147,7 @@
             <abilityDetails>MOVEMENT SLOW:  30%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  30</abilityDetails>
             <abilityDetails>SLOW DURATION:  4 / 4 / 4</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 370 / 460 / 550</abilityDetails>
-            <abilityDetails> SCEPTER CAST RANGE:</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 850 / 850 / 850</abilityDetails>
         </abilities>
     </heroInfo>
@@ -8305,13 +8230,9 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  600 / 725 / 850</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 725 / 875 / 1025</abilityDetails>
-            <abilityDetails> SCEPTER MANA COST:</abilityDetails>
             <abilityDetails> SCEPTER MANA COST: 200 / 420 / 625</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 100 / 60 / 20</abilityDetails>
-            <abilityDetails> SCEPTER AOE:</abilityDetails>
             <abilityDetails> SCEPTER AOE: 300</abilityDetails>
         </abilities>
     </heroInfo>
@@ -8557,11 +8478,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE PER MISSING HP:  0.4 / 0.6 / 0.9</abilityDetails>
             <abilityDetails>STUN DURATION:  1.5 / 1.5 / 1.5</abilityDetails>
-            <abilityDetails> SCEPTER MANA COST:</abilityDetails>
             <abilityDetails> SCEPTER MANA COST: 150 / 340 / 500</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 70</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE PER MISSING HP:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE PER MISSING HP: 0.6 / 0.9 / 1.2</abilityDetails>
             <abilityDetails>ADDED RESPAWN TIME:  30</abilityDetails>
         </abilities>
@@ -8649,13 +8567,9 @@
             <abilityDetails>GOLEM DAMAGE:  75 / 100 / 125</abilityDetails>
             <abilityDetails>GOLEM ARMOR:  6 / 9 / 12</abilityDetails>
             <abilityDetails>GOLEM HEALTH REGEN:  25 / 50 / 75</abilityDetails>
-            <abilityDetails> SCEPTER NUMBER OF GOLEMS:</abilityDetails>
             <abilityDetails> SCEPTER NUMBER OF GOLEMS: 2</abilityDetails>
-            <abilityDetails> SCEPTER GOLEM HEALTH:</abilityDetails>
             <abilityDetails> SCEPTER GOLEM HEALTH: 675 / 900 / 1125</abilityDetails>
-            <abilityDetails> SCEPTER GOLEM DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER GOLEM DAMAGE: 56 / 75 / 94</abilityDetails>
-            <abilityDetails> SCEPTER BOUNTY REDUCTION:</abilityDetails>
             <abilityDetails> SCEPTER BOUNTY REDUCTION: 50%</abilityDetails>
         </abilities>
     </heroInfo>
@@ -8737,9 +8651,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>WAVE MAX RADIUS:  450</abilityDetails>
             <abilityDetails>DAMAGE:  290 / 380 / 470</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 40</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 325 / 440 / 555</abilityDetails>
         </abilities>
     </heroInfo>
@@ -8906,7 +8818,6 @@
             <abilityDetails>DRAIN PER SECOND:  150 / 200 / 250</abilityDetails>
             <abilityDetails>CAST RANGE:  900 / 1050 / 1200</abilityDetails>
             <abilityDetails>MAX DURATION:  10</abilityDetails>
-            <abilityDetails> SCEPTER DRAIN PER SECOND:</abilityDetails>
             <abilityDetails> SCEPTER DRAIN PER SECOND: 180 / 240 / 300</abilityDetails>
         </abilities>
     </heroInfo>
@@ -8992,9 +8903,7 @@
             <abilityDetails>RADIUS:  575 / 575 / 575</abilityDetails>
             <abilityDetails>ARMOR PER SECOND:  0.75 / 1 / 1.25</abilityDetails>
             <abilityDetails>DURATION:  24</abilityDetails>
-            <abilityDetails> SCEPTER RADIUS:</abilityDetails>
             <abilityDetails> SCEPTER RADIUS: 775 / 775 / 775</abilityDetails>
-            <abilityDetails> SCEPTER ARMOR PER SECOND:</abilityDetails>
             <abilityDetails> SCEPTER ARMOR PER SECOND: 1.25 / 1.5 / 1.75</abilityDetails>
         </abilities>
     </heroInfo>
@@ -9085,7 +8994,6 @@
             <abilityDetails>MANA/SEC:  20 / 40 / 60</abilityDetails>
             <abilityDetails>RADIUS:  450</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 130 / 160</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 160 / 190 / 220</abilityDetails>
         </abilities>
     </heroInfo>
@@ -9170,7 +9078,6 @@
             <abilityDetails>REPLICA DAMAGE:  60% / 75% / 90%</abilityDetails>
             <abilityDetails>REPLICA DAMAGE TAKEN:  400% / 400% / 400%</abilityDetails>
             <abilityDetails>CAST RANGE:  500 / 900 / 1300</abilityDetails>
-            <abilityDetails> SCEPTER REPLICA DAMAGE:</abilityDetails>
             <abilityDetails> SCEPTER REPLICA DAMAGE: 100% / 120% / 140%</abilityDetails>
         </abilities>
     </heroInfo>
@@ -9340,7 +9247,6 @@
             <abilityDetails>FROSTBITTEN DURATION:  8 / 9 / 10</abilityDetails>
             <abilityDetails>FROSTBITTEN DAMAGE PER SECOND:  12.5 / 20 / 32</abilityDetails>
             <abilityDetails>SHATTER HEALTH THRESHOLD:  10% / 11% / 12%</abilityDetails>
-            <abilityDetails> SCEPTER FROSTBITTEN DURATION:</abilityDetails>
             <abilityDetails> SCEPTER FROSTBITTEN DURATION: 17</abilityDetails>
         </abilities>
         <abilities>
@@ -9419,9 +9325,7 @@
             <cooldown>22/17/12/5</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>MAX SPELLS:  2 / 2 / 2 / 2</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN:</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 16 / 8 / 4 / 2</abilityDetails>
-            <abilityDetails> SCEPTER MANA COST:</abilityDetails>
             <abilityDetails> SCEPTER MANA COST: 0</abilityDetails>
         </abilities>
         <abilities>
@@ -9764,7 +9668,6 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE:  200 / 300 / 400</abilityDetails>
             <abilityDetails>DURATION:  5 / 5 / 5</abilityDetails>
-            <abilityDetails> SCEPTER CHARGE RESTORE TIME:</abilityDetails>
             <abilityDetails> SCEPTER CHARGE RESTORE TIME: 40</abilityDetails>
         </abilities>
     </heroInfo>

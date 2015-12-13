@@ -44,7 +44,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
@@ -58,7 +57,6 @@ import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //TODO-next: test much more for crashes, there is something wrong somewhere. The camera threading??
@@ -229,7 +227,12 @@ public class MainActivity extends AppCompatActivity
      * @param view
      */
     public void useLastPhotoButton(View view) {
-        doImageRecognitionOnPhoto();
+        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
+        if (mediaFile.exists()) {
+            doImageRecognitionOnPhoto();
+        } else { // If there isn't a previous photo, then just do the demo
+            demoButton(view);
+        }
     }
 
     static public Bitmap CreateCroppedBitmap(String photoPath) {
@@ -327,6 +330,7 @@ public class MainActivity extends AppCompatActivity
         protected void onPreExecute() {
             resetInfo();
             slideDemoButtonsOffScreen();
+            hideBackground();
             pulseCameraFab();
         }
 
@@ -349,6 +353,13 @@ public class MainActivity extends AppCompatActivity
                         .setDuration(150)
                         .setInterpolator(new AccelerateInterpolator());
             }
+        }
+
+        private void hideBackground() {
+            View view = findViewById(R.id.image_main_background);
+            view.animate()
+                    .alpha(0f)
+                    .setDuration(150);
         }
 
         // This is where the hard work happens which needs to be off the UI thread

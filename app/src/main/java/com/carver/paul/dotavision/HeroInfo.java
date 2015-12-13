@@ -100,10 +100,8 @@ class HeroAbility {
 
         for (String detail : abilityDetails) {
             if (abilityType != DISABLE_NOT_STUN
-                    && detail.contains(abilityDescription + " DURATION:")) {
-                return detail;
-            } else if (abilityType != DISABLE_NOT_STUN
-                    && detail.contains("MAX " + abilityDescription + ":")) {
+                    && detail.contains(abilityDescription)
+                    && (detail.contains("MAX") || detail.contains("DURATION"))) {
                 return detail;
             } else if (detail.startsWith("DURATION:")) {
                 return detail;
