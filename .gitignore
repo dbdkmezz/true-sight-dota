@@ -3,7 +3,11 @@
 .gradle
 /local.properties
 /.idea/workspace.xml
+/.idea/gradle.xml
+/.idea/modules.xml
 /.idea/libraries
+/app/app.iml
+openCVLibrary300/openCVLibrary300.iml
 .DS_Store
 /build
 /captures
