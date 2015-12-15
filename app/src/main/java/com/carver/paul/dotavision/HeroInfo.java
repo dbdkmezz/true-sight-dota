@@ -112,9 +112,10 @@ class HeroAbility {
             }
         }
 
-        // If still not found the duration, then just use any old detail string with a DURATION
+        // If still not found the duration, then just use any old detail string with a DURATION or
+        // MAX
         for (String detail : abilityDetails) {
-            if (detail.contains("DURATION")) {
+            if (detail.contains("DURATION") || detail.contains("MAX")) {
                 return detail;
             }
         }

@@ -76,7 +76,7 @@ import java.util.List;
 
 //TODO-next: Add rate this app button
 
-//TODO-now: give the first screen a background?
+//TODO-next: Add a way to keep both dire and radiant photos
 
 //TODO-someday: Add details for escape and invisibility abilities:
 // http://dota2.gamepedia.com/Teleport
@@ -428,6 +428,7 @@ public class MainActivity extends AppCompatActivity
         /**
          * Makes the camera FAB pulse infinitely (will be stopped when loading completes)
          */
+        //TODO-now: Make camea button rotate, not pulse
         private void pulseCameraFab() {
             //Code using the old Animation class, rather than the new ViewPropertyAnimator
             //Infinite repeat is easier to implement this way

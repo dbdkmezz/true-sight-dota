@@ -5193,7 +5193,7 @@
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
-            <isDisable>false</isDisable>
+            <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>oracle_fortunes_end_hp2</imageName>
