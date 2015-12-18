@@ -76,38 +76,37 @@ class HeroAbility {
     public String description;
     public String manaCost;
     public String cooldown;
+    public String disableDuration;
     public List<String> abilityDetails;
 
     public HeroAbility() {
         abilityDetails = new ArrayList<>();
     }
 
+    //TODO: save silence durations in the XML too
     public String guessAbilityDuration(int abilityType) {
         if (abilityType != STUN && abilityType != SILENCE && abilityType != DISABLE_NOT_STUN)
             throw new RuntimeException("guessAbilityDuration passed wrong abilityType");
 
-        if (abilityType == STUN && isStun != true) return null;
-        if (abilityType == DISABLE_NOT_STUN && isDisable != true) return null;
-        if (abilityType == SILENCE && isSilence != true) return null;
+        if (abilityType == STUN || abilityType == DISABLE_NOT_STUN) {
+            if (isDisable != true) {
+                return null;
+            }
+            else {
+                return disableDuration;
+            }
+        }
 
-        String abilityDescription = "";
-        if (abilityType == STUN)
-            abilityDescription = "STUN";
-        else if (abilityType == SILENCE)
-            abilityDescription = "SILENCE";
-        else if (abilityType != DISABLE_NOT_STUN)
-            abilityDescription = "XXXXX";
+        if (abilityType != SILENCE)
+            throw new RuntimeException("abilityType should be silence by now");
 
         for (String detail : abilityDetails) {
-            if (abilityType != DISABLE_NOT_STUN
-                    && detail.contains(abilityDescription)
+            if (detail.contains("SILENCE")
                     && (detail.contains("MAX") || detail.contains("DURATION"))) {
                 return detail;
             } else if (detail.startsWith("DURATION:")) {
                 return detail;
             } else if (detail.startsWith("HERO DURATION:")) {
-                return detail;
-            } else if (detail.startsWith("CHANNEL DURATION:")) {
                 return detail;
             }
         }

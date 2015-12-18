@@ -551,6 +551,10 @@ public class Variables {
                 new Pair<>(R.drawable.winter_wyvern_arctic_burn_hp2, "winter_wyvern_arctic_burn_hp2"),
                 new Pair<>(R.drawable.winter_wyvern_splinter_blast_hp2, "winter_wyvern_splinter_blast_hp2"),
                 new Pair<>(R.drawable.winter_wyvern_cold_embrace_hp2, "winter_wyvern_cold_embrace_hp2"),
-                new Pair<>(R.drawable.winter_wyvern_winters_curse_hp2, "winter_wyvern_winters_curse_hp2"));
+                new Pair<>(R.drawable.winter_wyvern_winters_curse_hp2, "winter_wyvern_winters_curse_hp2"),
+                new Pair<>(R.drawable.arc_warden_flux_hp2, "arc_warden_flux_hp2"),
+                new Pair<>(R.drawable.arc_warden_magnetic_field_hp2, "arc_warden_magnetic_field_hp2"),
+                new Pair<>(R.drawable.arc_warden_spark_wraith_hp2, "arc_warden_spark_wraith_hp2"),
+                new Pair<>(R.drawable.arc_warden_tempest_double_hp2, "arc_warden_tempest_double_hp2"));
     }
 }

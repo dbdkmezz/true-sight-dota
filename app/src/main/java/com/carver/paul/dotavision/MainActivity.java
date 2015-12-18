@@ -78,6 +78,8 @@ import java.util.List;
 
 //TODO-next: Add a way to keep both dire and radiant photos
 
+//TODO-next: Add map with creep camp stack timings
+
 //TODO-someday: Add details for escape and invisibility abilities:
 // http://dota2.gamepedia.com/Teleport
 // http://dota2.gamepedia.com/Invisibility

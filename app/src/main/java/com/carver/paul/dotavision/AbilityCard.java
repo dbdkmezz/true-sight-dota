@@ -37,13 +37,15 @@ class AbilityCard extends FrameLayout {
     private ImageView mImageView;
     private HeroAbility mAbility;
     private int mAbilityType = -1;
+    private boolean mShowHeroName;
 
     //bool to say if the card has full info or not (full info is toggled when clicked)
     private boolean isExtended = false;
 
-    public AbilityCard(Context context, HeroAbility ability, int abilityType) {
+    public AbilityCard(Context context, HeroAbility ability, boolean showHeroName, int abilityType) {
         super(context);
         mAbility = ability;
+        mShowHeroName = showHeroName;
         mAbilityType = abilityType;
         init();
     }
@@ -75,7 +77,12 @@ class AbilityCard extends FrameLayout {
 
     private void setupTextView() {
         StringBuilder text = new StringBuilder();
-        text.append("<b>" + mAbility.heroName + ": " + mAbility.name + "</b>");
+
+        text.append("<b>");
+        if(mShowHeroName) {
+            text.append(mAbility.heroName + ": ");
+        }
+        text.append(mAbility.name + "</b>");
 
         if(isExtended) {
             text.append("<br>" + mAbility.description);

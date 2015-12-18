@@ -68,22 +68,22 @@ public class AbilityInfoFragment extends Fragment {
     private void AddAllCardsAboutHeroes(List<HeroInfo> heroesSeen) {
         //TODO-someday: don't show disables heading when there aren't any other disables
         AddAbilityHeading(getString(R.string.stuns));
-        boolean cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.STUN);
+        boolean cardsAdded = AddAbilityCardsOfType(heroesSeen, HeroAbility.STUN);
         if(!cardsAdded)
             AddAbilityText(getString(R.string.no_stuns_found));
 
         AddAbilityHeading(getString(R.string.disables));
-        cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.DISABLE_NOT_STUN);
+        cardsAdded = AddAbilityCardsOfType(heroesSeen, HeroAbility.DISABLE_NOT_STUN);
         if(!cardsAdded)
             AddAbilityText(getString(R.string.no_disables_found));
 
         AddAbilityHeading(getString(R.string.silences));
-        cardsAdded = AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.SILENCE);
+        cardsAdded = AddAbilityCardsOfType(heroesSeen, HeroAbility.SILENCE);
         if(!cardsAdded)
             AddAbilityText(getString(R.string.no_silences_found));
 
         AddAbilityHeading(getString(R.string.ultimates));
-        AddAbilityCardsForHeroesList(heroesSeen, HeroAbility.ULTIMATE);
+        AddAbilityCardsOfType(heroesSeen, HeroAbility.ULTIMATE);
 
         AddAbilityCardsForAllHeroAbilities(heroesSeen);
     }
@@ -116,7 +116,7 @@ public class AbilityInfoFragment extends Fragment {
      * @param abilityType
      * @return returns true if any cards have been added
      */
-    private boolean AddAbilityCardsForHeroesList(List<HeroInfo> heroes, int abilityType) {
+    private boolean AddAbilityCardsOfType(List<HeroInfo> heroes, int abilityType) {
         List<HeroAbility> abilities = new ArrayList<>();
         for (HeroInfo hero : heroes) {
             for (HeroAbility ability : hero.abilities) {
@@ -132,19 +132,19 @@ public class AbilityInfoFragment extends Fragment {
             }
         }
 
-        return AddAbilityCards(abilities, abilityType);
+        return AddAbilityCards(abilities, true, abilityType);
     }
 
-    private boolean AddAbilityCards(List<HeroAbility> abilities) {
-        return AddAbilityCards(abilities, -1);
+    private boolean AddAbilityCards(List<HeroAbility> abilities, boolean showHeroName) {
+        return AddAbilityCards(abilities, showHeroName, -1);
     }
 
-    private boolean AddAbilityCards(List<HeroAbility> abilities, int abilityType) {
+    private boolean AddAbilityCards(List<HeroAbility> abilities, boolean showHeroName, int abilityType) {
         LinearLayout parent = (LinearLayout) getActivity().findViewById(R.id.layout_results_info);
         boolean cardsAdded = false;
 
         for (HeroAbility ability : abilities) {
-            AbilityCard card = new AbilityCard(getActivity(), ability, abilityType);
+            AbilityCard card = new AbilityCard(getActivity(), ability, showHeroName, abilityType);
             parent.addView(card);
             cardsAdded = true;
         }
@@ -155,7 +155,7 @@ public class AbilityInfoFragment extends Fragment {
     private void AddAbilityCardsForAllHeroAbilities(List<HeroInfo> heroes) {
         for (HeroInfo hero : heroes) {
             AddAbilityHeading(hero.name);
-            AddAbilityCards(hero.abilities);
+            AddAbilityCards(hero.abilities, false);
         }
     }
 }

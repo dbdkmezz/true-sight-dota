@@ -158,6 +158,9 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("cooldown")) {
                 ability.cooldown = readText(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "cooldown");
+            } else if (parser.getName().equals("disableDuration")) {
+                ability.disableDuration = readText(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "disableDuration");
             } else if (parser.getName().equals("abilityDetails")) {
                 ability.abilityDetails.add(readText(parser));
                 parser.require(XmlPullParser.END_TAG, sNullString, "abilityDetails");
