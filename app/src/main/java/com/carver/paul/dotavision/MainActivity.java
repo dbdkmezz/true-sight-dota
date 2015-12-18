@@ -506,8 +506,10 @@ public class MainActivity extends AppCompatActivity
 
             if (BuildConfig.DEBUG && sDebugMode) {
                 TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
-                imageDebugText.setVisibility(View.VISIBLE);
-                imageDebugText.setText(Recognition.mDebugString);
+                if (imageDebugText != null) {
+                    imageDebugText.setVisibility(View.VISIBLE);
+                    imageDebugText.setText(Recognition.mDebugString);
+                }
             }
 
             //A list of the heroes we've seen, for use when adding the ability cards
@@ -519,10 +521,14 @@ public class MainActivity extends AppCompatActivity
             }
 
             FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mHeroInfoFromXml);
+            if (foundHeroesFragment != null) {
+                foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mHeroInfoFromXml);
+            }
 
             AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-            abilityInfoFragment.showHeroAbilities(mHeroesSeen);
+            if (abilityInfoFragment != null) {
+                abilityInfoFragment.showHeroAbilities(mHeroesSeen);
+            }
 
             //TODO-someday: bring back animation when loading the hero images and abilities?
 /*            LayoutTransition transition = new LayoutTransition();

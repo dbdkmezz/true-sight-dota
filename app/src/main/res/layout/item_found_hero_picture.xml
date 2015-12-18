@@ -9,6 +9,8 @@
         android:id="@+id/text_hero_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textNoSuggestions"
+        android:selectAllOnFocus="true"
         android:textStyle="bold"/>
 
     <LinearLayout
