@@ -31,6 +31,7 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
     private final LinearLayoutManager mLayoutManager;
     private final int mPosInHeroList;
     private final List<HeroAndSimilarity> mSimilarityList;
+    private HeroAndSimilarity mCurrentSelectedHero;
 
     private final String TAG = "CenterLockListener";
 
@@ -44,6 +45,7 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
         mLayoutManager = layoutManager;
         mSimilarityList = similarityList;
         mPosInHeroList = posInHeroList;
+        mCurrentSelectedHero = similarityList.get(0);
     }
 
     @Override
@@ -52,33 +54,43 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
 
         LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
 
-        if( mCenterPivot == 0 ) {
-
+        if(mCenterPivot == 0) {
             // Default pivot , Its a bit inaccurate .
             // Better pass the center pivot as your Center Indicator view's
             // calculated center on it OnGlobalLayoutListener event
-            mCenterPivot = lm.getOrientation() == LinearLayoutManager.HORIZONTAL ? ( recyclerView.getLeft() + recyclerView.getRight() ) : ( recyclerView.getTop() + recyclerView.getBottom() );
+            if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                mCenterPivot = recyclerView.getLeft() + recyclerView.getRight();
+            } else {
+                mCenterPivot = recyclerView.getTop() + recyclerView.getBottom();
+            }
         }
-        if( !mAutoSet ) {
-
+        if(!mAutoSet) {
             if( newState == RecyclerView.SCROLL_STATE_IDLE ) {
                 //ScrollStoppped
                 View view = findCenterView(lm);//get the view nearest to center
-                int viewCenter = lm.getOrientation() == LinearLayoutManager.HORIZONTAL ? ( view.getLeft() + view.getRight() )/2 :( view.getTop() + view.getBottom() )/2;
+
+                int viewCenter;
+                if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                    viewCenter = (view.getLeft() + view.getRight()) / 2;
+                } else {
+                    viewCenter = (view.getTop() + view.getBottom()) / 2;
+                }
+
                 //compute scroll from center
                 int scrollNeeded = viewCenter - mCenterPivot; // Add or subtract any offsets you need here
 
-                if( lm.getOrientation() == LinearLayoutManager.HORIZONTAL ) {
+                if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
                     recyclerView.smoothScrollBy(scrollNeeded, 0);
                 }
                 else
                 {
-                    recyclerView.smoothScrollBy(0, (int) (scrollNeeded));
+                    recyclerView.smoothScrollBy(0, scrollNeeded);
                 }
-                mAutoSet =true;
+                mAutoSet = true;
             }
         }
-        if( newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING ){
+        if(newState == RecyclerView.SCROLL_STATE_DRAGGING
+                || newState == RecyclerView.SCROLL_STATE_SETTLING){
             mAutoSet = false;
         }
     }
@@ -89,16 +101,14 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
 
     }
 
-    //TODO-next: make hero changes scroll nicely
+    //TODO-someday: make hero changes scroll nicely
     public void setHero(String heroName) {
-        // No need to do anything if the current hero has the new hero name
-        if(mSimilarityList.get(mPosInHeroList).hero.name.equals(heroName))
-            return;
-
         int newPos = 0;
         for(HeroAndSimilarity hero : mSimilarityList) {
             if(hero.hero.name.equals(heroName)) {
-                mLayoutManager.scrollToPositionWithOffset(newPos, 0);
+                if(hero != mCurrentSelectedHero) {
+                    mLayoutManager.scrollToPositionWithOffset(newPos, 0);
+                }
                // recyclerView.smoothScrollBy(scrollNeeded, 0);
                 return;
             }
@@ -109,30 +119,33 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
     }
 
     private View findCenterView(LinearLayoutManager lm) {
-
         int minDistance = 0;
         View view = null;
         View returnView = null;
         int foundPos = -1;
         boolean notFound = true;
 
-        for(int i = lm.findFirstVisibleItemPosition(); i <= lm.findLastVisibleItemPosition() && notFound ; i++ ) {
+        for(int i = lm.findFirstVisibleItemPosition();
+            i <= lm.findLastVisibleItemPosition() && notFound;
+            i++) {
 
             view=lm.findViewByPosition(i);
 
-            int center = lm.getOrientation() == LinearLayoutManager.HORIZONTAL ? ( view.getLeft() + view.getRight() )/ 2 : ( view.getTop() + view.getBottom() )/ 2;
+            int center;
+            if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                center = (view.getLeft() + view.getRight()) / 2;
+            } else {
+                center = (view.getTop() + view.getBottom()) / 2;
+            }
+
             int leastDifference = Math.abs(mCenterPivot - center);
 
-            if( leastDifference <= minDistance || i == lm.findFirstVisibleItemPosition())
-            {
+            if(leastDifference <= minDistance || i == lm.findFirstVisibleItemPosition()) {
                 minDistance = leastDifference;
-                returnView=view;
+                returnView = view;
                 foundPos = i;
-            }
-            else
-            {
-                notFound=false;
-
+            } else {
+                notFound = false;
             }
         }
 
@@ -144,7 +157,7 @@ public class CenterLockListener extends RecyclerView.OnScrollListener {
     }
 
     private void reportHeroChange(int pos) {
-        HeroAndSimilarity newHero = mSimilarityList.get(pos);
-        mHeroChangedListener.onHeroChanged(mPosInHeroList, newHero.hero.name);
+        mCurrentSelectedHero = mSimilarityList.get(pos);
+        mHeroChangedListener.onHeroChanged(mPosInHeroList, mCurrentSelectedHero.hero.name);
     }
 }

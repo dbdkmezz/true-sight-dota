@@ -108,8 +108,6 @@ public class FoundHeroesFragment extends Fragment {
             ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
             leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
 
-
-            //TODO-now do something for when losing focus? Change text back?
             AutoCompleteTextView heroNameTextView
                     = (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name);
             mHeroNamesTextViews.add(heroNameTextView);
