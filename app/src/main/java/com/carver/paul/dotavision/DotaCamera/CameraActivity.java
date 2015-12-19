@@ -51,7 +51,7 @@ import java.util.concurrent.TimeUnit;
 
 //TODO-someday: crop what the Camera saves
 
-//TODO-now: Give the camera preview a visible border and add it to the preview
+//TODO-someday: Give the camera preview a visible border and add it to the preview
 
 public class CameraActivity extends Activity {
     private Camera mCamera;

@@ -18,6 +18,11 @@
 
 package com.carver.paul.dotavision;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
@@ -42,7 +47,11 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,6 +68,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO-now: Check all new ability icons, I think that when I updated them the ones online were not
+// right. Also Loan Druid's new ability Savage Roar wasn't even there
+// http://www.dota2.com/hero/Lone_Druid/
+
 //TODO-next: test much more for crashes, there is something wrong somewhere. The camera threading??
 
 //TODO-next: reduce package size. Smaller images? Crop test image
@@ -70,7 +83,9 @@ import java.util.List;
 
 //TODO-someday: Make card borders 0 on small displays
 
-//TODO-now: Detect empty box for when no hero picked yet
+//TODO-next: Detect empty box for when no hero picked yet (note, this isn't as easy as it may seem!)
+
+//TODO-now: new screenshots for the play store
 
 //TODO-next: Can hit use last photo multiple times! Fix all buttons
 
@@ -390,8 +405,8 @@ public class MainActivity extends AppCompatActivity
          * @param heroes
          */
         protected void onPostExecute(final List<HeroFromPhoto> heroes) {
-            ImageView imageview = (ImageView) findViewById(R.id.button_fab_take_photo);
-            Animation animation = imageview.getAnimation();
+            View view= findViewById(R.id.button_fab_take_photo);
+            Animation animation = view.getAnimation();
             if (animation == null) {
                 // I don't understand how this happens, but it does
                 //TODO-beauty: fix null animation issue
@@ -425,23 +440,34 @@ public class MainActivity extends AppCompatActivity
         private void LoadXML() {
             XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
             LoadHeroXml.Load(parser, mHeroInfoList);
+//            AddBlankHeroImage();
         }
+
+/*        private void AddBlankHeroImage() {
+            HeroInfo blankHero = new HeroInfo();
+            blankHero.name = "Blank";
+            blankHero.imageName = "blank_hero";
+            mHeroInfoList.add(blankHero);
+        }*/
 
         /**
          * Makes the camera FAB pulse infinitely (will be stopped when loading completes)
          */
-        //TODO-now: Make camea button rotate, not pulse
+        //TODO-nextversion: Make camera do something other than pulse - it implies you should press
+        // it! When done I should stop disabling the button when animating too.
         private void pulseCameraFab() {
             //Code using the old Animation class, rather than the new ViewPropertyAnimator
             //Infinite repeat is easier to implement this way
-            View view = findViewById(R.id.button_fab_take_photo);
-            moveViewBackToStartingPosAndScale(view);
+
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
+            fab.setEnabled(false);
+            moveViewBackToStartingPosAndScale(fab);
 
             ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
             pulse.setDuration(250);
             pulse.setRepeatCount(Animation.INFINITE);
             pulse.setRepeatMode(Animation.REVERSE);
-            view.startAnimation(pulse);
+            fab.startAnimation(pulse);
 
             View processingText = findViewById(R.id.text_processing_image);
             processingText.setVisibility(View.VISIBLE);
@@ -452,7 +478,6 @@ public class MainActivity extends AppCompatActivity
             ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.8f);
             animatorSet.playTogether(scaleX, scaleY);
             animatorSet.setDuration(250);
-
             animatorSet.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
@@ -460,7 +485,6 @@ public class MainActivity extends AppCompatActivity
                     animation.start();
                 }
             });
-
             animatorSet.start();*/
 
 
@@ -468,12 +492,10 @@ public class MainActivity extends AppCompatActivity
                     0.5f,  Animation.RELATIVE_TO_SELF, 0.5f);
             rotate.setDuration(300);
             rotate.setRepeatCount(Animation.INFINITE);
-
             rotate.setInterpolator(context, R.anim.linear_interpolator);
             imageview.startAnimation(rotate);*/
 
 /*                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
-
         TimeInterpolator interpolator = new OvershootInterpolator();
         fab.animate().
                 scaleX(0.2f).
@@ -544,6 +566,7 @@ public class MainActivity extends AppCompatActivity
             processingText.setVisibility(View.GONE);
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
+            fab.setEnabled(true);
             View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
 
             int xTrans = (int) ((fabEndLocation.getX() + fabEndLocation.getWidth() / 2) - (fab.getX() + fab.getWidth() / 2));

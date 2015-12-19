@@ -31,6 +31,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -52,6 +55,7 @@ public class FoundHeroesFragment extends Fragment {
     private OnHeroChangedListener mHeroChangedListener;
     private List<TextView> mHeroNamesTextViews;
     private List<CenterLockListener> mHeroRecyclerViewListeners;
+    private List<RecyclerView> mHeroRecyclerViews;
     private List<String> mAllHeroNames;
 
     @Override
@@ -92,11 +96,10 @@ public class FoundHeroesFragment extends Fragment {
 
         mHeroNamesTextViews = new ArrayList<>();
         mHeroRecyclerViewListeners = new ArrayList<>();
+        mHeroRecyclerViews = new ArrayList<>();
 
         if(mAllHeroNames == null)
             mAllHeroNames = getHeroNames(heroInfoFromXml);
-
-        //TODO-now: make hero previews animate in
 
         int posInList = 0;
         for (HeroFromPhoto hero : heroes) {
@@ -141,6 +144,19 @@ public class FoundHeroesFragment extends Fragment {
                     mHeroChangedListener, layoutManager, hero.getSimilarityList(), posInList);
             recyclerView.addOnScrollListener(recyclerViewListener);
             mHeroRecyclerViewListeners.add(recyclerViewListener);
+            mHeroRecyclerViews.add(recyclerView);
+
+
+            // Animate the recycler view in from the right to indicate that you can slide it to
+            // change the hero
+            int xPos = (int) recyclerView.getX();
+            recyclerView.setX(metrics.widthPixels);
+            recyclerView.animate()
+                    .setStartDelay(50 * posInList)
+                    .translationX(xPos)
+                    .setInterpolator(new DecelerateInterpolator())
+                    .setDuration(200);
+
 
             parent.addView(foundPicturesView);
 
@@ -162,6 +178,14 @@ public class FoundHeroesFragment extends Fragment {
     public void changeHero(int posInList, String niceHeroName, String heroImageName) {
         mHeroNamesTextViews.get(posInList).setText(niceHeroName);
         mHeroRecyclerViewListeners.get(posInList).setHero(heroImageName);
+
+        // Hide the keyboard
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+
+        // Give the relevant recyclerview focus. This ensures none of the text views have focus
+        // after setting the name of a hero
+        mHeroRecyclerViews.get(posInList).requestFocus();
     }
 
     public void reset() {
