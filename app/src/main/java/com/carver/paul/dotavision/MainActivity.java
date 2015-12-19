@@ -85,8 +85,6 @@ import java.util.List;
 
 //TODO-next: Detect empty box for when no hero picked yet (note, this isn't as easy as it may seem!)
 
-//TODO-now: new screenshots for the play store
-
 //TODO-next: Can hit use last photo multiple times! Fix all buttons
 
 //TODO-next: Add rate this app button
