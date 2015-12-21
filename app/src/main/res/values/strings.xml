@@ -11,6 +11,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="demo">DEMO</string>
+    <string name="use_last_photo">USE LAST PHOTO</string>
+
     <string name="picture">Picture</string>
     <string name="camera_help_text">Position the 5 enemy hero portraits to fill the box below. Ensure the colored lines above them are visible.</string>
     <string name="camera_example_text">For example:</string>

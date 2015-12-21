@@ -113,12 +113,6 @@ public class MainActivity extends AppCompatActivity
 
     private List<HeroInfo> mHeroesSeen = null;
 
-/*
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mRecyclerAdapter;
-    private RecyclerView.LayoutManager mRecyclerLayoutManager;
-*/
-
     static {
         if(System.getenv("ROBOLECTRIC") == null) {
             System.loadLibrary("opencv_java3");
@@ -131,8 +125,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-/*        createRecyclerView();*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

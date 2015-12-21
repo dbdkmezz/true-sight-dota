@@ -81,7 +81,7 @@
                 android:background="@color/colorPrimary"
                 android:onClick="demoButton"
                 android:padding="@dimen/activity_horizontal_margin"
-                android:text="DEMO"
+                android:text="@string/demo"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -92,7 +92,7 @@
                 android:background="@color/colorPrimary"
                 android:onClick="useLastPhotoButton"
                 android:padding="@dimen/activity_horizontal_margin"
-                android:text="USE LAST PHOTO"
+                android:text="@string/use_last_photo"
                 android:textColor="#FFFFFF"
                 android:focusable="false" />
 
