@@ -20,7 +20,6 @@ package com.carver.paul.dotavision;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +30,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -103,58 +101,19 @@ public class FoundHeroesFragment extends Fragment {
 
         int posInList = 0;
         for (HeroFromPhoto hero : heroes) {
-            LinearLayout foundPicturesView = (LinearLayout) inflater.inflate(
-                    R.layout.item_found_hero_picture, parent, false);
-            ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
-            leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
+            LinearLayout foundPicturesView =
+                    (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
 
-            AutoCompleteTextView heroNameTextView
-                    = (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name);
-            mHeroNamesTextViews.add(heroNameTextView);
+            addLeftHeroImage(foundPicturesView, hero);
 
-            heroNameTextView.setText(heroInfoList.get(posInList).name);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                    android.R.layout.simple_dropdown_item_1line, mAllHeroNames);
-            heroNameTextView.setAdapter(adapter);
+            addHeroNameEditText(
+                    (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name),
+                    heroInfoList.get(posInList).name,
+                    posInList);
 
-            heroNameTextView.addTextChangedListener(new HeroTextWatcher(
-                    heroNameTextView.getText().toString(), mHeroChangedListener, mAllHeroNames,
-                    posInList));
-
-
-            RecyclerView recyclerView = (RecyclerView) foundPicturesView.findViewById(
-                    R.id.recycler_correct_image);
-
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
-
-            //TODO-beauty: make the FoundHeroesFragment not depend on the screen width for finding
-            // its centre, should instead use the Fragment's width. It also goes wrong if the
-            // image on the left hand side is too wide! I don't really understand the math here!
-            DisplayMetrics metrics = new DisplayMetrics();
-            getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            // This makes the recyclerView automatically lock on the image which has been
-            // scrolled to. Thanks stackoverflow and Github :)
-            int center = (11 * metrics.widthPixels / 24);
-            CenterLockListener recyclerViewListener = new CenterLockListener(center,
-                    mHeroChangedListener, layoutManager, hero.getSimilarityList(), posInList);
-            recyclerView.addOnScrollListener(recyclerViewListener);
-            mHeroRecyclerViewListeners.add(recyclerViewListener);
-            mHeroRecyclerViews.add(recyclerView);
-
-
-            // Animate the recycler view in from the right to indicate that you can slide it to
-            // change the hero
-            int xPos = (int) recyclerView.getX();
-            recyclerView.setX(metrics.widthPixels);
-            recyclerView.animate()
-                    .setStartDelay(50 * posInList)
-                    .translationX(xPos)
-                    .setInterpolator(new DecelerateInterpolator())
-                    .setDuration(200);
-
+            addHeroSelectRecycler(
+                    (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image),
+                    hero, posInList);
 
             parent.addView(foundPicturesView);
 
@@ -233,6 +192,79 @@ public class FoundHeroesFragment extends Fragment {
             tv.setVisibility(View.GONE);
         }
     }
+
+    /**
+     * Adds the picture of the hero on the left (the one which is currently selected)
+     * @param foundPicturesView
+     * @param hero
+     */
+    private void addLeftHeroImage(LinearLayout foundPicturesView,
+                                  HeroFromPhoto hero) {
+        ImageView leftImage = (ImageView) foundPicturesView.findViewById(R.id.image_left);
+        leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
+    }
+
+    /**
+     * Adds the AutoCompleteTextView showing the name of the currently selected hero, which is
+     * also editable by the user to select a different hero.
+     * @param heroNameTextView
+     * @param heroName
+     * @param posInList
+     */
+    private void addHeroNameEditText(AutoCompleteTextView heroNameTextView,
+                                     String heroName,
+                                     int posInList) {
+        mHeroNamesTextViews.add(heroNameTextView);
+
+        heroNameTextView.setText(heroName);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_dropdown_item_1line, mAllHeroNames);
+        heroNameTextView.setAdapter(adapter);
+
+        heroNameTextView.addTextChangedListener(new HeroTextWatcher(
+                heroNameTextView.getText().toString(), mHeroChangedListener, mAllHeroNames,
+                posInList));
+    }
+
+    /**
+     * Adds the recycler view used for changing the hero
+     * @param recyclerView
+     * @param hero
+     * @param posInList
+     */
+    private void addHeroSelectRecycler(RecyclerView recyclerView, HeroFromPhoto hero,
+                                       int posInList) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
+
+
+        //TODO-beauty: make the FoundHeroesFragment not depend on the screen width for finding
+        // its centre, should instead use the Fragment's width. It also goes wrong if the
+        // image on the left hand side is too wide! I don't really understand the math here!
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        // This makes the recyclerView automatically lock on the image which has been
+        // scrolled to. Thanks stackoverflow and Github :)
+        int center = (11 * metrics.widthPixels / 24);
+        CenterLockListener recyclerViewListener = new CenterLockListener(center,
+                mHeroChangedListener, layoutManager, hero.getSimilarityList(), posInList);
+        recyclerView.addOnScrollListener(recyclerViewListener);
+        mHeroRecyclerViewListeners.add(recyclerViewListener);
+        mHeroRecyclerViews.add(recyclerView);
+
+
+        // Animate the recycler view in from the right to indicate that you can slide it to
+        // change the hero
+        int xPos = (int) recyclerView.getX();
+        recyclerView.setX(metrics.widthPixels);
+        recyclerView.animate()
+                .setStartDelay(50 * posInList)
+                .translationX(xPos)
+                .setInterpolator(new DecelerateInterpolator())
+                .setDuration(200);
+    }
 }
 
 class HeroTextWatcher implements TextWatcher {
@@ -277,5 +309,148 @@ class HeroTextWatcher implements TextWatcher {
                 return true;
 
         return false;
+    }
+}
+
+class CenterLockListener extends RecyclerView.OnScrollListener {
+
+    //To avoid recursive calls
+    private boolean mAutoSet = true;
+
+    //The pivot to be snapped to
+    private int mCenterPivot;
+
+    private final FoundHeroesFragment.OnHeroChangedListener mHeroChangedListener;
+    private final LinearLayoutManager mLayoutManager;
+    private final int mPosInHeroList;
+    private final List<HeroAndSimilarity> mSimilarityList;
+    private HeroAndSimilarity mCurrentSelectedHero;
+
+    private final String TAG = "CenterLockListener";
+
+    public CenterLockListener(int center,
+                              FoundHeroesFragment.OnHeroChangedListener heroChangedListener,
+                              LinearLayoutManager layoutManager,
+                              List<HeroAndSimilarity> similarityList,
+                              int posInHeroList){
+        mCenterPivot = center;
+        mHeroChangedListener = heroChangedListener;
+        mLayoutManager = layoutManager;
+        mSimilarityList = similarityList;
+        mPosInHeroList = posInHeroList;
+        mCurrentSelectedHero = similarityList.get(0);
+    }
+
+    @Override
+    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+
+        LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+        if(mCenterPivot == 0) {
+            // Default pivot , Its a bit inaccurate .
+            // Better pass the center pivot as your Center Indicator view's
+            // calculated center on it OnGlobalLayoutListener event
+            if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                mCenterPivot = recyclerView.getLeft() + recyclerView.getRight();
+            } else {
+                mCenterPivot = recyclerView.getTop() + recyclerView.getBottom();
+            }
+        }
+        if(!mAutoSet) {
+            if( newState == RecyclerView.SCROLL_STATE_IDLE ) {
+                //ScrollStoppped
+                View view = findCenterView(lm);//get the view nearest to center
+
+                int viewCenter;
+                if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                    viewCenter = (view.getLeft() + view.getRight()) / 2;
+                } else {
+                    viewCenter = (view.getTop() + view.getBottom()) / 2;
+                }
+
+                //compute scroll from center
+                int scrollNeeded = viewCenter - mCenterPivot; // Add or subtract any offsets you need here
+
+                if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                    recyclerView.smoothScrollBy(scrollNeeded, 0);
+                }
+                else
+                {
+                    recyclerView.smoothScrollBy(0, scrollNeeded);
+                }
+                mAutoSet = true;
+            }
+        }
+        if(newState == RecyclerView.SCROLL_STATE_DRAGGING
+                || newState == RecyclerView.SCROLL_STATE_SETTLING){
+            mAutoSet = false;
+        }
+    }
+
+    @Override
+    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+
+    }
+
+    //TODO-someday: make hero changes scroll nicely
+    public void setHero(String heroName) {
+        int newPos = 0;
+        for(HeroAndSimilarity hero : mSimilarityList) {
+            if(hero.hero.name.equals(heroName)) {
+                if(hero != mCurrentSelectedHero) {
+                    mLayoutManager.scrollToPositionWithOffset(newPos, 0);
+                }
+                // recyclerView.smoothScrollBy(scrollNeeded, 0);
+                return;
+            }
+            newPos++;
+        }
+
+        Log.e(TAG, "Attempting to scroll to " + heroName + " but can't find a hero with that name");
+    }
+
+    private View findCenterView(LinearLayoutManager lm) {
+        int minDistance = 0;
+        View view = null;
+        View returnView = null;
+        int foundPos = -1;
+        boolean notFound = true;
+
+        for(int i = lm.findFirstVisibleItemPosition();
+            i <= lm.findLastVisibleItemPosition() && notFound;
+            i++) {
+
+            view=lm.findViewByPosition(i);
+
+            int center;
+            if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                center = (view.getLeft() + view.getRight()) / 2;
+            } else {
+                center = (view.getTop() + view.getBottom()) / 2;
+            }
+
+            int leastDifference = Math.abs(mCenterPivot - center);
+
+            if(leastDifference <= minDistance || i == lm.findFirstVisibleItemPosition()) {
+                minDistance = leastDifference;
+                returnView = view;
+                foundPos = i;
+            } else {
+                notFound = false;
+            }
+        }
+
+        if(foundPos != -1) {
+            reportHeroChange(foundPos - 1);
+        }
+
+        return returnView;
+    }
+
+    private void reportHeroChange(int pos) {
+        mCurrentSelectedHero = mSimilarityList.get(pos);
+        mHeroChangedListener.onHeroChanged(mPosInHeroList, mCurrentSelectedHero.hero.name);
     }
 }

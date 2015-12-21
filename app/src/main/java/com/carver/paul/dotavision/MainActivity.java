@@ -18,11 +18,6 @@
 
 package com.carver.paul.dotavision;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
@@ -47,11 +42,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -75,6 +66,8 @@ import java.util.List;
 //TODO-next: test much more for crashes, there is something wrong somewhere. The camera threading??
 
 //TODO-next: reduce package size. Smaller images? Crop test image
+
+//TODO-beauty: support rotating the screen!
 
 //TODO-next: make the heroes info separated somehow. Just a dividing line for now? It's a mess.
 // Perhaps just draw their image?
@@ -112,7 +105,6 @@ public class MainActivity extends AppCompatActivity
     // BuildConfig.DEBUG is false (i.e. the app is compiled for release)
     public static boolean sDebugMode = false;
     public static final String PHOTO_FILE_NAME = "photo.jpg";
-
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     private static final String TAG = "MainActivity";
 
@@ -128,7 +120,9 @@ public class MainActivity extends AppCompatActivity
 */
 
     static {
-        System.loadLibrary("opencv_java3");
+        if(System.getenv("ROBOLECTRIC") == null) {
+            System.loadLibrary("opencv_java3");
+        }
     }
 
     @Override
