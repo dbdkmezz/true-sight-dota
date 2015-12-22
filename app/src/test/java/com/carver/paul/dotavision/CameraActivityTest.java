@@ -1,7 +1,6 @@
 /*
 package com.carver.paul.dotavision;
 
-
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
 
 import org.junit.Before;
@@ -22,7 +21,7 @@ public class CameraActivityTest {
     @Before
     public void setUp() throws Exception
     {
-        activity = Robolectric.buildActivity( CameraActivity.class )
+        activity = Robolectric.buildActivity(CameraActivity.class)
                 .create()
                 .resume()
                 .get();
@@ -32,4 +31,5 @@ public class CameraActivityTest {
     public void shouldNotBeNull() throws Exception {
         assertNotNull(activity);
     }
-}*/
+}
+*/
