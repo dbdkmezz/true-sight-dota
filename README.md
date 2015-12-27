@@ -13,3 +13,9 @@ http://www.dota2.com/heroes/
 
 True Sight is built using the OpenCV (Open Source Computer Vision Library) library. OpenCV is a
 BSD-licensed project and is not covered by the GPL 3 library which covers the rest of this project.
+
+
+To make tests work ensure the Build Variant Test Artifact is set to Unit Tests. (Set within "Build
+Variant" on the left of Android Studio.) Also ensure that instant run is turned off, otherwise
+you'll get a "Could not find a class for package: ... and class name:
+com.android.tools.fd.runtime.BootstrapApplication" error.

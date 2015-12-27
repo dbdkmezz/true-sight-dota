@@ -79,8 +79,8 @@ public class CameraActivity extends Activity {
         // Setup the camera
         if (mCamera == null) {
             if (mCameraOpeningTask != null) {
-                Log.w(TAG, "Running onResume, but ther mCameraOpeningTask is already running. " +
-                        "I don't think this can happen, so I must have missed soemthing!");
+                Log.w(TAG, "Running onResume, but the mCameraOpeningTask is already running. " +
+                        "I don't think this can happen, so I must have missed something!");
                 mCameraOpeningTask.cancel(true);
             }
             mCameraOpeningTask = new CameraOpeningTask(this);
@@ -101,13 +101,16 @@ public class CameraActivity extends Activity {
     }
 
     /**
-     * called when the capture photo buttin is pressed
+     * called when the capture photo button is pressed
      *
      * @param view
      */
     public void capturePhoto(View view) {
-        //mCamera.takePicture(null, null, mPicture);
-        if (mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+        if (mCameraOpeningTask.getStatus() != AsyncTask.Status.FINISHED || mCamera == null)
+            return;
+
+        if (mCamera.getParameters().getFocusMode() != null
+                && mCamera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
 
             // add a 3 second timeout to autofocus
             //https://stackoverflow.com/questions/6658868/camera-autofocus-callback-not-happening
@@ -139,7 +142,7 @@ public class CameraActivity extends Activity {
             mCamera.autoFocus(autoFocusCallback);
         } else {
             if (BuildConfig.DEBUG) {
-                Log.d(TAG, "Taking piture outside focus mode");
+                Log.d(TAG, "Taking picture outside focus mode");
             }
             mCamera.takePicture(null, null, mPicture);
         }

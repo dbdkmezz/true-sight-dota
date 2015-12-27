@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ public class MainActivityTest {
         assertNotNull(demoButton);
         assertThat(demoButton.getText().toString(),
                 equalTo (RuntimeEnvironment.application.getString(R.string.demo)));
+        assertTrue(demoButton.getVisibility() == View.VISIBLE);
     }
 
     @Test
@@ -58,30 +60,45 @@ public class MainActivityTest {
         assertNotNull(lastPhotoButton);
         assertThat(lastPhotoButton.getText().toString(),
                 equalTo (RuntimeEnvironment.application.getString(R.string.use_last_photo)));
+        assertTrue(lastPhotoButton.getVisibility() == View.VISIBLE);
     }
 
     @Test
-    public void viewsShouldNotBeNull() {
-        ImageView backgroundImage = (ImageView) activity.findViewById(R.id.image_main_background);
-        assertNotNull(backgroundImage);
-
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        assertNotNull(toolbar);
-
-        ImageView topImage = (ImageView) activity.findViewById(R.id.image_top);
-        assertNotNull(topImage);
-
-        TextView imageDebugText = (TextView) activity.findViewById(R.id.text_image_debug);
-        assertNotNull(imageDebugText);
-
+    public void shouldHaveTakePhotoFab() {
         FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.button_fab_take_photo);
         assertNotNull(fab);
+        assertTrue(fab.getVisibility() == View.VISIBLE);
+    }
 
-        TextView processingText = (TextView) activity.findViewById(R.id.text_processing_image);
-        assertNotNull(processingText);
+    @Test
+    public void shouldHaveBackground() {
+        ImageView backgroundImage = (ImageView) activity.findViewById(R.id.image_main_background);
+        assertNotNull(backgroundImage);
+        assertTrue(backgroundImage.getVisibility() == View.VISIBLE);
+    }
+
+    @Test
+    public void shouldHaveToobarAndNavView() {
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        assertNotNull(toolbar);
+        assertTrue(toolbar.getVisibility() == View.VISIBLE);
 
         NavigationView navView = (NavigationView) activity.findViewById(R.id.nav_view);
         assertNotNull(navView);
+        assertTrue(navView.getVisibility() == View.VISIBLE);
+    }
+
+    @Test
+    public void shouldHaveTopImage() {
+        ImageView topImage = (ImageView) activity.findViewById(R.id.image_top);
+        assertNotNull(topImage);
+    }
+
+    @Test
+    public void hiddenViewsNotVisible() {
+        TextView processingText = (TextView) activity.findViewById(R.id.text_processing_image);
+        assertNotNull(processingText);
+        assertTrue(processingText.getVisibility() != View.VISIBLE);
     }
 
     @Test
