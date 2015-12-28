@@ -18,12 +18,9 @@
 
 package com.carver.paul.dotavision;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -32,13 +29,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -49,10 +43,8 @@ import android.widget.TextView;
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
 import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
-import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
-import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import java.io.File;
@@ -114,7 +106,7 @@ public class MainActivity extends AppCompatActivity
     private List<HeroInfo> mHeroesSeen = null;
 
     static {
-        if(System.getenv("ROBOLECTRIC") == null) {
+        if (System.getenv("ROBOLECTRIC") == null) {
             System.loadLibrary("opencv_java3");
         }
     }
@@ -170,12 +162,12 @@ public class MainActivity extends AppCompatActivity
         if (mHeroesSeen == null || mHeroInfoFromXml == null) return;
 
         HeroInfo newHeroInfo = FindHeroWithName(newHero, mHeroInfoFromXml);
-        if(newHeroInfo == null) {
+        if (newHeroInfo == null) {
             Log.e(TAG, "Attempting to change hero to " + newHero + ", but I can't find a hero with that name.");
             return;
         }
 
-        if(mHeroesSeen.get(posInList) == newHeroInfo) return;
+        if (mHeroesSeen.get(posInList) == newHeroInfo) return;
 
         mHeroesSeen.set(posInList, newHeroInfo);
 
@@ -281,6 +273,58 @@ public class MainActivity extends AppCompatActivity
         return null;
     }
 
+    /**
+     * Tasks to be run on the UI thread before doing the background work
+     */
+    public void preRecognitionUiTasks(Bitmap photoBitmap) {
+        setTopImage(photoBitmap);
+        resetInfo();
+        slideDemoButtonsOffScreen();
+        hideBackground();
+        pulseCameraFab();
+    }
+
+    /**
+     * This is where you do the work in the UI thread after the hard work of image recognition.
+     * <p/>
+     * This lets the cameraFab do one final pulse, and the moves it to the bottom right and
+     * shows the result of the recognition.
+     *
+     * @param heroes
+     */
+    public void postRecognitionUiTasks(final List<HeroFromPhoto> heroes) {
+        View view = findViewById(R.id.button_fab_take_photo);
+        Animation animation = view.getAnimation();
+        if (animation == null) {
+            // I don't understand how this happens, but it does
+            //TODO-beauty: fix null animation issue
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
+            }
+            moveCameraFabToBottomRight();
+            showResult(heroes);
+        } else {
+            animation.setRepeatCount(0);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    moveCameraFabToBottomRight();
+                    showResult(heroes);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
@@ -305,158 +349,65 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void doImageRecognition(Bitmap bitmap) {
-        ImageView topImage = (ImageView) findViewById(R.id.image_top);
-        topImage.setImageBitmap(bitmap);
-
-        // Observable.just
-
-        RecognitionTaskParams params = new RecognitionTaskParams(bitmap, mHeroInfoFromXml);
-
-        new RecognitionTask(this).execute(params);
+        RecognitionWithRx recognitionWithRx = new RecognitionWithRx();
+        recognitionWithRx.Run(this, bitmap, mHeroInfoFromXml);
     }
 
-    //TODO-someday: work out if it's worth make it so RecognitionTask gets passed similarityTest
-    // by MainActivity so I don't have to load it every time.
-    private class RecognitionTask extends AsyncTask<RecognitionTaskParams, Void, List<HeroFromPhoto>> {
+    private void setTopImage(Bitmap photoBitmap) {
+        ImageView topImage = (ImageView) findViewById(R.id.image_top);
+        topImage.setImageBitmap(photoBitmap);
+    }
 
-        static final String TAG = "RecognitionTask";
+    private void resetInfo() {
+        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
+        foundHeroesFragment.reset();
 
-        private SimilarityTest similarityTest = null;
-        private List<HeroInfo> mHeroInfoList;
-        private Context mContext;
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+        abilityInfoFragment.reset();
+    }
 
-        public RecognitionTask(Context context) {
-            mContext = context;
-        }
-
-        // work to do in the UI thread before doing the hard work
-        protected void onPreExecute() {
-            resetInfo();
-            slideDemoButtonsOffScreen();
-            hideBackground();
-            pulseCameraFab();
-        }
-
-        private void resetInfo() {
-            FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-            foundHeroesFragment.reset();
-
-            AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-            abilityInfoFragment.reset();
-        }
-
-        /**
-         * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
-         */
-        private void slideDemoButtonsOffScreen() {
-            View view = findViewById(R.id.layout_demo_and_last_photo_buttons);
-            if (view.getTranslationX() == 0) {
-                view.animate()
-                        .x(-1f * view.getWidth())
-                        .setDuration(150)
-                        .setInterpolator(new AccelerateInterpolator());
-            }
-        }
-
-        private void hideBackground() {
-            View view = findViewById(R.id.image_main_background);
+    /**
+     * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
+     */
+    private void slideDemoButtonsOffScreen() {
+        View view = findViewById(R.id.layout_demo_and_last_photo_buttons);
+        if (view.getTranslationX() == 0) {
             view.animate()
-                    .alpha(0f)
-                    .setDuration(150);
+                    .x(-1f * view.getWidth())
+                    .setDuration(150)
+                    .setInterpolator(new AccelerateInterpolator());
         }
+    }
 
-        // This is where the hard work happens which needs to be off the UI thread
-        protected List<HeroFromPhoto> doInBackground(RecognitionTaskParams... params) {
-            mHeroInfoList = params[0].heroInfoList;
+    private void hideBackground() {
+        View view = findViewById(R.id.image_main_background);
+        view.animate()
+                .alpha(0f)
+                .setDuration(150);
+    }
 
-            if (mHeroInfoList == null)
-                throw new RuntimeException("mHeroInfoFromXml has not been instantiated as a list.");
 
-            if(mHeroInfoList.isEmpty())
-                LoadXML();
+    /**
+     * Makes the camera FAB pulse infinitely (will be stopped when loading completes)
+     */
+    //TODO-nextversion: Make camera do something other than pulse - it implies you should press
+    // it! When done I should stop disabling the button when animating too.
+    private void pulseCameraFab() {
+        //Code using the old Animation class, rather than the new ViewPropertyAnimator
+        //Infinite repeat is easier to implement this way
 
-            if (similarityTest == null)
-                loadHistTest();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
+        fab.setEnabled(false);
+        moveViewBackToStartingPosAndScale(fab);
 
-            // do the hard work of the image recognition
-            return Recognition.Run(params[0].bitmap, similarityTest);
-        }
+        ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        pulse.setDuration(250);
+        pulse.setRepeatCount(Animation.INFINITE);
+        pulse.setRepeatMode(Animation.REVERSE);
+        fab.startAnimation(pulse);
 
-        /**
-         * This is where you do the work in the UI thread after the hard work of image recognition.
-         * <p/>
-         * This lets the cameraFab do one final pulse, and the moves it to the bottom right and
-         * shows the result of the recognition.
-         *
-         * @param heroes
-         */
-        protected void onPostExecute(final List<HeroFromPhoto> heroes) {
-            View view= findViewById(R.id.button_fab_take_photo);
-            Animation animation = view.getAnimation();
-            if (animation == null) {
-                // I don't understand how this happens, but it does
-                //TODO-beauty: fix null animation issue
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
-                }
-                moveCameraFabToBottomRight();
-                showResult(heroes);
-            } else {
-                animation.setRepeatCount(0);
-                animation.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        moveCameraFabToBottomRight();
-                        showResult(heroes);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-            }
-        }
-
-        private void LoadXML() {
-            XmlResourceParser parser = getResources().getXml(R.xml.hero_info_from_web);
-            LoadHeroXml.Load(parser, mHeroInfoList);
-//            AddBlankHeroImage();
-        }
-
-/*        private void AddBlankHeroImage() {
-            HeroInfo blankHero = new HeroInfo();
-            blankHero.name = "Blank";
-            blankHero.imageName = "blank_hero";
-            mHeroInfoList.add(blankHero);
-        }*/
-
-        /**
-         * Makes the camera FAB pulse infinitely (will be stopped when loading completes)
-         */
-        //TODO-nextversion: Make camera do something other than pulse - it implies you should press
-        // it! When done I should stop disabling the button when animating too.
-        private void pulseCameraFab() {
-            //Code using the old Animation class, rather than the new ViewPropertyAnimator
-            //Infinite repeat is easier to implement this way
-
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
-            fab.setEnabled(false);
-            moveViewBackToStartingPosAndScale(fab);
-
-            ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            pulse.setDuration(250);
-            pulse.setRepeatCount(Animation.INFINITE);
-            pulse.setRepeatMode(Animation.REVERSE);
-            fab.startAnimation(pulse);
-
-            View processingText = findViewById(R.id.text_processing_image);
-            processingText.setVisibility(View.VISIBLE);
+        View processingText = findViewById(R.id.text_processing_image);
+        processingText.setVisibility(View.VISIBLE);
 
 /*            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
             AnimatorSet animatorSet = new AnimatorSet();
@@ -496,154 +447,75 @@ public class MainActivity extends AppCompatActivity
         scaleY.setDuration(300);
         animatorSet.play(scaleX).with(scaleY);
         animatorSet.start();*/
+    }
+
+    private void moveViewBackToStartingPosAndScale(View view) {
+        view.setTranslationX(0f);
+        view.setTranslationY(0f);
+        view.setScaleX(1f);
+        view.setScaleY(1f);
+    }
+
+    private void moveCameraFabToBottomRight() {
+        // First hide the text to say that the image is being processed
+        View processingText = findViewById(R.id.text_processing_image);
+        processingText.setVisibility(View.GONE);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
+        fab.setEnabled(true);
+        View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
+
+        int xTrans = (int) ((fabEndLocation.getX() + fabEndLocation.getWidth() / 2) - (fab.getX() + fab.getWidth() / 2));
+        int yTrans = (int) ((fabEndLocation.getY() + fabEndLocation.getHeight() / 2) - (fab.getY() + fab.getHeight() / 2));
+
+        fab.animate()
+                .translationX(xTrans)
+                .translationY(yTrans)
+                .scaleX((float) fabEndLocation.getWidth() / (float) fab.getWidth())
+                .scaleY((float) fabEndLocation.getHeight() / (float) fab.getHeight())
+                .setInterpolator(new AccelerateDecelerateInterpolator());
+    }
+
+
+    /**
+     * showResult shows all the information about the heroes I've seen in the photo
+     *
+     * @param heroes
+     */
+    private void showResult(final List<HeroFromPhoto> heroes) {
+
+        if (BuildConfig.DEBUG && sDebugMode) {
+            TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
+            if (imageDebugText != null) {
+                imageDebugText.setVisibility(View.VISIBLE);
+                imageDebugText.setText(Recognition.mDebugString);
+            }
         }
 
-        private void moveViewBackToStartingPosAndScale(View view) {
-            view.setTranslationX(0f);
-            view.setTranslationY(0f);
-            view.setScaleX(1f);
-            view.setScaleY(1f);
+        //A list of the heroes we've seen, for use when adding the ability cards
+        mHeroesSeen = new ArrayList<>();
+
+        for (HeroFromPhoto hero : heroes) {
+            HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
+                    mHeroInfoFromXml);
+            mHeroesSeen.add(heroInfo);
         }
 
-        /**
-         * showResult shows all the information about the heroes I've seen in the photo
-         *
-         * @param heroes
-         */
-        private void showResult(final List<HeroFromPhoto> heroes) {
+        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
+        if (foundHeroesFragment != null) {
+            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mHeroInfoFromXml);
+        }
 
-            if (BuildConfig.DEBUG && sDebugMode) {
-                TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
-                if (imageDebugText != null) {
-                    imageDebugText.setVisibility(View.VISIBLE);
-                    imageDebugText.setText(Recognition.mDebugString);
-                }
-            }
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+        if (abilityInfoFragment != null) {
+            abilityInfoFragment.showHeroAbilities(mHeroesSeen);
+        }
 
-            //A list of the heroes we've seen, for use when adding the ability cards
-            mHeroesSeen = new ArrayList<>();
-
-            for (HeroFromPhoto hero : heroes) {
-                HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name, mHeroInfoList);
-                mHeroesSeen.add(heroInfo);
-            }
-
-            FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-            if (foundHeroesFragment != null) {
-                foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mHeroInfoFromXml);
-            }
-
-            AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-            if (abilityInfoFragment != null) {
-                abilityInfoFragment.showHeroAbilities(mHeroesSeen);
-            }
-
-            //TODO-someday: bring back animation when loading the hero images and abilities?
+        //TODO-someday: bring back animation when loading the hero images and abilities?
 /*            LayoutTransition transition = new LayoutTransition();
             transition.enableTransitionType(LayoutTransition.CHANGING);
             transition.setDuration(250);
             LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.layout_results_info);
             resultsInfoLayout.setLayoutTransition(transition);*/
-        }
-
-        private void moveCameraFabToBottomRight() {
-            // First hide the text to say that the image is being processed
-            View processingText = findViewById(R.id.text_processing_image);
-            processingText.setVisibility(View.GONE);
-
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
-            fab.setEnabled(true);
-            View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
-
-            int xTrans = (int) ((fabEndLocation.getX() + fabEndLocation.getWidth() / 2) - (fab.getX() + fab.getWidth() / 2));
-            int yTrans = (int) ((fabEndLocation.getY() + fabEndLocation.getHeight() / 2) - (fab.getY() + fab.getHeight() / 2));
-
-            fab.animate()
-                    .translationX(xTrans)
-                    .translationY(yTrans)
-                    .scaleX((float) fabEndLocation.getWidth() / (float) fab.getWidth())
-                    .scaleY((float) fabEndLocation.getHeight() / (float) fab.getHeight())
-                    .setInterpolator(new AccelerateDecelerateInterpolator());
-        }
-
-        private void loadHistTest() {
-            if (BuildConfig.DEBUG) Log.d(TAG, "Loading comparison images.");
-
-            similarityTest = new SimilarityTest(mContext);
-
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "Loaded " + similarityTest.NumberOfHeroesLoaded() + " hero images.");
-            }
-        }
     }
 }
-
-//TODO-beauty: find a way to put the RecognitionTaskParams inside that class?
-class RecognitionTaskParams {
-    Bitmap bitmap;
-    List<HeroInfo> heroInfoList;
-
-    RecognitionTaskParams(Bitmap bitmap, List<HeroInfo> heroInfoList) {
-        this.bitmap = bitmap;
-        this.heroInfoList = heroInfoList;
-    }
-}
-
-class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder> {
-    private List<HeroAndSimilarity> mHeroes;
-
-    // Provide a reference to the views for each data item
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView imageView;
-
-        public ViewHolder(View v) {
-            super(v);
-            imageView = (ImageView) v.findViewById(R.id.image);
-/*            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        Log.d("HeroImageAdapter", "Element " + getPosition() + " clicked.");
-                }
-            });*/
-        }
-
-        public ImageView getImageView() {
-            return imageView;
-        }
-    }
-
-    public HeroImageAdapter() {
-        mHeroes = new ArrayList<>();
-        return;
-    }
-
-    public HeroImageAdapter(List<HeroAndSimilarity> heroes) {
-        mHeroes = heroes;
-    }
-
-    // Create new views (invoked by the layout manager)
-    @Override
-    public HeroImageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                          int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_hero_recycler_image, parent, false);
-        // google says that here you set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.getImageView().setImageResource(mHeroes.get(position).hero.getImageResource());
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return mHeroes.size();
-    }
-}
-

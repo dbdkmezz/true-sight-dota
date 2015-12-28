@@ -454,3 +454,61 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
         mHeroChangedListener.onHeroChanged(mPosInHeroList, mCurrentSelectedHero.hero.name);
     }
 }
+
+class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder> {
+    private List<HeroAndSimilarity> mHeroes;
+
+    // Provide a reference to the views for each data item
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView imageView;
+
+        public ViewHolder(View v) {
+            super(v);
+            imageView = (ImageView) v.findViewById(R.id.image);
+/*            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        Log.d("HeroImageAdapter", "Element " + getPosition() + " clicked.");
+                }
+            });*/
+        }
+
+        public ImageView getImageView() {
+            return imageView;
+        }
+    }
+
+    public HeroImageAdapter() {
+        mHeroes = new ArrayList<>();
+        return;
+    }
+
+    public HeroImageAdapter(List<HeroAndSimilarity> heroes) {
+        mHeroes = heroes;
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public HeroImageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                          int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_hero_recycler_image, parent, false);
+        // google says that here you set the view's size, margins, paddings and layout parameters
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
+        holder.getImageView().setImageResource(mHeroes.get(position).hero.getImageResource());
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return mHeroes.size();
+    }
+}
