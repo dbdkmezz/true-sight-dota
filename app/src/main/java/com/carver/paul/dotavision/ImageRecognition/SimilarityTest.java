@@ -158,6 +158,10 @@ public class SimilarityTest {
                 //new Pair<>(R.drawable.blank_hero, "blank_hero"));
     }
 
+    public int NumberOfHeroesLoaded() {
+        return mHeroes.size();
+    }
+
     /**
      * This constructor sets loading all the heroes needed for the comparison work
      * @param context

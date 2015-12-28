@@ -59,7 +59,7 @@ public class CameraActivityTest {
         assertTrue(takeAgain.getVisibility() != View.VISIBLE);
     }
 
-    @Test
+/*    @Test
     public void clickingCapture_shouldShowOtherButtons() {
         Robolectric.flushBackgroundThreadScheduler();
         activity.findViewById(R.id.button_capture).performClick();
@@ -69,5 +69,5 @@ public class CameraActivityTest {
         assertTrue(activity.findViewById(R.id.button_capture).getVisibility() != View.VISIBLE);
         assertTrue(activity.findViewById(R.id.button_take_again).getVisibility() == View.VISIBLE);
         assertTrue(activity.findViewById(R.id.button_confirm).getVisibility() == View.VISIBLE);
-    }
+    }*/
 }

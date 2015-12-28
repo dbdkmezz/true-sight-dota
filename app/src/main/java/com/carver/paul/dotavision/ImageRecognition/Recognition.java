@@ -19,12 +19,12 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.MainActivity;
 
 import org.opencv.core.Mat;
-import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
@@ -44,6 +44,8 @@ public class Recognition {
     // mDebugString is used when in debug mode to keep track of how recognition is going.
     public static String mDebugString = "";
 
+    private static final String TAG = "Recognition";
+
     public static List<HeroFromPhoto> Run(Bitmap bitmap, SimilarityTest similarityTest) {
 
         if (BuildConfig.DEBUG && MainActivity.sDebugMode == true) mDebugString = "";
@@ -51,17 +53,26 @@ public class Recognition {
         // Load the bitmap into a format OpenCV can use
         Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
+        if (BuildConfig.DEBUG) Log.d(TAG, "Got mat from bitmap.");
+
         // Find the coloured lines which are above each hero (these are used to locate the heroes
         // in the image.
         List<Mat> linesList = findHeroTopLinesInImage(load);
 
+        if (BuildConfig.DEBUG) Log.d(TAG, "Found " + linesList.size() + " top hero lines.");
+
         // Find the rectangles where the images of the individuals heroes are
         List<HeroFromPhoto> heroes = CalculateHeroRects(linesList, load);
+
+        if (BuildConfig.DEBUG) Log.d(TAG, "Found " + heroes.size() + " hero rects.");
 
         // Find out which heroes the heroes in the rectangles look like
         for (HeroFromPhoto hero : heroes) {
             hero.calcSimilarityList(similarityTest);
         }
+
+        if (BuildConfig.DEBUG) Log.d(TAG, "Calculated the most similar hero for each of the "
+                + heroes.size() + " heroes.");
 
         return heroes;
     }
@@ -112,8 +123,11 @@ public class Recognition {
         int totalLeftLines = countLinesInMats(leftLines);
         int totalRightLines = countLinesInMats(rightLines);
 
-        if (totalLeftLines > totalRightLines) return leftLines;
-        else return rightLines;
+        if (totalLeftLines > totalRightLines) {
+            return leftLines;
+        } else {
+            return rightLines;
+        }
     }
 
     public static List<Mat> findHeroTopLinesInImage(Mat photo, List<List<Integer>> colourRanges, int lowerHsvS, int lowerHsvV, int upperHsvS, int upperHsvV) {
@@ -141,10 +155,11 @@ public class Recognition {
             ImageTools.MaskAColourFromImage(subMat, lowerHsv, upperHsv, mask);
 
             Mat lines = new Mat();
-            ImageTools.getLineFromTopRectMask(mask, lines, photoWidth / 7); //USED TO BE 8!!!!
-            adjustXPosOfLines(lines, minX);
-            // System.out.println(lines.rows() + " lines found.");
 
+            // note, this is the part that takes most time.
+            ImageTools.getLineFromTopRectMask(mask, lines, photoWidth / 7); //USED TO BE 8!!!!
+
+            adjustXPosOfLines(lines, minX);
             linesList.add(lines);
 
             //   Main.DrawMatInImageBox(mask, maskImage); // just for debug

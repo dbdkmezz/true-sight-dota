@@ -25,6 +25,9 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
+//TODO-beauty: add test for the main activity to click the demo button. Will need to re-write some
+// of the image processing code to make it suitable for testing.
+
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class MainActivityTest {

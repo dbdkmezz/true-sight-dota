@@ -308,6 +308,8 @@ public class MainActivity extends AppCompatActivity
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
         topImage.setImageBitmap(bitmap);
 
+        // Observable.just
+
         RecognitionTaskParams params = new RecognitionTaskParams(bitmap, mHeroInfoFromXml);
 
         new RecognitionTask(this).execute(params);
@@ -565,7 +567,13 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void loadHistTest() {
+            if (BuildConfig.DEBUG) Log.d(TAG, "Loading comparison images.");
+
             similarityTest = new SimilarityTest(mContext);
+
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Loaded " + similarityTest.NumberOfHeroesLoaded() + " hero images.");
+            }
         }
     }
 }
