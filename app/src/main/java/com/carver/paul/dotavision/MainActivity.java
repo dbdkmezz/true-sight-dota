@@ -100,10 +100,9 @@ public class MainActivity extends AppCompatActivity
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     private static final String TAG = "MainActivity";
 
-    // This is where the hero data from the XML gets saved
-    private List<HeroInfo> mHeroInfoFromXml = new ArrayList<>();
-
     private List<HeroInfo> mHeroesSeen = null;
+
+    private RecognitionWithRx mRecognitionWithRx;
 
     static {
         if (System.getenv("ROBOLECTRIC") == null) {
@@ -126,6 +125,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mRecognitionWithRx = new RecognitionWithRx(this);
     }
 
     @Override
@@ -159,9 +160,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onHeroChanged(int posInList, String newHero) {
-        if (mHeroesSeen == null || mHeroInfoFromXml == null) return;
+        if (mHeroesSeen == null || mRecognitionWithRx.getXmlInfo() == null) return;
 
-        HeroInfo newHeroInfo = FindHeroWithName(newHero, mHeroInfoFromXml);
+        HeroInfo newHeroInfo = FindHeroWithName(newHero, mRecognitionWithRx.getXmlInfo());
         if (newHeroInfo == null) {
             Log.e(TAG, "Attempting to change hero to " + newHero + ", but I can't find a hero with that name.");
             return;
@@ -349,8 +350,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void doImageRecognition(Bitmap bitmap) {
-        RecognitionWithRx recognitionWithRx = new RecognitionWithRx();
-        recognitionWithRx.Run(this, bitmap, mHeroInfoFromXml);
+//        RecognitionWithRx recognitionWithRx = new RecognitionWithRx();
+        mRecognitionWithRx.Run(this, bitmap);
     }
 
     private void setTopImage(Bitmap photoBitmap) {
@@ -497,13 +498,13 @@ public class MainActivity extends AppCompatActivity
 
         for (HeroFromPhoto hero : heroes) {
             HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
-                    mHeroInfoFromXml);
+                    mRecognitionWithRx.getXmlInfo());
             mHeroesSeen.add(heroInfo);
         }
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         if (foundHeroesFragment != null) {
-            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mHeroInfoFromXml);
+            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mRecognitionWithRx.getXmlInfo());
         }
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);

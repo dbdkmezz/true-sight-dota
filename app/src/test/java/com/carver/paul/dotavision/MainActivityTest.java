@@ -37,7 +37,7 @@ public class MainActivityTest {
     @Before
     public void setUp() throws Exception
     {
-        activity = Robolectric.buildActivity(MainActivity.class)
+        activity = Robolectric.buildActivity(MainActivity.class )
                 .create()
                 .resume()
                 .get();
