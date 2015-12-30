@@ -19,8 +19,10 @@
 package com.carver.paul.dotavision.ImageRecognition;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 
+import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.R;
 
 import org.opencv.core.Core;
@@ -40,6 +42,7 @@ public class SimilarityTest {
     private List<LoadedHeroImage> mHeroes = new ArrayList<>();
 
     static final private List<Pair<Integer, String>> mHeroIconDrawables;
+    static final private String TAG = "SimilarityTest";
 
     // TODO-someday: There's got to be a better way of saving the hero icon drawables other than a huge list of int and String pairs!
 
@@ -167,9 +170,15 @@ public class SimilarityTest {
      * @param context
      */
     public SimilarityTest(Context context) {
+        if (BuildConfig.DEBUG) Log.d(TAG, "Loading comparison images.");
+
         for (Pair<Integer, String> drawableIdAndName : mHeroIconDrawables) {
             LoadedHeroImage hero = new LoadedHeroImage(context, drawableIdAndName.first, drawableIdAndName.second);
             mHeroes.add(hero);
+        }
+
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Loaded " + NumberOfHeroesLoaded() + " hero images.");
         }
     }
 

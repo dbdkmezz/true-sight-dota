@@ -14,8 +14,10 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Single;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subjects.AsyncSubject;
 
@@ -29,23 +31,25 @@ class RecognitionWithRx {
 
     //TODO-someday: improve performance by saving mSimilarityTest mHeroInfoList once they have
     // been loaded the first time
-    private SimilarityTest mSimilarityTest;
-    private AsyncSubject<List<HeroInfo>> xmlInfo;
+//    private SimilarityTest mSimilarityTest;
+    private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
+    private AsyncSubject<SimilarityTest> mSimilarityTestRx;
 
     RecognitionWithRx(final Context context) {
-        StartBackgroundLoading(context);
+        StartXmlLoading(context);
+        StartSimilarityTestLoading(context);
     }
 
     public List<HeroInfo> getXmlInfo() {
-        return xmlInfo.getValue();
+        return mXmlInfoRx.getValue();
     }
 
     /**
      * Reads the XML and opens the hero images in the background. This should be launched when the
      * app is first launched, and then everything should be ready when it is needed.
      */
-    private void StartBackgroundLoading(final Context context) {
-        xmlInfo = AsyncSubject.create();
+    private void StartXmlLoading(final Context context) {
+        mXmlInfoRx = AsyncSubject.create();
 
         // Create an observable to load the xml and then subscribe the AsyncSubject xmlInfo to it
         Observable.create(new Observable.OnSubscribe<List<HeroInfo>>() {
@@ -60,26 +64,42 @@ class RecognitionWithRx {
         })
 //TODO-beauty: check that the XML parsing should be done on the io thread. Is all the io work done
 // at the start instantly?
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(xmlInfo);
+                .subscribe(mXmlInfoRx);
+    }
+
+    private void StartSimilarityTestLoading(final Context context) {
+        mSimilarityTestRx = AsyncSubject.create();
+
+        Observable.create(new Observable.OnSubscribe<SimilarityTest>() {
+            @Override
+            public void call(Subscriber<? super SimilarityTest> observer) {
+                observer.onNext(new SimilarityTest(context));
+                observer.onCompleted();
+            }
+        })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mSimilarityTestRx);
     }
 
     public void Run(final MainActivity mainActivity, final Bitmap photoBitmap) {
         mainActivity.preRecognitionUiTasks(photoBitmap);
 
-        Observable.create(new Observable.OnSubscribe<List<HeroFromPhoto>>() {
+        //TODO: this is created every time this is run. Memory leak danger???
+        //Should photo bitmap be in there?
+
+        // Zipping the two observables used in the loading task will ensure that both the xml and
+        // the similarity test have loaded successfully before attempting to do tje image
+        // recognition
+        Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest, List<HeroFromPhoto>>() {
             @Override
-            public void call(Subscriber<? super List<HeroFromPhoto>> observer) {
-                //TODO-beauty: handle errors in the observer
-                if (!observer.isUnsubscribed()) {
-                    List<HeroFromPhoto> heroes = backgroundWork(mainActivity, photoBitmap);
-                    observer.onNext(heroes);
-                    observer.onCompleted();
-                }
+            public List<HeroFromPhoto> call(List<HeroInfo> heroInfoList, SimilarityTest similarityTest) {
+                return Recognition.Run(photoBitmap, similarityTest);
             }
         })
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<HeroFromPhoto>>() {
                     @Override
@@ -97,27 +117,5 @@ class RecognitionWithRx {
                         mainActivity.postRecognitionUiTasks(heroes);
                     }
                 });
-    }
-
-
-    // This is where the hard work happens which needs to be off the UI thread
-    private List<HeroFromPhoto> backgroundWork(final Context context, Bitmap photoBitmap) {
-        //NEED to add code to ensure that the xml has loaded
-
-        if (mSimilarityTest == null)
-            loadHistTest(context);
-
-        // do the hard work of the image recognition
-        return Recognition.Run(photoBitmap, mSimilarityTest);
-    }
-
-    private void loadHistTest(final Context context) {
-        if (BuildConfig.DEBUG) Log.d(TAG, "Loading comparison images.");
-
-        mSimilarityTest = new SimilarityTest(context);
-
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "Loaded " + mSimilarityTest.NumberOfHeroesLoaded() + " hero images.");
-        }
     }
 }
