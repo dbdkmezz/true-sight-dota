@@ -23,7 +23,6 @@ import rx.schedulers.Schedulers;
  * results in the UI
  */
 class RecognitionWithRx {
-
     static final String TAG = "RecognitionRx";
 
     //TODO-someday: improve performance by saving mSimilarityTest mHeroInfoList once they have
@@ -38,6 +37,7 @@ class RecognitionWithRx {
         Observable.create(new Observable.OnSubscribe<List<HeroFromPhoto>>() {
             @Override
             public void call(Subscriber<? super List<HeroFromPhoto>> observer) {
+                //TODO-beauty: handle errors in the observer
                 if (!observer.isUnsubscribed()) {
                     List<HeroFromPhoto> heroes = backgroundWork(mainActivity, photoBitmap);
                     observer.onNext(heroes);
