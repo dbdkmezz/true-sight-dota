@@ -130,6 +130,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onDestroy() {
+        if(mRecognitionWithRx != null) {
+            mRecognitionWithRx.onDestroy();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -173,8 +181,7 @@ public class MainActivity extends AppCompatActivity
         mHeroesSeen.set(posInList, newHeroInfo);
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        abilityInfoFragment.reset();
-        abilityInfoFragment.showHeroAbilities(mHeroesSeen);
+        abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         foundHeroesFragment.changeHero(posInList, newHeroInfo.name, newHeroInfo.imageName);
@@ -509,7 +516,7 @@ public class MainActivity extends AppCompatActivity
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
         if (abilityInfoFragment != null) {
-            abilityInfoFragment.showHeroAbilities(mHeroesSeen);
+            abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
         }
 
         //TODO-someday: bring back animation when loading the hero images and abilities?
