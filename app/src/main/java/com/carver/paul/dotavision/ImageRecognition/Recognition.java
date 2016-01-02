@@ -52,48 +52,32 @@ public class Recognition  {
 
     private static final String TAG = "Recognition";
 
-    public static Observable<HeroFromPhoto> Run(final Bitmap photoBitmap,
-                                                final SimilarityTest similarityTest) {
+    public static List<HeroFromPhoto> findFiveHeroesInPhoto(final Bitmap photoBitmap) {
+        if (BuildConfig.DEBUG && MainActivity.sDebugMode == true) mDebugString = "";
 
-        Observable<HeroFromPhoto> heroesSeenRx =
-                Observable.create(new Observable.OnSubscribe<HeroFromPhoto>() {
-            @Override
-            public void call(Subscriber<? super HeroFromPhoto> subscriber) {
-                if (BuildConfig.DEBUG && MainActivity.sDebugMode == true) mDebugString = "";
+        // Load the bitmap into a format OpenCV can use
+        Mat load = ImageTools.GetMatFromBitmap(photoBitmap);
 
-                // Load the bitmap into a format OpenCV can use
-                Mat load = ImageTools.GetMatFromBitmap(photoBitmap);
+        if (BuildConfig.DEBUG) Log.d(TAG, "Got mat from bitmap.");
 
-                if (BuildConfig.DEBUG) Log.d(TAG, "Got mat from bitmap.");
+        // Find the coloured lines which are above each hero (these are used to locate the heroes
+        // in the image.
+        List<Mat> linesList = findHeroTopLinesInImage(load);
 
-                // Find the coloured lines which are above each hero (these are used to locate the heroes
-                // in the image.
-                List<Mat> linesList = findHeroTopLinesInImage(load);
+        if (BuildConfig.DEBUG) Log.d(TAG, "Found " + linesList.size() + " top hero lines.");
 
-                if (BuildConfig.DEBUG) Log.d(TAG, "Found " + linesList.size() + " top hero lines.");
+        // Find the rectangles where the images of the individuals heroes are
+        List<HeroFromPhoto> heroes = CalculateHeroRects(linesList, load);
 
-                // Find the rectangles where the images of the individuals heroes are
-                List<HeroFromPhoto> heroes = CalculateHeroRects(linesList, load);
+        if (BuildConfig.DEBUG) Log.d(TAG, "Found " + heroes.size() + " hero rects.");
 
-                if (BuildConfig.DEBUG) Log.d(TAG, "Found " + heroes.size() + " hero rects.");
+        return heroes;
+    }
 
-                subscriber.onNext(null);
-
-                // Find out which heroes the heroes in the rectangles look like
-                for (HeroFromPhoto hero : heroes) {
-                    hero.calcSimilarityList(similarityTest);
-                    subscriber.onNext(hero);
-                }
-
-                if (BuildConfig.DEBUG)
-                    Log.d(TAG, "Calculated the most similar hero for each of the "
-                            + heroes.size() + " heroes.");
-
-                subscriber.onCompleted();
-            }
-        });
-
-        return heroesSeenRx;
+    public static HeroFromPhoto identifyHeroFromPhoto(HeroFromPhoto heroFromPhoto,
+                                                 SimilarityTest similarityTest) {
+        heroFromPhoto.calcSimilarityList(similarityTest);
+        return heroFromPhoto;
     }
 
     public static List<Mat> findHeroTopLinesInImage(Mat photo) {

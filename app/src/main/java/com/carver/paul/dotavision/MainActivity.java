@@ -299,7 +299,9 @@ public class MainActivity extends AppCompatActivity
      * This lets the cameraFab do one final pulse, and the moves it to the bottom right and
      * shows the result of the recognition.
      */
-    public void postRecognitionUiTasks() {
+    public void postRecognitionUiTasks(final List<HeroFromPhoto> unidentifiedHeroesFromPhotos) {
+        prepareToShowResults(unidentifiedHeroesFromPhotos);
+
         View view = findViewById(R.id.button_fab_take_photo);
         Animation animation = view.getAnimation();
         if (animation == null) {
@@ -309,7 +311,6 @@ public class MainActivity extends AppCompatActivity
                 Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
             }
             moveCameraFabToBottomRight();
-            prepareToShowResults();
         } else {
             animation.setRepeatCount(0);
             animation.setAnimationListener(new Animation.AnimationListener() {
@@ -321,7 +322,6 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     moveCameraFabToBottomRight();
-                    prepareToShowResults();
                 }
 
                 @Override
@@ -338,10 +338,26 @@ public class MainActivity extends AppCompatActivity
 
         mHeroesSeen.add(heroInfo);
 
+        FoundHeroesFragment foundHeroesFragment =
+                (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
+        if(foundHeroesFragment != null) {
+            foundHeroesFragment.showHero(hero, heroInfo.name);
+        }
+
+/*
+        //Note: adding the heroInfoCards like this one by one is too resource intensive, it makes
+        the animations in the found heros fragment stutter
+
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
         if (abilityInfoFragment != null) {
             abilityInfoFragment.addHero(heroInfo);
         }
+*/
+    }
+
+    public void addAllAbilityCards() {
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+        abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
     }
 
     @Override
@@ -378,6 +394,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void resetInfo() {
+        mHeroesSeen = new ArrayList<>();
+
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         foundHeroesFragment.reset();
 
@@ -495,7 +513,7 @@ public class MainActivity extends AppCompatActivity
                 .setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
-    private void prepareToShowResults() {
+    private void prepareToShowResults(List<HeroFromPhoto> unidentifiedHeroesFromPhotos) {
         if (BuildConfig.DEBUG && sDebugMode) {
             TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
             if (imageDebugText != null) {
@@ -504,8 +522,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        //A list of the heroes we've seen, for use when adding the ability cards
-        mHeroesSeen = new ArrayList<>();
 
        /* for (HeroFromPhoto hero : heroes) {
             HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
@@ -513,13 +529,12 @@ public class MainActivity extends AppCompatActivity
             mHeroesSeen.add(heroInfo);
         }*/
 
-/*
+
+
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         if (foundHeroesFragment != null) {
-            foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mRecognitionWithRx.getXmlInfo());
+            foundHeroesFragment.prepareToShowResults(unidentifiedHeroesFromPhotos, mRecognitionWithRx.getXmlInfo());
         }
-*/
-
 
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);

@@ -21,6 +21,7 @@ package com.carver.paul.dotavision;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -50,6 +51,10 @@ import java.util.List;
  * Shows the heroes which have been seen in the image, and allows the user to change them.
  */
 public class FoundHeroesFragment extends Fragment {
+    private static final String TAG = "FoundHeroesFragment";
+
+    private List<Pair<HeroFromPhoto, LinearLayout>> mHeroesAndLayouts;
+
     private OnHeroChangedListener mHeroChangedListener;
     private List<TextView> mHeroNamesTextViews;
     private List<CenterLockListener> mHeroRecyclerViewListeners;
@@ -85,8 +90,7 @@ public class FoundHeroesFragment extends Fragment {
         public void onHeroChanged(int posInList, String newHero);
     }
 
-    public void showFoundHeroes(List<HeroFromPhoto> heroes,
-                                List<HeroInfo> heroInfoList,
+    public void prepareToShowResults(List<HeroFromPhoto> heroes,
                                 List<HeroInfo> heroInfoFromXml) {
         LinearLayout parent = (LinearLayout) getActivity().findViewById(
                 R.id.layout_found_hero_pictures);
@@ -95,33 +99,55 @@ public class FoundHeroesFragment extends Fragment {
         mHeroNamesTextViews = new ArrayList<>();
         mHeroRecyclerViewListeners = new ArrayList<>();
         mHeroRecyclerViews = new ArrayList<>();
+        mHeroesAndLayouts = new ArrayList<>();
 
         if(mAllHeroNames == null)
             mAllHeroNames = getHeroNames(heroInfoFromXml);
 
         int posInList = 0;
+
         for (HeroFromPhoto hero : heroes) {
             LinearLayout foundPicturesView =
                     (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
 
             addLeftHeroImage(foundPicturesView, hero);
 
-            addHeroNameEditText(
+            initialiseHeroNameEditText(
                     (AutoCompleteTextView) foundPicturesView.findViewById(R.id.text_hero_name),
-                    heroInfoList.get(posInList).name,
                     posInList);
 
-            addHeroSelectRecycler(
-                    (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image),
-                    hero, posInList);
+            initialiseHeroSelectRecycler(
+                    (RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image));
 
             parent.addView(foundPicturesView);
-
-            if (BuildConfig.DEBUG && MainActivity.sDebugMode)
-                showSimilarityInfo(hero.getSimilarityList());
+            mHeroesAndLayouts.add(new Pair<>(hero, foundPicturesView));
 
             posInList++;
         }
+    }
+
+    public void showHero(HeroFromPhoto hero, String displayName) {
+        int pos = -1;
+        LinearLayout foundPicturesView = null;
+        for (Pair<HeroFromPhoto, LinearLayout> pair : mHeroesAndLayouts) {
+            pos++;
+            if (pair.first == hero) {
+                foundPicturesView = pair.second;
+                break;
+            }
+        }
+
+        if (pos == -1 || foundPicturesView == null) {
+            throw new RuntimeException("Attempting to show details for a hero in " +
+                    "FoundHeroesFragment, but no matching hero found");
+        }
+
+
+        mHeroNamesTextViews.get(pos).setText(displayName);
+
+        completeRecycler((RecyclerView) foundPicturesView.findViewById(R.id.recycler_correct_image),
+                hero,
+                pos);
     }
 
     /**
@@ -133,6 +159,13 @@ public class FoundHeroesFragment extends Fragment {
      * @param heroImageName
      */
     public void changeHero(int posInList, String niceHeroName, String heroImageName) {
+        if(mHeroRecyclerViewListeners.isEmpty()) {
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Attempting to change hero, but mHeroRecyclerViewListeners is empty.");
+            }
+            return;
+        }
+
         mHeroNamesTextViews.get(posInList).setText(niceHeroName);
         mHeroRecyclerViewListeners.get(posInList).setHero(heroImageName);
 
@@ -163,6 +196,7 @@ public class FoundHeroesFragment extends Fragment {
         return names;
     }
 
+/*
     private void showSimilarityInfo(List<HeroAndSimilarity> similarityList) {
         TextView infoText = (TextView) getActivity().findViewById(R.id.text_debug_similarity_info);
         infoText.setText("");
@@ -184,6 +218,7 @@ public class FoundHeroesFragment extends Fragment {
         infoText.append(System.getProperty("line.separator")
                 + System.getProperty("line.separator"));
     }
+*/
 
     private void ResetTextViews(List<Integer> ids) {
         for (Integer id : ids) {
@@ -204,14 +239,26 @@ public class FoundHeroesFragment extends Fragment {
         leftImage.setImageBitmap(ImageTools.GetBitmapFromMat(hero.image));
     }
 
+    private void initialiseHeroNameEditText(AutoCompleteTextView heroNameTextView,
+                                            int posInList) {
+        //heroNameTextView.setText("???");
+        mHeroNamesTextViews.add(heroNameTextView);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_dropdown_item_1line, mAllHeroNames);
+        heroNameTextView.setAdapter(adapter);
+
+        heroNameTextView.addTextChangedListener(new HeroTextWatcher(
+                heroNameTextView.getText().toString(), mHeroChangedListener, mAllHeroNames,
+                posInList));
+    }
+
     /**
      * Adds the AutoCompleteTextView showing the name of the currently selected hero, which is
      * also editable by the user to select a different hero.
-     * @param heroNameTextView
-     * @param heroName
-     * @param posInList
+
      */
-    private void addHeroNameEditText(AutoCompleteTextView heroNameTextView,
+/*    private void addHeroNameEditText(AutoCompleteTextView heroNameTextView,
                                      String heroName,
                                      int posInList) {
         mHeroNamesTextViews.add(heroNameTextView);
@@ -224,6 +271,13 @@ public class FoundHeroesFragment extends Fragment {
         heroNameTextView.addTextChangedListener(new HeroTextWatcher(
                 heroNameTextView.getText().toString(), mHeroChangedListener, mAllHeroNames,
                 posInList));
+    }*/
+
+    private void initialiseHeroSelectRecycler(RecyclerView recyclerView) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setAdapter(new HeroImageAdapter());
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     /**
@@ -232,13 +286,9 @@ public class FoundHeroesFragment extends Fragment {
      * @param hero
      * @param posInList
      */
-    private void addHeroSelectRecycler(RecyclerView recyclerView, HeroFromPhoto hero,
-                                       int posInList) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
+    private void completeRecycler(RecyclerView recyclerView, HeroFromPhoto hero, int posInList) {
+        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         recyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
-
 
         //TODO-beauty: make the FoundHeroesFragment not depend on the screen width for finding
         // its centre, should instead use the Fragment's width. It also goes wrong if the
@@ -260,8 +310,8 @@ public class FoundHeroesFragment extends Fragment {
         int xPos = (int) recyclerView.getX();
         recyclerView.setX(metrics.widthPixels);
         recyclerView.animate()
-                .setStartDelay(50 * posInList)
-                .translationX(xPos)
+//                .setStartDelay(50 * posInList)
+                .translationXBy(1 + -1 * xPos)
                 .setInterpolator(new DecelerateInterpolator())
                 .setDuration(200);
     }
