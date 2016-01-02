@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity
         mHeroesSeen.set(posInList, newHeroInfo);
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+        abilityInfoFragment.reset();
         abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
@@ -516,6 +517,7 @@ public class MainActivity extends AppCompatActivity
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
         if (abilityInfoFragment != null) {
+            abilityInfoFragment.reset();
             abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
         }
 
