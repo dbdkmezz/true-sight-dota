@@ -3,6 +3,8 @@ package com.carver.paul.dotavision;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
+import android.support.v4.util.Pair;
+import android.util.Log;
 
 import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.Recognition;
@@ -16,6 +18,7 @@ import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subjects.AsyncSubject;
@@ -33,7 +36,8 @@ class RecognitionWithRx {
 //    private SimilarityTest mSimilarityTest;
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
-    private Subscriber<List<HeroFromPhoto>> mHeroRecognitionSubscriberRx;
+    private Subscriber<HeroFromPhoto> mHeroRecognitionSubscriberRx;
+    private Subscriber<Pair<SimilarityTest, Bitmap>> mLoadingCompleteRx;
 
     /**
      * Reads the XML and opens the hero images in the background. This should be launched when the
@@ -86,9 +90,9 @@ class RecognitionWithRx {
 
         Observable.create(new Observable.OnSubscribe<SimilarityTest>() {
             @Override
-            public void call(Subscriber<? super SimilarityTest> observer) {
-                observer.onNext(new SimilarityTest(context));
-                observer.onCompleted();
+            public void call(Subscriber<? super SimilarityTest> subscriber) {
+                subscriber.onNext(new SimilarityTest(context));
+                subscriber.onCompleted();
             }
         })
                 .subscribeOn(Schedulers.newThread())
@@ -97,15 +101,28 @@ class RecognitionWithRx {
     }
 
     public void Run(final MainActivity mainActivity, final Bitmap photoBitmap) {
-        resetHeroRecognitionSubscriber(mainActivity);
+        resetSubscribers(mainActivity);
 
         // Show that image processing is happening in the background (pulse the large camera button)
         mainActivity.preRecognitionUiTasks(photoBitmap);
 
         //TODO: should this be an observable which takes the photo bitmap as input in a more Rx way?
 
-        // Zipping the two observables used in the loading task will ensure that both the xml and
-        // the similarity test have loaded successfully before attempting to do tje image
+        Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
+                Pair<SimilarityTest, Bitmap>>() {
+            @Override
+            public Pair<SimilarityTest, Bitmap> call(List<HeroInfo> heroInfoList,
+                                            SimilarityTest similarityTest) {
+                return new Pair<SimilarityTest, Bitmap>(similarityTest, photoBitmap);
+            }
+        })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mLoadingCompleteRx);
+
+
+/*        // Zipping the two observables used in the loading task will ensure that both the xml and
+            // the similarity test have loaded successfully before attempting to do tje image
         // recognition
         Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
                 List<HeroFromPhoto>>() {
@@ -117,7 +134,7 @@ class RecognitionWithRx {
         })
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mHeroRecognitionSubscriberRx);
+                .subscribe(mHeroRecognitionSubscriberRx);*/
     }
 
     /**
@@ -125,7 +142,7 @@ class RecognitionWithRx {
      * subscribe to any observers, otherwise there could be memory leaks.
      */
     public void onDestroy() {
-        ensureHeroRecognitionSubscriberUnsubscribed();
+        ensureAllSubscribersUnsubscribed();
     }
 
     /**
@@ -133,14 +150,10 @@ class RecognitionWithRx {
      * mainActivity.postRecognitionUiTasks and all the heroes will be visible.
      * @param mainActivity
      */
-    private void resetHeroRecognitionSubscriber(final MainActivity mainActivity) {
-        //TODO-beauty: test if we actually need to unsubscribe from the observer, and if
-        // unsubscribing like this does clear it from memory
+    private void resetSubscribers(final MainActivity mainActivity) {
+        ensureAllSubscribersUnsubscribed();
 
-        ensureHeroRecognitionSubscriberUnsubscribed();
-
-        // Set up the new subscriber
-        mHeroRecognitionSubscriberRx = new Subscriber<List<HeroFromPhoto>>() {
+        mHeroRecognitionSubscriberRx = new Subscriber<HeroFromPhoto>() {
             @Override
             public void onCompleted() {
 
@@ -152,16 +165,49 @@ class RecognitionWithRx {
             }
 
             @Override
-            public void onNext(List<HeroFromPhoto> heroes) {
-                mainActivity.postRecognitionUiTasks(heroes);
+            public void onNext(HeroFromPhoto hero) {
+                if(hero == null) {
+                    mainActivity.postRecognitionUiTasks();
+                } else {
+                    Log.d(TAG, "Adding " + hero.getSimilarityList().get(0).hero.name);
+                    mainActivity.addHero(hero);
+                }
+            }
+        };
+
+        // Set up the new subscriber
+        mLoadingCompleteRx = new Subscriber<Pair<SimilarityTest, Bitmap>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Pair<SimilarityTest, Bitmap> pair) {
+                Recognition.Run(pair.second, pair.first)
+                        .subscribeOn(Schedulers.computation())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(mHeroRecognitionSubscriberRx);
             }
         };
     }
 
-    private void ensureHeroRecognitionSubscriberUnsubscribed() {
+    private void ensureAllSubscribersUnsubscribed() {
+        //TODO-beauty: test if we actually need to unsubscribe from the observer, and if
+        // unsubscribing like this does clear it from memory
         if(mHeroRecognitionSubscriberRx != null) {
             mHeroRecognitionSubscriberRx.unsubscribe();
             mHeroRecognitionSubscriberRx = null;
+        }
+
+        if(mLoadingCompleteRx != null) {
+            mLoadingCompleteRx.unsubscribe();
+            mLoadingCompleteRx = null;
         }
     }
 }

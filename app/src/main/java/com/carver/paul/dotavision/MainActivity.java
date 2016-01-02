@@ -298,10 +298,8 @@ public class MainActivity extends AppCompatActivity
      * <p/>
      * This lets the cameraFab do one final pulse, and the moves it to the bottom right and
      * shows the result of the recognition.
-     *
-     * @param heroes
      */
-    public void postRecognitionUiTasks(final List<HeroFromPhoto> heroes) {
+    public void postRecognitionUiTasks() {
         View view = findViewById(R.id.button_fab_take_photo);
         Animation animation = view.getAnimation();
         if (animation == null) {
@@ -311,7 +309,7 @@ public class MainActivity extends AppCompatActivity
                 Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
             }
             moveCameraFabToBottomRight();
-            showResult(heroes);
+            prepareToShowResults();
         } else {
             animation.setRepeatCount(0);
             animation.setAnimationListener(new Animation.AnimationListener() {
@@ -323,7 +321,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     moveCameraFabToBottomRight();
-                    showResult(heroes);
+                    prepareToShowResults();
                 }
 
                 @Override
@@ -331,6 +329,18 @@ public class MainActivity extends AppCompatActivity
 
                 }
             });
+        }
+    }
+
+    public void addHero(HeroFromPhoto hero) {
+        HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
+                mRecognitionWithRx.getXmlInfo());
+
+        mHeroesSeen.add(heroInfo);
+
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
+        if (abilityInfoFragment != null) {
+            abilityInfoFragment.addHero(heroInfo);
         }
     }
 
@@ -485,14 +495,7 @@ public class MainActivity extends AppCompatActivity
                 .setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
-
-    /**
-     * showResult shows all the information about the heroes I've seen in the photo
-     *
-     * @param heroes
-     */
-    private void showResult(final List<HeroFromPhoto> heroes) {
-
+    private void prepareToShowResults() {
         if (BuildConfig.DEBUG && sDebugMode) {
             TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
             if (imageDebugText != null) {
@@ -504,21 +507,24 @@ public class MainActivity extends AppCompatActivity
         //A list of the heroes we've seen, for use when adding the ability cards
         mHeroesSeen = new ArrayList<>();
 
-        for (HeroFromPhoto hero : heroes) {
+       /* for (HeroFromPhoto hero : heroes) {
             HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
                     mRecognitionWithRx.getXmlInfo());
             mHeroesSeen.add(heroInfo);
-        }
+        }*/
 
+/*
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         if (foundHeroesFragment != null) {
             foundHeroesFragment.showFoundHeroes(heroes, mHeroesSeen, mRecognitionWithRx.getXmlInfo());
         }
+*/
+
+
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
         if (abilityInfoFragment != null) {
             abilityInfoFragment.reset();
-            abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
         }
 
         //TODO-someday: bring back animation when loading the hero images and abilities?

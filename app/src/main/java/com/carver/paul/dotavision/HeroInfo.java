@@ -21,7 +21,7 @@ package com.carver.paul.dotavision;
 import java.util.ArrayList;
 import java.util.List;
 
-class HeroInfo {
+public class HeroInfo {
     public String name;
     public String imageName;
     public String bioRoles;
