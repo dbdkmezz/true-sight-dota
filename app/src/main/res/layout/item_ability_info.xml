@@ -19,7 +19,7 @@
             android:paddingBottom="@dimen/activity_vertical_spacing"
             android:layout_gravity="center_vertical"
             android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"/>
 
         <TextView
             android:id="@+id/textView"

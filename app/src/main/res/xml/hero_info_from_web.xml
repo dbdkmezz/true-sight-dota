@@ -546,8 +546,8 @@
         <defence>1.82</defence>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>rattletrap_battery_assault_hp2</imageName>
@@ -555,7 +555,6 @@
             <description>Discharges high-powered shrapnel at random nearby enemy units, dealing minor magical damage and ministun.</description>
             <manaCost>75/75/75/75</manaCost>
             <cooldown>32/28/24/20</cooldown>
-            <disableDuration>DURATION:  10.5 / 10.5 / 10.5 / 10.5</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -2195,6 +2194,7 @@
             <description>Drow's experiences in battle improve her accuracy and effectiveness in combat, providing a passive bonus to Agility. Grants no bonus if there are enemy heroes within 400 range. Upgradable by Aghanim's Scepter.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>BONUS AGILITY:  40 / 60 / 80</abilityDetails>
+            <abilityDetails>SEARCH RANGE:  375</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2655,7 +2655,7 @@
             <isMute>false</isMute>
             <imageName>riki_smoke_screen_hp2</imageName>
             <name>Smoke Screen</name>
-            <description>Throws down a smoke bomb, silencing enemies, causing causing them to miss most attacks, as well as slowing movement.</description>
+            <description>Throws down a smoke bomb, silencing enemies, and causing them to miss most attacks, as well as slowing movement.</description>
             <manaCost>75/80/85/90</manaCost>
             <cooldown>11</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
@@ -2689,7 +2689,7 @@
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>riki_permanent_invisibility_hp2</imageName>
-            <name>Permanent Invisibility</name>
+            <name>Cloak and Dagger</name>
             <description>Riki fades into the shadows, becoming invisible. Every time Riki strikes his enemy from behind, he deals bonus damage based on his Agility. When Riki attacks, he becomes visible.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
@@ -2770,8 +2770,8 @@
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>sniper_assassinate_hp2</imageName>
@@ -2779,7 +2779,6 @@
             <description>Sniper locks onto a target enemy unit and, after 2 seconds, fires a devastating shot that deals damage at long range, and mini-stuns the target.</description>
             <manaCost>175/275/375</manaCost>
             <cooldown>20/15/10</cooldown>
-            <disableDuration>MINI-STUN</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -2975,8 +2974,8 @@
         <defence>5.94</defence>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>bounty_hunter_shuriken_toss_hp2</imageName>
@@ -2984,7 +2983,6 @@
             <description>Hurls a deadly shuriken at an enemy unit, dealing damage and mini-stunning the target. The shuriken will bounce between any Tracked units who are within a 1200 radius of each other.</description>
             <manaCost>120/130/140/150</manaCost>
             <cooldown>10</cooldown>
-            <disableDuration>MINI-STUN</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -3263,7 +3261,7 @@
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
-            <isDisable>false</isDisable>
+            <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>lone_druid_savage_roar_hp2</imageName>
@@ -3271,6 +3269,7 @@
             <description>Lone Druid roars fiercely causing nearby enemies to flee towards their base in terror. Their movement speed is increased by 20%.</description>
             <manaCost>50</manaCost>
             <cooldown>28/24/20/16</cooldown>
+            <disableDuration>DURATION:  1.2 / 1.6 / 2 / 2.4</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RANGE:  325</abilityDetails>
@@ -3734,7 +3733,7 @@
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
+            <isStun>false</isStun>
             <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
@@ -4082,8 +4081,8 @@
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>zuus_lightning_bolt_hp2</imageName>
@@ -4091,7 +4090,6 @@
             <description>Calls down a bolt of lightning to strike an enemy unit, causing damage and a mini-stun. When cast, Lightning Bolt briefly provides unobstructed vision and True Sight around the target in a 750 radius. Can be cast on the ground, affecting the closest enemy hero in 325 range.</description>
             <manaCost>75/95/115/135</manaCost>
             <cooldown>6</cooldown>
-            <disableDuration>MINI-STUN</disableDuration>
             <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -4248,7 +4246,7 @@
             <isStun>false</isStun>
             <isDisable>true</isDisable>
             <isSilence>false</isSilence>
-            <isMute>false</isMute>
+            <isMute>true</isMute>
             <imageName>shadow_shaman_voodoo_hp2</imageName>
             <name>Hex</name>
             <description>Transforms an enemy unit into a harmless creature, disabling their attacks and abilities.</description>
@@ -5625,13 +5623,13 @@
         <defence>0.96</defence>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>pudge_meat_hook_hp2</imageName>
             <name>Meat Hook</name>
-            <description>Launches a bloody hook toward a unit or location. The hook will snag the first unit it encounters, dragging the unit back to Pudge and dealing damage if it is an enemy. Upgradable by Aghanim's Scepter, reducing the cooldown.</description>
+            <description>Launches a bloody hook toward a unit or location. The hook will snag the first unit it encounters, dragging the unit back to Pudge and dealing damage if it is an enemy. Upgradable by Aghanim's Scepter, reducing the cooldown and increasing the damage.</description>
             <manaCost>110/120/130/140</manaCost>
             <cooldown>14/13/12/11</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
@@ -5640,6 +5638,7 @@
             <abilityDetails>DAMAGE:  90 / 180 / 270 / 360</abilityDetails>
             <abilityDetails>RANGE:  1000 / 1100 / 1200 / 1300</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 4</abilityDetails>
+            <abilityDetails> SCEPTER DAMAGE: 175 / 275 / 375 / 475</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5679,7 +5678,7 @@
             <isMute>false</isMute>
             <imageName>pudge_dismember_hp2</imageName>
             <name>Dismember</name>
-            <description>CHANNELED - Pudge chows down on an enemy unit, disabling it and dealing damage over time. Pudge gets healed for the same amount he damages. Lasts 3 seconds on Heroes, 6 seconds on creeps. Upgradable by Aghanim's Scepter.</description>
+            <description>CHANNELED - Pudge chows down on an enemy unit, disabling it and dealing damage over time. Pudge gets healed for the same amount he damages. Lasts 3 seconds on Heroes, 6 seconds on creeps.</description>
             <manaCost>100/130/170</manaCost>
             <cooldown>30</cooldown>
             <disableDuration>DURATION: 3</disableDuration>
@@ -5709,7 +5708,7 @@
             <isMute>false</isMute>
             <imageName>sandking_burrowstrike_hp2</imageName>
             <name>Burrowstrike</name>
-            <description>Sand King burrows into the ground and tunnels forward, damaging and stunning enemy units above him as he resurfaces. Upgradable by Aghanim's Scepter, increasing the range and applies Caustic Finale to every heroes hit by Burrowstrike.</description>
+            <description>Sand King burrows into the ground and tunnels forward, damaging and stunning enemy units above him as he resurfaces. Upgradable by Aghanim's Scepter, increasing the range and applies Caustic Finale to every heroes hit by Burrowstrike. Upgradable by Aghanim's Scepter.</description>
             <manaCost>110/120/130/140</manaCost>
             <cooldown>11</cooldown>
             <disableDuration>STUN DURATION:  2.17</disableDuration>
@@ -5768,7 +5767,7 @@
             <isMute>false</isMute>
             <imageName>sandking_epicenter_hp2</imageName>
             <name>Epicenter</name>
-            <description>CHANNELED - After channeling for 2 seconds, Sand King sends a disturbance into the earth, causing it to shudder violently. All enemies caught within range will take damage and become slowed. Each subsequent pulse increases the radius of damage dealt. Upgradable by Aghanim's Scepter.</description>
+            <description>CHANNELED - After channeling for 2 seconds, Sand King sends a disturbance into the earth, causing it to shudder violently. All enemies caught within range will take damage and become slowed. Each subsequent pulse increases the radius of damage dealt.</description>
             <manaCost>175/250/325</manaCost>
             <cooldown>140/120/100</cooldown>
             <abilityDetails>ABILITY:  No Target, Channeled</abilityDetails>
@@ -6167,8 +6166,8 @@
         <defence>5.52</defence>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>night_stalker_void_hp2</imageName>
@@ -6176,7 +6175,6 @@
             <description>Creates a damaging void that slows an enemy unit and deals damage. Void also mini-stuns, interrupting channeling abilities. The slowing effect lasts longer at night.</description>
             <manaCost>80/90/100/110</manaCost>
             <cooldown>8</cooldown>
-            <disableDuration>MINI-STUN</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -6286,7 +6284,7 @@
             <isMute>false</isMute>
             <imageName>doom_bringer_infernal_blade_hp2</imageName>
             <name>Infernal Blade</name>
-            <description>Doom swings his burning sword, igniting the enemy. Stuns for %ministun_durations% seconds and applies a 4 second burn that deals 40 + 1.25% of the target's Max HP as damage per second.</description>
+            <description>Doom swings his burning sword, igniting the enemy. Stuns for 0.3 seconds and applies a 4 second burn that deals 40 + 1.25% of the target's Max HP as damage per second.</description>
             <manaCost>40</manaCost>
             <cooldown>16/12/8/4</cooldown>
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
@@ -6300,8 +6298,8 @@
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>true</isSilence>
             <isMute>true</isMute>
             <imageName>doom_bringer_doom_hp2</imageName>
@@ -6309,7 +6307,6 @@
             <description>Inflicts a curse that prevents an enemy Hero from casting spells or using items, while taking damage over time. Upgradable by Aghanim's Scepter.</description>
             <manaCost>150/200/250</manaCost>
             <cooldown>125</cooldown>
-            <disableDuration>DURATION:  15</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
@@ -8308,8 +8305,8 @@
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>lich_chain_frost_hp2</imageName>
@@ -8317,7 +8314,6 @@
             <description>Releases an orb of frost that bounces between nearby enemy units up to 10 times, slowing and damaging each time it hits. The first target is mini-stunned. Upgradable by Aghanim's Scepter.</description>
             <manaCost>200/325/500</manaCost>
             <cooldown>120/90/60</cooldown>
-            <disableDuration>MINI-STUN</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -8366,7 +8362,7 @@
             <isStun>false</isStun>
             <isDisable>true</isDisable>
             <isSilence>false</isSilence>
-            <isMute>false</isMute>
+            <isMute>true</isMute>
             <imageName>lion_voodoo_hp2</imageName>
             <name>Hex</name>
             <description>Transforms an enemy unit into a harmless beast, with all special abilities disabled.</description>
@@ -8893,7 +8889,7 @@
             <isMute>false</isMute>
             <imageName>death_prophet_spirit_siphon_hp2</imageName>
             <name>Spirit Siphon</name>
-            <description>Creates a spirit link between Death Prophet and an enemy unit, draining 20 + 1% Max HP per second and slowing the enemy's movement speed by 6%. Lasts 4 seconds.</description>
+            <description>Creates a spirit link between Death Prophet and an enemy unit, draining 20 + 1% Max HP per second and slowing the enemy's movement speed by 6%.</description>
             <manaCost>70/65/60/55</manaCost>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -8901,6 +8897,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>BASE DAMAGE:  20</abilityDetails>
             <abilityDetails>MAX HP AS DAMAGE:  1% / 1.8% / 2.6% / 3.4%</abilityDetails>
+            <abilityDetails>DURATION:  4</abilityDetails>
             <abilityDetails>ENEMY SLOW:  6% / 10% / 14% / 18%</abilityDetails>
             <abilityDetails>MAX CHARGES:  1 / 2 / 3 / 4</abilityDetails>
             <abilityDetails>CHARGE RESTORE TIME:  45</abilityDetails>
@@ -8913,7 +8910,7 @@
             <isMute>false</isMute>
             <imageName>death_prophet_exorcism_hp2</imageName>
             <name>Exorcism</name>
-            <description>Unleashes evil spirits to drain the life of nearby enemy units and structures. At the end of the spell's duration, Death Prophet is healed in proportion to the damage dealt. Lasts 30 seconds.</description>
+            <description>Unleashes evil spirits to drain the life of nearby enemy units and structures. At the end of the spell's duration, Death Prophet is healed in proportion to the damage dealt. Lasts 35 seconds.</description>
             <manaCost>200/300/400</manaCost>
             <cooldown>145</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>

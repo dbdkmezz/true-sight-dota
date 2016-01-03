@@ -51,6 +51,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO-beauty: Write tests to check if all hero images load, and if all hero ability icons draw and
+// all hero abilities have text
+
 //TODO-now: Check all new ability icons, I think that when I updated them the ones online were not
 // right. Also Loan Druid's new ability Savage Roar wasn't even there
 // http://www.dota2.com/hero/Lone_Druid/
@@ -252,7 +255,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
-    // TODO-next: Make takePhoto save in the write media location, I think media store wasn't right
+    // TODO-next: Make takePhoto save in the right media location, I think media store wasn't right
     public void takePhoto(View view) {
         EnsureMediaDirectoryExists();
         Intent intent = new Intent(this, CameraActivity.class);
