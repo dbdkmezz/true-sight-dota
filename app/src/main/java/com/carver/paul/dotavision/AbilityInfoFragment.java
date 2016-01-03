@@ -72,6 +72,10 @@ public class AbilityInfoFragment extends Fragment {
         }
     }
 
+    public void prepareToShowResults() {
+        reset();
+    }
+
     /**
      * Ensures that no cards about heroes are shown
      */

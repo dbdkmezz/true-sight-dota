@@ -307,11 +307,9 @@ public class FoundHeroesFragment extends Fragment {
 
         // Animate the recycler view in from the right to indicate that you can slide it to
         // change the hero
-        int xPos = (int) recyclerView.getX();
         recyclerView.setX(metrics.widthPixels);
         recyclerView.animate()
-//                .setStartDelay(50 * posInList)
-                .translationXBy(1 + -1 * xPos)
+                .translationXBy(-1 * recyclerView.getWidth())
                 .setInterpolator(new DecelerateInterpolator())
                 .setDuration(200);
     }

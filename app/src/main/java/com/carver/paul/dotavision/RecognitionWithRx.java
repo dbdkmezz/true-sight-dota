@@ -15,6 +15,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Single;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -32,18 +33,13 @@ import rx.subjects.AsyncSubject;
 class RecognitionWithRx {
     static final String TAG = "RecognitionRx";
 
-    //TODO-someday: improve performance by saving mSimilarityTest mHeroInfoList once they have
-    // been loaded the first time
-//    private SimilarityTest mSimilarityTest;
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
-
-    private Subscriber<List<HeroFromPhoto>> mFoundUnidentifiedHeroesSubscriberRx;
     private Subscriber<HeroFromPhoto> mHeroRecognitionSubscriberRx;
 
     /**
      * Reads the XML and opens the hero images in the background. This should be launched when the
-     * app is first launched, and then everything should be ready when it is needed.
+     * app is first launched, and then everything will be ready when it is needed.
      */
     RecognitionWithRx(final Context context) {
         StartXmlLoading(context);
@@ -82,7 +78,7 @@ class RecognitionWithRx {
     }
 
     /**
-     *Create an observable to Similarity Test (all the hero images used for detection)in the
+     * Create an observable to Similarity Test (all the hero images used for detection) in the
      * background. mSimilarityTestRx is subscribed to it and will complete when the file has been
      * loaded.
      * @param context
@@ -102,64 +98,109 @@ class RecognitionWithRx {
                 .subscribe(mSimilarityTestRx);
     }
 
-    public void Run(final MainActivity mainActivity, final Bitmap photoBitmap) {
-        resetSubscribers(mainActivity);
+    /**
+     * When doing the work recognising the heroes in a photo there are four methods in MainActivity
+     * that should be called. These are named recognition1_ through to recognition4_.
+     *
+     * This method does the image recognition work in a background thread, and when necessary calls
+     * the appropriate methods on MainActivity to show the progress to the user.
+     * @param mainActivity
+     * @param photo
+     */
+    public void Run(final MainActivity mainActivity, final Bitmap photo) {
+        prepareHeroRecognitionSubscriber(mainActivity);
 
-        // Show that image processing is happening in the background (pulse the large camera button)
-        mainActivity.preRecognitionUiTasks(photoBitmap);
+        mainActivity.recognition1ShowDetectingHeroes(photo);
 
-        //TODO: should this be an observable which takes the photo bitmap as input in a more Rx way?
-
+        /**
+         * This is where the magic happens! Recognising the heroes in the photos goes through the
+         * following steps:
+         *
+         *   1) zip the AsyncSubjects for loading the xml file and the similarityTest (the pictures
+         *   against which we compare what we see in the photograph) to ensure both have loaded
+         *   before going any further.
+         *
+         *   2) doOnNext: call prepareToShowResults, which gets the mainActivity UI ready to start
+         *   showing the results of the image processing
+         *
+         *   3) flatMapIterable: turn the list of unidentified heroes in the photo into chain of
+         *   Observables for each to be processed.
+         *
+         *   4) identify each hero found in the photo
+         *
+         *   5) send the identified heroes to the mHeroRecognitionSubscriberRx subscriber (which
+         *   will in turn call the appropriate MainActivity methods to show the results to the user.
+         */
         Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
                 List<HeroFromPhoto>>() {
             @Override
             public List<HeroFromPhoto> call(List<HeroInfo> heroInfoList,
                                             SimilarityTest similarityTest) {
-                return Recognition.findFiveHeroesInPhoto(photoBitmap);
+                return Recognition.findFiveHeroesInPhoto(photo);
             }
         })
+                .doOnNext(new Action1<List<HeroFromPhoto>>() {
+            @Override
+                    public void call(List<HeroFromPhoto> unidentifiedHeroes) {
+                prepareToShowResults(mainActivity, unidentifiedHeroes);
+            }
+        })
+                .flatMapIterable(new Func1<List<HeroFromPhoto>, Iterable<HeroFromPhoto>>() {
+                    @Override
+                    public Iterable<HeroFromPhoto> call(List<HeroFromPhoto> heroFromPhotos) {
+                        return heroFromPhotos;
+                    }
+                })
+                .map(new Func1<HeroFromPhoto, HeroFromPhoto>() {
+                    @Override
+                    public HeroFromPhoto call(HeroFromPhoto unidentifiedHero) {
+                        return Recognition.identifyHeroFromPhoto(unidentifiedHero,
+                                mSimilarityTestRx.getValue());
+                    }
+                })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mFoundUnidentifiedHeroesSubscriberRx);
-
-
-/*        // Zipping the two observables used in the loading task will ensure that both the xml and
-            // the similarity test have loaded successfully before attempting to do tje image
-        // recognition
-        Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
-                List<HeroFromPhoto>>() {
-            @Override
-            public List<HeroFromPhoto> call(List<HeroInfo> heroInfoList,
-                                            SimilarityTest similarityTest) {
-                return Recognition.Run(photoBitmap, similarityTest);
-            }
-        })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mHeroRecognitionSubscriberRx);*/
+                .subscribe(mHeroRecognitionSubscriberRx);
     }
 
     /**
      * This needs to be called by MainActivity.onDestory to ensure all subscribers no longer
-     * subscribe to any observers, otherwise there could be memory leaks.
+     * subscribe to any observers, otherwise there could be memory leaks. (I think!)
      */
     public void onDestroy() {
         ensureAllSubscribersUnsubscribed();
     }
 
     /**
-     * Sets up mHeroRecognitionSubscriberRx so that when onNext is called it will run
-     * mainActivity.postRecognitionUiTasks and all the heroes will be visible.
+     * calls the method recognition2prepareToShowResults on mainActivity in the mainThread (i.e.
+     * the UI thread).
+     *
+     * @param mainActivity
+     * @param unidentifiedHeroes
+     */
+    private void prepareToShowResults(final MainActivity mainActivity, List<HeroFromPhoto> unidentifiedHeroes) {
+        Single.just(unidentifiedHeroes)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<HeroFromPhoto>>() {
+                    public void call(List<HeroFromPhoto> unidentifiedHeroes) {
+                        mainActivity.recognition2prepareToShowResults(unidentifiedHeroes);
+                    }
+                });
+    }
+
+    /**
+     * Sets up mHeroRecognitionSubscriberRx
      * @param mainActivity
      */
-    private void resetSubscribers(final MainActivity mainActivity) {
+    private void prepareHeroRecognitionSubscriber(final MainActivity mainActivity) {
         ensureAllSubscribersUnsubscribed();
 
+        // Set up the subscriber
         mHeroRecognitionSubscriberRx = new Subscriber<HeroFromPhoto>() {
+            // Finish off showing the results of the image processing.
             @Override
             public void onCompleted() {
-                mainActivity.addAllAbilityCards();
-                mHeroRecognitionSubscriberRx.unsubscribe();
+                mainActivity.recognition4ShowHeroAbilities();
             }
 
             @Override
@@ -168,41 +209,13 @@ class RecognitionWithRx {
 
             }
 
+            // For each hero identified in the photo, get MainActivity to show it
             @Override
             public void onNext(HeroFromPhoto hero) {
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "Adding " + hero.getSimilarityList().get(0).hero.name);
                 }
-                mainActivity.addHero(hero);
-            }
-        };
-
-        mFoundUnidentifiedHeroesSubscriberRx = new Subscriber<List<HeroFromPhoto>>() {
-            @Override
-            public void onCompleted() {
-                mFoundUnidentifiedHeroesSubscriberRx.unsubscribe();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "mFoundUnidentifiedHeroesSubscriberRx. Unhandled error: " + e.toString());
-            }
-
-            @Override
-            public void onNext(List<HeroFromPhoto> unidentifiedHeroesFromPhotos) {
-                mainActivity.postRecognitionUiTasks(unidentifiedHeroesFromPhotos);
-
-                Observable.from(unidentifiedHeroesFromPhotos)
-                        .map(new Func1<HeroFromPhoto, HeroFromPhoto>() {
-                            @Override
-                            public HeroFromPhoto call(HeroFromPhoto unidentifiedHero) {
-                                return Recognition.identifyHeroFromPhoto(unidentifiedHero,
-                                        mSimilarityTestRx.getValue());
-                            }
-                        })
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(mHeroRecognitionSubscriberRx);
+                mainActivity.recognition3AddHero(hero);
             }
         };
     }
@@ -213,11 +226,6 @@ class RecognitionWithRx {
         if(mHeroRecognitionSubscriberRx != null) {
             mHeroRecognitionSubscriberRx.unsubscribe();
             mHeroRecognitionSubscriberRx = null;
-        }
-
-        if(mFoundUnidentifiedHeroesSubscriberRx != null) {
-            mFoundUnidentifiedHeroesSubscriberRx.unsubscribe();
-            mFoundUnidentifiedHeroesSubscriberRx = null;
         }
     }
 }

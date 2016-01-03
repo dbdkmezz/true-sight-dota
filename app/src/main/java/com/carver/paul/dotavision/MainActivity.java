@@ -283,9 +283,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Tasks to be run on the UI thread before doing the background work
+     * While recognising the heroes in a photo MainActivity goes through 4 stages to dispaly the
+     * progress of this work. These methods are named recognition1_ through to recognition4_.
+     *
+     * recognition1ShowDetectingHeroes shows the photo, starts pulsing the camera button to show
+     * that work is being done, and shows the "detecting heroes" message.
      */
-    public void preRecognitionUiTasks(Bitmap photoBitmap) {
+    public void recognition1ShowDetectingHeroes(Bitmap photoBitmap) {
         setTopImage(photoBitmap);
         resetInfo();
         slideDemoButtonsOffScreen();
@@ -294,13 +298,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * This is where you do the work in the UI thread after the hard work of image recognition.
-     * <p/>
-     * This lets the cameraFab do one final pulse, and the moves it to the bottom right and
-     * shows the result of the recognition.
+     * While recognising the heroes in a photo MainActivity goes through 4 stages to dispaly the
+     * progress of this work. These methods are named recognition1_ through to recognition4_.
+     *
+     * recognition2prepareToShowResults shows the FoundHeroesFragment where the results will be
+     * displayed, it also lets the cameraFab do one final pulse, and the moves it to the bottom
+     * right.
      */
-    public void postRecognitionUiTasks(final List<HeroFromPhoto> unidentifiedHeroesFromPhotos) {
-        prepareToShowResults(unidentifiedHeroesFromPhotos);
+    public void recognition2prepareToShowResults(final List<HeroFromPhoto> unidentifiedHeroes) {
+        prepareToShowResults(unidentifiedHeroes);
 
         View view = findViewById(R.id.button_fab_take_photo);
         Animation animation = view.getAnimation();
@@ -332,30 +338,38 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void addHero(HeroFromPhoto hero) {
+
+    /**
+     * While recognising the heroes in a photo MainActivity goes through 4 stages to dispaly the
+     * progress of this work. These methods are named recognition1_ through to recognition4_.
+     *
+     * recognition3AddHero should be called for each hero identified in the photo. It gets the
+     * foundHeroesFragment to show the hero identified. By calling this as soon as each hero is
+     * identified the results can be shown one by one, and the app will seem much more responsive
+     * on slower phones.
+     */
+     public void recognition3AddHero(HeroFromPhoto hero) {
         HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
                 mRecognitionWithRx.getXmlInfo());
 
         mHeroesSeen.add(heroInfo);
 
-        FoundHeroesFragment foundHeroesFragment =
-                (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-        if(foundHeroesFragment != null) {
-            foundHeroesFragment.showHero(hero, heroInfo.name);
-        }
-
-/*
-        //Note: adding the heroInfoCards like this one by one is too resource intensive, it makes
-        the animations in the found heros fragment stutter
-
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        if (abilityInfoFragment != null) {
-            abilityInfoFragment.addHero(heroInfo);
-        }
-*/
+        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_found_heroes);
+         foundHeroesFragment.showHero(hero, heroInfo.name);
     }
 
-    public void addAllAbilityCards() {
+    /**
+     * While recognising the heroes in a photo MainActivity goes through 4 stages to display the
+     * progress of this work. These methods are named recognition1_ through to recognition4_.
+     *
+     * recognition4ShowHeroAbilities instructs the abilityInfoFragment to show the abilities for all
+     * the heroes we have detected.
+     *
+     * (Note: we can't show these results one by one using recognition3AddHero because that is too
+     * computationally expensive and causes the animations to stutter.)
+     */
+    public void recognition4ShowHeroAbilities() {
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
         abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
     }
@@ -494,10 +508,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void moveCameraFabToBottomRight() {
-        // First hide the text to say that the image is being processed
-        View processingText = findViewById(R.id.text_processing_image);
-        processingText.setVisibility(View.GONE);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
         fab.setEnabled(true);
         View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
@@ -513,33 +523,22 @@ public class MainActivity extends AppCompatActivity
                 .setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
+    /**
+     * Calls the methods in the fragments to prepare to show the results of the image recognition
+     * @param unidentifiedHeroesFromPhotos
+     */
     private void prepareToShowResults(List<HeroFromPhoto> unidentifiedHeroesFromPhotos) {
-        if (BuildConfig.DEBUG && sDebugMode) {
-            TextView imageDebugText = (TextView) findViewById(R.id.text_image_debug);
-            if (imageDebugText != null) {
-                imageDebugText.setVisibility(View.VISIBLE);
-                imageDebugText.setText(Recognition.mDebugString);
-            }
-        }
-
-
-       /* for (HeroFromPhoto hero : heroes) {
-            HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
-                    mRecognitionWithRx.getXmlInfo());
-            mHeroesSeen.add(heroInfo);
-        }*/
-
-
+        View processingText = findViewById(R.id.text_processing_image);
+        processingText.setVisibility(View.GONE);
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         if (foundHeroesFragment != null) {
             foundHeroesFragment.prepareToShowResults(unidentifiedHeroesFromPhotos, mRecognitionWithRx.getXmlInfo());
         }
 
-
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
         if (abilityInfoFragment != null) {
-            abilityInfoFragment.reset();
+            abilityInfoFragment.prepareToShowResults();
         }
 
         //TODO-someday: bring back animation when loading the hero images and abilities?
