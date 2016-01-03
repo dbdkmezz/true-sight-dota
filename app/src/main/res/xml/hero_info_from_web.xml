@@ -1573,7 +1573,7 @@
             <name>Walrus PUNCH!</name>
             <description>Tusk connects with his mighty Walrus Punch, a critical strike so powerful it launches its victim into the air. The victim is slowed upon landing. Upgradable by Aghanim's Scepter.</description>
             <manaCost>50/75/100</manaCost>
-            <cooldown>20/16/12</cooldown>
+            <cooldown>36/24/12</cooldown>
             <disableDuration>AIR TIME:  1</disableDuration>
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -2679,7 +2679,7 @@
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RANGE:  700</abilityDetails>
+            <abilityDetails>RANGE:  800</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  20 / 40 / 60 / 80</abilityDetails>
         </abilities>
         <abilities>
@@ -2694,7 +2694,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>AGI DAMAGE MULT:  0.4 / 0.6 / 0.8 / 1</abilityDetails>
+            <abilityDetails>AGI DAMAGE MULT:  0.5 / 0.75 / 1.0 / 1.25</abilityDetails>
             <abilityDetails>FADE DELAY:  6 / 5 / 4 / 3</abilityDetails>
         </abilities>
         <abilities>
@@ -2705,11 +2705,11 @@
             <isMute>false</isMute>
             <imageName>riki_tricks_of_the_trade_hp2</imageName>
             <name>Tricks of the Trade</name>
-            <description>CHANNELED - Phases out of the world while striking every enemy from behind in a 450 AoE once per second.</description>
+            <description>CHANNELED - Phases out of the world while striking every enemy hero from behind in a 500 AoE once per second.</description>
             <manaCost>75</manaCost>
-            <cooldown>90/80/70</cooldown>
+            <cooldown>40</cooldown>
             <abilityDetails>ABILITY:  No Target, Channeled</abilityDetails>
-            <abilityDetails>RADIUS:  450</abilityDetails>
+            <abilityDetails>RADIUS:  500</abilityDetails>
             <abilityDetails>MAX ATTACKS PER UNIT:  4 / 5 / 6</abilityDetails>
         </abilities>
     </heroInfo>
@@ -3206,7 +3206,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>MISSILE ONE DAMAGE:  220 / 285 / 350</abilityDetails>
+            <abilityDetails>MISSILE ONE DAMAGE:  200 / 275 / 350</abilityDetails>
             <abilityDetails>MISSILE TWO DAMAGE:  100 / 150 / 200</abilityDetails>
             <abilityDetails>MISSILE ONE SLOW:  30%</abilityDetails>
             <abilityDetails>MISSILE TWO SLOW:  60%</abilityDetails>
@@ -5638,7 +5638,7 @@
             <abilityDetails>DAMAGE:  90 / 180 / 270 / 360</abilityDetails>
             <abilityDetails>RANGE:  1000 / 1100 / 1200 / 1300</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 4</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE: 175 / 275 / 375 / 475</abilityDetails>
+            <abilityDetails> SCEPTER DAMAGE: 180 / 270 / 360 / 450</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6623,7 +6623,7 @@
             <name>Tombstone</name>
             <description>Summons a tombstone at the target point. Zombies will frequently spawn next to every enemy unit in the area around the Tombstone, and attack them. Zombies have the Deathlust ability, which causes their attacks to slow the target, and if the target reaches below a certain amount of health, increases the attack and movement speed of the zombie.</description>
             <manaCost>120/130/140/150</manaCost>
-            <cooldown>60</cooldown>
+            <cooldown>70</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>ATTACKS TO DESTROY:  3 / 4 / 5 / 7</abilityDetails>
@@ -7174,7 +7174,7 @@
             <cooldown>24/18/12/6</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RANGE:  550</abilityDetails>
+            <abilityDetails>RANGE:  625</abilityDetails>
             <abilityDetails>BACKTRACK DURATION:  2</abilityDetails>
         </abilities>
         <abilities>
@@ -7187,11 +7187,11 @@
             <name>Time Dilation</name>
             <description>Faceless Void traps all nearby enemies in a time dilation field for 6 seconds, freezing their cooldowns and slowing their movement and attack speed by 4% for each cooldown frozen.</description>
             <manaCost>50</manaCost>
-            <cooldown>34/28/22/16</cooldown>
+            <cooldown>36/30/24/18</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>RADIUS:  650</abilityDetails>
-            <abilityDetails>DURATION:  6 / 7 / 8 / 9</abilityDetails>
-            <abilityDetails>SLOW PER COOLDOWN:  4% / 6% / 8% / 10%</abilityDetails>
+            <abilityDetails>RADIUS:  725</abilityDetails>
+            <abilityDetails>DURATION:  6 / 8 / 10 / 12</abilityDetails>
+            <abilityDetails>SLOW PER COOLDOWN:  7% / 8% / 9% / 10%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8193,7 +8193,7 @@
             <name>Nightmare</name>
             <description>Puts the target enemy or friendly Hero to sleep and deals damage per second. Sleeping units are awakened when attacked, but the Nightmare passes to the attacking unit. The nightmared unit instantly wakes up if it takes damage.</description>
             <manaCost>165/165/165/165</manaCost>
-            <cooldown>16/15/14/13</cooldown>
+            <cooldown>22/19/16/13</cooldown>
             <disableDuration>DURATION:  4 / 5 / 6 / 7</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Heroes</abilityDetails>
@@ -8896,9 +8896,9 @@
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>BASE DAMAGE:  20</abilityDetails>
-            <abilityDetails>MAX HP AS DAMAGE:  1% / 1.8% / 2.6% / 3.4%</abilityDetails>
-            <abilityDetails>DURATION:  4</abilityDetails>
-            <abilityDetails>ENEMY SLOW:  6% / 10% / 14% / 18%</abilityDetails>
+            <abilityDetails>MAX HP AS DAMAGE:  1% / 2% / 3% / 4%</abilityDetails>
+            <abilityDetails>DURATION:  5</abilityDetails>
+            <abilityDetails>ENEMY SLOW:  5% / 10% / 15% / 20%</abilityDetails>
             <abilityDetails>MAX CHARGES:  1 / 2 / 3 / 4</abilityDetails>
             <abilityDetails>CHARGE RESTORE TIME:  45</abilityDetails>
         </abilities>
@@ -9065,7 +9065,7 @@
             <imageName>dazzle_shadow_wave_hp2</imageName>
             <name>Shadow Wave</name>
             <description>Sends out a bolt of power that arcs between allies, healing them while damaging any units standing nearby. Dazzle is always healed by Shadow Wave.</description>
-            <manaCost>80/90/100/110</manaCost>
+            <manaCost>90/100/110/120</manaCost>
             <cooldown>12/10/8/6</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
@@ -9243,7 +9243,7 @@
             <imageName>dark_seer_surge_hp2</imageName>
             <name>Surge</name>
             <description>Charges a target friendly unit with power, giving it a brief burst of maximum movement speed.</description>
-            <manaCost>20/30/40/50</manaCost>
+            <manaCost>50</manaCost>
             <cooldown>12/11/10/9</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
@@ -9721,7 +9721,7 @@
             <isMute>false</isMute>
             <imageName>obsidian_destroyer_arcane_orb_hp2</imageName>
             <name>Arcane Orb</name>
-            <description>Adds extra pure damage to Outworld Devourer's attacks, based on his remaining mana pool. Steals 0 intelligence for 40 seconds per hit when attacking an enemy hero. Arcane Orb also does bonus damage to summoned units and illusions. Arcane Orb is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.</description>
+            <description>Adds extra pure damage to Outworld Devourer's attacks, based on his remaining mana pool. Steals 1 intelligence for 50 seconds per hit when attacking an enemy hero. Arcane Orb also does bonus damage to summoned units and illusions. Arcane Orb is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.</description>
             <manaCost>100/100/100/100</manaCost>
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -9729,8 +9729,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MANA POOL TO DAMAGE:  6% / 7% / 8% / 9%</abilityDetails>
             <abilityDetails>ILLUSION DAMAGE:  100 / 200 / 300 / 400</abilityDetails>
-            <abilityDetails>INTELLIGENCE STEAL:  0 / 1 / 2 / 3</abilityDetails>
-            <abilityDetails>STEAL DURATION:  40</abilityDetails>
+            <abilityDetails>INTELLIGENCE STEAL:  2 / 3 / 4 / 5</abilityDetails>
+            <abilityDetails>STEAL DURATION:  50</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9742,7 +9742,7 @@
             <name>Astral Imprisonment</name>
             <description>Places a target unit into an astral prison. The hidden unit is invulnerable and disabled. When the astral prison implodes, it deals 75 damage to enemies in a 400 radius around the target.</description>
             <manaCost>120/140/160/180</manaCost>
-            <cooldown>20/17/14/11</cooldown>
+            <cooldown>22/18/14/10</cooldown>
             <disableDuration>PRISON DURATION:  4</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -10057,7 +10057,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>CURSE RADIUS:  500</abilityDetails>
             <abilityDetails>CURSE DAMAGE REDUCTION:  100%</abilityDetails>
-            <abilityDetails>CURSE ATTACK SPEED:  50</abilityDetails>
+            <abilityDetails>CURSE ATTACK SPEED:  70</abilityDetails>
             <abilityDetails>CURSE DURATION:  3.25 / 4 / 4.75</abilityDetails>
         </abilities>
     </heroInfo>

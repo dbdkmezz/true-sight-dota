@@ -50,8 +50,6 @@ class RecognitionWithRx {
         return mXmlInfoRx.getValue();
     }
 
-    //TODO: Look in to the "Suspending all threads took" messages I'm getting
-
     /**
      *Create an observable to load the xml file in the background. mXmlInfoRx is subscribed to
      * it and will complete when the file has been loaded.
