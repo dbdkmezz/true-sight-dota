@@ -118,16 +118,17 @@ class RecognitionWithRx {
          *   against which we compare what we see in the photograph) to ensure both have loaded
          *   before going any further.
          *
-         *   2) doOnNext: call prepareToShowResults, which gets the mainActivity UI ready to start
-         *   showing the results of the image processing
+         *   2) doOnNext: call prepareToShowResults, which gets the UI ready to start showing the
+         *   results of the image processing.
          *
          *   3) flatMapIterable: turn the list of unidentified heroes in the photo into chain of
-         *   Observables for each to be processed.
+         *   Observables so that each can be processed in turn.
          *
-         *   4) identify each hero found in the photo
+         *   4) map: identify each hero from the photo.
          *
-         *   5) send the identified heroes to the mHeroRecognitionSubscriberRx subscriber (which
-         *   will in turn call the appropriate MainActivity methods to show the results to the user.
+         *   5) As each is hero is identified it will be sent to the mHeroRecognitionSubscriberRx
+         *   subscriber (which will in turn call the appropriate MainActivity methods to show the
+         *   results to the user as they are available).
          */
         Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
                 List<HeroFromPhoto>>() {
@@ -204,7 +205,6 @@ class RecognitionWithRx {
             @Override
             public void onError(Throwable e) {
                 Log.e(TAG, "mHeroRecognitionSubscriberRx. Unhandled error: " + e.toString());
-
             }
 
             // For each hero identified in the photo, get MainActivity to show it
