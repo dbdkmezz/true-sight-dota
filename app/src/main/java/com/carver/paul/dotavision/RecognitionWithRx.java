@@ -108,6 +108,7 @@ class RecognitionWithRx {
     public void Run(final MainActivity mainActivity, final Bitmap photo) {
         prepareHeroRecognitionSubscriber(mainActivity);
 
+        // Asks the main activity to show the "detecting heroes" loading screen
         mainActivity.recognition1ShowDetectingHeroes(photo);
 
         /**
