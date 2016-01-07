@@ -3,21 +3,18 @@ package com.carver.paul.dotavision;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
-import android.support.v4.util.Pair;
 import android.util.Log;
 
 import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
-import com.carver.paul.dotavision.ImageRecognition.Recognition;
+import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Observer;
 import rx.Single;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -26,11 +23,15 @@ import rx.schedulers.Schedulers;
 import rx.subjects.AsyncSubject;
 
 /**
- * This class does all the work in the UI thread showing that the image is being processed,
- * processes the image in a background thread to identify the five heroes, and then presents the
- * results in the UI
+ * This class acts as the intermediary between the UI and the RecognitionModel class which carries
+ * out the image processing. It uses processes the RecognitionModel class to identify the five
+ * heroes in the image and then calls the appropriate classes in MainActivity to show the results
+ * and progress of image processing.
+ *
+ * It ensures that image processing will happen in background threads, while calling methods in the view
+ * in the UI thread to show that the image is being processed.
  */
-class RecognitionWithRx {
+class RecognitionPresenter {
     static final String TAG = "RecognitionRx";
 
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
@@ -41,7 +42,7 @@ class RecognitionWithRx {
      * Reads the XML and opens the hero images in the background. This should be launched when the
      * app is first launched, and then everything will be ready when it is needed.
      */
-    RecognitionWithRx(final Context context) {
+    RecognitionPresenter(final Context context) {
         StartXmlLoading(context);
         StartSimilarityTestLoading(context);
     }
@@ -135,7 +136,7 @@ class RecognitionWithRx {
             @Override
             public List<HeroFromPhoto> call(List<HeroInfo> heroInfoList,
                                             SimilarityTest similarityTest) {
-                return Recognition.findFiveHeroesInPhoto(photo);
+                return RecognitionModel.findFiveHeroesInPhoto(photo);
             }
         })
                 .doOnNext(new Action1<List<HeroFromPhoto>>() {
@@ -153,7 +154,7 @@ class RecognitionWithRx {
                 .map(new Func1<HeroFromPhoto, HeroFromPhoto>() {
                     @Override
                     public HeroFromPhoto call(HeroFromPhoto unidentifiedHero) {
-                        return Recognition.identifyHeroFromPhoto(unidentifiedHero,
+                        return RecognitionModel.identifyHeroFromPhoto(unidentifiedHero,
                                 mSimilarityTestRx.getValue());
                     }
                 })

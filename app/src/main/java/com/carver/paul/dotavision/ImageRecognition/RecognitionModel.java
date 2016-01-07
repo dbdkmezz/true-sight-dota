@@ -22,7 +22,6 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.carver.paul.dotavision.BuildConfig;
-import com.carver.paul.dotavision.HeroInfo;
 import com.carver.paul.dotavision.MainActivity;
 
 import org.opencv.core.Mat;
@@ -33,24 +32,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func2;
-import rx.subjects.AsyncSubject;
-
 //TODO-prebeta: Implement arcana hero images too
 
 /**
- * This is where all the hard work recognising the images happens
+ * This is where all the hard work processing the photos to recognise heroes happens
  */
-public class Recognition  {
+public class RecognitionModel {
 
-    public Recognition() {}
+    public RecognitionModel() {}
 
     // mDebugString is used when in debug mode to keep track of how recognition is going.
     public static String mDebugString = "";
 
-    private static final String TAG = "Recognition";
+    private static final String TAG = "RecognitionModel";
 
     public static List<HeroFromPhoto> findFiveHeroesInPhoto(final Bitmap photoBitmap) {
         if (BuildConfig.DEBUG && MainActivity.sDebugMode == true) mDebugString = "";
@@ -81,7 +75,8 @@ public class Recognition  {
     }
 
     public static List<Mat> findHeroTopLinesInImage(Mat photo) {
-        return findHeroTopLinesInImage(photo, Variables.sRange.get(0), Variables.vRange.get(0), Variables.sRange.get(1), Variables.vRange.get(1));
+        return findHeroTopLinesInImage(photo, Variables.sRange.get(0), Variables.vRange.get(0),
+                Variables.sRange.get(1), Variables.vRange.get(1));
     }
 
     public static List<HeroFromPhoto> CalculateHeroRects(List<Mat> linesList, Mat backgroundImage) {
@@ -120,7 +115,7 @@ public class Recognition  {
         List<Mat> rightLines = findHeroTopLinesInImage(photo, Variables.rightColoursRanges, lowerHsvS, lowerHsvV, upperHsvS, upperHsvV);
 
         if (BuildConfig.DEBUG && MainActivity.sDebugMode) {
-            Recognition.mDebugString = Recognition.mDebugString + System.getProperty("line.separator") + debugStringForLines(leftLines) + "-" + debugStringForLines(rightLines);
+            RecognitionModel.mDebugString = RecognitionModel.mDebugString + System.getProperty("line.separator") + debugStringForLines(leftLines) + "-" + debugStringForLines(rightLines);
         }
 
         int totalLeftLines = countLinesInMats(leftLines);
@@ -260,6 +255,10 @@ class HeroLine {
         rect = new android.graphics.Rect(left, top, right, bottom);
     }
 
+    /**
+     * Draws the line onto the image, used for debugging.
+     * @param img
+     */
     public void Draw(Mat img) {
         Imgproc.rectangle(img, new org.opencv.core.Point(rect.left, rect.top), new org.opencv.core.Point(rect.right, rect.bottom), new Scalar(0, 255, 0), 2);
     }
@@ -303,7 +302,7 @@ class HeroLine {
 
         if (goodLines.size() < 2) {
             if (BuildConfig.DEBUG && MainActivity.sDebugMode) {
-                Recognition.mDebugString = Recognition.mDebugString + System.getProperty("line.separator") +
+                RecognitionModel.mDebugString = RecognitionModel.mDebugString + System.getProperty("line.separator") +
                         "After removing lines without lines, and overly wide lines I'm only left " + goodLines.size() + " hero lines. So I'm giving up trying to fix them.";
             }
             return;
@@ -342,7 +341,7 @@ class HeroLine {
 
         if (goodLines.size() < 2) {
             if (BuildConfig.DEBUG && MainActivity.sDebugMode) {
-                Recognition.mDebugString = Recognition.mDebugString + System.getProperty("line.separator") +
+                RecognitionModel.mDebugString = RecognitionModel.mDebugString + System.getProperty("line.separator") +
                         "After getting ride of lines which are too tall I'm only left with " + goodLines.size() +
                         " hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
             }
@@ -367,7 +366,7 @@ class HeroLine {
 
         if (goodLines.size() < 2) {
             if (BuildConfig.DEBUG && MainActivity.sDebugMode) {
-                Recognition.mDebugString = Recognition.mDebugString + System.getProperty("line.separator") +
+                RecognitionModel.mDebugString = RecognitionModel.mDebugString + System.getProperty("line.separator") +
                         "After getting ride of lines which are too wide I'm not left with enough good hero lines. So I'm giving up trying to fix them. I think the code could be improved to get round this. So come back if this comes up lots!";
             }
             return;
@@ -382,13 +381,13 @@ class HeroLine {
 
     // Creates a string to be used when debugging, showing a 1 for found lines, and a - for no line
     private static void updateDebugStringForGoodLines(List<HeroLine> heroLines, List<HeroLine> goodLines, String description) {
-        Recognition.mDebugString = Recognition.mDebugString + System.getProperty("line.separator") + description;
+        RecognitionModel.mDebugString = RecognitionModel.mDebugString + System.getProperty("line.separator") + description;
 
         for (HeroLine line : heroLines) {
             if (goodLines.contains(line))
-                Recognition.mDebugString = Recognition.mDebugString + "1";
+                RecognitionModel.mDebugString = RecognitionModel.mDebugString + "1";
             else
-                Recognition.mDebugString = Recognition.mDebugString + "0";
+                RecognitionModel.mDebugString = RecognitionModel.mDebugString + "0";
         }
     }
 

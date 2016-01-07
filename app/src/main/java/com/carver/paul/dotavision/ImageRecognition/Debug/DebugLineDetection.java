@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
-import com.carver.paul.dotavision.ImageRecognition.Recognition;
+import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
@@ -55,7 +55,7 @@ public class DebugLineDetection {
 //        List<Integer> colourRange = Arrays.asList(hMin, hMax);
         List<List<Integer>> colourRanges = Arrays.asList(Arrays.asList(hMin, hMax));
 
-        List<Mat> linesList = Recognition.findHeroTopLinesInImage(load, colourRanges, sMin, vMin, sMax, vMax);
+        List<Mat> linesList = RecognitionModel.findHeroTopLinesInImage(load, colourRanges, sMin, vMin, sMax, vMax);
 
         for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
@@ -68,11 +68,11 @@ public class DebugLineDetection {
         Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
 
-        List<Mat> linesList = Recognition.findHeroTopLinesInImage(load);
+        List<Mat> linesList = RecognitionModel.findHeroTopLinesInImage(load);
 /*        for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
         }*/
-        List<HeroFromPhoto> heroes = Recognition.CalculateHeroRects(linesList, load);
+        List<HeroFromPhoto> heroes = RecognitionModel.CalculateHeroRects(linesList, load);
 
 
         return ImageTools.GetBitmapFromMat(load);

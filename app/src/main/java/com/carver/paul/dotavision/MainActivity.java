@@ -38,13 +38,11 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
 import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
-import com.carver.paul.dotavision.ImageRecognition.Recognition;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import java.io.File;
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity
 
     private List<HeroInfo> mHeroesSeen = null;
 
-    private RecognitionWithRx mRecognitionWithRx;
+    private RecognitionPresenter mRecognitionPresenter;
 
     static {
         if (System.getenv("ROBOLECTRIC") == null) {
@@ -129,13 +127,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mRecognitionWithRx = new RecognitionWithRx(this);
+        mRecognitionPresenter = new RecognitionPresenter(this);
     }
 
     @Override
     protected void onDestroy() {
-        if(mRecognitionWithRx != null) {
-            mRecognitionWithRx.onDestroy();
+        if(mRecognitionPresenter != null) {
+            mRecognitionPresenter.onDestroy();
         }
         super.onDestroy();
     }
@@ -171,9 +169,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onHeroChanged(int posInList, String newHero) {
-        if (mHeroesSeen == null || mRecognitionWithRx.getXmlInfo() == null) return;
+        if (mHeroesSeen == null || mRecognitionPresenter.getXmlInfo() == null) return;
 
-        HeroInfo newHeroInfo = FindHeroWithName(newHero, mRecognitionWithRx.getXmlInfo());
+        HeroInfo newHeroInfo = FindHeroWithName(newHero, mRecognitionPresenter.getXmlInfo());
         if (newHeroInfo == null) {
             Log.e(TAG, "Attempting to change hero to " + newHero + ", but I can't find a hero with that name.");
             return;
@@ -353,7 +351,7 @@ public class MainActivity extends AppCompatActivity
      */
      public void recognition3AddHero(HeroFromPhoto hero) {
         HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
-                mRecognitionWithRx.getXmlInfo());
+                mRecognitionPresenter.getXmlInfo());
 
         mHeroesSeen.add(heroInfo);
 
@@ -401,8 +399,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void doImageRecognition(Bitmap bitmap) {
-//        RecognitionWithRx recognitionWithRx = new RecognitionWithRx();
-        mRecognitionWithRx.Run(this, bitmap);
+//        RecognitionPresenter recognitionWithRx = new RecognitionPresenter();
+        mRecognitionPresenter.Run(this, bitmap);
     }
 
     private void setTopImage(Bitmap photoBitmap) {
@@ -536,7 +534,7 @@ public class MainActivity extends AppCompatActivity
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         if (foundHeroesFragment != null) {
-            foundHeroesFragment.prepareToShowResults(unidentifiedHeroesFromPhotos, mRecognitionWithRx.getXmlInfo());
+            foundHeroesFragment.prepareToShowResults(unidentifiedHeroesFromPhotos, mRecognitionPresenter.getXmlInfo());
         }
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
