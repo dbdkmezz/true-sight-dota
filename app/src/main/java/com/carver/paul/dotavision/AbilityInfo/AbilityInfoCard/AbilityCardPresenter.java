@@ -16,9 +16,11 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.AbilityInfo.AbilityInfoCard;
 
+import com.carver.paul.dotavision.HeroAbility;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
+import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.List;
 /**
  * The presenter behind AbilityCardView
  */
-public class AbilityCardPresenter {
+class AbilityCardPresenter {
     private AbilityCardView mView;
     private HeroAbility mAbility;
     private int mAbilityType;

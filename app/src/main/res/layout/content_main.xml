@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content" />
 
             <fragment
-                android:name="com.carver.paul.dotavision.AbilityInfoFragment"
+                android:name="com.carver.paul.dotavision.AbilityInfo.AbilityInfoFragment"
                 android:id="@+id/fragment_ability_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

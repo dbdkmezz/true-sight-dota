@@ -39,6 +39,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
+import com.carver.paul.dotavision.AbilityInfo.AbilityInfoFragment;
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
 import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;

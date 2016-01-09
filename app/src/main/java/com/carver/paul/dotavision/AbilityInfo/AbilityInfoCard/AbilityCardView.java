@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.AbilityInfo.AbilityInfoCard;
 
 import android.animation.LayoutTransition;
 import android.content.Context;
@@ -26,6 +26,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.carver.paul.dotavision.HeroAbility;
+import com.carver.paul.dotavision.R;
+
 /**
  * AbilityCardView is a card in which the information about an ability is shown.
  *
@@ -33,7 +36,7 @@ import android.widget.TextView;
  * info on tbe ability can be seen when pressed. By default just the three-line non-expanded version
  * will be shown.
  */
-class AbilityCardView extends FrameLayout {
+public class AbilityCardView extends FrameLayout {
 
     private AbilityCardPresenter mPresenter;
 

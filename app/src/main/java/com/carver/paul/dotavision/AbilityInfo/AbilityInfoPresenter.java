@@ -16,12 +16,16 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.AbilityInfo;
+
+import com.carver.paul.dotavision.HeroAbility;
+import com.carver.paul.dotavision.HeroInfo;
+import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbilityInfoPresenter {
+class AbilityInfoPresenter {
     private AbilityInfoFragment mView;
 
     AbilityInfoPresenter(AbilityInfoFragment view) {

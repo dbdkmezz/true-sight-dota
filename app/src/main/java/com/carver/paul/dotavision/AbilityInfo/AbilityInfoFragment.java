@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.AbilityInfo;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -25,6 +25,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.carver.paul.dotavision.AbilityInfo.AbilityInfoCard.AbilityCardView;
+import com.carver.paul.dotavision.HeroAbility;
+import com.carver.paul.dotavision.HeroInfo;
+import com.carver.paul.dotavision.R;
 
 import java.util.List;
 
