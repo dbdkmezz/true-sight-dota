@@ -79,7 +79,7 @@ public class AbilityInfoFragment extends Fragment {
         addText(string, R.layout.item_ability_info_text);
     }
     protected void addAbilityCard(HeroAbility ability, boolean showHeroName) {
-        AbilityCard card = new AbilityCard(getActivity(), ability, showHeroName, -1);
+        AbilityCardView card = new AbilityCardView(getActivity(), ability, showHeroName, -1);
         mParentLinearLayout.addView(card);
     }
 
@@ -90,5 +90,4 @@ public class AbilityInfoFragment extends Fragment {
         textView.setText(string);
         mParentLinearLayout.addView(view);
     }
-
 }
