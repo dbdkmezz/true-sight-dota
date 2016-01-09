@@ -26,23 +26,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Pack200;
-
-import rx.Observable;
 
 /**
  * This is where the information about the individual abilities is shown
  */
 public class AbilityInfoFragment extends Fragment {
 
-    private List<HeroInfo> mHeroesWithVisibleInfo = new ArrayList<>();
+    private AbilityInfoPresenter mPresenter;
     private LinearLayout mParentLinearLayout;
-    private View mStunsVisibleTextView;
-    private View mDisablesHeading;
-    private View mSilencesVisibleTextView;
-    private View mUltimatesHeading;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,126 +42,53 @@ public class AbilityInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View inflateView  = inflater.inflate(R.layout.fragment_ability_info, container, false);
         mParentLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_results_info);
+        mPresenter = new AbilityInfoPresenter(this);
         return inflateView;
     }
 
     /**
-     * Shows the abilities for just hero
-     * @param hero
-     */
-    public void addHero(HeroInfo hero) {
-        AddHeroCards(hero);
-    }
-
-    /**
-     * Shows the ability cards for all heroes in heroesSeen
-     * @param heroes
-     */
-    public void showAllHeroAbilities(List<HeroInfo> heroes) {
-        reset();
-        for(HeroInfo hero : heroes) {
-            AddHeroCards(hero);
-        }
-    }
-
-    public void prepareToShowResults() {
-        reset();
-    }
-
-    /**
-     * Ensures that no cards about heroes are shown
+     * Removes all ability cards from the view so that the view is clear
      */
     public void reset() {
         mParentLinearLayout.removeAllViews();
-        mHeroesWithVisibleInfo.clear();
-        mStunsVisibleTextView = null;
-        mDisablesHeading = null;
-        mSilencesVisibleTextView = null;
-        mUltimatesHeading = null;
     }
 
-    private void AddHeadings() {
-        AddAbilityHeading(getString(R.string.stuns));
-        mStunsVisibleTextView = AddAbilityText(getString(R.string.no_stuns_found));
-
-        mDisablesHeading = AddAbilityHeading(getString(R.string.disables));
-        mDisablesHeading.setVisibility(View.GONE);
-
-        AddAbilityHeading(getString(R.string.silences));
-        mSilencesVisibleTextView = AddAbilityText(getString(R.string.no_silences_found));
-
-        mUltimatesHeading = AddAbilityHeading(getString(R.string.ultimates));
+    /**
+     * Resets the fragment, removing all old ability cards, and then shows the cards for the heroes
+     * in the list heroes
+     * @param heroes
+     */
+    public void showHeroAbilities(List<HeroInfo> heroes) {
+        reset();
+        mPresenter.showHeroAbilities(heroes);
     }
 
-    private void AddHeroCards(HeroInfo hero) {
-        if(mHeroesWithVisibleInfo.contains(hero)) {
-            return;
-        }
-        if(mHeroesWithVisibleInfo.isEmpty()) {
-            AddHeadings();
-        }
-
-        mHeroesWithVisibleInfo.add(hero);
-
-        AddAbilityHeading(hero.name);
-        for (HeroAbility ability : hero.abilities) {
-            addCardsForAbility(ability);
-        }
-
+    protected void addHeading(int stringInt) {
+        addHeading(getString(stringInt));
     }
 
-    private View AddAbilityHeading(String string) {
-        if (string == null) return null;
-
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_ability_info_heading, mParentLinearLayout, false);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(string);
-        mParentLinearLayout.addView(view);
-        return view;
+    protected void addHeading(String string) {
+        addText(string, R.layout.item_ability_info_heading);
     }
 
-    private View AddAbilityText(String string) {
-        if (string == null) return null;
-
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_ability_info_text, mParentLinearLayout, false);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(string);
-        mParentLinearLayout.addView(view);
-        return view;
+    protected void addAbilityText(int stringInt) {
+        addAbilityText(getString(stringInt));
     }
 
-    private void addCardsForAbility(HeroAbility ability) {
-        if(ability.isStun) {
-            int pos = mParentLinearLayout.indexOfChild(mStunsVisibleTextView);
-            mStunsVisibleTextView.setVisibility(View.GONE);
-            addAbilityCardAtPos(ability, true, HeroAbility.STUN, pos);
-        } else if(ability.isDisable){
-            int pos = 1 + mParentLinearLayout.indexOfChild(mDisablesHeading);
-            mDisablesHeading.setVisibility(View.VISIBLE);
-            addAbilityCardAtPos(ability, true, HeroAbility.DISABLE_NOT_STUN, pos);
-        } else if(ability.isSilence){
-            int pos = mParentLinearLayout.indexOfChild(mSilencesVisibleTextView);
-            mSilencesVisibleTextView.setVisibility(View.GONE);
-            addAbilityCardAtPos(ability, true, HeroAbility.SILENCE, pos);
-        }
-
-        if(ability.isUltimate){
-            int pos = 1 + mParentLinearLayout.indexOfChild(mUltimatesHeading);
-            addAbilityCardAtPos(ability, true, HeroAbility.STUN, pos);
-        }
-
-        addAbilityCardToBottom(ability, false);
+    protected void addAbilityText(String string) {
+        addText(string, R.layout.item_ability_info_text);
     }
-
-    private void addAbilityCardAtPos(HeroAbility ability, boolean showHeroName, int abilityType, int pos) {
-        AbilityCard card = new AbilityCard(getActivity(), ability, showHeroName, abilityType);
-        mParentLinearLayout.addView(card, pos);
-    }
-
-    private void addAbilityCardToBottom(HeroAbility ability, boolean showHeroName) {
+    protected void addAbilityCard(HeroAbility ability, boolean showHeroName) {
         AbilityCard card = new AbilityCard(getActivity(), ability, showHeroName, -1);
         mParentLinearLayout.addView(card);
     }
+
+    private void addText(String string, int layout) {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(layout, mParentLinearLayout, false);
+        TextView textView = (TextView) view.findViewById(R.id.textView);
+        textView.setText(string);
+        mParentLinearLayout.addView(view);
+    }
+
 }

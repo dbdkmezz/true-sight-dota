@@ -182,8 +182,7 @@ public class MainActivity extends AppCompatActivity
         mHeroesSeen.set(posInList, newHeroInfo);
 
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        abilityInfoFragment.reset();
-        abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
+        abilityInfoFragment.showHeroAbilities(mHeroesSeen);
 
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         foundHeroesFragment.changeHero(posInList, newHeroInfo.name, newHeroInfo.imageName);
@@ -372,7 +371,7 @@ public class MainActivity extends AppCompatActivity
      */
     public void recognition4ShowHeroAbilities() {
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        abilityInfoFragment.showAllHeroAbilities(mHeroesSeen);
+        abilityInfoFragment.showHeroAbilities(mHeroesSeen);
     }
 
     @Override
@@ -535,11 +534,6 @@ public class MainActivity extends AppCompatActivity
         FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
         if (foundHeroesFragment != null) {
             foundHeroesFragment.prepareToShowResults(unidentifiedHeroesFromPhotos, mRecognitionPresenter.getXmlInfo());
-        }
-
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        if (abilityInfoFragment != null) {
-            abilityInfoFragment.prepareToShowResults();
         }
 
         //TODO-someday: bring back animation when loading the hero images and abilities?

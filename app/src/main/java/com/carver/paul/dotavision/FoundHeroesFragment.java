@@ -470,7 +470,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
             i <= lm.findLastVisibleItemPosition() && notFound;
             i++) {
 
-            view=lm.findViewByPosition(i);
+            view = lm.findViewByPosition(i);
 
             int center;
             if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
@@ -513,12 +513,6 @@ class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder>
         public ViewHolder(View v) {
             super(v);
             imageView = (ImageView) v.findViewById(R.id.image);
-/*            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        Log.d("HeroImageAdapter", "Element " + getPosition() + " clicked.");
-                }
-            });*/
         }
 
         public ImageView getImageView() {
