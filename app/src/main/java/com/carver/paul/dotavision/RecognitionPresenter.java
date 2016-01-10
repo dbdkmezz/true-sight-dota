@@ -1,3 +1,22 @@
+/**
+ * True Sight for Dota 2
+ * Copyright (C) 2016 Paul Broadbent
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/
+ *//*
+
+
 package com.carver.paul.dotavision;
 
 import android.content.Context;
@@ -5,9 +24,10 @@ import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
+import com.carver.paul.dotavision.Models.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
+import com.carver.paul.dotavision.Models.HeroInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +42,7 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subjects.AsyncSubject;
 
+*/
 /**
  * This class acts as the intermediary between the UI and the RecognitionModel class which carries
  * out the image processing. It uses processes the RecognitionModel class to identify the five
@@ -30,7 +51,8 @@ import rx.subjects.AsyncSubject;
  *
  * It ensures that image processing will happen in background threads, while calling methods in the view
  * in the UI thread to show that the image is being processed.
- */
+ *//*
+
 class RecognitionPresenter {
     static final String TAG = "RecognitionRx";
 
@@ -38,10 +60,12 @@ class RecognitionPresenter {
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
     private Subscriber<HeroFromPhoto> mHeroRecognitionSubscriberRx;
 
-    /**
+    */
+/**
      * Reads the XML and opens the hero images in the background. This should be launched when the
      * app is first launched, and then everything will be ready when it is needed.
-     */
+     *//*
+
     RecognitionPresenter(final Context context) {
         StartXmlLoading(context);
         StartSimilarityTestLoading(context);
@@ -51,11 +75,13 @@ class RecognitionPresenter {
         return mXmlInfoRx.getValue();
     }
 
-    /**
+    */
+/**
      *Create an observable to load the xml file in the background. mXmlInfoRx is subscribed to
      * it and will complete when the file has been loaded.
      * @param context
-     */
+     *//*
+
     private void StartXmlLoading(final Context context) {
         mXmlInfoRx = AsyncSubject.create();
 
@@ -76,12 +102,14 @@ class RecognitionPresenter {
                 .subscribe(mXmlInfoRx);
     }
 
-    /**
+    */
+/**
      * Create an observable to Similarity Test (all the hero images used for detection) in the
      * background. mSimilarityTestRx is subscribed to it and will complete when the file has been
      * loaded.
      * @param context
-     */
+     *//*
+
     private void StartSimilarityTestLoading(final Context context) {
         mSimilarityTestRx = AsyncSubject.create();
 
@@ -97,7 +125,8 @@ class RecognitionPresenter {
                 .subscribe(mSimilarityTestRx);
     }
 
-    /**
+    */
+/**
      * When doing the work recognising the heroes in a photo there are four methods in MainActivity
      * that should be called. These are named recognition1_ through to recognition4_.
      *
@@ -105,14 +134,16 @@ class RecognitionPresenter {
      * the appropriate methods on MainActivity to show the progress to the user.
      * @param mainActivity
      * @param photo
-     */
+     *//*
+
     public void Run(final MainActivity mainActivity, final Bitmap photo) {
         prepareHeroRecognitionSubscriber(mainActivity);
 
         // Asks the main activity to show the "detecting heroes" loading screen
         mainActivity.recognition1ShowDetectingHeroes(photo);
 
-        /**
+        */
+/**
          * This is where the magic happens! Recognising the heroes in the photos goes through the
          * following steps:
          *
@@ -131,7 +162,8 @@ class RecognitionPresenter {
          *   5) As each is hero is identified it will be sent to the mHeroRecognitionSubscriberRx
          *   subscriber (which will in turn call the appropriate MainActivity methods to show the
          *   results to the user as they are available).
-         */
+         *//*
+
         Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
                 List<HeroFromPhoto>>() {
             @Override
@@ -164,21 +196,25 @@ class RecognitionPresenter {
                 .subscribe(mHeroRecognitionSubscriberRx);
     }
 
-    /**
+    */
+/**
      * This needs to be called by MainActivity.onDestory to ensure all subscribers no longer
      * subscribe to any observers, otherwise there could be memory leaks. (I think!)
-     */
+     *//*
+
     public void onDestroy() {
         ensureAllSubscribersUnsubscribed();
     }
 
-    /**
+    */
+/**
      * calls the method recognition2prepareToShowResults on mainActivity in the mainThread (i.e.
      * the UI thread).
      *
      * @param mainActivity
      * @param unidentifiedHeroes
-     */
+     *//*
+
     private void prepareToShowResults(final MainActivity mainActivity, List<HeroFromPhoto> unidentifiedHeroes) {
         Single.just(unidentifiedHeroes)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -189,10 +225,12 @@ class RecognitionPresenter {
                 });
     }
 
-    /**
+    */
+/**
      * Sets up mHeroRecognitionSubscriberRx
      * @param mainActivity
-     */
+     *//*
+
     private void prepareHeroRecognitionSubscriber(final MainActivity mainActivity) {
         ensureAllSubscribersUnsubscribed();
 
@@ -229,3 +267,4 @@ class RecognitionPresenter {
         }
     }
 }
+*/

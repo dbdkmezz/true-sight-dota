@@ -2,7 +2,7 @@ package com.carver.paul.dotavision.ImageRecognition.Debug;
 
 import android.graphics.Bitmap;
 
-import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
+import com.carver.paul.dotavision.Models.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 

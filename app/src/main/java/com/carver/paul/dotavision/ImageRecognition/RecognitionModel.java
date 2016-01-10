@@ -23,8 +23,10 @@ import android.util.Log;
 
 import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.MainActivity;
+import com.carver.paul.dotavision.Models.HeroFromPhoto;
 
 import org.opencv.core.Mat;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
@@ -102,9 +104,11 @@ public class RecognitionModel {
         HeroLine.FixHeroLinesWithBadHeights(heroLines);
 */
 
+        int positionInPhoto = 0;
         for (HeroLine hLine : heroLines) {
-            HeroFromPhoto hImage = new HeroFromPhoto(hLine, backgroundImage);
-            heroes.add(hImage);
+            HeroFromPhoto heroImage = calculateHeroFromPhoto(hLine, positionInPhoto, backgroundImage);
+            positionInPhoto++;
+            heroes.add(heroImage);
         }
 
         return heroes;
@@ -199,6 +203,55 @@ public class RecognitionModel {
                 debugString = debugString + "0";
         }
         return debugString;
+    }
+
+    private static HeroFromPhoto calculateHeroFromPhoto(HeroLine line, int positionInPhoto,
+                                                 Mat backgroundImage) {
+        if (line.isRealLine == false) {
+            return makeFakeHeroFromPhoto(backgroundImage, positionInPhoto);
+        }
+
+        final double rationHeightToWidthbeforeCuts = 1.8;
+
+        final double ratioToCutFromSide = 0.05;
+        final double ratioToCutFromTop = 0.05;
+        // ratioToCutFromBottom may need to be larger because a red box with MMR at the bottom may obscure the image
+        final double ratioToCutFromBottom = 0.05;
+
+        double heightWithoutCuts = line.rect.width() / rationHeightToWidthbeforeCuts;
+        int left = line.rect.left + (int) (line.rect.width() * ratioToCutFromSide);
+        int width = line.rect.width() - (int) (line.rect.width() * 2 * ratioToCutFromSide);
+        int top = line.rect.top + line.rect.height() + (int) (heightWithoutCuts * ratioToCutFromTop);
+        int finalHeight = (int) heightWithoutCuts - (int) (heightWithoutCuts * ratioToCutFromBottom);
+
+        Log.d("AA", "width " + width + ", height" + finalHeight);
+
+        if (left + width > backgroundImage.width())
+            width = backgroundImage.width() - left;
+        if (top + finalHeight > backgroundImage.height())
+            finalHeight = backgroundImage.height() - top;
+
+
+        if (left < 0) left = 0;
+        if (top < 0) top = 0;
+
+        if (left > backgroundImage.width() || top > backgroundImage.height()) {
+            return makeFakeHeroFromPhoto(backgroundImage, positionInPhoto);
+        }
+
+        Rect rect = new Rect(left, top, width, finalHeight);
+        Mat image = new Mat(backgroundImage, rect);
+
+        return new HeroFromPhoto(image, positionInPhoto);
+    }
+
+    private static HeroFromPhoto makeFakeHeroFromPhoto(Mat backgroundImage, int positionInPhoto) {
+        int width = 26;
+        int height = 15;//(int) (width / rationHeightToWidthbeforeCuts);
+        Rect rect = new Rect(0, 0, width, height);
+
+        Mat image = new Mat(backgroundImage, rect);
+        return new HeroFromPhoto(image, positionInPhoto);
     }
 }
 

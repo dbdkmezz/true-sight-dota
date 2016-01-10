@@ -18,7 +18,7 @@
 
 package com.carver.paul.dotavision.AbilityInfo.AbilityInfoCard;
 
-import com.carver.paul.dotavision.HeroAbility;
+import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.R;
 
@@ -30,14 +30,14 @@ import java.util.List;
  */
 class AbilityCardPresenter {
     private AbilityCardView mView;
-    private HeroAbility mAbility;
+    private HeroAbilityInfo mAbility;
     private int mAbilityType;
     private boolean mShowHeroName;
 
     //bool to say if the card has full info or not (full info is toggled when clicked)
     private boolean mIsExtended = false;
 
-    protected AbilityCardPresenter(AbilityCardView view, HeroAbility ability, boolean showHeroName, int abilityType) {
+    protected AbilityCardPresenter(AbilityCardView view, HeroAbilityInfo ability, boolean showHeroName, int abilityType) {
         mView = view;
         mAbility = ability;
         mShowHeroName = showHeroName;
@@ -112,9 +112,9 @@ class AbilityCardPresenter {
     }
 
     private void appendTwoLineText(StringBuilder text) {
-        if (mAbilityType == HeroAbility.STUN
-                || mAbilityType == HeroAbility.DISABLE_NOT_STUN
-                || mAbilityType == HeroAbility.SILENCE) {
+        if (mAbilityType == HeroAbilityInfo.STUN
+                || mAbilityType == HeroAbilityInfo.DISABLE_NOT_STUN
+                || mAbilityType == HeroAbilityInfo.SILENCE) {
             String abilityDuration = mAbility.guessAbilityDuration(mAbilityType);
             if (abilityDuration != null) {
                 text.append("<br>" + abilityDuration);

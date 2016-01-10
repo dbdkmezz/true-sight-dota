@@ -26,7 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.carver.paul.dotavision.HeroAbility;
+import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.R;
 
 /**
@@ -47,7 +47,7 @@ public class AbilityCardView extends FrameLayout {
      * @param showHeroName
      * @param abilityType   The type of ability which this card is being used to demonstrate.
      */
-    public AbilityCardView(Context context, HeroAbility ability, boolean showHeroName,
+    public AbilityCardView(Context context, HeroAbilityInfo ability, boolean showHeroName,
                            int abilityType) {
         super(context);
         init();

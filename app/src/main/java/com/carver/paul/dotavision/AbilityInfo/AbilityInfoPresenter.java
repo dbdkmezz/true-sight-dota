@@ -18,30 +18,36 @@
 
 package com.carver.paul.dotavision.AbilityInfo;
 
-import com.carver.paul.dotavision.HeroAbility;
-import com.carver.paul.dotavision.HeroInfo;
+import com.carver.paul.dotavision.Models.HeroAbilityInfo;
+import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class AbilityInfoPresenter {
+public class AbilityInfoPresenter {
     private AbilityInfoFragment mView;
 
     AbilityInfoPresenter(AbilityInfoFragment view) {
         mView = view;
     }
 
+    public void reset() {
+        mView.reset();
+    }
+
     public void showHeroAbilities(List<HeroInfo> heroes) {
-        List<HeroAbility> stunAbilities = new ArrayList<>();
-        List<HeroAbility> disableAbilities = new ArrayList<>();
-        List<HeroAbility> silenceAbilities = new ArrayList<>();
-        List<HeroAbility> ultimateAbilities = new ArrayList<>();
+        mView.reset();
+
+        List<HeroAbilityInfo> stunAbilities = new ArrayList<>();
+        List<HeroAbilityInfo> disableAbilities = new ArrayList<>();
+        List<HeroAbilityInfo> silenceAbilities = new ArrayList<>();
+        List<HeroAbilityInfo> ultimateAbilities = new ArrayList<>();
 
         heroes = removeDuplicates(heroes);
 
         for (HeroInfo hero : heroes) {
-            for (HeroAbility ability : hero.abilities) {
+            for (HeroAbilityInfo ability : hero.abilities) {
                 if (ability.isStun) stunAbilities.add(ability);
                 else if (ability.isDisable) disableAbilities.add(ability);
                 else if (ability.isSilence) silenceAbilities.add(ability);
@@ -67,41 +73,41 @@ class AbilityInfoPresenter {
         return listWithoutDuplicates;
     }
 
-    private void showStuns(List<HeroAbility> stunAbilities) {
+    private void showStuns(List<HeroAbilityInfo> stunAbilities) {
         mView.addHeading(R.string.stuns);
         if (stunAbilities.isEmpty()) {
             mView.addAbilityText(R.string.no_stuns_found);
         } else {
-            for (HeroAbility ability : stunAbilities) {
+            for (HeroAbilityInfo ability : stunAbilities) {
                 mView.addAbilityCard(ability, true);
             }
         }
     }
 
-    private void showDisables(List<HeroAbility> disableAbilities) {
+    private void showDisables(List<HeroAbilityInfo> disableAbilities) {
         if (!disableAbilities.isEmpty()) {
             mView.addHeading(R.string.disables);
 
-            for (HeroAbility ability : disableAbilities) {
+            for (HeroAbilityInfo ability : disableAbilities) {
                 mView.addAbilityCard(ability, true);
             }
         }
     }
 
-    private void showSilences(List<HeroAbility> silenceAbilities) {
+    private void showSilences(List<HeroAbilityInfo> silenceAbilities) {
         mView.addHeading(R.string.silences);
         if (silenceAbilities.isEmpty()) {
             mView.addAbilityText(R.string.no_silences_found);
         } else {
-            for (HeroAbility ability : silenceAbilities) {
+            for (HeroAbilityInfo ability : silenceAbilities) {
                 mView.addAbilityCard(ability, true);
             }
         }
     }
 
-    private void showUltimates(List<HeroAbility> ultimateAbilities) {
+    private void showUltimates(List<HeroAbilityInfo> ultimateAbilities) {
         mView.addHeading(R.string.ultimates);
-        for (HeroAbility ability : ultimateAbilities) {
+        for (HeroAbilityInfo ability : ultimateAbilities) {
             mView.addAbilityCard(ability, true);
         }
     }
@@ -109,7 +115,7 @@ class AbilityInfoPresenter {
     private void showAbilitiesForAllHeroes(List<HeroInfo> heroes) {
         for(HeroInfo hero : heroes) {
             mView.addHeading(hero.name);
-            for (HeroAbility ability : hero.abilities) {
+            for (HeroAbilityInfo ability : hero.abilities) {
                 mView.addAbilityCard(ability, false);
             }
         }

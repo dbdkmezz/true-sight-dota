@@ -16,6 +16,8 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
+//TODO-now: finish making MainActivity MVP
+
 package com.carver.paul.dotavision;
 
 import android.content.Intent;
@@ -43,11 +45,12 @@ import com.carver.paul.dotavision.AbilityInfo.AbilityInfoFragment;
 import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
 import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
 import com.carver.paul.dotavision.DotaCamera.CameraActivity;
-import com.carver.paul.dotavision.ImageRecognition.HeroFromPhoto;
+import com.carver.paul.dotavision.Presenters.MainActivityPresenter;
+import com.carver.paul.dotavision.Views.HeroesDetectedFragment;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
+import com.carver.paul.dotavision.Models.HeroInfo;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 //TODO-beauty: Write tests to check if all hero images load, and if all hero ability icons draw and
@@ -92,8 +95,7 @@ import java.util.List;
 // http://developer.android.com/training/improving-layouts/optimizing-layout.html
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        FoundHeroesFragment.OnHeroChangedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     // sDebugMode is true if I want to show extra debug information. It is ignored when
     // BuildConfig.DEBUG is false (i.e. the app is compiled for release)
@@ -102,9 +104,9 @@ public class MainActivity extends AppCompatActivity
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     private static final String TAG = "MainActivity";
 
-    private List<HeroInfo> mHeroesSeen = null;
+//    private List<HeroInfo> mHeroesSeen = null;
 
-    private RecognitionPresenter mRecognitionPresenter;
+    private MainActivityPresenter mPresenter;
 
     static {
         if (System.getenv("ROBOLECTRIC") == null) {
@@ -127,14 +129,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        mRecognitionPresenter = new RecognitionPresenter(this);
+        mPresenter = new MainActivityPresenter(this);
     }
 
     @Override
     protected void onDestroy() {
-        if(mRecognitionPresenter != null) {
-            mRecognitionPresenter.onDestroy();
+        if(mPresenter != null) {
+            mPresenter.onDestroy();
         }
         super.onDestroy();
     }
@@ -169,26 +170,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onHeroChanged(int posInList, String newHero) {
-        if (mHeroesSeen == null || mRecognitionPresenter.getXmlInfo() == null) return;
-
-        HeroInfo newHeroInfo = FindHeroWithName(newHero, mRecognitionPresenter.getXmlInfo());
-        if (newHeroInfo == null) {
-            Log.e(TAG, "Attempting to change hero to " + newHero + ", but I can't find a hero with that name.");
-            return;
-        }
-
-        if (mHeroesSeen.get(posInList) == newHeroInfo) return;
-
-        mHeroesSeen.set(posInList, newHeroInfo);
-
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        abilityInfoFragment.showHeroAbilities(mHeroesSeen);
-
-        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-        foundHeroesFragment.changeHero(posInList, newHeroInfo.name, newHeroInfo.imageName);
-    }
-
     public void startDebugLineActivity() {
         Intent intent = new Intent(this, DebugLineDetectionActivity.class);
         startActivity(intent);
@@ -221,6 +202,7 @@ public class MainActivity extends AppCompatActivity
      */
     public void demoButton(View view) {
         Bitmap sampleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
+
         doImageRecognition(sampleBitmap);
     }
 
@@ -276,38 +258,25 @@ public class MainActivity extends AppCompatActivity
             throw new RuntimeException("Called FindHeroWithName when mHeroInfoFromXml is not initialised.");
 
         for (HeroInfo hero : heroInfoList) {
-            if (hero.HasName(name)) {
+            if (hero.hasName(name)) {
                 return hero;
             }
         }
         return null;
     }
 
-    /**
-     * While recognising the heroes in a photo MainActivity goes through 4 stages to dispaly the
-     * progress of this work. These methods are named recognition1_ through to recognition4_.
-     *
-     * recognition1ShowDetectingHeroes shows the photo, starts pulsing the camera button to show
-     * that work is being done, and shows the "detecting heroes" message.
-     */
-    public void recognition1ShowDetectingHeroes(Bitmap photoBitmap) {
-        setTopImage(photoBitmap);
-        resetInfo();
-        slideDemoButtonsOffScreen();
-        hideBackground();
-        pulseCameraFab();
-    }
 
     /**
      * While recognising the heroes in a photo MainActivity goes through 4 stages to dispaly the
      * progress of this work. These methods are named recognition1_ through to recognition4_.
      *
-     * recognition2prepareToShowResults shows the FoundHeroesFragment where the results will be
+     * recognition2prepareToShowResults shows the HeroesDetectedFragment where the results will be
      * displayed, it also lets the cameraFab do one final pulse, and the moves it to the bottom
      * right.
      */
-    public void recognition2prepareToShowResults(final List<HeroFromPhoto> unidentifiedHeroes) {
-        prepareToShowResults(unidentifiedHeroes);
+    public void stopHeroRecognitionLoadingAnimations() {
+        View processingText = findViewById(R.id.text_processing_image);
+        processingText.setVisibility(View.GONE);
 
         View view = findViewById(R.id.button_fab_take_photo);
         Animation animation = view.getAnimation();
@@ -339,89 +308,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
-    /**
-     * While recognising the heroes in a photo MainActivity goes through 4 stages to dispaly the
-     * progress of this work. These methods are named recognition1_ through to recognition4_.
-     *
-     * recognition3AddHero should be called for each hero identified in the photo. It gets the
-     * foundHeroesFragment to show the hero identified. By calling this as soon as each hero is
-     * identified the results can be shown one by one, and the app will seem much more responsive
-     * on slower phones.
-     */
-     public void recognition3AddHero(HeroFromPhoto hero) {
-        HeroInfo heroInfo = FindHeroWithName(hero.getSimilarityList().get(0).hero.name,
-                mRecognitionPresenter.getXmlInfo());
-
-        mHeroesSeen.add(heroInfo);
-
-        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_found_heroes);
-         foundHeroesFragment.showHero(hero, heroInfo.name);
-    }
-
-    /**
-     * While recognising the heroes in a photo MainActivity goes through 4 stages to display the
-     * progress of this work. These methods are named recognition1_ through to recognition4_.
-     *
-     * recognition4ShowHeroAbilities instructs the abilityInfoFragment to show the abilities for all
-     * the heroes we have detected.
-     *
-     * (Note: we can't show these results one by one using recognition3AddHero because that is too
-     * computationally expensive and causes the animations to stutter.)
-     */
-    public void recognition4ShowHeroAbilities() {
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        abilityInfoFragment.showHeroAbilities(mHeroesSeen);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                doImageRecognitionOnPhoto();
-            } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the image capture
-            } else {
-                // Image capture failed, advise user
-            }
-        }
-    }
-
-    private void doImageRecognitionOnPhoto() {
-        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
-        if (!mediaFile.exists()) {
-            throw new RuntimeException("Trying to recognise photo, but I can't find file at " + getImagesLocation() + PHOTO_FILE_NAME);
-        }
-
-        Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
-        doImageRecognition(bitmap);
-    }
-
-    private void doImageRecognition(Bitmap bitmap) {
-//        RecognitionPresenter recognitionWithRx = new RecognitionPresenter();
-        mRecognitionPresenter.Run(this, bitmap);
-    }
-
-    private void setTopImage(Bitmap photoBitmap) {
+    public void setTopImage(Bitmap photoBitmap) {
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
         topImage.setImageBitmap(photoBitmap);
-    }
-
-    private void resetInfo() {
-        mHeroesSeen = new ArrayList<>();
-
-        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-        foundHeroesFragment.reset();
-
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager().findFragmentById(R.id.fragment_ability_info);
-        abilityInfoFragment.reset();
     }
 
     /**
      * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
      */
-    private void slideDemoButtonsOffScreen() {
+    public void slideDemoButtonsOffScreen() {
         View view = findViewById(R.id.layout_demo_and_last_photo_buttons);
         if (view.getTranslationX() == 0) {
             view.animate()
@@ -431,7 +326,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void hideBackground() {
+    public void hideBackground() {
         View view = findViewById(R.id.image_main_background);
         view.animate()
                 .alpha(0f)
@@ -444,7 +339,7 @@ public class MainActivity extends AppCompatActivity
      */
     //TODO-nextversion: Make camera do something other than pulse - it implies you should press
     // it! When done I should stop disabling the button when animating too.
-    private void pulseCameraFab() {
+    public void pulseCameraFab() {
         //Code using the old Animation class, rather than the new ViewPropertyAnimator
         //Infinite repeat is easier to implement this way
 
@@ -501,11 +396,17 @@ public class MainActivity extends AppCompatActivity
         animatorSet.start();*/
     }
 
-    private void moveViewBackToStartingPosAndScale(View view) {
-        view.setTranslationX(0f);
-        view.setTranslationY(0f);
-        view.setScaleX(1f);
-        view.setScaleY(1f);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                doImageRecognitionOnPhoto();
+            } else if (resultCode == RESULT_CANCELED) {
+                // User cancelled the image capture
+            } else {
+                // Image capture failed, advise user
+            }
+        }
     }
 
     private void moveCameraFabToBottomRight() {
@@ -524,24 +425,33 @@ public class MainActivity extends AppCompatActivity
                 .setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
-    /**
-     * Calls the methods in the fragments to prepare to show the results of the image recognition
-     * @param unidentifiedHeroesFromPhotos
-     */
-    private void prepareToShowResults(List<HeroFromPhoto> unidentifiedHeroesFromPhotos) {
-        View processingText = findViewById(R.id.text_processing_image);
-        processingText.setVisibility(View.GONE);
-
-        FoundHeroesFragment foundHeroesFragment = (FoundHeroesFragment) getFragmentManager().findFragmentById(R.id.fragment_found_heroes);
-        if (foundHeroesFragment != null) {
-            foundHeroesFragment.prepareToShowResults(unidentifiedHeroesFromPhotos, mRecognitionPresenter.getXmlInfo());
+    private void doImageRecognitionOnPhoto() {
+        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
+        if (!mediaFile.exists()) {
+            throw new RuntimeException("Trying to recognise photo, but I can't find file at " + getImagesLocation() + PHOTO_FILE_NAME);
         }
 
-        //TODO-someday: bring back animation when loading the hero images and abilities?
-/*            LayoutTransition transition = new LayoutTransition();
-            transition.enableTransitionType(LayoutTransition.CHANGING);
-            transition.setDuration(250);
-            LinearLayout resultsInfoLayout = (LinearLayout) findViewById(R.id.layout_results_info);
-            resultsInfoLayout.setLayoutTransition(transition);*/
+        Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
+        doImageRecognition(bitmap);
+    }
+
+    private void doImageRecognition(Bitmap bitmap) {
+        HeroesDetectedFragment heroesDetectedFragment = (HeroesDetectedFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_found_heroes);
+
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_ability_info);
+
+        //TODO-now, put fragment presenters in MainActivityPresenter earlier?
+        mPresenter.doImageRecognition(bitmap,
+                heroesDetectedFragment.getPresenter(),
+                abilityInfoFragment.getPresenter());
+    }
+
+    private void moveViewBackToStartingPosAndScale(View view) {
+        view.setTranslationX(0f);
+        view.setTranslationY(0f);
+        view.setScaleX(1f);
+        view.setScaleY(1f);
     }
 }

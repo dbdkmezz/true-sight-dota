@@ -21,11 +21,13 @@ package com.carver.paul.dotavision;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
 
+import com.carver.paul.dotavision.Models.HeroAbilityInfo;
+import com.carver.paul.dotavision.Models.HeroInfo;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -112,7 +114,7 @@ public class LoadHeroXml {
             }
         }
 
-        for(HeroAbility ability : hero.abilities)
+        for(HeroAbilityInfo ability : hero.abilities)
             ability.heroName = hero.name;
 
         parser.require(XmlPullParser.END_TAG, sNullString, "heroInfo");
@@ -121,9 +123,9 @@ public class LoadHeroXml {
     }
 
 
-    static private HeroAbility LoadHeroAbilities(XmlResourceParser parser) throws IOException, XmlPullParserException {
+    static private HeroAbilityInfo LoadHeroAbilities(XmlResourceParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, sNullString, "abilities");
-        HeroAbility ability = new HeroAbility();
+        HeroAbilityInfo ability = new HeroAbilityInfo();
 
 
         while (parser.next() != XmlPullParser.END_TAG) {

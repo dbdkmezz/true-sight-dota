@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2015 Paul Broadbent
- * <p>
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p>
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p>
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -27,14 +27,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.carver.paul.dotavision.AbilityInfo.AbilityInfoCard.AbilityCardView;
-import com.carver.paul.dotavision.HeroAbility;
-import com.carver.paul.dotavision.HeroInfo;
+import com.carver.paul.dotavision.Models.HeroAbilityInfo;
+import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.R;
 
 import java.util.List;
 
 /**
- * This is where the information about the individual abilities is shown
+ * This is where the information about the individual abilities is shown.
+ *
+ * A card is generated for each ability, with cards for stuns, disables, silences and ultimates
+ * first, and then cards for all the abilities for each hero in turn.
+ *
+ * When clicked the cards will expand to show more information about the ability.
  */
 public class AbilityInfoFragment extends Fragment {
 
@@ -51,21 +56,15 @@ public class AbilityInfoFragment extends Fragment {
         return inflateView;
     }
 
-    /**
-     * Removes all ability cards from the view so that the view is clear
-     */
-    public void reset() {
-        mParentLinearLayout.removeAllViews();
+    public AbilityInfoPresenter getPresenter() {
+        return mPresenter;
     }
 
     /**
-     * Resets the fragment, removing all old ability cards, and then shows the cards for the heroes
-     * in the list heroes
-     * @param heroes
+     * Removes all ability cards from the view so that the view is empty
      */
-    public void showHeroAbilities(List<HeroInfo> heroes) {
-        reset();
-        mPresenter.showHeroAbilities(heroes);
+    public void reset() {
+        mParentLinearLayout.removeAllViews();
     }
 
     protected void addHeading(int stringInt) {
@@ -83,7 +82,7 @@ public class AbilityInfoFragment extends Fragment {
     protected void addAbilityText(String string) {
         addText(string, R.layout.item_ability_info_text);
     }
-    protected void addAbilityCard(HeroAbility ability, boolean showHeroName) {
+    protected void addAbilityCard(HeroAbilityInfo ability, boolean showHeroName) {
         AbilityCardView card = new AbilityCardView(getActivity(), ability, showHeroName, -1);
         mParentLinearLayout.addView(card);
     }
