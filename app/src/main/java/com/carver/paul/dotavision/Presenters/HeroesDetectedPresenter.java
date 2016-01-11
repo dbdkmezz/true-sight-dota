@@ -59,13 +59,18 @@ public class HeroesDetectedPresenter {
         }
 
         for(int i = 0; i < mHeroDetectedItemPresenters.size() && i < heroes.size(); i++) {
-            mHeroDetectedItemPresenters.get(i).completeSetup(this, heroes.get(i), mAllHeroNames);
+            mHeroDetectedItemPresenters.get(i).completeSetup(this, heroes.get(i));
         }
     }
 
     public void heroIdentified(int positionInPhoto, String name) {
+        if(mAllHeroNames == null) {
+            throw new RuntimeException("Attempting to disaply an identified hero without having " +
+                    "set up the hero names");
+        }
+
         HeroDetectedItemPresenter heroDetected = HeroDetectedItemPresenterWithPosition(positionInPhoto);
-        heroDetected.showDetectedHero(name);
+        heroDetected.showDetectedHero(mAllHeroNames, name);
     }
 
     //TODO-now: is receiveHeroChangedReport really a good way to do it. Would some RX work better?
@@ -74,15 +79,18 @@ public class HeroesDetectedPresenter {
         mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, posInSimilarityList);
     }
 
+    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
+                                         String newHeroName) {
+        mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, newHeroName);
+    }
+
     /**
      * Changes the hero which is positionInPhoto of those visible. niceHeroName specifies the name of the
      * hero to display in the box. heroImageName is the name of the hero's image, for use when
      * scrolling to the hero with the recyclerView.
      * @param positionInPhoto
-     * @param niceHeroName
-     * @param heroImageName
      */
-    public void changeHero(int positionInPhoto, String niceHeroName, String heroImageName) {
+    public void changeHero(int positionInPhoto, String name, int posInSimilarityList) {
         if(mHeroDetectedItemPresenters.isEmpty()) {
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Attempting to change hero, but mHeroDetectedItemPresenters is empty.");
@@ -91,8 +99,8 @@ public class HeroesDetectedPresenter {
         }
 
         HeroDetectedItemPresenter hero = HeroDetectedItemPresenterWithPosition(positionInPhoto);
+        hero.changeHero(name, posInSimilarityList);
 
-        hero.changeHero(niceHeroName, heroImageName);
         mView.hideKeyboard();
     }
 

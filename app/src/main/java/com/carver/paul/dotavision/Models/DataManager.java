@@ -24,9 +24,11 @@ import android.util.Log;
 
 import com.carver.paul.dotavision.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.BuildConfig;
+import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
+import com.carver.paul.dotavision.ImageRecognition.LoadedHeroImage;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
-import com.carver.paul.dotavision.LoadHeroXml;
+import com.carver.paul.dotavision.ImageRecognition.LoadHeroXml;
 import com.carver.paul.dotavision.Presenters.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.Presenters.MainActivityPresenter;
 import com.carver.paul.dotavision.R;
@@ -71,15 +73,26 @@ public class DataManager {
      *
      * This method does the image recognition work in a background thread, and when necessary calls
      * the appropriate methods on MainActivity to show the progress to the user.
-     * @param photo
+     * @param
      */
-    public void identifyHeroesInPhoto(final Bitmap photo,
-                                      final HeroesDetectedPresenter heroesDetectedPresenter,
-                                      final AbilityInfoPresenter abilityInfoPresenter) {
+
+    public void registerPresenters(final HeroesDetectedPresenter heroesDetectedPresenter,
+            final AbilityInfoPresenter abilityInfoPresenter) {
         mHeroesDetectedPresenter = heroesDetectedPresenter;
         mHeroesDetectedPresenter.setDataManger(this);
 
         mAbilityInfoPresenter = abilityInfoPresenter;
+    }
+
+    public boolean presentersRegistered() {
+        return (mHeroesDetectedPresenter != null && mAbilityInfoPresenter != null);
+    }
+
+    public void identifyHeroesInPhoto(final Bitmap photo) {
+        if(!presentersRegistered()) {
+            throw new RuntimeException("Attempting to identify heroes before registering " +
+                    "presenters.");
+        }
 
         mHeroesInPhoto.clear();
         prepareHeroRecognitionSubscriber();
@@ -152,12 +165,27 @@ public class DataManager {
 
     public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
                                          int posInSimilarityListOfNewSelection) {
-        for(HeroFromPhotoWithCurrentlySelected hero : mHeroesInPhoto) {
-            if(hero.hero.getPositionInPhoto() == posInPhotoOfChangedHero) {
-                hero.heroSelectedInSimilarityList = posInSimilarityListOfNewSelection;
-            }
-        }
+        HeroFromPhotoWithCurrentlySelected hero = findHeroWithPhotoPos(posInPhotoOfChangedHero);
+        hero.setSelectedHero(posInSimilarityListOfNewSelection);
 
+        HeroInfo heroInfo = findHeroWithName(
+                hero.getHeroSelected().name,
+                mXmlInfoRx.getValue());
+
+        mHeroesDetectedPresenter.changeHero(posInPhotoOfChangedHero, heroInfo.name,
+                posInSimilarityListOfNewSelection);
+        showHeroAbilities();
+    }
+
+    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
+                                         String newHeroRealName) {
+        HeroFromPhotoWithCurrentlySelected hero = findHeroWithPhotoPos(posInPhotoOfChangedHero);
+
+        String heroImageName = getHeroImageName(newHeroRealName);
+        hero.setSelectedHero(heroImageName);
+
+        mHeroesDetectedPresenter.changeHero(posInPhotoOfChangedHero, newHeroRealName,
+                hero.getPosInSimilarityListOfSelectedHero());
         showHeroAbilities();
     }
 
@@ -239,13 +267,9 @@ public class DataManager {
         };
     }
 
-    // TODO-beauty: replace FindHeroWithName to use the drawable id int instead of strings
-    private static HeroInfo FindHeroWithName(String name, List<HeroInfo> heroInfoList) {
-        if (heroInfoList == null)
-            throw new RuntimeException("Called FindHeroWithName when mHeroInfoFromXml is not initialised.");
-
-        for (HeroInfo hero : heroInfoList) {
-            if (hero.hasName(name)) {
+    private HeroFromPhotoWithCurrentlySelected findHeroWithPhotoPos(int posInPhoto) {
+        for (HeroFromPhotoWithCurrentlySelected hero : mHeroesInPhoto) {
+            if (hero.getHero().getPositionInPhoto() == posInPhoto) {
                 return hero;
             }
         }
@@ -253,8 +277,37 @@ public class DataManager {
     }
 
     private String getHeroRealName(String heroImageName) {
-        HeroInfo heroInfo = FindHeroWithName(heroImageName, mXmlInfoRx.getValue());
+        HeroInfo heroInfo = findHeroWithName(heroImageName, mXmlInfoRx.getValue());
         return heroInfo.name;
+    }
+
+    private String getHeroImageName(String heroRealName) {
+        if (mXmlInfoRx.getValue() == null)
+            throw new RuntimeException("Called getHeroImageName when mHeroInfoFromXml is not " +
+                    "initialised.");
+
+        for(HeroInfo heroInfo : mXmlInfoRx.getValue()) {
+            if (heroInfo.hasName(heroRealName)) {
+                return heroInfo.imageName;
+            }
+        }
+
+        return null;
+    }
+
+    // TODO-beauty: replace FindHeroWithName to use the drawable id int instead of strings
+    private static HeroInfo findHeroWithName(String name, List<HeroInfo> heroInfos) {
+        if (heroInfos == null)
+            throw new RuntimeException("Called findHeroWithName when mHeroInfoFromXml is not " +
+                    "initialised.");
+
+        for (HeroInfo heroInfo : heroInfos) {
+            if (heroInfo.hasName(name)) {
+                return heroInfo;
+            }
+        }
+
+        return null;
     }
 
     private void ensureAllSubscribersUnsubscribed() {
@@ -267,10 +320,16 @@ public class DataManager {
     }
 
     /**
-     * calls the method recognition2prepareToShowResults on mainActivity in the mainThread (i.e.
-     * the UI thread).
+     * This will make the MainActivity to end its animations which show the hero image is being
+     * processed. It also sends the unidentified heroes up to the HeroesDetectedPresenter so that
+     * the photos of them can be shown.
      *
-     * @param unidentifiedHeroes
+     * This method is safe to call from a background thread. We use RxJava here to ensure that the
+     * required work in the UI this work is done in the mainThread (i.e. the UI thread).
+     *
+     * @param unidentifiedHeroes the list of heroes found in the photo, currently no work has been
+     *                           done to identify who they are, we just need to have a photo of them
+     *                           at this stage.
      */
     private void prepareToShowResults(List<HeroFromPhoto> unidentifiedHeroes) {
         Single.just(unidentifiedHeroes)
@@ -287,8 +346,8 @@ public class DataManager {
     private void showHeroAbilities() {
         List<HeroInfo> heroInfoList = new ArrayList<>();
         for (HeroFromPhotoWithCurrentlySelected hero : mHeroesInPhoto) {
-            HeroInfo heroInfo = FindHeroWithName(
-                    hero.hero.getSimilarityList().get(hero.heroSelectedInSimilarityList).hero.name,
+            HeroInfo heroInfo = findHeroWithName(
+                    hero.getHeroSelected().name,
                     mXmlInfoRx.getValue());
             heroInfoList.add(heroInfo);
         }
@@ -299,11 +358,44 @@ public class DataManager {
 
 //TODO-now: sort out HeroFromPhotoWithCurrentlySelected !
 class HeroFromPhotoWithCurrentlySelected {
-    public int heroSelectedInSimilarityList = 0;
-    public HeroFromPhoto hero;
+    private final HeroFromPhoto mHero;
+    private LoadedHeroImage mHeroSelected;
 
     HeroFromPhotoWithCurrentlySelected(HeroFromPhoto hero) {
-        this.hero = hero;
-        heroSelectedInSimilarityList = 0;
+        mHero = hero;
+        setSelectedHero(0);
+    }
+
+    public LoadedHeroImage getHeroSelected() {
+        return mHeroSelected;
+    }
+
+    public HeroFromPhoto getHero() {
+        return mHero;
+    }
+
+    public void setSelectedHero(int posInSimilarityList) {
+        mHeroSelected = mHero.getSimilarityList().get(posInSimilarityList).hero;
+    }
+
+    public void setSelectedHero(String name) {
+        for (HeroAndSimilarity sHero : mHero.getSimilarityList()) {
+            if (sHero.hero.name.equals(name)) {
+                mHeroSelected = sHero.hero;
+                return;
+            }
+        }
+
+        throw new RuntimeException("Couldn't find hero with name " + name + " in similarity list.");
+    }
+
+    public int getPosInSimilarityListOfSelectedHero() {
+        for(int i = 0; i < mHero.getSimilarityList().size(); i++) {
+            if(mHeroSelected == mHero.getSimilarityList().get(i).hero) {
+                return i;
+            }
+        }
+
+        throw new RuntimeException("Couldn't find hero in similarity list.");
     }
 }

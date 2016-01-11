@@ -18,9 +18,11 @@
 
 package com.carver.paul.dotavision.Presenters;
 
+import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 import com.carver.paul.dotavision.Models.HeroFromPhoto;
 import com.carver.paul.dotavision.Views.HeroDetectedItemView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeroDetectedItemPresenter {
@@ -33,34 +35,42 @@ public class HeroDetectedItemPresenter {
     }
 
     public void completeSetup(HeroesDetectedPresenter parentPresenter,
-                              HeroFromPhoto hero,
-                              List<String> allHeroNames) {
+                              HeroFromPhoto hero) {
         mParentPresenter = parentPresenter;
         mHero = hero;
-        mView.setHeroImageFromPhoto(hero.getBitmap());
-        mView.initialiseHeroNameEditText(allHeroNames);
+        mView.setHeroImage(hero.getBitmap());
+//        mView.initialiseHeroNameEditText(allHeroNames);
     }
 
     public int getPositionInPhoto() {
         return mHero.getPositionInPhoto();
     }
 
-    public void showDetectedHero(String name) {
-        mView.completeRecycler(mHero);
-        //TODO-now: fix hero names
-        mView.setName(name);
+    //TODO-now: rename methods
+    public void showDetectedHero(List<String> allHeroNames, String name) {
+        List<Integer> similarHeroesImages = new ArrayList<>();
+        for (HeroAndSimilarity similarHero: mHero.getSimilarityList()) {
+            similarHeroesImages.add(similarHero.hero.getImageResource());
+        }
+
+        mView.completeRecycler(similarHeroesImages);
+        mView.initialiseHeroNameEditText(name, allHeroNames);
     }
 
-    public void changeHero(String niceHeroName, String heroImageName) {
-        mView.setName(niceHeroName);
-        mView.setHeroInRecycler(heroImageName);
+    public void changeHero(String name, int posInSimilarityList) {
+        mView.setName(name);
+        mView.setHeroInRecycler(posInSimilarityList);
     }
 
     /**
      * The hero selected has changed to the one which is posInSimilarityList in the Similarity list
-     * @param posInSimilarityList
+     * @param posInSimilarityList the position in the similarity list of the hero we have changed to
      */
-    public void reportHeroChange(int posInSimilarityList) {
+    public void receiveHeroChangedReport(int posInSimilarityList) {
         mParentPresenter.receiveHeroChangedReport(mHero.getPositionInPhoto(), posInSimilarityList);
+    }
+
+    public void receiveHeroChangedReport(String newHeroName) {
+        mParentPresenter.receiveHeroChangedReport(mHero.getPositionInPhoto(), newHeroName);
     }
 }

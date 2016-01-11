@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
- * Copyright (C) 2015 Paul Broadbent
- * <p/>
+ * Copyright (C) 2016 Paul Broadbent
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p/>
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p/>
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -252,27 +252,16 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // TODO-beauty: replace FindHeroWithName to use the drawable id int instead of strings
-    public static HeroInfo FindHeroWithName(String name, List<HeroInfo> heroInfoList) {
-        if (heroInfoList == null)
-            throw new RuntimeException("Called FindHeroWithName when mHeroInfoFromXml is not initialised.");
-
-        for (HeroInfo hero : heroInfoList) {
-            if (hero.hasName(name)) {
-                return hero;
-            }
-        }
-        return null;
+    public void startHeroRecognitionLoadingAnimations(Bitmap photo) {
+        setTopImage(photo);
+        slideDemoButtonsOffScreen();
+        hideBackground();
+        pulseCameraFab();
     }
 
-
     /**
-     * While recognising the heroes in a photo MainActivity goes through 4 stages to dispaly the
-     * progress of this work. These methods are named recognition1_ through to recognition4_.
-     *
-     * recognition2prepareToShowResults shows the HeroesDetectedFragment where the results will be
-     * displayed, it also lets the cameraFab do one final pulse, and the moves it to the bottom
-     * right.
+     * stopHeroRecognitionLoadingAnimations shows makes the the cameraFab do one final pulse, and
+     * then moves it to the bottom right.
      */
     public void stopHeroRecognitionLoadingAnimations() {
         View processingText = findViewById(R.id.text_processing_image);
@@ -308,7 +297,20 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void setTopImage(Bitmap photoBitmap) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                doImageRecognitionOnPhoto();
+            } else if (resultCode == RESULT_CANCELED) {
+                // User cancelled the image capture
+            } else {
+                // Image capture failed, advise user
+            }
+        }
+    }
+
+    private void setTopImage(Bitmap photoBitmap) {
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
         topImage.setImageBitmap(photoBitmap);
     }
@@ -316,7 +318,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
      */
-    public void slideDemoButtonsOffScreen() {
+    private void slideDemoButtonsOffScreen() {
         View view = findViewById(R.id.layout_demo_and_last_photo_buttons);
         if (view.getTranslationX() == 0) {
             view.animate()
@@ -326,20 +328,19 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void hideBackground() {
+    private void hideBackground() {
         View view = findViewById(R.id.image_main_background);
         view.animate()
                 .alpha(0f)
                 .setDuration(150);
     }
 
-
     /**
      * Makes the camera FAB pulse infinitely (will be stopped when loading completes)
      */
     //TODO-nextversion: Make camera do something other than pulse - it implies you should press
     // it! When done I should stop disabling the button when animating too.
-    public void pulseCameraFab() {
+    private void pulseCameraFab() {
         //Code using the old Animation class, rather than the new ViewPropertyAnimator
         //Infinite repeat is easier to implement this way
 
@@ -396,19 +397,6 @@ public class MainActivity extends AppCompatActivity
         animatorSet.start();*/
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                doImageRecognitionOnPhoto();
-            } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the image capture
-            } else {
-                // Image capture failed, advise user
-            }
-        }
-    }
-
     private void moveCameraFabToBottomRight() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
         fab.setEnabled(true);
@@ -442,7 +430,6 @@ public class MainActivity extends AppCompatActivity
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_ability_info);
 
-        //TODO-now, put fragment presenters in MainActivityPresenter earlier?
         mPresenter.doImageRecognition(bitmap,
                 heroesDetectedFragment.getPresenter(),
                 abilityInfoFragment.getPresenter());

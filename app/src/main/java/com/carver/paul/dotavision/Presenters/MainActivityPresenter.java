@@ -43,7 +43,11 @@ public class MainActivityPresenter {
     public void doImageRecognition(Bitmap photo,
                                    HeroesDetectedPresenter heroesDetectedPresenter,
                                    AbilityInfoPresenter abilityInfoPresenter) {
-        mDataManager.identifyHeroesInPhoto(photo, heroesDetectedPresenter, abilityInfoPresenter);
+        if(!mDataManager.presentersRegistered()) {
+            mDataManager.registerPresenters(heroesDetectedPresenter, abilityInfoPresenter);
+        }
+
+        mDataManager.identifyHeroesInPhoto(photo);
     }
 
     public Context getContext() {
@@ -51,10 +55,7 @@ public class MainActivityPresenter {
     }
 
     public void startHeroRecognitionLoadingAnimations(Bitmap photo) {
-        mView.setTopImage(photo);
-        mView.slideDemoButtonsOffScreen();
-        mView.hideBackground();
-        mView.pulseCameraFab();
+        mView.startHeroRecognitionLoadingAnimations(photo);
     }
 
     public void stopHeroRecognitionLoadingAnimations() {

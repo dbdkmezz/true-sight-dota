@@ -16,11 +16,12 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.ImageRecognition;
 
 import android.content.res.XmlResourceParser;
 import android.util.Log;
 
+import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.Models.HeroInfo;
 

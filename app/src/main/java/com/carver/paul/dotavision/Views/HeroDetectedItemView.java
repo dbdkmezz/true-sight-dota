@@ -25,7 +25,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,8 +33,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
-import com.carver.paul.dotavision.Models.HeroFromPhoto;
 import com.carver.paul.dotavision.Presenters.HeroDetectedItemPresenter;
 import com.carver.paul.dotavision.R;
 
@@ -47,7 +44,6 @@ public class HeroDetectedItemView {
 
     private Context mActivityContext;
     private LinearLayout mLinearLayout;
-    private AutoCompleteTextView mNameTextView;
     private CenterLockListener mRecyclerViewListener;
     private RecyclerView mRecyclerView;
     private int mScreenWidth;
@@ -76,11 +72,13 @@ public class HeroDetectedItemView {
     }
 
     public void setName(String name) {
-        mNameTextView.setText(name);
+        AutoCompleteTextView nameTextView
+                = (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
+        nameTextView.setText(name);
     }
 
-    public void setHeroInRecycler(String heroImageName) {
-        mRecyclerViewListener.setHero(heroImageName);
+    public void setHeroInRecycler(int posInSimilarityList) {
+        mRecyclerViewListener.setHero(posInSimilarityList);
 
         // Give the relevant recyclerview focus. This ensures none of the text views have focus
         // after setting the name of a hero
@@ -89,30 +87,26 @@ public class HeroDetectedItemView {
     /**
      * Adds the picture of the hero on the left (the one which is currently selected)
      */
-    public void setHeroImageFromPhoto(Bitmap image) {
+    public void setHeroImage(Bitmap image) {
         ImageView leftImage = (ImageView) mLinearLayout.findViewById(R.id.image_left);
         leftImage.setImageBitmap(image);
     }
 
-    public void initialiseHeroNameEditText(List<String> allHeroNames) {
-        mNameTextView =
+    public void initialiseHeroNameEditText(String name, List<String> allHeroNames) {
+        AutoCompleteTextView nameTextView =
                 (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
 
-        //TODO-now: don't get all hero names this way
+        nameTextView.setText(name);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivityContext,
                 android.R.layout.simple_dropdown_item_1line, allHeroNames);
-        mNameTextView.setAdapter(adapter);
+        nameTextView.setAdapter(adapter);
 
-        //TODO-now: bring back text changed listener
-/*
-        mNameTextView.addTextChangedListener(new HeroTextWatcher(
-                mNameTextView.getText().toString(),
-                mHeroChangedListener,
-                mPresenter.getAllHeroNames(),
-                posInList));
-*/
+        nameTextView.addTextChangedListener(new HeroTextWatcher(
+                mPresenter,
+                name,
+                allHeroNames));
     }
-
 
     private void initialiseHeroSelectRecycler() {
         mRecyclerView =
@@ -125,11 +119,11 @@ public class HeroDetectedItemView {
     }
     /**
      * Adds the recycler view used for changing the hero
-     * @param hero
+     * @param similarHeroImages
      */
-    public void completeRecycler(HeroFromPhoto hero) {
+    public void completeRecycler(List<Integer> similarHeroImages) {
         LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-        mRecyclerView.setAdapter(new HeroImageAdapter(hero.getSimilarityList()));
+        mRecyclerView.setAdapter(new HeroImageAdapter(similarHeroImages));
 
         //TODO-beauty: make the HeroesDetectedFragment not depend on the screen width for finding
         // its centre, should instead use the Fragment's width. It also goes wrong if the
@@ -138,9 +132,7 @@ public class HeroDetectedItemView {
         // This makes the recyclerView automatically lock on the image which has been
         // scrolled to. Thanks stackoverflow and Github :)
         int center = (11 * mScreenWidth / 24);
-        mRecyclerViewListener = new CenterLockListener(mPresenter, center,
-                layoutManager, hero.getSimilarityList(),
-                hero.getPositionInPhoto());
+        mRecyclerViewListener = new CenterLockListener(mPresenter, center, layoutManager);
         mRecyclerView.addOnScrollListener(mRecyclerViewListener);
 
         //TODO-now: bring back recycler animation in from side
@@ -161,14 +153,16 @@ class HeroTextWatcher implements TextWatcher {
 
     private String mCurrentHeroName;
     private final List<String> mAllHeroNames;
-    private final int mPosInHeroList;
+    private final HeroDetectedItemPresenter mPresenter;
+//    private final int mPosInHeroList;
 
-    HeroTextWatcher(String currentHeroName,
-                    List<String> allHeroNames,
-                    int posInHeroList){
+    HeroTextWatcher(HeroDetectedItemPresenter presenter,
+                    String currentHeroName,
+                    List<String> allHeroNames){
         mCurrentHeroName = currentHeroName;
         mAllHeroNames = allHeroNames;
-        mPosInHeroList = posInHeroList;
+        mPresenter = presenter;
+//        mPosInHeroList = posInHeroList;
     }
 
     @Override
@@ -182,7 +176,7 @@ class HeroTextWatcher implements TextWatcher {
                 && containsIgnoreCase(mAllHeroNames, (s.toString()))) {
             mCurrentHeroName = s.toString();
 
-//            mHeroChangedListener.onHeroChanged(mPosInHeroList, s.toString());
+            mPresenter.receiveHeroChangedReport(s.toString());
         }
     }
 
@@ -200,6 +194,7 @@ class HeroTextWatcher implements TextWatcher {
     }
 }
 
+//TODO-now: remove all model code from CenterLockListener, should only have a list of Bitmaps, not heroes
 class CenterLockListener extends RecyclerView.OnScrollListener {
 
     //To avoid recursive calls
@@ -210,23 +205,14 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
 
     private final HeroDetectedItemPresenter mPresenter;
     private final LinearLayoutManager mLayoutManager;
-    private final int mPositionInPhoto;
-    private final List<HeroAndSimilarity> mSimilarityList;
-    private HeroAndSimilarity mCurrentSelectedHero;
-
     private final String TAG = "CenterLockListener";
 
     public CenterLockListener(HeroDetectedItemPresenter presenter,
-                                int center,
-                              LinearLayoutManager layoutManager,
-                              List<HeroAndSimilarity> similarityList,
-                              int positionInPhoto){
+                              int center,
+                              LinearLayoutManager layoutManager){
         mPresenter = presenter;
         mCenterPivot = center;
         mLayoutManager = layoutManager;
-        mSimilarityList = similarityList;
-        mPositionInPhoto = positionInPhoto;
-        mCurrentSelectedHero = similarityList.get(0);
     }
 
     @Override
@@ -279,24 +265,11 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-
     }
 
     //TODO-someday: make hero changes scroll nicely
-    public void setHero(String heroName) {
-        int newPos = 0;
-        for(HeroAndSimilarity hero : mSimilarityList) {
-            if(hero.hero.name.equals(heroName)) {
-                if(hero != mCurrentSelectedHero) {
-                    mLayoutManager.scrollToPositionWithOffset(newPos, 0);
-                }
-                // recyclerView.smoothScrollBy(scrollNeeded, 0);
-                return;
-            }
-            newPos++;
-        }
-
-        Log.e(TAG, "Attempting to scroll to " + heroName + " but can't find a hero with that name");
+    public void setHero(int posInSimilarityList) {
+        mLayoutManager.scrollToPositionWithOffset(posInSimilarityList, 0);
     }
 
     private View findCenterView(LinearLayoutManager lm) {
@@ -338,13 +311,12 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
     }
 
     private void reportHeroChange(int positionInSimilarityList) {
-        mCurrentSelectedHero = mSimilarityList.get(positionInSimilarityList);
-        mPresenter.reportHeroChange(positionInSimilarityList);
+        mPresenter.receiveHeroChangedReport(positionInSimilarityList);
     }
 }
 
 class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder> {
-    private List<HeroAndSimilarity> mHeroes;
+    private List<Integer> mHeroImages;
 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -361,11 +333,11 @@ class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder>
     }
 
     public HeroImageAdapter() {
-        mHeroes = new ArrayList<>();
+        mHeroImages = new ArrayList<>();
     }
 
-    public HeroImageAdapter(List<HeroAndSimilarity> heroes) {
-        mHeroes = heroes;
+    public HeroImageAdapter(List<Integer> heroImages) {
+        mHeroImages = heroImages;
     }
 
     // Create new views (invoked by the layout manager)
@@ -384,12 +356,12 @@ class HeroImageAdapter extends RecyclerView.Adapter<HeroImageAdapter.ViewHolder>
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.getImageView().setImageResource(mHeroes.get(position).hero.getImageResource());
+        holder.getImageView().setImageResource(mHeroImages.get(position));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mHeroes.size();
+        return mHeroImages.size();
     }
 }
