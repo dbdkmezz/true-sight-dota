@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.DebugActivities;
+package com.carver.paul.dotavision.Ui.DebugActivities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.carver.paul.dotavision.ImageRecognition.Debug.DebugLineDetection;
-import com.carver.paul.dotavision.MainActivity;
+import com.carver.paul.dotavision.Ui.MainActivity;
 import com.carver.paul.dotavision.R;
 
 import java.io.File;

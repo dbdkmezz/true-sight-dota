@@ -16,16 +16,17 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-//TODO-now: put presenters and views in one package so that all the UI code only presenters run can be protected?
-
-package com.carver.paul.dotavision.Presenters;
+package com.carver.paul.dotavision.Ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.View;
 
-import com.carver.paul.dotavision.AbilityInfo.AbilityInfoPresenter;
-import com.carver.paul.dotavision.MainActivity;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Models.DataManager;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
+
+import java.io.File;
 
 public class MainActivityPresenter {
     private MainActivity mView;

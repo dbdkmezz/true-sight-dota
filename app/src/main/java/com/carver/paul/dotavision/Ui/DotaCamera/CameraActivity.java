@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.DotaCamera;
+package com.carver.paul.dotavision.Ui.DotaCamera;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,7 +35,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
-import com.carver.paul.dotavision.MainActivity;
+import com.carver.paul.dotavision.Ui.MainActivity;
 import com.carver.paul.dotavision.R;
 
 import java.io.File;
@@ -48,6 +48,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+
+//TODO-wno: make DotaCamera MVP
 
 //TODO-someday: crop what the Camera saves
 

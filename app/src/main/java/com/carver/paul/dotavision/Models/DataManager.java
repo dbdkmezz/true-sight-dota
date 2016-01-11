@@ -22,15 +22,14 @@ import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.carver.paul.dotavision.AbilityInfo.AbilityInfoPresenter;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.BuildConfig;
-import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.LoadedHeroImage;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 import com.carver.paul.dotavision.ImageRecognition.LoadHeroXml;
-import com.carver.paul.dotavision.Presenters.HeroesDetectedPresenter;
-import com.carver.paul.dotavision.Presenters.MainActivityPresenter;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
+import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;

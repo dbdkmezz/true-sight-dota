@@ -16,11 +16,11 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.Presenters;
+package com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem;
 
-import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
+import com.carver.paul.dotavision.Models.HeroAndSimilarity;
 import com.carver.paul.dotavision.Models.HeroFromPhoto;
-import com.carver.paul.dotavision.Views.HeroDetectedItemView;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +66,11 @@ public class HeroDetectedItemPresenter {
      * The hero selected has changed to the one which is posInSimilarityList in the Similarity list
      * @param posInSimilarityList the position in the similarity list of the hero we have changed to
      */
-    public void receiveHeroChangedReport(int posInSimilarityList) {
+    protected void receiveHeroChangedReport(int posInSimilarityList) {
         mParentPresenter.receiveHeroChangedReport(mHero.getPositionInPhoto(), posInSimilarityList);
     }
 
-    public void receiveHeroChangedReport(String newHeroName) {
+    protected void receiveHeroChangedReport(String newHeroName) {
         mParentPresenter.receiveHeroChangedReport(mHero.getPositionInPhoto(), newHeroName);
     }
 }

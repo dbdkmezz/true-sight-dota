@@ -16,13 +16,15 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.Ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public class AboutActivity extends AppCompatActivity {
+import com.carver.paul.dotavision.R;
+
+class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

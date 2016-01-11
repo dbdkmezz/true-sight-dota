@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.AbilityInfo.AbilityInfoCard;
+package com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoCard;
 
 import android.animation.LayoutTransition;
 import android.content.Context;
@@ -54,6 +54,20 @@ public class AbilityCardView extends FrameLayout {
         mPresenter = new AbilityCardPresenter(this, ability, showHeroName, abilityType);
     }
 
+    protected void setIcon(int drawable) {
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setImageResource(drawable);
+    }
+
+    protected void setText(String text) {
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(Html.fromHtml(text));
+    }
+
+    protected String getString(int stringInt) {
+        return getContext().getString(stringInt);
+    }
+
     private void init() {
         setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,19 +85,5 @@ public class AbilityCardView extends FrameLayout {
         setLayoutTransition(transition);
 
         inflate(getContext(), R.layout.item_ability_info, this);
-    }
-
-    protected void setIcon(int drawable) {
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setImageResource(drawable);
-    }
-
-    protected void setText(String text) {
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(Html.fromHtml(text));
-    }
-
-    protected String getString(int stringInt) {
-        return getContext().getString(stringInt);
     }
 }

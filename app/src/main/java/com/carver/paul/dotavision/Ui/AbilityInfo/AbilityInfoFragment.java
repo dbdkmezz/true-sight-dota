@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.AbilityInfo;
+package com.carver.paul.dotavision.Ui.AbilityInfo;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -26,12 +26,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.carver.paul.dotavision.AbilityInfo.AbilityInfoCard.AbilityCardView;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoCard.AbilityCardView;
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
-import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.R;
-
-import java.util.List;
 
 /**
  * This is where the information about the individual abilities is shown.

@@ -23,6 +23,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.carver.paul.dotavision.BuildConfig;
+import com.carver.paul.dotavision.Models.HeroAndSimilarity;
 import com.carver.paul.dotavision.R;
 
 import org.opencv.core.Core;

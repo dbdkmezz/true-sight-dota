@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context=".Ui.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <ScrollView
@@ -51,13 +51,13 @@
             </FrameLayout>
 
             <fragment
-                android:name="com.carver.paul.dotavision.Views.HeroesDetectedFragment"
+                android:name="com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment"
                 android:id="@+id/fragment_found_heroes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <fragment
-                android:name="com.carver.paul.dotavision.AbilityInfo.AbilityInfoFragment"
+                android:name="com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment"
                 android:id="@+id/fragment_ability_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

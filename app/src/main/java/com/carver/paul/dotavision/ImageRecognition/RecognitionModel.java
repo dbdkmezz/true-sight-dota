@@ -22,7 +22,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.carver.paul.dotavision.BuildConfig;
-import com.carver.paul.dotavision.MainActivity;
+import com.carver.paul.dotavision.Ui.MainActivity;
 import com.carver.paul.dotavision.Models.HeroFromPhoto;
 
 import org.opencv.core.Mat;

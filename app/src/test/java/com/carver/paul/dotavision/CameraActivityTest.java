@@ -3,7 +3,7 @@ package com.carver.paul.dotavision;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.carver.paul.dotavision.DotaCamera.CameraActivity;
+import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 
 import org.junit.Before;
 import org.junit.Test;

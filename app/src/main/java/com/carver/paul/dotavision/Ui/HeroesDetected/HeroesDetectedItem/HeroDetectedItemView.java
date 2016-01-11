@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.Views;
+package com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,7 +24,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.carver.paul.dotavision.Presenters.HeroDetectedItemPresenter;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
@@ -72,13 +70,13 @@ public class HeroDetectedItemView {
         return mPresenter;
     }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         AutoCompleteTextView nameTextView
                 = (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
         nameTextView.setText(name);
     }
 
-    public void setHeroInRecycler(int posInSimilarityList) {
+    protected void setHeroInRecycler(int posInSimilarityList) {
         mRecyclerViewListener.setHero(posInSimilarityList);
 
         // Give the relevant recyclerview focus. This ensures none of the text views have focus
@@ -88,12 +86,12 @@ public class HeroDetectedItemView {
     /**
      * Adds the picture of the hero on the left (the one which is currently selected)
      */
-    public void setHeroImage(Bitmap image) {
+    protected void setHeroImage(Bitmap image) {
         ImageView leftImage = (ImageView) mLinearLayout.findViewById(R.id.image_left);
         leftImage.setImageBitmap(image);
     }
 
-    public void initialiseHeroNameEditText(String name, List<String> allHeroNames) {
+    protected void initialiseHeroNameEditText(String name, List<String> allHeroNames) {
         AutoCompleteTextView nameTextView =
                 (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
 

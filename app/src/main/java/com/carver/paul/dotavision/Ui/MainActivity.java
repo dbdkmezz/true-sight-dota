@@ -18,7 +18,7 @@
 
 //TODO-now: finish making MainActivity MVP
 
-package com.carver.paul.dotavision;
+package com.carver.paul.dotavision.Ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -41,12 +41,11 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
-import com.carver.paul.dotavision.AbilityInfo.AbilityInfoFragment;
-import com.carver.paul.dotavision.DebugActivities.DebugLineDetectionActivity;
-import com.carver.paul.dotavision.DebugActivities.DebugWholeProcessActivity;
-import com.carver.paul.dotavision.DotaCamera.CameraActivity;
-import com.carver.paul.dotavision.Presenters.MainActivityPresenter;
-import com.carver.paul.dotavision.Views.HeroesDetectedFragment;
+import com.carver.paul.dotavision.BuildConfig;
+import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment;
+import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import java.io.File;

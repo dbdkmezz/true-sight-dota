@@ -20,7 +20,6 @@ package com.carver.paul.dotavision.Models;
 
 import android.graphics.Bitmap;
 
-import com.carver.paul.dotavision.ImageRecognition.HeroAndSimilarity;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 

@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.carver.paul.dotavision.DotaCamera.CameraActivity;
+import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
+import com.carver.paul.dotavision.Ui.MainActivity;
 
 import org.junit.Before;
 import org.junit.Test;

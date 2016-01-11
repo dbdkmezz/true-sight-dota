@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.Views;
+package com.carver.paul.dotavision.Ui.HeroesDetected;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -28,9 +28,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
-import com.carver.paul.dotavision.Presenters.HeroDetectedItemPresenter;
-import com.carver.paul.dotavision.Presenters.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem.HeroDetectedItemPresenter;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem.HeroDetectedItemView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class HeroesDetectedFragment extends Fragment {
         return mPresenter;
     }
 
-    public List<HeroDetectedItemPresenter> createHeroDetectedViews(int totalHeroesToShow) {
+    protected List<HeroDetectedItemPresenter> createHeroDetectedViews(int totalHeroesToShow) {
         LinearLayout parent = (LinearLayout) getActivity().findViewById(
                 R.id.layout_found_hero_pictures);
 
@@ -78,12 +78,12 @@ public class HeroesDetectedFragment extends Fragment {
         return presenters;
     }
 
-    public void removeAllViews() {
+    protected void removeAllViews() {
         LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.layout_found_hero_pictures);
         layout.removeAllViews();
     }
 
-    public void hideKeyboard() {
+    protected void hideKeyboard() {
         // Hide the keyboard
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);

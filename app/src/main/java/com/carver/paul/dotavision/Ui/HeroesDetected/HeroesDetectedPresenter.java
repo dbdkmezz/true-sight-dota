@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.Presenters;
+package com.carver.paul.dotavision.Ui.HeroesDetected;
 
 import android.util.Log;
 
@@ -24,7 +24,7 @@ import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.Models.DataManager;
 import com.carver.paul.dotavision.Models.HeroFromPhoto;
 import com.carver.paul.dotavision.Models.HeroInfo;
-import com.carver.paul.dotavision.Views.HeroesDetectedFragment;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem.HeroDetectedItemPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,18 +72,6 @@ public class HeroesDetectedPresenter {
         HeroDetectedItemPresenter heroDetected = HeroDetectedItemPresenterWithPosition(positionInPhoto);
         heroDetected.showDetectedHero(mAllHeroNames, name);
     }
-
-    //TODO-now: is receiveHeroChangedReport really a good way to do it. Would some RX work better?
-    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
-                                         int posInSimilarityList) {
-        mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, posInSimilarityList);
-    }
-
-    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
-                                         String newHeroName) {
-        mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, newHeroName);
-    }
-
     /**
      * Changes the hero which is positionInPhoto of those visible. niceHeroName specifies the name of the
      * hero to display in the box. heroImageName is the name of the hero's image, for use when
@@ -102,6 +90,17 @@ public class HeroesDetectedPresenter {
         hero.changeHero(name, posInSimilarityList);
 
         mView.hideKeyboard();
+    }
+
+    //TODO-now: is receiveHeroChangedReport really a good way to do it. Would some RX work better?
+    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
+                                            int posInSimilarityList) {
+        mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, posInSimilarityList);
+    }
+
+    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
+                                            String newHeroName) {
+        mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, newHeroName);
     }
 
     private HeroDetectedItemPresenter HeroDetectedItemPresenterWithPosition(int positionInPhoto) {

@@ -16,7 +16,9 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.ImageRecognition;
+package com.carver.paul.dotavision.Models;
+
+import com.carver.paul.dotavision.ImageRecognition.LoadedHeroImage;
 
 /**
  * HeroAndSimilarity stores a LoadedHeroImage with a similarity value. It overrides the equals function

@@ -16,14 +16,14 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.DebugActivities;
+package com.carver.paul.dotavision.Ui.DebugActivities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.carver.paul.dotavision.MainActivity;
+import com.carver.paul.dotavision.Ui.MainActivity;
 import com.carver.paul.dotavision.R;
 
 import java.io.File;

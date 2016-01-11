@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-package com.carver.paul.dotavision.AbilityInfo;
+package com.carver.paul.dotavision.Ui.AbilityInfo;
 
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.Models.HeroInfo;
