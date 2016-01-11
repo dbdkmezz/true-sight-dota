@@ -38,6 +38,19 @@ import com.carver.paul.dotavision.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class shows a hero which has been found in the image.
+ *
+ * For the hero we show:
+ *
+ *   1) The image of the hero we found in the photo.
+ *
+ *   2) The name of the hero (this is editable by the user to change the hero identified)
+ *
+ *   3) A horizontal RecyclerView showing all the images of the heroes in the game, in order of how
+ *   similar we think they are to the image of the hero in the photo. The user can scroll through
+ *   these to select a different hero.
+ */
 public class HeroDetectedItemView {
     private HeroDetectedItemPresenter mPresenter;
 
@@ -150,20 +163,21 @@ public class HeroDetectedItemView {
     }
 }
 
+/**
+ * Watches the name of the hero. If the user changes it to the name of another hero this will be
+ * reported back to the presenter so that the hero can be changed.
+ */
 class HeroTextWatcher implements TextWatcher {
 
     private String mCurrentHeroName;
     private final List<String> mAllHeroNames;
     private final HeroDetectedItemPresenter mPresenter;
-//    private final int mPosInHeroList;
-
     HeroTextWatcher(HeroDetectedItemPresenter presenter,
                     String currentHeroName,
                     List<String> allHeroNames){
         mCurrentHeroName = currentHeroName;
         mAllHeroNames = allHeroNames;
         mPresenter = presenter;
-//        mPosInHeroList = posInHeroList;
     }
 
     @Override
@@ -197,6 +211,8 @@ class HeroTextWatcher implements TextWatcher {
 
 //TODO-now fix RecyclerView scrolling. It broke along the way when refactoring to MVP. Don't know why
 /**
+ * This makes the recyclerView automatically lock on the image which has been scrolled to.
+ *
  * Based on code from github, via stackoverflow
  * https://github.com/humblerookie/centerlockrecyclerview
  */

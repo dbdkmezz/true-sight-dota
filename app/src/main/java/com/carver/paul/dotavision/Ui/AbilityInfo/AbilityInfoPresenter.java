@@ -25,6 +25,14 @@ import com.carver.paul.dotavision.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is where the information about the individual abilities is shown.
+ *
+ * A card is generated for each ability, with cards for stuns, disables, silences and ultimates
+ * first, and then cards for all the abilities for each hero in turn.
+ *
+ * When clicked the cards will expand to show more information about the ability.
+ */
 public class AbilityInfoPresenter {
     private AbilityInfoFragment mView;
 

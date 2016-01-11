@@ -16,7 +16,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
 
-//TODO-now: finish making MainActivity MVP
+//TODO-now: finish off the details in making MainActivity MVP
 
 package com.carver.paul.dotavision.Ui;
 
@@ -46,7 +46,6 @@ import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment;
 import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
-import com.carver.paul.dotavision.ImageRecognition.Variables;
 
 import java.io.File;
 
@@ -98,10 +97,9 @@ public class MainActivity extends AppCompatActivity
     // BuildConfig.DEBUG is false (i.e. the app is compiled for release)
     public static boolean sDebugMode = false;
     public static final String PHOTO_FILE_NAME = "photo.jpg";
-    private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
-    private static final String TAG = "MainActivity";
 
-//    private List<HeroInfo> mHeroesSeen = null;
+    private static final String TAG = "MainActivity";
+    private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
 
     private MainActivityPresenter mPresenter;
 
@@ -189,10 +187,6 @@ public class MainActivity extends AppCompatActivity
                 Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
     }
 
-    public static String getPhotoLocation() {
-        return new File(getImagesLocation(), PHOTO_FILE_NAME).getPath();
-    }
-
     /**
      * Called when the demo buttin is pressed
      * Runs the image recognition on a sample photo which is part of the app
@@ -200,9 +194,7 @@ public class MainActivity extends AppCompatActivity
      * @param view
      */
     public void demoButton(View view) {
-        Bitmap sampleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
-
-        doImageRecognition(sampleBitmap);
+        mPresenter.demoButtonPressed();
     }
 
     /**
@@ -211,26 +203,7 @@ public class MainActivity extends AppCompatActivity
      * @param view
      */
     public void useLastPhotoButton(View view) {
-        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
-        if (mediaFile.exists()) {
-            doImageRecognitionOnPhoto();
-        } else { // If there isn't a previous photo, then just do the demo
-            demoButton(view);
-        }
-    }
-
-    static public Bitmap CreateCroppedBitmap(String photoPath) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inMutable = true;
-        Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);
-        int newHeight = Variables.SCALED_IMAGE_WIDTH * bitmap.getHeight() / bitmap.getWidth();
-        if (bitmap.getWidth() != Variables.SCALED_IMAGE_WIDTH)
-            bitmap = Bitmap.createScaledBitmap(bitmap, Variables.SCALED_IMAGE_WIDTH, newHeight, false);
-
-        //crop the top and bottom thirds off, if it's tall
-        if (newHeight > Variables.SCALED_IMAGE_HEIGHT)
-            bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, Variables.SCALED_IMAGE_WIDTH, newHeight / 3);
-        return bitmap;
+        mPresenter.useLastPhotoButtonPressed();
     }
 
     // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
@@ -251,7 +224,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void startHeroRecognitionLoadingAnimations(Bitmap photo) {
+    protected void startHeroRecognitionLoadingAnimations(Bitmap photo) {
         setTopImage(photo);
         slideDemoButtonsOffScreen();
         hideBackground();
@@ -262,7 +235,7 @@ public class MainActivity extends AppCompatActivity
      * stopHeroRecognitionLoadingAnimations shows makes the the cameraFab do one final pulse, and
      * then moves it to the bottom right.
      */
-    public void stopHeroRecognitionLoadingAnimations() {
+    protected void stopHeroRecognitionLoadingAnimations() {
         View processingText = findViewById(R.id.text_processing_image);
         processingText.setVisibility(View.GONE);
 
@@ -300,13 +273,30 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                doImageRecognitionOnPhoto();
+                mPresenter.doImageRecognitionOnPhoto();
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {
                 // Image capture failed, advise user
             }
         }
+    }
+
+    protected Bitmap getSamplePhoto() {
+        return BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
+    }
+
+    protected void doImageRecognition(Bitmap bitmap) {
+        HeroesDetectedFragment heroesDetectedFragment = (HeroesDetectedFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_found_heroes);
+
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_ability_info);
+
+        //TODO-now, put fragment presenters in MainActivityPresenter earlier?
+        mPresenter.doImageRecognition(bitmap,
+                heroesDetectedFragment.getPresenter(),
+                abilityInfoFragment.getPresenter());
     }
 
     private void setTopImage(Bitmap photoBitmap) {
@@ -410,28 +400,6 @@ public class MainActivity extends AppCompatActivity
                 .scaleX((float) fabEndLocation.getWidth() / (float) fab.getWidth())
                 .scaleY((float) fabEndLocation.getHeight() / (float) fab.getHeight())
                 .setInterpolator(new AccelerateDecelerateInterpolator());
-    }
-
-    private void doImageRecognitionOnPhoto() {
-        File mediaFile = new File(getImagesLocation(), PHOTO_FILE_NAME);
-        if (!mediaFile.exists()) {
-            throw new RuntimeException("Trying to recognise photo, but I can't find file at " + getImagesLocation() + PHOTO_FILE_NAME);
-        }
-
-        Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
-        doImageRecognition(bitmap);
-    }
-
-    private void doImageRecognition(Bitmap bitmap) {
-        HeroesDetectedFragment heroesDetectedFragment = (HeroesDetectedFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_found_heroes);
-
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_ability_info);
-
-        mPresenter.doImageRecognition(bitmap,
-                heroesDetectedFragment.getPresenter(),
-                abilityInfoFragment.getPresenter());
     }
 
     private void moveViewBackToStartingPosAndScale(View view) {

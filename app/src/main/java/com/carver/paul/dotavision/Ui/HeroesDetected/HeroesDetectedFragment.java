@@ -36,8 +36,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Shows the heroes which have been seen in the image, and allows the user to change them.
+ * This class shows the heroes which have been found in the image.
+ *
+ * For each of them we show:
+ *
+ *   1) The image of the hero we found in the photo.
+ *
+ *   2) The name of the hero (this is editable by the user to change the hero identified)
+ *
+ *   3) A horizontal RecyclerView showing all the images of the heroes in the game, in order of how
+ *   similar we think they are to the image of the hero in the photo. The user can scroll through
+ *   these to select a different hero.
+ *
+ *   HeroesDetectedFragment uses a HeroDetectedItem for each hero.
  */
+//TODO-now: rename HeroesDetectedFragment, it's not all clear!
 public class HeroesDetectedFragment extends Fragment {
     private static final String TAG = "HeroesDetectedFragment";
 

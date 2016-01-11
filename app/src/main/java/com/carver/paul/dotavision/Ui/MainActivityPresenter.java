@@ -20,8 +20,9 @@ package com.carver.paul.dotavision.Ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.view.View;
+import android.graphics.BitmapFactory;
 
+import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Models.DataManager;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
@@ -44,7 +45,7 @@ public class MainActivityPresenter {
     public void doImageRecognition(Bitmap photo,
                                    HeroesDetectedPresenter heroesDetectedPresenter,
                                    AbilityInfoPresenter abilityInfoPresenter) {
-        if(!mDataManager.presentersRegistered()) {
+        if (!mDataManager.presentersRegistered()) {
             mDataManager.registerPresenters(heroesDetectedPresenter, abilityInfoPresenter);
         }
 
@@ -61,5 +62,47 @@ public class MainActivityPresenter {
 
     public void stopHeroRecognitionLoadingAnimations() {
         mView.stopHeroRecognitionLoadingAnimations();
+    }
+
+    /**
+     * Runs the image recognition code on the last photo which was taken by the camera
+     */
+    protected void useLastPhotoButtonPressed() {
+        File mediaFile = new File(mView.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
+        if (mediaFile.exists()) {
+            doImageRecognitionOnPhoto();
+        } else { // If there isn't a previous photo, then just do the demo
+            demoButtonPressed();
+        }
+    }
+
+    protected void demoButtonPressed() {
+        Bitmap SamplePhoto = mView.getSamplePhoto();
+        mView.doImageRecognition(SamplePhoto);
+    }
+
+    protected void doImageRecognitionOnPhoto() {
+        File mediaFile = new File(mView.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
+        if (!mediaFile.exists()) {
+            throw new RuntimeException("Trying to recognise photo, but I can't find file at "
+                    + mView.getImagesLocation() + MainActivity.PHOTO_FILE_NAME);
+        }
+
+        Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
+        mView.doImageRecognition(bitmap);
+    }
+
+    static private Bitmap CreateCroppedBitmap(String photoPath) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inMutable = true;
+        Bitmap bitmap = BitmapFactory.decodeFile(photoPath, options);
+        int newHeight = Variables.SCALED_IMAGE_WIDTH * bitmap.getHeight() / bitmap.getWidth();
+        if (bitmap.getWidth() != Variables.SCALED_IMAGE_WIDTH)
+            bitmap = Bitmap.createScaledBitmap(bitmap, Variables.SCALED_IMAGE_WIDTH, newHeight, false);
+
+        //crop the top and bottom thirds off, if it's tall
+        if (newHeight > Variables.SCALED_IMAGE_HEIGHT)
+            bitmap = Bitmap.createBitmap(bitmap, 0, newHeight / 3, Variables.SCALED_IMAGE_WIDTH, newHeight / 3);
+        return bitmap;
     }
 }

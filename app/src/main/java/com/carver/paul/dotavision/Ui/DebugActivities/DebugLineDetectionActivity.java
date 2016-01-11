@@ -47,6 +47,7 @@ public class DebugLineDetectionActivity extends AppCompatActivity {
     }
 
     public void testWithoutNewPhoto(View view) {
+/*
 
         // hide the keyboard
         if (view != null) {
@@ -56,9 +57,11 @@ public class DebugLineDetectionActivity extends AppCompatActivity {
 
         File mediaFile = new File(MainActivity.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
         runTest(mediaFile.getPath());
+*/
     }
 
     private void runTest(String photoPath) {
+/*
         TextView tv = (TextView) findViewById(R.id.minH);
         int hMin = Integer.parseInt(tv.getText().toString());
         tv = (TextView) findViewById(R.id.maxH);
@@ -72,9 +75,12 @@ public class DebugLineDetectionActivity extends AppCompatActivity {
         tv = (TextView) findViewById(R.id.maxV);
         int vMax = Integer.parseInt(tv.getText().toString());
 
+
         Bitmap bitmap = MainActivity.CreateCroppedBitmap(photoPath);
 
-/*        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);*/
+*/
+/*        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);*//*
+
 
         //DebugLineDetection.TestLines(bitmap, (ImageView) findViewById(R.id.imageViewMask));
         Bitmap linesBitmap = DebugLineDetection.TestLines(bitmap, hMin, hMax, sMin, sMax, vMin, vMax);
@@ -85,5 +91,6 @@ public class DebugLineDetectionActivity extends AppCompatActivity {
         mImageView.setImageBitmap(linesBitmap);
         mImageView = (ImageView) findViewById(R.id.imageViewMask);
         mImageView.setImageBitmap(maskBitmap);
+*/
     }
 }

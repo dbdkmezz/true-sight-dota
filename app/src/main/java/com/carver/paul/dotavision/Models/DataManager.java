@@ -45,6 +45,12 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subjects.AsyncSubject;
 
+/**
+ * This is the class which is responsible for processing the photo to identify the heroes in it.
+ *
+ * All the hard photo processing will be done in a new thread, so that it doesn't make the UI lock
+ * up. Updates will be sent to the UI as they become available.
+ */
 public class DataManager {
     static final String TAG = "DataManager";
 
@@ -58,6 +64,13 @@ public class DataManager {
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
     private Subscriber<HeroFromPhoto> mHeroRecognitionSubscriberRx;
 
+    /**
+     * By calling StartXmlLoading and StartSimilarityTestLoading as soon as the datamanager is
+     * created (hopefully when the activity is first launched) this hard work can be done in a
+     * background thread immediately. These loading tasks are likely to complete before the results
+     * are needed, but the use of rxJava later on means that it doesn't matter if they are not.
+     * @param mainActivityPresenter
+     */
     public DataManager(final MainActivityPresenter mainActivityPresenter) {
         mMainActivityPresenter = mainActivityPresenter;
         mHeroesInPhoto = new ArrayList<>();
@@ -67,14 +80,13 @@ public class DataManager {
     }
 
     /**
-     * When doing the work recognising the heroes in a photo there are four methods in MainActivity
-     * that should be called. These are named recognition1_ through to recognition4_.
+     * Registers the UI presenters needed to send the results of image recognition back to the UI
+     * views. (In MVP presenters are the middleman between the hard work done in the Models, and
+     * the Views with which the user interacts.)
      *
-     * This method does the image recognition work in a background thread, and when necessary calls
-     * the appropriate methods on MainActivity to show the progress to the user.
-     * @param
+     * @param heroesDetectedPresenter
+     * @param abilityInfoPresenter
      */
-
     public void registerPresenters(final HeroesDetectedPresenter heroesDetectedPresenter,
             final AbilityInfoPresenter abilityInfoPresenter) {
         mHeroesDetectedPresenter = heroesDetectedPresenter;
@@ -84,9 +96,29 @@ public class DataManager {
     }
 
     public boolean presentersRegistered() {
-        return (mHeroesDetectedPresenter != null && mAbilityInfoPresenter != null);
+        return (mMainActivityPresenter != null
+                && mHeroesDetectedPresenter != null
+                && mAbilityInfoPresenter != null);
     }
 
+    /**
+     * This will identify the five heroes in the photo.
+     *
+     * While doing the hard image recognition work in the background the UI will show the results
+     * as they become available. The UI goes through the following stages:
+     *
+     *   1) Show the loading animation (e.g. pulsing the camera button).
+     *
+     *   2) Show the images of the heroes we have found in the photo, but not yet identified who
+     *   they are.
+     *
+     *   3) One by one, show the images of the heroes we think they are. Each image is processed to
+     *   identify a match individually, and the results are shown on the UI as they become available.
+     *
+     *   4) Show the abilities of all the heroes identified.
+     *
+     * @param photo
+     */
     public void identifyHeroesInPhoto(final Bitmap photo) {
         if(!presentersRegistered()) {
             throw new RuntimeException("Attempting to identify heroes before registering " +
@@ -94,6 +126,7 @@ public class DataManager {
         }
 
         mHeroesInPhoto.clear();
+
         prepareHeroRecognitionSubscriber();
 
         // Asks the main activity to show the "detecting heroes" loading screen
@@ -101,7 +134,6 @@ public class DataManager {
         mHeroesDetectedPresenter.reset();
         mAbilityInfoPresenter.reset();
 
-        //TODO-now: re-write BIG KEY comment for DataManager
         /**
          * This is where the magic happens! Recognising the heroes in the photos goes through the
          * following steps:
@@ -111,7 +143,8 @@ public class DataManager {
          *   before going any further.
          *
          *   2) doOnNext: call prepareToShowResults, which gets the UI ready to start showing the
-         *   results of the image processing.
+         *   results of the image processing (i.e. end the loading animation and show the images
+         *   of the heroes we have found in the photo (but not yet identifeid who they are).
          *
          *   3) flatMapIterable: turn the list of unidentified heroes in the photo into chain of
          *   Observables so that each can be processed in turn.
@@ -120,7 +153,9 @@ public class DataManager {
          *
          *   5) As each is hero is identified it will be sent to the mHeroRecognitionSubscriberRx
          *   subscriber (which will in turn call the appropriate MainActivity methods to show the
-         *   results to the user as they are available).
+         *   results to the user as they are available). (On a Nexus 5 identifying each hero takes
+         *   around 0.2 seconds, so it is good that we can show the results as they become
+         *   available.)
          */
         Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
                 List<HeroFromPhoto>>() {
@@ -234,14 +269,39 @@ public class DataManager {
     }
 
     /**
-     * Sets up mHeroRecognitionSubscriberRx
+     * This will make the MainActivity end its animations which show the hero image is being
+     * processed. It also sends the unidentified heroes up to the HeroesDetectedPresenter so that
+     * the photos of them can be shown.
+     *
+     * This method is safe to call from a background thread. We use RxJava here to ensure that the
+     * required work in the UI this work is done in the mainThread (i.e. the UI thread).
+     *
+     * @param unidentifiedHeroes the list of heroes found in the photo, currently no work has been
+     *                           done to identify who they are, we just need to have a photo of them
+     *                           at this stage.
+     */
+    private void prepareToShowResults(List<HeroFromPhoto> unidentifiedHeroes) {
+        Single.just(unidentifiedHeroes)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<HeroFromPhoto>>() {
+                    public void call(List<HeroFromPhoto> unidentifiedHeroes) {
+                        mMainActivityPresenter.stopHeroRecognitionLoadingAnimations();
+                        mHeroesDetectedPresenter.prepareToShowResults(unidentifiedHeroes,
+                                mXmlInfoRx.getValue());
+                    }
+                });
+    }
+
+    /**
+     * Sets up mHeroRecognitionSubscriberRx. As each hero is identified onNext for this subscriber
+     * is called.
      */
     private void prepareHeroRecognitionSubscriber() {
         ensureAllSubscribersUnsubscribed();
         // Set up the subscriber
         mHeroRecognitionSubscriberRx = new Subscriber<HeroFromPhoto>() {
 
-            // Finish off showing the results of the image processing.
+            // Show the ability cards for the heroes we have now identified
             @Override
             public void onCompleted() {
                 showHeroAbilities();
@@ -252,8 +312,8 @@ public class DataManager {
                 Log.e(TAG, "mHeroRecognitionSubscriberRx. Unhandled error: " + e.toString());
             }
 
-            //TODO-now: fix all comments in DataManager
-            // For each hero identified in the photo, get MainActivity to show it
+            // When a hero has been identified, get the mHeroesDetectedPresenter to show who we
+            // think the hero is
             @Override
             public void onNext(HeroFromPhoto hero) {
                 if (BuildConfig.DEBUG) {
@@ -318,30 +378,6 @@ public class DataManager {
         }
     }
 
-    /**
-     * This will make the MainActivity to end its animations which show the hero image is being
-     * processed. It also sends the unidentified heroes up to the HeroesDetectedPresenter so that
-     * the photos of them can be shown.
-     *
-     * This method is safe to call from a background thread. We use RxJava here to ensure that the
-     * required work in the UI this work is done in the mainThread (i.e. the UI thread).
-     *
-     * @param unidentifiedHeroes the list of heroes found in the photo, currently no work has been
-     *                           done to identify who they are, we just need to have a photo of them
-     *                           at this stage.
-     */
-    private void prepareToShowResults(List<HeroFromPhoto> unidentifiedHeroes) {
-        Single.just(unidentifiedHeroes)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<HeroFromPhoto>>() {
-                    public void call(List<HeroFromPhoto> unidentifiedHeroes) {
-                        mMainActivityPresenter.stopHeroRecognitionLoadingAnimations();
-                        mHeroesDetectedPresenter.prepareToShowResults(unidentifiedHeroes,
-                                mXmlInfoRx.getValue());
-                    }
-                });
-    }
-
     private void showHeroAbilities() {
         List<HeroInfo> heroInfoList = new ArrayList<>();
         for (HeroFromPhotoWithCurrentlySelected hero : mHeroesInPhoto) {
@@ -355,7 +391,14 @@ public class DataManager {
     }
 }
 
-//TODO-now: sort out HeroFromPhotoWithCurrentlySelected !
+//TODO-now: sort out HeroFromPhotoWithCurrentlySelected. This is a very ugly class and too many
+// of my classes have "hero" in the name or members. THOUGHT IS NEEDED.
+
+/**
+ * This class contains a hero found in a photo (HeroFromPhoto) and the hero which is currently
+ * selected from ths list of heroes which are similar to it (i.e. the one who's abilities are shown
+ * in the UI.
+ */
 class HeroFromPhotoWithCurrentlySelected {
     private final HeroFromPhoto mHero;
     private LoadedHeroImage mHeroSelected;
