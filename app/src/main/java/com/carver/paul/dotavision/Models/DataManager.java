@@ -197,6 +197,19 @@ public class DataManager {
         ensureAllSubscribersUnsubscribed();
     }
 
+    /**
+     * This class enables presenters to inform the DataManager a hero has changed and that we
+     * need to update the hero abilities we show.
+     *
+     * @param posInPhotoOfChangedHero           The position in the photo of the hero which has
+     *                                          changed (counting between 0 and 4, starting from the
+     *                                          left of the photo)
+     * @param posInSimilarityListOfNewSelection The number in the list of similar heroes which
+     *                                          has been selected. (For each image of a hero in the
+     *                                          photo there is a list of all heroes in the game (the
+     *                                          similarity list) ordered by how similar we think
+     *                                          they are to the image.
+     */
     public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
                                          int posInSimilarityListOfNewSelection) {
         HeroFromPhotoWithCurrentlySelected hero = findHeroWithPhotoPos(posInPhotoOfChangedHero);
@@ -211,6 +224,16 @@ public class DataManager {
         showHeroAbilities();
     }
 
+    /**
+     * This class enables presenters to inform the DataManager a hero has changed and that we
+     * need to update the hero abilities we show.
+     *
+     * @param posInPhotoOfChangedHero           The position in the photo of the hero which has
+     *                                          changed (counting between 0 and 4, starting from the
+     *                                          left of the photo)
+     * @param newHeroRealName                   The name of the hero which the user has identified
+     *                                          the photo to be.
+     */
     public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
                                          String newHeroRealName) {
         HeroFromPhotoWithCurrentlySelected hero = findHeroWithPhotoPos(posInPhotoOfChangedHero);
@@ -224,7 +247,7 @@ public class DataManager {
     }
 
     /**
-     *Create an observable to load the xml file in the background. mXmlInfoRx is subscribed to
+     * Create an observable to load the xml file in the background. mXmlInfoRx is subscribed to
      * it and will complete when the file has been loaded.
      */
     private void StartXmlLoading() {
@@ -249,9 +272,9 @@ public class DataManager {
     }
 
     /**
-     * Create an observable to Similarity Test (all the hero images used for detection) in the
-     * background. mSimilarityTestRx is subscribed to it and will complete when the file has been
-     * loaded.
+     * Create an observable to load SimilarityTest (basically this loads a picture of each hero in
+     * the game to be used in image recognition) in the background. mSimilarityTestRx is subscribed
+     * to this observable and will complete when the file has been loaded.
      */
     private void StartSimilarityTestLoading() {
         mSimilarityTestRx = AsyncSubject.create();
