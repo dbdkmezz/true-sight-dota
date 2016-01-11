@@ -48,10 +48,8 @@ import com.carver.paul.dotavision.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Presenters.MainActivityPresenter;
 import com.carver.paul.dotavision.Views.HeroesDetectedFragment;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
-import com.carver.paul.dotavision.Models.HeroInfo;
 
 import java.io.File;
-import java.util.List;
 
 //TODO-beauty: Write tests to check if all hero images load, and if all hero ability icons draw and
 // all hero abilities have text
@@ -170,6 +168,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+/*
     public void startDebugLineActivity() {
         Intent intent = new Intent(this, DebugLineDetectionActivity.class);
         startActivity(intent);
@@ -179,6 +178,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, DebugWholeProcessActivity.class);
         startActivity(intent);
     }
+*/
 
     public void startAboutActivity() {
         Intent intent = new Intent(this, AboutActivity.class);

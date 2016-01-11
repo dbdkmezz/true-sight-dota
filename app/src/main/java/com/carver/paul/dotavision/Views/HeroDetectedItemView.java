@@ -28,6 +28,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -108,6 +109,10 @@ public class HeroDetectedItemView {
                 allHeroNames));
     }
 
+    //TODO-beauty, remove the need to intialise recycler
+    /**
+     * If we don't set the layoutmanager for the recycler immediately then the app crashes
+     */
     private void initialiseHeroSelectRecycler() {
         mRecyclerView =
                 (RecyclerView) mLinearLayout.findViewById(R.id.recycler_correct_image);
@@ -117,9 +122,11 @@ public class HeroDetectedItemView {
         mRecyclerView.setAdapter(new HeroImageAdapter());
         mRecyclerView.setLayoutManager(layoutManager);
     }
+
     /**
      * Adds the recycler view used for changing the hero
-     * @param similarHeroImages
+     * @param similarHeroImages the R.ids for the images to be shown in the recycler (ordered by
+     *                          how similar they are to to this hero)
      */
     public void completeRecycler(List<Integer> similarHeroImages) {
         LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
@@ -128,26 +135,22 @@ public class HeroDetectedItemView {
         //TODO-beauty: make the HeroesDetectedFragment not depend on the screen width for finding
         // its centre, should instead use the Fragment's width. It also goes wrong if the
         // image on the left hand side is too wide! I don't really understand the math here!
-        DisplayMetrics metrics = new DisplayMetrics();
+
         // This makes the recyclerView automatically lock on the image which has been
         // scrolled to. Thanks stackoverflow and Github :)
         int center = (11 * mScreenWidth / 24);
         mRecyclerViewListener = new CenterLockListener(mPresenter, center, layoutManager);
         mRecyclerView.addOnScrollListener(mRecyclerViewListener);
 
-        //TODO-now: bring back recycler animation in from side
-/*        // Animate the recycler view in from the right to indicate that you can slide it to
+        // Animate the recycler view in from the right to indicate that you can slide it to
         // change the hero
-        mRecyclerView.setX(metrics.widthPixels);
+        mRecyclerView.setX(mScreenWidth);
         mRecyclerView.animate()
                 .translationXBy(-1 * mRecyclerView.getWidth())
                 .setInterpolator(new DecelerateInterpolator())
-                .setDuration(200);*/
+                .setDuration(200);
     }
 }
-
-
-//TODO-now: bring back text watcher
 
 class HeroTextWatcher implements TextWatcher {
 
@@ -194,7 +197,11 @@ class HeroTextWatcher implements TextWatcher {
     }
 }
 
-//TODO-now: remove all model code from CenterLockListener, should only have a list of Bitmaps, not heroes
+//TODO-now fix RecyclerView scrolling. It broke along the way when refactoring to MVP. Don't know why
+/**
+ * Based on code from github, via stackoverflow
+ * https://github.com/humblerookie/centerlockrecyclerview
+ */
 class CenterLockListener extends RecyclerView.OnScrollListener {
 
     //To avoid recursive calls
@@ -205,7 +212,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
 
     private final HeroDetectedItemPresenter mPresenter;
     private final LinearLayoutManager mLayoutManager;
-    private final String TAG = "CenterLockListener";
+    private final static String TAG = "CenterLockListener";
 
     public CenterLockListener(HeroDetectedItemPresenter presenter,
                               int center,
