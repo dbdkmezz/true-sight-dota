@@ -19,7 +19,7 @@
 package com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem;
 
 import com.carver.paul.dotavision.Models.HeroAndSimilarity;
-import com.carver.paul.dotavision.Models.HeroFromPhoto;
+import com.carver.paul.dotavision.Models.HeroImageAndPosition;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.util.ArrayList;
@@ -41,48 +41,68 @@ import java.util.List;
 public class HeroDetectedItemPresenter {
     private HeroesDetectedPresenter mParentPresenter;
     private HeroDetectedItemView mView;
-    private HeroFromPhoto mHero;
+
+    private int mPositionInPhoto;
+    private String mName;
+    private List<HeroAndSimilarity> mSimilarityList;
 
     public HeroDetectedItemPresenter(HeroDetectedItemView view) {
         mView = view;
     }
 
-    public void completeSetup(HeroesDetectedPresenter parentPresenter,
-                              HeroFromPhoto hero) {
+    public void setImage(HeroesDetectedPresenter parentPresenter,
+                         HeroImageAndPosition heroImage) {
         mParentPresenter = parentPresenter;
-        mHero = hero;
-        mView.setHeroImage(hero.getBitmap());
+        mPositionInPhoto = heroImage.getPosition();
+        mView.setHeroImage(heroImage.getImage());
     }
 
     public int getPositionInPhoto() {
-        return mHero.getPositionInPhoto();
+        return mPositionInPhoto;
     }
 
-    //TODO-now: rename methods
-    public void showDetectedHero(List<String> allHeroNames, String name) {
+    public void setSimilarityListAndName(List<HeroAndSimilarity> similarityList,
+                                         String name,
+                                         List<String> allHeroNames) {
+        mName = name;
+        mSimilarityList = similarityList;
+
         List<Integer> similarHeroesImages = new ArrayList<>();
-        for (HeroAndSimilarity similarHero: mHero.getSimilarityList()) {
+        for (HeroAndSimilarity similarHero : mSimilarityList) {
             similarHeroesImages.add(similarHero.hero.getImageResource());
         }
 
         mView.completeRecycler(similarHeroesImages);
-        mView.initialiseHeroNameEditText(name, allHeroNames);
+        mView.initialiseHeroNameEditText(mName, allHeroNames);
     }
 
-    public void changeHero(String name, int posInSimilarityList) {
-        mView.setName(name);
-        mView.setHeroInRecycler(posInSimilarityList);
+    public String getName() {
+        return mName;
     }
 
     /**
      * The hero selected has changed to the one which is posInSimilarityList in the Similarity list
      * @param posInSimilarityList the position in the similarity list of the hero we have changed to
      */
-    protected void receiveHeroChangedReport(int posInSimilarityList) {
-        mParentPresenter.receiveHeroChangedReport(mHero.getPositionInPhoto(), posInSimilarityList);
+    protected void updateFromSimilarityListChange(int posInSimilarityList) {
+        String heroImageName = mSimilarityList.get(posInSimilarityList).hero.name;
+        mName = mParentPresenter.getHeroRealName(heroImageName);
+        mView.setName(mName);
+        mParentPresenter.sendUpdatedHeroList();
     }
 
-    protected void receiveHeroChangedReport(String newHeroName) {
-        mParentPresenter.receiveHeroChangedReport(mHero.getPositionInPhoto(), newHeroName);
+    protected void updateFromNameChange(String newHeroName) {
+        mName = newHeroName;
+        String imageName = mParentPresenter.getHeroImageName(newHeroName);
+
+        for (int i = 0; i < mSimilarityList.size(); i++) {
+            if (mSimilarityList.get(i).equals(imageName)) {
+                mView.setHeroInRecycler(i);
+                break;
+            }
+        }
+
+        mParentPresenter.hideKeyboard();
+        mParentPresenter.sendUpdatedHeroList();
     }
 }

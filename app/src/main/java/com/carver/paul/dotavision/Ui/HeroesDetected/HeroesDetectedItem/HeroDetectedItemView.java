@@ -139,7 +139,7 @@ public class HeroDetectedItemView {
      * @param similarHeroImages the R.ids for the images to be shown in the recycler (ordered by
      *                          how similar they are to to this hero)
      */
-    public void completeRecycler(List<Integer> similarHeroImages) {
+    protected void completeRecycler(List<Integer> similarHeroImages) {
         LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
         mRecyclerView.setAdapter(new HeroImageAdapter(similarHeroImages));
 
@@ -191,7 +191,7 @@ class HeroTextWatcher implements TextWatcher {
                 && containsIgnoreCase(mAllHeroNames, (s.toString()))) {
             mCurrentHeroName = s.toString();
 
-            mPresenter.receiveHeroChangedReport(s.toString());
+            mPresenter.updateFromNameChange(s.toString());
         }
     }
 
@@ -332,7 +332,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
     }
 
     private void reportHeroChange(int positionInSimilarityList) {
-        mPresenter.receiveHeroChangedReport(positionInSimilarityList);
+        mPresenter.updateFromSimilarityListChange(positionInSimilarityList);
     }
 }
 

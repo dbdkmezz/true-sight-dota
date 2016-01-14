@@ -22,12 +22,15 @@ import android.util.Log;
 
 import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.Models.DataManager;
-import com.carver.paul.dotavision.Models.HeroFromPhoto;
+import com.carver.paul.dotavision.Models.HeroImageAndPosition;
 import com.carver.paul.dotavision.Models.HeroInfo;
+import com.carver.paul.dotavision.Models.SimilarityListAndPosition;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem.HeroDetectedItemPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * This class shows the heroes which have been found in the image.
@@ -51,74 +54,128 @@ public class HeroesDetectedPresenter {
     private DataManager mDataManger;
     private List<HeroDetectedItemPresenter> mHeroDetectedItemPresenters = new ArrayList<>();
     private List<String> mAllHeroNames;
+    private Subscriber<SimilarityListAndPosition> mHeroRecognitionSubscriberRx;
 
     public HeroesDetectedPresenter(HeroesDetectedFragment view) {
         mView = view;
+        setupSubscriber();
     }
 
     public void reset() {
-        mHeroDetectedItemPresenters.clear();
         mView.removeAllViews();
+        mHeroDetectedItemPresenters.clear();
     }
 
     public void setDataManger(DataManager dataManger) {
         mDataManger = dataManger;
     }
 
-    public void prepareToShowResults(List<HeroFromPhoto> heroes,
-                                     List<HeroInfo> heroInfoFromXml) {
-        mHeroDetectedItemPresenters = mView.createHeroDetectedViews(heroes.size());
+    public Subscriber<SimilarityListAndPosition> getHeroRecognitionSubscriberRx() {
+        return mHeroRecognitionSubscriberRx;
+    }
 
-        if(mAllHeroNames == null) {
-            mAllHeroNames = getHeroNames(heroInfoFromXml);
-        }
+    public void showHeroImages(List<HeroImageAndPosition> heroImages) {
+        mHeroDetectedItemPresenters = mView.createHeroDetectedViews(heroImages.size());
 
-        for(int i = 0; i < mHeroDetectedItemPresenters.size() && i < heroes.size(); i++) {
-            mHeroDetectedItemPresenters.get(i).completeSetup(this, heroes.get(i));
+        ensureHeroNamesInitialised();
+
+        for (int i = 0; i < mHeroDetectedItemPresenters.size() && i < heroImages.size(); i++) {
+            mHeroDetectedItemPresenters.get(i).setImage(this, heroImages.get(i));
         }
     }
 
-    public void heroIdentified(int positionInPhoto, String name) {
-        if(mAllHeroNames == null) {
-            throw new RuntimeException("Attempting to disaply an identified hero without having " +
-                    "set up the hero names");
+    public void sendUpdatedHeroList() {
+        List<HeroInfo> heroInfoList = new ArrayList<>();
+        for (HeroDetectedItemPresenter hero : mHeroDetectedItemPresenters) {
+            HeroInfo heroInfo = findHeroWithName(hero.getName(), mDataManger.getHeroInfo());
+            if (!heroInfoList.contains(heroInfo))
+                heroInfoList.add(heroInfo);
         }
 
-        HeroDetectedItemPresenter heroDetected = HeroDetectedItemPresenterWithPosition(positionInPhoto);
-        heroDetected.showDetectedHero(mAllHeroNames, name);
+        mDataManger.sendUpdatedHeroList(heroInfoList);
     }
-    /**
-     * Changes the hero which is positionInPhoto of those visible. niceHeroName specifies the name of the
-     * hero to display in the box. heroImageName is the name of the hero's image, for use when
-     * scrolling to the hero with the recyclerView.
-     * @param positionInPhoto
-     */
-    public void changeHero(int positionInPhoto, String name, int posInSimilarityList) {
-        if(mHeroDetectedItemPresenters.isEmpty()) {
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "Attempting to change hero, but mHeroDetectedItemPresenters is empty.");
-            }
-            return;
-        }
 
-        HeroDetectedItemPresenter hero = HeroDetectedItemPresenterWithPosition(positionInPhoto);
-        hero.changeHero(name, posInSimilarityList);
-
+    public void hideKeyboard() {
         mView.hideKeyboard();
     }
 
-    //TODO-now: is receiveHeroChangedReport really a good way to do it. Would some RX work better?
-    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
-                                            int posInSimilarityList) {
-        mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, posInSimilarityList);
+    protected void onDestroy() {
+        unsubscribeSubscriber();
     }
 
-    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
-                                            String newHeroName) {
-        mDataManger.receiveHeroChangedReport(posInPhotoOfChangedHero, newHeroName);
+    public String getHeroRealName(String heroImageName) {
+        HeroInfo heroInfo = findHeroWithName(heroImageName, mDataManger.getHeroInfo());
+        return heroInfo.name;
     }
 
-    private HeroDetectedItemPresenter HeroDetectedItemPresenterWithPosition(int positionInPhoto) {
+    public String getHeroImageName(String heroRealName) {
+        HeroInfo heroInfo = findHeroWithName(heroRealName, mDataManger.getHeroInfo());
+        return heroInfo.imageName;
+    }
+
+    private void setupSubscriber() {
+        unsubscribeSubscriber();
+
+        mHeroRecognitionSubscriberRx = new Subscriber<SimilarityListAndPosition>() {
+
+            // Show the ability cards for the heroes we have now identified
+            @Override
+            public void onCompleted() {
+                sendUpdatedHeroList();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "mHeroRecognitionSubscriberRx. Unhandled error: " + e.toString());
+            }
+
+            // When a hero has been identified, show the images of similar heroes and the name of
+            // the hero we think it is by completing the set up of the HeroDetectedItemPresenter
+            @Override
+            public void onNext(SimilarityListAndPosition similarityListAndPosition) {
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "Adding "
+                            + similarityListAndPosition.getSimilarityList().get(0).hero.name);
+                }
+                ;
+
+                completeHeroDetectedSetup(similarityListAndPosition);
+            }
+        };
+    }
+
+    // When a hero has been identified, this is used to show the images of similar heroes and the
+    // name of the hero we think it is by completing the set up of the HeroDetectedItemPresenter
+    private void completeHeroDetectedSetup(SimilarityListAndPosition similarityListAndPosition) {
+        HeroDetectedItemPresenter heroDetected =
+                findPresenterAtPosition(similarityListAndPosition.getPosition());
+
+        heroDetected.setSimilarityListAndName(
+                similarityListAndPosition.getSimilarityList(),
+                getHeroRealName(similarityListAndPosition.getSimilarityList().get(0).hero.name),
+                mAllHeroNames);
+    }
+
+    private void unsubscribeSubscriber() {
+        //TODO-beauty: test if we actually need to unsubscribe from the observer, and if
+        // unsubscribing like this does clear it from memory
+        if (mHeroRecognitionSubscriberRx != null) {
+            mHeroRecognitionSubscriberRx.unsubscribe();
+            mHeroRecognitionSubscriberRx = null;
+        }
+    }
+
+    private void ensureHeroNamesInitialised() {
+        if (mAllHeroNames == null) {
+            if (mDataManger == null || mDataManger.getHeroInfo() == null) {
+                throw new RuntimeException("Attempting to access hero info but mDataManager not " +
+                        "ready.");
+            }
+            mAllHeroNames = getHeroNames(mDataManger.getHeroInfo());
+        }
+    }
+
+    private HeroDetectedItemPresenter findPresenterAtPosition(int positionInPhoto) {
         for(HeroDetectedItemPresenter heroPresenter : mHeroDetectedItemPresenters) {
             if(heroPresenter.getPositionInPhoto() == positionInPhoto) {
                 return heroPresenter;
@@ -134,5 +191,20 @@ public class HeroesDetectedPresenter {
             names.add(heroInfo.name);
         }
         return names;
+    }
+
+    // TODO-beauty: replace FindHeroWithName to use the drawable id int instead of strings
+    private static HeroInfo findHeroWithName(String name, List<HeroInfo> heroInfos) {
+        if (heroInfos == null)
+            throw new RuntimeException("Called findHeroWithName when heroInfo is not " +
+                    "initialised.");
+
+        for (HeroInfo heroInfo : heroInfos) {
+            if (heroInfo.hasName(name)) {
+                return heroInfo;
+            }
+        }
+
+        return null;
     }
 }

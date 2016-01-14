@@ -20,17 +20,14 @@ package com.carver.paul.dotavision.Models;
 
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
-import android.util.Log;
 
-import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
-import com.carver.paul.dotavision.BuildConfig;
-import com.carver.paul.dotavision.ImageRecognition.LoadedHeroImage;
+import com.carver.paul.dotavision.ImageRecognition.LoadHeroXml;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
-import com.carver.paul.dotavision.ImageRecognition.LoadHeroXml;
+import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.Ui.MainActivityPresenter;
-import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,22 +55,19 @@ public class DataManager {
     private HeroesDetectedPresenter mHeroesDetectedPresenter;
     private AbilityInfoPresenter mAbilityInfoPresenter;
 
-    private List<HeroFromPhotoWithCurrentlySelected> mHeroesInPhoto;
-
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
-    private Subscriber<HeroFromPhoto> mHeroRecognitionSubscriberRx;
 
     /**
      * By calling StartXmlLoading and StartSimilarityTestLoading as soon as the datamanager is
      * created (hopefully when the activity is first launched) this hard work can be done in a
      * background thread immediately. These loading tasks are likely to complete before the results
      * are needed, but the use of rxJava later on means that it doesn't matter if they are not.
+     *
      * @param mainActivityPresenter
      */
     public DataManager(final MainActivityPresenter mainActivityPresenter) {
         mMainActivityPresenter = mainActivityPresenter;
-        mHeroesInPhoto = new ArrayList<>();
 
         StartXmlLoading();
         StartSimilarityTestLoading();
@@ -88,7 +82,7 @@ public class DataManager {
      * @param abilityInfoPresenter
      */
     public void registerPresenters(final HeroesDetectedPresenter heroesDetectedPresenter,
-            final AbilityInfoPresenter abilityInfoPresenter) {
+                                   final AbilityInfoPresenter abilityInfoPresenter) {
         mHeroesDetectedPresenter = heroesDetectedPresenter;
         mHeroesDetectedPresenter.setDataManger(this);
 
@@ -103,31 +97,27 @@ public class DataManager {
 
     /**
      * This will identify the five heroes in the photo.
-     *
+     * <p/>
      * While doing the hard image recognition work in the background the UI will show the results
      * as they become available. The UI goes through the following stages:
-     *
-     *   1) Show the loading animation (e.g. pulsing the camera button).
-     *
-     *   2) Show the images of the heroes we have found in the photo, but not yet identified who
-     *   they are.
-     *
-     *   3) One by one, show the images of the heroes we think they are. Each image is processed to
-     *   identify a match individually, and the results are shown on the UI as they become available.
-     *
-     *   4) Show the abilities of all the heroes identified.
+     * <p/>
+     * 1) Show the loading animation (e.g. pulsing the camera button).
+     * <p/>
+     * 2) Show the images of the heroes we have found in the photo, but not yet identified who
+     * they are.
+     * <p/>
+     * 3) One by one, show the images of the heroes we think they are. Each image is processed to
+     * identify a match individually, and the results are shown on the UI as they become available.
+     * <p/>
+     * 4) Show the abilities of all the heroes identified.
      *
      * @param photo
      */
     public void identifyHeroesInPhoto(final Bitmap photo) {
-        if(!presentersRegistered()) {
+        if (!presentersRegistered()) {
             throw new RuntimeException("Attempting to identify heroes before registering " +
                     "presenters.");
         }
-
-        mHeroesInPhoto.clear();
-
-        prepareHeroRecognitionSubscriber();
 
         // Asks the main activity to show the "detecting heroes" loading screen
         mMainActivityPresenter.startHeroRecognitionLoadingAnimations(photo);
@@ -144,7 +134,7 @@ public class DataManager {
          *
          *   2) doOnNext: call prepareToShowResults, which gets the UI ready to start showing the
          *   results of the image processing (i.e. end the loading animation and show the images
-         *   of the heroes we have found in the photo (but not yet identifeid who they are).
+         *   of the heroes we have found in the photo (but not yet identified who they are).
          *
          *   3) flatMapIterable: turn the list of unidentified heroes in the photo into chain of
          *   Observables so that each can be processed in turn.
@@ -158,92 +148,44 @@ public class DataManager {
          *   available.)
          */
         Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
-                List<HeroFromPhoto>>() {
+                List<HeroImageAndPosition>>() {
             @Override
-            public List<HeroFromPhoto> call(List<HeroInfo> heroInfoList,
-                                            SimilarityTest similarityTest) {
+            public List<HeroImageAndPosition> call(List<HeroInfo> heroInfoList,
+                                                   SimilarityTest similarityTest) {
                 return RecognitionModel.findFiveHeroesInPhoto(photo);
             }
         })
-                .doOnNext(new Action1<List<HeroFromPhoto>>() {
+                .doOnNext(new Action1<List<HeroImageAndPosition>>() {
                     @Override
-                    public void call(List<HeroFromPhoto> unidentifiedHeroes) {
-                        prepareToShowResults(unidentifiedHeroes);
+                    public void call(List<HeroImageAndPosition> heroImages) {
+                        prepareToShowResults(heroImages);
                     }
                 })
-                .flatMapIterable(new Func1<List<HeroFromPhoto>, Iterable<HeroFromPhoto>>() {
+                .flatMapIterable(new Func1<List<HeroImageAndPosition>,
+                        Iterable<HeroImageAndPosition>>() {
                     @Override
-                    public Iterable<HeroFromPhoto> call(List<HeroFromPhoto> heroFromPhotos) {
+                    public Iterable<HeroImageAndPosition> call(List<HeroImageAndPosition> heroFromPhotos) {
                         return heroFromPhotos;
                     }
                 })
-                .map(new Func1<HeroFromPhoto, HeroFromPhoto>() {
+                .map(new Func1<HeroImageAndPosition, SimilarityListAndPosition>() {
                     @Override
-                    public HeroFromPhoto call(HeroFromPhoto unidentifiedHero) {
+                    public SimilarityListAndPosition call(HeroImageAndPosition unidentifiedHero) {
                         return RecognitionModel.identifyHeroFromPhoto(unidentifiedHero,
                                 mSimilarityTestRx.getValue());
                     }
                 })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mHeroRecognitionSubscriberRx);
+                .subscribe(mHeroesDetectedPresenter.getHeroRecognitionSubscriberRx());
     }
 
-    /**
-     * This needs to be called by MainActivity.onDestory to ensure all subscribers no longer
-     * subscribe to any observers, otherwise there could be memory leaks. (I think!)
-     */
-    public void onDestroy() {
-        ensureAllSubscribersUnsubscribed();
+    public List<HeroInfo> getHeroInfo() {
+        return mXmlInfoRx.getValue();
     }
 
-    /**
-     * This class enables presenters to inform the DataManager a hero has changed and that we
-     * need to update the hero abilities we show.
-     *
-     * @param posInPhotoOfChangedHero           The position in the photo of the hero which has
-     *                                          changed (counting between 0 and 4, starting from the
-     *                                          left of the photo)
-     * @param posInSimilarityListOfNewSelection The number in the list of similar heroes which
-     *                                          has been selected. (For each image of a hero in the
-     *                                          photo there is a list of all heroes in the game (the
-     *                                          similarity list) ordered by how similar we think
-     *                                          they are to the image.
-     */
-    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
-                                         int posInSimilarityListOfNewSelection) {
-        HeroFromPhotoWithCurrentlySelected hero = findHeroWithPhotoPos(posInPhotoOfChangedHero);
-        hero.setSelectedHero(posInSimilarityListOfNewSelection);
-
-        HeroInfo heroInfo = findHeroWithName(
-                hero.getHeroSelected().name,
-                mXmlInfoRx.getValue());
-
-        mHeroesDetectedPresenter.changeHero(posInPhotoOfChangedHero, heroInfo.name,
-                posInSimilarityListOfNewSelection);
-        showHeroAbilities();
-    }
-
-    /**
-     * This class enables presenters to inform the DataManager a hero has changed and that we
-     * need to update the hero abilities we show.
-     *
-     * @param posInPhotoOfChangedHero           The position in the photo of the hero which has
-     *                                          changed (counting between 0 and 4, starting from the
-     *                                          left of the photo)
-     * @param newHeroRealName                   The name of the hero which the user has identified
-     *                                          the photo to be.
-     */
-    public void receiveHeroChangedReport(int posInPhotoOfChangedHero,
-                                         String newHeroRealName) {
-        HeroFromPhotoWithCurrentlySelected hero = findHeroWithPhotoPos(posInPhotoOfChangedHero);
-
-        String heroImageName = getHeroImageName(newHeroRealName);
-        hero.setSelectedHero(heroImageName);
-
-        mHeroesDetectedPresenter.changeHero(posInPhotoOfChangedHero, newHeroRealName,
-                hero.getPosInSimilarityListOfSelectedHero());
-        showHeroAbilities();
+    public void sendUpdatedHeroList(List<HeroInfo> heroInfoList) {
+        mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
     }
 
     /**
@@ -295,172 +237,22 @@ public class DataManager {
      * This will make the MainActivity end its animations which show the hero image is being
      * processed. It also sends the unidentified heroes up to the HeroesDetectedPresenter so that
      * the photos of them can be shown.
-     *
+     * <p/>
      * This method is safe to call from a background thread. We use RxJava here to ensure that the
      * required work in the UI this work is done in the mainThread (i.e. the UI thread).
      *
-     * @param unidentifiedHeroes the list of heroes found in the photo, currently no work has been
-     *                           done to identify who they are, we just need to have a photo of them
-     *                           at this stage.
+     * @param heroImages the list of heroes images found in the photo, currently no work has been
+     *                   done to identify who they are, this is just a picture of them and their
+     *                   position in the photo.
      */
-    private void prepareToShowResults(List<HeroFromPhoto> unidentifiedHeroes) {
-        Single.just(unidentifiedHeroes)
+    private void prepareToShowResults(List<HeroImageAndPosition> heroImages) {
+        Single.just(heroImages)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<HeroFromPhoto>>() {
-                    public void call(List<HeroFromPhoto> unidentifiedHeroes) {
+                .subscribe(new Action1<List<HeroImageAndPosition>>() {
+                    public void call(List<HeroImageAndPosition> heroImages) {
                         mMainActivityPresenter.stopHeroRecognitionLoadingAnimations();
-                        mHeroesDetectedPresenter.prepareToShowResults(unidentifiedHeroes,
-                                mXmlInfoRx.getValue());
+                        mHeroesDetectedPresenter.showHeroImages(heroImages);
                     }
                 });
-    }
-
-    /**
-     * Sets up mHeroRecognitionSubscriberRx. As each hero is identified onNext for this subscriber
-     * is called.
-     */
-    private void prepareHeroRecognitionSubscriber() {
-        ensureAllSubscribersUnsubscribed();
-        // Set up the subscriber
-        mHeroRecognitionSubscriberRx = new Subscriber<HeroFromPhoto>() {
-
-            // Show the ability cards for the heroes we have now identified
-            @Override
-            public void onCompleted() {
-                showHeroAbilities();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "mHeroRecognitionSubscriberRx. Unhandled error: " + e.toString());
-            }
-
-            // When a hero has been identified, get the mHeroesDetectedPresenter to show who we
-            // think the hero is
-            @Override
-            public void onNext(HeroFromPhoto hero) {
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Adding " + hero.getSimilarityList().get(0).hero.name);
-                };
-                mHeroesInPhoto.add(new HeroFromPhotoWithCurrentlySelected(hero));
-                mHeroesDetectedPresenter.heroIdentified(hero.getPositionInPhoto(),
-                        getHeroRealName(hero.getSimilarityList().get(0).hero.name));
-            }
-        };
-    }
-
-    private HeroFromPhotoWithCurrentlySelected findHeroWithPhotoPos(int posInPhoto) {
-        for (HeroFromPhotoWithCurrentlySelected hero : mHeroesInPhoto) {
-            if (hero.getHero().getPositionInPhoto() == posInPhoto) {
-                return hero;
-            }
-        }
-        return null;
-    }
-
-    private String getHeroRealName(String heroImageName) {
-        HeroInfo heroInfo = findHeroWithName(heroImageName, mXmlInfoRx.getValue());
-        return heroInfo.name;
-    }
-
-    private String getHeroImageName(String heroRealName) {
-        if (mXmlInfoRx.getValue() == null)
-            throw new RuntimeException("Called getHeroImageName when mHeroInfoFromXml is not " +
-                    "initialised.");
-
-        for(HeroInfo heroInfo : mXmlInfoRx.getValue()) {
-            if (heroInfo.hasName(heroRealName)) {
-                return heroInfo.imageName;
-            }
-        }
-
-        return null;
-    }
-
-    // TODO-beauty: replace FindHeroWithName to use the drawable id int instead of strings
-    private static HeroInfo findHeroWithName(String name, List<HeroInfo> heroInfos) {
-        if (heroInfos == null)
-            throw new RuntimeException("Called findHeroWithName when mHeroInfoFromXml is not " +
-                    "initialised.");
-
-        for (HeroInfo heroInfo : heroInfos) {
-            if (heroInfo.hasName(name)) {
-                return heroInfo;
-            }
-        }
-
-        return null;
-    }
-
-    private void ensureAllSubscribersUnsubscribed() {
-        //TODO-beauty: test if we actually need to unsubscribe from the observer, and if
-        // unsubscribing like this does clear it from memory
-        if(mHeroRecognitionSubscriberRx != null) {
-            mHeroRecognitionSubscriberRx.unsubscribe();
-            mHeroRecognitionSubscriberRx = null;
-        }
-    }
-
-    private void showHeroAbilities() {
-        List<HeroInfo> heroInfoList = new ArrayList<>();
-        for (HeroFromPhotoWithCurrentlySelected hero : mHeroesInPhoto) {
-            HeroInfo heroInfo = findHeroWithName(
-                    hero.getHeroSelected().name,
-                    mXmlInfoRx.getValue());
-            heroInfoList.add(heroInfo);
-        }
-
-        mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
-    }
-}
-
-//TODO-now: sort out HeroFromPhotoWithCurrentlySelected. This is a very ugly class and too many
-// of my classes have "hero" in the name or members. THOUGHT IS NEEDED.
-
-/**
- * This class contains a hero found in a photo (HeroFromPhoto) and the hero which is currently
- * selected from ths list of heroes which are similar to it (i.e. the one who's abilities are shown
- * in the UI.
- */
-class HeroFromPhotoWithCurrentlySelected {
-    private final HeroFromPhoto mHero;
-    private LoadedHeroImage mHeroSelected;
-
-    HeroFromPhotoWithCurrentlySelected(HeroFromPhoto hero) {
-        mHero = hero;
-        setSelectedHero(0);
-    }
-
-    public LoadedHeroImage getHeroSelected() {
-        return mHeroSelected;
-    }
-
-    public HeroFromPhoto getHero() {
-        return mHero;
-    }
-
-    public void setSelectedHero(int posInSimilarityList) {
-        mHeroSelected = mHero.getSimilarityList().get(posInSimilarityList).hero;
-    }
-
-    public void setSelectedHero(String name) {
-        for (HeroAndSimilarity sHero : mHero.getSimilarityList()) {
-            if (sHero.hero.name.equals(name)) {
-                mHeroSelected = sHero.hero;
-                return;
-            }
-        }
-
-        throw new RuntimeException("Couldn't find hero with name " + name + " in similarity list.");
-    }
-
-    public int getPosInSimilarityListOfSelectedHero() {
-        for(int i = 0; i < mHero.getSimilarityList().size(); i++) {
-            if(mHeroSelected == mHero.getSimilarityList().get(i).hero) {
-                return i;
-            }
-        }
-
-        throw new RuntimeException("Couldn't find hero in similarity list.");
     }
 }

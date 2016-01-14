@@ -23,8 +23,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
-import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Models.DataManager;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.io.File;
@@ -36,10 +36,6 @@ public class MainActivityPresenter {
     public MainActivityPresenter(MainActivity view) {
         mView = view;
         mDataManager = new DataManager(this);
-    }
-
-    public void onDestroy() {
-        mDataManager.onDestroy();
     }
 
     public void doImageRecognition(Bitmap photo,

@@ -101,4 +101,12 @@ public class HeroesDetectedFragment extends Fragment {
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
     }
+
+    @Override
+    public void onDestroy() {
+        if (mPresenter != null) {
+            mPresenter.onDestroy();
+        }
+        super.onDestroy();
+    }
 }

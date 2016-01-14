@@ -22,8 +22,10 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.carver.paul.dotavision.BuildConfig;
+import com.carver.paul.dotavision.Models.HeroAndSimilarity;
+import com.carver.paul.dotavision.Models.HeroImageAndPosition;
+import com.carver.paul.dotavision.Models.SimilarityListAndPosition;
 import com.carver.paul.dotavision.Ui.MainActivity;
-import com.carver.paul.dotavision.Models.HeroFromPhoto;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
@@ -48,7 +50,7 @@ public class RecognitionModel {
 
     private static final String TAG = "RecognitionModel";
 
-    public static List<HeroFromPhoto> findFiveHeroesInPhoto(final Bitmap photoBitmap) {
+    public static List<HeroImageAndPosition> findFiveHeroesInPhoto(final Bitmap photoBitmap) {
         if (BuildConfig.DEBUG && MainActivity.sDebugMode == true) mDebugString = "";
 
         // Load the bitmap into a format OpenCV can use
@@ -63,17 +65,20 @@ public class RecognitionModel {
         if (BuildConfig.DEBUG) Log.d(TAG, "Found " + linesList.size() + " top hero lines.");
 
         // Find the rectangles where the images of the individuals heroes are
-        List<HeroFromPhoto> heroes = CalculateHeroRects(linesList, load);
+        List<HeroImageAndPosition> heroImages = CalculateHeroImages(linesList, load);
 
-        if (BuildConfig.DEBUG) Log.d(TAG, "Found " + heroes.size() + " hero rects.");
+        if (BuildConfig.DEBUG) Log.d(TAG, "Hero images identified in photo.");
 
-        return heroes;
+        return heroImages;
     }
 
-    public static HeroFromPhoto identifyHeroFromPhoto(HeroFromPhoto heroFromPhoto,
-                                                 SimilarityTest similarityTest) {
-        heroFromPhoto.calcSimilarityList(similarityTest);
-        return heroFromPhoto;
+    public static SimilarityListAndPosition identifyHeroFromPhoto(HeroImageAndPosition heroImage,
+                                                                  SimilarityTest similarityTest) {
+
+        List<HeroAndSimilarity> similarityList =
+                similarityTest.OrderedListOfTemplateSimilarHeroes(
+                        ImageTools.GetMatFromBitmap(heroImage.getImage()));
+        return new SimilarityListAndPosition(similarityList, heroImage.getPosition());
     }
 
     public static List<Mat> findHeroTopLinesInImage(Mat photo) {
@@ -81,8 +86,8 @@ public class RecognitionModel {
                 Variables.sRange.get(1), Variables.vRange.get(1));
     }
 
-    public static List<HeroFromPhoto> CalculateHeroRects(List<Mat> linesList, Mat backgroundImage) {
-        List<HeroFromPhoto> heroes = new ArrayList<>();
+    public static List<HeroImageAndPosition> CalculateHeroImages(List<Mat> linesList, Mat backgroundImage) {
+        List<HeroImageAndPosition> heroImages = new ArrayList<>();
 
 /*        for( Mat lines : linesList ) {
             HeroFromPhoto hero = new HeroFromPhoto(lines);
@@ -106,12 +111,14 @@ public class RecognitionModel {
 
         int positionInPhoto = 0;
         for (HeroLine hLine : heroLines) {
-            HeroFromPhoto heroImage = calculateHeroFromPhoto(hLine, positionInPhoto, backgroundImage);
+            HeroImageAndPosition heroImage = new HeroImageAndPosition(
+                    calculateHeroImageFromPhoto(hLine, backgroundImage),
+                    positionInPhoto);
             positionInPhoto++;
-            heroes.add(heroImage);
+            heroImages.add(heroImage);
         }
 
-        return heroes;
+        return heroImages;
     }
 
     private static List<Mat> findHeroTopLinesInImage(Mat photo, int lowerHsvS, int lowerHsvV, int upperHsvS, int upperHsvV) {
@@ -205,10 +212,9 @@ public class RecognitionModel {
         return debugString;
     }
 
-    private static HeroFromPhoto calculateHeroFromPhoto(HeroLine line, int positionInPhoto,
-                                                 Mat backgroundImage) {
+    private static Mat calculateHeroImageFromPhoto(HeroLine line, Mat backgroundImage) {
         if (line.isRealLine == false) {
-            return makeFakeHeroFromPhoto(backgroundImage, positionInPhoto);
+            return makeFakeHeroFromPhoto(backgroundImage);
         }
 
         final double rationHeightToWidthbeforeCuts = 1.8;
@@ -236,22 +242,19 @@ public class RecognitionModel {
         if (top < 0) top = 0;
 
         if (left > backgroundImage.width() || top > backgroundImage.height()) {
-            return makeFakeHeroFromPhoto(backgroundImage, positionInPhoto);
+            return makeFakeHeroFromPhoto(backgroundImage);
         }
 
         Rect rect = new Rect(left, top, width, finalHeight);
-        Mat image = new Mat(backgroundImage, rect);
-
-        return new HeroFromPhoto(image, positionInPhoto);
+        return new Mat(backgroundImage, rect);
     }
 
-    private static HeroFromPhoto makeFakeHeroFromPhoto(Mat backgroundImage, int positionInPhoto) {
+    private static Mat makeFakeHeroFromPhoto(Mat backgroundImage) {
         int width = 26;
         int height = 15;//(int) (width / rationHeightToWidthbeforeCuts);
         Rect rect = new Rect(0, 0, width, height);
 
-        Mat image = new Mat(backgroundImage, rect);
-        return new HeroFromPhoto(image, positionInPhoto);
+        return new Mat(backgroundImage, rect);
     }
 }
 

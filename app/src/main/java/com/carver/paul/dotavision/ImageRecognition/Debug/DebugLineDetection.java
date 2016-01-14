@@ -2,7 +2,6 @@ package com.carver.paul.dotavision.ImageRecognition.Debug;
 
 import android.graphics.Bitmap;
 
-import com.carver.paul.dotavision.Models.HeroFromPhoto;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 
@@ -64,17 +63,17 @@ public class DebugLineDetection {
         return ImageTools.GetBitmapFromMat(load);
     }
 
-    public static Bitmap TestRects(Bitmap bitmap) {
+/*    public static Bitmap TestRects(Bitmap bitmap) {
         Mat load = ImageTools.GetMatFromBitmap(bitmap);
 
 
         List<Mat> linesList = RecognitionModel.findHeroTopLinesInImage(load);
-/*        for (Mat lines : linesList) {
+*//*        for (Mat lines : linesList) {
             ImageTools.drawLinesOnImage(lines, load);
-        }*/
+        }*//*
         List<HeroFromPhoto> heroes = RecognitionModel.CalculateHeroRects(linesList, load);
 
 
         return ImageTools.GetBitmapFromMat(load);
-    }
+    }*/
 }
