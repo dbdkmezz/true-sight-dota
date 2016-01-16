@@ -209,7 +209,6 @@ class HeroTextWatcher implements TextWatcher {
     }
 }
 
-//TODO-now fix RecyclerView scrolling. It broke along the way when refactoring to MVP. Don't know why
 /**
  * This makes the recyclerView automatically lock on the image which has been scrolled to.
  *
@@ -218,15 +217,19 @@ class HeroTextWatcher implements TextWatcher {
  */
 class CenterLockListener extends RecyclerView.OnScrollListener {
 
+
+    private final HeroDetectedItemPresenter mPresenter;
+    private final LinearLayoutManager mLayoutManager;
+    private final static String TAG = "CenterLockListener";
+
     //To avoid recursive calls
     private boolean mAutoSet = true;
 
     //The pivot to be snapped to
     private int mCenterPivot;
 
-    private final HeroDetectedItemPresenter mPresenter;
-    private final LinearLayoutManager mLayoutManager;
-    private final static String TAG = "CenterLockListener";
+    // The position in the recycler view of the hero currently being shown
+    private int mCurrentPosition;
 
     public CenterLockListener(HeroDetectedItemPresenter presenter,
                               int center,
@@ -234,6 +237,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
         mPresenter = presenter;
         mCenterPivot = center;
         mLayoutManager = layoutManager;
+        mCurrentPosition = 0;
     }
 
     @Override
@@ -253,8 +257,8 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
             }
         }
         if(!mAutoSet) {
-            if( newState == RecyclerView.SCROLL_STATE_IDLE ) {
-                //ScrollStoppped
+            //The scrolling of the recycler view has stopped (i.e. the user has stopped scrolling)
+            if(newState == RecyclerView.SCROLL_STATE_IDLE) {
                 View view = findCenterView(lm);//get the view nearest to center
 
                 int viewCenter;
@@ -288,23 +292,29 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
         super.onScrolled(recyclerView, dx, dy);
     }
 
-    //TODO-someday: make hero changes scroll nicely
-    public void setHero(int posInSimilarityList) {
-        mLayoutManager.scrollToPositionWithOffset(posInSimilarityList, 0);
+    /**
+     * Scrolls the RecyclerView so that the hero with this position in the list is visible.
+     * @param newPosition   The position in the list of hero images to scroll to
+     */
+    public void setHero(int newPosition) {
+        if(mCurrentPosition != newPosition) {
+            mLayoutManager.scrollToPositionWithOffset(newPosition, 0);
+            mCurrentPosition = newPosition;
+        }
     }
 
     private View findCenterView(LinearLayoutManager lm) {
         int minDistance = 0;
         View view = null;
         View returnView = null;
-        int foundPos = -1;
+        Integer newPosition = null;
         boolean notFound = true;
 
         for(int i = lm.findFirstVisibleItemPosition();
             i <= lm.findLastVisibleItemPosition() && notFound;
             i++) {
 
-            view =lm.findViewByPosition(i);
+            view = lm.findViewByPosition(i);
 
             int center;
             if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
@@ -318,21 +328,22 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
             if(leastDifference <= minDistance || i == lm.findFirstVisibleItemPosition()) {
                 minDistance = leastDifference;
                 returnView = view;
-                foundPos = i;
+                newPosition = i - 1;
             } else {
                 notFound = false;
             }
         }
 
-        if(foundPos != -1) {
-            reportHeroChange(foundPos - 1);
+        if(newPosition != null) {
+            reportHeroChange(newPosition);
         }
 
         return returnView;
     }
 
-    private void reportHeroChange(int positionInSimilarityList) {
-        mPresenter.updateFromSimilarityListChange(positionInSimilarityList);
+    private void reportHeroChange(int newPosition) {
+        mCurrentPosition = newPosition;
+        mPresenter.updateFromSimilarityListChange(newPosition);
     }
 }
 
