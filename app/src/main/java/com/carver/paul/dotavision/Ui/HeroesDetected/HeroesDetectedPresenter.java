@@ -58,12 +58,12 @@ public class HeroesDetectedPresenter {
 
     public HeroesDetectedPresenter(HeroesDetectedFragment view) {
         mView = view;
-        setupSubscriber();
     }
 
     public void reset() {
         mView.removeAllViews();
         mHeroDetectedItemPresenters.clear();
+        setupSubscriber();
     }
 
     public void setDataManger(DataManager dataManger) {

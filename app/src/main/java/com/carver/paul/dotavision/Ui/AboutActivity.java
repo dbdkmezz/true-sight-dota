@@ -24,7 +24,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.carver.paul.dotavision.R;
 
-class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
