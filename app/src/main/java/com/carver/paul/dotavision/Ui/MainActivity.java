@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity
     private MainActivityPresenter mPresenter;
 
     static {
+        // Ensure this library isn't loaded when running robolectric tests, it makes them crash
         if (System.getenv("ROBOLECTRIC") == null) {
             System.loadLibrary("opencv_java3");
         }
@@ -179,21 +180,10 @@ public class MainActivity extends AppCompatActivity
                 Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
     }
 
-    /**
-     * Called when the demo buttin is pressed
-     * Runs the image recognition on a sample photo which is part of the app
-     *
-     * @param view
-     */
     public void demoButton(View view) {
         mPresenter.demoButtonPressed();
     }
 
-    /**
-     * Runs the image recognition code on the last photo which was taken by the camera
-     *
-     * @param view
-     */
     public void useLastPhotoButton(View view) {
         mPresenter.useLastPhotoButtonPressed();
     }
@@ -216,6 +206,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Starts the animations to show that photo recognition is running in the background.
+     * @param photo
+     */
     protected void startHeroRecognitionLoadingAnimations(Bitmap photo) {
         setTopImage(photo);
         slideDemoButtonsOffScreen();
@@ -225,7 +219,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * stopHeroRecognitionLoadingAnimations shows makes the the cameraFab do one final pulse, and
-     * then moves it to the bottom right.
+     * then moves it out to the bottom right.
      */
     protected void stopHeroRecognitionLoadingAnimations() {
         View processingText = findViewById(R.id.text_processing_image);
@@ -244,9 +238,7 @@ public class MainActivity extends AppCompatActivity
             animation.setRepeatCount(0);
             animation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
+                public void onAnimationStart(Animation animation) { }
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
@@ -254,9 +246,7 @@ public class MainActivity extends AppCompatActivity
                 }
 
                 @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
+                public void onAnimationRepeat(Animation animation) { }
             });
         }
     }

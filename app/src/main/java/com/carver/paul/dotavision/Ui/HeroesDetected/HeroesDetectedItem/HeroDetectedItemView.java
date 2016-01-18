@@ -57,6 +57,8 @@ public class HeroDetectedItemView {
     private Context mActivityContext;
     private LinearLayout mLinearLayout;
     private CenterLockListener mRecyclerViewListener;
+    // mRecyclerView holds images of all heroes in the game, so the user can scroll through them
+    // to choose a different hero.
     private RecyclerView mRecyclerView;
     private int mScreenWidth;
 
@@ -92,7 +94,7 @@ public class HeroDetectedItemView {
     protected void setHeroInRecycler(int posInSimilarityList) {
         mRecyclerViewListener.setHero(posInSimilarityList);
 
-        // Give the relevant recyclerview focus. This ensures none of the text views have focus
+        // Give the relevant RecyclerView focus. This ensures none of the text views have focus
         // after setting the name of a hero
         mRecyclerView.requestFocus();
     }
@@ -212,7 +214,7 @@ class HeroTextWatcher implements TextWatcher {
 /**
  * This makes the recyclerView automatically lock on the image which has been scrolled to.
  *
- * Based on code from github, via stackoverflow
+ * Based on code (highly modified now!) from github, via stackoverflow
  * https://github.com/humblerookie/centerlockrecyclerview
  */
 class CenterLockListener extends RecyclerView.OnScrollListener {

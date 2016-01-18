@@ -59,10 +59,10 @@ public class DataManager {
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
 
     /**
-     * By calling StartXmlLoading and StartSimilarityTestLoading as soon as the datamanager is
+     * By calling StartXmlLoading and StartSimilarityTestLoading as soon as DataManager is
      * created (hopefully when the activity is first launched) this hard work can be done in a
      * background thread immediately. These loading tasks are likely to complete before the results
-     * are needed, but the use of rxJava later on means that it doesn't matter if they are not.
+     * are needed, but the use of rxJava later on means that it doesn't matter if they're not.
      *
      * @param mainActivityPresenter
      */
@@ -75,8 +75,11 @@ public class DataManager {
 
     /**
      * Registers the UI presenters needed to send the results of image recognition back to the UI
-     * views. (In MVP presenters are the middleman between the hard work done in the Models, and
+     * views. (In MVP Presenters are the middleman between the hard work done in the Models, and
      * the Views with which the user interacts.)
+     *
+     * This must be called before attempting to identify heroes in a photo otherwise an exception
+     * will be thrown, since we won't have anywhere to send the results to.
      *
      * @param heroesDetectedPresenter
      * @param abilityInfoPresenter
@@ -97,19 +100,9 @@ public class DataManager {
 
     /**
      * This will identify the five heroes in the photo.
-     * <p/>
-     * While doing the hard image recognition work in the background the UI will show the results
-     * as they become available. The UI goes through the following stages:
-     * <p/>
-     * 1) Show the loading animation (e.g. pulsing the camera button).
-     * <p/>
-     * 2) Show the images of the heroes we have found in the photo, but not yet identified who
-     * they are.
-     * <p/>
-     * 3) One by one, show the images of the heroes we think they are. Each image is processed to
-     * identify a match individually, and the results are shown on the UI as they become available.
-     * <p/>
-     * 4) Show the abilities of all the heroes identified.
+     *
+     * The hard hard image recognition work will be done in the background, as work progresses the
+     * UI will show the results as they become available.
      *
      * @param photo
      */
@@ -121,6 +114,7 @@ public class DataManager {
 
         // Asks the main activity to show the "detecting heroes" loading screen
         mMainActivityPresenter.startHeroRecognitionLoadingAnimations(photo);
+
         mHeroesDetectedPresenter.reset();
         mAbilityInfoPresenter.reset();
 
@@ -206,8 +200,7 @@ public class DataManager {
                 observer.onCompleted();
             }
         })
-//TODO-beauty: check that the XML parsing should be done on the io thread. Is all the io work done
-// at the start instantly?
+//TODO-beauty: check if the XML parsing should be done on the io thread instead?
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mXmlInfoRx);
@@ -234,16 +227,16 @@ public class DataManager {
     }
 
     /**
-     * This will make the MainActivity end its animations which show the hero image is being
+     * This will make the MainActivity end the animations used show the hero image is being
      * processed. It also sends the unidentified heroes up to the HeroesDetectedPresenter so that
      * the photos of them can be shown.
-     * <p/>
-     * This method is safe to call from a background thread. We use RxJava here to ensure that the
-     * required work in the UI this work is done in the mainThread (i.e. the UI thread).
+     *
+     * This method is safe to call from a background thread. RxJava is used here to ensure that the
+     * required work in the UI this work will be done in the UI thread.
      *
      * @param heroImages the list of heroes images found in the photo, currently no work has been
-     *                   done to identify who they are, this is just a picture of them and their
-     *                   position in the photo.
+     *                   done to identify who they are, these are just pictures of them with their
+     *                   positions in the photo.
      */
     private void prepareToShowResults(List<HeroImageAndPosition> heroImages) {
         Single.just(heroImages)

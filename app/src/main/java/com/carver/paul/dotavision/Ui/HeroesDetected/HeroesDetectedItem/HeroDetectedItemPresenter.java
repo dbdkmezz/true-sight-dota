@@ -81,7 +81,10 @@ public class HeroDetectedItemPresenter {
     }
 
     /**
-     * The hero selected has changed to the one which is posInSimilarityList in the Similarity list
+     * Used when the hero selected in the RecyclerView list of similar hero images has changed. This
+     * will update the name accordingly and tell the parent presenter about the change to update
+     * other views as needed.
+     *
      * @param posInSimilarityList the position in the similarity list of the hero we have changed to
      */
     protected void updateFromSimilarityListChange(int posInSimilarityList) {
@@ -91,6 +94,13 @@ public class HeroDetectedItemPresenter {
         mParentPresenter.sendUpdatedHeroList();
     }
 
+    /**
+     * Used when the name of the hero has been changed by the user. This will update the name
+     * RecyclerView showing images of similar heroes and tell the parent presenter about the change
+     * to update other views as needed.
+     *
+     * @param newHeroName
+     */
     protected void updateFromNameChange(String newHeroName) {
         mName = newHeroName;
         String imageName = mParentPresenter.getHeroImageName(newHeroName);

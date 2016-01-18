@@ -44,6 +44,10 @@ public class AbilityInfoPresenter {
         mView.reset();
     }
 
+    /**
+     * Gets the AbilityInfoFragment to show ability cards for all of heroes' abilities
+     * @param heroes    The list of heroes whose abilities to show.
+     */
     public void showHeroAbilities(List<HeroInfo> heroes) {
         mView.reset();
 

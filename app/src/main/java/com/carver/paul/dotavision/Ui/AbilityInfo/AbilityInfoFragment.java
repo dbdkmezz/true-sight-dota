@@ -46,7 +46,6 @@ public class AbilityInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View inflateView  = inflater.inflate(R.layout.fragment_ability_info, container, false);
         mParentLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_results_info);
         mPresenter = new AbilityInfoPresenter(this);
@@ -58,7 +57,7 @@ public class AbilityInfoFragment extends Fragment {
     }
 
     /**
-     * Removes all ability cards from the view so that the view is empty
+     * Removes all ability cards from the view so that the view will be empty
      */
     public void reset() {
         mParentLinearLayout.removeAllViews();

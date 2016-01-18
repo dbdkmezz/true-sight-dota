@@ -33,9 +33,9 @@ import java.util.List;
 import rx.Subscriber;
 
 /**
- * This class shows the heroes which have been found in the image.
+ * This class shows the five heroes which have been found in the image.
  *
- * For each of them we show:
+ * For each hero we use HeroesDetectedItem to show:
  *
  *   1) The image of the hero we found in the photo.
  *
@@ -44,8 +44,6 @@ import rx.Subscriber;
  *   3) A horizontal RecyclerView showing all the images of the heroes in the game, in order of how
  *   similar we think they are to the image of the hero in the photo. The user can scroll through
  *   these to select a different hero.
- *
- *   These is a HeroDetectedItem for each hero.
  */
 public class HeroesDetectedPresenter {
     private static final String TAG = "HeroesDetectedPresenter";
@@ -137,7 +135,6 @@ public class HeroesDetectedPresenter {
                     Log.d(TAG, "Adding "
                             + similarityListAndPosition.getSimilarityList().get(0).hero.name);
                 }
-                ;
 
                 completeHeroDetectedSetup(similarityListAndPosition);
             }
@@ -171,7 +168,7 @@ public class HeroesDetectedPresenter {
                 throw new RuntimeException("Attempting to access hero info but mDataManager not " +
                         "ready.");
             }
-            mAllHeroNames = getHeroNames(mDataManger.getHeroInfo());
+            mAllHeroNames = getAllHeroNames(mDataManger.getHeroInfo());
         }
     }
 
@@ -185,7 +182,13 @@ public class HeroesDetectedPresenter {
         throw new RuntimeException("Can't find presenter for hero in photo");
     }
 
-    private static List<String> getHeroNames(List<HeroInfo> heroInfoFromXml) {
+    /**
+     * Returns a list of all the names of heroes in the game (using the data loaded in
+     * heroInfoFromXml)
+     * @param heroInfoFromXml
+     * @return
+     */
+    private static List<String> getAllHeroNames(List<HeroInfo> heroInfoFromXml) {
         List<String> names = new ArrayList<>();
         for(HeroInfo heroInfo : heroInfoFromXml) {
             names.add(heroInfo.name);

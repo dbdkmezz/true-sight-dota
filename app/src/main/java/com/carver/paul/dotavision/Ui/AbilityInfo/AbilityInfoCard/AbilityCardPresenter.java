@@ -25,6 +25,10 @@ import com.carver.paul.dotavision.R;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO-beauty: Ability cards are slow -- the UI hangs for a second when we try to draw a lot of them
+// Look into whether this is because of the use of StringBuilder here, and if it would be worth
+// caching strings as they are loaded.
+
 /**
  * The presenter behind AbilityCardView
  */

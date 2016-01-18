@@ -72,6 +72,9 @@ public class MainActivityPresenter {
         }
     }
 
+    /**
+     * Runs image recognition on the sample photo
+     */
     protected void demoButtonPressed() {
         Bitmap SamplePhoto = mView.getSamplePhoto();
         mView.doImageRecognition(SamplePhoto);
@@ -88,6 +91,12 @@ public class MainActivityPresenter {
         mView.doImageRecognition(bitmap);
     }
 
+    /**
+     * Crops the photo at photoPath to the size needed by image recognition, returning the resulting
+     * Bitmap
+     * @param photoPath
+     * @return
+     */
     static private Bitmap CreateCroppedBitmap(String photoPath) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inMutable = true;
