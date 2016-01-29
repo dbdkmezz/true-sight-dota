@@ -32,6 +32,9 @@
         images and names are property of Valve Corporation. This app is not affiliated with Valve
         Corporation.</string>
 
+    <string name="counter_picker">Counter picker</string>
+    <string name="hero_abilities">Hero abilities</string>
+
     <string name="cooldown">COOLDOWN</string>
     <string name="mana_cost">MANA COST</string>
     <string name="passive">Passive ability</string>

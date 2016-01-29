@@ -80,6 +80,15 @@ public class MainActivityPresenter {
         mView.doImageRecognition(SamplePhoto);
     }
 
+    protected void counterPickerButtonPressed() {
+        mView.showHeroAbilitiesButton();
+    }
+
+    protected void heroAbilitiesButtonPressed() {
+        mView.showCounterPickerButton();
+    }
+
+
     protected void doImageRecognitionOnPhoto() {
         File mediaFile = new File(mView.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
         if (!mediaFile.exists()) {

@@ -56,6 +56,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <Button
+                android:id="@+id/button_counter_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:onClick="counterPickerButton"
+                android:text="@string/counter_picker"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/button_hero_abilities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:onClick="heroAbilitiesButton"
+                android:text="@string/hero_abilities"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+
             <fragment
                 android:name="com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment"
                 android:id="@+id/fragment_ability_info"

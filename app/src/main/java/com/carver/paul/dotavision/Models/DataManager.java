@@ -58,6 +58,8 @@ public class DataManager {
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
 
+    private SqlLoader mSqlLoader;
+
     /**
      * By calling StartXmlLoading and StartSimilarityTestLoading as soon as DataManager is
      * created (hopefully when the activity is first launched) this hard work can be done in a
@@ -69,8 +71,9 @@ public class DataManager {
     public DataManager(final MainActivityPresenter mainActivityPresenter) {
         mMainActivityPresenter = mainActivityPresenter;
 
-        StartXmlLoading();
-        StartSimilarityTestLoading();
+        startXmlLoading();
+        startSimilarityTestLoading();
+        startSqlLoading();
     }
 
     /**
@@ -186,7 +189,7 @@ public class DataManager {
      * Create an observable to load the xml file in the background. mXmlInfoRx is subscribed to
      * it and will complete when the file has been loaded.
      */
-    private void StartXmlLoading() {
+    private void startXmlLoading() {
         mXmlInfoRx = AsyncSubject.create();
 
         Observable.create(new Observable.OnSubscribe<List<HeroInfo>>() {
@@ -211,7 +214,7 @@ public class DataManager {
      * the game to be used in image recognition) in the background. mSimilarityTestRx is subscribed
      * to this observable and will complete when the file has been loaded.
      */
-    private void StartSimilarityTestLoading() {
+    private void startSimilarityTestLoading() {
         mSimilarityTestRx = AsyncSubject.create();
 
         Observable.create(new Observable.OnSubscribe<SimilarityTest>() {
@@ -224,6 +227,10 @@ public class DataManager {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mSimilarityTestRx);
+    }
+
+    private void startSqlLoading() {
+        mSqlLoader = new SqlLoader(mMainActivityPresenter.getContext());
     }
 
     /**

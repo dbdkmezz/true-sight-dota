@@ -39,6 +39,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.carver.paul.dotavision.BuildConfig;
@@ -188,6 +189,14 @@ public class MainActivity extends AppCompatActivity
         mPresenter.useLastPhotoButtonPressed();
     }
 
+    public void counterPickerButton(View view) {
+        mPresenter.counterPickerButtonPressed();
+    }
+
+    public void heroAbilitiesButton(View view) {
+        mPresenter.heroAbilitiesButtonPressed();
+    }
+
     // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
     // TODO-next: Make takePhoto save in the right media location, I think media store wasn't right
     public void takePhoto(View view) {
@@ -279,6 +288,20 @@ public class MainActivity extends AppCompatActivity
         mPresenter.doImageRecognition(bitmap,
                 heroesDetectedFragment.getPresenter(),
                 abilityInfoFragment.getPresenter());
+    }
+
+    protected void showCounterPickerButton() {
+        Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
+        counterPicker.setVisibility(View.VISIBLE);
+        Button heroAbilities = (Button) findViewById(R.id.button_counter_picker);
+        heroAbilities.setVisibility(View.GONE);
+    }
+
+    protected void showHeroAbilitiesButton() {
+        Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
+        counterPicker.setVisibility(View.GONE);
+        Button heroAbilities = (Button) findViewById(R.id.button_counter_picker);
+        heroAbilities.setVisibility(View.VISIBLE);
     }
 
     private void setTopImage(Bitmap photoBitmap) {
