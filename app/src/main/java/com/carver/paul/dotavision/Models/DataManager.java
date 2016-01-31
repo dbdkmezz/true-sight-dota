@@ -20,6 +20,7 @@ package com.carver.paul.dotavision.Models;
 
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.carver.paul.dotavision.ImageRecognition.LoadHeroXml;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;

@@ -24,6 +24,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class SqlLoader {
@@ -32,8 +33,11 @@ class SqlLoader {
     private List<HeroAndAdvantages> mHeroes;
 
     protected SqlLoader(Context context) {
+        Log.d(TAG, "1");
         DataBaseHelper dbHelper = new DataBaseHelper(context);
+        Log.d(TAG, "2");
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Log.d(TAG, "3");
 
         mHeroes = new ArrayList<>();
 
@@ -46,6 +50,7 @@ class SqlLoader {
 
         c.close();
         db.close();
+        Log.d(TAG, "4");
 
         List<String> testNames = new ArrayList<>();
         testNames.add("Disruptor");
@@ -55,6 +60,7 @@ class SqlLoader {
         testNames.add("Io");
 
         calculateAdvantages(context, testNames);
+
     }
 
     protected void calculateAdvantages(Context context, List<String> heroesInPhoto) {
@@ -70,7 +76,6 @@ class SqlLoader {
                     advantages.add(0d);
                 } else {
                     String sqlSafeEnemyName = enemyName.replace("'", "");
-                    Log.d(TAG, "Name :" + sqlSafeEnemyName + ". id: " + heroId);
                     Cursor c = db.rawQuery(
                             "SELECT advantage " +
                                     "FROM Heroes, Advantages " +
@@ -79,13 +84,59 @@ class SqlLoader {
                                     "  AND Advantages.hero_id = " + heroId, null);
                     c.moveToFirst();
                     advantages.add(c.getDouble(c.getColumnIndexOrThrow("advantage")));
+                    c.close();
                 }
             }
             hero.setAdvantages(advantages);
         }
         
-        mHeroes.sort();
+        Collections.sort(mHeroes);
 
         db.close();
     }
+
+    // This method seems ~ 5% quicker, but the code is less nice, so might as well use the method
+    // with a join
+/*    protected void calculateAdvantagesNoJoin(Context context, List<String> heroesInPhoto) {
+        DataBaseHelper dbHelper = new DataBaseHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        List<Integer> enemyIds = new ArrayList<>();
+        //Cursor c;
+        for(String enemyName : heroesInPhoto) {
+            String sqlSafeEnemyName = enemyName.replace("'", "");
+            Cursor c = db.rawQuery(
+                    "SELECT _id " +
+                            "FROM Heroes " +
+                            "WHERE Heroes.name = '" + sqlSafeEnemyName + "'", null);
+            c.moveToFirst();
+            enemyIds.add(c.getInt(c.getColumnIndexOrThrow("_id")));
+            c.close();
+        }
+
+        for(HeroAndAdvantages hero : mHeroes) {
+            int heroId = hero.getId();
+            List<Double> advantages = new ArrayList<>();
+            for(Integer enemyId : enemyIds) {
+                // If the the enemy hero is the same as this one then neither has any advantage
+                if(enemyId == heroId) {
+                    advantages.add(0d);
+                } else {
+                    Cursor c = db.rawQuery(
+                            "SELECT advantage " +
+                                    "FROM Advantages " +
+                                    "WHERE hero_id = " + heroId + " " +
+                                    "  AND enemy_id = " + enemyId, null);
+                    c.moveToFirst();
+                    advantages.add(c.getDouble(c.getColumnIndexOrThrow("advantage")));
+                    c.close();
+                }
+            }
+            hero.setAdvantages(advantages);
+        }
+
+        Collections.sort(mHeroes);
+
+        db.close();
+    }*/
 }
