@@ -19,22 +19,23 @@
 package com.carver.paul.dotavision.Ui.CounterPicker;
 
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
+import com.carver.paul.dotavision.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CounterPickerPresenter {
     private CounterPickerFragment mView;
+    private int mRoleFilter = R.string.all_roles;
+    private List<HeroAndAdvantages> mHeroesAndAdvantages = new ArrayList<>();
 
     CounterPickerPresenter(CounterPickerFragment view) {
         mView = view;
     }
 
-    public void showAdvantages(List<HeroAndAdvantages> heroes) {
-        reset();
-
-        for(HeroAndAdvantages hero : heroes) {
-            mView.addRow(hero.getName(), hero.getAdvantages(), hero.getTotalAdvantage());
-        }
+    public void showAdvantages(List<HeroAndAdvantages> heroesAndAdvantages) {
+        mHeroesAndAdvantages = heroesAndAdvantages;
+        showAdvantages();
     }
 
     public void reset() {
@@ -47,5 +48,27 @@ public class CounterPickerPresenter {
 
     public void show() {
         mView.show();
+    }
+
+    protected void setRoleFilter(int roleFilter) {
+        if(roleFilter == mRoleFilter) {
+            return;
+        } else {
+            mRoleFilter = roleFilter;
+            showAdvantages();
+        }
+    }
+
+    private void showAdvantages() {
+        reset();
+
+        for(HeroAndAdvantages hero : mHeroesAndAdvantages) {
+            if(mRoleFilter == R.string.all_roles
+                    || (mRoleFilter == R.string.carry_role && hero.isCarry())
+                    || (mRoleFilter == R.string.support_role && hero.isSupport())
+                    || (mRoleFilter == R.string.mid_role && hero.isMid())) {
+                mView.addRow(hero.getName(), hero.getAdvantages(), hero.getTotalAdvantage());
+            }
+        }
     }
 }

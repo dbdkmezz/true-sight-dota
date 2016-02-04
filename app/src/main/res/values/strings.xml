@@ -1,6 +1,10 @@
 
 <!DOCTYPE resources [
     <!ENTITY appname "True Sight for Dota 2">
+    <!ENTITY all_roles "All">
+    <!ENTITY support_role "Support">
+    <!ENTITY carry_role "Carry">
+    <!ENTITY mid_role "Mid">
     ]>
 
 <resources>
@@ -47,4 +51,16 @@
     <string name="silences">Silences</string>
     <string name="no_silences_found">No silences found!</string>
     <string name="ultimates">Ultimates</string>
+
+    <string name="all_roles">&all_roles;</string>
+    <string name="carry_role">&carry_role;</string>
+    <string name="mid_role">&mid_role;</string>
+    <string name="support_role">&support_role;</string>
+
+    <string-array name="roles_array">
+        <item>&all_roles;</item>
+        <item>&carry_role;</item>
+        <item>&mid_role;</item>
+        <item>&support_role;</item>
+    </string-array>
 </resources>

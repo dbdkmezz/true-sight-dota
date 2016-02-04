@@ -41,6 +41,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.functions.Func3;
+import rx.functions.FuncN;
 import rx.schedulers.Schedulers;
 import rx.subjects.AsyncSubject;
 
@@ -60,6 +62,7 @@ public class DataManager {
 
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
+    private AsyncSubject<SqlLoader> mAdvantagesSqlRx;
 
     /**
      * By calling StartXmlLoading and StartSimilarityTestLoading as soon as DataManager is
@@ -74,6 +77,7 @@ public class DataManager {
 
         startXmlLoading();
         startSimilarityTestLoading();
+        startSqlLoading();
     }
 
     /**
@@ -148,11 +152,12 @@ public class DataManager {
          *   around 0.2 seconds, so it is good that we can show the results as they become
          *   available.)
          */
-        Observable.zip(mXmlInfoRx, mSimilarityTestRx, new Func2<List<HeroInfo>, SimilarityTest,
-                List<HeroImageAndPosition>>() {
+        Observable.zip(mXmlInfoRx, mSimilarityTestRx, mAdvantagesSqlRx, new Func3<List<HeroInfo>,
+                SimilarityTest, SqlLoader, List<HeroImageAndPosition>>() {
             @Override
             public List<HeroImageAndPosition> call(List<HeroInfo> heroInfoList,
-                                                   SimilarityTest similarityTest) {
+                                                   SimilarityTest similarityTest,
+                                                   SqlLoader sqlLoader) {
                 return RecognitionModel.findFiveHeroesInPhoto(photo);
             }
         })
@@ -191,15 +196,41 @@ public class DataManager {
     }
 
     private void showAdvantages(List<HeroInfo> heroInfoList) {
-        List<String> heroNames = new ArrayList<>();
+        final List<String> heroNames = new ArrayList<>();
         for(HeroInfo heroInfo : heroInfoList) {
             heroNames.add(heroInfo.name);
         }
 
+        mAdvantagesSqlRx.map(new Func1<SqlLoader, List<HeroAndAdvantages>>() {
+            @Override
+            public List<HeroAndAdvantages> call(SqlLoader sqlLoader) {
+                return sqlLoader.calculateAdvantages(heroNames);
+            }
+        })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<HeroAndAdvantages>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "mAdvantagesSqlRx. Unhandled error: " + e.toString());
+                    }
+
+                    @Override
+                    public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
+                        mCounterPickerPresenter.showAdvantages(heroAndAdvantages);
+                    }
+                });
+/*
+
         List<HeroAndAdvantages> heroes =
                 SqlLoader.calculateAdvantages(mMainActivityPresenter.getContext(), heroNames);
 
-        mCounterPickerPresenter.showAdvantages(heroes);
+        mCounterPickerPresenter.showAdvantages(heroes);*/
     }
 
     /**
@@ -244,6 +275,21 @@ public class DataManager {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mSimilarityTestRx);
+    }
+
+    private void startSqlLoading() {
+        mAdvantagesSqlRx = AsyncSubject.create();
+
+        Observable.create(new Observable.OnSubscribe<SqlLoader>() {
+            @Override
+            public void call(Subscriber<? super SqlLoader> subscriber) {
+                subscriber.onNext(new SqlLoader(mMainActivityPresenter.getContext()));
+                subscriber.onCompleted();
+            }
+        })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mAdvantagesSqlRx);
     }
 
     /**

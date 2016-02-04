@@ -36,8 +36,8 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     private static final String ID_COLUMN = "_id";
     private static final String NAME_COLUMN = "name";
-    private static final String CARRY_COLUMN = "is_support";
-    private static final String SUPPORT_COLUMN = "is_carry";
+    private static final String CARRY_COLUMN = "is_carry";
+    private static final String SUPPORT_COLUMN = "is_support";
     private static final String MID_COLUMN = "is_mid";
 
     @Override
@@ -55,6 +55,18 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         return mTotalAdvantage;
     }
 
+    public boolean isCarry() {
+        return mIsCarry;
+    }
+
+    public boolean isSupport() {
+        return mIsSupport;
+    }
+
+    public boolean isMid() {
+        return mIsMid;
+    }
+
     protected HeroAndAdvantages(Cursor c) {
         mId = c.getInt(c.getColumnIndexOrThrow(ID_COLUMN));
         mName = c.getString(c.getColumnIndexOrThrow(NAME_COLUMN));
@@ -69,15 +81,23 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     protected void setAdvantages(List<Double> advantages) {
         mAdvantages = advantages;
+        calculateTotalAdvantage();
+    }
 
-        mTotalAdvantage = 0;
-        for(Double d : mAdvantages) {
-            mTotalAdvantage += d;
-        }
+    protected void setAdvantage(double advantage, int position) {
+        mAdvantages.set(position, advantage);
+        calculateTotalAdvantage();
     }
 
     protected int getId() {
         return mId;
+    }
+
+    private void calculateTotalAdvantage() {
+        mTotalAdvantage = 0;
+        for(Double d : mAdvantages) {
+            mTotalAdvantage += d;
+        }
     }
 
     private static boolean intToBool(int i) {
