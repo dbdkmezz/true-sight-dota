@@ -204,7 +204,7 @@ public class DataManager {
         showAdvantages(heroInfoList);
     }
 
-    private void showAdvantages(List<HeroInfo> heroInfoList) {
+    private void showAdvantages(final List<HeroInfo> heroInfoList) {
         final List<String> heroNames = new ArrayList<>();
         for(HeroInfo heroInfo : heroInfoList) {
             heroNames.add(heroInfo.name);
@@ -216,6 +216,8 @@ public class DataManager {
                 return sqlLoader.calculateAdvantages(heroNames);
             }
         })
+                // Running this on the database thread ensures we don't load the database more than
+                // once at a time. (The database reading code is not threadsafe.)
                 .subscribeOn(databaseThread)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<HeroAndAdvantages>>() {
@@ -231,7 +233,7 @@ public class DataManager {
 
                     @Override
                     public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
-                        mCounterPickerPresenter.showAdvantages(heroAndAdvantages);
+                        mCounterPickerPresenter.showAdvantages(heroAndAdvantages, heroInfoList);
                     }
                 });
 /*

@@ -19,6 +19,7 @@
 package com.carver.paul.dotavision.Ui.CounterPicker;
 
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
+import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
@@ -33,7 +34,8 @@ public class CounterPickerPresenter {
         mView = view;
     }
 
-    public void showAdvantages(List<HeroAndAdvantages> heroesAndAdvantages) {
+    public void showAdvantages(List<HeroAndAdvantages> heroesAndAdvantages,
+                               List<HeroInfo> enemyHeroes) {
         mHeroesAndAdvantages = heroesAndAdvantages;
         showAdvantages();
     }

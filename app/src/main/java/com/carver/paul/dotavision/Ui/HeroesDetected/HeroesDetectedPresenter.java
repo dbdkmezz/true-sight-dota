@@ -86,8 +86,7 @@ public class HeroesDetectedPresenter {
         List<HeroInfo> heroInfoList = new ArrayList<>();
         for (HeroDetectedItemPresenter hero : mHeroDetectedItemPresenters) {
             HeroInfo heroInfo = findHeroWithName(hero.getName(), mDataManger.getHeroInfo());
-            if (!heroInfoList.contains(heroInfo))
-                heroInfoList.add(heroInfo);
+            heroInfoList.add(heroInfo);
         }
 
         mDataManger.sendUpdatedHeroList(heroInfoList);

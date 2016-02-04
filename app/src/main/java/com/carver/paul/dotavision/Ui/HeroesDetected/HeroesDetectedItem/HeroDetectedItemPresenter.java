@@ -102,6 +102,8 @@ public class HeroDetectedItemPresenter {
      * @param newHeroName
      */
     protected void updateFromNameChange(String newHeroName) {
+        if(mName.equals(newHeroName)) return;
+
         mName = newHeroName;
         String imageName = mParentPresenter.getHeroImageName(newHeroName);
 
