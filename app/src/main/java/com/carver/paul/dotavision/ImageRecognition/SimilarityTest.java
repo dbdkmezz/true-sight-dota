@@ -42,7 +42,7 @@ import java.util.List;
 public class SimilarityTest {
     private List<LoadedHeroImage> mHeroes = new ArrayList<>();
 
-    static final private List<Pair<Integer, String>> mHeroIconDrawables;
+    static final public List<Pair<Integer, String>> mHeroIconDrawables;
     static final private String TAG = "SimilarityTest";
 
     // TODO-someday: There's got to be a better way of saving the hero icon drawables other than a huge list of int and String pairs!

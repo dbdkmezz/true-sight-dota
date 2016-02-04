@@ -64,7 +64,7 @@ class AbilityCardPresenter {
      * Gets the view to show the icon for this ability
      */
     private void setupIcon() {
-        int drawable = ImageTools.GetDrawableFromString(mAbility.imageName);
+        int drawable = ImageTools.getDrawableForAbility(mAbility.imageName);
         if (drawable != -1)
             mView.setIcon(drawable);
     }

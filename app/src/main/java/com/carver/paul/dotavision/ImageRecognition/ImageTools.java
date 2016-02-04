@@ -69,9 +69,17 @@ public class ImageTools {
         Imgproc.HoughLinesP(mask, lines, 1, Math.PI / 180, 80, minLineLength, 10);
     }
 
-    public static int GetDrawableFromString(String string) {
+    public static int getDrawableForAbility(String abilityImageName) {
         for (Pair<Integer, String> pair : Variables.abilityDrawables) {
-            if (pair.second.equals(string))
+            if (pair.second.equals(abilityImageName))
+                return pair.first;
+        }
+        return -1;
+    }
+
+    public static int getDrawableForHero(String heroImageName) {
+        for (Pair<Integer, String> pair : SimilarityTest.mHeroIconDrawables) {
+            if (pair.second.equals(heroImageName))
                 return pair.first;
         }
         return -1;

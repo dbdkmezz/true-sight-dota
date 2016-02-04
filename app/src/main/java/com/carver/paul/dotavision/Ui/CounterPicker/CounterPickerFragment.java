@@ -19,20 +19,21 @@
 package com.carver.paul.dotavision.Ui.CounterPicker;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.carver.paul.dotavision.R;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,8 +41,12 @@ import java.util.List;
 
 public class CounterPickerFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    static private final List<Integer> advantageIds = Arrays.asList(R.id.advantage1,
+    static private final List<Integer> headingImageViewIds = Arrays.asList(R.id.hero1,
+            R.id.hero2, R.id.hero3, R.id.hero4, R.id.hero5);
+
+    static private final List<Integer> advantageTextViewIds = Arrays.asList(R.id.advantage1,
             R.id.advantage2, R.id.advantage3, R.id.advantage4, R.id.advantage5);
+
     static private final List<Integer> roleStringIds = Arrays.asList(R.string.all_roles,
             R.string.carry_role, R.string.support_role, R.string.mid_role);
 
@@ -58,6 +63,8 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         mPresenter = new CounterPickerPresenter(this);
 
         setupRolesSpinner(inflater, inflateView);
+
+        hide();
 
         return inflateView;
     }
@@ -98,6 +105,23 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         mParentLinearLayout.setVisibility(View.VISIBLE);
     }
 
+    protected void showHeadings(List<Integer> enemyImages) {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View headerView = inflater.inflate(R.layout.item_counter_picker_header, mItemsLinearLayout,
+                false);
+
+        for(int i = 0; i < enemyImages.size(); i++) {
+            ImageView imageView = (ImageView) headerView.findViewById(headingImageViewIds.get(i));
+            imageView.setImageResource(enemyImages.get(i));
+        }
+
+        mItemsLinearLayout.addView(headerView);
+    }
+
+    //TODO-soon: when showing all the heroes adding all the rows is a little slow. Need something
+    // more efficient (only showing the visible rows? like with a recyclerView?)
+
+    //TODO-now: if the advantage is >1 or <-1 make it bold (or a diff colour?)
     protected void addRow(String name, List<Double> advantages, Double totalAdvantage) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View itemView = inflater.inflate(R.layout.item_counter_picker, mItemsLinearLayout,
@@ -106,9 +130,16 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         TextView nameTextView = (TextView) itemView.findViewById(R.id.name);
         nameTextView.setText(name);
 
-        for(int i = 0; i < advantages.size() && i < advantageIds.size(); i++) {
-            TextView advTextView = (TextView) itemView.findViewById(advantageIds.get(i));
+        for(int i = 0; i < advantages.size() && i < advantageTextViewIds.size(); i++) {
+            TextView advTextView = (TextView) itemView.findViewById(advantageTextViewIds.get(i));
             advTextView.setText(String.format("%.1f", advantages.get(i)));
+            if(advantages.get(i) > 1) {
+                advTextView.setTypeface(null, Typeface.BOLD);
+                //advTextView.setTextColor(Color.GREEN);
+            } /*else if(advantages.get(i) < -1) {
+                advTextView.setTypeface(null, Typeface.BOLD);
+                advTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            }*/
         }
 
         TextView totalAdvTextView = (TextView) itemView.findViewById(R.id.total_advantage);

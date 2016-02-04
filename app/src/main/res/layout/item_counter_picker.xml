@@ -10,36 +10,43 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textStyle="bold"
         android:layout_weight="4"/>
 
     <TextView
         android:id="@+id/advantage1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/advantage2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/advantage3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/advantage4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/advantage5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="1"/>
 
 <!--    Extra view to ensure the final view has a little more space-->
@@ -52,6 +59,7 @@
         android:id="@+id/total_advantage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:layout_weight="1"/>
 

@@ -18,6 +18,7 @@
 
 package com.carver.paul.dotavision.Ui.CounterPicker;
 
+import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.R;
@@ -29,6 +30,7 @@ public class CounterPickerPresenter {
     private CounterPickerFragment mView;
     private int mRoleFilter = R.string.all_roles;
     private List<HeroAndAdvantages> mHeroesAndAdvantages = new ArrayList<>();
+    private List<HeroInfo> mEnemyHeroes = new ArrayList<>();
 
     CounterPickerPresenter(CounterPickerFragment view) {
         mView = view;
@@ -37,6 +39,9 @@ public class CounterPickerPresenter {
     public void showAdvantages(List<HeroAndAdvantages> heroesAndAdvantages,
                                List<HeroInfo> enemyHeroes) {
         mHeroesAndAdvantages = heroesAndAdvantages;
+        mEnemyHeroes = enemyHeroes;
+        reset();
+        showHeadings();
         showAdvantages();
     }
 
@@ -57,13 +62,21 @@ public class CounterPickerPresenter {
             return;
         } else {
             mRoleFilter = roleFilter;
+            reset();
+            showHeadings();
             showAdvantages();
         }
     }
 
-    private void showAdvantages() {
-        reset();
+    private void showHeadings() {
+        List<Integer> imageIds = new ArrayList<>();
+        for(HeroInfo hero : mEnemyHeroes) {
+            imageIds.add(ImageTools.getDrawableForHero(hero.imageName));
+        }
+        mView.showHeadings(imageIds);
+    }
 
+    private void showAdvantages() {
         for(HeroAndAdvantages hero : mHeroesAndAdvantages) {
             if(mRoleFilter == R.string.all_roles
                     || (mRoleFilter == R.string.carry_role && hero.isCarry())
