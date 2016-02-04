@@ -33,8 +33,10 @@ import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import rx.Observable;
+import rx.Scheduler;
 import rx.Single;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -64,6 +66,11 @@ public class DataManager {
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
     private AsyncSubject<SqlLoader> mAdvantagesSqlRx;
 
+    // We need a separate thread for working with the database to ensure we do not try to read it
+    // more than one time at once.
+    private Scheduler databaseThread;
+
+
     /**
      * By calling StartXmlLoading and StartSimilarityTestLoading as soon as DataManager is
      * created (hopefully when the activity is first launched) this hard work can be done in a
@@ -78,6 +85,8 @@ public class DataManager {
         startXmlLoading();
         startSimilarityTestLoading();
         startSqlLoading();
+
+        databaseThread = Schedulers.from(Executors.newSingleThreadExecutor());
     }
 
     /**
@@ -207,7 +216,7 @@ public class DataManager {
                 return sqlLoader.calculateAdvantages(heroNames);
             }
         })
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(databaseThread)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<HeroAndAdvantages>>() {
                     @Override

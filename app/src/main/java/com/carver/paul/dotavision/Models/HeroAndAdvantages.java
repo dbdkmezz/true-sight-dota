@@ -25,24 +25,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
-    private int mId;
-    private String mName;
-    private boolean mIsCarry;
-    private boolean mIsSupport;
-    private boolean mIsMid;
-    // The list of advantages this hero has over those in the photo
-    private List<Double> mAdvantages;
-    private double mTotalAdvantage = 0;
-
     private static final String ID_COLUMN = "_id";
     private static final String NAME_COLUMN = "name";
     private static final String CARRY_COLUMN = "is_carry";
     private static final String SUPPORT_COLUMN = "is_support";
     private static final String MID_COLUMN = "is_mid";
 
+    private final int mId;
+    private final String mName;
+    private final boolean mIsCarry;
+    private final boolean mIsSupport;
+    private final boolean mIsMid;
+
+    // The list of advantages this hero has over those in the photo
+    private List<Double> mAdvantages;
+    private double mTotalAdvantage = 0;
+
     @Override
     public int compareTo(HeroAndAdvantages other) {
         return Double.compare(other.getTotalAdvantage(), this.mTotalAdvantage);
+    }
+
+    public HeroAndAdvantages clone() {
+        HeroAndAdvantages heroClone =
+                new HeroAndAdvantages(mId, mName, mIsCarry, mIsSupport, mIsMid);
+
+        List<Double> advantagesClone = new ArrayList<>();
+        for(double advantage : mAdvantages) {
+            advantagesClone.add(advantage);
+        }
+        heroClone.setAdvantages(advantagesClone);
+
+        return heroClone;
     }
 
     public String getName() { return mName; }
@@ -69,10 +83,12 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     protected HeroAndAdvantages(Cursor c) {
         mId = c.getInt(c.getColumnIndexOrThrow(ID_COLUMN));
-        mName = c.getString(c.getColumnIndexOrThrow(NAME_COLUMN));
+        String name = c.getString(c.getColumnIndexOrThrow(NAME_COLUMN));
         // The SQL currently ignores ' characters, so need to put it back in
-        if(mName.equals("Natures Prophet")) {
+        if(name.equals("Natures Prophet")) {
             mName = "Nature's Prophet";
+        } else {
+            mName = name;
         }
         mIsCarry = intToBool(c.getInt(c.getColumnIndexOrThrow(CARRY_COLUMN)));
         mIsSupport = intToBool(c.getInt(c.getColumnIndexOrThrow(SUPPORT_COLUMN)));
@@ -91,6 +107,14 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     protected int getId() {
         return mId;
+    }
+
+    private HeroAndAdvantages(int id, String name, boolean isCarry, boolean isSupport, boolean isMid) {
+        mId = id;
+        mName = name;
+        mIsCarry = isCarry;
+        mIsSupport = isSupport;
+        mIsMid = isMid;
     }
 
     private void calculateTotalAdvantage() {

@@ -21,6 +21,7 @@ package com.carver.paul.dotavision.Models;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,10 +43,6 @@ public class SqlLoader {
     }
 
     protected List<HeroAndAdvantages> calculateAdvantages(List<String> heroesInPhoto) {
-        if(listsEqual(mHeroesInPhoto, heroesInPhoto)) {
-            return mHeroes;
-        }
-
         DataBaseHelper dbHelper = new DataBaseHelper(mContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -69,7 +66,10 @@ public class SqlLoader {
         db.close();
 
         Collections.sort(mHeroes);
-        return mHeroes;
+
+        // Need to return a copy of the heroes because they could be changed in a different thread
+        // from where they are read.
+        return deepCopyOfHeroes(mHeroes);
     }
 
     private static List<HeroAndAdvantages> loadHeroes(SQLiteDatabase db) {
@@ -130,17 +130,12 @@ public class SqlLoader {
         }
     }
 
-    private static boolean listsEqual(final List<String> list1, final List<String> list2) {
-        if(list1 == null || list2 == null) return false;
-        if(list1.size() != list2.size()) return false;
-
-        for(int i = 0; i < list1.size(); i++) {
-            if(!list1.get(i).equals(list2.get(i))) {
-                return false;
-            }
+    private static List<HeroAndAdvantages> deepCopyOfHeroes(List<HeroAndAdvantages> heroes) {
+        List<HeroAndAdvantages> deepCopy = new ArrayList<>();
+        for(HeroAndAdvantages hero : heroes) {
+            deepCopy.add(hero.clone());
         }
-
-        return true;
+        return deepCopy;
     }
 
     // This method seems ~ 5% quicker, but the code is less nice, so might as well use the method
