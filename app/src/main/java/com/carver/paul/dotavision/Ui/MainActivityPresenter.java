@@ -25,24 +25,33 @@ import android.graphics.BitmapFactory;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.Models.DataManager;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
+import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.io.File;
 
 public class MainActivityPresenter {
     private MainActivity mView;
+    private AbilityInfoPresenter mAbilityInfoPresenter;
+    private CounterPickerPresenter mCounterPickerPresenter;
     private DataManager mDataManager;
 
-    public MainActivityPresenter(MainActivity view) {
+    public MainActivityPresenter(MainActivity view, AbilityInfoPresenter abilityInfoPresenter,
+                                 CounterPickerPresenter counterPickerPresenter) {
         mView = view;
+        mAbilityInfoPresenter = abilityInfoPresenter;
+        mCounterPickerPresenter = counterPickerPresenter;
         mDataManager = new DataManager(this);
     }
 
     public void doImageRecognition(Bitmap photo,
                                    HeroesDetectedPresenter heroesDetectedPresenter,
-                                   AbilityInfoPresenter abilityInfoPresenter) {
+                                   AbilityInfoPresenter abilityInfoPresenter,
+                                   CounterPickerPresenter counterPickerPresenter) {
         if (!mDataManager.presentersRegistered()) {
-            mDataManager.registerPresenters(heroesDetectedPresenter, abilityInfoPresenter);
+            mDataManager.registerPresenters(heroesDetectedPresenter,
+                    abilityInfoPresenter,
+                    counterPickerPresenter);
         }
 
         mDataManager.identifyHeroesInPhoto(photo);
@@ -58,6 +67,18 @@ public class MainActivityPresenter {
 
     public void stopHeroRecognitionLoadingAnimations() {
         mView.stopHeroRecognitionLoadingAnimations();
+    }
+
+    public void showCounterPicker() {
+        mView.showHeroAbilitiesButton();
+        mAbilityInfoPresenter.hide();
+        mCounterPickerPresenter.show();
+    }
+
+    public void showHeroAbilities() {
+        mView.showCounterPickerButton();
+        mCounterPickerPresenter.hide();
+        mAbilityInfoPresenter.show();
     }
 
     /**
@@ -79,15 +100,6 @@ public class MainActivityPresenter {
         Bitmap SamplePhoto = mView.getSamplePhoto();
         mView.doImageRecognition(SamplePhoto);
     }
-
-    protected void counterPickerButtonPressed() {
-        mView.showHeroAbilitiesButton();
-    }
-
-    protected void heroAbilitiesButtonPressed() {
-        mView.showCounterPickerButton();
-    }
-
 
     protected void doImageRecognitionOnPhoto() {
         File mediaFile = new File(mView.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);

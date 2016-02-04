@@ -27,6 +27,7 @@ import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
+import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 
@@ -55,11 +56,10 @@ public class DataManager {
     private MainActivityPresenter mMainActivityPresenter;
     private HeroesDetectedPresenter mHeroesDetectedPresenter;
     private AbilityInfoPresenter mAbilityInfoPresenter;
+    private CounterPickerPresenter mCounterPickerPresenter;
 
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
-
-    private SqlLoader mSqlLoader;
 
     /**
      * By calling StartXmlLoading and StartSimilarityTestLoading as soon as DataManager is
@@ -74,7 +74,6 @@ public class DataManager {
 
         startXmlLoading();
         startSimilarityTestLoading();
-        startSqlLoading();
     }
 
     /**
@@ -89,17 +88,20 @@ public class DataManager {
      * @param abilityInfoPresenter
      */
     public void registerPresenters(final HeroesDetectedPresenter heroesDetectedPresenter,
-                                   final AbilityInfoPresenter abilityInfoPresenter) {
+                                   final AbilityInfoPresenter abilityInfoPresenter,
+                                   final CounterPickerPresenter counterPickerPresenter) {
         mHeroesDetectedPresenter = heroesDetectedPresenter;
         mHeroesDetectedPresenter.setDataManger(this);
 
         mAbilityInfoPresenter = abilityInfoPresenter;
+        mCounterPickerPresenter = counterPickerPresenter;
     }
 
     public boolean presentersRegistered() {
         return (mMainActivityPresenter != null
                 && mHeroesDetectedPresenter != null
-                && mAbilityInfoPresenter != null);
+                && mAbilityInfoPresenter != null
+                && mCounterPickerPresenter != null);
     }
 
     /**
@@ -121,6 +123,7 @@ public class DataManager {
 
         mHeroesDetectedPresenter.reset();
         mAbilityInfoPresenter.reset();
+        mCounterPickerPresenter.reset();
 
         /**
          * This is where the magic happens! Recognising the heroes in the photos goes through the
@@ -132,7 +135,7 @@ public class DataManager {
          *
          *   2) doOnNext: call prepareToShowResults, which gets the UI ready to start showing the
          *   results of the image processing (i.e. end the loading animation and show the images
-         *   of the heroes we have found in the photo (but not yet identified who they are).
+         *   of the heroes we have found in the photo (but not yet identified who they are)).
          *
          *   3) flatMapIterable: turn the list of unidentified heroes in the photo into chain of
          *   Observables so that each can be processed in turn.
@@ -184,6 +187,12 @@ public class DataManager {
 
     public void sendUpdatedHeroList(List<HeroInfo> heroInfoList) {
         mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
+
+        List<String> heroNames = new ArrayList<>();
+        for(HeroInfo heroInfo : heroInfoList) {
+            heroNames.add(heroInfo.name);
+        }
+        mCounterPickerPresenter.showAdvantages(heroNames);
     }
 
     /**
@@ -230,10 +239,6 @@ public class DataManager {
                 .subscribe(mSimilarityTestRx);
     }
 
-    private void startSqlLoading() {
-        mSqlLoader = new SqlLoader(mMainActivityPresenter.getContext());
-    }
-
     /**
      * This will make the MainActivity end the animations used show the hero image is being
      * processed. It also sends the unidentified heroes up to the HeroesDetectedPresenter so that
@@ -252,6 +257,9 @@ public class DataManager {
                 .subscribe(new Action1<List<HeroImageAndPosition>>() {
                     public void call(List<HeroImageAndPosition> heroImages) {
                         mMainActivityPresenter.stopHeroRecognitionLoadingAnimations();
+                        //TODO-now: make it only show counter picker if the photo is of the hero
+                        // select screen
+                        mMainActivityPresenter.showCounterPicker();
                         mHeroesDetectedPresenter.showHeroImages(heroImages);
                     }
                 });

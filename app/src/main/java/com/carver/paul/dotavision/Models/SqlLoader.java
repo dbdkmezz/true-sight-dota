@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class SqlLoader {
+public class SqlLoader {
     private static final String TAG = "SqlLoader";
 
     private List<HeroAndAdvantages> mHeroes;
@@ -60,7 +60,6 @@ class SqlLoader {
         testNames.add("Io");
 
         calculateAdvantages(context, testNames);
-
     }
 
     protected void calculateAdvantages(Context context, List<String> heroesInPhoto) {

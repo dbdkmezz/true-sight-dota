@@ -21,6 +21,7 @@ package com.carver.paul.dotavision.Models;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
@@ -44,8 +45,28 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         return Double.compare(this.mTotalAdvantage, other.getTotalAdvantage());
     }
 
-    public double getTotalAdvantage() {
+    public String getName() { return mName; }
+
+    public List<Double> getAdvantages() {
+        return mAdvantages;
+    }
+
+    public Double getTotalAdvantage() {
         return mTotalAdvantage;
+    }
+
+    //TODO-now: remove debug HeroAndAdvantages constructor
+    public HeroAndAdvantages(String name) {
+        mName = name;
+
+        List<Double> advs  = new ArrayList<>();
+        advs.add(1.2);
+        advs.add(3.2);
+        advs.add(-0.2);
+        advs.add(-4.0);
+        advs.add(3.0);
+
+        setAdvantages(advs);
     }
 
     protected HeroAndAdvantages(Cursor c) {
@@ -72,8 +93,6 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     protected int getId() {
         return mId;
     }
-
-    protected String getName() { return mName; }
 
     private static boolean intToBool(int i) {
         if(i == 0) return false;

@@ -45,6 +45,9 @@ import android.widget.ImageView;
 import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
+import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerFragment;
+import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
 
@@ -126,7 +129,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        mPresenter = new MainActivityPresenter(this);
+
+
+        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_ability_info);
+        AbilityInfoPresenter abilityInfoPresenter = abilityInfoFragment.getPresenter();
+
+        CounterPickerFragment counterPickerFragment = (CounterPickerFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_counter_picker);
+        CounterPickerPresenter counterPickerPresenter = counterPickerFragment.getPresenter();
+
+        mPresenter = new MainActivityPresenter(this, abilityInfoPresenter, counterPickerPresenter);
     }
 
     @Override
@@ -190,11 +203,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void counterPickerButton(View view) {
-        mPresenter.counterPickerButtonPressed();
+        mPresenter.showCounterPicker();
     }
 
     public void heroAbilitiesButton(View view) {
-        mPresenter.heroAbilitiesButtonPressed();
+        mPresenter.showHeroAbilities();
     }
 
     // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
@@ -284,23 +297,27 @@ public class MainActivity extends AppCompatActivity
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_ability_info);
 
+        CounterPickerFragment counterPickerFragment = (CounterPickerFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_counter_picker);
+
         //TODO-now, put fragment presenters in MainActivityPresenter earlier?
         mPresenter.doImageRecognition(bitmap,
                 heroesDetectedFragment.getPresenter(),
-                abilityInfoFragment.getPresenter());
+                abilityInfoFragment.getPresenter(),
+                counterPickerFragment.getPresenter());
     }
 
     protected void showCounterPickerButton() {
         Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
         counterPicker.setVisibility(View.VISIBLE);
-        Button heroAbilities = (Button) findViewById(R.id.button_counter_picker);
+        Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
         heroAbilities.setVisibility(View.GONE);
     }
 
     protected void showHeroAbilitiesButton() {
         Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
         counterPicker.setVisibility(View.GONE);
-        Button heroAbilities = (Button) findViewById(R.id.button_counter_picker);
+        Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
         heroAbilities.setVisibility(View.VISIBLE);
     }
 

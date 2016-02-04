@@ -83,6 +83,14 @@ public class AbilityInfoFragment extends Fragment {
         mParentLinearLayout.addView(card);
     }
 
+    protected void hide() {
+        mParentLinearLayout.setVisibility(View.GONE);
+    }
+
+    protected void show() {
+        mParentLinearLayout.setVisibility(View.VISIBLE);
+    }
+
     private void addText(String string, int layout) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(layout, mParentLinearLayout, false);
