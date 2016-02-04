@@ -187,12 +187,19 @@ public class DataManager {
 
     public void sendUpdatedHeroList(List<HeroInfo> heroInfoList) {
         mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
+        showAdvantages(heroInfoList);
+    }
 
+    private void showAdvantages(List<HeroInfo> heroInfoList) {
         List<String> heroNames = new ArrayList<>();
         for(HeroInfo heroInfo : heroInfoList) {
             heroNames.add(heroInfo.name);
         }
-        mCounterPickerPresenter.showAdvantages(heroNames);
+
+        List<HeroAndAdvantages> heroes =
+                SqlLoader.calculateAdvantages(mMainActivityPresenter.getContext(), heroNames);
+
+        mCounterPickerPresenter.showAdvantages(heroes);
     }
 
     /**

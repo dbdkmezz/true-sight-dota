@@ -31,6 +31,8 @@ import com.carver.paul.dotavision.R;
 import java.util.Arrays;
 import java.util.List;
 
+//TODO-now: make it show when it's loading advantages
+
 public class CounterPickerFragment extends Fragment {
 
     static private final List<Integer> advantageIds = Arrays.asList(R.id.advantage1,
@@ -78,96 +80,12 @@ public class CounterPickerFragment extends Fragment {
 
         for(int i = 0; i < advantages.size() && i < advantageIds.size(); i++) {
             TextView advTextView = (TextView) itemView.findViewById(advantageIds.get(i));
-            advTextView.setText(advantages.get(i).toString());
+            advTextView.setText(String.format("%.1f", advantages.get(i)));
         }
 
         TextView totalAdvTextView = (TextView) itemView.findViewById(R.id.total_advantage);
-        totalAdvTextView.setText(totalAdvantage.toString());
+        totalAdvTextView.setText(String.format("%.1f", totalAdvantage));
 
         mParentLinearLayout.addView(itemView);
     }
-
-/*    private void setupRecycler(View inflateView) {
-        mRecycler = (RecyclerView) inflateView.findViewById(R.id.recycler_view_counter_picker);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(inflateView.getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        List<HeroAndAdvantages> heroesSample = new ArrayList<>();
-        heroesSample.add(new HeroAndAdvantages("disruptor"));
-        heroesSample.add(new HeroAndAdvantages("lich"));
-        heroesSample.add(new HeroAndAdvantages("poop"));
-
-        mRecycler.setAdapter(new CounterPickerAdapter(heroesSample));
-        mRecycler.setLayoutManager(layoutManager);
-    }*/
-
-/*    private void completeRecycler() {
-*//*
-        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-        mRecycler.setAdapter(new HeroImageAdapter(similarHeroImages));
-*//*
-    }*/
 }
-
-/*
-class CounterPickerAdapter extends RecyclerView.Adapter<CounterPickerAdapter.ViewHolder> {
-    private List<HeroAndAdvantages> mHeroes;
-
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        private LinearLayout mLinearLayout;
-
-        public ViewHolder(LinearLayout v) {
-            super(v);
-            mLinearLayout = v;
-        }
-
-        public void setName(String name) {
-            TextView textView = (TextView) mLinearLayout.findViewById(R.id.name);
-            textView.setText(name);
-        }
-    }
-
-*/
-/*    public CounterPickerAdapter() {
-        mHeroes = new ArrayList<>();
-    }
-    *//*
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public CounterPickerAdapter(List<HeroAndAdvantages> heroes) {
-        mHeroes = heroes;
-    }
-
-    // Create new views (invoked by the layout manager)
-    @Override
-    public CounterPickerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
-        // create a new view
-        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_counter_picker, parent, false);
-        // google says that here you set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.setName(mHeroes.get(position).getName());
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return mHeroes.size();
-    }
-}
-
-*/

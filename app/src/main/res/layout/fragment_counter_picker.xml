@@ -5,9 +5,16 @@
     android:layout_height="fill_parent">
 
     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
         android:id="@+id/layout_counter_picker"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"/>
+
+    </LinearLayout>
 
 </FrameLayout>

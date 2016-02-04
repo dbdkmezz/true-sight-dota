@@ -42,7 +42,7 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     @Override
     public int compareTo(HeroAndAdvantages other) {
-        return Double.compare(this.mTotalAdvantage, other.getTotalAdvantage());
+        return Double.compare(other.getTotalAdvantage(), this.mTotalAdvantage);
     }
 
     public String getName() { return mName; }
@@ -53,20 +53,6 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     public Double getTotalAdvantage() {
         return mTotalAdvantage;
-    }
-
-    //TODO-now: remove debug HeroAndAdvantages constructor
-    public HeroAndAdvantages(String name) {
-        mName = name;
-
-        List<Double> advs  = new ArrayList<>();
-        advs.add(1.2);
-        advs.add(3.2);
-        advs.add(-0.2);
-        advs.add(-4.0);
-        advs.add(3.0);
-
-        setAdvantages(advs);
     }
 
     protected HeroAndAdvantages(Cursor c) {

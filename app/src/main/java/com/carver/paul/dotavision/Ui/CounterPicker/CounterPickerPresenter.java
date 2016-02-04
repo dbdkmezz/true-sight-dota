@@ -20,7 +20,6 @@ package com.carver.paul.dotavision.Ui.CounterPicker;
 
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CounterPickerPresenter {
@@ -30,21 +29,16 @@ public class CounterPickerPresenter {
         mView = view;
     }
 
-    public void showAdvantages(List<String> enemyNames) {
+    public void showAdvantages(List<HeroAndAdvantages> heroes) {
+        reset();
 
+        for(HeroAndAdvantages hero : heroes) {
+            mView.addRow(hero.getName(), hero.getAdvantages(), hero.getTotalAdvantage());
+        }
     }
 
     public void reset() {
         mView.reset();
-
-        List<HeroAndAdvantages> heroesSample = new ArrayList<>();
-        heroesSample.add(new HeroAndAdvantages("disruptor"));
-        heroesSample.add(new HeroAndAdvantages("licejsghje shjgesjghjsehghse jhgkhekgh"));
-        heroesSample.add(new HeroAndAdvantages("poop"));
-
-        for(HeroAndAdvantages hero : heroesSample) {
-            mView.addRow(hero.getName(), hero.getAdvantages(), hero.getTotalAdvantage());
-        }
     }
 
     public void hide() {
