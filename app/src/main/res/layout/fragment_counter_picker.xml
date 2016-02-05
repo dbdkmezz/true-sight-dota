@@ -25,12 +25,6 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
-        <LinearLayout
-            android:id="@+id/layout_counter_picker_items"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" />
-
     </LinearLayout>
 
 </FrameLayout>

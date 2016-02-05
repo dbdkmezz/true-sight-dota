@@ -1,39 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <FrameLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:id="@+id/layout_found_hero_pictures"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="#FFFFFF"
-        android:elevation="4dp">
-
-        <LinearLayout
-            android:id="@+id/layout_found_hero_pictures"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="#FFFFFF"
-        android:elevation="4dp">
-
-        <TextView
-            android:id="@+id/text_debug_similarity_info"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:singleLine="false"
-            android:visibility="gone" />
-    </FrameLayout>
-
-</LinearLayout>
+        android:orientation="vertical" />
+</FrameLayout>

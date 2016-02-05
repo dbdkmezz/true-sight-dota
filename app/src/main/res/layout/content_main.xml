@@ -54,7 +54,8 @@
                 android:name="com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment"
                 android:id="@+id/fragment_found_heroes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
             <Button
                 android:id="@+id/button_counter_picker"
@@ -81,16 +82,18 @@
                 android:visibility="gone"/>
 
             <fragment
-                android:name="com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerFragment"
-                android:id="@+id/fragment_counter_picker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <fragment
                 android:name="com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment"
                 android:id="@+id/fragment_ability_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <fragment
+                android:name="com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerFragment"
+                android:id="@+id/fragment_counter_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/fab_diameter" />
 
         </LinearLayout>
 

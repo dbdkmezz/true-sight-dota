@@ -10,7 +10,7 @@
     <dimen name="large_text">22sp</dimen>
     <dimen name="medium_text">18sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="fab_width">56dp</dimen>
+    <dimen name="fab_diameter">56dp</dimen>
     <dimen name="button_elevation">5dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
 

@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import com.carver.paul.dotavision.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,14 +53,13 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
     private CounterPickerPresenter mPresenter;
     private LinearLayout mParentLinearLayout;
-    private LinearLayout mItemsLinearLayout;
+    private List<View> mRowViews = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflateView = inflater.inflate(R.layout.fragment_counter_picker, container, false);
         mParentLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_counter_picker);
-        mItemsLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_counter_picker_items);
         mPresenter = new CounterPickerPresenter(this);
 
         setupRolesSpinner(inflater, inflateView);
@@ -94,7 +94,10 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
      * Removes all ability cards from the view so that the view will be empty
      */
     public void reset() {
-        mItemsLinearLayout.removeAllViews();
+        for(View v: mRowViews) {
+            mParentLinearLayout.removeView(v);
+        }
+        mRowViews.clear();
     }
 
     protected void hide() {
@@ -107,7 +110,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
     protected void showHeadings(List<Integer> enemyImages) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View headerView = inflater.inflate(R.layout.item_counter_picker_header, mItemsLinearLayout,
+        View headerView = inflater.inflate(R.layout.item_counter_picker_header, mParentLinearLayout,
                 false);
 
         for(int i = 0; i < enemyImages.size(); i++) {
@@ -115,7 +118,8 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
             imageView.setImageResource(enemyImages.get(i));
         }
 
-        mItemsLinearLayout.addView(headerView);
+        mParentLinearLayout.addView(headerView);
+        mRowViews.add(headerView);
     }
 
     //TODO-soon: when showing all the heroes adding all the rows is a little slow. Need something
@@ -124,7 +128,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     //TODO-now: if the advantage is >1 or <-1 make it bold (or a diff colour?)
     protected void addRow(String name, List<Double> advantages, Double totalAdvantage) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View itemView = inflater.inflate(R.layout.item_counter_picker, mItemsLinearLayout,
+        View itemView = inflater.inflate(R.layout.item_counter_picker, mParentLinearLayout,
                 false);
 
         TextView nameTextView = (TextView) itemView.findViewById(R.id.name);
@@ -145,7 +149,8 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         TextView totalAdvTextView = (TextView) itemView.findViewById(R.id.total_advantage);
         totalAdvTextView.setText(String.format("%.1f", totalAdvantage));
 
-        mItemsLinearLayout.addView(itemView);
+        mParentLinearLayout.addView(itemView);
+        mRowViews.add(itemView);
     }
 
     private void setupRolesSpinner(LayoutInflater inflater, View inflateView) {
