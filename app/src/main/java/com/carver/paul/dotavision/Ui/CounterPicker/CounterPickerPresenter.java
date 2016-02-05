@@ -42,8 +42,6 @@ public class CounterPickerPresenter {
         mEnemyHeroes = enemyHeroes;
         reset();
         mView.endLoadingAnimation();
-        showHeadings();
-        showAdvantages();
     }
 
     public void reset() {
@@ -71,6 +69,11 @@ public class CounterPickerPresenter {
             showHeadings();
             showAdvantages();
         }
+    }
+
+    protected void loadingAnimationFinished() {
+        showHeadings();
+        showAdvantages();
     }
 
     private void showHeadings() {

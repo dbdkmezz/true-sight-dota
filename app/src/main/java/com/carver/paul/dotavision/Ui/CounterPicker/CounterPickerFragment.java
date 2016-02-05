@@ -18,17 +18,15 @@
 
 package com.carver.paul.dotavision.Ui.CounterPicker;
 
+import android.animation.Animator;
 import android.app.Fragment;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -36,7 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
@@ -107,11 +104,14 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         mRowViews.clear();
     }
 
+    /**
+     * Shows the loading text and pulses it. Ensures everything else is hidden
+     */
     protected void startLoadingAnimation() {
         mLoadingText.setVisibility(View.VISIBLE);
 
-        AlphaAnimation pulseAlphaAnimation = new AlphaAnimation(0f, 1f);
-        pulseAlphaAnimation.setDuration(250);
+        AlphaAnimation pulseAlphaAnimation = new AlphaAnimation(0.2f, 1f);
+        pulseAlphaAnimation.setDuration(300);
         pulseAlphaAnimation.setRepeatCount(Animation.INFINITE);
         pulseAlphaAnimation.setRepeatMode(Animation.REVERSE);
         mLoadingText.startAnimation(pulseAlphaAnimation);
@@ -119,12 +119,63 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         mMainLinearLayout.setVisibility(View.GONE);
     }
 
+    /**
+     * End the loading animation and then inform the presenter that it is complete by calling
+     * loadingAnimationFinished
+     */
+    //TODO-beauty: when I get lambda support remove animation boilerplate code
     protected void endLoadingAnimation() {
+        /**
+         * First we tell the pulse alpha animation to do one more repeat.
+         * Then after that animate the view to make it transparent
+         * When that is complete we tell the presenter and call loadingAnimationFinished
+         */
         Animation pulseAlphaAnimation = mLoadingText.getAnimation();
-        pulseAlphaAnimation.setRepeatCount(0);
-        mMainLinearLayout.setVisibility(View.VISIBLE);
-        mMainLinearLayout.setAlpha(0f);
-        mMainLinearLayout.animate().alpha(1f);
+        if (pulseAlphaAnimation == null) {
+            mMainLinearLayout.setVisibility(View.VISIBLE);
+            mPresenter.loadingAnimationFinished();
+        } else {
+            pulseAlphaAnimation.setRepeatCount(0);
+            pulseAlphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                    mLoadingText.animate()
+                            .alpha(0f)
+                            .setDuration(300)
+                            .setListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mMainLinearLayout.setVisibility(View.VISIBLE);
+                            mPresenter.loadingAnimationFinished();
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    });
+                }
+            });
+        }
     }
 
     protected void hide() {
