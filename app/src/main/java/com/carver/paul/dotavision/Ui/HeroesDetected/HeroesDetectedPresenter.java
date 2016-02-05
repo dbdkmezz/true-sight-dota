@@ -82,18 +82,12 @@ public class HeroesDetectedPresenter {
         }
     }
 
-    public void sendUpdatedHeroList() {
-        List<HeroInfo> heroInfoList = new ArrayList<>();
-        for (HeroDetectedItemPresenter hero : mHeroDetectedItemPresenters) {
-            HeroInfo heroInfo = findHeroWithName(hero.getName(), mDataManger.getHeroInfo());
-            heroInfoList.add(heroInfo);
-        }
-
-        mDataManger.sendUpdatedHeroList(heroInfoList);
-    }
-
     public void hideKeyboard() {
         mView.hideKeyboard();
+    }
+
+    public void sendUpdatedHeroList() {
+        sendUpdatedHeroList(false);
     }
 
     protected void onDestroy() {
@@ -109,6 +103,21 @@ public class HeroesDetectedPresenter {
         HeroInfo heroInfo = findHeroWithName(heroRealName, mDataManger.getHeroInfo());
         return heroInfo.imageName;
     }
+    /**
+     * Sends the datamanager the list of all the heroes currently selected.
+     * @param completelyNewList true if the list has just been loaded for the first time (i.e. is
+     *                          not changing as a result of user input).
+     */
+    private void sendUpdatedHeroList(boolean completelyNewList) {
+        List<HeroInfo> heroInfoList = new ArrayList<>();
+        for (HeroDetectedItemPresenter hero : mHeroDetectedItemPresenters) {
+            HeroInfo heroInfo = findHeroWithName(hero.getName(), mDataManger.getHeroInfo());
+            heroInfoList.add(heroInfo);
+        }
+
+        mDataManger.sendUpdatedHeroList(heroInfoList, completelyNewList);
+    }
+
 
     private void setupSubscriber() {
         unsubscribeSubscriber();
@@ -118,7 +127,7 @@ public class HeroesDetectedPresenter {
             // Show the ability cards for the heroes we have now identified
             @Override
             public void onCompleted() {
-                sendUpdatedHeroList();
+                sendUpdatedHeroList(true);
             }
 
             @Override

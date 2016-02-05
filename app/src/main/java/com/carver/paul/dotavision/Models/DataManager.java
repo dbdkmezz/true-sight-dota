@@ -34,6 +34,7 @@ import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Phaser;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -199,12 +200,16 @@ public class DataManager {
         return mXmlInfoRx.getValue();
     }
 
-    public void sendUpdatedHeroList(List<HeroInfo> heroInfoList) {
+    public void sendUpdatedHeroList(List<HeroInfo> heroInfoList, boolean completelyNewList) {
         mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
-        showAdvantages(heroInfoList);
+
+        if(completelyNewList) {
+            mCounterPickerPresenter.startLoadingAnimation();
+        }
+        updateCounterPicker(heroInfoList);
     }
 
-    private void showAdvantages(final List<HeroInfo> heroInfoList) {
+    private void updateCounterPicker(final List<HeroInfo> heroInfoList) {
         final List<String> heroNames = new ArrayList<>();
         for(HeroInfo heroInfo : heroInfoList) {
             heroNames.add(heroInfo.name);

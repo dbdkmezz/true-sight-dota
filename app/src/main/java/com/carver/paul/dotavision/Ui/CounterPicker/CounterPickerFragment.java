@@ -22,9 +22,13 @@ import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -32,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
@@ -52,14 +57,16 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
             R.string.carry_role, R.string.support_role, R.string.mid_role);
 
     private CounterPickerPresenter mPresenter;
-    private LinearLayout mParentLinearLayout;
+    private LinearLayout mMainLinearLayout;
+    private TextView mLoadingText;
     private List<View> mRowViews = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflateView = inflater.inflate(R.layout.fragment_counter_picker, container, false);
-        mParentLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_counter_picker);
+        mMainLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_counter_picker);
+        mLoadingText = (TextView) inflateView.findViewById(R.id.text_loading);
         mPresenter = new CounterPickerPresenter(this);
 
         setupRolesSpinner(inflater, inflateView);
@@ -95,22 +102,42 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
      */
     public void reset() {
         for(View v: mRowViews) {
-            mParentLinearLayout.removeView(v);
+            mMainLinearLayout.removeView(v);
         }
         mRowViews.clear();
     }
 
+    protected void startLoadingAnimation() {
+        mLoadingText.setVisibility(View.VISIBLE);
+
+        AlphaAnimation pulseAlphaAnimation = new AlphaAnimation(0f, 1f);
+        pulseAlphaAnimation.setDuration(250);
+        pulseAlphaAnimation.setRepeatCount(Animation.INFINITE);
+        pulseAlphaAnimation.setRepeatMode(Animation.REVERSE);
+        mLoadingText.startAnimation(pulseAlphaAnimation);
+
+        mMainLinearLayout.setVisibility(View.GONE);
+    }
+
+    protected void endLoadingAnimation() {
+        Animation pulseAlphaAnimation = mLoadingText.getAnimation();
+        pulseAlphaAnimation.setRepeatCount(0);
+        mMainLinearLayout.setVisibility(View.VISIBLE);
+        mMainLinearLayout.setAlpha(0f);
+        mMainLinearLayout.animate().alpha(1f);
+    }
+
     protected void hide() {
-        mParentLinearLayout.setVisibility(View.GONE);
+        mMainLinearLayout.setVisibility(View.GONE);
     }
 
     protected void show() {
-        mParentLinearLayout.setVisibility(View.VISIBLE);
+        mMainLinearLayout.setVisibility(View.VISIBLE);
     }
 
     protected void showHeadings(List<Integer> enemyImages) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View headerView = inflater.inflate(R.layout.item_counter_picker_header, mParentLinearLayout,
+        View headerView = inflater.inflate(R.layout.item_counter_picker_header, mMainLinearLayout,
                 false);
 
         for(int i = 0; i < enemyImages.size(); i++) {
@@ -118,7 +145,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
             imageView.setImageResource(enemyImages.get(i));
         }
 
-        mParentLinearLayout.addView(headerView);
+        mMainLinearLayout.addView(headerView);
         mRowViews.add(headerView);
     }
 
@@ -128,7 +155,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     //TODO-now: if the advantage is >1 or <-1 make it bold (or a diff colour?)
     protected void addRow(String name, List<Double> advantages, Double totalAdvantage) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View itemView = inflater.inflate(R.layout.item_counter_picker, mParentLinearLayout,
+        View itemView = inflater.inflate(R.layout.item_counter_picker, mMainLinearLayout,
                 false);
 
         TextView nameTextView = (TextView) itemView.findViewById(R.id.name);
@@ -149,7 +176,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         TextView totalAdvTextView = (TextView) itemView.findViewById(R.id.total_advantage);
         totalAdvTextView.setText(String.format("%.1f", totalAdvantage));
 
-        mParentLinearLayout.addView(itemView);
+        mMainLinearLayout.addView(itemView);
         mRowViews.add(itemView);
     }
 

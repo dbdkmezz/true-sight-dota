@@ -41,6 +41,7 @@ public class CounterPickerPresenter {
         mHeroesAndAdvantages = heroesAndAdvantages;
         mEnemyHeroes = enemyHeroes;
         reset();
+        mView.endLoadingAnimation();
         showHeadings();
         showAdvantages();
     }
@@ -55,6 +56,10 @@ public class CounterPickerPresenter {
 
     public void show() {
         mView.show();
+    }
+
+    public void startLoadingAnimation() {
+        mView.startLoadingAnimation();
     }
 
     protected void setRoleFilter(int roleFilter) {

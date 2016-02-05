@@ -52,6 +52,8 @@
     <string name="no_silences_found">No silences found!</string>
     <string name="ultimates">Ultimates</string>
 
+    <string name="loading_counter_picker">Calculating counters...</string>
+
     <string name="all_roles">&all_roles;</string>
     <string name="carry_role">&carry_role;</string>
     <string name="mid_role">&mid_role;</string>
