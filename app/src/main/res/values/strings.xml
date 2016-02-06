@@ -4,6 +4,8 @@
     <!ENTITY all_roles "All">
     <!ENTITY support_role "Support">
     <!ENTITY carry_role "Carry">
+    <!ENTITY jungler_role "Jungler">
+    <!ENTITY off_lane_role "Off lane">
     <!ENTITY mid_role "Mid">
     ]>
 
@@ -56,6 +58,8 @@
 
     <string name="all_roles">&all_roles;</string>
     <string name="carry_role">&carry_role;</string>
+    <string name="off_lane_role">&off_lane_role;</string>
+    <string name="jungler_role">&jungler_role;</string>
     <string name="mid_role">&mid_role;</string>
     <string name="support_role">&support_role;</string>
 
@@ -63,6 +67,8 @@
         <item>&all_roles;</item>
         <item>&carry_role;</item>
         <item>&mid_role;</item>
+        <item>&off_lane_role;</item>
         <item>&support_role;</item>
+        <item>&jungler_role;</item>
     </string-array>
 </resources>

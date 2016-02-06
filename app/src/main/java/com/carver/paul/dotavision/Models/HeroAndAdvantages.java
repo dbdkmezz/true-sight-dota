@@ -24,6 +24,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO-next: add
+
 public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     public static final int NEUTRAL_ADVANTAGE = 999;
 
@@ -32,12 +34,16 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     private static final String CARRY_COLUMN = "is_carry";
     private static final String SUPPORT_COLUMN = "is_support";
     private static final String MID_COLUMN = "is_mid";
+    private static final String JUNGLER_COLUMN = "is_jungler";
+    private static final String OFF_LANE_COLUMN = "is_off_lane";
 
     private final int mId;
     private final String mName;
     private final boolean mIsCarry;
     private final boolean mIsSupport;
     private final boolean mIsMid;
+    private final boolean mIsJungler;
+    private final boolean mIsOffLane;
 
     // The list of advantages this hero has over those in the photo
     private List<Double> mAdvantages;
@@ -50,7 +56,7 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     public HeroAndAdvantages clone() {
         HeroAndAdvantages heroClone =
-                new HeroAndAdvantages(mId, mName, mIsCarry, mIsSupport, mIsMid);
+                new HeroAndAdvantages(mId, mName, mIsCarry, mIsSupport, mIsMid, mIsJungler, mIsOffLane);
 
         List<Double> advantagesClone = new ArrayList<>();
         for(double advantage : mAdvantages) {
@@ -83,6 +89,14 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         return mIsMid;
     }
 
+    public boolean isJunger() {
+        return mIsJungler;
+    }
+
+    public boolean isOffLane() {
+        return mIsOffLane;
+    }
+
     protected HeroAndAdvantages(Cursor c) {
         mId = c.getInt(c.getColumnIndexOrThrow(ID_COLUMN));
         String name = c.getString(c.getColumnIndexOrThrow(NAME_COLUMN));
@@ -95,6 +109,8 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         mIsCarry = intToBool(c.getInt(c.getColumnIndexOrThrow(CARRY_COLUMN)));
         mIsSupport = intToBool(c.getInt(c.getColumnIndexOrThrow(SUPPORT_COLUMN)));
         mIsMid = intToBool(c.getInt(c.getColumnIndexOrThrow(MID_COLUMN)));
+        mIsJungler = intToBool(c.getInt(c.getColumnIndexOrThrow(JUNGLER_COLUMN)));
+        mIsOffLane = intToBool(c.getInt(c.getColumnIndexOrThrow(OFF_LANE_COLUMN)));
     }
 
     protected void setAdvantages(List<Double> advantages) {
@@ -111,12 +127,15 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         return mId;
     }
 
-    private HeroAndAdvantages(int id, String name, boolean isCarry, boolean isSupport, boolean isMid) {
+    private HeroAndAdvantages(int id, String name, boolean isCarry, boolean isSupport,
+                              boolean isMid, boolean isJungler, boolean isOffLane) {
         mId = id;
         mName = name;
         mIsCarry = isCarry;
         mIsSupport = isSupport;
         mIsMid = isMid;
+        mIsJungler = isJungler;
+        mIsOffLane = isOffLane;
     }
 
     private void calculateTotalAdvantage() {

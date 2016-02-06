@@ -128,6 +128,10 @@ public class CounterPickerPresenter {
                                 return hero.isSupport();
                             case R.string.mid_role:
                                 return hero.isMid();
+                            case R.string.off_lane_role:
+                                return hero.isOffLane();
+                            case R.string.jungler_role:
+                                return hero.isJunger();
                         }
                         Log.e(TAG, "mRoleFilter has invalid value.");
                         return true;
