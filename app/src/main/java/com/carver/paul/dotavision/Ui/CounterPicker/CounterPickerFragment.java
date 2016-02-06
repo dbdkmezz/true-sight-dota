@@ -115,8 +115,6 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         pulseAlphaAnimation.setRepeatCount(Animation.INFINITE);
         pulseAlphaAnimation.setRepeatMode(Animation.REVERSE);
         mLoadingText.startAnimation(pulseAlphaAnimation);
-
-        mMainLinearLayout.setVisibility(View.GONE);
     }
 
     /**
@@ -125,33 +123,17 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
      */
     //TODO-beauty: when I get lambda support remove animation boilerplate code
     protected void endLoadingAnimation() {
-        /**
-         * First we tell the pulse alpha animation to do one more repeat.
-         * Then after that animate the view to make it transparent
-         * When that is complete we tell the presenter and call loadingAnimationFinished
-         */
         Animation pulseAlphaAnimation = mLoadingText.getAnimation();
         if (pulseAlphaAnimation == null) {
-            mMainLinearLayout.setVisibility(View.VISIBLE);
+            mLoadingText.setVisibility(View.GONE);
             mPresenter.loadingAnimationFinished();
         } else {
             pulseAlphaAnimation.setRepeatCount(0);
-            pulseAlphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                }
 
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-
-                    mLoadingText.animate()
-                            .alpha(0f)
-                            .setDuration(300)
-                            .setListener(new Animator.AnimatorListener() {
+            mLoadingText.animate()
+                    .alpha(0f)
+                    .setDuration(300)
+                    .setListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
 
@@ -159,7 +141,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            mMainLinearLayout.setVisibility(View.VISIBLE);
+                            mLoadingText.setVisibility(View.GONE);
                             mPresenter.loadingAnimationFinished();
                         }
 
@@ -173,8 +155,6 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
                         }
                     });
-                }
-            });
         }
     }
 
