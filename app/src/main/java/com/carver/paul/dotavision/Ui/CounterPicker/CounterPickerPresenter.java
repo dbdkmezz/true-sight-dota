@@ -53,7 +53,7 @@ public class CounterPickerPresenter {
                                List<HeroInfo> enemyHeroes) {
         mHeroesAndAdvantages = heroesAndAdvantages;
         mEnemyHeroes = enemyHeroes;
-        reset();
+        mView.removeAllRows();
         mView.endLoadingAnimation();
     }
 
@@ -78,7 +78,7 @@ public class CounterPickerPresenter {
             return;
         } else {
             mRoleFilter = roleFilter;
-            reset();
+            mView.removeAllRows();
             showHeadings();
             showAdvantages();
         }
@@ -151,7 +151,7 @@ public class CounterPickerPresenter {
                 .subscribe(new Subscriber<HeroAndAdvantages>() {
                     @Override
                     public void onCompleted() {
-
+                        mView.resetMinimumHeight();
                     }
 
                     @Override

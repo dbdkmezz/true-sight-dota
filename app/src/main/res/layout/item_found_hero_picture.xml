@@ -28,6 +28,7 @@
             android:layout_width="@dimen/button_clear_name_size"
             android:layout_height="@dimen/button_clear_name_size"
             android:layout_gravity="center_vertical"
+            android:scaleType="centerInside"
             android:src="@android:drawable/ic_menu_close_clear_cancel"/>
 
     </LinearLayout>

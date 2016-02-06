@@ -21,6 +21,7 @@ package com.carver.paul.dotavision.Ui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Button;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.Models.DataManager;

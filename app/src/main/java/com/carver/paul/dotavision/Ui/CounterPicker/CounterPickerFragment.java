@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//TODO-now: make it show when it's loading advantages
+//TODO-next: only show the counter picker first if we're on the hero select screen
 
 public class CounterPickerFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -96,10 +96,26 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         return mPresenter;
     }
 
+    public void reset() {
+        mMainLinearLayout.setVisibility(View.GONE);
+        removeAllRows();
+        resetMinimumHeight();
+    }
+
+    protected void resetMinimumHeight() {
+        mMainLinearLayout.setMinimumHeight(0);
+    }
+
     /**
      * Removes all ability cards from the view so that the view will be empty
      */
-    public void reset() {
+    protected void removeAllRows() {
+        if(!mRowViews.isEmpty()) {
+            // After removing the rows we are likely to add a load of new ones, and if the height
+            // shrinks then grows again in a moment then the view will jump up, this stops that
+            mMainLinearLayout.setMinimumHeight(mMainLinearLayout.getHeight());
+        }
+
         for(View v: mRowViews) {
             mMainLinearLayout.removeView(v);
         }
@@ -111,6 +127,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
      */
     protected void startLoadingAnimation() {
         mLoadingText.setVisibility(View.VISIBLE);
+        mLoadingText.setAlpha(1f);
 
         AlphaAnimation pulseAlphaAnimation = new AlphaAnimation(0.2f, 1f);
         pulseAlphaAnimation.setDuration(300);
@@ -184,8 +201,6 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
     //TODO-soon: when showing all the heroes adding all the rows is a little slow. Need something
     // more efficient (only showing the visible rows? like with a recyclerView?)
-
-    //TODO-now: if the advantage is >1 or <-1 make it bold (or a diff colour?)
     protected void addRow(String name, List<Pair<String, Boolean>> advantages, String totalAdvantage) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View itemView = inflater.inflate(R.layout.item_counter_picker, mMainLinearLayout,

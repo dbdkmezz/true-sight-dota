@@ -53,6 +53,9 @@ import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
 
 import java.io.File;
 
+//TODO-next: give counter picker and hero ability buttons a little triangle below them to show
+// which is selected
+
 //TODO-beauty: Write tests to check if all hero images load, and if all hero ability icons draw and
 // all hero abilities have text
 
@@ -336,6 +339,11 @@ public class MainActivity extends AppCompatActivity
      * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
      */
     private void slideDemoButtonsOffScreen() {
+        View counterPickerButton = findViewById(R.id.button_counter_picker);
+        counterPickerButton.setVisibility(View.GONE);
+        View heroAbilitiesButton = findViewById(R.id.button_hero_abilities);
+        heroAbilitiesButton.setVisibility(View.GONE);
+
         View view = findViewById(R.id.layout_demo_and_last_photo_buttons);
         if (view.getTranslationX() == 0) {
             view.animate()

@@ -326,8 +326,6 @@ public class DataManager {
                 .subscribe(new Action1<List<HeroImageAndPosition>>() {
                     public void call(List<HeroImageAndPosition> heroImages) {
                         mMainActivityPresenter.stopHeroRecognitionLoadingAnimations();
-                        //TODO-now: make it only show counter picker if the photo is of the hero
-                        // select screen
                         mMainActivityPresenter.showCounterPicker();
                         mHeroesDetectedPresenter.showHeroImages(heroImages);
                     }
