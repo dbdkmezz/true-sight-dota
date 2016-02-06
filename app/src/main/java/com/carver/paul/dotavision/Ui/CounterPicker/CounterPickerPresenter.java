@@ -109,6 +109,14 @@ public class CounterPickerPresenter {
                 .filter(new Func1<HeroAndAdvantages, Boolean>() {
                     @Override
                     public Boolean call(HeroAndAdvantages hero) {
+                        // don't show heroes with the same name as one in the photo
+                        for(HeroInfo enemy : mEnemyHeroes) {
+                            if(hero.getName().equals(enemy.name)) {
+                                return false;
+                            }
+                        }
+
+                        // implement the role selection made in the spinner
                         switch (mRoleFilter) {
                             case R.string.all_roles:
                                 return true;
@@ -145,6 +153,9 @@ public class CounterPickerPresenter {
 
                     }
 
+//TODO-soon: fix row adding subscriber so that it gets unsubscribed when the view is changed or
+// removed. Things will probably go wrong if this is still adding rows and we select a different
+// role in the spinner or load a new photo.
                     @Override
                     public void onNext(HeroAndAdvantages hero) {
                         mView.addRow(hero.getName(), hero.getAdvantages(), hero.getTotalAdvantage());
