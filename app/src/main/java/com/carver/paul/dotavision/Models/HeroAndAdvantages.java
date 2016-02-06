@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
+    public static final int NEUTRAL_ADVANTAGE = 999;
+
     private static final String ID_COLUMN = "_id";
     private static final String NAME_COLUMN = "name";
     private static final String CARRY_COLUMN = "is_carry";
@@ -120,7 +122,9 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     private void calculateTotalAdvantage() {
         mTotalAdvantage = 0;
         for(Double d : mAdvantages) {
-            mTotalAdvantage += d;
+            if(d != NEUTRAL_ADVANTAGE) {
+                mTotalAdvantage += d;
+            }
         }
     }
 

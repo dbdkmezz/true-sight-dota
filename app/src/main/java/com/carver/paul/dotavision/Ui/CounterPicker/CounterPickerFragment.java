@@ -22,6 +22,7 @@ import android.animation.Animator;
 import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -184,7 +185,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     // more efficient (only showing the visible rows? like with a recyclerView?)
 
     //TODO-now: if the advantage is >1 or <-1 make it bold (or a diff colour?)
-    protected void addRow(String name, List<Double> advantages, Double totalAdvantage) {
+    protected void addRow(String name, List<Pair<String, Boolean>> advantages, String totalAdvantage) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View itemView = inflater.inflate(R.layout.item_counter_picker, mMainLinearLayout,
                 false);
@@ -194,24 +195,15 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
         for(int i = 0; i < advantages.size() && i < advantageTextViewIds.size(); i++) {
             TextView advTextView = (TextView) itemView.findViewById(advantageTextViewIds.get(i));
+            advTextView.setText(advantages.get(i).first);
 
-            String string = String.format("%.1f", advantages.get(i));
-            if(string.equals("0.0")) {
-                string = "-";
+            if(advantages.get(i).second) {
+                advTextView.setTypeface(null, Typeface.BOLD);
             }
-            advTextView.setText(string); 
-
-            if(advantages.get(i) > 1) {
-                advTextView.setTypeface(null, Typeface.BOLD);
-                //advTextView.setTextColor(Color.GREEN);
-            } /*else if(advantages.get(i) < -1) {
-                advTextView.setTypeface(null, Typeface.BOLD);
-                advTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            }*/
         }
 
         TextView totalAdvTextView = (TextView) itemView.findViewById(R.id.total_advantage);
-        totalAdvTextView.setText(String.format("%.1f", totalAdvantage));
+        totalAdvTextView.setText(totalAdvantage);
 
         mMainLinearLayout.addView(itemView);
         mRowViews.add(itemView);

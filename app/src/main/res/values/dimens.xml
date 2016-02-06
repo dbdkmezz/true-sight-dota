@@ -6,7 +6,6 @@
     <dimen name="activity_double_horizontal_spacing">16dp</dimen>
     <dimen name="activity_horizontal_spacing">8dp</dimen>
     <dimen name="activity_vertical_spacing">8dp</dimen>
-    <dimen name="big_photo_fab_size">180dp</dimen>
     <dimen name="large_text">22sp</dimen>
     <dimen name="medium_text">18sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
@@ -14,5 +13,7 @@
     <dimen name="button_elevation">5dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
 
+    <dimen name="big_photo_fab_size">180dp</dimen>
+    <dimen name="button_clear_name_size">48dp</dimen>
     <dimen name="camera_buttons_width">60dp</dimen>
 </resources>

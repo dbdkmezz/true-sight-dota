@@ -115,7 +115,7 @@ public class SqlLoader {
         if (enemyName.equals(hero.getName()) || enemyName.equals("")) {
             // If the the enemy hero is the same as this one then neither has any advantage
             // If the enemy is nameless (i.e. is missing / unpicked) then it has no advantage
-            return 0d;
+            return HeroAndAdvantages.NEUTRAL_ADVANTAGE;
         } else {
             String sqlSafeEnemyName = enemyName.replace("'", "");
             Cursor c = db.rawQuery(

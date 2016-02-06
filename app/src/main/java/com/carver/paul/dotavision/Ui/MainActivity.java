@@ -307,18 +307,24 @@ public class MainActivity extends AppCompatActivity
                 counterPickerFragment.getPresenter());
     }
 
-    protected void showCounterPickerButton() {
+    protected void enableCounterPickerButton() {
         Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
         counterPicker.setVisibility(View.VISIBLE);
-        Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
-        heroAbilities.setVisibility(View.GONE);
-    }
+        counterPicker.setEnabled(true);
 
-    protected void showHeroAbilitiesButton() {
-        Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
-        counterPicker.setVisibility(View.GONE);
         Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
         heroAbilities.setVisibility(View.VISIBLE);
+        heroAbilities.setEnabled(false);
+    }
+
+    protected void enableHeroAbilitiesButton() {
+        Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
+        heroAbilities.setVisibility(View.VISIBLE);
+        heroAbilities.setEnabled(true);
+
+        Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
+        counterPicker.setVisibility(View.VISIBLE);
+        counterPicker.setEnabled(false);
     }
 
     private void setTopImage(Bitmap photoBitmap) {

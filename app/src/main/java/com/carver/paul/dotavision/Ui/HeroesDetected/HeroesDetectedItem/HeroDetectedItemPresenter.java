@@ -18,6 +18,8 @@
 
 package com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem;
 
+import android.view.View;
+
 import com.carver.paul.dotavision.Models.HeroAndSimilarity;
 import com.carver.paul.dotavision.Models.HeroImageAndPosition;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
@@ -78,6 +80,13 @@ public class HeroDetectedItemPresenter {
 
     public String getName() {
         return mName;
+    }
+
+    /**
+     * Run when clear name button pressed
+     */
+    protected void clearName() {
+
     }
 
     /**

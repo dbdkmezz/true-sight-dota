@@ -4716,7 +4716,6 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>HEAL:  200 / 300 / 400</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN: 30</abilityDetails>
             <abilityDetails> SCEPTER HOLY PERSUASION ANCIENTS: 1 / 2 / 3</abilityDetails>
         </abilities>
     </heroInfo>
@@ -9684,7 +9683,7 @@
             <imageName>invoker_deafening_blast_hp2</imageName>
             <name>Deafening Blast</name>
             <description>Invoker unleashes a mighty sonic wave in front of him, dealing damage to any enemy unit it collides with based on the level of Exort. The sheer impact from the blast is enough to knock those enemy units back for a duration based on the level of Quas, then disarm their attacks for a duration based on the level of Wex. If Quas, Wex, and Exort are all at max level, Deafening Blast becomes a non-targetable circular wave released in every direction around Invoker.</description>
-            <manaCost>200</manaCost>
+            <manaCost>300</manaCost>
             <cooldown>40</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>

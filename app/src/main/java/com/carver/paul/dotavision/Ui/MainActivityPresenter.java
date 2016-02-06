@@ -70,13 +70,13 @@ public class MainActivityPresenter {
     }
 
     public void showCounterPicker() {
-        mView.showHeroAbilitiesButton();
+        mView.enableHeroAbilitiesButton();
         mAbilityInfoPresenter.hide();
         mCounterPickerPresenter.show();
     }
 
     public void showHeroAbilities() {
-        mView.showCounterPickerButton();
+        mView.enableCounterPickerButton();
         mCounterPickerPresenter.hide();
         mAbilityInfoPresenter.show();
     }

@@ -218,6 +218,8 @@ public class SimilarityTest {
 
         if(isMissingHero(preparedPhoto)) {
             similarityList.add(0, new HeroAndSimilarity(LoadedHeroImage.newMissingHero(), 0));
+        } else {
+            similarityList.add(2, new HeroAndSimilarity(LoadedHeroImage.newMissingHero(), 0));
         }
 
         return similarityList;

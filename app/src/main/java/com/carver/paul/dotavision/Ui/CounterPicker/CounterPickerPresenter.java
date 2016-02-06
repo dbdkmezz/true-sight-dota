@@ -19,6 +19,7 @@
 package com.carver.paul.dotavision.Ui.CounterPicker;
 
 import android.util.Log;
+import android.util.Pair;
 
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
@@ -27,6 +28,7 @@ import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -158,8 +160,34 @@ public class CounterPickerPresenter {
 // role in the spinner or load a new photo.
                     @Override
                     public void onNext(HeroAndAdvantages hero) {
-                        mView.addRow(hero.getName(), hero.getAdvantages(), hero.getTotalAdvantage());
+                        addRow(hero);
                     }
                 });
+    }
+
+    private void addRow(HeroAndAdvantages hero) {
+        List<Pair<String, Boolean>> advantages = new ArrayList<>();
+
+        for(Double advantage : hero.getAdvantages()) {
+            String string;
+            Boolean boldText = false;
+
+            if(advantage == HeroAndAdvantages.NEUTRAL_ADVANTAGE) {
+                string = "  - ";
+            } else {
+                string = String.format(Locale.US, "%.1f", advantage);
+                // add an empty space to offset the lack of a minus sign
+                if(advantage >= 0 && advantage < 10) {
+                    string = " " + string;
+                }
+            }
+
+            if(advantage > 1) {
+                boldText = true;
+            }
+
+            advantages.add(new Pair<>(string, boldText));
+        }
+        mView.addRow(hero.getName(), advantages, String.format(Locale.US, "%.1f", hero.getTotalAdvantage()));
     }
 }

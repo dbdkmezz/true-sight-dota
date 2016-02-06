@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -73,6 +74,19 @@ public class HeroDetectedItemView {
 
         mLinearLayout =
                 (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
+
+        ImageButton clearNameButton =
+                (ImageButton) mLinearLayout.findViewById(R.id.button_clear_name);
+        clearNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AutoCompleteTextView nameTextView =
+                        (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
+                nameTextView.setText("");
+
+                mPresenter.updateFromNameChange("");
+            }
+        });
 
         initialiseHeroSelectRecycler();
     }

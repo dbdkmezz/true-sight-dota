@@ -100,6 +100,10 @@ public class HeroesDetectedPresenter {
     }
 
     public String getHeroImageName(String heroRealName) {
+        if(heroRealName.equals("")) {
+            return "";
+        }
+
         HeroInfo heroInfo = findHeroWithName(heroRealName, mDataManger.getHeroInfo());
         return heroInfo.imageName;
     }
