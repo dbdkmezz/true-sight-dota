@@ -204,21 +204,33 @@ public class SimilarityTest {
 
         List<HeroAndSimilarity> similarityList = new ArrayList<>();
         for (LoadedHeroImage hero : mHeroes) {
-            // note, will be inefficient to do this every time!
-            Mat preparedOriginal = BlurAndThresholdMat(hero.mat, originalThreshold, thresholdType, blurSize);
-            Double value = CompareTemplate(preparedPhoto, preparedOriginal, method);
+            if(hero.comparisonMat == null) {
+                hero.comparisonMat =
+                        BlurAndThresholdMat(hero.mat, originalThreshold, thresholdType, blurSize);
+            }
+            Double value = CompareTemplate(preparedPhoto, hero.comparisonMat, method);
             similarityList.add(new HeroAndSimilarity(hero, value));
         }
 
         Collections.sort(similarityList);
         if (method != Imgproc.TM_SQDIFF && method != Imgproc.TM_SQDIFF_NORMED)
             Collections.reverse(similarityList);
-/*
-        if (!(method == Imgproc.CV_COMP_BHATTACHARYYA || method == Imgproc.CV_COMP_CHISQR || method == 99))
-            Collections.reverse(similarityList);
-*/
+
+        if(isMissingHero(preparedPhoto)) {
+            similarityList.add(0, new HeroAndSimilarity(LoadedHeroImage.newMissingHero(), 0));
+        }
 
         return similarityList;
+    }
+
+    /**
+     * Returns true if mat is of just a blank space -- i.e. no hero has been picked for that slot
+     * yet
+     * @param mat
+     * @return
+     */
+    static private boolean isMissingHero(Mat mat) {
+        return( Core.mean(mat).val[0] < 50 );
     }
 
     static private Mat EnsureMatSmallerThan(Mat mat, int width, int height) {

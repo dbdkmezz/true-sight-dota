@@ -112,8 +112,9 @@ public class SqlLoader {
     }
 
     private static double findAdvantage(HeroAndAdvantages hero, String enemyName, SQLiteDatabase db) {
-        if (enemyName.equals(hero.getName())) {
+        if (enemyName.equals(hero.getName()) || enemyName.equals("")) {
             // If the the enemy hero is the same as this one then neither has any advantage
+            // If the enemy is nameless (i.e. is missing / unpicked) then it has no advantage
             return 0d;
         } else {
             String sqlSafeEnemyName = enemyName.replace("'", "");

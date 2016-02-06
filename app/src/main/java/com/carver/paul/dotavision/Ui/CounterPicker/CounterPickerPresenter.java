@@ -95,8 +95,16 @@ public class CounterPickerPresenter {
         mView.showHeadings(imageIds);
     }
 
+    /**
+     * Shows a row for each hero selected of the role selected in the spinner mRoleFilter with
+     * the advantage it has against the five heroes in the photo.
+     *
+     * A little RxJava is used here to only show one row every 10 milliseconds, this is to prevent
+     * the UI from locking up (which would happen if we attempt to add all ~120 rows at once).
+     */
     private void showAdvantages() {
-        //Create a observable that filters out the in appropriate roles
+        //Create an observable that filters out the heroes which don't have the roe specified in the
+        // spinner filter.
         Observable<HeroAndAdvantages> rowsToShowRx = Observable.from(mHeroesAndAdvantages)
                 .filter(new Func1<HeroAndAdvantages, Boolean>() {
                     @Override
@@ -121,7 +129,7 @@ public class CounterPickerPresenter {
         Observable.interval(10, TimeUnit.MILLISECONDS)
                 .zipWith(rowsToShowRx, new Func2<Long, HeroAndAdvantages, HeroAndAdvantages>() {
                     @Override
-                    public HeroAndAdvantages call(Long aLong, HeroAndAdvantages heroAndAdvantages) {
+                    public HeroAndAdvantages call(Long count, HeroAndAdvantages heroAndAdvantages) {
                         return heroAndAdvantages;
                     }
                 })

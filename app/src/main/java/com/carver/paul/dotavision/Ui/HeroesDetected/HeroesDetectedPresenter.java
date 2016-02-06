@@ -210,6 +210,16 @@ public class HeroesDetectedPresenter {
             throw new RuntimeException("Called findHeroWithName when heroInfo is not " +
                     "initialised.");
 
+        if (name == null)
+            throw new RuntimeException("Called findHeroWithName when name is not " +
+                    "initialised.");
+
+        if(name.equals("")) {
+            HeroInfo missingHero = new HeroInfo();
+            missingHero.name = "";
+            return missingHero;
+        }
+
         for (HeroInfo heroInfo : heroInfos) {
             if (heroInfo.hasName(name)) {
                 return heroInfo;

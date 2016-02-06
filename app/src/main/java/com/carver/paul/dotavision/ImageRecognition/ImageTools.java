@@ -21,6 +21,8 @@ package com.carver.paul.dotavision.ImageRecognition;
 import android.graphics.Bitmap;
 import android.util.Pair;
 
+import com.carver.paul.dotavision.R;
+
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -78,6 +80,10 @@ public class ImageTools {
     }
 
     public static int getDrawableForHero(String heroImageName) {
+        if(heroImageName == null || heroImageName.equals("")) {
+            return R.drawable.missing_hero;
+        }
+
         for (Pair<Integer, String> pair : SimilarityTest.mHeroIconDrawables) {
             if (pair.second.equals(heroImageName))
                 return pair.first;

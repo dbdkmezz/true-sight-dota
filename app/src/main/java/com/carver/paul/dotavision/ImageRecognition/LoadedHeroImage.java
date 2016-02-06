@@ -22,6 +22,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.carver.paul.dotavision.R;
+
 import org.opencv.core.Mat;
 
 /**
@@ -30,6 +32,7 @@ import org.opencv.core.Mat;
 
 public class LoadedHeroImage {
     public Mat mat;
+    public Mat comparisonMat;
     public String name;
 
     private int mDrawableId;
@@ -45,7 +48,16 @@ public class LoadedHeroImage {
         return mDrawableId;
     }
 
-    public Bitmap getBitmap(Context context) {
-        return BitmapFactory.decodeResource(context.getResources(), mDrawableId);
+    public static LoadedHeroImage newMissingHero() {
+        LoadedHeroImage missingHero = new LoadedHeroImage();
+        missingHero.mat = null;
+        missingHero.name = "";
+        missingHero.mDrawableId = R.drawable.missing_hero;
+        return missingHero;
     }
+
+    /**
+     * private constructor for creating missing heroes
+     */
+    private LoadedHeroImage() {}
 }

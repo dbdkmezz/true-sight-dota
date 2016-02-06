@@ -134,9 +134,11 @@ public class AbilityInfoPresenter {
 
     private void showAbilitiesForAllHeroes(List<HeroInfo> heroes) {
         for(HeroInfo hero : heroes) {
-            mView.addHeading(hero.name);
-            for (HeroAbilityInfo ability : hero.abilities) {
-                mView.addAbilityCard(ability, false);
+            if(!hero.name.equals("")) {
+                mView.addHeading(hero.name);
+                for (HeroAbilityInfo ability : hero.abilities) {
+                    mView.addAbilityCard(ability, false);
+                }
             }
         }
     }

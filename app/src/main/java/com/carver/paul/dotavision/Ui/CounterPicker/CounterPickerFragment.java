@@ -194,7 +194,13 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
         for(int i = 0; i < advantages.size() && i < advantageTextViewIds.size(); i++) {
             TextView advTextView = (TextView) itemView.findViewById(advantageTextViewIds.get(i));
-            advTextView.setText(String.format("%.1f", advantages.get(i)));
+
+            String string = String.format("%.1f", advantages.get(i));
+            if(string.equals("0.0")) {
+                string = "-";
+            }
+            advTextView.setText(string); 
+
             if(advantages.get(i) > 1) {
                 advTextView.setTypeface(null, Typeface.BOLD);
                 //advTextView.setTextColor(Color.GREEN);
