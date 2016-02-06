@@ -3268,7 +3268,7 @@
             <name>Savage Roar</name>
             <description>Lone Druid roars fiercely causing nearby enemies to flee towards their base in terror. Their movement speed is increased by 20%.</description>
             <manaCost>50</manaCost>
-            <cooldown>28/24/20/16</cooldown>
+            <cooldown>38/32/26/20</cooldown>
             <disableDuration>DURATION:  1.2 / 1.6 / 2 / 2.4</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
