@@ -9690,17 +9690,6 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>TRAVEL DISTANCE:  1000</abilityDetails>
         </abilities>
-        <abilities>
-            <isUltimate>false</isUltimate>
-            <isStun>false</isStun>
-            <isDisable>false</isDisable>
-            <isSilence>false</isSilence>
-            <isMute>false</isMute>
-            <imageName>invoker_attribute_bonus_hp2</imageName>
-            <name>invoker_attribute_bonus</name>
-            <description>DOTA_Tooltip_ability_invoker_attribute_bonus_Description</description>
-            <abilityDetails>ABILITY:  Passive</abilityDetails>
-        </abilities>
     </heroInfo>
     <heroInfo>
         <name>Outworld Devourer</name>
