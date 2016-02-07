@@ -105,7 +105,18 @@ public class CounterPickerPresenter {
      * the UI from locking up (which would happen if we attempt to add all ~120 rows at once).
      */
     private void showAdvantages() {
-        //Create an observable that filters out the heroes which don't have the roe specified in the
+
+        // Filters out the heroes which don't have the role specified in the
+        // spinner filter.
+        List<HeroAndAdvantages> rowsToShow = new ArrayList<>();
+
+        for (HeroAndAdvantages hero : mHeroesAndAdvantages) {
+            if (shouldShowHero(hero))
+                rowsToShow.add(hero);
+        }
+
+
+/*        //Create an observable that filters out the heroes which don't have the roe specified in the
         // spinner filter.
         Observable<HeroAndAdvantages> rowsToShowRx = Observable.from(mHeroesAndAdvantages)
                 .filter(new Func1<HeroAndAdvantages, Boolean>() {
@@ -136,17 +147,18 @@ public class CounterPickerPresenter {
                         Log.e(TAG, "mRoleFilter has invalid value.");
                         return true;
                     }
-                });
+                });*/
 
         // Show a new row every 10 milliseconds (if we attempt to show them all at once then the UI
         // locks up because adding 120 rows at once takes too long!)
         Observable.interval(10, TimeUnit.MILLISECONDS)
-                .zipWith(rowsToShowRx, new Func2<Long, HeroAndAdvantages, HeroAndAdvantages>() {
+                .zipWith(rowsToShow, new Func2<Long, HeroAndAdvantages, HeroAndAdvantages>() {
                     @Override
                     public HeroAndAdvantages call(Long count, HeroAndAdvantages heroAndAdvantages) {
                         return heroAndAdvantages;
                     }
                 })
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<HeroAndAdvantages>() {
                     @Override
@@ -156,7 +168,7 @@ public class CounterPickerPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e(TAG, "Interval observable. Unhandled error: " + e.toString());
                     }
 
 //TODO-soon: fix row adding subscriber so that it gets unsubscribed when the view is changed or
@@ -167,6 +179,33 @@ public class CounterPickerPresenter {
                         addRow(hero);
                     }
                 });
+    }
+
+    private boolean shouldShowHero(HeroAndAdvantages hero) {
+            for(HeroInfo enemy : mEnemyHeroes) {
+                if(hero.getName().equals(enemy.name)) {
+                    return false;
+                }
+            }
+
+        // implement the role selection made in the spinner
+        switch (mRoleFilter) {
+            case R.string.all_roles:
+                return true;
+            case R.string.carry_role:
+                return hero.isCarry();
+            case R.string.support_role:
+                return hero.isSupport();
+            case R.string.mid_role:
+                return hero.isMid();
+            case R.string.off_lane_role:
+                return hero.isOffLane();
+            case R.string.jungler_role:
+                return hero.isJunger();
+        }
+
+        Log.e(TAG, "mRoleFilter has invalid value.");
+        return true;
     }
 
     private void addRow(HeroAndAdvantages hero) {
