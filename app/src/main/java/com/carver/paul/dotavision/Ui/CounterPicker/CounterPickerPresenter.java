@@ -151,7 +151,8 @@ public class CounterPickerPresenter {
 
         // Show a new row every 10 milliseconds (if we attempt to show them all at once then the UI
         // locks up because adding 120 rows at once takes too long!)
-        Observable.interval(10, TimeUnit.MILLISECONDS)
+        Observable.interval(20, TimeUnit.MILLISECONDS)
+                .onBackpressureDrop()
                 .zipWith(rowsToShow, new Func2<Long, HeroAndAdvantages, HeroAndAdvantages>() {
                     @Override
                     public HeroAndAdvantages call(Long count, HeroAndAdvantages heroAndAdvantages) {
@@ -171,7 +172,7 @@ public class CounterPickerPresenter {
                         Log.e(TAG, "Interval observable. Unhandled error: " + e.toString());
                     }
 
-//TODO-soon: fix row adding subscriber so that it gets unsubscribed when the view is changed or
+//TODO-next: fix row adding subscriber so that it gets unsubscribed when the view is changed or
 // removed. Things will probably go wrong if this is still adding rows and we select a different
 // role in the spinner or load a new photo.
                     @Override

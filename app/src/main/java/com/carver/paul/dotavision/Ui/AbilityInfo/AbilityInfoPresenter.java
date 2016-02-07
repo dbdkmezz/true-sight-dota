@@ -99,7 +99,7 @@ public class AbilityInfoPresenter {
             mView.addAbilityText(R.string.no_stuns_found);
         } else {
             for (HeroAbilityInfo ability : stunAbilities) {
-                mView.addAbilityCard(ability, true);
+                mView.addAbilityCard(ability, true, HeroAbilityInfo.STUN);
             }
         }
     }
@@ -109,7 +109,7 @@ public class AbilityInfoPresenter {
             mView.addHeading(R.string.disables);
 
             for (HeroAbilityInfo ability : disableAbilities) {
-                mView.addAbilityCard(ability, true);
+                mView.addAbilityCard(ability, true, HeroAbilityInfo.DISABLE_NOT_STUN);
             }
         }
     }
@@ -120,7 +120,7 @@ public class AbilityInfoPresenter {
             mView.addAbilityText(R.string.no_silences_found);
         } else {
             for (HeroAbilityInfo ability : silenceAbilities) {
-                mView.addAbilityCard(ability, true);
+                mView.addAbilityCard(ability, true, HeroAbilityInfo.SILENCE);
             }
         }
     }

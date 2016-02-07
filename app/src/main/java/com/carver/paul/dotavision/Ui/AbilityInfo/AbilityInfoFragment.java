@@ -78,8 +78,13 @@ public class AbilityInfoFragment extends Fragment {
     protected void addAbilityText(String string) {
         addText(string, R.layout.item_ability_info_text);
     }
+
     protected void addAbilityCard(HeroAbilityInfo ability, boolean showHeroName) {
-        AbilityCardView card = new AbilityCardView(getActivity(), ability, showHeroName, -1);
+        addAbilityCard(ability, showHeroName, -1);
+    }
+
+    protected void addAbilityCard(HeroAbilityInfo ability, boolean showHeroName, int abilityType) {
+        AbilityCardView card = new AbilityCardView(getActivity(), ability, showHeroName, abilityType);
         mParentLinearLayout.addView(card);
     }
 
