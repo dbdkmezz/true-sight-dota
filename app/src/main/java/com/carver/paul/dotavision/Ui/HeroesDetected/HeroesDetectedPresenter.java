@@ -115,6 +115,11 @@ public class HeroesDetectedPresenter {
     private void sendUpdatedHeroList(boolean completelyNewList) {
         List<HeroInfo> heroInfoList = new ArrayList<>();
         for (HeroDetectedItemPresenter hero : mHeroDetectedItemPresenters) {
+            if(hero.getName() == null) {
+                Log.d(TAG, "WARNING: Hero item name not initialised when called " +
+                        "sendUpdatedHeroList, giving up attempt to send update.");
+                return;
+            }
             HeroInfo heroInfo = findHeroWithName(hero.getName(), mDataManger.getHeroInfo());
             heroInfoList.add(heroInfo);
         }

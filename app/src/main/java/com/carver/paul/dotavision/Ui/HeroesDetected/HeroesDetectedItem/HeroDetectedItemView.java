@@ -358,8 +358,10 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
     }
 
     private void reportHeroChange(int newPosition) {
-        mCurrentPosition = newPosition;
-        mPresenter.updateFromSimilarityListChange(newPosition);
+        if(mCurrentPosition != newPosition) {
+            mCurrentPosition = newPosition;
+            mPresenter.updateFromSimilarityListChange(newPosition);
+        }
     }
 }
 

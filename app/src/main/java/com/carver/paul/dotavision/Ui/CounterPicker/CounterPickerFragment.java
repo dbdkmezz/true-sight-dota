@@ -199,18 +199,30 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         mRowViews.add(headerView);
     }
 
-    //TODO-soon: when showing all the heroes adding all the rows is a little slow. Need something
-    // more efficient (only showing the visible rows? like with a recyclerView?)
+    /**
+     * Add a row detailing the advantages a particular hero has over the five in the photo.
+     *
+     * @param name
+     * @param advantages        This is a list of pairs, the string is the value of this hero's
+     *                          advantage over that enemy. The boolean is whether or no the text
+     *                          should be bold.
+     * @param totalAdvantage
+     */
     protected void addRow(String name, List<Pair<String, Boolean>> advantages, String totalAdvantage) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        if(inflater == null) return;
+
         View itemView = inflater.inflate(R.layout.item_counter_picker, mMainLinearLayout,
                 false);
+        if(itemView == null) return;
 
         TextView nameTextView = (TextView) itemView.findViewById(R.id.name);
+        if(nameTextView == null) return;
         nameTextView.setText(name);
 
         for(int i = 0; i < advantages.size() && i < advantageTextViewIds.size(); i++) {
             TextView advTextView = (TextView) itemView.findViewById(advantageTextViewIds.get(i));
+            if(advTextView == null) return;
             advTextView.setText(advantages.get(i).first);
 
             if(advantages.get(i).second) {
@@ -219,6 +231,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         }
 
         TextView totalAdvTextView = (TextView) itemView.findViewById(R.id.total_advantage);
+        if(totalAdvantage == null) return;
         totalAdvTextView.setText(totalAdvantage);
 
         mMainLinearLayout.addView(itemView);

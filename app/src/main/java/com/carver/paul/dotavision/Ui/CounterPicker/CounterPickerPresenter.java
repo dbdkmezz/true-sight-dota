@@ -44,6 +44,7 @@ public class CounterPickerPresenter {
     private int mRoleFilter = R.string.all_roles;
     private List<HeroAndAdvantages> mHeroesAndAdvantages = new ArrayList<>();
     private List<HeroInfo> mEnemyHeroes = new ArrayList<>();
+    private Subscriber<HeroAndAdvantages> mRowAdderRx;
 
     CounterPickerPresenter(CounterPickerFragment view) {
         mView = view;
@@ -53,7 +54,7 @@ public class CounterPickerPresenter {
                                List<HeroInfo> enemyHeroes) {
         mHeroesAndAdvantages = heroesAndAdvantages;
         mEnemyHeroes = enemyHeroes;
-        mView.removeAllRows();
+        removeAllRows();
         mView.endLoadingAnimation();
     }
 
@@ -78,15 +79,21 @@ public class CounterPickerPresenter {
             return;
         } else {
             mRoleFilter = roleFilter;
-            mView.removeAllRows();
+            removeAllRows();
             showHeadings();
             showAdvantages();
         }
     }
 
     protected void loadingAnimationFinished() {
+        removeAllRows();
         showHeadings();
         showAdvantages();
+    }
+
+    private void removeAllRows() {
+        unsubscribeRowAddingSubscriber();
+        mView.removeAllRows();
     }
 
     private void showHeadings() {
@@ -115,42 +122,13 @@ public class CounterPickerPresenter {
                 rowsToShow.add(hero);
         }
 
+        setupRowAddingSubscriber();
 
-/*        //Create an observable that filters out the heroes which don't have the roe specified in the
-        // spinner filter.
-        Observable<HeroAndAdvantages> rowsToShowRx = Observable.from(mHeroesAndAdvantages)
-                .filter(new Func1<HeroAndAdvantages, Boolean>() {
-                    @Override
-                    public Boolean call(HeroAndAdvantages hero) {
-                        // don't show heroes with the same name as one in the photo
-                        for(HeroInfo enemy : mEnemyHeroes) {
-                            if(hero.getName().equals(enemy.name)) {
-                                return false;
-                            }
-                        }
-
-                        // implement the role selection made in the spinner
-                        switch (mRoleFilter) {
-                            case R.string.all_roles:
-                                return true;
-                            case R.string.carry_role:
-                                return hero.isCarry();
-                            case R.string.support_role:
-                                return hero.isSupport();
-                            case R.string.mid_role:
-                                return hero.isMid();
-                            case R.string.off_lane_role:
-                                return hero.isOffLane();
-                            case R.string.jungler_role:
-                                return hero.isJunger();
-                        }
-                        Log.e(TAG, "mRoleFilter has invalid value.");
-                        return true;
-                    }
-                });*/
+        //TODO-someday: remove the need for the interval observerable when adding rows
 
         // Show a new row every 10 milliseconds (if we attempt to show them all at once then the UI
         // locks up because adding 120 rows at once takes too long!)
+        // (onBackpressureDrop is needed in case the intervals are coming too quick to handle)
         Observable.interval(20, TimeUnit.MILLISECONDS)
                 .onBackpressureDrop()
                 .zipWith(rowsToShow, new Func2<Long, HeroAndAdvantages, HeroAndAdvantages>() {
@@ -161,25 +139,7 @@ public class CounterPickerPresenter {
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<HeroAndAdvantages>() {
-                    @Override
-                    public void onCompleted() {
-                        mView.resetMinimumHeight();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "Interval observable. Unhandled error: " + e.toString());
-                    }
-
-//TODO-next: fix row adding subscriber so that it gets unsubscribed when the view is changed or
-// removed. Things will probably go wrong if this is still adding rows and we select a different
-// role in the spinner or load a new photo.
-                    @Override
-                    public void onNext(HeroAndAdvantages hero) {
-                        addRow(hero);
-                    }
-                });
+                .subscribe(mRowAdderRx);
     }
 
     private boolean shouldShowHero(HeroAndAdvantages hero) {
@@ -207,6 +167,33 @@ public class CounterPickerPresenter {
 
         Log.e(TAG, "mRoleFilter has invalid value.");
         return true;
+    }
+
+    private void setupRowAddingSubscriber() {
+        unsubscribeRowAddingSubscriber();
+
+        mRowAdderRx = new Subscriber<HeroAndAdvantages>() {
+            @Override
+            public void onCompleted() {
+                mView.resetMinimumHeight();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "Interval observable. Unhandled error: " + e.toString());
+            }
+
+            @Override
+            public void onNext(HeroAndAdvantages hero) {
+                addRow(hero);
+            }
+        };
+    }
+
+    private void unsubscribeRowAddingSubscriber() {
+        if (mRowAdderRx != null) {
+            mRowAdderRx.unsubscribe();
+        }
     }
 
     private void addRow(HeroAndAdvantages hero) {
