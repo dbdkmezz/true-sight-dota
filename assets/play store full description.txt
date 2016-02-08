@@ -1,0 +1,11 @@
+True Sight provides full information for counter picking enemy heroes, and the details of their abilities. Enemies can be identified just by taking a photo -- ideal for the hero picking screen -- , or by typing their name. 
+
+Counter picks can be filtered by role: Carry, Mid, Support, Off lane, or Jungler. Drop me an email if you'd like an extra role added.
+
+Also features hero abilities mode for newer players: see a list of all the enemy heroes' abilities, with key spells like  stuns, silences, and ultimates listed first. Useful just for seeing a quick list of the stuns the enemies have, or for finding out important details, such as damage type.
+
+To try out the app without a game in front of you press the "Demo" button.
+
+True Sight for Dota 2 is GPL3 free software, the source code is available at: https://github.com/dbdkmezz/true-sight-dota 
+
+Dota 2 is a registered trademark of Valve Corporation. All game images and names are property of Valve Corporation. This app is not affiliated with Valve Corporation.
