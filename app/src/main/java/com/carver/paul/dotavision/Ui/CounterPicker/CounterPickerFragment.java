@@ -43,6 +43,8 @@ import java.util.List;
 
 //TODO-next: only show the counter picker first if we're on the hero select screen
 
+//TODO-next: add "role" text to the left of the spinner
+
 public class CounterPickerFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     static private final List<Integer> headingImageViewIds = Arrays.asList(R.id.hero1,

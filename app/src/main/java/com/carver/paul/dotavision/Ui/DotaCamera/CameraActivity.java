@@ -49,7 +49,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-//TODO-wno: make DotaCamera MVP
+//TODO-now: make DotaCamera MVP
+
+//TODO-soon: fix the crashes in the camera
 
 //TODO-someday: crop what the Camera saves
 
