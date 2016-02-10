@@ -56,6 +56,8 @@ import java.io.File;
 //TODO-next: give counter picker and hero ability buttons a little triangle below them to show
 // which is selected
 
+//TODO-next: remove the first screen entirely and make using photos much more optional
+
 //TODO-beauty: Write tests to check if all hero images load, and if all hero ability icons draw and
 // all hero abilities have text
 
