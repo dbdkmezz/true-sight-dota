@@ -131,12 +131,7 @@ public class CounterPickerPresenter {
         // (onBackpressureDrop is needed in case the intervals are coming too quick to handle)
         Observable.interval(20, TimeUnit.MILLISECONDS)
                 .onBackpressureDrop()
-                .zipWith(rowsToShow, new Func2<Long, HeroAndAdvantages, HeroAndAdvantages>() {
-                    @Override
-                    public HeroAndAdvantages call(Long count, HeroAndAdvantages heroAndAdvantages) {
-                        return heroAndAdvantages;
-                    }
-                })
+                .zipWith(rowsToShow, (count, heroAndAdvantages) -> heroAndAdvantages)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mRowAdderRx);

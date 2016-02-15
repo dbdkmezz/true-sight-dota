@@ -162,35 +162,14 @@ public class DataManager {
          *   around 0.2 seconds, so it is good that we can show the results as they become
          *   available.)
          */
-        Observable.zip(mXmlInfoRx, mSimilarityTestRx, mAdvantagesSqlRx, new Func3<List<HeroInfo>,
-                SimilarityTest, SqlLoader, List<HeroImageAndPosition>>() {
-            @Override
-            public List<HeroImageAndPosition> call(List<HeroInfo> heroInfoList,
-                                                   SimilarityTest similarityTest,
-                                                   SqlLoader sqlLoader) {
-                return RecognitionModel.findFiveHeroesInPhoto(photo);
-            }
-        })
-                .doOnNext(new Action1<List<HeroImageAndPosition>>() {
-                    @Override
-                    public void call(List<HeroImageAndPosition> heroImages) {
-                        prepareToShowResults(heroImages);
-                    }
-                })
-                .flatMapIterable(new Func1<List<HeroImageAndPosition>,
-                        Iterable<HeroImageAndPosition>>() {
-                    @Override
-                    public Iterable<HeroImageAndPosition> call(List<HeroImageAndPosition> heroFromPhotos) {
-                        return heroFromPhotos;
-                    }
-                })
-                .map(new Func1<HeroImageAndPosition, SimilarityListAndPosition>() {
-                    @Override
-                    public SimilarityListAndPosition call(HeroImageAndPosition unidentifiedHero) {
-                        return RecognitionModel.identifyHeroFromPhoto(unidentifiedHero,
-                                mSimilarityTestRx.getValue());
-                    }
-                })
+
+        Observable.zip(mXmlInfoRx, mSimilarityTestRx, mAdvantagesSqlRx,
+                (mXmlInfoRx, mSimilarityTestRx, mAdvantagesSqlRx) ->
+                        RecognitionModel.findFiveHeroesInPhoto(photo))
+                .doOnNext(heroImages -> prepareToShowResults(heroImages))
+                .flatMapIterable(heroFromPhotos -> heroFromPhotos)
+                .map(unidentifiedHero -> RecognitionModel.identifyHeroFromPhoto(unidentifiedHero,
+                                mSimilarityTestRx.getValue()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mHeroesDetectedPresenter.getHeroRecognitionSubscriberRx());
@@ -215,12 +194,7 @@ public class DataManager {
             heroNames.add(heroInfo.name);
         }
 
-        mAdvantagesSqlRx.map(new Func1<SqlLoader, List<HeroAndAdvantages>>() {
-            @Override
-            public List<HeroAndAdvantages> call(SqlLoader sqlLoader) {
-                return sqlLoader.calculateAdvantages(heroNames);
-            }
-        })
+        mAdvantagesSqlRx.map(sqlLoader -> sqlLoader.calculateAdvantages(heroNames))
                 // Running this on the database thread ensures we don't load the database more than
                 // once at a time. (The database reading code is not threadsafe.)
                 .subscribeOn(databaseThread)
