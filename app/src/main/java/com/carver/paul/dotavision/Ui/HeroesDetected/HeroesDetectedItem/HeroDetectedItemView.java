@@ -91,9 +91,7 @@ public class HeroDetectedItemView {
         clearNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNameTextView.setText("");
-
-                mPresenter.updateFromNameChange("");
+                mPresenter.clear();
             }
         });
 
@@ -115,6 +113,11 @@ public class HeroDetectedItemView {
 
     protected void setName(String name) {
         mNameTextView.setText(name);
+    }
+
+    protected void clearName() {
+        mNameTextView.setText("");
+        mPresenter.updateFromNameChange("");
     }
 
     protected void setHeroInRecycler(int posInSimilarityList) {

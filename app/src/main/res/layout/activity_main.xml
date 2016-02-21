@@ -30,10 +30,6 @@
             android:src="@drawable/button_camera"
             android:visibility="gone"/>
 
-<!--
-        android:src="@drawable/button_camera" />
-        android:src="@android:drawable/ic_menu_camera" />
--->
         <TextView
             android:id="@+id/text_processing_image"
             android:layout_width="wrap_content"
@@ -43,18 +39,17 @@
             android:paddingTop="@dimen/big_photo_fab_size"
             android:text="@string/processing_image"
             android:textSize="@dimen/large_text"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
-<!--
-        <View
-            android:id="@+id/button_fab_take_photo_final_location"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_clear"
             android:layout_width="@dimen/fab_diameter"
             android:layout_height="@dimen/fab_diameter"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:layout_gravity="bottom|right"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:layout_marginRight="@dimen/fab_margin"
-            android:visibility="gone" />
--->
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:onClick="clearButton"
+            android:visibility="invisible"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

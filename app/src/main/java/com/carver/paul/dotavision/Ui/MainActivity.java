@@ -20,8 +20,6 @@
 
 package com.carver.paul.dotavision.Ui;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -211,6 +209,10 @@ public class MainActivity extends AppCompatActivity
                 Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
     }
 
+    public void clearButton(View view) {
+        mPresenter.clearButton();
+    }
+
     public void counterPickerButton(View view) {
         mPresenter.showCounterPicker();
     }
@@ -240,6 +242,10 @@ public class MainActivity extends AppCompatActivity
     protected void hideTip() {
         View view = findViewById(R.id.text_opening_tip);
         view.setVisibility(View.GONE);
+    }
+
+    protected void showClearFab() {
+        findViewById(R.id.fab_clear).setVisibility(View.VISIBLE);
     }
 
     /**

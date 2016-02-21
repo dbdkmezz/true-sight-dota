@@ -32,6 +32,7 @@ import java.io.File;
 
 public class MainActivityPresenter {
     private final MainActivity mView;
+    private final HeroesDetectedPresenter mHeroesDetectedPresenter;
     private final AbilityInfoPresenter mAbilityInfoPresenter;
     private final CounterPickerPresenter mCounterPickerPresenter;
     private final DataManager mDataManager;
@@ -42,8 +43,10 @@ public class MainActivityPresenter {
                                  AbilityInfoPresenter abilityInfoPresenter,
                                  CounterPickerPresenter counterPickerPresenter) {
         mView = view;
+        mHeroesDetectedPresenter = heroesDetectedPresenter;
         mAbilityInfoPresenter = abilityInfoPresenter;
         mCounterPickerPresenter = counterPickerPresenter;
+
         mDataManager = new DataManager(this, heroesDetectedPresenter,
                 abilityInfoPresenter,
                 counterPickerPresenter);
@@ -57,6 +60,7 @@ public class MainActivityPresenter {
      * This should be called whenever the hero list is shown
      */
     public void updateHeroList() {
+        mView.showClearFab();
         if(!heroInfoShown) {
             mView.hideTip();
             showCounterPicker();
@@ -90,6 +94,11 @@ public class MainActivityPresenter {
         mView.enableCounterPickerButton();
         mCounterPickerPresenter.hide();
         mAbilityInfoPresenter.show();
+    }
+
+    protected void clearButton() {
+        heroInfoShown = false;
+        mHeroesDetectedPresenter.clearAll();
     }
 
     /**

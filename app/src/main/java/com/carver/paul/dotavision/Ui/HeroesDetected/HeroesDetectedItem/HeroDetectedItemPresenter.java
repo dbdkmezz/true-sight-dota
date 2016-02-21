@@ -84,6 +84,10 @@ public class HeroDetectedItemPresenter {
         mView.setupTextAutoCompleteAndChangeListener(mName, allHeroNames);
     }
 
+    public void clear() {
+        mView.clearName();
+    }
+
     /**
      * Used when the hero selected in the RecyclerView list of similar hero images has changed. This
      * will update the name accordingly and tell the parent presenter about the change to update

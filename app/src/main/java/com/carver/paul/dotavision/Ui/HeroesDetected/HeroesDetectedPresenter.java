@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * This class shows the five heroes which have been found in the image.
@@ -56,6 +58,12 @@ public class HeroesDetectedPresenter {
 
     public HeroesDetectedPresenter(HeroesDetectedFragment view) {
         mView = view;
+    }
+
+    public void clearAll() {
+        for (HeroDetectedItemPresenter presenter : mHeroDetectedItemPresenters) {
+            presenter.clear();
+        }
     }
 
     public void reset() {
@@ -201,6 +209,8 @@ public class HeroesDetectedPresenter {
 
         mDataManger.getHeroInfoRx()
                 .first()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mNameSetupSubscriberRx);
     }
 
