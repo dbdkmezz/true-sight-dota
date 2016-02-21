@@ -7,6 +7,7 @@
     <!ENTITY jungler_role "Jungler">
     <!ENTITY off_lane_role "Off lane">
     <!ENTITY mid_role "Mid">
+    <!ENTITY roaming_role "Roaming">
     ]>
 
 <resources>
@@ -65,6 +66,7 @@
     <string name="off_lane_role">&off_lane_role;</string>
     <string name="jungler_role">&jungler_role;</string>
     <string name="mid_role">&mid_role;</string>
+    <string name="roaming_role">&roaming_role;</string>
     <string name="support_role">&support_role;</string>
 
     <string-array name="roles_array">
@@ -73,6 +75,7 @@
         <item>&mid_role;</item>
         <item>&off_lane_role;</item>
         <item>&support_role;</item>
+        <item>&roaming_role;</item>
         <item>&jungler_role;</item>
     </string-array>
 </resources>

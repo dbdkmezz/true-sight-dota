@@ -34,6 +34,7 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     private static final String CARRY_COLUMN = "is_carry";
     private static final String SUPPORT_COLUMN = "is_support";
     private static final String MID_COLUMN = "is_mid";
+    private static final String ROAMING_COLUMN = "is_roaming";
     private static final String JUNGLER_COLUMN = "is_jungler";
     private static final String OFF_LANE_COLUMN = "is_off_lane";
 
@@ -42,6 +43,7 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     private final boolean mIsCarry;
     private final boolean mIsSupport;
     private final boolean mIsMid;
+    private final boolean mIsRoaming;
     private final boolean mIsJungler;
     private final boolean mIsOffLane;
 
@@ -56,7 +58,8 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     public HeroAndAdvantages clone() {
         HeroAndAdvantages heroClone =
-                new HeroAndAdvantages(mId, mName, mIsCarry, mIsSupport, mIsMid, mIsJungler, mIsOffLane);
+                new HeroAndAdvantages(mId, mName, mIsCarry, mIsSupport, mIsMid, mIsRoaming,
+                        mIsJungler, mIsOffLane);
 
         List<Double> advantagesClone = new ArrayList<>();
         for(double advantage : mAdvantages) {
@@ -89,6 +92,10 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         return mIsMid;
     }
 
+    public boolean isRoaming() {
+        return mIsRoaming;
+    }
+
     public boolean isJunger() {
         return mIsJungler;
     }
@@ -109,6 +116,7 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         mIsCarry = intToBool(c.getInt(c.getColumnIndexOrThrow(CARRY_COLUMN)));
         mIsSupport = intToBool(c.getInt(c.getColumnIndexOrThrow(SUPPORT_COLUMN)));
         mIsMid = intToBool(c.getInt(c.getColumnIndexOrThrow(MID_COLUMN)));
+        mIsRoaming = intToBool(c.getInt(c.getColumnIndexOrThrow(ROAMING_COLUMN)));
         mIsJungler = intToBool(c.getInt(c.getColumnIndexOrThrow(JUNGLER_COLUMN)));
         mIsOffLane = intToBool(c.getInt(c.getColumnIndexOrThrow(OFF_LANE_COLUMN)));
     }
@@ -128,12 +136,14 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     }
 
     private HeroAndAdvantages(int id, String name, boolean isCarry, boolean isSupport,
-                              boolean isMid, boolean isJungler, boolean isOffLane) {
+                              boolean isMid, boolean isRoaming, boolean isJungler,
+                              boolean isOffLane) {
         mId = id;
         mName = name;
         mIsCarry = isCarry;
         mIsSupport = isSupport;
         mIsMid = isMid;
+        mIsRoaming = isRoaming;
         mIsJungler = isJungler;
         mIsOffLane = isOffLane;
     }

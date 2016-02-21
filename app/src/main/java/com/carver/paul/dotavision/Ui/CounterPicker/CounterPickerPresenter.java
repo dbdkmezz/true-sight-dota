@@ -158,6 +158,8 @@ public class CounterPickerPresenter {
                 return hero.isSupport();
             case R.string.mid_role:
                 return hero.isMid();
+            case R.string.roaming_role:
+                return hero.isRoaming();
             case R.string.off_lane_role:
                 return hero.isOffLane();
             case R.string.jungler_role:

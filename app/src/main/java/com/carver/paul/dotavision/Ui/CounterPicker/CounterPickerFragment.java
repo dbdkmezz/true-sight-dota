@@ -54,8 +54,8 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
             R.id.advantage2, R.id.advantage3, R.id.advantage4, R.id.advantage5);
 
     static private final List<Integer> roleStringIds = Arrays.asList(R.string.all_roles,
-            R.string.carry_role, R.string.support_role, R.string.mid_role, R.string.off_lane_role,
-            R.string.jungler_role);
+            R.string.carry_role, R.string.support_role, R.string.mid_role, R.string.roaming_role,
+            R.string.off_lane_role, R.string.jungler_role);
 
     private CounterPickerPresenter mPresenter;
     private LinearLayout mMainLinearLayout;
