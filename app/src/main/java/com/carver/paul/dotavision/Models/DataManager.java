@@ -55,10 +55,10 @@ import rx.subjects.AsyncSubject;
 public class DataManager {
     static final String TAG = "DataManager";
 
-    private MainActivityPresenter mMainActivityPresenter;
-    private HeroesDetectedPresenter mHeroesDetectedPresenter;
-    private AbilityInfoPresenter mAbilityInfoPresenter;
-    private CounterPickerPresenter mCounterPickerPresenter;
+    private final MainActivityPresenter mMainActivityPresenter;
+    private final HeroesDetectedPresenter mHeroesDetectedPresenter;
+    private final AbilityInfoPresenter mAbilityInfoPresenter;
+    private final CounterPickerPresenter mCounterPickerPresenter;
 
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
@@ -68,7 +68,6 @@ public class DataManager {
     // more than one time at once.
     private Scheduler databaseThread;
 
-
     /**
      * By calling StartXmlLoading and StartSimilarityTestLoading as soon as DataManager is
      * created (hopefully when the activity is first launched) this hard work can be done in a
@@ -77,33 +76,20 @@ public class DataManager {
      *
      * @param mainActivityPresenter
      */
-    public DataManager(final MainActivityPresenter mainActivityPresenter) {
+    public DataManager(final MainActivityPresenter mainActivityPresenter,
+                       final HeroesDetectedPresenter heroesDetectedPresenter,
+                       final AbilityInfoPresenter abilityInfoPresenter,
+                       final CounterPickerPresenter counterPickerPresenter) {
         mMainActivityPresenter = mainActivityPresenter;
+        mHeroesDetectedPresenter = heroesDetectedPresenter;
+        mAbilityInfoPresenter = abilityInfoPresenter;
+        mCounterPickerPresenter = counterPickerPresenter;
 
         startXmlLoading();
         startSimilarityTestLoading();
         startSqlLoading();
 
         databaseThread = Schedulers.from(Executors.newSingleThreadExecutor());
-    }
-
-    /**
-     * Registers the UI presenters needed to send the results of image recognition back to the UI
-     * views. (In MVP Presenters are the middleman between the hard work done in the Models, and
-     * the Views with which the user interacts.)
-     *
-     * This must be called before attempting to identify heroes in a photo otherwise an exception
-     * will be thrown, since we won't have anywhere to send the results to.
-     *
-     * @param heroesDetectedPresenter
-     * @param abilityInfoPresenter
-     */
-    public void registerPresenters(final HeroesDetectedPresenter heroesDetectedPresenter,
-                                   final AbilityInfoPresenter abilityInfoPresenter,
-                                   final CounterPickerPresenter counterPickerPresenter) {
-        mHeroesDetectedPresenter = heroesDetectedPresenter;
-        mAbilityInfoPresenter = abilityInfoPresenter;
-        mCounterPickerPresenter = counterPickerPresenter;
     }
 
     public boolean presentersRegistered() {
@@ -204,6 +190,7 @@ public class DataManager {
     }
 
     public void sendUpdatedHeroList(List<HeroInfo> heroInfoList, boolean completelyNewList) {
+        mMainActivityPresenter.updateHeroList();
         mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
 
         if(completelyNewList) {

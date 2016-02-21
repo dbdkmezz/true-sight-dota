@@ -67,8 +67,10 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
                              Bundle savedInstanceState) {
         View inflateView = inflater.inflate(R.layout.fragment_counter_picker, container, false);
         mMainLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_counter_picker);
-        mLoadingText = (TextView) inflateView.findViewById(R.id.text_loading);
         mPresenter = new CounterPickerPresenter(this);
+
+        mLoadingText = (TextView) inflateView.findViewById(R.id.text_loading);
+        mLoadingText.setVisibility(View.GONE);
 
         setupRolesSpinner(inflater, inflateView);
 

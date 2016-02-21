@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,9 +100,15 @@ public class HeroesDetectedFragment extends Fragment {
     }
 
     protected void hideKeyboard() {
-        // Hide the keyboard
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        if(getActivity().getCurrentFocus().getWindowToken() == null) {
+            Log.d(TAG, "Can't hide keyboard because" +
+                    " getActivity().getCurrentFocus().getWindowToken() returns null");
+        } else {
+            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     @Override

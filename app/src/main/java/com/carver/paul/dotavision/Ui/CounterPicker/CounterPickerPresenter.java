@@ -34,7 +34,6 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.functions.Func2;
 
 public class CounterPickerPresenter {
@@ -99,7 +98,7 @@ public class CounterPickerPresenter {
     private void showHeadings() {
         List<Integer> imageIds = new ArrayList<>();
         for (HeroInfo hero : mEnemyHeroes) {
-            imageIds.add(ImageTools.getDrawableForHero(hero.imageName));
+            imageIds.add(ImageTools.getResIdForHeroImage(hero.imageName));
         }
         mView.showHeadings(imageIds);
     }

@@ -20,6 +20,8 @@
 
 package com.carver.paul.dotavision.Ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,9 +36,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -149,7 +153,8 @@ public class MainActivity extends AppCompatActivity
         mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter, abilityInfoPresenter,
                 counterPickerPresenter);
 
-        heroesDetectedPresenter.showWithoutRecyclers();
+        // Hide the keyboard
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
@@ -228,6 +233,11 @@ public class MainActivity extends AppCompatActivity
                 Log.e(TAG, "failed to create media directory.");
             }
         }
+    }
+
+    protected void hideTip() {
+        View view = findViewById(R.id.text_opening_tip);
+        view.setVisibility(View.GONE);
     }
 
     /**

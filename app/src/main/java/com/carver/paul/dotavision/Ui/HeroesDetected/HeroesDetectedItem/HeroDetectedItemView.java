@@ -125,10 +125,15 @@ public class HeroDetectedItemView {
         mRecyclerView.requestFocus();
     }
 
+    protected void setUpperHeroImage(int resId) {
+        ImageView imageView = (ImageView) mLinearLayout.findViewById(R.id.image_upper_hero);
+        imageView.setImageResource(resId);
+    }
+
     /**
      * Adds the picture of the hero on the left (the one which is currently selected)
      */
-    protected void setHeroImage(Bitmap image) {
+    protected void setPhotoImage(Bitmap image) {
         ImageView leftImage = (ImageView) mLinearLayout.findViewById(R.id.image_lower_left);
         leftImage.setImageBitmap(image);
     }

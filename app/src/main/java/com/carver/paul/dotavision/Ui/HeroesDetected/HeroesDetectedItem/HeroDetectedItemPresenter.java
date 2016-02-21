@@ -18,6 +18,7 @@
 
 package com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem;
 
+import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.Models.HeroAndSimilarity;
 import com.carver.paul.dotavision.Models.HeroImageAndPosition;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
@@ -40,7 +41,7 @@ import java.util.List;
  */
 public class HeroDetectedItemPresenter {
     private final HeroesDetectedPresenter mParentPresenter;
-    private HeroDetectedItemView mView;
+    private final HeroDetectedItemView mView;
 
     private int mPositionInPhoto;
     private String mName = "";
@@ -54,7 +55,7 @@ public class HeroDetectedItemPresenter {
 
     public void setPhotoImage(HeroImageAndPosition heroImage) {
         mPositionInPhoto = heroImage.getPosition();
-        mView.setHeroImage(heroImage.getImage());
+        mView.setPhotoImage(heroImage.getImage());
     }
 
     public int getPositionInPhoto() {
@@ -117,6 +118,9 @@ public class HeroDetectedItemPresenter {
                     break;
                 }
             }
+        } else {
+            int resId = ImageTools.getResIdForHeroImage(imageName);
+            mView.setUpperHeroImage(resId);
         }
 
         mParentPresenter.hideKeyboard();

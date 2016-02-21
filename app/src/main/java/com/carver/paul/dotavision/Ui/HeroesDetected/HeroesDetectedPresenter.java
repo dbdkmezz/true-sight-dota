@@ -48,7 +48,7 @@ import rx.Subscriber;
 public class HeroesDetectedPresenter {
     private static final String TAG = "HeroesDetectedPresenter";
 
-    private HeroesDetectedFragment mView;
+    private final HeroesDetectedFragment mView;
     private DataManager mDataManger;
     private List<HeroDetectedItemPresenter> mHeroDetectedItemPresenters = new ArrayList<>();
     private Subscriber<SimilarityListAndPosition> mHeroRecognitionSubscriberRx;
@@ -112,6 +112,7 @@ public class HeroesDetectedPresenter {
         HeroInfo heroInfo = findHeroWithName(heroRealName, mDataManger.getHeroInfoValue());
         return heroInfo.imageName;
     }
+
     /**
      * Sends the datamanager the list of all the heroes currently selected.
      * @param completelyNewList true if the list has just been loaded for the first time (i.e. is

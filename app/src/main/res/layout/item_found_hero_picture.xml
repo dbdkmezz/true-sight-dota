@@ -21,7 +21,7 @@
             android:layout_marginBottom="@dimen/activity_vertical_spacing"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            android:src="@drawable/lich_hphover" />
+            android:src="@drawable/missing_hero" />
 
         <AutoCompleteTextView
             android:id="@+id/text_hero_name"

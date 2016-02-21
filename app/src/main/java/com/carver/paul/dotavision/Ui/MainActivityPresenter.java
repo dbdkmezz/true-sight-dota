@@ -21,7 +21,6 @@ package com.carver.paul.dotavision.Ui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.Button;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.Models.DataManager;
@@ -32,10 +31,11 @@ import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 import java.io.File;
 
 public class MainActivityPresenter {
-    private MainActivity mView;
-    private AbilityInfoPresenter mAbilityInfoPresenter;
-    private CounterPickerPresenter mCounterPickerPresenter;
-    private DataManager mDataManager;
+    private final MainActivity mView;
+    private final AbilityInfoPresenter mAbilityInfoPresenter;
+    private final CounterPickerPresenter mCounterPickerPresenter;
+    private final DataManager mDataManager;
+    private boolean heroInfoShown = false;
 
     public MainActivityPresenter(MainActivity view,
                                  HeroesDetectedPresenter heroesDetectedPresenter,
@@ -44,13 +44,24 @@ public class MainActivityPresenter {
         mView = view;
         mAbilityInfoPresenter = abilityInfoPresenter;
         mCounterPickerPresenter = counterPickerPresenter;
-        mDataManager = new DataManager(this);
-        heroesDetectedPresenter.setDataManger(mDataManager);
-        //TODO now, register presenters on datamanager creation
-        mDataManager.registerPresenters(heroesDetectedPresenter,
+        mDataManager = new DataManager(this, heroesDetectedPresenter,
                 abilityInfoPresenter,
                 counterPickerPresenter);
 
+        heroesDetectedPresenter.setDataManger(mDataManager);
+
+        heroesDetectedPresenter.showWithoutRecyclers();
+    }
+
+    /**
+     * This should be called whenever the hero list is shown
+     */
+    public void updateHeroList() {
+        if(!heroInfoShown) {
+            mView.hideTip();
+            showCounterPicker();
+            heroInfoShown = true;
+        }
     }
 
     public void doImageRecognition(Bitmap photo) {

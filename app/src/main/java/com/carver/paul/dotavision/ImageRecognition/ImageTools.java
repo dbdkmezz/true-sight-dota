@@ -79,7 +79,7 @@ public class ImageTools {
         return -1;
     }
 
-    public static int getDrawableForHero(String heroImageName) {
+    public static int getResIdForHeroImage(String heroImageName) {
         if(heroImageName == null || heroImageName.equals("")) {
             return R.drawable.missing_hero;
         }
