@@ -95,19 +95,19 @@ public class MainActivityPresenter {
     /**
      * Runs the image recognition code on the last photo which was taken by the camera
      */
-    protected void useLastPhotoButtonPressed() {
+    protected void useLastPhoto() {
         File mediaFile = new File(mView.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
         if (mediaFile.exists()) {
             doImageRecognitionOnPhoto();
         } else { // If there isn't a previous photo, then just do the demo
-            demoButtonPressed();
+            demoPhotoRecognition();
         }
     }
 
     /**
      * Runs image recognition on the sample photo
      */
-    protected void demoButtonPressed() {
+    protected void demoPhotoRecognition() {
         Bitmap SamplePhoto = mView.getSamplePhoto();
         doImageRecognition(SamplePhoto);
     }

@@ -22,7 +22,7 @@
 
         <include layout="@layout/content_main" />
 
-        <ImageView
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/image_pulsing_camera"
             android:layout_width="@dimen/big_photo_fab_size"
             android:layout_height="@dimen/big_photo_fab_size"

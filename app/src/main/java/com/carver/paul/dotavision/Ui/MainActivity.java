@@ -37,10 +37,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -174,6 +172,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.about) {
             startAboutActivity();
+        } else if (id == R.id.demo) {
+            mPresenter.demoPhotoRecognition();
+        } else if (id == R.id.use_last_photo) {
+            mPresenter.useLastPhoto();
         }
 /*        } else if (id == R.id.debug_specific_hue) {
             startDebugLineActivity();
@@ -246,6 +248,8 @@ public class MainActivity extends AppCompatActivity
      */
     protected void startHeroRecognitionLoadingAnimations(Bitmap photo) {
         setTopImage(photo);
+        findViewById(R.id.text_opening_tip).setVisibility(View.GONE);
+        hideBothButtons();
         pulseCameraImage();
     }
 
@@ -303,6 +307,11 @@ public class MainActivity extends AppCompatActivity
         counterPicker.setEnabled(false);
     }
 
+    private void hideBothButtons() {
+        findViewById(R.id.button_hero_abilities).setVisibility(View.GONE);
+        findViewById(R.id.button_counter_picker).setVisibility(View.GONE);
+    }
+
     private void setTopImage(Bitmap photoBitmap) {
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
         topImage.setImageBitmap(photoBitmap);
@@ -328,6 +337,7 @@ public class MainActivity extends AppCompatActivity
         cameraImage.startAnimation(pulse);
 
         View processingText = findViewById(R.id.text_processing_image);
+        processingText.setAlpha(1f);
         processingText.setVisibility(View.VISIBLE);
     }
 }
