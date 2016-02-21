@@ -15,5 +15,7 @@
 
     <dimen name="big_photo_fab_size">180dp</dimen>
     <dimen name="button_clear_name_size">40dp</dimen>
+    <dimen name="image_hero_preview_width">71dp</dimen>
+    <dimen name="image_hero_preview_height">40dp</dimen>
     <dimen name="camera_buttons_width">60dp</dimen>
 </resources>

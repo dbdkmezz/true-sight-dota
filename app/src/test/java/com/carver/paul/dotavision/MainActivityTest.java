@@ -50,38 +50,6 @@ public class MainActivityTest {
     }
 
     @Test
-    public void shouldHaveDemoButton() {
-        Button demoButton = (Button) activity.findViewById(R.id.button_demo);
-        assertNotNull(demoButton);
-        assertThat(demoButton.getText().toString(),
-                equalTo (RuntimeEnvironment.application.getString(R.string.demo)));
-        assertTrue(demoButton.getVisibility() == View.VISIBLE);
-    }
-
-    @Test
-    public void shouldHaveUseLastPhotoButton() {
-        Button lastPhotoButton = (Button) activity.findViewById(R.id.button_use_last_photo);
-        assertNotNull(lastPhotoButton);
-        assertThat(lastPhotoButton.getText().toString(),
-                equalTo (RuntimeEnvironment.application.getString(R.string.use_last_photo)));
-        assertTrue(lastPhotoButton.getVisibility() == View.VISIBLE);
-    }
-
-    @Test
-    public void shouldHaveTakePhotoFab() {
-        FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.button_fab_take_photo);
-        assertNotNull(fab);
-        assertTrue(fab.getVisibility() == View.VISIBLE);
-    }
-
-    @Test
-    public void shouldHaveBackground() {
-        ImageView backgroundImage = (ImageView) activity.findViewById(R.id.image_main_background);
-        assertNotNull(backgroundImage);
-        assertTrue(backgroundImage.getVisibility() == View.VISIBLE);
-    }
-
-    @Test
     public void shouldHaveToobarAndNavView() {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         assertNotNull(toolbar);
@@ -104,11 +72,11 @@ public class MainActivityTest {
         assertNotNull(processingText);
         assertTrue(processingText.getVisibility() != View.VISIBLE);
     }
-
+/*
     @Test
     public void clickingTakePhoto_shouldStartCameraActivity() {
         activity.findViewById(R.id.button_fab_take_photo).performClick();
         Intent expectedIntent = new Intent(activity, CameraActivity.class);
         assertTrue(shadowOf(activity).getNextStartedActivity().equals(expectedIntent));
-    }
+    }*/
 }

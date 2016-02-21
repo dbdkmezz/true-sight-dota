@@ -51,8 +51,8 @@ public class HeroesDetectedPresenter {
     private HeroesDetectedFragment mView;
     private DataManager mDataManger;
     private List<HeroDetectedItemPresenter> mHeroDetectedItemPresenters = new ArrayList<>();
-    private List<String> mAllHeroNames;
     private Subscriber<SimilarityListAndPosition> mHeroRecognitionSubscriberRx;
+    private Subscriber<List<HeroInfo>> mNameSetupSubscriberRx;
 
     public HeroesDetectedPresenter(HeroesDetectedFragment view) {
         mView = view;
@@ -72,14 +72,19 @@ public class HeroesDetectedPresenter {
         return mHeroRecognitionSubscriberRx;
     }
 
-    public void showHeroImages(List<HeroImageAndPosition> heroImages) {
-        mHeroDetectedItemPresenters = mView.createHeroDetectedViews(heroImages.size());
+    public void showWithoutRecyclers() {
+        mHeroDetectedItemPresenters = mView.createHeroDetectedViews(5, false);
+        setupTextAutoCompleteAndChangeListener();
+    }
 
-        ensureHeroNamesInitialised();
+    public void showHeroImages(List<HeroImageAndPosition> heroImages) {
+        mHeroDetectedItemPresenters = mView.createHeroDetectedViews(heroImages.size(), true);
 
         for (int i = 0; i < mHeroDetectedItemPresenters.size() && i < heroImages.size(); i++) {
-            mHeroDetectedItemPresenters.get(i).setImage(this, heroImages.get(i));
+            mHeroDetectedItemPresenters.get(i).setPhotoImage(heroImages.get(i));
         }
+
+        setupTextAutoCompleteAndChangeListener();
     }
 
     public void hideKeyboard() {
@@ -95,7 +100,7 @@ public class HeroesDetectedPresenter {
     }
 
     public String getHeroRealName(String heroImageName) {
-        HeroInfo heroInfo = findHeroWithName(heroImageName, mDataManger.getHeroInfo());
+        HeroInfo heroInfo = findHeroWithName(heroImageName, mDataManger.getHeroInfoValue());
         return heroInfo.name;
     }
 
@@ -104,7 +109,7 @@ public class HeroesDetectedPresenter {
             return "";
         }
 
-        HeroInfo heroInfo = findHeroWithName(heroRealName, mDataManger.getHeroInfo());
+        HeroInfo heroInfo = findHeroWithName(heroRealName, mDataManger.getHeroInfoValue());
         return heroInfo.imageName;
     }
     /**
@@ -120,13 +125,12 @@ public class HeroesDetectedPresenter {
                         "sendUpdatedHeroList, giving up attempt to send update.");
                 return;
             }
-            HeroInfo heroInfo = findHeroWithName(hero.getName(), mDataManger.getHeroInfo());
+            HeroInfo heroInfo = findHeroWithName(hero.getName(), mDataManger.getHeroInfoValue());
             heroInfoList.add(heroInfo);
         }
 
         mDataManger.sendUpdatedHeroList(heroInfoList, completelyNewList);
     }
-
 
     private void setupSubscriber() {
         unsubscribeSubscriber();
@@ -166,8 +170,37 @@ public class HeroesDetectedPresenter {
 
         heroDetected.setSimilarityListAndName(
                 similarityListAndPosition.getSimilarityList(),
-                getHeroRealName(similarityListAndPosition.getSimilarityList().get(0).hero.name),
-                mAllHeroNames);
+                getHeroRealName(similarityListAndPosition.getSimilarityList().get(0).hero.name));
+    }
+
+    private void setupTextAutoCompleteAndChangeListener() {
+        // To setup autocomplete we need to know all the hero names from the xml file, but the data
+        // manager may not have finished loading the xml yet. So we subscribe to observable loading
+        // them and defer setting up the names until its done.
+
+        mNameSetupSubscriberRx =  new Subscriber<List<HeroInfo>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "mNameSetupSubscriberRx. Unhandled error: " + e.toString());
+            }
+
+            @Override
+            public void onNext(List<HeroInfo> heroInfo) {
+                List<String> allHeroNames = getAllHeroNames(heroInfo);
+                for (HeroDetectedItemPresenter presenter : mHeroDetectedItemPresenters) {
+                    presenter.setupTextAutoCompleteAndChangeListener(allHeroNames);
+                }
+            }
+        };
+
+        mDataManger.getHeroInfoRx()
+                .first()
+                .subscribe(mNameSetupSubscriberRx);
     }
 
     private void unsubscribeSubscriber() {
@@ -177,9 +210,13 @@ public class HeroesDetectedPresenter {
             mHeroRecognitionSubscriberRx.unsubscribe();
             mHeroRecognitionSubscriberRx = null;
         }
+        if(mNameSetupSubscriberRx != null) {
+            mNameSetupSubscriberRx.unsubscribe();
+            mNameSetupSubscriberRx = null;
+        }
     }
 
-    private void ensureHeroNamesInitialised() {
+/*    private void ensureHeroNamesInitialised() {
         if (mAllHeroNames == null) {
             if (mDataManger == null || mDataManger.getHeroInfo() == null) {
                 throw new RuntimeException("Attempting to access hero info but mDataManager not " +
@@ -187,7 +224,7 @@ public class HeroesDetectedPresenter {
             }
             mAllHeroNames = getAllHeroNames(mDataManger.getHeroInfo());
         }
-    }
+    }*/
 
     private HeroDetectedItemPresenter findPresenterAtPosition(int positionInPhoto) {
         for(HeroDetectedItemPresenter heroPresenter : mHeroDetectedItemPresenters) {

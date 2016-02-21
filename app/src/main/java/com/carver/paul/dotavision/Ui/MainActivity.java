@@ -25,7 +25,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -35,14 +34,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
@@ -50,6 +47,7 @@ import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerFragment;
 import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.io.File;
 
@@ -144,7 +142,14 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.fragment_counter_picker);
         CounterPickerPresenter counterPickerPresenter = counterPickerFragment.getPresenter();
 
-        mPresenter = new MainActivityPresenter(this, abilityInfoPresenter, counterPickerPresenter);
+        HeroesDetectedFragment heroesDetectedFragment = (HeroesDetectedFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_found_heroes);
+        HeroesDetectedPresenter heroesDetectedPresenter = heroesDetectedFragment.getPresenter();
+
+        mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter, abilityInfoPresenter,
+                counterPickerPresenter);
+
+        heroesDetectedPresenter.showWithoutRecyclers();
     }
 
     @Override
@@ -199,14 +204,6 @@ public class MainActivity extends AppCompatActivity
                 Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
     }
 
-    public void demoButton(View view) {
-        mPresenter.demoButtonPressed();
-    }
-
-    public void useLastPhotoButton(View view) {
-        mPresenter.useLastPhotoButtonPressed();
-    }
-
     public void counterPickerButton(View view) {
         mPresenter.showCounterPicker();
     }
@@ -239,43 +236,24 @@ public class MainActivity extends AppCompatActivity
      */
     protected void startHeroRecognitionLoadingAnimations(Bitmap photo) {
         setTopImage(photo);
-        slideDemoButtonsOffScreen();
-        hideBackground();
-        pulseCameraFab();
+        pulseCameraImage();
     }
 
     /**
-     * stopHeroRecognitionLoadingAnimations shows makes the the cameraFab do one final pulse, and
-     * then moves it out to the bottom right.
+     * stopHeroRecognitionLoadingAnimations shows makes the the camera do one final pulse, and
+     * then fades it away
      */
     protected void stopHeroRecognitionLoadingAnimations() {
         View processingText = findViewById(R.id.text_processing_image);
-        processingText.setVisibility(View.GONE);
+        processingText.animate().alpha(0).setDuration(150);
 
-        View view = findViewById(R.id.button_fab_take_photo);
-        Animation animation = view.getAnimation();
-        if (animation == null) {
-            // I don't understand how this happens, but it does
-            //TODO-beauty: fix null animation issue
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "Animation is null, I don't understand how this can happen, but it does!");
-            }
-            moveCameraFabToBottomRight();
-        } else {
+        View cameraImage = findViewById(R.id.image_pulsing_camera);
+        Animation animation = cameraImage.getAnimation();
+        if (animation != null) {
             animation.setRepeatCount(0);
-            animation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) { }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    moveCameraFabToBottomRight();
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) { }
-            });
         }
+
+        cameraImage.animate().alpha(0).setDuration(150);
     }
 
     @Override
@@ -293,23 +271,6 @@ public class MainActivity extends AppCompatActivity
 
     protected Bitmap getSamplePhoto() {
         return BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
-    }
-
-    protected void doImageRecognition(Bitmap bitmap) {
-        HeroesDetectedFragment heroesDetectedFragment = (HeroesDetectedFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_found_heroes);
-
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_ability_info);
-
-        CounterPickerFragment counterPickerFragment = (CounterPickerFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_counter_picker);
-
-        //TODO-now, put fragment presenters in MainActivityPresenter earlier?
-        mPresenter.doImageRecognition(bitmap,
-                heroesDetectedFragment.getPresenter(),
-                abilityInfoFragment.getPresenter(),
-                counterPickerFragment.getPresenter());
     }
 
     protected void enableCounterPickerButton() {
@@ -338,112 +299,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * If the demo and use last photo buttons haven't been moved yet, then slide them off the left of the screen
-     */
-    private void slideDemoButtonsOffScreen() {
-        View counterPickerButton = findViewById(R.id.button_counter_picker);
-        counterPickerButton.setVisibility(View.GONE);
-        View heroAbilitiesButton = findViewById(R.id.button_hero_abilities);
-        heroAbilitiesButton.setVisibility(View.GONE);
-
-        View view = findViewById(R.id.layout_demo_and_last_photo_buttons);
-        if (view.getTranslationX() == 0) {
-            view.animate()
-                    .x(-1f * view.getWidth())
-                    .setDuration(150)
-                    .setInterpolator(new AccelerateInterpolator());
-        }
-    }
-
-    private void hideBackground() {
-        View view = findViewById(R.id.image_main_background);
-        view.animate()
-                .alpha(0f)
-                .setDuration(150);
-    }
-
-    /**
-     * Makes the camera FAB pulse infinitely (will be stopped when loading completes)
+     * Makes the camera pulse infinitely (will be stopped when loading completes)
      */
     //TODO-nextversion: Make camera do something other than pulse - it implies you should press
     // it! When done I should stop disabling the button when animating too.
-    private void pulseCameraFab() {
+    private void pulseCameraImage() {
         //Code using the old Animation class, rather than the new ViewPropertyAnimator
         //Infinite repeat is easier to implement this way
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
-        fab.setEnabled(false);
-        moveViewBackToStartingPosAndScale(fab);
+        View cameraImage = findViewById(R.id.image_pulsing_camera);
+        cameraImage.setVisibility(View.VISIBLE);
+        cameraImage.setAlpha(1f);
 
         ScaleAnimation pulse = new ScaleAnimation(1f, 0.8f, 1f, 0.8f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         pulse.setDuration(250);
         pulse.setRepeatCount(Animation.INFINITE);
         pulse.setRepeatMode(Animation.REVERSE);
-        fab.startAnimation(pulse);
+        cameraImage.startAnimation(pulse);
 
         View processingText = findViewById(R.id.text_processing_image);
         processingText.setVisibility(View.VISIBLE);
-
-/*            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
-            AnimatorSet animatorSet = new AnimatorSet();
-            ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.8f);
-            ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.8f);
-            animatorSet.playTogether(scaleX, scaleY);
-            animatorSet.setDuration(250);
-            animatorSet.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    animation.start();
-                }
-            });
-            animatorSet.start();*/
-
-
-/*            RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,
-                    0.5f,  Animation.RELATIVE_TO_SELF, 0.5f);
-            rotate.setDuration(300);
-            rotate.setRepeatCount(Animation.INFINITE);
-            rotate.setInterpolator(context, R.anim.linear_interpolator);
-            imageview.startAnimation(rotate);*/
-
-/*                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.cameraFab);
-        TimeInterpolator interpolator = new OvershootInterpolator();
-        fab.animate().
-                scaleX(0.2f).
-                scaleY(0.2f).
-                setDuration(300).
-                setInterpolator(interpolator);*/
-
-            /*        AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(fab, "scaleX", 0.2f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(fab, "scaleY", 0.2f);
-        scaleX.setDuration(300);
-        scaleY.setDuration(300);
-        animatorSet.play(scaleX).with(scaleY);
-        animatorSet.start();*/
-    }
-
-    private void moveCameraFabToBottomRight() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab_take_photo);
-        fab.setEnabled(true);
-        View fabEndLocation = findViewById(R.id.button_fab_take_photo_final_location);
-
-        int xTrans = (int) ((fabEndLocation.getX() + fabEndLocation.getWidth() / 2) - (fab.getX() + fab.getWidth() / 2));
-        int yTrans = (int) ((fabEndLocation.getY() + fabEndLocation.getHeight() / 2) - (fab.getY() + fab.getHeight() / 2));
-
-        fab.animate()
-                .translationX(xTrans)
-                .translationY(yTrans)
-                .scaleX((float) fabEndLocation.getWidth() / (float) fab.getWidth())
-                .scaleY((float) fabEndLocation.getHeight() / (float) fab.getHeight())
-                .setInterpolator(new AccelerateDecelerateInterpolator());
-    }
-
-    private void moveViewBackToStartingPosAndScale(View view) {
-        view.setTranslationX(0f);
-        view.setTranslationY(0f);
-        view.setScaleX(1f);
-        view.setScaleY(1f);
     }
 }

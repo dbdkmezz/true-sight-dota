@@ -12,10 +12,22 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin">
 
+        <ImageView
+            android:id="@+id/image_upper_hero"
+            android:layout_width="@dimen/image_hero_preview_width"
+            android:layout_height="@dimen/image_hero_preview_height"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_spacing"
+            android:layout_marginBottom="@dimen/activity_vertical_spacing"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/lich_hphover" />
+
         <AutoCompleteTextView
             android:id="@+id/text_hero_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:inputType="textNoSuggestions"
             android:selectAllOnFocus="true"
             android:textColor="@color/colorTextGray"
@@ -34,6 +46,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -46,7 +59,7 @@
             android:layout_weight="2" />
 
         <ImageView
-            android:id="@+id/image_left"
+            android:id="@+id/image_lower_left"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/activity_horizontal_spacing"
@@ -55,7 +68,7 @@
             android:scaleType="centerCrop" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_correct_image"
+            android:id="@+id/recycler"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"

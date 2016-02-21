@@ -18,8 +18,6 @@
 
 package com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedItem;
 
-import android.view.View;
-
 import com.carver.paul.dotavision.Models.HeroAndSimilarity;
 import com.carver.paul.dotavision.Models.HeroImageAndPosition;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
@@ -41,20 +39,20 @@ import java.util.List;
  *   these to select a different hero.
  */
 public class HeroDetectedItemPresenter {
-    private HeroesDetectedPresenter mParentPresenter;
+    private final HeroesDetectedPresenter mParentPresenter;
     private HeroDetectedItemView mView;
 
     private int mPositionInPhoto;
-    private String mName;
+    private String mName = "";
     private List<HeroAndSimilarity> mSimilarityList;
 
-    public HeroDetectedItemPresenter(HeroDetectedItemView view) {
+    public HeroDetectedItemPresenter(HeroDetectedItemView view,
+                                     HeroesDetectedPresenter parentPresenter) {
         mView = view;
+        mParentPresenter = parentPresenter;
     }
 
-    public void setImage(HeroesDetectedPresenter parentPresenter,
-                         HeroImageAndPosition heroImage) {
-        mParentPresenter = parentPresenter;
+    public void setPhotoImage(HeroImageAndPosition heroImage) {
         mPositionInPhoto = heroImage.getPosition();
         mView.setHeroImage(heroImage.getImage());
     }
@@ -64,8 +62,7 @@ public class HeroDetectedItemPresenter {
     }
 
     public void setSimilarityListAndName(List<HeroAndSimilarity> similarityList,
-                                         String name,
-                                         List<String> allHeroNames) {
+                                         String name) {
         mName = name;
         mSimilarityList = similarityList;
 
@@ -75,18 +72,15 @@ public class HeroDetectedItemPresenter {
         }
 
         mView.completeRecycler(similarHeroesImages);
-        mView.initialiseHeroNameEditText(mName, allHeroNames);
+        mView.setName(mName);
     }
 
     public String getName() {
         return mName;
     }
 
-    /**
-     * Run when clear name button pressed
-     */
-    protected void clearName() {
-
+    public void setupTextAutoCompleteAndChangeListener(List<String> allHeroNames) {
+        mView.setupTextAutoCompleteAndChangeListener(mName, allHeroNames);
     }
 
     /**
@@ -116,10 +110,12 @@ public class HeroDetectedItemPresenter {
         mName = newHeroName;
         String imageName = mParentPresenter.getHeroImageName(newHeroName);
 
-        for (int i = 0; i < mSimilarityList.size(); i++) {
-            if (mSimilarityList.get(i).equals(imageName)) {
-                mView.setHeroInRecycler(i);
-                break;
+        if(mView.recyclerInitialised()) {
+            for (int i = 0; i < mSimilarityList.size(); i++) {
+                if (mSimilarityList.get(i).equals(imageName)) {
+                    mView.setHeroInRecycler(i);
+                    break;
+                }
             }
         }
 

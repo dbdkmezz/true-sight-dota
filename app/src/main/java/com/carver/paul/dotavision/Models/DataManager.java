@@ -34,7 +34,6 @@ import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Phaser;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -43,9 +42,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.functions.Func2;
 import rx.functions.Func3;
-import rx.functions.FuncN;
 import rx.schedulers.Schedulers;
 import rx.subjects.AsyncSubject;
 
@@ -105,8 +102,6 @@ public class DataManager {
                                    final AbilityInfoPresenter abilityInfoPresenter,
                                    final CounterPickerPresenter counterPickerPresenter) {
         mHeroesDetectedPresenter = heroesDetectedPresenter;
-        mHeroesDetectedPresenter.setDataManger(this);
-
         mAbilityInfoPresenter = abilityInfoPresenter;
         mCounterPickerPresenter = counterPickerPresenter;
     }
@@ -196,8 +191,16 @@ public class DataManager {
                 .subscribe(mHeroesDetectedPresenter.getHeroRecognitionSubscriberRx());
     }
 
-    public List<HeroInfo> getHeroInfo() {
+    public List<HeroInfo> getHeroInfoValue() {
+        if(mXmlInfoRx.getValue() == null) {
+            throw new RuntimeException("Attempting to call mXmlInfoRx.getValue() when not ready" +
+                    "to return values yet.");
+        }
         return mXmlInfoRx.getValue();
+    }
+
+    public AsyncSubject<List<HeroInfo>> getHeroInfoRx() {
+        return mXmlInfoRx;
     }
 
     public void sendUpdatedHeroList(List<HeroInfo> heroInfoList, boolean completelyNewList) {

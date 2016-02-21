@@ -68,8 +68,9 @@ public class HeroesDetectedFragment extends Fragment {
         return mPresenter;
     }
 
-    protected List<HeroDetectedItemPresenter> createHeroDetectedViews(int totalHeroesToShow) {
-        LinearLayout parent = (LinearLayout) getActivity().findViewById(
+    protected List<HeroDetectedItemPresenter> createHeroDetectedViews(int totalHeroesToShow,
+                                                                      boolean showRecyclers) {
+        LinearLayout parentView = (LinearLayout) getActivity().findViewById(
                 R.id.layout_found_hero_pictures);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -83,8 +84,9 @@ public class HeroesDetectedFragment extends Fragment {
 
         for (int i = 0; i < totalHeroesToShow; i++) {
             HeroDetectedItemView heroDetectedItemView =
-                    new HeroDetectedItemView(getActivity(), inflater, parent, screenWidth);
-            parent.addView(heroDetectedItemView.getView());
+                    new HeroDetectedItemView(getActivity(), inflater, parentView, mPresenter,
+                            screenWidth, showRecyclers);
+            parentView.addView(heroDetectedItemView.getView());
             presenters.add(heroDetectedItemView.getPresenter());
         }
 

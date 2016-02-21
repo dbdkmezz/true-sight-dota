@@ -18,25 +18,17 @@
         tools:context=".Ui.MainActivity"
         android:background="@color/colorGray">
 
-        <ImageView
-            android:id="@+id/image_main_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:src="@drawable/background_river"
-            android:scaleType="centerCrop"/>
-
         <include layout="@layout/partial_appbar_and_toolbar" />
 
         <include layout="@layout/content_main" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/button_fab_take_photo"
+        <ImageView
+            android:id="@+id/image_pulsing_camera"
             android:layout_width="@dimen/big_photo_fab_size"
             android:layout_height="@dimen/big_photo_fab_size"
             android:layout_gravity="center"
-            android:onClick="takePhoto"
-            android:src="@drawable/button_camera" />
+            android:src="@drawable/button_camera"
+            android:visibility="gone"/>
 
 <!--
         android:src="@drawable/button_camera" />
@@ -53,7 +45,7 @@
             android:textSize="@dimen/large_text"
             android:visibility="gone" />
 
-        <!--This is an invisible fab, used to know where to put the fab after its first press-->
+<!--
         <View
             android:id="@+id/button_fab_take_photo_final_location"
             android:layout_width="@dimen/fab_diameter"
@@ -62,41 +54,7 @@
             android:layout_marginBottom="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
             android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/layout_demo_and_last_photo_buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
-
-<!--            TODO-someday: Give demo and last photo buttons elevation-->
-
-            <Button
-                android:id="@+id/button_demo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:onClick="demoButton"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="@string/demo"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/button_use_last_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_spacing"
-                android:background="@color/colorPrimary"
-                android:onClick="useLastPhotoButton"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="@string/use_last_photo"
-                android:textColor="#FFFFFF"
-                android:focusable="false" />
-
-        </LinearLayout>
+-->
 
     </android.support.design.widget.CoordinatorLayout>
 

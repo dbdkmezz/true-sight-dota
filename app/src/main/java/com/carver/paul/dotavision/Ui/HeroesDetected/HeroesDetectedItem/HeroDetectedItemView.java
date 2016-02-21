@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2016 Paul Broadbent
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,10 +54,14 @@ import java.util.List;
  *   these to select a different hero.
  */
 public class HeroDetectedItemView {
+
     private HeroDetectedItemPresenter mPresenter;
 
     private Context mActivityContext;
     private LinearLayout mLinearLayout;
+    private ImageView mImageUpperHero;
+    private LinearLayout mLayoutBottom;
+    private AutoCompleteTextView mNameTextView;
     private CenterLockListener mRecyclerViewListener;
     // mRecyclerView holds images of all heroes in the game, so the user can scroll through them
     // to choose a different hero.
@@ -65,30 +70,39 @@ public class HeroDetectedItemView {
 
     public HeroDetectedItemView(Context activityContext,
                                 LayoutInflater inflater,
-                                LinearLayout parent,
-                                int screenWidth) {
+                                LinearLayout parentView,
+                                HeroesDetectedPresenter parentPresenter,
+                                int screenWidth,
+                                boolean showRecycler) {
         mActivityContext = activityContext;
         mScreenWidth = screenWidth;
 
-        mPresenter = new HeroDetectedItemPresenter(this);
+        mPresenter = new HeroDetectedItemPresenter(this, parentPresenter);
 
         mLinearLayout =
-                (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parent, false);
+                (LinearLayout) inflater.inflate(R.layout.item_found_hero_picture, parentView, false);
+
+        mImageUpperHero = (ImageView) mLinearLayout.findViewById(R.id.image_upper_hero);
+        mLayoutBottom = (LinearLayout) mLinearLayout.findViewById(R.id.layout_bottom);
+        mNameTextView = (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
 
         ImageButton clearNameButton =
                 (ImageButton) mLinearLayout.findViewById(R.id.button_clear_name);
         clearNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AutoCompleteTextView nameTextView =
-                        (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
-                nameTextView.setText("");
+                mNameTextView.setText("");
 
                 mPresenter.updateFromNameChange("");
             }
         });
 
-        initialiseHeroSelectRecycler();
+        if(showRecycler) {
+            mImageUpperHero.setVisibility(View.GONE);
+            initialiseHeroSelectRecycler();
+        } else {
+            mLayoutBottom.setVisibility(View.GONE);
+        }
     }
 
     public LinearLayout getView() {
@@ -100,9 +114,7 @@ public class HeroDetectedItemView {
     }
 
     protected void setName(String name) {
-        AutoCompleteTextView nameTextView
-                = (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
-        nameTextView.setText(name);
+        mNameTextView.setText(name);
     }
 
     protected void setHeroInRecycler(int posInSimilarityList) {
@@ -112,43 +124,65 @@ public class HeroDetectedItemView {
         // after setting the name of a hero
         mRecyclerView.requestFocus();
     }
+
     /**
      * Adds the picture of the hero on the left (the one which is currently selected)
      */
     protected void setHeroImage(Bitmap image) {
-        ImageView leftImage = (ImageView) mLinearLayout.findViewById(R.id.image_left);
+        ImageView leftImage = (ImageView) mLinearLayout.findViewById(R.id.image_lower_left);
         leftImage.setImageBitmap(image);
     }
 
-    protected void initialiseHeroNameEditText(String name, List<String> allHeroNames) {
-        AutoCompleteTextView nameTextView =
-                (AutoCompleteTextView) mLinearLayout.findViewById(R.id.text_hero_name);
-
-        nameTextView.setText(name);
-
+    protected void setupTextAutoCompleteAndChangeListener(String currentHeroName,
+                                                      List<String> allHeroNames) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivityContext,
                 android.R.layout.simple_dropdown_item_1line, allHeroNames);
-        nameTextView.setAdapter(adapter);
+        mNameTextView.setAdapter(adapter);
 
-        nameTextView.addTextChangedListener(new HeroTextWatcher(
+        // There's a chance the text in the textview will have changed already, which would be
+        // missed by the text changed listener. So we change it back to its initialised value and
+        // then after setting up the TextChangedListener change it's value now.
+        String currentText = mNameTextView.getText().toString();
+        mNameTextView.setText(currentHeroName);
+
+        mNameTextView.addTextChangedListener(new HeroTextWatcher(
                 mPresenter,
-                name,
+                currentHeroName,
                 allHeroNames));
+
+        mNameTextView.setText(currentText);
+    }
+
+    protected boolean recyclerInitialised() {
+        return mRecyclerView != null;
     }
 
     //TODO-beauty, remove the need to intialise recycler
+
     /**
      * If we don't set the layoutmanager for the recycler immediately then the app crashes
      */
     private void initialiseHeroSelectRecycler() {
         mRecyclerView =
-                (RecyclerView) mLinearLayout.findViewById(R.id.recycler_correct_image);
+                (RecyclerView) mLinearLayout.findViewById(R.id.recycler);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mActivityContext);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setAdapter(new HeroImageAdapter());
         mRecyclerView.setLayoutManager(layoutManager);
     }
+
+/*
+    private void showRecycler() {
+        mLayoutBottom.setVisibility(View.VISIBLE);
+        mImageUpperHero.setVisibility(View.GONE);
+    }
+
+    private void hideRecycler() {
+        mLayoutBottom.setVisibility(View.GONE);
+        mImageUpperHero.setVisibility(View.VISIBLE);
+    }
+*/
 
     /**
      * Adds the recycler view used for changing the hero
@@ -188,9 +222,10 @@ class HeroTextWatcher implements TextWatcher {
     private String mCurrentHeroName;
     private final List<String> mAllHeroNames;
     private final HeroDetectedItemPresenter mPresenter;
+
     HeroTextWatcher(HeroDetectedItemPresenter presenter,
                     String currentHeroName,
-                    List<String> allHeroNames){
+                    List<String> allHeroNames) {
         mCurrentHeroName = currentHeroName;
         mAllHeroNames = allHeroNames;
         mPresenter = presenter;
@@ -203,7 +238,7 @@ class HeroTextWatcher implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if(!mCurrentHeroName.equalsIgnoreCase(s.toString())
+        if (!mCurrentHeroName.equalsIgnoreCase(s.toString())
                 && containsIgnoreCase(mAllHeroNames, (s.toString()))) {
             mCurrentHeroName = s.toString();
 
@@ -217,8 +252,8 @@ class HeroTextWatcher implements TextWatcher {
     }
 
     private boolean containsIgnoreCase(List<String> list, String string) {
-        for(String s : list)
-            if(s.equalsIgnoreCase(string))
+        for (String s : list)
+            if (s.equalsIgnoreCase(string))
                 return true;
 
         return false;
@@ -249,7 +284,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
 
     public CenterLockListener(HeroDetectedItemPresenter presenter,
                               int center,
-                              LinearLayoutManager layoutManager){
+                              LinearLayoutManager layoutManager) {
         mPresenter = presenter;
         mCenterPivot = center;
         mLayoutManager = layoutManager;
@@ -262,23 +297,23 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
 
         LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
 
-        if(mCenterPivot == 0) {
+        if (mCenterPivot == 0) {
             // Default pivot , Its a bit inaccurate .
             // Better pass the center pivot as your Center Indicator view's
             // calculated center on it OnGlobalLayoutListener event
-            if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+            if (lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
                 mCenterPivot = recyclerView.getLeft() + recyclerView.getRight();
             } else {
                 mCenterPivot = recyclerView.getTop() + recyclerView.getBottom();
             }
         }
-        if(!mAutoSet) {
+        if (!mAutoSet) {
             //The scrolling of the recycler view has stopped (i.e. the user has stopped scrolling)
-            if(newState == RecyclerView.SCROLL_STATE_IDLE) {
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                 View view = findCenterView(lm);//get the view nearest to center
 
                 int viewCenter;
-                if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                if (lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
                     viewCenter = (view.getLeft() + view.getRight()) / 2;
                 } else {
                     viewCenter = (view.getTop() + view.getBottom()) / 2;
@@ -287,18 +322,16 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
                 //compute scroll from center
                 int scrollNeeded = viewCenter - mCenterPivot; // Add or subtract any offsets you need here
 
-                if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                if (lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
                     recyclerView.smoothScrollBy(scrollNeeded, 0);
-                }
-                else
-                {
+                } else {
                     recyclerView.smoothScrollBy(0, scrollNeeded);
                 }
                 mAutoSet = true;
             }
         }
-        if(newState == RecyclerView.SCROLL_STATE_DRAGGING
-                || newState == RecyclerView.SCROLL_STATE_SETTLING){
+        if (newState == RecyclerView.SCROLL_STATE_DRAGGING
+                || newState == RecyclerView.SCROLL_STATE_SETTLING) {
             mAutoSet = false;
         }
     }
@@ -313,7 +346,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
      * @param newPosition   The position in the list of hero images to scroll to
      */
     public void setHero(int newPosition) {
-        if(mCurrentPosition != newPosition) {
+        if (mCurrentPosition != newPosition) {
             mLayoutManager.scrollToPositionWithOffset(newPosition, 0);
             mCurrentPosition = newPosition;
         }
@@ -326,14 +359,14 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
         Integer newPosition = null;
         boolean notFound = true;
 
-        for(int i = lm.findFirstVisibleItemPosition();
-            i <= lm.findLastVisibleItemPosition() && notFound;
-            i++) {
+        for (int i = lm.findFirstVisibleItemPosition();
+             i <= lm.findLastVisibleItemPosition() && notFound;
+             i++) {
 
             view = lm.findViewByPosition(i);
 
             int center;
-            if(lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+            if (lm.getOrientation() == LinearLayoutManager.HORIZONTAL) {
                 center = (view.getLeft() + view.getRight()) / 2;
             } else {
                 center = (view.getTop() + view.getBottom()) / 2;
@@ -341,7 +374,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
 
             int leastDifference = Math.abs(mCenterPivot - center);
 
-            if(leastDifference <= minDistance || i == lm.findFirstVisibleItemPosition()) {
+            if (leastDifference <= minDistance || i == lm.findFirstVisibleItemPosition()) {
                 minDistance = leastDifference;
                 returnView = view;
                 newPosition = i - 1;
@@ -350,7 +383,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
             }
         }
 
-        if(newPosition != null) {
+        if (newPosition != null) {
             reportHeroChange(newPosition);
         }
 
@@ -358,7 +391,7 @@ class CenterLockListener extends RecyclerView.OnScrollListener {
     }
 
     private void reportHeroChange(int newPosition) {
-        if(mCurrentPosition != newPosition) {
+        if (mCurrentPosition != newPosition) {
             mCurrentPosition = newPosition;
             mPresenter.updateFromSimilarityListChange(newPosition);
         }

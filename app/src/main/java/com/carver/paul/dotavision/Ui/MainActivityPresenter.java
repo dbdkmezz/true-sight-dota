@@ -37,24 +37,23 @@ public class MainActivityPresenter {
     private CounterPickerPresenter mCounterPickerPresenter;
     private DataManager mDataManager;
 
-    public MainActivityPresenter(MainActivity view, AbilityInfoPresenter abilityInfoPresenter,
+    public MainActivityPresenter(MainActivity view,
+                                 HeroesDetectedPresenter heroesDetectedPresenter,
+                                 AbilityInfoPresenter abilityInfoPresenter,
                                  CounterPickerPresenter counterPickerPresenter) {
         mView = view;
         mAbilityInfoPresenter = abilityInfoPresenter;
         mCounterPickerPresenter = counterPickerPresenter;
         mDataManager = new DataManager(this);
+        heroesDetectedPresenter.setDataManger(mDataManager);
+        //TODO now, register presenters on datamanager creation
+        mDataManager.registerPresenters(heroesDetectedPresenter,
+                abilityInfoPresenter,
+                counterPickerPresenter);
+
     }
 
-    public void doImageRecognition(Bitmap photo,
-                                   HeroesDetectedPresenter heroesDetectedPresenter,
-                                   AbilityInfoPresenter abilityInfoPresenter,
-                                   CounterPickerPresenter counterPickerPresenter) {
-        if (!mDataManager.presentersRegistered()) {
-            mDataManager.registerPresenters(heroesDetectedPresenter,
-                    abilityInfoPresenter,
-                    counterPickerPresenter);
-        }
-
+    public void doImageRecognition(Bitmap photo) {
         mDataManager.identifyHeroesInPhoto(photo);
     }
 
@@ -99,7 +98,7 @@ public class MainActivityPresenter {
      */
     protected void demoButtonPressed() {
         Bitmap SamplePhoto = mView.getSamplePhoto();
-        mView.doImageRecognition(SamplePhoto);
+        doImageRecognition(SamplePhoto);
     }
 
     protected void doImageRecognitionOnPhoto() {
@@ -110,7 +109,7 @@ public class MainActivityPresenter {
         }
 
         Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
-        mView.doImageRecognition(bitmap);
+        doImageRecognition(bitmap);
     }
 
     /**
