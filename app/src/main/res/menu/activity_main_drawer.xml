@@ -14,12 +14,8 @@
         <item
             android:id="@+id/use_last_photo"
             android:title="@string/use_last_photo"/>
-    </group>
-
-    <group android:checkableBehavior="none">
         <item
             android:id="@+id/about"
             android:title="@string/about"/>
-    </group>
 
 </menu>
