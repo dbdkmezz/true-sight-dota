@@ -171,13 +171,10 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.about:
                 startAboutActivity();
-                return true;
             case R.id.demo:
                 mPresenter.demoPhotoRecognition();
-                return true;
             case R.id.use_last_photo:
                 mPresenter.useLastPhoto();
-                return true;
         }
 
 /*        } else if (id == R.id.debug_specific_hue) {
