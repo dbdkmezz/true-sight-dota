@@ -32,6 +32,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -166,15 +167,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.about) {
-            startAboutActivity();
-        } else if (id == R.id.demo) {
-            mPresenter.demoPhotoRecognition();
-        } else if (id == R.id.use_last_photo) {
-            mPresenter.useLastPhoto();
+        switch (item.getItemId()) {
+            case R.id.about:
+                startAboutActivity();
+                return true;
+            case R.id.demo:
+                mPresenter.demoPhotoRecognition();
+                return true;
+            case R.id.use_last_photo:
+                mPresenter.useLastPhoto();
+                return true;
         }
+
 /*        } else if (id == R.id.debug_specific_hue) {
             startDebugLineActivity();
         }*/
@@ -185,6 +190,27 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    // Handle the buttons in the toolbar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_take_photo:
+                mPresenter.takePhotoButton();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 /*
@@ -221,15 +247,6 @@ public class MainActivity extends AppCompatActivity
         mPresenter.showHeroAbilities();
     }
 
-    // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
-    // TODO-next: Make takePhoto save in the right media location, I think media store wasn't right
-    public void takePhoto(View view) {
-        EnsureMediaDirectoryExists();
-        Intent intent = new Intent(this, CameraActivity.class);
-        //TODO-beauty: make it possible to specify image save location by sending camera activity an intent
-        startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
-    }
-
     public static void EnsureMediaDirectoryExists() {
         File mediaStorageDir = new File(getImagesLocation());
         if (!mediaStorageDir.exists()) {
@@ -242,6 +259,15 @@ public class MainActivity extends AppCompatActivity
     protected void hideTip() {
         View view = findViewById(R.id.text_opening_tip);
         view.setVisibility(View.GONE);
+    }
+
+    // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
+    // TODO-next: Make takePhoto save in the right media location, I think media store wasn't right
+    protected void startCameraActivity() {
+        EnsureMediaDirectoryExists();
+        Intent intent = new Intent(this, CameraActivity.class);
+        //TODO-beauty: make it possible to specify image save location by sending camera activity an intent
+        startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
     }
 
     protected void showClearFab() {

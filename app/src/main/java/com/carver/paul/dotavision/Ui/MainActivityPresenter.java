@@ -96,6 +96,10 @@ public class MainActivityPresenter {
         mAbilityInfoPresenter.show();
     }
 
+    protected void takePhotoButton() {
+        mView.startCameraActivity();
+    }
+
     protected void clearButton() {
         heroInfoShown = false;
         mHeroesDetectedPresenter.clearAll();

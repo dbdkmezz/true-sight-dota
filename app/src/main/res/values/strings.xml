@@ -22,6 +22,8 @@
     <string name="use_last_photo">Use last photo</string>
     <string name="about">About</string>
 
+    <string name="take_photo">Take photo</string>
+
     <string name="picture">Picture</string>
     <string name="camera_help_text">Position the 5 enemy hero portraits to fill the box below. Ensure the colored lines above them are visible.</string>
     <string name="camera_example_text">For example:</string>
