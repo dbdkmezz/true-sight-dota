@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity
 
         // Hide the keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
     }
 
     @Override
@@ -171,10 +172,13 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.about:
                 startAboutActivity();
+                break;
             case R.id.demo:
                 mPresenter.demoPhotoRecognition();
+                break;
             case R.id.use_last_photo:
                 mPresenter.useLastPhoto();
+                break;
         }
 
 /*        } else if (id == R.id.debug_specific_hue) {
@@ -268,7 +272,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void showClearFab() {
-        findViewById(R.id.fab_clear).setVisibility(View.VISIBLE);
+        View clear_fab = findViewById(R.id.fab_clear);
+        clear_fab.setVisibility(View.VISIBLE);
     }
 
     /**
