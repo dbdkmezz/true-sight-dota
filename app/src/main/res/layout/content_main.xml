@@ -66,6 +66,19 @@
                 android:text="@string/opening_tip"
                 android:textSize="@dimen/medium_text"/>
 
+            <com.carver.paul.dotavision.Ui.widget.SlidingTabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                android:background="@color/colorPrimary"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="800dp"/>
+
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +112,9 @@
                     android:visibility="gone"/>
 
             </LinearLayout>
+-->
 
+<!--
             <fragment
                 android:id="@+id/fragment_ability_info"
                 android:name="com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment"
@@ -113,6 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/fab_diameter"
                 android:layout_marginTop="@dimen/activity_vertical_margin" />
+-->
 
         </LinearLayout>
 

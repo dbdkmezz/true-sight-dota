@@ -86,7 +86,7 @@ public class MainActivityPresenter {
 
     public void showCounterPicker() {
         mView.enableHeroAbilitiesButton();
-        mAbilityInfoPresenter.hide();
+        mAbilityInfoPresenter.show();
         mCounterPickerPresenter.show();
     }
 

@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,17 +39,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.carver.paul.dotavision.R;
-import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment;
-import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
-import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerFragment;
-import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
+import com.carver.paul.dotavision.Ui.widget.SlidingTabLayout;
+import com.carver.paul.dotavision.Ui.widget.ViewPagerAdapter;
 
 import java.io.File;
 
@@ -111,6 +109,9 @@ public class MainActivity extends AppCompatActivity
 
     private MainActivityPresenter mPresenter;
 
+    CharSequence Titles[]={"Home","Events"};
+    int Numboftabs =2;
+
     static {
         // Ensure this library isn't loaded when running robolectric tests, it makes them crash
         if (System.getenv("ROBOLECTRIC") == null) {
@@ -122,6 +123,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -134,7 +136,24 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Setup the tabs for the AbilityInfoFragment and the CounterPickerFragment
+        ViewPagerAdapter adapter =  new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+        SlidingTabLayout tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(true);
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(pager);
 
+
+/*
         AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_ability_info);
         AbilityInfoPresenter abilityInfoPresenter = abilityInfoFragment.getPresenter();
@@ -142,13 +161,20 @@ public class MainActivity extends AppCompatActivity
         CounterPickerFragment counterPickerFragment = (CounterPickerFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_counter_picker);
         CounterPickerPresenter counterPickerPresenter = counterPickerFragment.getPresenter();
+*/
 
         HeroesDetectedFragment heroesDetectedFragment = (HeroesDetectedFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_found_heroes);
         HeroesDetectedPresenter heroesDetectedPresenter = heroesDetectedFragment.getPresenter();
 
+/*
         mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter, abilityInfoPresenter,
                 counterPickerPresenter);
+*/
+
+        mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter,
+                adapter.getAbilityInfoPresenter(), adapter.getCounterPickerPresenter());
+
 
         // Hide the keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -322,6 +348,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void enableCounterPickerButton() {
+/*
         Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
         counterPicker.setVisibility(View.VISIBLE);
         counterPicker.setEnabled(true);
@@ -329,9 +356,11 @@ public class MainActivity extends AppCompatActivity
         Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
         heroAbilities.setVisibility(View.VISIBLE);
         heroAbilities.setEnabled(false);
+*/
     }
 
     protected void enableHeroAbilitiesButton() {
+/*
         Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
         heroAbilities.setVisibility(View.VISIBLE);
         heroAbilities.setEnabled(true);
@@ -339,11 +368,14 @@ public class MainActivity extends AppCompatActivity
         Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
         counterPicker.setVisibility(View.VISIBLE);
         counterPicker.setEnabled(false);
+*/
     }
 
     private void hideBothButtons() {
+/*
         findViewById(R.id.button_hero_abilities).setVisibility(View.GONE);
         findViewById(R.id.button_counter_picker).setVisibility(View.GONE);
+*/
     }
 
     private void setTopImage(Bitmap photoBitmap) {

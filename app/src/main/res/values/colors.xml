@@ -5,4 +5,5 @@
     <color name="colorAccent">#F44336</color>
     <color name="colorGray">#ECECEC</color>
     <color name="colorTextGray">#9A000000</color>
+    <color name="tabsScrollColor">#8a140e</color>
 </resources>

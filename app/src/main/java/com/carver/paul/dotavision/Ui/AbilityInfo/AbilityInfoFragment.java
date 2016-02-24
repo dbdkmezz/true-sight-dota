@@ -18,7 +18,7 @@
 
 package com.carver.paul.dotavision.Ui.AbilityInfo;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +40,7 @@ import com.carver.paul.dotavision.R;
  */
 public class AbilityInfoFragment extends Fragment {
 
-    private AbilityInfoPresenter mPresenter;
+    private AbilityInfoPresenter mPresenter = new AbilityInfoPresenter(this);
     private LinearLayout mParentLinearLayout;
 
     @Override
@@ -48,7 +48,7 @@ public class AbilityInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View inflateView  = inflater.inflate(R.layout.fragment_ability_info, container, false);
         mParentLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_results_info);
-        mPresenter = new AbilityInfoPresenter(this);
+      //  mPresenter = new AbilityInfoPresenter(this);
         return inflateView;
     }
 

@@ -19,7 +19,7 @@
 package com.carver.paul.dotavision.Ui.CounterPicker;
 
 import android.animation.Animator;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Pair;
@@ -57,7 +57,8 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
             R.string.carry_role, R.string.support_role, R.string.mid_role, R.string.roaming_role,
             R.string.off_lane_role, R.string.jungler_role);
 
-    private CounterPickerPresenter mPresenter;
+    private CounterPickerPresenter mPresenter = new CounterPickerPresenter(this);
+
     private LinearLayout mMainLinearLayout;
     private TextView mLoadingText;
     private List<View> mRowViews = new ArrayList<>();
@@ -67,7 +68,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
                              Bundle savedInstanceState) {
         View inflateView = inflater.inflate(R.layout.fragment_counter_picker, container, false);
         mMainLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_counter_picker);
-        mPresenter = new CounterPickerPresenter(this);
+       // mPresenter = new CounterPickerPresenter(this);
 
         mLoadingText = (TextView) inflateView.findViewById(R.id.text_loading);
         mLoadingText.setVisibility(View.GONE);
