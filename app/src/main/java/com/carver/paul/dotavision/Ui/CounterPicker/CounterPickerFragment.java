@@ -104,6 +104,15 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         resetMinimumHeight();
     }
 
+    protected void hide() {
+        mMainLinearLayout.setVisibility(View.GONE);
+    }
+
+    protected void show() {
+        mMainLinearLayout.setVisibility(View.VISIBLE);
+    }
+
+
     protected void resetMinimumHeight() {
         mMainLinearLayout.setMinimumHeight(0);
     }

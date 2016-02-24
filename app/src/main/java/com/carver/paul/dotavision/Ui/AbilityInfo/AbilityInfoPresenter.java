@@ -77,6 +77,14 @@ public class AbilityInfoPresenter {
         showAbilitiesForAllHeroes(heroes);
     }
 
+    public void hide() {
+        mView.hide();
+    }
+
+    public void show() {
+        mView.show();
+    }
+
     private List<HeroInfo> removeDuplicates(List<HeroInfo> list) {
         List<HeroInfo> listWithoutDuplicates = new ArrayList<>();
         for(HeroInfo hero : list) {

@@ -42,6 +42,8 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
+import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
@@ -106,6 +108,8 @@ public class MainActivity extends AppCompatActivity
             R.string.hero_abilities);
 
     private MainActivityPresenter mPresenter;
+    private CounterPickerPresenter mCounterPickerPresenter;
+    private AbilityInfoPresenter mAbilityInfoPresenter;
 
     static {
         // Ensure this library isn't loaded when running robolectric tests, it makes them crash
@@ -137,8 +141,10 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.fragment_found_heroes);
         HeroesDetectedPresenter heroesDetectedPresenter = heroesDetectedFragment.getPresenter();
 
+        mCounterPickerPresenter = adapter.getCounterPickerPresenter();
+        mAbilityInfoPresenter = adapter.getAbilityInfoPresenter();
         mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter,
-                adapter.getAbilityInfoPresenter(), adapter.getCounterPickerPresenter());
+                mAbilityInfoPresenter, mCounterPickerPresenter);
 
         // Hide the keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -288,12 +294,16 @@ public class MainActivity extends AppCompatActivity
 
     protected void hidePager() {
         findViewById(R.id.tabs).setVisibility(View.GONE);
-        findViewById(R.id.pager).setVisibility(View.GONE);
+//        findViewById(R.id.pager).setVisibility(View.GONE);
+        mCounterPickerPresenter.hide();
+        mAbilityInfoPresenter.hide();
     }
 
     protected void showPager(){
         findViewById(R.id.tabs).setVisibility(View.VISIBLE);
-        findViewById(R.id.pager).setVisibility(View.VISIBLE);
+//        findViewById(R.id.pager).setVisibility(View.VISIBLE);
+        mCounterPickerPresenter.show();
+        mAbilityInfoPresenter.show();
     }
 
     @Override

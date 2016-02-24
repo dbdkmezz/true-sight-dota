@@ -38,6 +38,7 @@ import rx.functions.Func2;
 
 public class CounterPickerPresenter {
     private static final String TAG = "CounterPickerPresenter";
+    private static final int MAX_COUNTERS_TO_SHOW = 25;
 
     private CounterPickerFragment mView;
     private int mRoleFilter = R.string.all_roles;
@@ -59,6 +60,15 @@ public class CounterPickerPresenter {
 
     public void reset() {
         mView.reset();
+    }
+
+
+    public void hide() {
+        mView.hide();
+    }
+
+    public void show() {
+        mView.show();
     }
 
     public void startLoadingAnimation() {
@@ -109,8 +119,12 @@ public class CounterPickerPresenter {
         List<HeroAndAdvantages> rowsToShow = new ArrayList<>();
 
         for (HeroAndAdvantages hero : mHeroesAndAdvantages) {
-            if (shouldShowHero(hero))
+            if (shouldShowHero(hero)) {
                 rowsToShow.add(hero);
+                if (rowsToShow.size() >= MAX_COUNTERS_TO_SHOW) {
+                    break;
+                }
+            }
         }
 
         setupRowAddingSubscriber();

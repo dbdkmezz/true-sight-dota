@@ -6,7 +6,8 @@
     android:layout_height="fill_parent"
     android:background="#FFFFFF"
     android:elevation="4dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <Spinner
         android:id="@+id/spinner_counter_picker"

@@ -62,6 +62,14 @@ public class AbilityInfoFragment extends Fragment {
         mParentLinearLayout.removeAllViews();
     }
 
+    protected void hide() {
+        mParentLinearLayout.setVisibility(View.GONE);
+    }
+
+    protected void show() {
+        mParentLinearLayout.setVisibility(View.VISIBLE);
+    }
+
     protected void addHeading(int stringInt) {
         addHeading(getString(stringInt));
     }
