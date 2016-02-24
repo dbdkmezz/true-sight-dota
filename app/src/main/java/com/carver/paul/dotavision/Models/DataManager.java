@@ -315,8 +315,7 @@ public class DataManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<HeroImageAndPosition>>() {
                     public void call(List<HeroImageAndPosition> heroImages) {
-                        mMainActivityPresenter.stopHeroRecognitionLoadingAnimations();
-                        mMainActivityPresenter.showCounterPicker();
+                        mMainActivityPresenter.showPager();
                         mHeroesDetectedPresenter.showHeroImages(heroImages);
                     }
                 });

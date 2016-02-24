@@ -48,7 +48,6 @@ public class AbilityInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View inflateView  = inflater.inflate(R.layout.fragment_ability_info, container, false);
         mParentLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_results_info);
-      //  mPresenter = new AbilityInfoPresenter(this);
         return inflateView;
     }
 
@@ -86,14 +85,6 @@ public class AbilityInfoFragment extends Fragment {
     protected void addAbilityCard(HeroAbilityInfo ability, boolean showHeroName, int abilityType) {
         AbilityCardView card = new AbilityCardView(getActivity(), ability, showHeroName, abilityType);
         mParentLinearLayout.addView(card);
-    }
-
-    protected void hide() {
-        mParentLinearLayout.setVisibility(View.GONE);
-    }
-
-    protected void show() {
-        mParentLinearLayout.setVisibility(View.VISIBLE);
     }
 
     private void addText(String string, int layout) {

@@ -49,11 +49,9 @@ import com.carver.paul.dotavision.Ui.widget.SlidingTabLayout;
 import com.carver.paul.dotavision.Ui.widget.ViewPagerAdapter;
 
 import java.io.File;
-
-//TODO-next: give counter picker and hero ability buttons a little triangle below them to show
-// which is selected
-
-//TODO-next: remove the first screen entirely and make using photos much more optional
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //TODO-beauty: Write tests to check if all hero images load, and if all hero ability icons draw and
 // all hero abilities have text
@@ -76,8 +74,6 @@ import java.io.File;
 //TODO-someday: Make card borders 0 on small displays
 
 //TODO-next: Detect empty box for when no hero picked yet (note, this isn't as easy as it may seem!)
-
-//TODO-next: Can hit use last photo multiple times! Fix all buttons
 
 //TODO-next: Add rate this app button
 
@@ -103,14 +99,12 @@ public class MainActivity extends AppCompatActivity
     // BuildConfig.DEBUG is false (i.e. the app is compiled for release)
     public static boolean sDebugMode = false;
     public static final String PHOTO_FILE_NAME = "photo.jpg";
-
     private static final String TAG = "MainActivity";
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
+    private static final List<Integer> TAB_TITLE_RES_IDS = Arrays.asList(R.string.counter_picker,
+            R.string.hero_abilities);
 
     private MainActivityPresenter mPresenter;
-
-    CharSequence Titles[]={"Home","Events"};
-    int Numboftabs =2;
 
     static {
         // Ensure this library isn't loaded when running robolectric tests, it makes them crash
@@ -136,45 +130,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Setup the tabs for the AbilityInfoFragment and the CounterPickerFragment
-        ViewPagerAdapter adapter =  new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
-        SlidingTabLayout tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true);
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
-
-
-/*
-        AbilityInfoFragment abilityInfoFragment = (AbilityInfoFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_ability_info);
-        AbilityInfoPresenter abilityInfoPresenter = abilityInfoFragment.getPresenter();
-
-        CounterPickerFragment counterPickerFragment = (CounterPickerFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_counter_picker);
-        CounterPickerPresenter counterPickerPresenter = counterPickerFragment.getPresenter();
-*/
+        ViewPagerAdapter adapter =  createViewPager();
 
         HeroesDetectedFragment heroesDetectedFragment = (HeroesDetectedFragment) getFragmentManager()
                 .findFragmentById(R.id.fragment_found_heroes);
         HeroesDetectedPresenter heroesDetectedPresenter = heroesDetectedFragment.getPresenter();
 
-/*
-        mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter, abilityInfoPresenter,
-                counterPickerPresenter);
-*/
-
         mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter,
                 adapter.getAbilityInfoPresenter(), adapter.getCounterPickerPresenter());
-
 
         // Hide the keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -266,14 +229,6 @@ public class MainActivity extends AppCompatActivity
         mPresenter.clearButton();
     }
 
-    public void counterPickerButton(View view) {
-        mPresenter.showCounterPicker();
-    }
-
-    public void heroAbilitiesButton(View view) {
-        mPresenter.showHeroAbilities();
-    }
-
     public static void EnsureMediaDirectoryExists() {
         File mediaStorageDir = new File(getImagesLocation());
         if (!mediaStorageDir.exists()) {
@@ -309,7 +264,7 @@ public class MainActivity extends AppCompatActivity
     protected void startHeroRecognitionLoadingAnimations(Bitmap photo) {
         setTopImage(photo);
         findViewById(R.id.text_opening_tip).setVisibility(View.GONE);
-        hideBothButtons();
+        hidePager();
         pulseCameraImage();
     }
 
@@ -330,6 +285,16 @@ public class MainActivity extends AppCompatActivity
         cameraImage.animate().alpha(0).setDuration(150);
     }
 
+    protected void hidePager() {
+        findViewById(R.id.tabs).setVisibility(View.GONE);
+        findViewById(R.id.pager).setVisibility(View.GONE);
+    }
+
+    protected void showPager(){
+        findViewById(R.id.tabs).setVisibility(View.VISIBLE);
+        findViewById(R.id.pager).setVisibility(View.VISIBLE);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_ACTIVITY_REQUEST_CODE) {
@@ -347,35 +312,31 @@ public class MainActivity extends AppCompatActivity
         return BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
     }
 
-    protected void enableCounterPickerButton() {
-/*
-        Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
-        counterPicker.setVisibility(View.VISIBLE);
-        counterPicker.setEnabled(true);
+    /**
+     * Based on code from:
+     * http://www.android4devs.com/2015/01/how-to-make-material-design-sliding-tabs.html
+     */
+    private ViewPagerAdapter createViewPager() {
+        List<String> tabTitles = new ArrayList<>();
+        for(Integer resId : TAB_TITLE_RES_IDS) {
+            tabTitles.add(getString(resId));
+        }
+        ViewPagerAdapter adapter =  new ViewPagerAdapter(getSupportFragmentManager(), tabTitles);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+        SlidingTabLayout tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(true);
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(pager);
 
-        Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
-        heroAbilities.setVisibility(View.VISIBLE);
-        heroAbilities.setEnabled(false);
-*/
-    }
-
-    protected void enableHeroAbilitiesButton() {
-/*
-        Button heroAbilities = (Button) findViewById(R.id.button_hero_abilities);
-        heroAbilities.setVisibility(View.VISIBLE);
-        heroAbilities.setEnabled(true);
-
-        Button counterPicker = (Button) findViewById(R.id.button_counter_picker);
-        counterPicker.setVisibility(View.VISIBLE);
-        counterPicker.setEnabled(false);
-*/
-    }
-
-    private void hideBothButtons() {
-/*
-        findViewById(R.id.button_hero_abilities).setVisibility(View.GONE);
-        findViewById(R.id.button_counter_picker).setVisibility(View.GONE);
-*/
+        return adapter;
     }
 
     private void setTopImage(Bitmap photoBitmap) {
@@ -387,7 +348,7 @@ public class MainActivity extends AppCompatActivity
      * Makes the camera pulse infinitely (will be stopped when loading completes)
      */
     //TODO-nextversion: Make camera do something other than pulse - it implies you should press
-    // it! When done I should stop disabling the button when animating too.
+    // it!
     private void pulseCameraImage() {
         //Code using the old Animation class, rather than the new ViewPropertyAnimator
         //Infinite repeat is easier to implement this way

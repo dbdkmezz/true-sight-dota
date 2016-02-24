@@ -61,14 +61,6 @@ public class CounterPickerPresenter {
         mView.reset();
     }
 
-    public void hide() {
-        mView.hide();
-    }
-
-    public void show() {
-        mView.show();
-    }
-
     public void startLoadingAnimation() {
         mView.startLoadingAnimation();
     }

@@ -75,8 +75,6 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
         setupRolesSpinner(inflater, inflateView);
 
-        hide();
-
         return inflateView;
     }
 
@@ -102,7 +100,6 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     }
 
     public void reset() {
-        mMainLinearLayout.setVisibility(View.GONE);
         removeAllRows();
         resetMinimumHeight();
     }
@@ -180,14 +177,6 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
                         }
                     });
         }
-    }
-
-    protected void hide() {
-        mMainLinearLayout.setVisibility(View.GONE);
-    }
-
-    protected void show() {
-        mMainLinearLayout.setVisibility(View.VISIBLE);
     }
 
     protected void showHeadings(List<Integer> enemyImages) {

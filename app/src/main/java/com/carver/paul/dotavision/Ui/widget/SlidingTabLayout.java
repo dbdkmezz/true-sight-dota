@@ -17,6 +17,8 @@ package com.carver.paul.dotavision.Ui.widget;
  */
 
         import android.content.Context;
+        import android.content.res.ColorStateList;
+        import android.graphics.Color;
         import android.graphics.Typeface;
         import android.support.v4.view.PagerAdapter;
         import android.support.v4.view.ViewPager;
@@ -167,6 +169,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
+        textView.setTextColor(Color.WHITE);
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 

@@ -18,4 +18,6 @@
     <dimen name="image_hero_preview_width">71dp</dimen>
     <dimen name="image_hero_preview_height">40dp</dimen>
     <dimen name="camera_buttons_width">60dp</dimen>
+
+    <dimen name="starting_pager_size">800dp</dimen>
 </resources>

@@ -63,7 +63,7 @@ public class MainActivityPresenter {
         mView.showClearFab();
         if(!heroInfoShown) {
             mView.hideTip();
-            showCounterPicker();
+            mView.showPager();
             heroInfoShown = true;
         }
     }
@@ -80,20 +80,9 @@ public class MainActivityPresenter {
         mView.startHeroRecognitionLoadingAnimations(photo);
     }
 
-    public void stopHeroRecognitionLoadingAnimations() {
+    public void showPager() {
         mView.stopHeroRecognitionLoadingAnimations();
-    }
-
-    public void showCounterPicker() {
-        mView.enableHeroAbilitiesButton();
-        mAbilityInfoPresenter.show();
-        mCounterPickerPresenter.show();
-    }
-
-    public void showHeroAbilities() {
-        mView.enableCounterPickerButton();
-        mCounterPickerPresenter.hide();
-        mAbilityInfoPresenter.show();
+        mView.showPager();
     }
 
     protected void takePhotoButton() {

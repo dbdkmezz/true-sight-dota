@@ -71,64 +71,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="2dp"
-                android:background="@color/colorPrimary"/>
+                android:background="@color/colorPrimary"
+                android:visibility="gone"/>
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="800dp"/>
-
-<!--
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button_counter_picker"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_custom_toggler"
-                    android:onClick="counterPickerButton"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:text="@string/counter_picker"
-                    android:textColor="#FFFFFF"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/button_hero_abilities"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_custom_toggler"
-                    android:onClick="heroAbilitiesButton"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:text="@string/hero_abilities"
-                    android:textColor="#FFFFFF"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
--->
-
-<!--
-            <fragment
-                android:id="@+id/fragment_ability_info"
-                android:name="com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <fragment
-                android:id="@+id/fragment_counter_picker"
-                android:name="com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/fab_diameter"
-                android:layout_marginTop="@dimen/activity_vertical_margin" />
--->
+                android:layout_height="@dimen/starting_pager_size"/>
 
         </LinearLayout>
 
