@@ -74,10 +74,10 @@
                 android:background="@color/colorPrimary"
                 android:visibility="gone"/>
 
-            <android.support.v4.view.ViewPager
+            <com.carver.paul.dotavision.Ui.widget.ExpandingViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/starting_pager_size"/>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

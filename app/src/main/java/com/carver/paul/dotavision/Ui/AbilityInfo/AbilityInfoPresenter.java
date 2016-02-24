@@ -18,6 +18,8 @@
 
 package com.carver.paul.dotavision.Ui.AbilityInfo;
 
+import android.util.Log;
+
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.R;

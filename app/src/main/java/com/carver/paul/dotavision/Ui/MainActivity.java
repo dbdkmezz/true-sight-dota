@@ -45,6 +45,7 @@ import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedFragment;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
+import com.carver.paul.dotavision.Ui.widget.ExpandingViewPager;
 import com.carver.paul.dotavision.Ui.widget.SlidingTabLayout;
 import com.carver.paul.dotavision.Ui.widget.ViewPagerAdapter;
 
@@ -322,7 +323,7 @@ public class MainActivity extends AppCompatActivity
             tabTitles.add(getString(resId));
         }
         ViewPagerAdapter adapter =  new ViewPagerAdapter(getSupportFragmentManager(), tabTitles);
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        ExpandingViewPager pager = (ExpandingViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
         SlidingTabLayout tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
