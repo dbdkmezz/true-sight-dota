@@ -64,11 +64,14 @@ public class MainActivityPresenter {
         if(!heroInfoShown) {
             mView.hideTip();
             mView.showPager();
+            mCounterPickerPresenter.show();
+            mAbilityInfoPresenter.show();
             heroInfoShown = true;
         }
     }
 
     public void doImageRecognition(Bitmap photo) {
+        mView.hideClearFab();
         mDataManager.identifyHeroesInPhoto(photo);
     }
 
@@ -77,12 +80,16 @@ public class MainActivityPresenter {
     }
 
     public void startHeroRecognitionLoadingAnimations(Bitmap photo) {
+        mCounterPickerPresenter.hide();
+        mAbilityInfoPresenter.hide();
         mView.startHeroRecognitionLoadingAnimations(photo);
     }
 
     public void showPager() {
         mView.stopHeroRecognitionLoadingAnimations();
         mView.showPager();
+        mCounterPickerPresenter.show();
+        mAbilityInfoPresenter.show();
     }
 
     protected void takePhotoButton() {
@@ -91,7 +98,12 @@ public class MainActivityPresenter {
 
     protected void clearButton() {
         heroInfoShown = false;
+        mView.hidePhoto();
+/*
         mHeroesDetectedPresenter.clearAll();
+*/
+        mHeroesDetectedPresenter.reset();
+        mHeroesDetectedPresenter.showWithoutRecyclers();
     }
 
     /**

@@ -60,16 +60,19 @@ public class HeroesDetectedPresenter {
         mView = view;
     }
 
-    public void clearAll() {
+/*    public void clearAll() {
         for (HeroDetectedItemPresenter presenter : mHeroDetectedItemPresenters) {
             presenter.clear();
         }
-    }
+    }*/
 
     public void reset() {
-        mView.removeAllViews();
-        mHeroDetectedItemPresenters.clear();
         setupSubscriber();
+        for (HeroDetectedItemPresenter presenter : mHeroDetectedItemPresenters) {
+            presenter.clear();
+        }
+        mHeroDetectedItemPresenters.clear();
+        mView.removeAllViews();
     }
 
     public void setDataManger(DataManager dataManger) {

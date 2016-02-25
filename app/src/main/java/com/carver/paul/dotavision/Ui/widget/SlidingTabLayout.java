@@ -17,7 +17,6 @@ package com.carver.paul.dotavision.Ui.widget;
  */
 
         import android.content.Context;
-        import android.content.res.ColorStateList;
         import android.graphics.Color;
         import android.graphics.Typeface;
         import android.support.v4.view.PagerAdapter;

@@ -38,7 +38,7 @@ import rx.functions.Func2;
 
 public class CounterPickerPresenter {
     private static final String TAG = "CounterPickerPresenter";
-    private static final int MAX_COUNTERS_TO_SHOW = 25;
+    private static final int MAX_COUNTERS_TO_SHOW = 2005;
 
     private CounterPickerFragment mView;
     private int mRoleFilter = R.string.all_roles;

@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -108,8 +107,6 @@ public class MainActivity extends AppCompatActivity
             R.string.hero_abilities);
 
     private MainActivityPresenter mPresenter;
-    private CounterPickerPresenter mCounterPickerPresenter;
-    private AbilityInfoPresenter mAbilityInfoPresenter;
 
     static {
         // Ensure this library isn't loaded when running robolectric tests, it makes them crash
@@ -141,10 +138,10 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.fragment_found_heroes);
         HeroesDetectedPresenter heroesDetectedPresenter = heroesDetectedFragment.getPresenter();
 
-        mCounterPickerPresenter = adapter.getCounterPickerPresenter();
-        mAbilityInfoPresenter = adapter.getAbilityInfoPresenter();
+        CounterPickerPresenter counterPickerPresenter = adapter.getCounterPickerPresenter();
+        AbilityInfoPresenter abilityInfoPresenter = adapter.getAbilityInfoPresenter();
         mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter,
-                mAbilityInfoPresenter, mCounterPickerPresenter);
+                abilityInfoPresenter, counterPickerPresenter);
 
         // Hide the keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -260,8 +257,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void showClearFab() {
-        View clear_fab = findViewById(R.id.fab_clear);
-        clear_fab.setVisibility(View.VISIBLE);
+        findViewById(R.id.fab_clear).setVisibility(View.VISIBLE);
+    }
+
+    protected void hideClearFab() {
+        findViewById(R.id.fab_clear).setVisibility(View.GONE);
     }
 
     /**
@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity
     protected void startHeroRecognitionLoadingAnimations(Bitmap photo) {
         setTopImage(photo);
         findViewById(R.id.text_opening_tip).setVisibility(View.GONE);
-        hidePager();
+        findViewById(R.id.tabs).setVisibility(View.GONE);
         pulseCameraImage();
     }
 
@@ -292,18 +292,8 @@ public class MainActivity extends AppCompatActivity
         cameraImage.animate().alpha(0).setDuration(150);
     }
 
-    protected void hidePager() {
-        findViewById(R.id.tabs).setVisibility(View.GONE);
-//        findViewById(R.id.pager).setVisibility(View.GONE);
-        mCounterPickerPresenter.hide();
-        mAbilityInfoPresenter.hide();
-    }
-
     protected void showPager(){
         findViewById(R.id.tabs).setVisibility(View.VISIBLE);
-//        findViewById(R.id.pager).setVisibility(View.VISIBLE);
-        mCounterPickerPresenter.show();
-        mAbilityInfoPresenter.show();
     }
 
     @Override
@@ -321,6 +311,10 @@ public class MainActivity extends AppCompatActivity
 
     protected Bitmap getSamplePhoto() {
         return BitmapFactory.decodeResource(getResources(), R.drawable.sample_photo);
+    }
+
+    protected void hidePhoto() {
+        findViewById(R.id.image_top).setVisibility(View.GONE);
     }
 
     /**
@@ -352,6 +346,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setTopImage(Bitmap photoBitmap) {
         ImageView topImage = (ImageView) findViewById(R.id.image_top);
+        topImage.setVisibility(View.VISIBLE);
         topImage.setImageBitmap(photoBitmap);
     }
 

@@ -221,6 +221,9 @@ public class HeroDetectedItemView {
     }
 }
 
+//TODO-now: fix hero name watcher, if you type a name, clear it, then type it again it doesn't
+// recogise!
+
 /**
  * Watches the name of the hero. If the user changes it to the name of another hero this will be
  * reported back to the presenter so that the hero can be changed.
