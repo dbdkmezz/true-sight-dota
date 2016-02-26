@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
@@ -68,9 +70,6 @@ import java.util.List;
 
 //TODO-beauty: support rotating the screen!
 
-//TODO-next: make the heroes info separated somehow. Just a dividing line for now? It's a mess.
-// Perhaps just draw their image?
-
 //TODO-someday: add tab view so you can slide to change hero rather them all being piled up in one place
 
 //TODO-someday: Make card borders 0 on small displays
@@ -79,7 +78,7 @@ import java.util.List;
 
 //TODO-next: Add rate this app button
 
-//TODO-next: Add a way to keep both dire and radiant photos
+//TODO-someday: Add a way to keep both dire and radiant photos
 
 //TODO-next: Add map with creep camp stack timings
 
@@ -257,11 +256,23 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void showClearFab() {
-        findViewById(R.id.fab_clear).setVisibility(View.VISIBLE);
+        View fab = findViewById(R.id.fab_clear);
+        fab.setVisibility(View.VISIBLE);
+/*
+        if (fab.getAlpha() != 1f) {
+            fab.animate().alpha(1f).setDuration(150).setStartDelay(100);
+        }
+*/
     }
 
     protected void hideClearFab() {
-        findViewById(R.id.fab_clear).setVisibility(View.GONE);
+        View fab = findViewById(R.id.fab_clear);
+        fab.setVisibility(View.GONE);
+/*
+        if(fab.getAlpha() != 0f) {
+            fab.animate().alpha(0f).setDuration(150);
+        }
+*/
     }
 
     /**
@@ -315,6 +326,11 @@ public class MainActivity extends AppCompatActivity
 
     protected void hidePhoto() {
         findViewById(R.id.image_top).setVisibility(View.GONE);
+    }
+
+    protected void scrollToTop() {
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
+        scrollView.fullScroll(ScrollView.FOCUS_UP);
     }
 
     /**

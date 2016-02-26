@@ -60,7 +60,13 @@ public class MainActivityPresenter {
      * This should be called whenever the hero list is shown
      */
     public void updateHeroList() {
-        mView.showClearFab();
+        showPager();
+
+        if(!mHeroesDetectedPresenter.allHeroesClear()) {
+            // We don't want to show the clear button if all all the heroes are already clear
+            mView.showClearFab();
+        }
+
         if(!heroInfoShown) {
             mView.hideTip();
             mView.showPager();
@@ -71,12 +77,20 @@ public class MainActivityPresenter {
     }
 
     public void doImageRecognition(Bitmap photo) {
+       // clearButton();
+
         mView.hideClearFab();
+        mHeroesDetectedPresenter.reset();
+
         mDataManager.identifyHeroesInPhoto(photo);
     }
 
     public Context getContext() {
         return mView;
+    }
+
+    public void stopHeroRecognitionLoadingAnimations() {
+        mView.stopHeroRecognitionLoadingAnimations();
     }
 
     public void startHeroRecognitionLoadingAnimations(Bitmap photo) {
@@ -86,7 +100,6 @@ public class MainActivityPresenter {
     }
 
     public void showPager() {
-        mView.stopHeroRecognitionLoadingAnimations();
         mView.showPager();
         mCounterPickerPresenter.show();
         mAbilityInfoPresenter.show();
@@ -99,11 +112,13 @@ public class MainActivityPresenter {
     protected void clearButton() {
         heroInfoShown = false;
         mView.hidePhoto();
+        mView.hideClearFab();
 /*
         mHeroesDetectedPresenter.clearAll();
 */
         mHeroesDetectedPresenter.reset();
         mHeroesDetectedPresenter.showWithoutRecyclers();
+        mView.scrollToTop();
     }
 
     /**

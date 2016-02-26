@@ -63,7 +63,8 @@ public class HeroDetectedItemPresenter {
     }
 
     public void setSimilarityListAndName(List<HeroAndSimilarity> similarityList,
-                                         String name) {
+                                         String name,
+                                         boolean sendUpdatedListOnAnimationCompletion) {
         mName = name;
         mSimilarityList = similarityList;
 
@@ -72,7 +73,7 @@ public class HeroDetectedItemPresenter {
             similarHeroesImages.add(similarHero.hero.getImageResource());
         }
 
-        mView.completeRecycler(similarHeroesImages);
+        mView.completeRecycler(similarHeroesImages, sendUpdatedListOnAnimationCompletion);
         mView.setName(mName);
     }
 
@@ -129,5 +130,9 @@ public class HeroDetectedItemPresenter {
 
         mParentPresenter.hideKeyboard();
         mParentPresenter.sendUpdatedHeroList();
+    }
+
+    protected void recyclerViewAnimationsFinished() {
+        mParentPresenter.recyclerViewAnimationsFinished();
     }
 }

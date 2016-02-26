@@ -62,7 +62,6 @@ public class CounterPickerPresenter {
         mView.reset();
     }
 
-
     public void hide() {
         mView.hide();
     }

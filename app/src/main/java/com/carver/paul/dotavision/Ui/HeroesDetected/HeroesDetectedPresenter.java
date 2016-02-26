@@ -106,6 +106,15 @@ public class HeroesDetectedPresenter {
         sendUpdatedHeroList(false);
     }
 
+    public boolean allHeroesClear() {
+        for (HeroDetectedItemPresenter hero : mHeroDetectedItemPresenters) {
+            if(hero.getName() != null && hero.getName().length() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     protected void onDestroy() {
         unsubscribeSubscriber();
     }
@@ -122,6 +131,10 @@ public class HeroesDetectedPresenter {
 
         HeroInfo heroInfo = findHeroWithName(heroRealName, mDataManger.getHeroInfoValue());
         return heroInfo.imageName;
+    }
+
+    public void recyclerViewAnimationsFinished() {
+        sendUpdatedHeroList(true);
     }
 
     /**
@@ -152,7 +165,7 @@ public class HeroesDetectedPresenter {
             // Show the ability cards for the heroes we have now identified
             @Override
             public void onCompleted() {
-                sendUpdatedHeroList(true);
+//                sendUpdatedHeroList(true);
             }
 
             @Override
@@ -164,11 +177,6 @@ public class HeroesDetectedPresenter {
             // the hero we think it is by completing the set up of the HeroDetectedItemPresenter
             @Override
             public void onNext(SimilarityListAndPosition similarityListAndPosition) {
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Adding "
-                            + similarityListAndPosition.getSimilarityList().get(0).hero.name);
-                }
-
                 completeHeroDetectedSetup(similarityListAndPosition);
             }
         };
@@ -182,7 +190,8 @@ public class HeroesDetectedPresenter {
 
         heroDetected.setSimilarityListAndName(
                 similarityListAndPosition.getSimilarityList(),
-                getHeroRealName(similarityListAndPosition.getSimilarityList().get(0).hero.name));
+                getHeroRealName(similarityListAndPosition.getSimilarityList().get(0).hero.name),
+                similarityListAndPosition.getPosition() == 4);
     }
 
     private void setupTextAutoCompleteAndChangeListener() {
