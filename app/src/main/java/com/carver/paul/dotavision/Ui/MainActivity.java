@@ -258,21 +258,16 @@ public class MainActivity extends AppCompatActivity
     protected void showClearFab() {
         View fab = findViewById(R.id.fab_clear);
         fab.setVisibility(View.VISIBLE);
-/*
         if (fab.getAlpha() != 1f) {
-            fab.animate().alpha(1f).setDuration(150).setStartDelay(100);
+            fab.animate().alpha(1f).setDuration(150).setStartDelay(50);
         }
-*/
     }
 
     protected void hideClearFab() {
         View fab = findViewById(R.id.fab_clear);
-        fab.setVisibility(View.GONE);
-/*
         if(fab.getAlpha() != 0f) {
             fab.animate().alpha(0f).setDuration(150);
         }
-*/
     }
 
     /**

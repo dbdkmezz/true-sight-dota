@@ -177,6 +177,7 @@ public class HeroDetectedItemView {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mActivityContext);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        layoutManager.setAutoMeasureEnabled(false); // Required with appcompat v23.2.0 onwards
         mRecyclerView.setAdapter(new HeroImageAdapter());
         mRecyclerView.setLayoutManager(layoutManager);
     }
