@@ -232,10 +232,8 @@ public class DataManager {
                     }
                 });
 /*
-
         List<HeroAndAdvantages> heroes =
                 SqlLoader.calculateAdvantages(mMainActivityPresenter.getContext(), heroNames);
-
         mCounterPickerPresenter.showAdvantages(heroes);*/
     }
 

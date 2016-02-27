@@ -147,11 +147,11 @@ public class CounterPickerPresenter {
     }
 
     private boolean shouldShowHero(HeroAndAdvantages hero) {
-            for(HeroInfo enemy : mEnemyHeroes) {
-                if(hero.getName().equals(enemy.name)) {
-                    return false;
-                }
+        for(HeroInfo enemy : mEnemyHeroes) {
+            if(hero.getName().equals(enemy.name)) {
+                return false;
             }
+        }
 
         // implement the role selection made in the spinner
         switch (mRoleFilter) {
