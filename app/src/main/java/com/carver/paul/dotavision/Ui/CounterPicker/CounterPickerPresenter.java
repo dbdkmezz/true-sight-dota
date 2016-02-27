@@ -74,6 +74,11 @@ public class CounterPickerPresenter {
         mView.startLoadingAnimation();
     }
 
+    public void removeAllRows() {
+        unsubscribeRowAddingSubscriber();
+        mView.removeAllRows();
+    }
+
     protected void setRoleFilter(int roleFilter) {
         if (roleFilter == mRoleFilter) {
             return;
@@ -89,11 +94,6 @@ public class CounterPickerPresenter {
         removeAllRows();
         showHeadings();
         showAdvantages();
-    }
-
-    private void removeAllRows() {
-        unsubscribeRowAddingSubscriber();
-        mView.removeAllRows();
     }
 
     private void showHeadings() {

@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2015 Paul Broadbent
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -37,7 +37,6 @@ import android.widget.TextView;
 
 import com.carver.paul.dotavision.R;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,16 +59,18 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     private CounterPickerPresenter mPresenter = new CounterPickerPresenter(this);
 
     private LinearLayout mMainLinearLayout;
+    private LinearLayout mCountersLinearLayout;
     private TextView mLoadingText;
-    private List<View> mRowViews = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflateView = inflater.inflate(R.layout.fragment_counter_picker, container, false);
         mMainLinearLayout = (LinearLayout) inflateView.findViewById(R.id.layout_counter_picker);
-       // mPresenter = new CounterPickerPresenter(this);
+        // mPresenter = new CounterPickerPresenter(this);
 
+        mCountersLinearLayout =
+                (LinearLayout) inflateView.findViewById(R.id.layout_individual_counters);
         mLoadingText = (TextView) inflateView.findViewById(R.id.text_loading);
         mLoadingText.setVisibility(View.GONE);
 
@@ -83,8 +84,8 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         String role = (String) parent.getItemAtPosition(pos);
-        for(int stringId : roleStringIds) {
-            if(role.equals(getString(stringId))) {
+        for (int stringId : roleStringIds) {
+            if (role.equals(getString(stringId))) {
                 mPresenter.setRoleFilter(stringId);
                 return;
             }
@@ -121,16 +122,11 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
      * Removes all ability cards from the view so that the view will be empty
      */
     protected void removeAllRows() {
-        if(!mRowViews.isEmpty()) {
-            // After removing the rows we are likely to add a load of new ones, and if the height
-            // shrinks then grows again in a moment then the view will jump up, this stops that
-            mMainLinearLayout.setMinimumHeight(mMainLinearLayout.getHeight());
-        }
+        // After removing the rows we are likely to add a load of new ones, and if the height
+        // shrinks then grows again in a moment then the view will jump up, this stops that
+        mMainLinearLayout.setMinimumHeight(mMainLinearLayout.getHeight());
 
-        for(View v: mRowViews) {
-            mMainLinearLayout.removeView(v);
-        }
-        mRowViews.clear();
+        mCountersLinearLayout.removeAllViews();
     }
 
     /**
@@ -190,16 +186,15 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
     protected void showHeadings(List<Integer> enemyImages) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View headerView = inflater.inflate(R.layout.item_counter_picker_header, mMainLinearLayout,
+        View headerView = inflater.inflate(R.layout.item_counter_picker_header, mCountersLinearLayout,
                 false);
 
-        for(int i = 0; i < enemyImages.size(); i++) {
+        for (int i = 0; i < enemyImages.size(); i++) {
             ImageView imageView = (ImageView) headerView.findViewById(headingImageViewIds.get(i));
             imageView.setImageResource(enemyImages.get(i));
         }
 
-        mMainLinearLayout.addView(headerView);
-        mRowViews.add(headerView);
+        mCountersLinearLayout.addView(headerView);
     }
 
     /**
@@ -213,32 +208,31 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
      */
     protected void addRow(String name, List<Pair<String, Boolean>> advantages, String totalAdvantage) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        if(inflater == null) return;
+        if (inflater == null) return;
 
-        View itemView = inflater.inflate(R.layout.item_counter_picker, mMainLinearLayout,
+        View itemView = inflater.inflate(R.layout.item_counter_picker, mCountersLinearLayout,
                 false);
-        if(itemView == null) return;
+        if (itemView == null) return;
 
         TextView nameTextView = (TextView) itemView.findViewById(R.id.name);
-        if(nameTextView == null) return;
+        if (nameTextView == null) return;
         nameTextView.setText(name);
 
-        for(int i = 0; i < advantages.size() && i < advantageTextViewIds.size(); i++) {
+        for (int i = 0; i < advantages.size() && i < advantageTextViewIds.size(); i++) {
             TextView advTextView = (TextView) itemView.findViewById(advantageTextViewIds.get(i));
-            if(advTextView == null) return;
+            if (advTextView == null) return;
             advTextView.setText(advantages.get(i).first);
 
-            if(advantages.get(i).second) {
+            if (advantages.get(i).second) {
                 advTextView.setTypeface(null, Typeface.BOLD);
             }
         }
 
         TextView totalAdvTextView = (TextView) itemView.findViewById(R.id.total_advantage);
-        if(totalAdvantage == null) return;
+        if (totalAdvantage == null) return;
         totalAdvTextView.setText(totalAdvantage);
 
-        mMainLinearLayout.addView(itemView);
-        mRowViews.add(itemView);
+        mCountersLinearLayout.addView(itemView);
     }
 
     private void setupRolesSpinner(LayoutInflater inflater, View inflateView) {

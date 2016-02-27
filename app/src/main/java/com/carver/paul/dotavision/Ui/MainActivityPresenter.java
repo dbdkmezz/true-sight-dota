@@ -77,10 +77,9 @@ public class MainActivityPresenter {
     }
 
     public void doImageRecognition(Bitmap photo) {
-       // clearButton();
-
         mView.hideClearFab();
         mHeroesDetectedPresenter.reset();
+        mCounterPickerPresenter.removeAllRows();
 
         mDataManager.identifyHeroesInPhoto(photo);
     }

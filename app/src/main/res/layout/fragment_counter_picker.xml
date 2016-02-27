@@ -33,4 +33,10 @@
         android:textSize="@dimen/large_text"
         android:visibility="gone"/>
 
+    <LinearLayout
+        android:id="@+id/layout_individual_counters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
 </LinearLayout>
