@@ -23,8 +23,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.carver.paul.dotavision.Ui.MainActivity;
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.MainActivity;
 
 import java.io.File;
 

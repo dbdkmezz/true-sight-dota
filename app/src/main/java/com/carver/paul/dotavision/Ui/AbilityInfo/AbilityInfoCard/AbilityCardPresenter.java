@@ -18,8 +18,8 @@
 
 package com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoCard;
 
-import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
+import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;

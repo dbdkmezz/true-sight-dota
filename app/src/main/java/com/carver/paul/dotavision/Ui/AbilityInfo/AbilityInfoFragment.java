@@ -18,17 +18,17 @@
 
 package com.carver.paul.dotavision.Ui.AbilityInfo;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoCard.AbilityCardView;
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoCard.AbilityCardView;
 
 /**
  * This is where the information about the individual abilities is shown.

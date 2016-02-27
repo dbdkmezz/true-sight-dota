@@ -1,15 +1,11 @@
 package com.carver.paul.dotavision;
 
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
 import com.carver.paul.dotavision.Ui.MainActivity;
 
 import org.junit.Before;
@@ -17,14 +13,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.robolectric.Shadows.shadowOf;
 
 //TODO-beauty: add test for the main activity to click the demo button. Will need to re-write some
 // of the image processing code to make it suitable for testing.

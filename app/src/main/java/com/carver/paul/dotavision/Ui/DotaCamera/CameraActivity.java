@@ -35,8 +35,8 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
-import com.carver.paul.dotavision.Ui.MainActivity;
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.MainActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;

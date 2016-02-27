@@ -20,7 +20,6 @@ package com.carver.paul.dotavision.Ui.HeroesDetected;
 
 import android.util.Log;
 
-import com.carver.paul.dotavision.BuildConfig;
 import com.carver.paul.dotavision.Models.DataManager;
 import com.carver.paul.dotavision.Models.HeroImageAndPosition;
 import com.carver.paul.dotavision.Models.HeroInfo;

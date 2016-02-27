@@ -18,21 +18,12 @@
 
 package com.carver.paul.dotavision.Ui.DebugActivities;
 
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.carver.paul.dotavision.ImageRecognition.Debug.DebugLineDetection;
-import com.carver.paul.dotavision.Ui.MainActivity;
 import com.carver.paul.dotavision.R;
-
-import java.io.File;
 
 public class DebugLineDetectionActivity extends AppCompatActivity {
 
