@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2015 Paul Broadbent
- * <p/>
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p/>
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p/>
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -22,6 +22,7 @@ import android.animation.Animator;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,8 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     static private final List<Integer> roleStringIds = Arrays.asList(R.string.all_roles,
             R.string.carry_role, R.string.support_role, R.string.mid_role, R.string.roaming_role,
             R.string.off_lane_role, R.string.jungler_role);
+
+    static private final String TAG = "CounterPickerFragment";
 
     private CounterPickerPresenter mPresenter = new CounterPickerPresenter(this);
 
@@ -119,9 +122,20 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     }
 
     /**
-     * Removes all ability cards from the view so that the view will be empty
+     * Removes all counter picker information rows and the heading row
      */
     protected void removeAllRows() {
+        if (mMainLinearLayout == null) {
+            Log.d(TAG, "Attempting to remove all rows, but mMainLinearLayout is null. I don't " +
+                    "know why this happens, but it does.");
+            return;
+        }
+        if (mCountersLinearLayout == null) {
+            Log.d(TAG, "Attempting to remove all rows, but mCountersLinearLayout is null. I " +
+                    "don't know why this happens, but it does.");
+            return;
+        }
+
         // After removing the rows we are likely to add a load of new ones, and if the height
         // shrinks then grows again in a moment then the view will jump up, this stops that
         mMainLinearLayout.setMinimumHeight(mMainLinearLayout.getHeight());
