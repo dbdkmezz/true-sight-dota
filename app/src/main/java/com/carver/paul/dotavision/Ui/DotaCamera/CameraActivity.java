@@ -59,7 +59,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CameraActivity extends Activity {
     private Camera mCamera;
-    private SurfaceView mPreview;
+    private CameraPreview mPreview;
     private static final String TAG = "Camera Activity";
 
     private final ScheduledExecutorService mScheduledExecutorService =
@@ -110,7 +110,10 @@ public class CameraActivity extends Activity {
      * @param view
      */
     public void capturePhoto(View view) {
-        if (mCameraOpeningTask.getStatus() != AsyncTask.Status.FINISHED || mCamera == null)
+        if (mCameraOpeningTask.getStatus() != AsyncTask.Status.FINISHED
+                || mCamera == null
+                || mPreview == null
+                || !mPreview.isSurfaceCreated())
             return;
 
         if (mCamera.getParameters().getFocusMode() != null
@@ -458,6 +461,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private static final String TAG = "Camera Preview";
+    private boolean mSurfaceCreated = false;
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
@@ -486,6 +490,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             setLayoutParams(layoutParams);*/
 
             mCamera.startPreview();
+            mSurfaceCreated = true;
 
         } catch (IOException e) {
             if (BuildConfig.DEBUG) {
@@ -494,7 +499,12 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    public boolean isSurfaceCreated() {
+        return mSurfaceCreated;
+    }
+
     public void surfaceDestroyed(SurfaceHolder holder) {
+        Log.d(TAG, "surfaceDestroyed called.");
         //don't need to do anything here, camera is released when the Activity is paused anyway
     }
 
