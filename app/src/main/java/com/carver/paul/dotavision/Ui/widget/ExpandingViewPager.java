@@ -6,7 +6,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by paul on 24/02/16.
+ * This is a ViewPager which grows to match the height of its content. Based on code from
+ * StackOverflow.
  */
 public class ExpandingViewPager extends ViewPager {
 
