@@ -22,20 +22,19 @@ import android.util.Log;
 
 import java.util.List;
 
-import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class Downloader {
     private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
     private static final String TAG = "DownloadAdvantages";
 
-    static protected void getAdvantages(List<String> heroesInPhoto) {
-        RestAdapter restAdapter = new RestAdapter
-                .Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint(SERVICE_ENDPOINT).build();
+    static public void getAdvantages(List<String> heroesInPhoto) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(SERVICE_ENDPOINT)
+                .build();
 
         AdvantagesApi advantages = restAdapter.create(AdvantagesApi.class);
 
@@ -44,16 +43,25 @@ public class Downloader {
         }
 
         advantages.getAdvantages(heroesInPhoto.get(0), heroesInPhoto.get(1), heroesInPhoto.get(2),
-                heroesInPhoto.get(3), heroesInPhoto.get(4), new Callback<AdvantageData>() {
-                    @Override
-                    public void success(AdvantageData gitmodel, Response response) {
-                        Log.d(TAG, "Yay!");
-                    }
+                heroesInPhoto.get(3), heroesInPhoto.get(4))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<AdvantageData>() {
+                               @Override
+                               public void onCompleted() {
+                               }
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Log.d(TAG, "Fail!");
-                    }
-                });
+                               @Override
+                               public void onError(Throwable e) {
+                                   Log.e(TAG, "Unhandled error: " + e.toString());
+                               }
+
+                               @Override
+                               public void onNext(AdvantageData advantageData) {
+                                   Log.d(TAG, "Yay!");
+                                   Log.d(TAG, "" + advantageData.getData().size() + " found.");
+                                   Log.d(TAG, "" + advantageData.getData().get(1).getName() + " advantages0:" + advantageData.getData().get(1).getAdvantages().get(0));
+                               }
+                           });
     }
 }

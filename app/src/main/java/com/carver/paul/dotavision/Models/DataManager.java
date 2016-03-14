@@ -25,6 +25,7 @@ import android.util.Log;
 import com.carver.paul.dotavision.ImageRecognition.LoadHeroXml;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
+import com.carver.paul.dotavision.Models.AdvantagesDownloader.Downloader;
 import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
@@ -91,7 +92,7 @@ public class DataManager {
         startSqlLoading();
 
         List<String> testNames = Arrays.asList("Disruptor", "Pudge", "Puck", "Lion", "Lina");
-        DownloadAdvantages.getAdvantages(testNames);
+        Downloader.getAdvantages(testNames);
 
         databaseThread = Schedulers.from(Executors.newSingleThreadExecutor());
     }
