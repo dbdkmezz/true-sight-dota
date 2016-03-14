@@ -120,6 +120,19 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         mIsOffLane = intToBool(c.getInt(c.getColumnIndexOrThrow(OFF_LANE_COLUMN)));
     }
 
+    protected HeroAndAdvantages(int id, String name, boolean isCarry, boolean isSupport,
+                                boolean isMid, boolean isRoaming, boolean isJungler,
+                                boolean isOffLane) {
+        mId = id;
+        mName = name;
+        mIsCarry = isCarry;
+        mIsSupport = isSupport;
+        mIsMid = isMid;
+        mIsRoaming = isRoaming;
+        mIsJungler = isJungler;
+        mIsOffLane = isOffLane;
+    }
+
     protected void setAdvantages(List<Double> advantages) {
         mAdvantages = advantages;
         calculateTotalAdvantage();
@@ -132,19 +145,6 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     protected int getId() {
         return mId;
-    }
-
-    private HeroAndAdvantages(int id, String name, boolean isCarry, boolean isSupport,
-                              boolean isMid, boolean isRoaming, boolean isJungler,
-                              boolean isOffLane) {
-        mId = id;
-        mName = name;
-        mIsCarry = isCarry;
-        mIsSupport = isSupport;
-        mIsMid = isMid;
-        mIsRoaming = isRoaming;
-        mIsJungler = isJungler;
-        mIsOffLane = isOffLane;
     }
 
     private void calculateTotalAdvantage() {

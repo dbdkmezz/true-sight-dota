@@ -32,6 +32,7 @@ import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -88,6 +89,9 @@ public class DataManager {
         startXmlLoading();
         startSimilarityTestLoading();
         startSqlLoading();
+
+        List<String> testNames = Arrays.asList("Disruptor", "Pudge", "Puck", "Lion", "Lina");
+        DownloadAdvantages.getAdvantages(testNames);
 
         databaseThread = Schedulers.from(Executors.newSingleThreadExecutor());
     }
