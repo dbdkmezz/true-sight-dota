@@ -212,7 +212,7 @@ public class DataManager {
         }
 
         Downloader.getObservable(heroNames, mMainActivityPresenter.isNetworkAvailable())
-                .timeout(4000, TimeUnit.MILLISECONDS)
+                .timeout(1, TimeUnit.MILLISECONDS)
                 .onErrorResumeNext(sqlQueryObservable(heroNames))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<HeroAndAdvantages>>() {

@@ -70,11 +70,14 @@ public class Downloader {
     }
 
     static private List<String> removeEmptyNames(List<String> heroesInPhoto) {
-        for(int i = 0; i < heroesInPhoto.size(); i++) {
-            if(heroesInPhoto.get(i) == "") {
-                heroesInPhoto.set(i, "none");
+        List<String> newList = new ArrayList<>();
+        for(String s : heroesInPhoto) {
+            if(s.equals("")) {
+                newList.add("none");
+            } else {
+                newList.add(s);
             }
         }
-        return heroesInPhoto;
+        return newList;
     }
 }
