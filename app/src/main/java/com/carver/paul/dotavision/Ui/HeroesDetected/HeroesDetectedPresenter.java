@@ -55,6 +55,10 @@ public class HeroesDetectedPresenter {
     private Subscriber<SimilarityListAndPosition> mHeroRecognitionSubscriberRx;
     private Subscriber<List<HeroInfo>> mNameSetupSubscriberRx;
 
+    // Don't want to send an update up about the change in the heroes shown if we're currently
+    // just wiping them all.
+    private boolean mCurrentlyResetting = false;
+
     public HeroesDetectedPresenter(HeroesDetectedFragment view) {
         mView = view;
     }
@@ -66,12 +70,14 @@ public class HeroesDetectedPresenter {
     }*/
 
     public void reset() {
+        mCurrentlyResetting = true;
         setupSubscriber();
         for (HeroDetectedItemPresenter presenter : mHeroDetectedItemPresenters) {
             presenter.clear();
         }
         mHeroDetectedItemPresenters.clear();
         mView.removeAllViews();
+        mCurrentlyResetting = false;
     }
 
     public void setDataManger(DataManager dataManger) {
@@ -142,6 +148,8 @@ public class HeroesDetectedPresenter {
      *                          not changing as a result of user input).
      */
     private void sendUpdatedHeroList(boolean completelyNewList) {
+        if(mCurrentlyResetting) return;
+
         List<HeroInfo> heroInfoList = new ArrayList<>();
         for (HeroDetectedItemPresenter hero : mHeroDetectedItemPresenters) {
             if(hero.getName() == null) {

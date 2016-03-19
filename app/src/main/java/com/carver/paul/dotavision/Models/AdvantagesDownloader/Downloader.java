@@ -53,25 +53,6 @@ public class Downloader {
             throw new RuntimeException("Wrong number of heroes. Need 5");
         }
 
-/*        if(cachedHeroAndAdvantages != null && cachedHeroNames != null) {
-            String differentName = null;
-            int differentPos;
-            for(int i = 0; i < 5; i++) {
-                if(!cachedHeroNames.get(i).equals(heroesInPhoto.get(i))) {
-                    if(differentName == null) {
-                        differentName = heroesInPhoto.get(i);
-                        differentPos = i;
-                    } else {
-                        differentName = null;
-                        break;
-                    }
-                }
-            }
-            if(differentName != null) {
-                advantages.getSingeAdvantage(differentName);
-            }
-        }*/
-
         heroesInPhoto = removeEmptyNames(heroesInPhoto);
 
         return advantages.getAdvantages(heroesInPhoto.get(0), heroesInPhoto.get(1), heroesInPhoto.get(2),

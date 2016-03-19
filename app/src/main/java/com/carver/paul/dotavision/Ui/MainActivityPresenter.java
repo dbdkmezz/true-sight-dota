@@ -121,6 +121,8 @@ public class MainActivityPresenter {
 */
         mHeroesDetectedPresenter.reset();
         mHeroesDetectedPresenter.showWithoutRecyclers();
+        mCounterPickerPresenter.reset();
+        mAbilityInfoPresenter.reset();
         mView.scrollToTop();
     }
 
