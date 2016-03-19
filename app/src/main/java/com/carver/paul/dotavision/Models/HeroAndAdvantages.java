@@ -20,13 +20,15 @@ package com.carver.paul.dotavision.Models;
 
 import android.database.Cursor;
 
+import com.carver.paul.dotavision.Models.AdvantagesDownloader.AdvantagesDatum;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //TODO-next: add roaming role
 
 public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
-    public static final int NEUTRAL_ADVANTAGE = 999;
+    public static final double NEUTRAL_ADVANTAGE = 999;
 
     private static final String ID_COLUMN = "_id";
     private static final String NAME_COLUMN = "name";
@@ -49,6 +51,18 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     // The list of advantages this hero has over those in the photo
     private List<Double> mAdvantages;
     private double mTotalAdvantage = 0;
+
+    public HeroAndAdvantages(AdvantagesDatum downloadedDatum) {
+        mId = downloadedDatum.getIdNum();
+        mName = correctedName(downloadedDatum.getName());
+        mIsCarry = downloadedDatum.getIsCarry();
+        mIsSupport = downloadedDatum.getIsSupport();
+        mIsMid = downloadedDatum.getIsMid();
+        mIsRoaming = downloadedDatum.getIsRoaming();
+        mIsJungler = downloadedDatum.getIsJungler();
+        mIsOffLane = downloadedDatum.getIsOffLane();
+        setAdvantages(downloadedDatum.getAdvantages());
+    }
 
     @Override
     public int compareTo(HeroAndAdvantages other) {
@@ -107,11 +121,7 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         mId = c.getInt(c.getColumnIndexOrThrow(ID_COLUMN));
         String name = c.getString(c.getColumnIndexOrThrow(NAME_COLUMN));
         // The SQL currently ignores ' characters, so need to put it back in
-        if(name.equals("Natures Prophet")) {
-            mName = "Nature's Prophet";
-        } else {
-            mName = name;
-        }
+        mName = correctedName(name);
         mIsCarry = intToBool(c.getInt(c.getColumnIndexOrThrow(CARRY_COLUMN)));
         mIsSupport = intToBool(c.getInt(c.getColumnIndexOrThrow(SUPPORT_COLUMN)));
         mIsMid = intToBool(c.getInt(c.getColumnIndexOrThrow(MID_COLUMN)));
@@ -135,16 +145,32 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
 
     protected void setAdvantages(List<Double> advantages) {
         mAdvantages = advantages;
+        for(int i = 0; i < mAdvantages.size(); i++) {
+            if(mAdvantages.get(i) == null) {
+                mAdvantages.set(i, NEUTRAL_ADVANTAGE);
+            }
+        }
         calculateTotalAdvantage();
     }
 
-    protected void setAdvantage(double advantage, int position) {
+    protected void setAdvantage(Double advantage, int position) {
+        if(advantage == null) {
+            advantage = NEUTRAL_ADVANTAGE;
+        }
         mAdvantages.set(position, advantage);
         calculateTotalAdvantage();
     }
 
     protected int getId() {
         return mId;
+    }
+
+    static private String correctedName(String name) {
+        if(name.equals("Natures Prophet")) {
+            return "Nature's Prophet";
+        } else {
+            return name;
+        }
     }
 
     private void calculateTotalAdvantage() {

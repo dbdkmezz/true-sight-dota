@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 // Crated with http://www.jsonschema2pojo.org/
-class AdvantagesDatum {
+public class AdvantagesDatum {
 
     @SerializedName("is_carry")
     @Expose

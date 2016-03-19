@@ -91,8 +91,8 @@ public class DataManager {
         startSimilarityTestLoading();
         startSqlLoading();
 
-        List<String> testNames = Arrays.asList("Disruptor", "Pudge", "Puck", "Lion", "Lina");
-        Downloader.getAdvantages(testNames);
+/*        List<String> testNames = Arrays.asList("Disruptor", "Pudge", "Puck", "Lion", "Lina");
+        Downloader.getAdvantages(testNames);*/
 
         databaseThread = Schedulers.from(Executors.newSingleThreadExecutor());
     }
@@ -210,12 +210,14 @@ public class DataManager {
             heroNames.add(heroInfo.name);
         }
 
+        Downloader.getObservable(heroNames)
+/*
         mAdvantagesSqlRx.map(new Func1<SqlLoader, List<HeroAndAdvantages>>() {
             @Override
             public List<HeroAndAdvantages> call(SqlLoader sqlLoader) {
                 return sqlLoader.calculateAdvantages(heroNames);
             }
-        })
+        })*/
                 // Running this on the database thread ensures we don't load the database more than
                 // once at a time. (The database reading code is not threadsafe.)
                 .subscribeOn(databaseThread)
@@ -236,10 +238,6 @@ public class DataManager {
                         mCounterPickerPresenter.showAdvantages(heroAndAdvantages, heroInfoList);
                     }
                 });
-/*
-        List<HeroAndAdvantages> heroes =
-                SqlLoader.calculateAdvantages(mMainActivityPresenter.getContext(), heroNames);
-        mCounterPickerPresenter.showAdvantages(heroes);*/
     }
 
     /**
