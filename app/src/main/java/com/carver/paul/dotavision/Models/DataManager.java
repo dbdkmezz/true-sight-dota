@@ -33,7 +33,6 @@ import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 

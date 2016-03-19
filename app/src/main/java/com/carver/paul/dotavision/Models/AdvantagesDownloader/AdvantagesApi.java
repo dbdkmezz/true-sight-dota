@@ -29,4 +29,7 @@ public interface AdvantagesApi {
                                             @Path("name3") String name3,
                                             @Path("name4") String name4,
                                             @Path("name5") String name5);
+
+    @GET("/advantages/{name}")
+    Observable<AdvantageData> getSingeAdvantage(@Path("name") String name);
 }

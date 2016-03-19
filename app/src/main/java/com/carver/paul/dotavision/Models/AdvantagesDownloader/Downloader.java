@@ -21,6 +21,7 @@ package com.carver.paul.dotavision.Models.AdvantagesDownloader;
 import android.util.Log;
 
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class Downloader {
     private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
     private static final String TAG = "AdvantagesDownloader";
 
+    @RxLogObservable
     static public Observable<List<HeroAndAdvantages>> getObservable(List<String> heroesInPhoto) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(SERVICE_ENDPOINT)
@@ -43,6 +45,8 @@ public class Downloader {
         if(heroesInPhoto.size() != 5) {
             throw new RuntimeException("Wrong number of heroes. Need 5");
         }
+
+        heroesInPhoto = removeEmptyNames(heroesInPhoto);
 
         return advantages.getAdvantages(heroesInPhoto.get(0), heroesInPhoto.get(1), heroesInPhoto.get(2),
                 heroesInPhoto.get(3), heroesInPhoto.get(4))
@@ -56,5 +60,14 @@ public class Downloader {
                         return newList;
                     }
                 });
+    }
+
+    static private List<String> removeEmptyNames(List<String> heroesInPhoto) {
+        for(int i = 0; i < heroesInPhoto.size(); i++) {
+            if(heroesInPhoto.get(i) == "") {
+                heroesInPhoto.set(i, "none");
+            }
+        }
+        return heroesInPhoto;
     }
 }

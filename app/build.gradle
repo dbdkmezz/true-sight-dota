@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.fernandocejas.frodo'
 
 android {
     compileSdkVersion 23
