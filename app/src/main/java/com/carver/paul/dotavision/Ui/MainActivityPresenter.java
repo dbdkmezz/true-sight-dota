@@ -104,6 +104,10 @@ public class MainActivityPresenter {
         mAbilityInfoPresenter.show();
     }
 
+    public boolean isNetworkAvailable() {
+        return mView.isNetworkAvailable();
+    }
+
     protected void takePhotoButton() {
         mView.startCameraActivity();
     }

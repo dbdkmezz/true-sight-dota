@@ -18,7 +18,9 @@
 
 package com.carver.paul.dotavision.Models.AdvantagesDownloader;
 
-import android.util.Log;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
@@ -35,7 +37,12 @@ public class Downloader {
     private static final String TAG = "AdvantagesDownloader";
 
     @RxLogObservable
-    static public Observable<List<HeroAndAdvantages>> getObservable(List<String> heroesInPhoto) {
+    static public Observable<List<HeroAndAdvantages>> getObservable(List<String> heroesInPhoto,
+                                                                    boolean networkAvailable) {
+        if(networkAvailable == false) {
+            return Observable.error(new Throwable("No network available"));
+        }
+
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(SERVICE_ENDPOINT)
                 .build();
@@ -45,6 +52,25 @@ public class Downloader {
         if(heroesInPhoto.size() != 5) {
             throw new RuntimeException("Wrong number of heroes. Need 5");
         }
+
+/*        if(cachedHeroAndAdvantages != null && cachedHeroNames != null) {
+            String differentName = null;
+            int differentPos;
+            for(int i = 0; i < 5; i++) {
+                if(!cachedHeroNames.get(i).equals(heroesInPhoto.get(i))) {
+                    if(differentName == null) {
+                        differentName = heroesInPhoto.get(i);
+                        differentPos = i;
+                    } else {
+                        differentName = null;
+                        break;
+                    }
+                }
+            }
+            if(differentName != null) {
+                advantages.getSingeAdvantage(differentName);
+            }
+        }*/
 
         heroesInPhoto = removeEmptyNames(heroesInPhoto);
 

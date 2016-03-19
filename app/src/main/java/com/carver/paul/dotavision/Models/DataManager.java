@@ -31,10 +31,12 @@ import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.Ui.MainActivityPresenter;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -209,17 +211,9 @@ public class DataManager {
             heroNames.add(heroInfo.name);
         }
 
-        Downloader.getObservable(heroNames)
-/*
-        mAdvantagesSqlRx.map(new Func1<SqlLoader, List<HeroAndAdvantages>>() {
-            @Override
-            public List<HeroAndAdvantages> call(SqlLoader sqlLoader) {
-                return sqlLoader.calculateAdvantages(heroNames);
-            }
-        })*/
-                // Running this on the database thread ensures we don't load the database more than
-                // once at a time. (The database reading code is not threadsafe.)
-                .subscribeOn(databaseThread)
+        Downloader.getObservable(heroNames, mMainActivityPresenter.isNetworkAvailable())
+                .timeout(4000, TimeUnit.MILLISECONDS)
+                .onErrorResumeNext(sqlQueryObservable(heroNames))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<HeroAndAdvantages>>() {
                     @Override
@@ -237,6 +231,18 @@ public class DataManager {
                         mCounterPickerPresenter.showAdvantages(heroAndAdvantages, heroInfoList);
                     }
                 });
+    }
+
+    @RxLogObservable
+    private Observable<List<HeroAndAdvantages>> sqlQueryObservable(final List<String> heroNames) {
+        return mAdvantagesSqlRx.map(new Func1<SqlLoader, List<HeroAndAdvantages>>() {
+            @Override
+            public List<HeroAndAdvantages> call(SqlLoader sqlLoader) {
+                return sqlLoader.calculateAdvantages(heroNames);
+            }})
+                // Running this on the database thread ensures we don't load the database more than
+                // once at a time. (The database reading code is not threadsafe.)
+                .subscribeOn(databaseThread);
     }
 
     /**
