@@ -21,6 +21,7 @@ package com.carver.paul.dotavision.Models;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.util.Pair;
 
 import com.carver.paul.dotavision.ImageRecognition.LoadHeroXml;
 import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
@@ -70,6 +71,8 @@ public class DataManager {
     // We need a separate thread for working with the database to ensure we do not try to read it
     // more than one time at once.
     private Scheduler databaseThread;
+
+    private Pair<List<String>, List<HeroAndAdvantages>> mLastAdvantageData;
 
     /**
      * By calling StartXmlLoading and StartSimilarityTestLoading as soon as DataManager is
@@ -197,6 +200,7 @@ public class DataManager {
         mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
 
         if(completelyNewList) {
+            mLastAdvantageData = null;
             mCounterPickerPresenter.startLoadingAnimation();
         }
         updateCounterPicker(heroInfoList);
@@ -212,7 +216,8 @@ public class DataManager {
          * Attempts to get the advantages data from the network using Downloader. If that fails
          * then loads the advantages data from the SQL database
          */
-        Downloader.getObservable(heroNames, mMainActivityPresenter.isNetworkAvailable())
+        Downloader.getObservable(heroNames, mMainActivityPresenter.isNetworkAvailable(),
+                mLastAdvantageData)
                 .timeout(3500, TimeUnit.MILLISECONDS)
                 .onErrorResumeNext(sqlQueryObservable(heroNames))
                 .observeOn(AndroidSchedulers.mainThread())
@@ -229,6 +234,7 @@ public class DataManager {
 
                     @Override
                     public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
+                        mLastAdvantageData = new Pair<>(heroNames, heroAndAdvantages);
                         mCounterPickerPresenter.showAdvantages(heroAndAdvantages, heroInfoList);
                     }
                 });
