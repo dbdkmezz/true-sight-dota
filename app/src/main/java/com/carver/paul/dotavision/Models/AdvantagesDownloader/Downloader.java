@@ -42,8 +42,20 @@ public class Downloader {
     private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
     private static final String TAG = "AdvantagesDownloader";
     private static final int FULL_QUERY_TIMEOUT = 3500;
-    private static final int SINGlE_QUERY_TIMEOUT = 3500;
+    private static final int SINGlE_QUERY_TIMEOUT = 2000;
 
+    /**
+     * Returns an observable which will get the advantages data for the heroes named in
+     * heroesInPhoto from the net. It will throw and error if it takes too long or if there is no
+     * connection to the net.
+     * This method will do everything it can to just ask the server about one hero, if there is
+     * only one hero or if only one hero has chaned since last time (using the data stored in
+     * lastAdvantageData).
+     * @param heroesInPhoto
+     * @param networkAvailable
+     * @param lastAdvantageData
+     * @return
+     */
 //    @RxLogObservable(RxLogObservable.Scope.NOTHING)
     @RxLogObservable
     static public Observable<List<HeroAndAdvantages>>
@@ -84,7 +96,7 @@ public class Downloader {
         List<String> testList = Arrays.asList("", "", "", "", "");
         int singleHeroPos = findSingleDifference(heroesInPhoto, testList);
         if(singleHeroPos != NO_DIFFERENCES_FOUND && singleHeroPos != MULTIPLE_DIFFERENCES_FOUND) {
-            return getSingleHeroObservable(advantagesApi, singleHeroPos, heroesInPhoto);
+            return getSingleNewHeroObservable(advantagesApi, singleHeroPos, heroesInPhoto);
         }
 
         return getFullObservable(advantagesApi, heroesInPhoto);
@@ -109,7 +121,7 @@ public class Downloader {
         return differencePos;
     }
 
-    static private List<String> prepareNamesForSql(List<String> heroesInPhoto) {
+    static private List<String> prepareNamesForWebQuery(List<String> heroesInPhoto) {
         List<String> newList = new ArrayList<>();
         for (String s : heroesInPhoto) {
             if(s.contains("'")) {
@@ -143,6 +155,8 @@ public class Downloader {
         final List<HeroAndAdvantages> advantagesData =
                 SqlLoader.deepCopyOfHeroes(oldAdvantagesData);
 
+        // The single hero that has changed is blank, we can just set all the advantages to
+        // neutral and return that.
         if(heroesInPhoto.get(differencePos).equals("")) {
             for(HeroAndAdvantages hero : advantagesData) {
                 hero.setAdvantage(HeroAndAdvantages.NEUTRAL_ADVANTAGE, differencePos);
@@ -150,16 +164,16 @@ public class Downloader {
             return Observable.just(advantagesData);
         }
 
-        heroesInPhoto = prepareNamesForSql(heroesInPhoto);
+        heroesInPhoto = prepareNamesForWebQuery(heroesInPhoto);
 
         return advantagesApi.getSingeAdvantage(heroesInPhoto.get(differencePos))
                 .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
                     @Override
                     public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
                         for(HeroAndAdvantages hero : advantagesData) {
-                            for(AdvantagesDatum newHero : newAdvantageData.getData()) {
-                                if(hero.getName().equals(newHero.getName())) {
-                                    hero.setAdvantage(newHero.getAdvantages().get(0),
+                            for(AdvantagesDatum newDatum : newAdvantageData.getData()) {
+                                if(hero.getName().equals(newDatum.getName())) {
+                                    hero.setAdvantage(newDatum.getAdvantages().get(0),
                                             differencePos);
                                     break;
                                 }
@@ -182,7 +196,7 @@ public class Downloader {
      * @param heroesInPhoto
      * @return
      */
-    static private Observable<List<HeroAndAdvantages>> getSingleHeroObservable(
+    static private Observable<List<HeroAndAdvantages>> getSingleNewHeroObservable(
             AdvantagesApi advantagesApi, final int singleHeroPos, List<String> heroesInPhoto) {
 
         return advantagesApi.getSingeAdvantage(heroesInPhoto.get(singleHeroPos))
@@ -218,7 +232,7 @@ public class Downloader {
      */
     static private Observable<List<HeroAndAdvantages>> getFullObservable(
             AdvantagesApi advantagesApi, List<String> heroesInPhoto) {
-        heroesInPhoto = prepareNamesForSql(heroesInPhoto);
+        heroesInPhoto = prepareNamesForWebQuery(heroesInPhoto);
 
         return advantagesApi.getAdvantages(heroesInPhoto.get(0), heroesInPhoto.get(1),
                 heroesInPhoto.get(2), heroesInPhoto.get(3), heroesInPhoto.get(4))
