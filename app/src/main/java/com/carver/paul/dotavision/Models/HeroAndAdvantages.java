@@ -115,6 +115,14 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
         return mIsOffLane;
     }
 
+    public void setAdvantage(Double advantage, int position) {
+        if(advantage == null) {
+            advantage = NEUTRAL_ADVANTAGE;
+        }
+        mAdvantages.set(position, advantage);
+        calculateTotalAdvantage();
+    }
+
     protected HeroAndAdvantages(Cursor c) {
         mId = c.getInt(c.getColumnIndexOrThrow(ID_COLUMN));
         String name = c.getString(c.getColumnIndexOrThrow(NAME_COLUMN));
@@ -148,14 +156,6 @@ public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
                 mAdvantages.set(i, NEUTRAL_ADVANTAGE);
             }
         }
-        calculateTotalAdvantage();
-    }
-
-    protected void setAdvantage(Double advantage, int position) {
-        if(advantage == null) {
-            advantage = NEUTRAL_ADVANTAGE;
-        }
-        mAdvantages.set(position, advantage);
         calculateTotalAdvantage();
     }
 

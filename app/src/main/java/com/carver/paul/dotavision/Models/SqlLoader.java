@@ -33,6 +33,14 @@ public class SqlLoader {
     private List<HeroAndAdvantages> mHeroes;
     private List<String> mHeroesInPhoto;
 
+    public static List<HeroAndAdvantages> deepCopyOfHeroes(List<HeroAndAdvantages> heroes) {
+        List<HeroAndAdvantages> deepCopy = new ArrayList<>();
+        for(HeroAndAdvantages hero : heroes) {
+            deepCopy.add(hero.clone());
+        }
+        return deepCopy;
+    }
+
     protected SqlLoader(Context context) {
         mContext = context;
         DataBaseHelper dbHelper = new DataBaseHelper(mContext);
@@ -128,14 +136,6 @@ public class SqlLoader {
             c.close();
             return advantage;
         }
-    }
-
-    private static List<HeroAndAdvantages> deepCopyOfHeroes(List<HeroAndAdvantages> heroes) {
-        List<HeroAndAdvantages> deepCopy = new ArrayList<>();
-        for(HeroAndAdvantages hero : heroes) {
-            deepCopy.add(hero.clone());
-        }
-        return deepCopy;
     }
 
     // This method seems ~ 5% quicker, but the code is less nice, so might as well use the method

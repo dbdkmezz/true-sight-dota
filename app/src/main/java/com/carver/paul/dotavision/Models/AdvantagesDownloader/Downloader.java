@@ -18,9 +18,12 @@
 
 package com.carver.paul.dotavision.Models.AdvantagesDownloader;
 
+import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
+import com.carver.paul.dotavision.Models.SqlLoader;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;
@@ -38,11 +41,12 @@ public class Downloader {
     private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
     private static final String TAG = "AdvantagesDownloader";
 
-    @RxLogObservable(RxLogObservable.Scope.NOTHING)
+//    @RxLogObservable(RxLogObservable.Scope.NOTHING)
+    @RxLogObservable
     static public Observable<List<HeroAndAdvantages>>
     getObservable(List<String> heroesInPhoto,
                   boolean networkAvailable,
-                  Pair<List<String>, List<HeroAndAdvantages>> lastAdvantageData) {
+                  final Pair<List<String>, List<HeroAndAdvantages>> lastAdvantageData) {
         if (networkAvailable == false) {
             // There's no network connection so we might as well give up now
             return Observable.error(new Throwable("No network available"));
@@ -59,16 +63,38 @@ public class Downloader {
         }
 
         if(lastAdvantageData != null) {
-            int differencePos = findSingleDifference(heroesInPhoto, lastAdvantageData.first);
+            final int differencePos = findSingleDifference(heroesInPhoto, lastAdvantageData.first);
             if(differencePos == NO_DIFFERENCES_FOUND) {
+                Log.d(TAG, "No differences found.");
                 return Observable.just(lastAdvantageData.second);
             }
             if(differencePos != MULTIPLE_DIFFERENCES_FOUND) {
+                heroesInPhoto = prepareNamesForSql(heroesInPhoto);
 
+                final List<HeroAndAdvantages> advantagesData =
+                        SqlLoader.deepCopyOfHeroes(lastAdvantageData.second);
+                return advantages.getSingeAdvantage(heroesInPhoto.get(differencePos))
+                        .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
+                            @Override
+                            public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
+                                for(HeroAndAdvantages hero : advantagesData) {
+                                    for(AdvantagesDatum newHero : newAdvantageData.getData()) {
+                                        if(hero.getName().equals(newHero.getName())) {
+                                            hero.setAdvantage(newHero.getAdvantages().get(0),
+                                                    differencePos);
+                                            break;
+                                        }
+                                    }
+                                }
+                                Log.d(TAG, "Found data for just one difference.");
+                                Collections.sort(advantagesData);
+                                return advantagesData;
+                            }
+                        });
             }
         }
 
-        heroesInPhoto = removeEmptyNames(heroesInPhoto);
+        heroesInPhoto = prepareNamesForSql(heroesInPhoto);
 
         return advantages.getAdvantages(heroesInPhoto.get(0), heroesInPhoto.get(1),
                 heroesInPhoto.get(2), heroesInPhoto.get(3), heroesInPhoto.get(4))
@@ -83,18 +109,6 @@ public class Downloader {
                         return newList;
                     }
                 });
-    }
-
-    static private List<String> removeEmptyNames(List<String> heroesInPhoto) {
-        List<String> newList = new ArrayList<>();
-        for (String s : heroesInPhoto) {
-            if (s.equals("")) {
-                newList.add("none");
-            } else {
-                newList.add(s);
-            }
-        }
-        return newList;
     }
 
     static public int findSingleDifference(List<String> list1, List<String> list2) {
@@ -114,5 +128,21 @@ public class Downloader {
             }
         }
         return differencePos;
+    }
+
+    static private List<String> prepareNamesForSql(List<String> heroesInPhoto) {
+        List<String> newList = new ArrayList<>();
+        for (String s : heroesInPhoto) {
+            if(s.contains("'")) {
+                s = s.replace("'", "");
+            }
+
+            if (s.equals("")) {
+                newList.add("none");
+            } else {
+                newList.add(s);
+            }
+        }
+        return newList;
     }
 }
