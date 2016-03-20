@@ -1,17 +1,17 @@
 /**
  * True Sight for Dota 2
  * Copyright (C) 2016 Paul Broadbent
- *
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/
  */
@@ -37,7 +37,6 @@ import com.fernandocejas.frodo.annotation.RxLogObservable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -67,6 +66,7 @@ public class DataManager {
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
     private AsyncSubject<SqlLoader> mAdvantagesSqlRx;
+    private Subscriber<List<HeroAndAdvantages>> mAdvantagesSubscriber;
 
     // We need a separate thread for working with the database to ensure we do not try to read it
     // more than one time at once.
@@ -184,7 +184,7 @@ public class DataManager {
     }
 
     public List<HeroInfo> getHeroInfoValue() {
-        if(mXmlInfoRx.getValue() == null) {
+        if (mXmlInfoRx.getValue() == null) {
             throw new RuntimeException("Attempting to call mXmlInfoRx.getValue() when not ready" +
                     "to return values yet.");
         }
@@ -199,7 +199,7 @@ public class DataManager {
         mMainActivityPresenter.updateHeroList();
         mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
 
-        if(completelyNewList) {
+        if (completelyNewList) {
             mLastAdvantageData = null;
             mCounterPickerPresenter.startLoadingAnimation();
         }
@@ -208,9 +208,11 @@ public class DataManager {
 
     private void updateCounterPicker(final List<HeroInfo> heroInfoList) {
         final List<String> heroNames = new ArrayList<>();
-        for(HeroInfo heroInfo : heroInfoList) {
+        for (HeroInfo heroInfo : heroInfoList) {
             heroNames.add(heroInfo.name);
         }
+
+        setupAdvantagesSubscriber(heroNames, heroInfoList);
 
         /**
          * Attempts to get the advantages data from the network using Downloader. If that fails
@@ -218,26 +220,33 @@ public class DataManager {
          */
         Downloader.getObservable(heroNames, mMainActivityPresenter.isNetworkAvailable(),
                 mLastAdvantageData)
-                .timeout(3500, TimeUnit.MILLISECONDS)
                 .onErrorResumeNext(sqlQueryObservable(heroNames))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<HeroAndAdvantages>>() {
-                    @Override
-                    public void onCompleted() {
+                .subscribe(mAdvantagesSubscriber);
+    }
 
-                    }
+    private void setupAdvantagesSubscriber(final List<String> heroNames,
+                                           final List<HeroInfo> heroInfoList) {
+        if (mAdvantagesSubscriber != null) {
+            mAdvantagesSubscriber.unsubscribe();
+        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "mAdvantagesSqlRx. Unhandled error: " + e.toString());
-                    }
+        mAdvantagesSubscriber = new Subscriber<List<HeroAndAdvantages>>() {
+            @Override
+            public void onCompleted() {
+            }
 
-                    @Override
-                    public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
-                        mLastAdvantageData = new Pair<>(heroNames, heroAndAdvantages);
-                        mCounterPickerPresenter.showAdvantages(heroAndAdvantages, heroInfoList);
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "mAdvantagesSqlRx. Unhandled error: " + e.toString());
+            }
+
+            @Override
+            public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
+                mLastAdvantageData = new Pair<>(heroNames, heroAndAdvantages);
+                mCounterPickerPresenter.showAdvantages(heroAndAdvantages, heroInfoList);
+            }
+        };
     }
 
     @RxLogObservable(RxLogObservable.Scope.NOTHING)
@@ -246,7 +255,8 @@ public class DataManager {
             @Override
             public List<HeroAndAdvantages> call(SqlLoader sqlLoader) {
                 return sqlLoader.calculateAdvantages(heroNames);
-            }})
+            }
+        })
                 // Running this on the database thread ensures we don't load the database more than
                 // once at a time. (The database reading code is not threadsafe.)
                 .subscribeOn(databaseThread);

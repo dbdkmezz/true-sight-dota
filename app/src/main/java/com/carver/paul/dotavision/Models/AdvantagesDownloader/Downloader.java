@@ -18,7 +18,6 @@
 
 package com.carver.paul.dotavision.Models.AdvantagesDownloader;
 
-import android.content.Context;
 import android.util.Log;
 import android.util.Pair;
 
@@ -27,8 +26,10 @@ import com.carver.paul.dotavision.Models.SqlLoader;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
 import rx.Observable;
@@ -40,6 +41,8 @@ public class Downloader {
 
     private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
     private static final String TAG = "AdvantagesDownloader";
+    private static final int FULL_QUERY_TIMEOUT = 3500;
+    private static final int SINGlE_QUERY_TIMEOUT = 3500;
 
 //    @RxLogObservable(RxLogObservable.Scope.NOTHING)
     @RxLogObservable
@@ -56,59 +59,35 @@ public class Downloader {
                 .setEndpoint(SERVICE_ENDPOINT)
                 .build();
 
-        AdvantagesApi advantages = restAdapter.create(AdvantagesApi.class);
+        AdvantagesApi advantagesApi = restAdapter.create(AdvantagesApi.class);
 
         if (heroesInPhoto.size() != 5) {
             throw new RuntimeException("Wrong number of heroes. Need 5");
         }
 
-        if(lastAdvantageData != null) {
+        if (lastAdvantageData != null) {
             final int differencePos = findSingleDifference(heroesInPhoto, lastAdvantageData.first);
-            if(differencePos == NO_DIFFERENCES_FOUND) {
+            if (differencePos == NO_DIFFERENCES_FOUND) {
+                // If the heroes are the same as those we processed last time then we can just send
+                // back the same results as last time
                 Log.d(TAG, "No differences found.");
                 return Observable.just(lastAdvantageData.second);
             }
-            if(differencePos != MULTIPLE_DIFFERENCES_FOUND) {
-                heroesInPhoto = prepareNamesForSql(heroesInPhoto);
-
-                final List<HeroAndAdvantages> advantagesData =
-                        SqlLoader.deepCopyOfHeroes(lastAdvantageData.second);
-                return advantages.getSingeAdvantage(heroesInPhoto.get(differencePos))
-                        .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
-                            @Override
-                            public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
-                                for(HeroAndAdvantages hero : advantagesData) {
-                                    for(AdvantagesDatum newHero : newAdvantageData.getData()) {
-                                        if(hero.getName().equals(newHero.getName())) {
-                                            hero.setAdvantage(newHero.getAdvantages().get(0),
-                                                    differencePos);
-                                            break;
-                                        }
-                                    }
-                                }
-                                Log.d(TAG, "Found data for just one difference.");
-                                Collections.sort(advantagesData);
-                                return advantagesData;
-                            }
-                        });
+            if (differencePos != MULTIPLE_DIFFERENCES_FOUND) {
+                // If there is only one hero which has changed then we only need to ask the server
+                // to give us data on that hero (this makes it easier, and quicker, for the server)
+                return getSingleHeroChangedObservable(lastAdvantageData.second, heroesInPhoto,
+                        differencePos, advantagesApi);
             }
         }
 
-        heroesInPhoto = prepareNamesForSql(heroesInPhoto);
+        List<String> testList = Arrays.asList("", "", "", "", "");
+        int singleHeroPos = findSingleDifference(heroesInPhoto, testList);
+        if(singleHeroPos != NO_DIFFERENCES_FOUND && singleHeroPos != MULTIPLE_DIFFERENCES_FOUND) {
+            return getSingleHeroObservable(advantagesApi, singleHeroPos, heroesInPhoto);
+        }
 
-        return advantages.getAdvantages(heroesInPhoto.get(0), heroesInPhoto.get(1),
-                heroesInPhoto.get(2), heroesInPhoto.get(3), heroesInPhoto.get(4))
-                .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
-                    @Override
-                    public List<HeroAndAdvantages> call(AdvantageData advantageData) {
-                        List<HeroAndAdvantages> newList = new ArrayList<>();
-                        for (AdvantagesDatum datum : advantageData.getData()) {
-                            newList.add(new HeroAndAdvantages(datum));
-                        }
-                        Collections.sort(newList);
-                        return newList;
-                    }
-                });
+        return getFullObservable(advantagesApi, heroesInPhoto);
     }
 
     static public int findSingleDifference(List<String> list1, List<String> list2) {
@@ -144,5 +123,89 @@ public class Downloader {
             }
         }
         return newList;
+    }
+
+    static private Observable<List<HeroAndAdvantages>> getSingleHeroChangedObservable(
+            final List<HeroAndAdvantages> oldAdvantagesData, List<String> heroesInPhoto,
+            final int differencePos, AdvantagesApi advantagesApi) {
+        final List<HeroAndAdvantages> advantagesData =
+                SqlLoader.deepCopyOfHeroes(oldAdvantagesData);
+
+        if(heroesInPhoto.get(differencePos).equals("")) {
+            for(HeroAndAdvantages hero : advantagesData) {
+                hero.setAdvantage(HeroAndAdvantages.NEUTRAL_ADVANTAGE, differencePos);
+            }
+            return Observable.just(advantagesData);
+        }
+
+        heroesInPhoto = prepareNamesForSql(heroesInPhoto);
+
+        return advantagesApi.getSingeAdvantage(heroesInPhoto.get(differencePos))
+                .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
+                    @Override
+                    public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
+                        for(HeroAndAdvantages hero : advantagesData) {
+                            for(AdvantagesDatum newHero : newAdvantageData.getData()) {
+                                if(hero.getName().equals(newHero.getName())) {
+                                    hero.setAdvantage(newHero.getAdvantages().get(0),
+                                            differencePos);
+                                    break;
+                                }
+                            }
+                        }
+                        Log.d(TAG, "Downloaded data for just one difference.");
+                        Collections.sort(advantagesData);
+                        return advantagesData;
+                    }
+                })
+                .timeout(SINGlE_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
+    static private Observable<List<HeroAndAdvantages>> getSingleHeroObservable(
+            AdvantagesApi advantagesApi, final int singleHeroPos, List<String> heroesInPhoto) {
+
+        return advantagesApi.getSingeAdvantage(heroesInPhoto.get(singleHeroPos))
+                .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
+                    @Override
+                    public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
+                        List<HeroAndAdvantages> newList = new ArrayList<>();
+                        for(AdvantagesDatum hero : newAdvantageData.getData()) {
+                            List<Double> fullAdvantages = Arrays.asList(
+                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
+                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
+                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
+                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
+                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE);
+                            fullAdvantages.set(singleHeroPos, hero.getAdvantages().get(0));
+                            hero.setAdvantages(fullAdvantages);
+                            newList.add(new HeroAndAdvantages(hero));
+                            }
+                        Log.d(TAG, "Downloaded data for a new single hero.");
+                        Collections.sort(newList);
+                        return newList;
+                    }
+                })
+                .timeout(SINGlE_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
+    static private Observable<List<HeroAndAdvantages>> getFullObservable(
+            AdvantagesApi advantagesApi, List<String> heroesInPhoto) {
+        heroesInPhoto = prepareNamesForSql(heroesInPhoto);
+
+        return advantagesApi.getAdvantages(heroesInPhoto.get(0), heroesInPhoto.get(1),
+                heroesInPhoto.get(2), heroesInPhoto.get(3), heroesInPhoto.get(4))
+                .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
+                    @Override
+                    public List<HeroAndAdvantages> call(AdvantageData advantageData) {
+                        List<HeroAndAdvantages> newList = new ArrayList<>();
+                        for (AdvantagesDatum datum : advantageData.getData()) {
+                            newList.add(new HeroAndAdvantages(datum));
+                        }
+                        Log.d(TAG, "Downloaded data for five whole heroes.");
+                        Collections.sort(newList);
+                        return newList;
+                    }
+                })
+                .timeout(FULL_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 }
