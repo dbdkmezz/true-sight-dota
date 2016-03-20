@@ -26,6 +26,7 @@ import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit.RestAdapter;
@@ -36,7 +37,7 @@ public class Downloader {
     private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
     private static final String TAG = "AdvantagesDownloader";
 
-    @RxLogObservable
+    @RxLogObservable(RxLogObservable.Scope.NOTHING)
     static public Observable<List<HeroAndAdvantages>> getObservable(List<String> heroesInPhoto,
                                                                     boolean networkAvailable) {
         if(networkAvailable == false) {
@@ -64,6 +65,7 @@ public class Downloader {
                         for(AdvantagesDatum datum : advantageData.getData()) {
                             newList.add(new HeroAndAdvantages(datum));
                         }
+                        Collections.sort(newList);
                         return newList;
                     }
                 });

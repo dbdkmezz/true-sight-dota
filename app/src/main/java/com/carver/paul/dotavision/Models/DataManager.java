@@ -233,7 +233,7 @@ public class DataManager {
                 });
     }
 
-    @RxLogObservable
+    @RxLogObservable(RxLogObservable.Scope.NOTHING)
     private Observable<List<HeroAndAdvantages>> sqlQueryObservable(final List<String> heroNames) {
         return mAdvantagesSqlRx.map(new Func1<SqlLoader, List<HeroAndAdvantages>>() {
             @Override
