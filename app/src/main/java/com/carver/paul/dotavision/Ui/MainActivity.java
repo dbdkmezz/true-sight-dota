@@ -20,8 +20,10 @@
 
 package com.carver.paul.dotavision.Ui;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -29,6 +31,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -104,6 +108,7 @@ public class MainActivity extends AppCompatActivity
     public static final String PHOTO_FILE_NAME = "photo.jpg";
     private static final String TAG = "MainActivity";
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
+    protected static final int MY_PERMISSIONS_REQUEST_CAMERA = 101;
     private static final List<Integer> TAB_TITLE_RES_IDS = Arrays.asList(R.string.counter_picker,
             R.string.hero_abilities);
 
@@ -156,6 +161,23 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startCameraActivity();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+            }
         }
     }
 
@@ -225,22 +247,8 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public static String getImagesLocation() {
-        return new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "DOTA Vision").getPath();
-    }
-
     public void clearButton(View view) {
         mPresenter.clearButton();
-    }
-
-    public static void EnsureMediaDirectoryExists() {
-        File mediaStorageDir = new File(getImagesLocation());
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.e(TAG, "failed to create media directory.");
-            }
-        }
     }
 
     protected boolean isNetworkAvailable() {
@@ -255,13 +263,13 @@ public class MainActivity extends AppCompatActivity
         view.setVisibility(View.GONE);
     }
 
-    // TODO-beauty: Change permissions so I use the Android 6 way, then can increase target API
     // TODO-next: Make takePhoto save in the right media location, I think media store wasn't right
     protected void startCameraActivity() {
-        EnsureMediaDirectoryExists();
-        Intent intent = new Intent(this, CameraActivity.class);
-        //TODO-beauty: make it possible to specify image save location by sending camera activity an intent
-        startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
+        if(checkForCameraPermission()) {
+            Intent intent = new Intent(this, CameraActivity.class);
+            //TODO-beauty: make it possible to specify image save location by sending camera activity an intent
+            startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
+        }
     }
 
     protected void showClearFab() {
@@ -335,6 +343,17 @@ public class MainActivity extends AppCompatActivity
     protected void scrollToTop() {
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view);
         scrollView.fullScroll(ScrollView.FOCUS_UP);
+    }
+
+    private boolean checkForCameraPermission() {
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

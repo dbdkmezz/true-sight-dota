@@ -177,7 +177,6 @@ public class CameraActivity extends Activity {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
 
-            MainActivity.EnsureMediaDirectoryExists();
             File pictureFile = getOutputMediaFile();
             if (pictureFile == null) {
                 Log.e(TAG, "Error creating media file, check storage permissions: ");
@@ -197,8 +196,8 @@ public class CameraActivity extends Activity {
         }
     };
 
-    private static File getOutputMediaFile() {
-        return new File(MainActivity.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
+    private File getOutputMediaFile() {
+        return new File(getApplicationContext().getFilesDir(), MainActivity.PHOTO_FILE_NAME);
     }
 
     private void showPhotoConfirmButtons() {

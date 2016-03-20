@@ -41,7 +41,7 @@ public class DebugWholeProcessActivity extends AppCompatActivity {
     }
 
     public void testWithoutNewPhoto(View view) {
-        File mediaFile = new File(MainActivity.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
+        File mediaFile = new File(getApplicationContext().getFilesDir(), MainActivity.PHOTO_FILE_NAME);
         runTest(mediaFile.getPath());
     }
 

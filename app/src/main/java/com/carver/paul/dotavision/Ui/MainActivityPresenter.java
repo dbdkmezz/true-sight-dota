@@ -116,9 +116,7 @@ public class MainActivityPresenter {
         heroInfoShown = false;
         mView.hidePhoto();
         mView.hideClearFab();
-/*
-        mHeroesDetectedPresenter.clearAll();
-*/
+
         mHeroesDetectedPresenter.reset();
         mHeroesDetectedPresenter.showWithoutRecyclers();
         mCounterPickerPresenter.reset();
@@ -130,7 +128,7 @@ public class MainActivityPresenter {
      * Runs the image recognition code on the last photo which was taken by the camera
      */
     protected void useLastPhoto() {
-        File mediaFile = new File(mView.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
+        File mediaFile = new File(getContext().getFilesDir(), MainActivity.PHOTO_FILE_NAME);
         if (mediaFile.exists()) {
             doImageRecognitionOnPhoto();
         } else { // If there isn't a previous photo, then just do the demo
@@ -147,10 +145,10 @@ public class MainActivityPresenter {
     }
 
     protected void doImageRecognitionOnPhoto() {
-        File mediaFile = new File(mView.getImagesLocation(), MainActivity.PHOTO_FILE_NAME);
+        File mediaFile = new File(getContext().getFilesDir(), MainActivity.PHOTO_FILE_NAME);
         if (!mediaFile.exists()) {
-            throw new RuntimeException("Trying to recognise photo, but I can't find file at "
-                    + mView.getImagesLocation() + MainActivity.PHOTO_FILE_NAME);
+            throw new RuntimeException("Trying to recognise photo, but I can't the file "
+                    + MainActivity.PHOTO_FILE_NAME);
         }
 
         Bitmap bitmap = CreateCroppedBitmap(mediaFile.getPath());
