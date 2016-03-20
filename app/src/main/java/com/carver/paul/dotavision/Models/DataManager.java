@@ -92,9 +92,6 @@ public class DataManager {
         startSimilarityTestLoading();
         startSqlLoading();
 
-/*        List<String> testNames = Arrays.asList("Disruptor", "Pudge", "Puck", "Lion", "Lina");
-        Downloader.getAdvantages(testNames);*/
-
         databaseThread = Schedulers.from(Executors.newSingleThreadExecutor());
     }
 
@@ -211,6 +208,10 @@ public class DataManager {
             heroNames.add(heroInfo.name);
         }
 
+        /**
+         * Attempts to get the advantages data from the network using Downloader. If that fails
+         * then loads the advantages data from the SQL database
+         */
         Downloader.getObservable(heroNames, mMainActivityPresenter.isNetworkAvailable())
                 .timeout(3500, TimeUnit.MILLISECONDS)
                 .onErrorResumeNext(sqlQueryObservable(heroNames))

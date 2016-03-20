@@ -26,10 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Func1;
-import rx.subjects.AsyncSubject;
-
 public class SqlLoader {
     private static final String TAG = "SqlLoader";
 

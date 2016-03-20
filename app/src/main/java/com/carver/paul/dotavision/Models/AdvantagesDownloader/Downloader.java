@@ -18,10 +18,6 @@
 
 package com.carver.paul.dotavision.Models.AdvantagesDownloader;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 
@@ -41,6 +37,7 @@ public class Downloader {
     static public Observable<List<HeroAndAdvantages>> getObservable(List<String> heroesInPhoto,
                                                                     boolean networkAvailable) {
         if(networkAvailable == false) {
+            // There's no network connection so we might as well give up now
             return Observable.error(new Throwable("No network available"));
         }
 
