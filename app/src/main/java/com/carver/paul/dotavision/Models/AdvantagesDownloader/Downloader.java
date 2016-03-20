@@ -172,6 +172,9 @@ public class Downloader {
                     public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
                         for(HeroAndAdvantages hero : advantagesData) {
                             for(AdvantagesDatum newDatum : newAdvantageData.getData()) {
+                                if(newDatum.getName().equals("Natures Prophet")) {
+                                    newDatum.setName("Nature's Prophet");
+                                }
                                 if(hero.getName().equals(newDatum.getName())) {
                                     hero.setAdvantage(newDatum.getAdvantages().get(0),
                                             differencePos);
