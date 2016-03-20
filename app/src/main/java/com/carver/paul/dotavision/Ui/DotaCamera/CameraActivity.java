@@ -141,8 +141,12 @@ public class CameraActivity extends Activity {
                         if (BuildConfig.DEBUG) {
                             Log.d(TAG, "Taking picture with successful autofocus.");
                         }
-                        CameraActivity.this.mCamera.takePicture(null, null, mPicture);
-                        CameraActivity.this.mCamera.cancelAutoFocus();
+                        try {
+                            CameraActivity.this.mCamera.takePicture(null, null, mPicture);
+                            CameraActivity.this.mCamera.cancelAutoFocus();
+                        } catch (RuntimeException re) {
+                            Log.w(TAG, "Unexpected exception when taking photo", re);
+                        }
                     }
                 }
             };
@@ -176,9 +180,8 @@ public class CameraActivity extends Activity {
 
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-
             File pictureFile = getOutputMediaFile();
-            if (pictureFile == null) {
+            if(pictureFile == null) {
                 Log.e(TAG, "Error creating media file, check storage permissions: ");
                 return;
             }
@@ -326,7 +329,7 @@ public class CameraActivity extends Activity {
         private Camera.Size findSmallestGoodCameraSize(List<Camera.Size> pictureSizes,
                                                        List<Camera.Size> previewSizes) {
 
-            if(pictureSizes.isEmpty() || previewSizes.isEmpty()) {
+            if (pictureSizes.isEmpty() || previewSizes.isEmpty()) {
                 Log.e(TAG, "Can't set a camera size because there are none supported!");
                 return null;
             }
@@ -476,6 +479,9 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
 
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the mCamera where to draw the preview.
+        if (mCamera == null) {
+            return;
+        }
         try {
             mCamera.setPreviewDisplay(holder);
 
