@@ -32,10 +32,11 @@ import rx.Observable;
 import rx.functions.Func1;
 
 public class Downloader {
-    private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
-    private static final String TAG = "AdvantagesDownloader";
     public static final int NO_DIFFERENCES_FOUND = 100;
     public static final int MULTIPLE_DIFFERENCES_FOUND = 101;
+
+    private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
+    private static final String TAG = "AdvantagesDownloader";
 
     @RxLogObservable(RxLogObservable.Scope.NOTHING)
     static public Observable<List<HeroAndAdvantages>>

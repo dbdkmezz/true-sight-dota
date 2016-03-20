@@ -4,15 +4,19 @@ import com.carver.paul.dotavision.Models.AdvantagesDownloader.Downloader;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
 @RunWith(JUnit4.class)
 public class DownloaderTest {
+
     @Test
     public void identical(){
         List<String> list1 = Arrays.asList("a", "b", "c", "dog", "e");
