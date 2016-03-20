@@ -125,6 +125,18 @@ public class Downloader {
         return newList;
     }
 
+    /**
+     * If just one of the five heroes in the list is different from last time then we don't want to
+     * make the server get advantages data on all of them. This method returns an observable that
+     * just queries the server for advantages data on the new hero (the one at differencePos) and
+     * then updates the earlier advantages info with that new hero.
+     *
+     * @param oldAdvantagesData
+     * @param heroesInPhoto
+     * @param differencePos
+     * @param advantagesApi
+     * @return
+     */
     static private Observable<List<HeroAndAdvantages>> getSingleHeroChangedObservable(
             final List<HeroAndAdvantages> oldAdvantagesData, List<String> heroesInPhoto,
             final int differencePos, AdvantagesApi advantagesApi) {
@@ -161,6 +173,15 @@ public class Downloader {
                 .timeout(SINGlE_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * If we only have one hero in the list of heroes then we don't need to ask the server to get
+     * full advantages data, we can just ask it to get advantages data for the one hero. This
+     * returns an observable which does that.
+     * @param advantagesApi
+     * @param singleHeroPos
+     * @param heroesInPhoto
+     * @return
+     */
     static private Observable<List<HeroAndAdvantages>> getSingleHeroObservable(
             AdvantagesApi advantagesApi, final int singleHeroPos, List<String> heroesInPhoto) {
 
@@ -188,6 +209,13 @@ public class Downloader {
                 .timeout(SINGlE_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * Returns an observable which queries the server to find advantages data on the five heroes
+     * listed in heroesInPhoto.
+     * @param advantagesApi
+     * @param heroesInPhoto
+     * @return
+     */
     static private Observable<List<HeroAndAdvantages>> getFullObservable(
             AdvantagesApi advantagesApi, List<String> heroesInPhoto) {
         heroesInPhoto = prepareNamesForSql(heroesInPhoto);
