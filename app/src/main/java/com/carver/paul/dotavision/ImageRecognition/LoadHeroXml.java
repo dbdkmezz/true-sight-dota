@@ -31,11 +31,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.List;
 
-
-//TODO-someday: Decide if I just want to load the XML for the heroes I've taken the photo of.
-// That may be faster.
-
-//TODO-someday: Look into using a database (sqlite?) for hero info instead of an XML file
+//TODO-someday: Consider switching to sqlite database for hero info instead of an XML file
 
 public class LoadHeroXml {
 

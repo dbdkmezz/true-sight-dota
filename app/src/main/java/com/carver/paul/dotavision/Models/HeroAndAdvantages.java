@@ -25,8 +25,6 @@ import com.carver.paul.dotavision.Models.AdvantagesDownloader.AdvantagesDatum;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO-next: add roaming role
-
 public class HeroAndAdvantages implements Comparable<HeroAndAdvantages> {
     public static final double NEUTRAL_ADVANTAGE = 999;
 

@@ -72,8 +72,6 @@ import java.util.List;
 
 //TODO-next: test much more for crashes, there is something wrong somewhere. The camera threading??
 
-//TODO-next: reduce package size. Smaller images? Crop test image
-
 //TODO-beauty: support rotating the screen!
 
 //TODO-someday: add tab view so you can slide to change hero rather them all being piled up in one place
@@ -263,11 +261,9 @@ public class MainActivity extends AppCompatActivity
         view.setVisibility(View.GONE);
     }
 
-    // TODO-next: Make takePhoto save in the right media location, I think media store wasn't right
     protected void startCameraActivity() {
         if(checkForCameraPermission()) {
             Intent intent = new Intent(this, CameraActivity.class);
-            //TODO-beauty: make it possible to specify image save location by sending camera activity an intent
             startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
         }
     }
