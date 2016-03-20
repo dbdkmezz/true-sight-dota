@@ -109,6 +109,11 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
     }
 
     protected void hide() {
+        if(mMainLinearLayout == null) {
+            Log.e(TAG, "Attempting to hide the layout , but mMainLinearLayout is null. I don't " +
+                    "know why this happens, but it does.");
+            return;
+        }
         mMainLinearLayout.setVisibility(View.GONE);
     }
 
