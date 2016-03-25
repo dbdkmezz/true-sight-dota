@@ -170,21 +170,8 @@ public class Downloader {
                 .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
                     @Override
                     public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
-                        for(HeroAndAdvantages hero : advantagesData) {
-                            for(AdvantagesDatum newDatum : newAdvantageData.getData()) {
-                                if(newDatum.getName().equals("Natures Prophet")) {
-                                    newDatum.setName("Nature's Prophet");
-                                }
-                                if(hero.getName().equals(newDatum.getName())) {
-                                    hero.setAdvantage(newDatum.getAdvantages().get(0),
-                                            differencePos);
-                                    break;
-                                }
-                            }
-                        }
-                        Log.d(TAG, "Downloaded data for just one difference.");
-                        Collections.sort(advantagesData);
-                        return advantagesData;
+                        return AdvantageData.mergeIntoAdvantagesList(advantagesData,
+                                newAdvantageData, differencePos);
                     }
                 })
                 .timeout(SINGlE_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
@@ -206,21 +193,8 @@ public class Downloader {
                 .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
                     @Override
                     public List<HeroAndAdvantages> call(AdvantageData newAdvantageData) {
-                        List<HeroAndAdvantages> newList = new ArrayList<>();
-                        for(AdvantagesDatum hero : newAdvantageData.getData()) {
-                            List<Double> fullAdvantages = Arrays.asList(
-                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
-                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
-                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
-                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE,
-                                    HeroAndAdvantages.NEUTRAL_ADVANTAGE);
-                            fullAdvantages.set(singleHeroPos, hero.getAdvantages().get(0));
-                            hero.setAdvantages(fullAdvantages);
-                            newList.add(new HeroAndAdvantages(hero));
-                            }
-                        Log.d(TAG, "Downloaded data for a new single hero.");
-                        Collections.sort(newList);
-                        return newList;
+                        return AdvantageData.createAdvantagesListFromSingleAdvantage(
+                                newAdvantageData, singleHeroPos);
                     }
                 })
                 .timeout(SINGlE_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
@@ -242,13 +216,7 @@ public class Downloader {
                 .map(new Func1<AdvantageData, List<HeroAndAdvantages>>() {
                     @Override
                     public List<HeroAndAdvantages> call(AdvantageData advantageData) {
-                        List<HeroAndAdvantages> newList = new ArrayList<>();
-                        for (AdvantagesDatum datum : advantageData.getData()) {
-                            newList.add(new HeroAndAdvantages(datum));
-                        }
-                        Log.d(TAG, "Downloaded data for five whole heroes.");
-                        Collections.sort(newList);
-                        return newList;
+                        return AdvantageData.createFullAdvantagesList(advantageData);
                     }
                 })
                 .timeout(FULL_QUERY_TIMEOUT, TimeUnit.MILLISECONDS);
