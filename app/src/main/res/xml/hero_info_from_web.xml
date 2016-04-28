@@ -39,13 +39,15 @@
             <isMute>false</isMute>
             <imageName>earthshaker_enchant_totem_hp2</imageName>
             <name>Enchant Totem</name>
-            <description>Empowers Earthshaker's totem, causing it to deal extra damage on the next attack.</description>
+            <description>Empowers Earthshaker's totem, causing it to deal extra damage on the next attack. Upgradable by Aghanim's Scepter. Enchant Totem becomes a 900 range ground target ability, causes you to jump in the air and land at the target spot, casting Enchant Totem there. Reduced cast point of Enchant Totem to 0.</description>
             <manaCost>20/30/40/50</manaCost>
             <cooldown>5</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
+            <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE:  0 / 0 / 0 / 0</abilityDetails>
             <abilityDetails>BONUS:  100% / 200% / 300% / 400%</abilityDetails>
             <abilityDetails>DURATION:  14 / 14 / 14 / 14</abilityDetails>
+            <abilityDetails>SCEPTER JUMP DISTANCE:  900</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -72,7 +74,7 @@
             <isMute>false</isMute>
             <imageName>earthshaker_echo_slam_hp2</imageName>
             <name>Echo Slam</name>
-            <description>Shockwaves travel through the ground, damaging enemy units. Each enemy hit causes an echo to damage nearby units. Upgradable by Aghanim's Scepter.</description>
+            <description>Shockwaves travel through the ground, damaging enemy units. Each enemy hit causes an echo to damage nearby units.</description>
             <manaCost>145/205/265</manaCost>
             <cooldown>150/130/110</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -91,7 +93,7 @@
         <agility>21 + 2.00</agility>
         <strength>23 + 2.70</strength>
         <attack>41 - 43</attack>
-        <speed>295</speed>
+        <speed>290</speed>
         <defence>4.94</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -255,7 +257,7 @@
         <strength>24 + 3.00</strength>
         <attack>26 - 36</attack>
         <speed>300</speed>
-        <defence>1.96</defence>
+        <defence>3.96</defence>
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>true</isStun>
@@ -265,9 +267,9 @@
             <imageName>kunkka_torrent_hp2</imageName>
             <name>Torrent</name>
             <description>Summons a rising torrent that, after a short delay, hurls enemy units into the sky, stunning, dealing damage and slowing movement speed.</description>
-            <manaCost>120/120/120/120</manaCost>
+            <manaCost>90/100/110/120</manaCost>
             <cooldown>10</cooldown>
-            <disableDuration>STUN DURATION:  1.53 / 1.53 / 1.53 / 1.53</disableDuration>
+            <disableDuration>STUN DURATION:  1.6</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -275,7 +277,7 @@
             <abilityDetails>RADIUS:  225</abilityDetails>
             <abilityDetails>MOVE SLOW:  35%</abilityDetails>
             <abilityDetails>SLOW DURATION:  1 / 2 / 3 / 4</abilityDetails>
-            <abilityDetails>STUN DURATION:  1.53 / 1.53 / 1.53 / 1.53</abilityDetails>
+            <abilityDetails>STUN DURATION:  1.6</abilityDetails>
             <abilityDetails>DELAY:  1.6 / 1.6 / 1.6 / 1.6</abilityDetails>
         </abilities>
         <abilities>
@@ -392,8 +394,8 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>HAWK HEALTH:  40 / 60 / 80 / 100</abilityDetails>
             <abilityDetails>HAWK MOVEMENT SPEED:  250 / 275 / 300 / 325</abilityDetails>
-            <abilityDetails>HAWK DAY SIGHT RANGE:  700 / 1000 / 1300 / 1600</abilityDetails>
-            <abilityDetails>HAWK NIGHT SIGHT RANGE:  700 / 800 / 900 / 1000</abilityDetails>
+            <abilityDetails>HAWK DAY SIGHT RANGE:  500 / 750 / 1000 / 1250</abilityDetails>
+            <abilityDetails>HAWK NIGHT SIGHT RANGE:  500 / 650 / 800 / 950</abilityDetails>
             <abilityDetails>HAWK DURATION:  60 / 60 / 60 / 60</abilityDetails>
         </abilities>
         <abilities>
@@ -462,7 +464,7 @@
         <intelligence>15 + 1.70</intelligence>
         <agility>19 + 2.20</agility>
         <strength>19 + 2.80</strength>
-        <attack>27 - 33</attack>
+        <attack>31 - 37</attack>
         <speed>290</speed>
         <defence>3.66</defence>
         <abilities>
@@ -475,13 +477,13 @@
             <name>Breathe Fire</name>
             <description>Unleashes a breath of fire in front of Dragon Knight that burns enemies and reduces the damage their attacks deal.</description>
             <manaCost>100/110/120/130</manaCost>
-            <cooldown>12</cooldown>
+            <cooldown>14/13/12/11</cooldown>
             <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  90 / 170 / 240 / 300</abilityDetails>
-            <abilityDetails>DAMAGE REDUCTION:  20% / 25% / 30% / 35%</abilityDetails>
+            <abilityDetails>DAMAGE REDUCTION:  35%</abilityDetails>
             <abilityDetails>REDUCTION DURATION:  11</abilityDetails>
         </abilities>
         <abilities>
@@ -524,7 +526,7 @@
             <isMute>false</isMute>
             <imageName>dragon_knight_elder_dragon_form_hp2</imageName>
             <name>Elder Dragon Form</name>
-            <description>Dragon Knight takes the form of one of three powerful elder dragons, increasing his damage, speed, and Dragon Tail's range, while granting him new powers. LEVEL 1 Green Dragon - Corrosive Breath: attacks deal 20 poison damage per second for 5 seconds. Works on structures. LEVEL 2 Red Dragon - Splash Attack: attacks damage all enemy units in a 300 radius, with Corrosive Breath added to the primary target. LEVEL 3 Blue Dragon - Frost Breath: slows movement speed by 30% and attack speed by 20 of enemy units in Splash Attack range for 3 seconds, with Corrosive Breath added to the primary target.</description>
+            <description>Dragon Knight takes the form of one of three powerful elder dragons, increasing his speed, and Dragon Tail's range, while granting him new powers. LEVEL 1 Green Dragon - Corrosive Breath: attacks deal 20 poison damage per second for 5 seconds. Works on structures. LEVEL 2 Red Dragon - Splash Attack: attacks damage all enemy units in a 300 radius, with Corrosive Breath added to the primary target. LEVEL 3 Blue Dragon - Frost Breath: slows movement speed by 30% and attack speed by 20 of enemy units in Splash Attack range for 3 seconds, with Corrosive Breath added to the primary target.</description>
             <manaCost>50/50/50</manaCost>
             <cooldown>115</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -558,7 +560,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  20 / 40 / 60 / 80</abilityDetails>
+            <abilityDetails>DAMAGE:  20 / 45 / 70 / 95</abilityDetails>
             <abilityDetails>RADIUS:  275 / 275 / 275 / 275</abilityDetails>
             <abilityDetails>DURATION:  10.5 / 10.5 / 10.5 / 10.5</abilityDetails>
             <abilityDetails>INTERVAL:  0.7 / 0.7 / 0.7 / 0.7</abilityDetails>
@@ -671,10 +673,10 @@
             <isMute>false</isMute>
             <imageName>omniknight_degen_aura_hp2</imageName>
             <name>Degen Aura</name>
-            <description>Greatly degenerates the movement and attack capabilities of enemy units that stray too near, including Spell Immune enemies.</description>
+            <description>Greatly degenerates the movement and attack capabilities of enemy units that stray too near.</description>
             <abilityDetails>ABILITY:  Passive, Aura</abilityDetails>
             <abilityDetails>AFFECTS:  Enemies</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  10% / 18% / 26% / 34%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  10 / 18 / 26 / 34</abilityDetails>
             <abilityDetails>RADIUS:  350</abilityDetails>
@@ -752,7 +754,7 @@
             <name>Berserker's Blood</name>
             <description>Huskar's injuries feed his power, giving increased attack speed and magic damage resistance based on missing health.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>MAX ATTACK SPEED:  196 / 224 / 252 / 280</abilityDetails>
+            <abilityDetails>MAX ATTACK SPEED:  220 / 260 / 300 / 340</abilityDetails>
             <abilityDetails>MAX MAGIC RESISTANCE:  20% / 30% / 40% / 50%</abilityDetails>
             <abilityDetails>HP FOR MAX BONUS:  10%</abilityDetails>
         </abilities>
@@ -982,8 +984,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  15 / 30 / 45 / 60</abilityDetails>
             <abilityDetails>FADE TIME:  2</abilityDetails>
-            <abilityDetails>TREE RADIUS:  375 / 375 / 375 / 375</abilityDetails>
-            <abilityDetails>MOVEMENT SPEED:  10% / 10% / 10% / 10%</abilityDetails>
+            <abilityDetails>TREE RADIUS:  350</abilityDetails>
+            <abilityDetails>MOVEMENT SPEED:  14% / 16% / 18% / 20%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -995,7 +997,7 @@
             <name>Leech Seed</name>
             <description>Treant plants a life-sapping seed in an enemy unit, draining its health, while simultaneously slowing it. The seed heals friendly units around it. Pulses 6 times.</description>
             <manaCost>80/95/110/125</manaCost>
-            <cooldown>16/14/12/10</cooldown>
+            <cooldown>16/13/10/7</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -1214,7 +1216,7 @@
             <name>Double Edge</name>
             <description>Centaur strikes a mighty blow at melee range, damaging both himself and a small area around the target. Centaur cannot die from Double Edge.</description>
             <manaCost>0/0/0/0</manaCost>
-            <cooldown>8</cooldown>
+            <cooldown>6</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -1249,7 +1251,7 @@
             <cooldown>90/75/60</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>STAMPEDE DURATION:  3.75</abilityDetails>
+            <abilityDetails>STAMPEDE DURATION:  4</abilityDetails>
             <abilityDetails>STRENGTH MULTIPLIER DAMAGE:  1 / 2 / 3</abilityDetails>
             <abilityDetails>STOP DURATION:  1.5</abilityDetails>
             <abilityDetails>TRAMPLE RADIUS:  105</abilityDetails>
@@ -1283,7 +1285,7 @@
             <abilityDetails>RADIUS:  300</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 150 / 200 / 250</abilityDetails>
             <abilityDetails>STAT LOSS PERCENT:  15%</abilityDetails>
-            <abilityDetails>STAT LOSS DURATION:  11</abilityDetails>
+            <abilityDetails>STAT LOSS DURATION:  14</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1314,8 +1316,8 @@
             <name>Reactive Armor</name>
             <description>Each time Timbersaw is attacked, he gains increased health regen and armor.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>BONUS ARMOR:  1</abilityDetails>
-            <abilityDetails>BONUS HP REGEN:  1</abilityDetails>
+            <abilityDetails>BONUS ARMOR:  1 / 1.2 / 1.4 / 1.6</abilityDetails>
+            <abilityDetails>BONUS HP REGEN:  1 / 1.2 / 1.4 / 1.6</abilityDetails>
             <abilityDetails>MAX STACKS:  5 / 10 / 15 / 20</abilityDetails>
             <abilityDetails>STACK DURATION:  14 / 16 / 18 / 20</abilityDetails>
         </abilities>
@@ -1402,7 +1404,7 @@
             <isMute>false</isMute>
             <imageName>bristleback_viscous_nasal_goo_hp2</imageName>
             <name>Viscous Nasal Goo</name>
-            <description>Covers a target in snot, causing it to have reduced armor and movement speed. Multiple casts stack and refresh the duration. Upgradable by Aghanim's Scepter, making Goo an AoE ability that applies Goo to all enemies around you in a 600 radius.</description>
+            <description>Covers a target in snot, causing it to have reduced armor and movement speed. Multiple casts stack and refresh the duration. Upgradable by Aghanim's Scepter, making Goo an AoE ability that applies Goo to all enemies around you in a 700 radius.</description>
             <manaCost>25</manaCost>
             <cooldown>1.50</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -1413,6 +1415,7 @@
             <abilityDetails>BASE MOVEMENT SLOW:  20%</abilityDetails>
             <abilityDetails>MOVE SLOW PER STACK:  3% / 6% / 9% / 12%</abilityDetails>
             <abilityDetails>STACK LIMIT:  4</abilityDetails>
+            <abilityDetails>SCEPTER RADIUS:  700</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1442,10 +1445,11 @@
             <isMute>false</isMute>
             <imageName>bristleback_bristleback_hp2</imageName>
             <name>Bristleback</name>
-            <description>Bristleback takes less damage if hit on the sides or rear. If Bristleback takes 230 damage from the rear, he releases a Quill Spray of the current level.</description>
+            <description>Bristleback takes less damage if hit on the sides or rear. If Bristleback takes 210 damage from the rear, he releases a Quill Spray of the current level.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>SIDE DAMAGE REDUCTION:  8% / 12% / 16% / 20%</abilityDetails>
             <abilityDetails>BACK DAMAGE REDUCTION:  16% / 24% / 32% / 40%</abilityDetails>
+            <abilityDetails>DAMAGE THRESHOLD:  210</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -1554,14 +1558,14 @@
             <name>Walrus Kick</name>
             <description>Kicks the target unit back 900 units, damaging them and slowing their movement by 40% for 4 seconds.</description>
             <manaCost>100</manaCost>
-            <cooldown>12</cooldown>
+            <cooldown>8</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>KICK PUSH DISTANCE:  900</abilityDetails>
             <abilityDetails>MOVE SLOW:  40%</abilityDetails>
             <abilityDetails>SLOW DURATION:  4</abilityDetails>
-            <abilityDetails>DAMAGE:  200</abilityDetails>
+            <abilityDetails>DAMAGE:  350</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -1612,7 +1616,7 @@
             <abilityDetails>CAST TIME:  1.6</abilityDetails>
             <abilityDetails>RADIUS:  500</abilityDetails>
             <abilityDetails>SLEEP DURATION:  2 / 3 / 4 / 5</abilityDetails>
-            <abilityDetails>STOMP DAMAGE:  80 / 90 / 100 / 110</abilityDetails>
+            <abilityDetails>STOMP DAMAGE:  85 / 110 / 135 / 160</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1781,7 +1785,7 @@
         <agility>17 + 1.50</agility>
         <strength>21 + 2.90</strength>
         <attack>25 - 35</attack>
-        <speed>305</speed>
+        <speed>295</speed>
         <defence>3.38</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1802,14 +1806,14 @@
             <abilityDetails>REMNANT SMASH RADIUS:  200</abilityDetails>
             <abilityDetails>DAMAGE:  50 / 100 / 150 / 200</abilityDetails>
             <abilityDetails>STUN DURATION:  0.75 / 1.25 / 1.75 / 2.25</abilityDetails>
-            <abilityDetails>TRAVEL SPEED:  1200</abilityDetails>
+            <abilityDetails>TRAVEL SPEED:  900</abilityDetails>
             <abilityDetails>DISTANCE:  500 / 600 / 700 / 800</abilityDetails>
             <abilityDetails>DISTANCE (REMNANT):  2000</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
-            <isDisable>false</isDisable>
+            <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>earth_spirit_rolling_boulder_hp2</imageName>
@@ -1817,6 +1821,7 @@
             <description>Earth Spirit gathers himself into a boulder and, after a 0.6s delay, rolls toward the target location, damaging enemy units. He will stop if he collides with an enemy hero or is stunned. If he rolls over a Stone Remnant, he will travel further and faster, and enemies hit by the boulder will have their movement speed slowed.</description>
             <manaCost>50</manaCost>
             <cooldown>16/12/8/4</cooldown>
+            <disableDuration>SLOW DURATION:  2</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -1955,7 +1960,7 @@
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
-            <isDisable>false</isDisable>
+            <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>phoenix_sun_ray_hp2</imageName>
@@ -1963,6 +1968,7 @@
             <description>Phoenix expels a beam of light at the cost of its own health. The beam damages enemies and heals allies for a base amount plus a percentage of their health. The percentage increases as the beam continues to fire.</description>
             <manaCost>100</manaCost>
             <cooldown>20</cooldown>
+            <disableDuration>DURATION:  6</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -1993,6 +1999,7 @@
             <abilityDetails>DAMAGE PER SECOND:  60 / 90 / 120</abilityDetails>
             <abilityDetails>STUN DURATION:  1.5 / 2 / 2.5</abilityDetails>
             <abilityDetails>ATTACKS TO DESTROY:  5 / 8 / 11</abilityDetails>
+            <abilityDetails> SCEPTER ATTACKS TO DESTROY: 7 / 10 / 13</abilityDetails>
             <abilityDetails>DURATION:  6</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 500</abilityDetails>
         </abilities>
@@ -2103,8 +2110,8 @@
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>antimage_mana_void_hp2</imageName>
@@ -2112,7 +2119,6 @@
             <description>For each point of mana missing by the target unit, damage is dealt to it and surrounding enemies. The main target is also mini-stunned.</description>
             <manaCost>125/200/275</manaCost>
             <cooldown>70</cooldown>
-            <disableDuration>MINI-STUN</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -2177,7 +2183,7 @@
             <isMute>false</isMute>
             <imageName>drow_ranger_trueshot_hp2</imageName>
             <name>Precision Aura</name>
-            <description>Adds bonus damage to the physical attack of allied, ranged Hero units on the map based on a percentage of Drow's agility. Affects creeps for 30 seconds when cast.</description>
+            <description>Adds bonus damage to the physical attack of allied, ranged Hero units based on a percentage of Drow's agility. Affects creeps for 30 seconds when cast.</description>
             <cooldown>100</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
@@ -2194,7 +2200,9 @@
             <description>Drow's experiences in battle improve her accuracy and effectiveness in combat, providing a passive bonus to Agility. Grants no bonus if there are enemy heroes within 400 range. Upgradable by Aghanim's Scepter.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>BONUS AGILITY:  40 / 60 / 80</abilityDetails>
+            <abilityDetails> SPLIT COUNT: 2</abilityDetails>
             <abilityDetails>SEARCH RANGE:  375</abilityDetails>
+            <abilityDetails> DAMAGE REDUCTION: 50%</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2290,7 +2298,7 @@
             <isMute>false</isMute>
             <imageName>mirana_starfall_hp2</imageName>
             <name>Starstorm</name>
-            <description>Calls down a wave of meteors to damage nearby enemy units. The closest enemy unit to Mirana in a 425 radius will be struck a second time for 75% of the damage.</description>
+            <description>Calls down a wave of meteors to damage nearby enemy units. The closest enemy unit to Mirana in a 425 radius will be struck a second time for 75% of the damage. Upgradable by Aghanim's Scepter, causing Starstorm to passively trigger every 8 seconds. Does not trigger if the enemy doesn't see Mirana.</description>
             <manaCost>100/120/140/160</manaCost>
             <cooldown>12</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -2298,6 +2306,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
             <abilityDetails>RADIUS:  650</abilityDetails>
+            <abilityDetails>SCEPTER INTERVAL:  8</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2443,7 +2452,7 @@
             <name>Hybrid</name>
             <description>Morphling creates a hybrid replication of a target allied hero, which can cast all of that hero's current, non-ultimate abilities. Enemies are able to see which unit is a hybrid.</description>
             <manaCost>200</manaCost>
-            <cooldown>120</cooldown>
+            <cooldown>70</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DURATION:  20</abilityDetails>
         </abilities>
@@ -2455,13 +2464,13 @@
             <isMute>false</isMute>
             <imageName>morphling_replicate_hp2</imageName>
             <name>Replicate</name>
-            <description>Morphling replicates any hero, friend or foe, dealing 50% of the original Hero's outgoing damage while taking 100% of any incoming damage. At any time, Morphling can instantly take the position of the Replicate for 150 mana. If Morphling dies, the Replicate will expire. Upgradable by Aghanim's Scepter.</description>
+            <description>Morphling replicates any hero, friend or foe, dealing 80% of the original Hero's outgoing damage while taking 100% of any incoming damage. At any time, Morphling can instantly take the position of the Replicate for 150 mana. If Morphling dies, the Replicate will expire. Upgradable by Aghanim's Scepter.</description>
             <manaCost>25/25/25</manaCost>
             <cooldown>80</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  30 / 45 / 60</abilityDetails>
-            <abilityDetails>REPLICATE DAMAGE:  50% / 50% / 50%</abilityDetails>
+            <abilityDetails>REPLICATE DAMAGE:  80%</abilityDetails>
             <abilityDetails>REPLICATE DAMAGE TAKEN:  100% / 100% / 100%</abilityDetails>
             <abilityDetails>CAST RANGE:  700 / 1100 / 1500</abilityDetails>
         </abilities>
@@ -2579,13 +2588,13 @@
             <description>Fires a magic missile at an enemy unit, stunning and dealing damage.</description>
             <manaCost>110/120/130/140</manaCost>
             <cooldown>13/12/11/10</cooldown>
-            <disableDuration>STUN DURATION:  1.45 / 1.55 / 1.65 / 1.75</disableDuration>
+            <disableDuration>STUN DURATION:  1.2 / 1.4 / 1.6 / 1.8</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 175 / 250 / 325</abilityDetails>
-            <abilityDetails>STUN DURATION:  1.45 / 1.55 / 1.65 / 1.75</abilityDetails>
+            <abilityDetails>STUN DURATION:  1.2 / 1.4 / 1.6 / 1.8</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2635,6 +2644,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RANGE:  700 / 950 / 1200</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 10</abilityDetails>
+            <abilityDetails> SCEPTER ILLUSION DAMAGE DEALT: 50%</abilityDetails>
+            <abilityDetails> SCEPTER ILLUSION DAMAGE TAKEN: 150%</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2679,8 +2690,8 @@
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RANGE:  800</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  20 / 40 / 60 / 80</abilityDetails>
+            <abilityDetails>RANGE:  700</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  60 / 80 / 100 / 120</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2694,7 +2705,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>AGI DAMAGE MULT:  0.5 / 0.75 / 1.0 / 1.25</abilityDetails>
+            <abilityDetails>AGI DAMAGE MULT:  0.5 / 0.75 / 1 / 1.25</abilityDetails>
             <abilityDetails>FADE DELAY:  6 / 5 / 4 / 3</abilityDetails>
         </abilities>
         <abilities>
@@ -2705,9 +2716,9 @@
             <isMute>false</isMute>
             <imageName>riki_tricks_of_the_trade_hp2</imageName>
             <name>Tricks of the Trade</name>
-            <description>CHANNELED - Phases out of the world while striking every enemy hero from behind in a 500 AoE once per second.</description>
+            <description>CHANNELED - Phases out of the world while striking every enemy from behind in a 500 AoE once per second.</description>
             <manaCost>75</manaCost>
-            <cooldown>40</cooldown>
+            <cooldown>40/35/30</cooldown>
             <abilityDetails>ABILITY:  No Target, Channeled</abilityDetails>
             <abilityDetails>RADIUS:  500</abilityDetails>
             <abilityDetails>MAX ATTACKS PER UNIT:  4 / 5 / 6</abilityDetails>
@@ -2736,7 +2747,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  12 / 24 / 36 / 48</abilityDetails>
+            <abilityDetails>DAMAGE:  15 / 30 / 45 / 60</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  15% / 20% / 25% / 30%</abilityDetails>
             <abilityDetails>RADIUS:  450</abilityDetails>
             <abilityDetails>DURATION:  10</abilityDetails>
@@ -2885,7 +2896,7 @@
         <imageName>luna</imageName>
         <bioRoles>Ranged - Carry - Nuker - Pusher</bioRoles>
         <intelligence>16 + 1.85</intelligence>
-        <agility>18 + 2.80</agility>
+        <agility>18 + 3.30</agility>
         <strength>15 + 2.20</strength>
         <attack>26 - 32</attack>
         <speed>330</speed>
@@ -3015,7 +3026,7 @@
             <imageName>bounty_hunter_wind_walk_hp2</imageName>
             <name>Shadow Walk</name>
             <description>Bounty Hunter becomes invisible and gains the ability to move through other units until he attacks or uses an ability. If he breaks the invisibility with an attack, that attack will deal bonus damage.</description>
-            <manaCost>50/50/50/50</manaCost>
+            <manaCost>65</manaCost>
             <cooldown>15</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
@@ -3132,7 +3143,7 @@
         <intelligence>19 + 2.10</intelligence>
         <agility>24 + 2.80</agility>
         <strength>18 + 1.80</strength>
-        <attack>17 - 27</attack>
+        <attack>13 - 23</attack>
         <speed>315</speed>
         <defence>4.36</defence>
         <abilities>
@@ -3211,7 +3222,6 @@
             <abilityDetails>MISSILE ONE SLOW:  30%</abilityDetails>
             <abilityDetails>MISSILE TWO SLOW:  60%</abilityDetails>
             <abilityDetails>RADIUS:  600</abilityDetails>
-            <abilityDetails> SCEPTER MISSILE TWO DAMAGE: 175 / 225 / 275</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -3288,7 +3298,7 @@
             <manaCost>50/50/50</manaCost>
             <cooldown>60</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  90 / 120 / 150</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  70 / 100 / 130</abilityDetails>
             <abilityDetails>BONUS ARMOR:  10 / 15 / 20</abilityDetails>
             <abilityDetails>DURATION:  6</abilityDetails>
             <abilityDetails>RADIUS:  1000</abilityDetails>
@@ -3348,7 +3358,7 @@
             <cooldown>40</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>IMAGE DURATION:  30 / 30 / 30 / 30</abilityDetails>
-            <abilityDetails>IMAGE DAMAGE:  20% / 25% / 30% / 35%</abilityDetails>
+            <abilityDetails>IMAGE DAMAGE:  25% / 30% / 35% / 40%</abilityDetails>
             <abilityDetails>IMAGE DAMAGE TAKEN:  600% / 500% / 400% / 300%</abilityDetails>
         </abilities>
         <abilities>
@@ -3384,6 +3394,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 140 / 180 / 220</abilityDetails>
             <abilityDetails>ARMOR REDUCTION:  2 / 3 / 4 / 5</abilityDetails>
+            <abilityDetails>DURATION:  8 / 8 / 8 / 8</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3401,7 +3412,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  1250 / 1250 / 1250</abilityDetails>
             <abilityDetails>DURATION:  7 / 7 / 7</abilityDetails>
-            <abilityDetails> SCEPTER HEALTH REGEN: 8%</abilityDetails>
+            <abilityDetails> SCEPTER HEALTH REGEN: 10%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3455,7 +3466,7 @@
             <name>Whirling Axes (Ranged)</name>
             <description>Troll hurls a fistful of five axes in a cone shape over 900 range, slowing and damaging enemy units.</description>
             <manaCost>50/50/50/50</manaCost>
-            <cooldown>20/18/16/14</cooldown>
+            <cooldown>19/16/13/10</cooldown>
             <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -3494,7 +3505,7 @@
             <name>Fervor</name>
             <description>With each continuous blow on the same target, Troll gains increased attack speed. If Troll changes targets, the stacks drop to zero.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>MAX STACKS:  6</abilityDetails>
+            <abilityDetails>MAX STACKS:  7</abilityDetails>
             <abilityDetails>ATTACK SPEED PER STACK:  15 / 20 / 25 / 30</abilityDetails>
         </abilities>
         <abilities>
@@ -3618,90 +3629,6 @@
         </abilities>
     </heroInfo>
     <heroInfo>
-        <name>Arc Warden</name>
-        <imageName>arc_warden</imageName>
-        <bioRoles>Ranged - Carry - Escape - Nuker</bioRoles>
-        <intelligence>24 + 2.10</intelligence>
-        <agility>15 + 1.80</agility>
-        <strength>24 + 1.90</strength>
-        <attack>25 - 35</attack>
-        <speed>295</speed>
-        <defence>0.1</defence>
-        <abilities>
-            <isUltimate>false</isUltimate>
-            <isStun>false</isStun>
-            <isDisable>false</isDisable>
-            <isSilence>false</isSilence>
-            <isMute>false</isMute>
-            <imageName>arc_warden_flux_hp2</imageName>
-            <name>Flux</name>
-            <description>Infuses a lone enemy unit with swirling, volatile energy, slowing its movement speed and dealing damage over time. The effect is muted if another enemy unit is near the target.</description>
-            <manaCost>75</manaCost>
-            <cooldown>20</cooldown>
-            <abilityDetails>ABILITY:  Unit Target</abilityDetails>
-            <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
-            <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DURATION:  6</abilityDetails>
-            <abilityDetails>DAMAGE PER SECOND:  15 / 30 / 45 / 60</abilityDetails>
-            <abilityDetails>ALLY SEARCH RADIUS:  225</abilityDetails>
-            <abilityDetails>MOVEMENT SPEED SLOW:  50%</abilityDetails>
-        </abilities>
-        <abilities>
-            <isUltimate>false</isUltimate>
-            <isStun>false</isStun>
-            <isDisable>false</isDisable>
-            <isSilence>false</isSilence>
-            <isMute>false</isMute>
-            <imageName>arc_warden_magnetic_field_hp2</imageName>
-            <name>Magnetic Field</name>
-            <description>Generates a circular distortion field of magnetic energy that grants evasion and attack speed bonuses to allied heroes and buildings within.</description>
-            <manaCost>110</manaCost>
-            <cooldown>50</cooldown>
-            <abilityDetails>ABILITY:  Point Target</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RADIUS:  275</abilityDetails>
-            <abilityDetails>DURATION:  3.5 / 4 / 4.5 / 5</abilityDetails>
-            <abilityDetails>ATTACK SPEED BONUS:  50 / 60 / 70 / 80</abilityDetails>
-            <abilityDetails>EVASION BONUS:  100%</abilityDetails>
-        </abilities>
-        <abilities>
-            <isUltimate>false</isUltimate>
-            <isStun>false</isStun>
-            <isDisable>false</isDisable>
-            <isSilence>false</isSilence>
-            <isMute>false</isMute>
-            <imageName>arc_warden_spark_wraith_hp2</imageName>
-            <name>Spark Wraith</name>
-            <description>Summons a Spark Wraith that slowly materializes and patrols a targeted area until an enemy comes within its range. Once a target has been found the wraith fuses with them, dealing magical damage.</description>
-            <manaCost>100/110/120/130</manaCost>
-            <cooldown>4</cooldown>
-            <abilityDetails>ABILITY:  Point Target</abilityDetails>
-            <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>SEARCH RADIUS:  375</abilityDetails>
-            <abilityDetails>ACTIVATION DELAY:  3</abilityDetails>
-            <abilityDetails>DURATION:  50</abilityDetails>
-            <abilityDetails>WRAITH SPEED:  400</abilityDetails>
-            <abilityDetails>DAMAGE:  150 / 200 / 250 / 300</abilityDetails>
-        </abilities>
-        <abilities>
-            <isUltimate>true</isUltimate>
-            <isStun>false</isStun>
-            <isDisable>false</isDisable>
-            <isSilence>false</isSilence>
-            <isMute>false</isMute>
-            <imageName>arc_warden_tempest_double_hp2</imageName>
-            <name>Tempest Double</name>
-            <description>Briefly refocusing its fractured elements into a single form, the Arc Warden is able to create a perfect electrical duplication of itself. The duplicate can use all of Arc Warden's current items and spells. When the duplicate is created, all of its available items and normal abilities are off cooldown.</description>
-            <cooldown>65/60/55</cooldown>
-            <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>DURATION:  20</abilityDetails>
-            <abilityDetails>HEALTH COST:  30% / 15% / 0%</abilityDetails>
-            <abilityDetails>MANA COST:  30% / 15% / 0%</abilityDetails>
-        </abilities>
-    </heroInfo>
-    <heroInfo>
         <name>Crystal Maiden</name>
         <imageName>crystal_maiden</imageName>
         <bioRoles>Ranged - Support - Disabler - Nuker - Jungler</bioRoles>
@@ -3721,7 +3648,7 @@
             <name>Crystal Nova</name>
             <description>A burst of damaging frost slows enemy movement and attack rate in the targeted area.</description>
             <manaCost>100/120/140/160</manaCost>
-            <cooldown>12</cooldown>
+            <cooldown>12/11/10/9</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -3765,7 +3692,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
             <abilityDetails>ALLY MANA REGEN:  1 / 1.5 / 2 / 3</abilityDetails>
-            <abilityDetails>SELF MANA REGEN:  2 / 3 / 4 / 6</abilityDetails>
+            <abilityDetails>SELF MANA REGEN:  2 / 3 / 4 / 8</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3921,14 +3848,17 @@
             <isMute>false</isMute>
             <imageName>storm_spirit_electric_vortex_hp2</imageName>
             <name>Electric Vortex</name>
-            <description>A vortex that pulls an enemy unit to Storm Spirit's location, it also slows the Storm Spirit by 50% for 3 seconds.</description>
+            <description>A vortex that pulls an enemy unit to Storm Spirit's location, it also slows the Storm Spirit by 50% for 3 seconds. Upgradable by Aghanim's Scepter, causing Electric Vortex to be a 475 AoE ability.</description>
             <manaCost>85</manaCost>
             <cooldown>21/20/19/18</cooldown>
             <disableDuration>DURATION:  1 / 1.5 / 2 / 2.5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>SELF SLOW:  50%</abilityDetails>
+            <abilityDetails>SELF SLOW DURATION:  3.000000</abilityDetails>
             <abilityDetails>DURATION:  1 / 1.5 / 2 / 2.5</abilityDetails>
+            <abilityDetails>SCEPTER RADIUS:  475</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3943,6 +3873,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  30 / 50 / 70 / 90</abilityDetails>
+            <abilityDetails>RADIUS:  275</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  80%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  50</abilityDetails>
             <abilityDetails>DURATION:  0.6 / 0.6 / 0.6 / 0.6</abilityDetails>
@@ -4111,7 +4042,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RANGE:  1200</abilityDetails>
-            <abilityDetails>HEALTH REDUCTION:  5% / 7% / 9% / 11%</abilityDetails>
+            <abilityDetails>HEALTH REDUCTION:  4% / 6% / 8% / 10%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4129,7 +4060,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>TRUE SIGHT RADIUS:  500</abilityDetails>
             <abilityDetails>DURATION:  3 / 3 / 3 / 3</abilityDetails>
-            <abilityDetails>DAMAGE:  225 / 350 / 475</abilityDetails>
+            <abilityDetails>DAMAGE:  225 / 325 / 425</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 440 / 540 / 640</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4285,12 +4216,14 @@
             <isMute>false</isMute>
             <imageName>shadow_shaman_mass_serpent_ward_hp2</imageName>
             <name>Mass Serpent Ward</name>
-            <description>Summons 10 serpent wards to attack enemy units and structures. The wards are immune to magic, and have a small area of splash damage that increases per level. It takes two hits to destroy a single ward. Upgradable by Aghanim's Scepter.</description>
+            <description>Summons 10 serpent wards to attack enemy units and structures. The wards are immune to magic, and have a small area of splash damage. It takes two hits to destroy a single ward. Upgradable by Aghanim's Scepter.</description>
             <manaCost>200/350/600</manaCost>
             <cooldown>120</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
+            <abilityDetails>SPLASH RADIUS:  175</abilityDetails>
+            <abilityDetails>SPLASH DAMAGE:  75%</abilityDetails>
             <abilityDetails>ATTACK DAMAGE:  45 / 60 / 75</abilityDetails>
             <abilityDetails>DURATION:  45 / 45 / 45</abilityDetails>
             <abilityDetails> SCEPTER ATTACK DAMAGE: 90 / 110 / 130</abilityDetails>
@@ -4300,7 +4233,7 @@
         <name>Tinker</name>
         <imageName>tinker</imageName>
         <bioRoles>Ranged - Carry - Nuker - Pusher</bioRoles>
-        <intelligence>27 + 2.20</intelligence>
+        <intelligence>30 + 2.20</intelligence>
         <agility>13 + 1.20</agility>
         <strength>17 + 2.00</strength>
         <attack>22 - 28</attack>
@@ -4371,7 +4304,7 @@
             <imageName>tinker_rearm_hp2</imageName>
             <name>Rearm</name>
             <description>CHANNELED - Resets the cooldown on most of Tinker's items and abilities.</description>
-            <manaCost>125/225/325</manaCost>
+            <manaCost>100/200/300</manaCost>
             <cooldown>0</cooldown>
             <abilityDetails>ABILITY:  No Target, Channeled</abilityDetails>
             <abilityDetails>TIME TO REARM:  3 / 1.5 / 0.75</abilityDetails>
@@ -4472,11 +4405,10 @@
             <isMute>false</isMute>
             <imageName>enchantress_untouchable_hp2</imageName>
             <name>Untouchable</name>
-            <description>Enchantress beguiles her enemies, slowing their attacks when she is attacked. Lasts 4 seconds.</description>
+            <description>Enchantress beguiles her enemies, slowing their attacks when she is attacked.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>ATTACK SLOW:  40 / 70 / 100 / 130</abilityDetails>
-            <abilityDetails>SLOW DURATION:  4</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4526,7 +4458,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>DISTANCE DAMAGE:  15% / 20% / 25%</abilityDetails>
+            <abilityDetails>DISTANCE DAMAGE:  14% / 18% / 22%</abilityDetails>
             <abilityDetails> SCEPTER BONUS RANGE: 190 / 190 / 190</abilityDetails>
         </abilities>
     </heroInfo>
@@ -4597,7 +4529,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>ATTACK SLOW:  20 / 30 / 40 / 50</abilityDetails>
-            <abilityDetails>RADIUS:  300 / 300 / 300 / 300</abilityDetails>
+            <abilityDetails>RADIUS:  300</abilityDetails>
             <abilityDetails>BURN DAMAGE:  12 / 16 / 20 / 24</abilityDetails>
             <abilityDetails>DURATION:  5 / 5 / 5 / 5</abilityDetails>
         </abilities>
@@ -4612,17 +4544,17 @@
             <description>Jakiro exhales a wide line of lasting flames, which deals damage per second to any enemy units caught in the fire. Upgradable by Aghanim's Scepter.</description>
             <manaCost>220/330/440</manaCost>
             <cooldown>60</cooldown>
-            <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
+            <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  100 / 140 / 180</abilityDetails>
-            <abilityDetails>FLAME LENGTH:  900</abilityDetails>
+            <abilityDetails>FLAME LENGTH:  1400</abilityDetails>
             <abilityDetails>FLAME WIDTH:  240</abilityDetails>
             <abilityDetails>DURATION:  10</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE PER SECOND: 125 / 175 / 225</abilityDetails>
             <abilityDetails> SCEPTER FLAME LENGTH: 1800</abilityDetails>
-            <abilityDetails> SCEPTER DURATION: 20</abilityDetails>
+            <abilityDetails> SCEPTER DURATION: 30</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4710,7 +4642,7 @@
             <isMute>false</isMute>
             <imageName>chen_hand_of_god_hp2</imageName>
             <name>Hand of God</name>
-            <description>Fully regenerates any creeps under Chen's control and heals all allied heroes on the map. Upgradable by Aghanim's Scepter.</description>
+            <description>Heals all allied heroes on the map as well as all units under Chen's control. Upgradable by Aghanim's Scepter.</description>
             <manaCost>200/300/400</manaCost>
             <cooldown>160/140/120</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -4737,16 +4669,17 @@
             <isMute>false</isMute>
             <imageName>silencer_curse_of_the_silent_hp2</imageName>
             <name>Arcane Curse</name>
-            <description>Curses the target area, causing enemy heroes to take damage. Anytime affected enemies cast a spell, the duration is increased.</description>
+            <description>Curses the target area, causing enemy heroes to take damage and slowing their movement speed. Anytime affected enemies cast a spell, the duration is increased.</description>
             <manaCost>75/95/115/135</manaCost>
-            <cooldown>18/16/14/12</cooldown>
+            <cooldown>20/18/16/14</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  14 / 21 / 28 / 35</abilityDetails>
             <abilityDetails>RADIUS:  425</abilityDetails>
-            <abilityDetails>BASE DURATION:  7</abilityDetails>
+            <abilityDetails>BASE DURATION:  6</abilityDetails>
             <abilityDetails>PENALTY DURATION:  4</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  9% / 12% / 15% / 18%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4762,7 +4695,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>INT TO DAMAGE:  30% / 50% / 70% / 90%</abilityDetails>
+            <abilityDetails>INT TO DAMAGE:  35% / 50% / 65% / 80%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4772,7 +4705,7 @@
             <isMute>false</isMute>
             <imageName>silencer_last_word_hp2</imageName>
             <name>Last Word</name>
-            <description>Enchants a target, causing them to be damaged, silenced, and their movement speed slowed if they cast a spell or if the enchantment timer expires.</description>
+            <description>Enchants a target, causing them to be damaged and silenced if they cast a spell or if the enchantment timer expires.</description>
             <manaCost>115</manaCost>
             <cooldown>30/24/18/12</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -4781,8 +4714,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  150 / 200 / 250 / 300</abilityDetails>
             <abilityDetails>ENEMY CAST TIMER:  4</abilityDetails>
-            <abilityDetails>MOVE SLOW:  14% / 16% / 18% / 20%</abilityDetails>
-            <abilityDetails>SILENCE/SLOW DURATION:  3 / 4 / 5 / 6</abilityDetails>
+            <abilityDetails>SILENCE DURATION:  3 / 4 / 5 / 6</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4962,7 +4894,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  70 / 140 / 210 / 280</abilityDetails>
+            <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
             <abilityDetails>JUMP REDUCTION:  4% / 4% / 4% / 4%</abilityDetails>
             <abilityDetails>HERO DAMAGE REDUCTION:  20 / 25 / 30 / 35</abilityDetails>
             <abilityDetails>CREEP DAMAGE REDUCTION:  10 / 13 / 15 / 17</abilityDetails>
@@ -4978,7 +4910,7 @@
             <name>Null Field</name>
             <description>Rubick's mastery of the arcane protects nearby allies against weaker magics, granting them magic resistance.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>MAGIC RESISTANCE:  5% / 10% / 15% / 20%</abilityDetails>
+            <abilityDetails>MAGIC RESISTANCE:  10% / 14% / 18% / 22%</abilityDetails>
             <abilityDetails>RADIUS:  900</abilityDetails>
         </abilities>
         <abilities>
@@ -5058,7 +4990,7 @@
             <cooldown>13/12/11/10</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RADIUS:  325</abilityDetails>
+            <abilityDetails>RADIUS:  340</abilityDetails>
             <abilityDetails>FORMATION DELAY:  1.2 / 1.2 / 1.2 / 1.2</abilityDetails>
             <abilityDetails>DURATION:  2.6 / 3.2 / 3.8 / 4.4</abilityDetails>
         </abilities>
@@ -5092,7 +5024,7 @@
         <agility>15 + 1.60</agility>
         <strength>14 + 1.80</strength>
         <attack>18 - 32</attack>
-        <speed>315</speed>
+        <speed>335</speed>
         <defence>1.1</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5312,7 +5244,8 @@
             <abilityDetails>RADIUS:  170</abilityDetails>
             <abilityDetails>DURATION:  2.4</abilityDetails>
             <abilityDetails>DAMAGE:  600 / 1000 / 1400</abilityDetails>
-            <abilityDetails>SCEPTER COOLDOWN:  20 / 10 / 0</abilityDetails>
+            <abilityDetails>SCEPTER COOLDOWN:  20 / 10 / 5</abilityDetails>
+            <abilityDetails>SCEPTER DURATION:  12</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -5369,7 +5302,7 @@
             <isMute>false</isMute>
             <imageName>oracle_purifying_flames_hp2</imageName>
             <name>Purifying Flames</name>
-            <description>Burns away impurities, dealing heavy magic damage to the target before causing them to regenerate health over time. The amount of health regenerated over its duration exceeds the amount of initial damage. Can be cast on enemies and allies.</description>
+            <description>Burns away impurities, dealing heavy magic damage to the target before causing them to regenerate health over time. The amount of health regenerated over its duration exceeds the amount of initial damage. Can be cast on enemies and allies. Upgradable by Aghanim's Scepter, reducing cooldown and improves cast point.</description>
             <manaCost>50/60/70/80</manaCost>
             <cooldown>2.25</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -5379,6 +5312,7 @@
             <abilityDetails>HEAL PER SECOND:  11 / 22 / 33 / 44</abilityDetails>
             <abilityDetails>TOTAL HEAL:  99 / 198 / 297 / 396</abilityDetails>
             <abilityDetails>DURATION:  9</abilityDetails>
+            <abilityDetails> SCEPTER COOLDOWN: 1</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5575,12 +5509,12 @@
             <isMute>false</isMute>
             <imageName>axe_counter_helix_hp2</imageName>
             <name>Counter Helix</name>
-            <description>When attacked, Axe performs a helix counter attack, dealing damage to all nearby enemies.</description>
+            <description>When attacked, Axe performs a helix counter attack, dealing pure damage to all nearby enemies.</description>
             <cooldown>0.45/0.40/0.35/0.30</cooldown>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
+            <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>DAMAGE:  100 / 135 / 170 / 205</abilityDetails>
+            <abilityDetails>DAMAGE:  90 / 120 / 150 / 180</abilityDetails>
             <abilityDetails>RADIUS:  275</abilityDetails>
             <abilityDetails>CHANCE TO HELIX:  20%</abilityDetails>
         </abilities>
@@ -5737,7 +5671,7 @@
             <abilityDetails>DAMAGE:  25 / 50 / 75 / 100</abilityDetails>
             <abilityDetails>INVISIBILITY DELAY:  1.5</abilityDetails>
             <abilityDetails>RADIUS:  525</abilityDetails>
-            <abilityDetails>DURATION:  20 / 40 / 60 / 80</abilityDetails>
+            <abilityDetails>DURATION:  50</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6002,7 +5936,8 @@
             <description>Wraith King passively gains a chance to deal bonus damage on an attack.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
-            <abilityDetails>CRITICAL DAMAGE:  150% / 200% / 250% / 300%</abilityDetails>
+            <abilityDetails>HERO CRITICAL DAMAGE:  150% / 200% / 250% / 300%</abilityDetails>
+            <abilityDetails>NON-HERO CRITICAL DAMAGE:  200% / 300% / 400% / 500%</abilityDetails>
             <abilityDetails>CRITICAL CHANCE:  15%</abilityDetails>
         </abilities>
         <abilities>
@@ -6033,7 +5968,7 @@
         <bioRoles>Melee - Carry - Durable - Jungler - Escape - Disabler</bioRoles>
         <intelligence>15 + 1.75</intelligence>
         <agility>18 + 1.90</agility>
-        <strength>25 + 2.40</strength>
+        <strength>25 + 3.00</strength>
         <attack>32 - 42</attack>
         <speed>315</speed>
         <defence>1.52</defence>
@@ -6289,7 +6224,7 @@
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>BASE BURN DAMAGE:  40</abilityDetails>
             <abilityDetails>MAX HP AS DAMAGE:  1.25% / 2.5% / 3.75% / 5%</abilityDetails>
             <abilityDetails>BURN DURATION:  4</abilityDetails>
@@ -6647,7 +6582,9 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  30</abilityDetails>
             <abilityDetails>MAX DAMAGE AMP:  20% / 25% / 30%</abilityDetails>
+            <abilityDetails>MIN DAMAGE AMP:  1%</abilityDetails>
             <abilityDetails>MAX MOVE SLOW:  20%</abilityDetails>
+            <abilityDetails>MIN MOVE SLOW:  1%</abilityDetails>
             <abilityDetails>DEATH HEAL (HEROES):  6%</abilityDetails>
             <abilityDetails>DEATH HEAL (CREEPS):  2%</abilityDetails>
         </abilities>
@@ -6659,7 +6596,7 @@
         <intelligence>19 + 1.65</intelligence>
         <agility>15 + 2.50</agility>
         <strength>21 + 2.75</strength>
-        <attack>28 - 40</attack>
+        <attack>32 - 44</attack>
         <speed>315</speed>
         <defence>4.1</defence>
         <abilities>
@@ -6677,7 +6614,6 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DISTANCE:  1150</abilityDetails>
             <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
         </abilities>
         <abilities>
@@ -6715,7 +6651,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>SPEED:  950</abilityDetails>
             <abilityDetails>DISTANCE:  900 / 1000 / 1100 / 1200</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  25% / 30% / 35% / 40%</abilityDetails>
+            <abilityDetails>SLOW:  25% / 30% / 35% / 40%</abilityDetails>
             <abilityDetails>SLOW DURATION:  2.5 / 2.75 / 3 / 3.25</abilityDetails>
             <abilityDetails>DAMAGE:  70 / 140 / 210 / 280</abilityDetails>
         </abilities>
@@ -6799,8 +6735,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DEBUFF DURATION:  2.5</abilityDetails>
             <abilityDetails>BUFF DURATION:  4.5</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  5% / 10% / 15% / 20%</abilityDetails>
-            <abilityDetails>ATTACK SLOW:  5 / 10 / 15 / 20</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  8% / 12% / 16% / 20%</abilityDetails>
+            <abilityDetails>ATTACK SLOW:  8 / 12 / 16 / 20</abilityDetails>
             <abilityDetails>MOVE SPEED BONUS:  15%</abilityDetails>
             <abilityDetails>ATTACK SPEED BONUS:  10 / 20 / 30 / 40</abilityDetails>
         </abilities>
@@ -6829,7 +6765,7 @@
         <bioRoles>Melee - Carry - Disabler - Jungler - Nuker - Initiator</bioRoles>
         <intelligence>18 + 1.70</intelligence>
         <agility>24 + 3.00</agility>
-        <strength>23 + 2.00</strength>
+        <strength>23 + 2.40</strength>
         <attack>29 - 35</attack>
         <speed>290</speed>
         <defence>3.36</defence>
@@ -6893,7 +6829,7 @@
             <isMute>false</isMute>
             <imageName>bloodseeker_rupture_hp2</imageName>
             <name>Rupture</name>
-            <description>Causes an enemy unit's skin to rupture. If the unit moves, it takes a percentage of the distance traveled as damage. The damage is dealt through spell immunity.</description>
+            <description>Causes an enemy unit's skin to rupture. If the unit moves, it takes a percentage of the distance traveled as damage. The damage is dealt through spell immunity. Upgradable by Aghanim's Scepter.</description>
             <manaCost>150/200/250</manaCost>
             <cooldown>60</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -6903,6 +6839,8 @@
             <abilityDetails>DURATION:  12</abilityDetails>
             <abilityDetails>MOVE DAMAGE:  20% / 40% / 60%</abilityDetails>
             <abilityDetails>CAST RANGE:  1000</abilityDetails>
+            <abilityDetails>SCEPTER CHARGES:  2</abilityDetails>
+            <abilityDetails>SCEPTER REPLENISH TIME:  40</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6940,10 +6878,11 @@
             <isMute>false</isMute>
             <imageName>nevermore_necromastery_hp2</imageName>
             <name>Necromastery</name>
-            <description>Shadow Fiend steals the soul from units he kills, gaining bonus damage. If the killed unit is a hero, he gains 12 souls. On death, he releases half of them from bondage.</description>
+            <description>Shadow Fiend steals the soul from units he kills, gaining bonus damage. If the killed unit is a hero, he gains 12 souls. On death, he releases half of them from bondage. Upgradable by Aghanim's Scepter, increasing Necromastery Max Souls to 22.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>DAMAGE PER SOUL:  2</abilityDetails>
             <abilityDetails>MAX SOULS:  15 / 22 / 29 / 36</abilityDetails>
+            <abilityDetails> SCEPTER MAX SOULS: 22 / 30 / 38 / 46</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7024,7 +6963,7 @@
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>LINK DURATION:  8 / 8 / 8 / 8</abilityDetails>
+            <abilityDetails>LINK DURATION:  8</abilityDetails>
             <abilityDetails>BUFF DURATION:  18 / 18 / 18 / 18</abilityDetails>
             <abilityDetails>DAMAGE DRAIN RATE:  7 / 14 / 21 / 28</abilityDetails>
         </abilities>
@@ -7156,7 +7095,7 @@
         <bioRoles>Melee - Carry - Initiator - Disabler - Escape - Durable</bioRoles>
         <intelligence>15 + 1.50</intelligence>
         <agility>23 + 2.65</agility>
-        <strength>23 + 1.60</strength>
+        <strength>23 + 1.80</strength>
         <attack>37 - 43</attack>
         <speed>300</speed>
         <defence>4.22</defence>
@@ -7173,7 +7112,7 @@
             <cooldown>24/18/12/6</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RANGE:  625</abilityDetails>
+            <abilityDetails>RANGE:  675</abilityDetails>
             <abilityDetails>BACKTRACK DURATION:  2</abilityDetails>
         </abilities>
         <abilities>
@@ -7184,13 +7123,13 @@
             <isMute>false</isMute>
             <imageName>faceless_void_time_dilation_hp2</imageName>
             <name>Time Dilation</name>
-            <description>Faceless Void traps all nearby enemies in a time dilation field for 6 seconds, freezing their cooldowns and slowing their movement and attack speed by 4% for each cooldown frozen.</description>
+            <description>Faceless Void traps all nearby enemies in a time dilation field for 6 seconds, freezing their cooldowns and slowing their movement and attack speed by 8% for each cooldown frozen.</description>
             <manaCost>50</manaCost>
-            <cooldown>36/30/24/18</cooldown>
+            <cooldown>40/34/28/22</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>RADIUS:  725</abilityDetails>
             <abilityDetails>DURATION:  6 / 8 / 10 / 12</abilityDetails>
-            <abilityDetails>SLOW PER COOLDOWN:  7% / 8% / 9% / 10%</abilityDetails>
+            <abilityDetails>SLOW PER COOLDOWN:  8%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7207,7 +7146,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  1</abilityDetails>
             <abilityDetails>CHANCE:  10% / 15% / 20% / 25%</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  40 / 50 / 60 / 70</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  50 / 75 / 100 / 125</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7224,8 +7163,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  425</abilityDetails>
             <abilityDetails>DURATION:  4 / 4.5 / 5</abilityDetails>
-            <abilityDetails> SCEPTER DURATION: 4 / 5 / 6</abilityDetails>
-            <abilityDetails> SCEPTER COOLDOWN: 60 / 60 / 60</abilityDetails>
+            <abilityDetails> SCEPTER COOLDOWN: 60</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7246,17 +7184,17 @@
             <isMute>false</isMute>
             <imageName>phantom_assassin_stifling_dagger_hp2</imageName>
             <name>Stifling Dagger</name>
-            <description>Throws a dagger which deals pure damage and slows the enemy unit's movement speed, while also applying attack effects from items and abilities.</description>
+            <description>Throws a dagger slowing the enemy unit's movement speed, dealing 60+25% of Phantom Assassin's attack damage as physical damage and applying attack effects from items and abilities.</description>
             <manaCost>30/25/20/15</manaCost>
             <cooldown>6</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
-            <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
+            <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MOVE SLOW:  50%</abilityDetails>
             <abilityDetails>SLOW DURATION:  1 / 2 / 3 / 4</abilityDetails>
-            <abilityDetails>HERO DAMAGE:  30 / 50 / 70 / 90</abilityDetails>
-            <abilityDetails>CREEP DAMAGE:  60 / 100 / 140 / 180</abilityDetails>
+            <abilityDetails>BASE DAMAGE:  60</abilityDetails>
+            <abilityDetails>ATTACK DAMAGE:  25% / 40% / 55% / 70%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7321,7 +7259,7 @@
             <isMute>false</isMute>
             <imageName>viper_poison_attack_hp2</imageName>
             <name>Poison Attack</name>
-            <description>Intensifies Viper's venom, adding an effect to his normal attack that slows attack and movement speed while dealing damage over time. Poison Attack is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.</description>
+            <description>Intensifies Viper's venom, adding an effect to his normal attack that slows attack and movement speed while dealing damage over time.</description>
             <manaCost>20/20/20/20</manaCost>
             <cooldown>0</cooldown>
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
@@ -7493,6 +7431,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>LIFETIME:  60 / 60 / 60 / 60</abilityDetails>
             <abilityDetails>DAMAGE:  70 / 140 / 210 / 280</abilityDetails>
             <abilityDetails>COUNT:  1 / 2 / 3 / 4</abilityDetails>
         </abilities>
@@ -7621,7 +7560,8 @@
             <cooldown>60/50/40</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Heroes</abilityDetails>
-            <abilityDetails>SCEPTER ALLY CAST RANGE: 1000</abilityDetails>
+            <abilityDetails>SCEPTER COOLDOWN: 16</abilityDetails>
+            <abilityDetails> SCEPTER ALLY CAST RANGE: 1000</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7629,7 +7569,7 @@
         <imageName>spectre</imageName>
         <bioRoles>Melee - Carry - Durable - Escape</bioRoles>
         <intelligence>16 + 1.90</intelligence>
-        <agility>23 + 2.20</agility>
+        <agility>23 + 1.80</agility>
         <strength>19 + 2.00</strength>
         <attack>23 - 27</attack>
         <speed>290</speed>
@@ -7666,7 +7606,7 @@
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  20 / 35 / 50 / 65</abilityDetails>
-            <abilityDetails>RADIUS:  325 / 325 / 325 / 325</abilityDetails>
+            <abilityDetails>RADIUS:  325</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7704,7 +7644,7 @@
             <name>Haunt</name>
             <description>Creates a spectral nemesis to attack each enemy hero after a short delay. At any moment during the duration, Spectre can use Reality to exchange places of a given haunt. Haunt illusions are uncontrollable, take extra damage, and deal less damage than Spectre herself. They move at 400 base movement speed and ignore terrain.</description>
             <manaCost>150/150/150</manaCost>
-            <cooldown>120</cooldown>
+            <cooldown>140/130/120</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>HAUNT DURATION:  5 / 6 / 7</abilityDetails>
@@ -7719,7 +7659,7 @@
         <intelligence>20 + 1.60</intelligence>
         <agility>23 + 1.90</agility>
         <strength>23 + 1.60</strength>
-        <attack>16 - 22</attack>
+        <attack>20 - 26</attack>
         <speed>315</speed>
         <defence>4.22</defence>
         <abilities>
@@ -7852,7 +7792,7 @@
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
-            <isDisable>false</isDisable>
+            <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>nyx_assassin_burrow_hp2</imageName>
@@ -8045,15 +7985,15 @@
             <description>Any enemy units looking at Medusa will have their movement and attack speed slowed. If 2 seconds of total time is accumulated looking at Medusa while Stone Gaze is active, that unit will turn to stone. Petrified units are stunned, have 100% magic damage resistance, and take bonus physical damage. If the petrified unit is an illusion, it is immediately killed.</description>
             <manaCost>200/200/200</manaCost>
             <cooldown>90</cooldown>
-            <disableDuration>DURATION:  6 / 6 / 6</disableDuration>
+            <disableDuration>DURATION:  5 / 6 / 7</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  1000 / 1000 / 1000</abilityDetails>
-            <abilityDetails>DURATION:  6 / 6 / 6</abilityDetails>
-            <abilityDetails>SLOW:  50%</abilityDetails>
-            <abilityDetails>STONE DURATION:  3 / 3 / 3</abilityDetails>
-            <abilityDetails>BONUS PHYSICAL DAMAGE:  30% / 40% / 50%</abilityDetails>
+            <abilityDetails>DURATION:  5 / 6 / 7</abilityDetails>
+            <abilityDetails>SLOW:  35%</abilityDetails>
+            <abilityDetails>STONE DURATION:  3</abilityDetails>
+            <abilityDetails>BONUS PHYSICAL DAMAGE:  50%</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8065,7 +8005,7 @@
         <strength>15 + 1.40</strength>
         <attack>26 - 32</attack>
         <speed>315</speed>
-        <defence>7.08</defence>
+        <defence>10.08</defence>
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
@@ -8139,6 +8079,90 @@
         </abilities>
     </heroInfo>
     <heroInfo>
+        <name>Arc Warden</name>
+        <imageName>arc_warden</imageName>
+        <bioRoles>Ranged - Carry - Escape - Nuker</bioRoles>
+        <intelligence>24 + 2.60</intelligence>
+        <agility>15 + 1.80</agility>
+        <strength>24 + 2.30</strength>
+        <attack>25 - 35</attack>
+        <speed>295</speed>
+        <defence>0.1</defence>
+        <abilities>
+            <isUltimate>false</isUltimate>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
+            <isSilence>false</isSilence>
+            <isMute>false</isMute>
+            <imageName>arc_warden_flux_hp2</imageName>
+            <name>Flux</name>
+            <description>Infuses a lone enemy unit with swirling, volatile energy, slowing its movement speed and dealing damage over time. The effect is muted if another enemy unit is near the target.</description>
+            <manaCost>75</manaCost>
+            <cooldown>20</cooldown>
+            <abilityDetails>ABILITY:  Unit Target</abilityDetails>
+            <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
+            <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>DURATION:  6</abilityDetails>
+            <abilityDetails>DAMAGE PER SECOND:  15 / 30 / 45 / 60</abilityDetails>
+            <abilityDetails>ALLY SEARCH RADIUS:  225</abilityDetails>
+            <abilityDetails>MOVEMENT SPEED SLOW:  35% / 40% / 45% / 50%</abilityDetails>
+            <abilityDetails>CAST RANGE:  600 / 700 / 800 / 900</abilityDetails>
+        </abilities>
+        <abilities>
+            <isUltimate>false</isUltimate>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
+            <isSilence>false</isSilence>
+            <isMute>false</isMute>
+            <imageName>arc_warden_magnetic_field_hp2</imageName>
+            <name>Magnetic Field</name>
+            <description>Generates a circular distortion field of magnetic energy that protects allied heroes and buildings within it by evading attacks coming from outside the field.</description>
+            <manaCost>110</manaCost>
+            <cooldown>35/30/25/20</cooldown>
+            <abilityDetails>ABILITY:  Point Target</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>RADIUS:  275</abilityDetails>
+            <abilityDetails>DURATION:  3.5 / 4.5 / 5.5 / 6.5</abilityDetails>
+            <abilityDetails>ATTACK SPEED BONUS:  50 / 60 / 70 / 80</abilityDetails>
+            <abilityDetails>EVASION BONUS:  100%</abilityDetails>
+        </abilities>
+        <abilities>
+            <isUltimate>false</isUltimate>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
+            <isSilence>false</isSilence>
+            <isMute>false</isMute>
+            <imageName>arc_warden_spark_wraith_hp2</imageName>
+            <name>Spark Wraith</name>
+            <description>Summons a Spark Wraith that slowly materializes and patrols a targeted area until an enemy comes within its range. Once a target has been found the wraith fuses with them, dealing magical damage and purging the unit.</description>
+            <manaCost>80</manaCost>
+            <cooldown>4</cooldown>
+            <abilityDetails>ABILITY:  Point Target</abilityDetails>
+            <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>SEARCH RADIUS:  375</abilityDetails>
+            <abilityDetails>ACTIVATION DELAY:  2</abilityDetails>
+            <abilityDetails>DURATION:  50</abilityDetails>
+            <abilityDetails>WRAITH SPEED:  400</abilityDetails>
+            <abilityDetails>DAMAGE:  100 / 160 / 220 / 280</abilityDetails>
+            <abilityDetails>PURGE DURATION:  0.4 / 0.5 / 0.6 / 0.7</abilityDetails>
+        </abilities>
+        <abilities>
+            <isUltimate>true</isUltimate>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
+            <isSilence>false</isSilence>
+            <isMute>false</isMute>
+            <imageName>arc_warden_tempest_double_hp2</imageName>
+            <name>Tempest Double</name>
+            <description>Briefly refocusing its fractured elements into a single form, the Arc Warden is able to create a perfect electrical duplication of itself. The duplicate can use all of Arc Warden's current items and spells, except items that drop on death. The duplicate has seperate item and ability cooldowns.</description>
+            <cooldown>50/40/30</cooldown>
+            <abilityDetails>ABILITY:  No Target</abilityDetails>
+            <abilityDetails>DURATION:  12 / 13 / 14</abilityDetails>
+        </abilities>
+    </heroInfo>
+    <heroInfo>
         <name>Bane</name>
         <imageName>bane</imageName>
         <bioRoles>Ranged - Support - Disabler - Nuker - Durable</bioRoles>
@@ -8157,7 +8181,7 @@
             <imageName>bane_enfeeble_hp2</imageName>
             <name>Enfeeble</name>
             <description>Weakens an enemy unit, reducing its physical damage. Lasts 20 seconds.</description>
-            <manaCost>95/105/115/125</manaCost>
+            <manaCost>95</manaCost>
             <cooldown>8</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -8348,13 +8372,13 @@
             <description>Rock spikes burst from the earth along a straight path. Enemy units are hurled into the air, then are stunned and take damage when they fall.</description>
             <manaCost>100/120/140/160</manaCost>
             <cooldown>12</cooldown>
-            <disableDuration>DURATION:  1.1 / 1.6 / 2.1 / 2.6</disableDuration>
+            <disableDuration>STUN DURATION:  1.1 / 1.6 / 2.1 / 2.6</disableDuration>
             <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  80 / 140 / 200 / 260</abilityDetails>
-            <abilityDetails>DURATION:  1.1 / 1.6 / 2.1 / 2.6</abilityDetails>
+            <abilityDetails>STUN DURATION:  1.1 / 1.6 / 2.1 / 2.6</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8648,7 +8672,7 @@
             <isMute>false</isMute>
             <imageName>necrolyte_reapers_scythe_hp2</imageName>
             <name>Reaper's Scythe</name>
-            <description>Stuns the target enemy hero, then deals damage based on how much life it is missing. Heroes killed by Reaper's Scythe will have 30 seconds added to their respawn timer. Any kill under this effect is credited to Necrophos. Upgradable by Aghanim's Scepter.</description>
+            <description>Stuns the target enemy hero, then deals damage based on how much life it is missing. Heroes killed by Reaper's Scythe will have 10 seconds added to their respawn timer. Any kill under this effect is credited to Necrophos. Upgradable by Aghanim's Scepter.</description>
             <manaCost>175/340/500</manaCost>
             <cooldown>100/85/70</cooldown>
             <disableDuration>STUN DURATION:  1.5 / 1.5 / 1.5</disableDuration>
@@ -8656,12 +8680,12 @@
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>DAMAGE PER MISSING HP:  0.4 / 0.6 / 0.9</abilityDetails>
+            <abilityDetails>DAMAGE PER MISSING HP:  0.6 / 0.75 / 0.9</abilityDetails>
             <abilityDetails>STUN DURATION:  1.5 / 1.5 / 1.5</abilityDetails>
             <abilityDetails> SCEPTER MANA COST: 150 / 340 / 500</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 70</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE PER MISSING HP: 0.6 / 0.9 / 1.2</abilityDetails>
-            <abilityDetails>ADDED RESPAWN TIME:  30</abilityDetails>
+            <abilityDetails>ADDED RESPAWN TIME:  10 / 20 / 30</abilityDetails>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8684,7 +8708,7 @@
             <name>Fatal Bonds</name>
             <description>Binds several enemy units together, causing 25% of the damage dealt to one of them to be felt by the others.</description>
             <manaCost>120/120/120/120</manaCost>
-            <cooldown>25</cooldown>
+            <cooldown>24/22/20/18</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -8840,9 +8864,9 @@
         <name>Death Prophet</name>
         <imageName>death_prophet</imageName>
         <bioRoles>Ranged - Carry - Pusher - Nuker - Disabler</bioRoles>
-        <intelligence>20 + 3.00</intelligence>
+        <intelligence>23 + 3.00</intelligence>
         <agility>14 + 1.40</agility>
-        <strength>19 + 1.90</strength>
+        <strength>18 + 1.90</strength>
         <attack>24 - 36</attack>
         <speed>310</speed>
         <defence>2.96</defence>
@@ -8888,15 +8912,15 @@
             <isMute>false</isMute>
             <imageName>death_prophet_spirit_siphon_hp2</imageName>
             <name>Spirit Siphon</name>
-            <description>Creates a spirit link between Death Prophet and an enemy unit, draining 20 + 1% Max HP per second and slowing the enemy's movement speed by 6%.</description>
+            <description>Creates a spirit link between Death Prophet and an enemy unit, draining 25 + 1% Max HP per second and slowing the enemy's movement speed by 5%.</description>
             <manaCost>70/65/60/55</manaCost>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
-            <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>BASE DAMAGE:  20</abilityDetails>
-            <abilityDetails>MAX HP AS DAMAGE:  1% / 2% / 3% / 4%</abilityDetails>
-            <abilityDetails>DURATION:  5</abilityDetails>
+            <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>BASE DAMAGE:  25</abilityDetails>
+            <abilityDetails>MAX HP AS DAMAGE:  1% / 2.5% / 4% / 5.5%</abilityDetails>
+            <abilityDetails>DURATION:  6</abilityDetails>
             <abilityDetails>ENEMY SLOW:  5% / 10% / 15% / 20%</abilityDetails>
             <abilityDetails>MAX CHARGES:  1 / 2 / 3 / 4</abilityDetails>
             <abilityDetails>CHARGE RESTORE TIME:  45</abilityDetails>
@@ -9378,7 +9402,7 @@
             <name>Cold Feet</name>
             <description>Places a frozen hex on an enemy unit that deals damage over time, but can be dispelled by moving away from the initial cast point. If the enemy unit doesn't move outside of the given range, it will be stunned and frozen in place after 4 seconds.</description>
             <manaCost>150/150/150/150</manaCost>
-            <cooldown>15/13/11/9</cooldown>
+            <cooldown>13/11/9/7</cooldown>
             <disableDuration>STUN DURATION:  1.25 / 2 / 2.75 / 3.5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -9462,12 +9486,12 @@
         <name>Invoker</name>
         <imageName>invoker</imageName>
         <bioRoles>Ranged - Carry - Nuker - Disabler - Escape - Pusher</bioRoles>
-        <intelligence>22 + 4.00</intelligence>
-        <agility>20 + 1.90</agility>
-        <strength>19 + 1.70</strength>
-        <attack>13 - 19</attack>
+        <intelligence>16 + 4.00</intelligence>
+        <agility>14 + 1.90</agility>
+        <strength>17 + 1.70</strength>
+        <attack>19 - 25</attack>
         <speed>280</speed>
-        <defence>1.8</defence>
+        <defence>0.96</defence>
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
@@ -9552,7 +9576,7 @@
             <name>Ghost Walk</name>
             <description>Invoker manipulates the ice and electrical energies around him, rendering his body invisible. The elemental imbalance created as a consequence slows nearby enemies based on the level of Quas, and slows Invoker as well based on the level of Wex.</description>
             <manaCost>200</manaCost>
-            <cooldown>35</cooldown>
+            <cooldown>45</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DURATION:  100</abilityDetails>
@@ -9652,7 +9676,7 @@
             <isMute>false</isMute>
             <imageName>invoker_forge_spirit_hp2</imageName>
             <name>Forge Spirit</name>
-            <description>Invoker forges a spirit embodying the strength of fire and fortitude of ice. Damage, health, and armor are based on the level of Exort while attack range, mana, and duration are based on the level of Quas. The elemental's scorching attack is capable of melting the armor of enemy heroes. If both Quas and Exort are level 4 or higher, Invoker will create two spirits instead of one.</description>
+            <description>Invoker forges a spirit embodying the strength of fire and fortitude of ice. Damage, mana, and armor are based on the level of Exort while attack range, health, and duration are based on the level of Quas. The elemental's scorching attack is capable of melting the armor of enemy heroes. If both Quas and Exort are level 4 or higher, Invoker will create two spirits instead of one.</description>
             <manaCost>75</manaCost>
             <cooldown>30</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -9690,6 +9714,17 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>TRAVEL DISTANCE:  1000</abilityDetails>
         </abilities>
+        <abilities>
+            <isUltimate>false</isUltimate>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
+            <isSilence>false</isSilence>
+            <isMute>false</isMute>
+            <imageName>invoker_attribute_bonus_hp2</imageName>
+            <name>invoker_attribute_bonus</name>
+            <description>DOTA_Tooltip_ability_invoker_attribute_bonus_Description</description>
+            <abilityDetails>ABILITY:  Passive</abilityDetails>
+        </abilities>
     </heroInfo>
     <heroInfo>
         <name>Outworld Devourer</name>
@@ -9710,14 +9745,13 @@
             <imageName>obsidian_destroyer_arcane_orb_hp2</imageName>
             <name>Arcane Orb</name>
             <description>Adds extra pure damage to Outworld Devourer's attacks, based on his remaining mana pool. Steals 1 intelligence for 50 seconds per hit when attacking an enemy hero. Arcane Orb also does bonus damage to summoned units and illusions. Arcane Orb is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.</description>
-            <manaCost>100/100/100/100</manaCost>
+            <manaCost>100/120/140/160</manaCost>
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MANA POOL TO DAMAGE:  6% / 7% / 8% / 9%</abilityDetails>
-            <abilityDetails>ILLUSION DAMAGE:  100 / 200 / 300 / 400</abilityDetails>
-            <abilityDetails>INTELLIGENCE STEAL:  2 / 3 / 4 / 5</abilityDetails>
+            <abilityDetails>INTELLIGENCE STEAL:  1 / 2 / 3 / 4</abilityDetails>
             <abilityDetails>STEAL DURATION:  50</abilityDetails>
         </abilities>
         <abilities>
@@ -9800,7 +9834,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>BANISH DURATION:  2.5 / 2.5 / 2.5 / 2.5</abilityDetails>
             <abilityDetails>ILLUSION DURATION:  6 / 8 / 10 / 12</abilityDetails>
-            <abilityDetails>ILLUSION DAMAGE:  30% / 40% / 50% / 60%</abilityDetails>
+            <abilityDetails>ILLUSION DAMAGE:  30% / 45% / 60% / 75%</abilityDetails>
             <abilityDetails>ILLUSION DAMAGE TAKEN:  150% / 150% / 150% / 150%</abilityDetails>
         </abilities>
         <abilities>
@@ -9813,7 +9847,7 @@
             <name>Soul Catcher</name>
             <description>Curses a random enemy in an area to take increased damage. Units under the effect of Disruption can still be affected by Soul Catcher.</description>
             <manaCost>50/60/70/80</manaCost>
-            <cooldown>13</cooldown>
+            <cooldown>13/12/11/10</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -9936,7 +9970,7 @@
             <abilityDetails>ARMOR PER LAYER:  1 / 2 / 4 / 5</abilityDetails>
             <abilityDetails>RESIST PER LAYER:  3% / 6% / 12% / 16%</abilityDetails>
             <abilityDetails>MAX LAYERS:  4</abilityDetails>
-            <abilityDetails>LAYER RECOVERY TIME:  4</abilityDetails>
+            <abilityDetails>LAYER RECOVERY TIME:  3</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -9976,7 +10010,7 @@
             <isMute>false</isMute>
             <imageName>winter_wyvern_arctic_burn_hp2</imageName>
             <name>Arctic Burn</name>
-            <description>Winter Wyvern soars upon an arctic wind, granting her unobstructed movement and allowing her to exhale a blistering chill into each attack. While soaring, her attacks travel further and faster, and slow enemies with a magical freeze that strips them of 8% of their current health each second. Her sight is also hardened against night's chill, granting her 400% additional vision range at night while soaring.</description>
+            <description>Winter Wyvern soars upon an arctic wind, granting her unobstructed movement and allowing her to exhale a blistering chill into each attack. While soaring, her attacks travel further and faster, and slow enemies with a magical freeze that strips them of 8% of their current health each second. Her sight is also hardened against night's chill, granting her 400 additional vision range at night while soaring. Upgradable by Aghanim's Scepter, causing Arctic Burn to be a toggle ability, draining 40 mana per second when active. Removes limit on number of attacks per target.</description>
             <manaCost>120/110/100/90</manaCost>
             <cooldown>50/40/30/20</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -9988,6 +10022,7 @@
             <abilityDetails>BURN DURATION:  5</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  19% / 26% / 33% / 40%</abilityDetails>
             <abilityDetails>ADDED NIGHT VISION RANGE:  400</abilityDetails>
+            <abilityDetails> SCEPTER MANA PER SECOND: 40</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10038,7 +10073,7 @@
             <name>Winter's Curse</name>
             <description>Winter Wyvern freezes an enemy in place while striking those nearby with a maddening curse which causes them to attack their frozen ally with increased attack speed. The frozen ally and those cursed to attack their ally are immune to all damage from their enemies.</description>
             <manaCost>250</manaCost>
-            <cooldown>120/110/100</cooldown>
+            <cooldown>90</cooldown>
             <disableDuration>CURSE DURATION:  3.25 / 4 / 4.75</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
