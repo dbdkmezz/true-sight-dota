@@ -2571,7 +2571,7 @@
         <name>Vengeful Spirit</name>
         <imageName>vengefulspirit</imageName>
         <bioRoles>Ranged - Support - Initiator - Disabler - Nuker - Escape</bioRoles>
-        <intelligence>15 + 1.75</intelligence>
+        <intelligence>13 + 1.5</intelligence>
         <agility>27 + 3.30</agility>
         <strength>18 + 2.60</strength>
         <attack>12 - 26</attack>
@@ -3013,7 +3013,7 @@
             <cooldown>12/10/8/6</cooldown>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>CRITICAL DAMAGE:  150% / 175% / 200% / 225%</abilityDetails>
-            <abilityDetails>MOVE SLOW:  25% / 27% / 29% / 31%</abilityDetails>
+            <abilityDetails>MOVE SLOW:  15% / 20% / 25% / 30%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  25 / 27 / 29 / 31</abilityDetails>
             <abilityDetails>DURATION:  3 / 3 / 3 / 3</abilityDetails>
         </abilities>
@@ -3817,7 +3817,7 @@
         <name>Storm Spirit</name>
         <imageName>storm_spirit</imageName>
         <bioRoles>Ranged - Carry - Escape - Nuker - Initiator - Disabler</bioRoles>
-        <intelligence>23 + 2.60</intelligence>
+        <intelligence>24 + 3.0</intelligence>
         <agility>22 + 1.80</agility>
         <strength>19 + 1.50</strength>
         <attack>22 - 32</attack>
@@ -5721,7 +5721,7 @@
         <agility>17 + 2.40</agility>
         <strength>21 + 2.80</strength>
         <attack>30 - 38</attack>
-        <speed>300</speed>
+        <speed>295</speed>
         <defence>5.38</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6218,14 +6218,14 @@
             <isMute>false</isMute>
             <imageName>doom_bringer_infernal_blade_hp2</imageName>
             <name>Infernal Blade</name>
-            <description>Doom swings his burning sword, igniting the enemy. Stuns for 0.3 seconds and applies a 4 second burn that deals 40 + 1.25% of the target's Max HP as damage per second.</description>
+            <description>Doom swings his burning sword, igniting the enemy. Stuns for 0.3 seconds and applies a 4 second burn that deals 25/30/35/40 + 1.25% of the target's Max HP as damage per second.</description>
             <manaCost>40</manaCost>
             <cooldown>16/12/8/4</cooldown>
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>BASE BURN DAMAGE:  40</abilityDetails>
+            <abilityDetails>BASE BURN DAMAGE:  25 / 30 / 35 / 40</abilityDetails>
             <abilityDetails>MAX HP AS DAMAGE:  1.25% / 2.5% / 3.75% / 5%</abilityDetails>
             <abilityDetails>BURN DURATION:  4</abilityDetails>
             <abilityDetails>STUN DURATION:  0.3</abilityDetails>
@@ -7193,7 +7193,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MOVE SLOW:  50%</abilityDetails>
             <abilityDetails>SLOW DURATION:  1 / 2 / 3 / 4</abilityDetails>
-            <abilityDetails>BASE DAMAGE:  60</abilityDetails>
+            <abilityDetails>BASE DAMAGE:  75</abilityDetails>
             <abilityDetails>ATTACK DAMAGE:  25% / 40% / 55% / 70%</abilityDetails>
         </abilities>
         <abilities>
@@ -8039,7 +8039,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>ILLUSION DURATION:  32</abilityDetails>
             <abilityDetails>ILLUSION DAMAGE:  30% / 40% / 50% / 60%</abilityDetails>
-            <abilityDetails>ILLUSION DAMAGE TAKEN:  425%</abilityDetails>
+            <abilityDetails>ILLUSION DAMAGE TAKEN:  400%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8055,7 +8055,6 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DURATION:  40 / 44 / 48 / 52</abilityDetails>
             <abilityDetails>TRANSFORMATION TIME:  0.35</abilityDetails>
-            <abilityDetails>BASE ATTACK TIME:  1.6</abilityDetails>
             <abilityDetails>ATTACK RANGE:  550</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  20 / 40 / 60 / 80</abilityDetails>
             <abilityDetails>MOVEMENT SPEED LOSS:  25</abilityDetails>
@@ -8085,7 +8084,7 @@
         <intelligence>24 + 2.60</intelligence>
         <agility>15 + 1.80</agility>
         <strength>24 + 2.30</strength>
-        <attack>25 - 35</attack>
+        <attack>29 - 39</attack>
         <speed>295</speed>
         <defence>0.1</defence>
         <abilities>
@@ -8321,10 +8320,10 @@
             <name>Sacrifice</name>
             <description>Sacrifices a friendly creep and converts its current hit points into mana for Lich.</description>
             <manaCost>25/25/25/25</manaCost>
-            <cooldown>44/36/28/20</cooldown>
+            <cooldown>60/50/40/30</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
-            <abilityDetails>HEALTH CONVERSION:  25% / 40% / 55% / 70%</abilityDetails>
+            <abilityDetails>HEALTH CONVERSION:  30% / 50% / 70% / 90%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
