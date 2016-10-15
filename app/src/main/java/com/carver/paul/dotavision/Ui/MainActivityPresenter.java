@@ -24,18 +24,20 @@ import android.graphics.BitmapFactory;
 
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.Models.DataManager;
+import com.carver.paul.dotavision.Models.IInfoPresenter_Data;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivityPresenter {
     private final MainActivity mView;
     private final HeroesDetectedPresenter mHeroesDetectedPresenter;
-    private final AbilityInfoPresenter mAbilityInfoPresenter;
-    private final CounterPickerPresenter mCounterPickerPresenter;
+    private final List<IInfoPresenter_P> mInfoPresenters;
     private final DataManager mDataManager;
     private boolean heroInfoShown = false;
 
@@ -45,11 +47,10 @@ public class MainActivityPresenter {
                                  CounterPickerPresenter counterPickerPresenter) {
         mView = view;
         mHeroesDetectedPresenter = heroesDetectedPresenter;
-        mAbilityInfoPresenter = abilityInfoPresenter;
-        mCounterPickerPresenter = counterPickerPresenter;
+        mInfoPresenters = Arrays.asList((IInfoPresenter_P)abilityInfoPresenter, counterPickerPresenter);
 
         mDataManager = new DataManager(this, heroesDetectedPresenter,
-                Arrays.asList(mAbilityInfoPresenter, mCounterPickerPresenter));
+                Arrays.asList((IInfoPresenter_Data)abilityInfoPresenter, counterPickerPresenter));
 
         heroesDetectedPresenter.setDataManger(mDataManager);
 
@@ -69,9 +70,8 @@ public class MainActivityPresenter {
 
         if(!heroInfoShown) {
             mView.hideTip();
-            mView.showPager();
-            mCounterPickerPresenter.show();
-            mAbilityInfoPresenter.show();
+            mView.showPager();;
+            for(IInfoPresenter_P p : mInfoPresenters) p.show();
             heroInfoShown = true;
         }
     }
@@ -79,7 +79,7 @@ public class MainActivityPresenter {
     public void doImageRecognition(Bitmap photo) {
         mView.hideClearFab();
         mHeroesDetectedPresenter.reset();
-        mCounterPickerPresenter.removeAllRows();
+        for(IInfoPresenter_P p : mInfoPresenters) p.reset();
 
         mDataManager.identifyHeroesInPhoto(photo);
     }
@@ -93,15 +93,13 @@ public class MainActivityPresenter {
     }
 
     public void startHeroRecognitionLoadingAnimations(Bitmap photo) {
-        mCounterPickerPresenter.hide();
-        mAbilityInfoPresenter.hide();
+        for(IInfoPresenter_P p : mInfoPresenters) p.hide();
         mView.startHeroRecognitionLoadingAnimations(photo);
     }
 
     public void showPager() {
         mView.showPager();
-        mCounterPickerPresenter.show();
-        mAbilityInfoPresenter.show();
+        for(IInfoPresenter_P p : mInfoPresenters) p.show();
     }
 
     public boolean isNetworkAvailable() {
@@ -119,8 +117,7 @@ public class MainActivityPresenter {
 
         mHeroesDetectedPresenter.reset();
         mHeroesDetectedPresenter.showWithoutRecyclers();
-        mCounterPickerPresenter.reset();
-        mAbilityInfoPresenter.reset();
+        for(IInfoPresenter_P p : mInfoPresenters) p.reset();
         mView.scrollToTop();
     }
 

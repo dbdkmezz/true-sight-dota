@@ -24,8 +24,9 @@ import android.util.Pair;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.carver.paul.dotavision.Models.HeroInfo;
-import com.carver.paul.dotavision.Models.IInfoPresenter;
+import com.carver.paul.dotavision.Models.IInfoPresenter_Data;
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.IInfoPresenter_P;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func2;
 
-public class CounterPickerPresenter implements IInfoPresenter {
+public class CounterPickerPresenter implements IInfoPresenter_Data, IInfoPresenter_P {
     private static final String TAG = "CounterPickerPresenter";
     private static final int MAX_COUNTERS_TO_SHOW = 2005;
 
@@ -60,6 +61,7 @@ public class CounterPickerPresenter implements IInfoPresenter {
     }
 
     public void reset() {
+        unsubscribeRowAddingSubscriber();
         mView.reset();
     }
 
@@ -77,7 +79,8 @@ public class CounterPickerPresenter implements IInfoPresenter {
 
     public void removeAllRows() {
         unsubscribeRowAddingSubscriber();
-        mView.removeAllRows();
+        //mView.removeAllRows();
+        mView.reset();
     }
 
     protected void setRoleFilter(int roleFilter) {

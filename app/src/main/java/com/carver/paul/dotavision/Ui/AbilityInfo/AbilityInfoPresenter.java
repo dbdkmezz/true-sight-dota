@@ -21,8 +21,9 @@ package com.carver.paul.dotavision.Ui.AbilityInfo;
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.carver.paul.dotavision.Models.HeroInfo;
-import com.carver.paul.dotavision.Models.IInfoPresenter;
+import com.carver.paul.dotavision.Models.IInfoPresenter_Data;
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.IInfoPresenter_P;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ import java.util.List;
  *
  * When clicked the cards will expand to show more information about the ability.
  */
-public class AbilityInfoPresenter implements IInfoPresenter {
+public class AbilityInfoPresenter implements IInfoPresenter_Data, IInfoPresenter_P {
     private AbilityInfoFragment mView;
 
     AbilityInfoPresenter(AbilityInfoFragment view) {

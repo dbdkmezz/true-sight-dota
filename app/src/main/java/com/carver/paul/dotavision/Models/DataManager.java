@@ -58,7 +58,7 @@ public class DataManager {
 
     private final MainActivityPresenter mMainActivityPresenter;
     private final HeroesDetectedPresenter mHeroesDetectedPresenter;
-    private final List<IInfoPresenter> mInfoPresenters;
+    private final List<IInfoPresenter_Data> mInfoPresenters;
 
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
@@ -81,7 +81,7 @@ public class DataManager {
      */
     public DataManager(final MainActivityPresenter mainActivityPresenter,
                        final HeroesDetectedPresenter heroesDetectedPresenter,
-                       final List<IInfoPresenter> infoPresenters) {
+                       final List<IInfoPresenter_Data> infoPresenters) {
         mMainActivityPresenter = mainActivityPresenter;
         mHeroesDetectedPresenter = heroesDetectedPresenter;
         mInfoPresenters = infoPresenters;
@@ -97,7 +97,7 @@ public class DataManager {
         if(mMainActivityPresenter == null || mHeroesDetectedPresenter == null)
             return false;
 
-        for(IInfoPresenter p : mInfoPresenters)
+        for(IInfoPresenter_Data p : mInfoPresenters)
             if(p == null)
                 return false;
 
@@ -122,7 +122,7 @@ public class DataManager {
         mMainActivityPresenter.startHeroRecognitionLoadingAnimations(photo);
 
         mHeroesDetectedPresenter.reset();
-        for(IInfoPresenter p : mInfoPresenters) p.reset();
+        for(IInfoPresenter_Data p : mInfoPresenters) p.reset();
 
         /**
          * This is where the magic happens! Recognising the heroes in the photos goes through the
@@ -198,7 +198,7 @@ public class DataManager {
 
         if (completelyNewList) {
             mLastAdvantageData = null;
-            for(IInfoPresenter p : mInfoPresenters) p.prepareForFreshList();
+            for(IInfoPresenter_Data p : mInfoPresenters) p.prepareForFreshList();
         }
         updateCounterPicker(heroInfoList);
     }
@@ -241,7 +241,7 @@ public class DataManager {
             @Override
             public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
                 mLastAdvantageData = new Pair<>(heroNames, heroAndAdvantages);
-                for(IInfoPresenter p : mInfoPresenters)
+                for(IInfoPresenter_Data p : mInfoPresenters)
                     p.showHeroInfo(heroInfoList, heroAndAdvantages);
             }
         };
