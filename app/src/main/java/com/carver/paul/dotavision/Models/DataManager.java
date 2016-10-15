@@ -28,8 +28,6 @@ import com.carver.paul.dotavision.ImageRecognition.RecognitionModel;
 import com.carver.paul.dotavision.ImageRecognition.SimilarityTest;
 import com.carver.paul.dotavision.Models.AdvantagesDownloader.Downloader;
 import com.carver.paul.dotavision.R;
-import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
-import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 import com.carver.paul.dotavision.Ui.MainActivityPresenter;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
@@ -60,8 +58,7 @@ public class DataManager {
 
     private final MainActivityPresenter mMainActivityPresenter;
     private final HeroesDetectedPresenter mHeroesDetectedPresenter;
-    private final IInfoPresenter mAbilityInfoPresenter;
-    private final IInfoPresenter mCounterPickerPresenter;
+    private final List<IInfoPresenter> mInfoPresenters;
 
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
@@ -84,12 +81,10 @@ public class DataManager {
      */
     public DataManager(final MainActivityPresenter mainActivityPresenter,
                        final HeroesDetectedPresenter heroesDetectedPresenter,
-                       final AbilityInfoPresenter abilityInfoPresenter,
-                       final CounterPickerPresenter counterPickerPresenter) {
+                       final List<IInfoPresenter> infoPresenters) {
         mMainActivityPresenter = mainActivityPresenter;
         mHeroesDetectedPresenter = heroesDetectedPresenter;
-        mAbilityInfoPresenter = abilityInfoPresenter;
-        mCounterPickerPresenter = counterPickerPresenter;
+        mInfoPresenters = infoPresenters;
 
         startXmlLoading();
         startSimilarityTestLoading();
@@ -99,10 +94,14 @@ public class DataManager {
     }
 
     public boolean presentersRegistered() {
-        return (mMainActivityPresenter != null
-                && mHeroesDetectedPresenter != null
-                && mAbilityInfoPresenter != null
-                && mCounterPickerPresenter != null);
+        if(mMainActivityPresenter == null || mHeroesDetectedPresenter == null)
+            return false;
+
+        for(IInfoPresenter p : mInfoPresenters)
+            if(p == null)
+                return false;
+
+        return true;
     }
 
     /**
@@ -123,8 +122,7 @@ public class DataManager {
         mMainActivityPresenter.startHeroRecognitionLoadingAnimations(photo);
 
         mHeroesDetectedPresenter.reset();
-        mAbilityInfoPresenter.reset();
-        mCounterPickerPresenter.reset();
+        for(IInfoPresenter p : mInfoPresenters) p.reset();
 
         /**
          * This is where the magic happens! Recognising the heroes in the photos goes through the
@@ -200,7 +198,7 @@ public class DataManager {
 
         if (completelyNewList) {
             mLastAdvantageData = null;
-            mCounterPickerPresenter.prepareForFreshList();
+            for(IInfoPresenter p : mInfoPresenters) p.prepareForFreshList();
         }
         updateCounterPicker(heroInfoList);
     }
@@ -243,8 +241,8 @@ public class DataManager {
             @Override
             public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
                 mLastAdvantageData = new Pair<>(heroNames, heroAndAdvantages);
-                mCounterPickerPresenter.showHeroInfo(heroInfoList, heroAndAdvantages);
-                mAbilityInfoPresenter.showHeroInfo(heroInfoList, heroAndAdvantages);
+                for(IInfoPresenter p : mInfoPresenters)
+                    p.showHeroInfo(heroInfoList, heroAndAdvantages);
             }
         };
     }

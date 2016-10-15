@@ -29,6 +29,7 @@ import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class MainActivityPresenter {
     private final MainActivity mView;
@@ -48,8 +49,7 @@ public class MainActivityPresenter {
         mCounterPickerPresenter = counterPickerPresenter;
 
         mDataManager = new DataManager(this, heroesDetectedPresenter,
-                abilityInfoPresenter,
-                counterPickerPresenter);
+                Arrays.asList(mAbilityInfoPresenter, mCounterPickerPresenter));
 
         heroesDetectedPresenter.setDataManger(mDataManager);
 
