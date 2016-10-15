@@ -40,9 +40,11 @@ public class HeroAbilityInfo {
     public String cooldown;
     public String disableDuration;
     public List<String> abilityDetails;
+    public List<RemovableBuff> removableDebuffs;
 
     public HeroAbilityInfo() {
         abilityDetails = new ArrayList<>();
+        removableDebuffs = new ArrayList<>();
     }
 
     //TODO: save silence durations in the XML too
@@ -84,4 +86,10 @@ public class HeroAbilityInfo {
         return null;
     }
 
+    public static class RemovableBuff {
+        public String description;
+        public boolean basicDispel;
+        public boolean strongDispel;
+        public boolean spellImmunity;
+    }
 }

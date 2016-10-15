@@ -29,6 +29,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 //TODO-someday: Consider switching to sqlite database for hero info instead of an XML file
@@ -126,7 +127,6 @@ public class LoadHeroXml {
 
 
         while (parser.next() != XmlPullParser.END_TAG) {
-            //String name = parser.getName();
             if (parser.getName().equals("isStun")) {
                 ability.isStun = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "isStun");
@@ -163,6 +163,9 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("abilityDetails")) {
                 ability.abilityDetails.add(readText(parser));
                 parser.require(XmlPullParser.END_TAG, sNullString, "abilityDetails");
+            } else if (parser.getName().equals("removableDebuffs")) {
+                ability.removableDebuffs.add(LoadHeroDebuffs(parser));
+                parser.require(XmlPullParser.END_TAG, sNullString, "removableDebuffs");
             } else {
                 throw new RuntimeException("Loading XML Error, in LoadHeroAbilities. Name:" + parser.getName());
             }
@@ -170,6 +173,32 @@ public class LoadHeroXml {
 
         parser.require(XmlPullParser.END_TAG, sNullString, "abilities");
         return ability;
+    }
+
+    static private HeroAbilityInfo.RemovableBuff LoadHeroDebuffs(XmlResourceParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, sNullString, "removableDebuffs");
+        HeroAbilityInfo.RemovableBuff debuff = new HeroAbilityInfo.RemovableBuff();
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getName().equals("description")) {
+                debuff.description = readText(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "description");
+            } else if (parser.getName().equals("basicDispel")) {
+                debuff.basicDispel = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "basicDispel");
+            } else if (parser.getName().equals("strongDispel")) {
+                debuff.strongDispel = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "strongDispel");
+            } else if (parser.getName().equals("spellImmunity")) {
+                debuff.spellImmunity = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "spellImmunity");
+            } else {
+                throw new RuntimeException("Loading XML Error, in LoadHeroDebuffs. Name:" + parser.getName());
+            }
+        }
+
+        parser.require(XmlPullParser.END_TAG, sNullString, "removableDebuffs");
+        return debuff;
     }
 
     private static boolean readBoolean(XmlPullParser parser) throws IOException, XmlPullParserException {
