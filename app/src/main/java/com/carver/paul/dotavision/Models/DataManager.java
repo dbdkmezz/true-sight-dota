@@ -197,7 +197,6 @@ public class DataManager {
 
     public void sendUpdatedHeroList(List<HeroInfo> heroInfoList, boolean completelyNewList) {
         mMainActivityPresenter.updateHeroList();
-        mAbilityInfoPresenter.showHeroAbilities(heroInfoList);
 
         if (completelyNewList) {
             mLastAdvantageData = null;
@@ -244,7 +243,8 @@ public class DataManager {
             @Override
             public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
                 mLastAdvantageData = new Pair<>(heroNames, heroAndAdvantages);
-                mCounterPickerPresenter.showAdvantages(heroAndAdvantages, heroInfoList);
+                mCounterPickerPresenter.showHeroInfo(heroInfoList, heroAndAdvantages);
+                mAbilityInfoPresenter.showHeroInfo(heroInfoList, heroAndAdvantages);
             }
         };
     }

@@ -19,6 +19,7 @@
 package com.carver.paul.dotavision.Ui.AbilityInfo;
 
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
+import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.Models.IInfoPresenter;
 import com.carver.paul.dotavision.R;
@@ -51,7 +52,7 @@ public class AbilityInfoPresenter implements IInfoPresenter {
      * Gets the AbilityInfoFragment to show ability cards for all of heroes' abilities
      * @param heroes    The list of heroes whose abilities to show.
      */
-    public void showHeroAbilities(List<HeroInfo> heroes) {
+    public void showHeroInfo(List<HeroInfo> heroes, List<HeroAndAdvantages> advantageData) {
         mView.reset();
 
         List<HeroAbilityInfo> stunAbilities = new ArrayList<>();
