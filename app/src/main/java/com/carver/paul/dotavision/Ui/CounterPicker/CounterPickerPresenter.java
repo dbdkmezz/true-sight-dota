@@ -24,6 +24,7 @@ import android.util.Pair;
 import com.carver.paul.dotavision.ImageRecognition.ImageTools;
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.carver.paul.dotavision.Models.HeroInfo;
+import com.carver.paul.dotavision.Models.IInfoPresenter;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func2;
 
-public class CounterPickerPresenter {
+public class CounterPickerPresenter implements IInfoPresenter {
     private static final String TAG = "CounterPickerPresenter";
     private static final int MAX_COUNTERS_TO_SHOW = 2005;
 
@@ -50,8 +51,8 @@ public class CounterPickerPresenter {
         mView = view;
     }
 
-    public void showAdvantages(List<HeroAndAdvantages> heroesAndAdvantages,
-                               List<HeroInfo> enemyHeroes) {
+    public void showHeroInfo(List<HeroInfo> enemyHeroes,
+                             List<HeroAndAdvantages> heroesAndAdvantages) {
         mHeroesAndAdvantages = heroesAndAdvantages;
         mEnemyHeroes = enemyHeroes;
         removeAllRows();
@@ -70,7 +71,7 @@ public class CounterPickerPresenter {
         mView.show();
     }
 
-    public void startLoadingAnimation() {
+    public void prepareForFreshList() {
         mView.startLoadingAnimation();
     }
 

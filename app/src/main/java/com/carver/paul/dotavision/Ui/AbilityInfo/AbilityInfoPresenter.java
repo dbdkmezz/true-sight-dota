@@ -20,6 +20,7 @@ package com.carver.paul.dotavision.Ui.AbilityInfo;
 
 import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.Models.HeroInfo;
+import com.carver.paul.dotavision.Models.IInfoPresenter;
 import com.carver.paul.dotavision.R;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ import java.util.List;
  *
  * When clicked the cards will expand to show more information about the ability.
  */
-public class AbilityInfoPresenter {
+public class AbilityInfoPresenter implements IInfoPresenter {
     private AbilityInfoFragment mView;
 
     AbilityInfoPresenter(AbilityInfoFragment view) {
@@ -43,6 +44,8 @@ public class AbilityInfoPresenter {
     public void reset() {
         mView.reset();
     }
+
+    public void prepareForFreshList() {}
 
     /**
      * Gets the AbilityInfoFragment to show ability cards for all of heroes' abilities

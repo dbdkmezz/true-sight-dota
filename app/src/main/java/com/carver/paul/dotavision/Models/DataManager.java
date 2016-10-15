@@ -60,8 +60,8 @@ public class DataManager {
 
     private final MainActivityPresenter mMainActivityPresenter;
     private final HeroesDetectedPresenter mHeroesDetectedPresenter;
-    private final AbilityInfoPresenter mAbilityInfoPresenter;
-    private final CounterPickerPresenter mCounterPickerPresenter;
+    private final IInfoPresenter mAbilityInfoPresenter;
+    private final IInfoPresenter mCounterPickerPresenter;
 
     private AsyncSubject<List<HeroInfo>> mXmlInfoRx;
     private AsyncSubject<SimilarityTest> mSimilarityTestRx;
@@ -201,7 +201,7 @@ public class DataManager {
 
         if (completelyNewList) {
             mLastAdvantageData = null;
-            mCounterPickerPresenter.startLoadingAnimation();
+            mCounterPickerPresenter.prepareForFreshList();
         }
         updateCounterPicker(heroInfoList);
     }
