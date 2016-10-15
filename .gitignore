@@ -14,6 +14,7 @@ openCVLibrary300/openCVLibrary300.iml
 /app/src/main/jniLibs/
 /openCVLibrary300/build/
 *apk
+/app/*.log
 
 # don't ignore
 !libopencv_java3.so
