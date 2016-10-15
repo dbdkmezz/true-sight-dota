@@ -52,10 +52,12 @@ public class CounterPickerPresenter implements IInfoPresenter_Data, IInfoPresent
         mView = view;
     }
 
-    public void showHeroInfo(List<HeroInfo> enemyHeroes,
-                             List<HeroAndAdvantages> heroesAndAdvantages) {
-        mHeroesAndAdvantages = heroesAndAdvantages;
+    public void setEnemyHeroes(List<HeroInfo> enemyHeroes) {
         mEnemyHeroes = enemyHeroes;
+    }
+
+    public void setAdvantageData(List<HeroAndAdvantages> heroesAndAdvantages) {
+        mHeroesAndAdvantages = heroesAndAdvantages;
         removeAllRows();
         mView.endLoadingAnimation();
     }

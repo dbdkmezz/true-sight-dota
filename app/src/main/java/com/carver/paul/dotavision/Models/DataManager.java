@@ -195,6 +195,7 @@ public class DataManager {
 
     public void sendUpdatedHeroList(List<HeroInfo> heroInfoList, boolean completelyNewList) {
         mMainActivityPresenter.updateHeroList();
+        for(IInfoPresenter_Data p : mInfoPresenters) p.setEnemyHeroes(heroInfoList);
 
         if (completelyNewList) {
             mLastAdvantageData = null;
@@ -242,7 +243,7 @@ public class DataManager {
             public void onNext(List<HeroAndAdvantages> heroAndAdvantages) {
                 mLastAdvantageData = new Pair<>(heroNames, heroAndAdvantages);
                 for(IInfoPresenter_Data p : mInfoPresenters)
-                    p.showHeroInfo(heroInfoList, heroAndAdvantages);
+                    p.setAdvantageData(heroAndAdvantages);
             }
         };
     }

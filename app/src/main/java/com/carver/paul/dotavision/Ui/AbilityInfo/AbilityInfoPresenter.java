@@ -53,7 +53,7 @@ public class AbilityInfoPresenter implements IInfoPresenter_Data, IInfoPresenter
      * Gets the AbilityInfoFragment to show ability cards for all of heroes' abilities
      * @param heroes    The list of heroes whose abilities to show.
      */
-    public void showHeroInfo(List<HeroInfo> heroes, List<HeroAndAdvantages> advantageData) {
+    public void setEnemyHeroes(List<HeroInfo> heroes) {
         mView.reset();
 
         List<HeroAbilityInfo> stunAbilities = new ArrayList<>();
@@ -79,6 +79,8 @@ public class AbilityInfoPresenter implements IInfoPresenter_Data, IInfoPresenter
         showUltimates(ultimateAbilities);
         showAbilitiesForAllHeroes(heroes);
     }
+
+    public void setAdvantageData(List<HeroAndAdvantages> advantageData) {}
 
     public void hide() {
         mView.hide();
