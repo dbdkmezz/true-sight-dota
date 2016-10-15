@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityDebuffPresenter;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerFragment;
@@ -18,10 +19,11 @@ import java.util.List;
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     static private List<String> mTitles;
-    static private final int NUMBER_OF_TABS = 2;
+    static private final int NUMBER_OF_TABS = 3;
 
     CounterPickerFragment tab1;
     AbilityInfoFragment tab2;
+    AbilityInfoFragment tab3;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm, List<String> titles) {
@@ -30,25 +32,29 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         mTitles = titles;
         tab1 = new CounterPickerFragment();
         tab2 = new AbilityInfoFragment();
+        tab3 = new AbilityInfoFragment();
     }
 
     public CounterPickerPresenter getCounterPickerPresenter() {
         return tab1.getPresenter();
     }
 
-    public AbilityInfoPresenter getAbilityInfoPresenter() {
-        return tab2.getPresenter();
+    public AbilityInfoPresenter getAbilityInfoPresenter() { return tab2.getInfoPresenter(); }
+
+    public AbilityDebuffPresenter getAbilityDebuffPresenter() {
+        return tab3.getDebuffPresenter();
     }
 
     //This method return the fragment for the every position in the View Pager
     @Override
     public Fragment getItem(int position) {
-        if(position == 0) { // if the position is 0 we are returning the First tab
+        if(position == 0) {
             return tab1;
-        }
-        else {            // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        } else if(position == 1){
             return tab2;
-        }
+        } else
+            return tab3;
+
     }
 
     // This method return the titles for the Tabs in the Tab Strip

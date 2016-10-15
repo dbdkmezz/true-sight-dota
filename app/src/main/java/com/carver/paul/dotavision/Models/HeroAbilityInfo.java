@@ -47,6 +47,26 @@ public class HeroAbilityInfo {
         removableDebuffs = new ArrayList<>();
     }
 
+    public HeroAbilityInfo Copy()
+    {
+        HeroAbilityInfo ability = new HeroAbilityInfo();
+        ability.isUltimate = isUltimate;ability.isStun = isStun;
+        ability.isDisable = isDisable;
+        ability.isSilence = isSilence;
+        ability.isMute = isMute;
+        ability.heroName = heroName;
+        ability.name = name;
+        ability.imageName = imageName;
+        ability.description = description;
+        ability.manaCost = manaCost;
+        ability.cooldown = cooldown;
+        ability.disableDuration = disableDuration;
+        ability.abilityDetails = abilityDetails;
+        ability.removableDebuffs = removableDebuffs;
+
+        return ability;
+    }
+
     //TODO: save silence durations in the XML too
     public String guessAbilityDuration(int abilityType) {
         if (abilityType != STUN && abilityType != SILENCE && abilityType != DISABLE_NOT_STUN)

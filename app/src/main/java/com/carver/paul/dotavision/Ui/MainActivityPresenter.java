@@ -25,6 +25,7 @@ import android.graphics.BitmapFactory;
 import com.carver.paul.dotavision.ImageRecognition.Variables;
 import com.carver.paul.dotavision.Models.DataManager;
 import com.carver.paul.dotavision.Models.IInfoPresenter_Data;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityDebuffPresenter;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.HeroesDetected.HeroesDetectedPresenter;
@@ -44,13 +45,14 @@ public class MainActivityPresenter {
     public MainActivityPresenter(MainActivity view,
                                  HeroesDetectedPresenter heroesDetectedPresenter,
                                  AbilityInfoPresenter abilityInfoPresenter,
+                                 AbilityDebuffPresenter abilityDebuffPresenter,
                                  CounterPickerPresenter counterPickerPresenter) {
         mView = view;
         mHeroesDetectedPresenter = heroesDetectedPresenter;
-        mInfoPresenters = Arrays.asList((IInfoPresenter_P)abilityInfoPresenter, counterPickerPresenter);
+        mInfoPresenters = Arrays.asList((IInfoPresenter_P)abilityInfoPresenter, abilityDebuffPresenter, counterPickerPresenter);
 
         mDataManager = new DataManager(this, heroesDetectedPresenter,
-                Arrays.asList((IInfoPresenter_Data)abilityInfoPresenter, counterPickerPresenter));
+                Arrays.asList((IInfoPresenter_Data)abilityInfoPresenter, abilityDebuffPresenter, counterPickerPresenter));
 
         heroesDetectedPresenter.setDataManger(mDataManager);
 

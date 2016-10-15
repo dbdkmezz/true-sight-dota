@@ -90,7 +90,7 @@ public class AbilityInfoPresenter implements IInfoPresenter_Data, IInfoPresenter
         mView.show();
     }
 
-    private List<HeroInfo> removeDuplicates(List<HeroInfo> list) {
+    public static List<HeroInfo> removeDuplicates(List<HeroInfo> list) {
         List<HeroInfo> listWithoutDuplicates = new ArrayList<>();
         for(HeroInfo hero : list) {
             if(!listWithoutDuplicates.contains(hero)) {

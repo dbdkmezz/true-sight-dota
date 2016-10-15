@@ -47,6 +47,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import com.carver.paul.dotavision.R;
+import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityDebuffPresenter;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
 import com.carver.paul.dotavision.Ui.CounterPicker.CounterPickerPresenter;
 import com.carver.paul.dotavision.Ui.DotaCamera.CameraActivity;
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity
     private static final int CAMERA_ACTIVITY_REQUEST_CODE = 100;
     protected static final int MY_PERMISSIONS_REQUEST_CAMERA = 101;
     private static final List<Integer> TAB_TITLE_RES_IDS = Arrays.asList(R.string.counter_picker,
-            R.string.hero_abilities);
+            R.string.hero_abilities, R.string.dispells);
 
     private MainActivityPresenter mPresenter;
 
@@ -141,8 +142,9 @@ public class MainActivity extends AppCompatActivity
 
         CounterPickerPresenter counterPickerPresenter = adapter.getCounterPickerPresenter();
         AbilityInfoPresenter abilityInfoPresenter = adapter.getAbilityInfoPresenter();
+        AbilityDebuffPresenter abilityDebuffPresenter = adapter.getAbilityDebuffPresenter();
         mPresenter = new MainActivityPresenter(this, heroesDetectedPresenter,
-                abilityInfoPresenter, counterPickerPresenter);
+                abilityInfoPresenter, abilityDebuffPresenter, counterPickerPresenter);
 
         // Hide the keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);

@@ -40,7 +40,8 @@ import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoCard.AbilityCardView
  */
 public class AbilityInfoFragment extends Fragment {
 
-    private AbilityInfoPresenter mPresenter = new AbilityInfoPresenter(this);
+    private AbilityInfoPresenter mInfoPresenter = new AbilityInfoPresenter(this);
+    private AbilityDebuffPresenter mDebuffPresenter = new AbilityDebuffPresenter(this);
     private LinearLayout mParentLinearLayout;
 
     @Override
@@ -51,8 +52,12 @@ public class AbilityInfoFragment extends Fragment {
         return inflateView;
     }
 
-    public AbilityInfoPresenter getPresenter() {
-        return mPresenter;
+    public AbilityInfoPresenter getInfoPresenter() {
+        return mInfoPresenter;
+    }
+
+    public AbilityDebuffPresenter getDebuffPresenter() {
+        return mDebuffPresenter;
     }
 
     /**
