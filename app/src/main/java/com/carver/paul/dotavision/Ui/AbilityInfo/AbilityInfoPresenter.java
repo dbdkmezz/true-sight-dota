@@ -39,7 +39,7 @@ import java.util.List;
 public class AbilityInfoPresenter implements IInfoPresenter_Data, IInfoPresenter_P {
     private AbilityInfoFragment mView;
 
-    AbilityInfoPresenter(AbilityInfoFragment view) {
+    public AbilityInfoPresenter(AbilityInfoFragment view) {
         mView = view;
     }
 

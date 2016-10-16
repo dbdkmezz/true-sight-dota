@@ -22,8 +22,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     static private final int NUMBER_OF_TABS = 3;
 
     CounterPickerFragment tab1;
-    AbilityInfoFragment tab2;
-    AbilityInfoFragment tab3;
+    AbilityInfoFragment<AbilityInfoPresenter> tab2;
+    AbilityInfoFragment<AbilityDebuffPresenter> tab3;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm, List<String> titles) {
@@ -31,19 +31,19 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         mTitles = titles;
         tab1 = new CounterPickerFragment();
-        tab2 = new AbilityInfoFragment();
-        tab3 = new AbilityInfoFragment();
+        tab2 = new AbilityInfoFragment<>();
+        tab2.setPresenter(new AbilityInfoPresenter(tab2));
+        tab3 = new AbilityInfoFragment<>();
+        tab3.setPresenter(new AbilityDebuffPresenter(tab3));
     }
 
     public CounterPickerPresenter getCounterPickerPresenter() {
         return tab1.getPresenter();
     }
 
-    public AbilityInfoPresenter getAbilityInfoPresenter() { return tab2.getInfoPresenter(); }
+    public AbilityInfoPresenter getAbilityInfoPresenter() { return tab2.getPresenter(); }
 
-    public AbilityDebuffPresenter getAbilityDebuffPresenter() {
-        return tab3.getDebuffPresenter();
-    }
+    public AbilityDebuffPresenter getAbilityDebuffPresenter() { return tab3.getPresenter(); }
 
     //This method return the fragment for the every position in the View Pager
     @Override

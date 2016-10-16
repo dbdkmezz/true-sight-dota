@@ -38,11 +38,14 @@ import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoCard.AbilityCardView
  *
  * When clicked the cards will expand to show more information about the ability.
  */
-public class AbilityInfoFragment extends Fragment {
+public class AbilityInfoFragment<T> extends Fragment {
 
-    private AbilityInfoPresenter mInfoPresenter = new AbilityInfoPresenter(this);
-    private AbilityDebuffPresenter mDebuffPresenter = new AbilityDebuffPresenter(this);
+    private T mPresenter;
     private LinearLayout mParentLinearLayout;
+
+    public void setPresenter(T presenter) {
+        mPresenter = presenter;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,12 +55,8 @@ public class AbilityInfoFragment extends Fragment {
         return inflateView;
     }
 
-    public AbilityInfoPresenter getInfoPresenter() {
-        return mInfoPresenter;
-    }
-
-    public AbilityDebuffPresenter getDebuffPresenter() {
-        return mDebuffPresenter;
+    public T getPresenter() {
+        return mPresenter;
     }
 
     /**

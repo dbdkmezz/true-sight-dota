@@ -6,6 +6,7 @@
 /.idea/gradle.xml
 /.idea/modules.xml
 /.idea/libraries
+/.idea/misc.xml
 /app/app.iml
 openCVLibrary300/openCVLibrary300.iml
 .DS_Store

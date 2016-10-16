@@ -22,7 +22,6 @@ import com.carver.paul.dotavision.Models.HeroAbilityInfo;
 import com.carver.paul.dotavision.Models.HeroAndAdvantages;
 import com.carver.paul.dotavision.Models.HeroInfo;
 import com.carver.paul.dotavision.Models.IInfoPresenter_Data;
-import com.carver.paul.dotavision.R;
 import com.carver.paul.dotavision.Ui.IInfoPresenter_P;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ import java.util.List;
 public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresenter_P {
     private AbilityInfoFragment mView;
 
-    AbilityDebuffPresenter(AbilityInfoFragment view) {
+    public AbilityDebuffPresenter(AbilityInfoFragment view) {
         mView = view;
     }
 
