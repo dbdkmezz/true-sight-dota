@@ -6014,7 +6014,7 @@
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Partially (see detail)</piercesSIType>
-            <piercesSIDetail>Cannot target spell immune enemies. Applies area effect when connecting with spell immune enemy. Always removes Repel​ off of enemies, regardless of them being spell immune. Neither stops, dispels, nor attempts to damage spell immune enemies.</piercesSIDetail>
+            <piercesSIDetail>Cannot target spell immune enemies. Applies area effect when connecting with spell immune enemy. Always removes Repel off of enemies, regardless of them being spell immune. Neither stops, dispels, nor attempts to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8117,7 +8117,7 @@
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Partially (see detail)</piercesSIType>
-            <piercesSIDetail>Cannot affect spell immune enemies. However, it always removes Repel​ off of enemies, regardless of them being spell immune.</piercesSIDetail>
+            <piercesSIDetail>Cannot affect spell immune enemies. However, it always removes Repel off of enemies, regardless of them being spell immune.</piercesSIDetail>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
