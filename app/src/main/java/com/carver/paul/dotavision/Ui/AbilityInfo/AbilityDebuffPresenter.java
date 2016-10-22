@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresenter_P {
-    private AbilityDebuffFragment mView;
+    private AbilityInfoFragment mView;
 
-    public AbilityDebuffPresenter(AbilityDebuffFragment view) {
+    public AbilityDebuffPresenter(AbilityInfoFragment view) {
         mView = view;
     }
 

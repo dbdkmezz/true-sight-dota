@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityDebuffFragment;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityDebuffPresenter;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoFragment;
 import com.carver.paul.dotavision.Ui.AbilityInfo.AbilityInfoPresenter;
@@ -23,8 +22,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     static private final int NUMBER_OF_TABS = 3;
 
     CounterPickerFragment tab1;
-    AbilityInfoFragment tab2;
-    AbilityDebuffFragment tab3;
+    AbilityInfoFragment<AbilityInfoPresenter> tab2;
+    AbilityInfoFragment<AbilityDebuffPresenter> tab3;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm, List<String> titles) {
@@ -32,8 +31,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         mTitles = titles;
         tab1 = new CounterPickerFragment();
-        tab2 = new AbilityInfoFragment();
-        tab3 = new AbilityDebuffFragment();
+        tab2 = new AbilityInfoFragment<>();
+        tab2.setPresenter(new AbilityInfoPresenter(tab2));
+        tab3 = new AbilityInfoFragment<>();
+        tab3.setPresenter(new AbilityDebuffPresenter(tab3));
     }
 
     public CounterPickerPresenter getCounterPickerPresenter() {
