@@ -1,5 +1,6 @@
 #ignore
 
+*.iml
 .gradle
 /local.properties
 /.idea/workspace.xml
@@ -17,7 +18,7 @@ openCVLibrary300/openCVLibrary300.iml
 *apk
 /app/*.log
 /openCVLibrary*/openCVLibrary*.iml
-/openCVLibrary*/build/*
+/openCVLibrary*/build
 
 
 # don't ignore
