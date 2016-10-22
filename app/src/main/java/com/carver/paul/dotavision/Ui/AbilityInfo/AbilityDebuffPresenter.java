@@ -47,6 +47,9 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
     public void setEnemyHeroes(List<HeroInfo> heroes) {
         mView.reset();
 
+        List<HeroAbilityInfo> piercesSpellImmunity = new ArrayList<>();
+        List<HeroAbilityInfo> notPiercesSpellImmunity = new ArrayList<>();
+
         List<HeroAbilityInfo> removedByStrongDisepell = new ArrayList<>();
         List<HeroAbilityInfo> notRemovedByStrongDisepell = new ArrayList<>();
 
@@ -57,6 +60,12 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
 
         for (HeroInfo hero : heroes) {
             for (HeroAbilityInfo ability : hero.abilities) {
+                if(ability.piercesSpellImmunity != null) {
+                    if(ability.piercesSpellImmunity)
+                        piercesSpellImmunity.add(ability.Copy());
+                    else
+                        notPiercesSpellImmunity.add(ability.Copy());
+                }
                 for(HeroAbilityInfo.RemovableBuff b : ability.removableDebuffs) {
                     HeroAbilityInfo abilityCopy = ability.Copy();
                     if(b.description != null)
@@ -74,10 +83,13 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
             }
         }
 
-        showAbilities("Removed by basic dispell", "Such as Eul's Cyclone",  removedByBasicDisepell);
-        showAbilities("Immune to basic dispell", null, notRemovedByBasicDisepell);
+        showAbilities("Pierces spell immunity", "(Such as BKB)", piercesSpellImmunity);
+        showAbilities("Blocked by spell immunity", null, notPiercesSpellImmunity);
 
-        showAbilities("Removed by strong dispell", "Such as Slark's Dark Pact", removedByStrongDisepell);
+        showAbilities("Removed by basic dispell", "(Such as Eul's Cyclone)",  removedByBasicDisepell);
+        //showAbilities("Immune to basic dispell", null, notRemovedByBasicDisepell);
+
+        showAbilities("Removed by strong dispell", "(Such as Slark's Dark Pact)", removedByStrongDisepell);
         showAbilities("Immune to strong dispell", null, notRemovedByStrongDisepell);
     }
 

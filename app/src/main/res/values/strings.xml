@@ -45,7 +45,7 @@
 
     <string name="counter_picker">Counter picker</string>
     <string name="hero_abilities">Hero abilities</string>
-    <string name="dispells">Dispells</string>
+    <string name="dispells">Spell immunity</string>
 
     <string name="cooldown">COOLDOWN</string>
     <string name="mana_cost">MANA COST</string>

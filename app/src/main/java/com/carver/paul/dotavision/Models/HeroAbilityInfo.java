@@ -32,6 +32,7 @@ public class HeroAbilityInfo {
     public boolean isDisable;
     public boolean isSilence;
     public boolean isMute;
+    public Boolean piercesSpellImmunity = null;
     public String heroName;
     public String name;
     public String imageName;
@@ -63,6 +64,7 @@ public class HeroAbilityInfo {
         ability.disableDuration = disableDuration;
         ability.abilityDetails = abilityDetails;
         ability.removableDebuffs = removableDebuffs;
+        ability.piercesSpellImmunity = piercesSpellImmunity;
 
         return ability;
     }
@@ -110,6 +112,5 @@ public class HeroAbilityInfo {
         public String description;
         public boolean basicDispel;
         public boolean strongDispel;
-        public boolean spellImmunity;
     }
 }

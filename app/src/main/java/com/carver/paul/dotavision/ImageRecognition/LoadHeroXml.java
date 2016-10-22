@@ -142,6 +142,9 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("isMute")) {
                 ability.isMute = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "isMute");
+            } else if (parser.getName().equals("piercesSpellImmunity")) {
+                ability.piercesSpellImmunity = readBoolean(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "piercesSpellImmunity");
             } else if (parser.getName().equals("name")) {
                 ability.name = readText(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "name");
@@ -189,9 +192,6 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("strongDispel")) {
                 debuff.strongDispel = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "strongDispel");
-            } else if (parser.getName().equals("spellImmunity")) {
-                debuff.spellImmunity = readBoolean(parser);
-                parser.require(XmlPullParser.END_TAG, sNullString, "spellImmunity");
             } else {
                 throw new RuntimeException("Loading XML Error, in LoadHeroDebuffs. Name:" + parser.getName());
             }

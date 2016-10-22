@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/activity_horizontal_spacing"
     android:layout_marginRight="@dimen/activity_horizontal_spacing"
+    android:layout_marginTop="@dimen/activity_vertical_spacing_invert"
+    android:layout_marginBottom="@dimen/activity_vertical_spacing"
     android:elevation="0dp">
 
     <TextView
