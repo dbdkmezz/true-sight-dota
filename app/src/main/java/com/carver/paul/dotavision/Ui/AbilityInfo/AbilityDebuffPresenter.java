@@ -54,7 +54,6 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
         List<HeroAbilityInfo> notRemovedByStrongDisepell = new ArrayList<>();
 
         List<HeroAbilityInfo> removedByBasicDisepell = new ArrayList<>();
-        List<HeroAbilityInfo> notRemovedByBasicDisepell = new ArrayList<>();
 
         heroes = AbilityInfoPresenter.removeDuplicates(heroes);
 
@@ -70,6 +69,7 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
                     HeroAbilityInfo abilityCopy = ability.Copy();
                     if(b.description != null)
                         abilityCopy.description += " (" + b.description + ")";
+
                     if(b.strongDispel)
                         removedByStrongDisepell.add(abilityCopy);
                     else
@@ -77,8 +77,6 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
 
                     if(b.basicDispel)
                         removedByBasicDisepell.add(abilityCopy);
-                    else
-                        notRemovedByBasicDisepell.add(abilityCopy);
                 }
             }
         }
@@ -86,11 +84,10 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
         showAbilities("Pierces spell immunity", "(Such as BKB)", piercesSpellImmunity);
         showAbilities("Blocked by spell immunity", null, notPiercesSpellImmunity);
 
-        showAbilities("Removed by basic dispell", "(Such as Eul's Cyclone)",  removedByBasicDisepell);
-        //showAbilities("Immune to basic dispell", null, notRemovedByBasicDisepell);
+        showAbilities("Debuff removed by basic dispell", "(Such as Eul's Cyclone)",  removedByBasicDisepell);
 
-        showAbilities("Removed by strong dispell", "(Such as Slark's Dark Pact)", removedByStrongDisepell);
-        showAbilities("Immune to strong dispell", null, notRemovedByStrongDisepell);
+        showAbilities("Debuff removed by strong dispell", "(Such as Slark's Dark Pact)", removedByStrongDisepell);
+        showAbilities("Debuff immune to strong dispell", null, notRemovedByStrongDisepell);
     }
 
     public void setAdvantageData(List<HeroAndAdvantages> advantageData) {}
