@@ -26,13 +26,13 @@ public class HeroAbilityInfo {
     public static final int DISABLE_NOT_STUN = 1;
     public static final int SILENCE = 2;
     public static final int ULTIMATE = 3;
+    public static final int SPELL_IMMUNITY = 4;
 
     public boolean isUltimate;
     public boolean isStun;
     public boolean isDisable;
     public boolean isSilence;
     public boolean isMute;
-    public Boolean piercesSpellImmunity = null;
     public String heroName;
     public String name;
     public String imageName;
@@ -42,6 +42,9 @@ public class HeroAbilityInfo {
     public String disableDuration;
     public List<String> abilityDetails;
     public List<RemovableBuff> removableDebuffs;
+    public Boolean piercesSpellImmunity = null;
+    public String piercesSIType = null;
+    public String piercesSIDetail = null;
 
     public HeroAbilityInfo() {
         abilityDetails = new ArrayList<>();
@@ -65,6 +68,8 @@ public class HeroAbilityInfo {
         ability.abilityDetails = abilityDetails;
         ability.removableDebuffs = removableDebuffs;
         ability.piercesSpellImmunity = piercesSpellImmunity;
+        ability.piercesSIType = piercesSIType;
+        ability.piercesSIDetail = piercesSIDetail;
 
         return ability;
     }

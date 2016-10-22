@@ -81,7 +81,7 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
             }
         }
 
-        showAbilities("Pierces spell immunity", "(Such as BKB)", piercesSpellImmunity);
+        showAbilities("Pierces spell immunity", "(Such as BKB)", piercesSpellImmunity, HeroAbilityInfo.SPELL_IMMUNITY);
         showAbilities("Blocked by spell immunity", null, notPiercesSpellImmunity);
 
         showAbilities("Debuff removed by basic dispell", "(Such as Eul's Cyclone)",  removedByBasicDisepell);
@@ -101,13 +101,18 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
     }
 
     private void showAbilities(String heading, String example, List<HeroAbilityInfo> abilities) {
+        showAbilities(heading, example, abilities, -1);
+    }
+
+    private void showAbilities(String heading, String example, List<HeroAbilityInfo> abilities,
+                               int abilityType) {
         mView.addHeading(heading);
         if (abilities.isEmpty()) {
             mView.addAbilityText("None");
         } else {
             if(example != null) mView.addAbilityText(example);
             for (HeroAbilityInfo ability : abilities) {
-                mView.addAbilityCard(ability, true);
+                mView.addAbilityCard(ability, true, abilityType);
             }
         }
     }

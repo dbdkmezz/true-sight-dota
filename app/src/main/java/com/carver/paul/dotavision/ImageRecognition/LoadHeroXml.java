@@ -145,6 +145,12 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("piercesSpellImmunity")) {
                 ability.piercesSpellImmunity = readBoolean(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "piercesSpellImmunity");
+            } else if (parser.getName().equals("piercesSIType")) {
+                ability.piercesSIType = readText(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "piercesSIType");
+            } else if (parser.getName().equals("piercesSIDetail")) {
+                ability.piercesSIDetail = readText(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "piercesSIDetail");
             } else if (parser.getName().equals("name")) {
                 ability.name = readText(parser);
                 parser.require(XmlPullParser.END_TAG, sNullString, "name");

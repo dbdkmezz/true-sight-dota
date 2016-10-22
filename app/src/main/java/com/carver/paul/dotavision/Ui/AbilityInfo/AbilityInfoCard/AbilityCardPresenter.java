@@ -89,6 +89,9 @@ class AbilityCardPresenter {
     }
 
     private void appendExtendedText(StringBuilder text) {
+        if(mAbilityType == HeroAbilityInfo.SPELL_IMMUNITY && mAbility.piercesSIDetail != null)
+            text.append("<br>" + mAbility.piercesSIDetail + "<br>");
+
         text.append("<br>" + mAbility.description);
 
         //TODO-beauty: on larger phone sizes show the extended ability details in two columns
@@ -116,24 +119,32 @@ class AbilityCardPresenter {
     }
 
     private void appendTwoLineText(StringBuilder text) {
-        if (mAbilityType == HeroAbilityInfo.STUN
-                || mAbilityType == HeroAbilityInfo.DISABLE_NOT_STUN
-                || mAbilityType == HeroAbilityInfo.SILENCE) {
-            String abilityDuration = mAbility.guessAbilityDuration(mAbilityType);
-            if (abilityDuration != null) {
-                text.append("<br>" + abilityDuration);
+        {
+            String abilityDetail = null;
+            if (mAbilityType == HeroAbilityInfo.STUN
+                    || mAbilityType == HeroAbilityInfo.DISABLE_NOT_STUN
+                    || mAbilityType == HeroAbilityInfo.SILENCE) {
+                abilityDetail = mAbility.guessAbilityDuration(mAbilityType);
+            } else if (mAbilityType == HeroAbilityInfo.SPELL_IMMUNITY && mAbility.piercesSIType != null) {
+                abilityDetail = mAbility.piercesSIType;
+            }
+            if (abilityDetail != null) {
+                text.append("<br>" + abilityDetail);
             }
         }
+
+        if(mAbilityType == HeroAbilityInfo.SPELL_IMMUNITY)
+            return;
 
         if (mAbility.cooldown != null) {
             text.append("<br>" + mView.getString(R.string.cooldown) + ": " + mAbility.cooldown);
         } else {
             //TODO-someday: put passive abilities in XML, rather than calculating them in app
-            for (String abilityDetail : mAbility.abilityDetails) {
-                if (abilityDetail.endsWith("Passive")) {
+            for (String detail : mAbility.abilityDetails) {
+                if (detail.endsWith("Passive")) {
                     text.append("<br><i>" + mView.getString(R.string.passive) + "</i>");
                     break;
-                } else if (abilityDetail.endsWith("Passive, Aura")) {
+                } else if (detail.endsWith("Passive, Aura")) {
                     text.append("<br><i>" + mView.getString(R.string.passive_aura) + "</i>");
                     break;
                 }
