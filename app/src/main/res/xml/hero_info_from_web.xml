@@ -35,7 +35,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Pushes aside and blocks path for all spell immune units. Does not stun or attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -240,7 +240,7 @@
                 <strongDispel>false</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can toss any spell immune unit. Attempts to damage spell immune tossed enemies. Does not attempt to damage spell immune enemies within the area. Cannot directly target spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -504,7 +504,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can target and stun spell immune enemies. Attempts to damage the primary target while spell immune. Can knock back secondary spell immune enemies. Does not slow and does not attempt to damage secondary spell immune enemies.</piercesSIDetail>
         </abilities>
     </heroInfo>
@@ -700,7 +700,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can latch on and stun spell immune enemies. Does not stun secondary spell immune enemies. Does not attempt to damage any spell immune enemy.</piercesSIDetail>
         </abilities>
     </heroInfo>
@@ -2166,7 +2166,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Places debuff on spell immune enemies. Attempts to damage spell immune enemies. Can spread to and refresh debuff on spell immune enemies. Does not silence or slow spell immune enemies when another magnetized enemy is hit by Rolling Boulder or Geomagnetic Grip.</piercesSIDetail>
         </abilities>
     </heroInfo>
@@ -2639,7 +2639,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can collide with spell immune enemies. Does not stun and does not attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -4330,7 +4330,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Latches on spell immune enemies. Attempts to damage spell immune enemies. Does not stun spell immune enemies. When upgraded, leash break stun pierces spell immunity.</piercesSIDetail>
         </abilities>
     </heroInfo>
@@ -4412,7 +4412,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Procs and applies area effect when attacking spell immune enemies. Does not slow and does not attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -4714,7 +4714,7 @@
                 <strongDispel>false</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot target spell immune enemies. Attempts to damage spell immune enemies. When upgraded, can target spell immune enemies.</piercesSIDetail>
         </abilities>
     </heroInfo>
@@ -5039,7 +5039,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot be cast on spell immune enemies. If any non-hero unit was enchanted at least once, it can always be targeted by Enchant, regardles of spell immunity.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -5165,7 +5165,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can target spell immune enemies. Does not place debuff on spell immune enemies. Attempts to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -5931,7 +5931,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can target spell immune enemies. Does not affect spell immune enemies. Applies area effects when connecting with spell immune enemy.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -6013,7 +6013,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot target spell immune enemies. Applies area effect when connecting with spell immune enemy. Always removes Repel off of enemies, regardless of them being spell immune. Neither stops, dispels, nor attempts to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -6346,7 +6346,7 @@
                 <strongDispel>false</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Damages and drags spell immune enemies. Does not disable spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -7609,7 +7609,7 @@
                 <strongDispel>false</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot hit spell immune enemies. Slows and attempts to damage enemies when they turn spell immune while already hit.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -8116,7 +8116,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot affect spell immune enemies. However, it always removes Repel off of enemies, regardless of them being spell immune.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -8410,7 +8410,7 @@
             <abilityDetails>EVASION:  20% / 30% / 40% / 50%</abilityDetails>
             <abilityDetails>MAP VANISH RADIUS:  1600 / 1600 / 1600 / 1600</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Reacts on spell immune enemy heroes when they turned spell immune while already within range. Does not react on enemies who get in range while already spell immune.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -8826,7 +8826,7 @@
                 <strongDispel>false</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Places trail and slow debuff on spell immune enemies. Slow debuff is inactive while enemy is spell immune. Attempts to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -8844,7 +8844,7 @@
             <abilityDetails>BONUS DAMAGE:  20 / 35 / 50 / 65</abilityDetails>
             <abilityDetails>RADIUS:  325</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Reacts on the presence of spell immune enemies. Does not proc on spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -9250,7 +9250,7 @@
             <abilityDetails>MANA STEAL:  11% / 14% / 17% / 20%</abilityDetails>
             <abilityDetails>DAMAGE INCREASE PER JUMP:  35%</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot directly target spell immune enemies. Can jump on, drain mana, and attempts to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -9698,7 +9698,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can target, mini-stun and bounce to spell immune enemies. Does not slow or attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
     </heroInfo>
@@ -9844,7 +9844,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot directly target spell immune enemies. Can bounce to spell immune enemies. Does not stun or attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -11576,7 +11576,7 @@
             <abilityDetails>GATHER DAMAGE THRESHOLD:  110</abilityDetails>
             <abilityDetails>GATHER DAMAGE RADIUS:  1375</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Counts damage done by or dealt to spell immune units. Cannot target spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -11676,7 +11676,7 @@
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Cannot directly target spell immune enemies. Secondary projectiles are launched towards spell immune enemies. Does not slow or attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <abilities>
@@ -11723,7 +11723,7 @@
                 <strongDispel>false</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Partially (see detail)</piercesSIType>
+            <piercesSIType>Partially pierces (see detail)</piercesSIType>
             <piercesSIDetail>Can directly target spell immune enemies, fully affecting it. Does not taunt spell immune enemies. Turning spell immune after being taunted does not remove the taunt effect.</piercesSIDetail>
         </abilities>
     </heroInfo>
