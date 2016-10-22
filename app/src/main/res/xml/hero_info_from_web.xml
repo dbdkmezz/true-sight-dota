@@ -33,8 +33,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -73,8 +73,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -93,6 +93,7 @@
             <abilityDetails>DAMAGE:  160 / 210 / 270</abilityDetails>
             <abilityDetails>RADIUS:  600</abilityDetails>
             <abilityDetails>ECHO DAMAGE:  40 / 55 / 70</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -127,8 +128,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -143,6 +144,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  300.000000</abilityDetails>
             <abilityDetails>CLEAVE DAMAGE:  30% / 42% / 54% / 66%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -209,8 +211,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -232,8 +234,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -256,8 +258,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -277,6 +279,7 @@
             <abilityDetails> SCEPTER CLEAVE DAMAGE: 50%</abilityDetails>
             <abilityDetails> SCEPTER BONUS BUILDING DAMAGE: 75%</abilityDetails>
             <abilityDetails> SCEPTER TOSS BONUS: 50% / 65% / 80%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -299,7 +302,7 @@
             <name>Torrent</name>
             <description>Summons a rising torrent that, after a short delay, hurls enemy units into the sky, stunning, dealing damage and slowing movement speed.</description>
             <manaCost>90/100/110/120</manaCost>
-            <cooldown>10</cooldown>
+            <cooldown>16/14/12/10</cooldown>
             <disableDuration>STUN DURATION:  1.6</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -314,8 +317,8 @@
                 <description>knockup/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -333,6 +336,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  450 / 500 / 550 / 600</abilityDetails>
             <abilityDetails>DAMAGE BONUS:  25 / 45 / 65 / 85</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -354,8 +358,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -383,8 +387,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -427,6 +431,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE:  70 / 100 / 130 / 160</abilityDetails>
             <abilityDetails>RANGE:  1300 / 1300 / 1300 / 1300</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -488,8 +493,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -523,8 +528,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -547,8 +552,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -579,6 +584,7 @@
             <abilityDetails>DURATION:  60 / 60 / 60</abilityDetails>
             <abilityDetails>BONUS MOVE SPEED:  25 / 25 / 25</abilityDetails>
             <abilityDetails>BONUS ATTACK RANGE:  350</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -613,8 +619,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -637,8 +643,8 @@
                 <description>knockback/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -656,6 +662,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  80 / 120 / 160 / 200</abilityDetails>
             <abilityDetails>RADIUS:  600</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -679,8 +686,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -703,13 +710,14 @@
             <name>Purification</name>
             <description>Instantly heals a friendly unit and damages all nearby enemy units.</description>
             <manaCost>100/120/140/160</manaCost>
-            <cooldown>10</cooldown>
+            <cooldown>9</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>HEAL/DAMAGE:  90 / 180 / 270 / 360</abilityDetails>
             <abilityDetails>RADIUS:  260</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -721,16 +729,16 @@
             <name>Repel</name>
             <description>Creates a divine barrier around a target unit which grants them Spell Immunity and 100% resistance to Magic Damage.</description>
             <manaCost>50/50/50/50</manaCost>
-            <cooldown>14</cooldown>
+            <cooldown>20/18/16/14</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Heroes</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DURATION:  4 / 6 / 8 / 10</abilityDetails>
+            <abilityDetails>DURATION:  5 / 6 / 7 / 8</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -750,8 +758,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -818,8 +826,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -859,8 +867,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -894,8 +902,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -919,8 +927,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1003,8 +1011,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1028,8 +1036,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1112,8 +1120,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1171,8 +1179,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -1209,7 +1217,6 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
         </abilities>
         <abilities>
@@ -1243,6 +1250,7 @@
             <abilityDetails>OSCILLATION RADIUS:  875 / 875 / 875 / 875</abilityDetails>
             <abilityDetails>EXPLOSION RADIUS:  300 / 300 / 300 / 300</abilityDetails>
             <abilityDetails>DURATION:  19 / 19 / 19 / 19</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1328,8 +1336,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1347,6 +1355,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  175 / 250 / 325 / 400</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1361,6 +1370,7 @@
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE:  16 / 18 / 20 / 22</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -1384,8 +1394,8 @@
                 <description>slow</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -1419,8 +1429,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1440,6 +1450,7 @@
             <abilityDetails>RADIUS:  225 / 225 / 225 / 225</abilityDetails>
             <abilityDetails>SPEED:  1600 / 2000 / 2400 / 2800</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 140 / 180 / 220</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1475,6 +1486,7 @@
             <abilityDetails>DAMAGE PER SECOND:  50 / 75 / 100</abilityDetails>
             <abilityDetails>SLOW:  5%</abilityDetails>
             <abilityDetails>MANA COST PER SECOND:  20 / 25 / 30</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1554,8 +1566,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1580,8 +1592,8 @@
                 <description>stack debuff</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1642,6 +1654,7 @@
             <abilityDetails>SHARD DAMAGE:  60 / 120 / 180 / 240</abilityDetails>
             <abilityDetails>SHARD DURATION:  7</abilityDetails>
             <abilityDetails>CAST RANGE:  1800</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1668,8 +1681,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1691,8 +1704,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1728,8 +1741,8 @@
                 <description>knockback/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -1754,8 +1767,8 @@
                 <description>knockup/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -1790,8 +1803,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1813,6 +1826,7 @@
             <abilityDetails>BUFF DURATION:  9</abilityDetails>
             <abilityDetails>BONUS SPEED(CREEPS):  1%</abilityDetails>
             <abilityDetails>BONUS SPEED(HEROES):  5%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1832,8 +1846,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1873,8 +1887,8 @@
                 <description>slow/disarm</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -1908,6 +1922,7 @@
             <abilityDetails>BONUS SPEED (HEROES):  9%</abilityDetails>
             <abilityDetails>SPEED DURATION:  7</abilityDetails>
             <abilityDetails>RADIUS:  330</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1963,8 +1978,8 @@
                 <description>fight</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2003,8 +2018,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2032,8 +2047,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2058,8 +2073,8 @@
                 <description>silence</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2096,8 +2111,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -2121,8 +2136,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2157,8 +2172,8 @@
                 <description>damage/slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2184,8 +2199,8 @@
                 <description>damage/slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2208,6 +2223,7 @@
             <abilityDetails>BASE HEAL PER SECOND:  7 / 10 / 13 / 16</abilityDetails>
             <abilityDetails>MAX HEAL:  0.625% / 1.25% / 1.875% / 2.5%</abilityDetails>
             <abilityDetails>DURATION:  6</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -2236,8 +2252,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2317,6 +2333,7 @@
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MANA BURNED PER HIT:  28 / 40 / 52 / 64</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2366,8 +2383,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2376,7 +2393,7 @@
         <bioRoles>Ranged - Carry - Disabler - Pusher</bioRoles>
         <intelligence>15 + 1.40</intelligence>
         <agility>26 + 1.90</agility>
-        <strength>17 + 1.90</strength>
+        <strength>17 + 1.60</strength>
         <attack>14 - 25</attack>
         <speed>300</speed>
         <defence>0.64</defence>
@@ -2401,8 +2418,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2425,8 +2442,8 @@
                 <description>knockback/silence</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2484,6 +2501,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  80 / 105 / 130 / 155</abilityDetails>
             <abilityDetails>RADIUS:  250</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2494,7 +2512,7 @@
             <imageName>juggernaut_healing_ward_hp2</imageName>
             <name>Healing Ward</name>
             <description>Summons a Healing Ward which heals all nearby allied units, based on their max health. The Healing Ward moves at 420 movement speed after being summoned. Lasts 25 seconds.</description>
-            <manaCost>120/125/130/135</manaCost>
+            <manaCost>140</manaCost>
             <cooldown>60</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>MAX HEALTH PER SECOND:  2% / 3% / 4% / 5%</abilityDetails>
@@ -2531,6 +2549,7 @@
             <abilityDetails>SLASH JUMP RADIUS:  425</abilityDetails>
             <abilityDetails> SCEPTER SLASHES: 6 / 9 / 12</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 70</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2559,7 +2578,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
             <abilityDetails>RADIUS:  650</abilityDetails>
-            <abilityDetails> SCEPTER INTERVAL: 9</abilityDetails>
+            <abilityDetails> SCEPTER INTERVAL: 10</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2584,8 +2604,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2626,7 +2646,7 @@
         <intelligence>17 + 1.10</intelligence>
         <agility>24 + 3.70</agility>
         <strength>19 + 2.00</strength>
-        <attack>13 - 22</attack>
+        <attack>9 - 18</attack>
         <speed>285</speed>
         <defence>1.36</defence>
         <abilities>
@@ -2644,6 +2664,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 175 / 250 / 325</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2671,8 +2692,8 @@
                 <description>knockback/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2737,6 +2758,7 @@
             <abilityDetails>REPLICATE DAMAGE:  80%</abilityDetails>
             <abilityDetails>REPLICATE DAMAGE TAKEN:  100% / 100% / 100%</abilityDetails>
             <abilityDetails>CAST RANGE:  700 / 1100 / 1500</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2786,8 +2808,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2819,6 +2841,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>MIN RUSH DISTANCE:  300</abilityDetails>
             <abilityDetails>MAX RUSH DISTANCE:  600 / 700 / 800 / 900</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -2835,6 +2858,7 @@
             <abilityDetails>ILLUSION TRIGGER CHANCE:  8%</abilityDetails>
             <abilityDetails>ILLUSION DAMAGE:  16%</abilityDetails>
             <abilityDetails>ILLUSION DAMAGE TAKEN:  500%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2868,8 +2892,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2892,8 +2916,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2911,8 +2935,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -2931,6 +2955,7 @@
             <abilityDetails> SCEPTER COOLDOWN: 10</abilityDetails>
             <abilityDetails> SCEPTER ILLUSION DAMAGE DEALT: 50%</abilityDetails>
             <abilityDetails> SCEPTER ILLUSION DAMAGE TAKEN: 150%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -2958,13 +2983,13 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  250 / 275 / 300 / 325</abilityDetails>
             <abilityDetails>MISS RATE:  40% / 50% / 60% / 70%</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  19% / 21% / 23% / 25%</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  13% / 17% / 21% / 25%</abilityDetails>
             <abilityDetails>DURATION:  6</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2982,6 +3007,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RANGE:  700</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  55 / 70 / 85 / 100</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -2997,6 +3023,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>AGI DAMAGE MULT:  0.5 / 0.75 / 1 / 1.25</abilityDetails>
             <abilityDetails>FADE DELAY:  6 / 5 / 4 / 3</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3012,6 +3039,7 @@
             <abilityDetails>ABILITY:  No Target, Channeled</abilityDetails>
             <abilityDetails>RADIUS:  500</abilityDetails>
             <abilityDetails>MAX ATTACKS PER UNIT:  4 / 5 / 6</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -3045,8 +3073,8 @@
                 <description>damage/slow</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3065,8 +3093,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3101,8 +3129,8 @@
                 <description>mini-stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -3154,8 +3182,8 @@
                 <description>armor reduction</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3171,6 +3199,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>BONUS ATTACK RANGE:  60 / 120 / 180 / 240</abilityDetails>
             <abilityDetails>SPLIT RANGE:  590 / 630 / 670 / 710</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3205,8 +3234,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -3240,8 +3269,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3257,6 +3286,7 @@
             <abilityDetails>BOUNCE RADIUS:  500</abilityDetails>
             <abilityDetails>BOUNCES:  1 / 2 / 3 / 6</abilityDetails>
             <abilityDetails>DAMAGE REDUCTION PER BOUNCE:  35%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3294,6 +3324,7 @@
             <abilityDetails> SCEPTER TOTAL BEAMS: 6 / 12 / 18</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 1.8 / 3.6 / 5.4</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 2500</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -3327,8 +3358,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3349,8 +3380,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3369,6 +3400,7 @@
             <abilityDetails>DURATION:  20 / 25 / 30 / 35</abilityDetails>
             <abilityDetails>FADE TIME:  1 / 0.75 / 0.5 / 0.25</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  30 / 60 / 90 / 120</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3385,7 +3417,7 @@
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>SPEED RADIUS:  900 / 900 / 900</abilityDetails>
-            <abilityDetails>BONUS SPEED:  20% / 20% / 20%</abilityDetails>
+            <abilityDetails>BONUS SPEED:  16% / 18% / 20%</abilityDetails>
             <abilityDetails>BONUS GOLD FOR SELF:  150 / 250 / 350</abilityDetails>
             <abilityDetails>BONUS GOLD FOR ALLIES:  40 / 80 / 120</abilityDetails>
             <abilityDetails>DURATION:  30 / 30 / 30</abilityDetails>
@@ -3394,8 +3426,8 @@
                 <description>target debuff</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -3428,8 +3460,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3465,8 +3497,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3514,6 +3546,7 @@
             <abilityDetails>DAMAGE:  7 / 12 / 17 / 22</abilityDetails>
             <abilityDetails>RADIUS:  400</abilityDetails>
             <abilityDetails>ROCKETS PER SECOND:  10</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3540,8 +3573,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3559,6 +3592,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  1000</abilityDetails>
             <abilityDetails>MAX ATTACKS:  3 / 4 / 5 / 6</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3582,8 +3616,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -3650,8 +3684,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3747,8 +3781,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3770,8 +3804,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3794,8 +3828,8 @@
                 <description>sleep</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3841,8 +3875,8 @@
                 <description>bash stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3945,8 +3979,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3970,8 +4004,8 @@
                 <description>marker</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3991,6 +4025,7 @@
             <abilityDetails>RADIUS:  400</abilityDetails>
             <abilityDetails>MAGIC ABSORB:  50 / 200 / 350 / 500</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  30 / 40 / 50 / 60</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4006,6 +4041,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4059,8 +4095,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4087,8 +4123,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4130,8 +4166,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4160,6 +4196,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  70 / 140 / 210 / 280</abilityDetails>
             <abilityDetails>MAX DISTANCE:  1950</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4181,8 +4218,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4236,8 +4273,8 @@
                 <description>stuns</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4266,6 +4303,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  260</abilityDetails>
             <abilityDetails>DAMAGE:  140 / 180 / 220 / 260</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4290,8 +4328,8 @@
                 <description>pull/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4314,8 +4352,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4334,6 +4372,7 @@
             <abilityDetails>SPEED:  1250 / 1875 / 2500</abilityDetails>
             <abilityDetails>RADIUS:  125 / 200 / 275</abilityDetails>
             <abilityDetails>MANA DRAIN PER UNIT:  0.7%</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4366,8 +4405,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4385,6 +4424,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  120 / 200 / 280 / 360</abilityDetails>
             <abilityDetails>RANGE:  2600</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4408,8 +4448,8 @@
                 <description>slow</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4430,6 +4470,7 @@
             <abilityDetails>DURATION:  20</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 15 / 15 / 15</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE REDUCTION: 30% / 15% / -0%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4459,6 +4500,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  85 / 100 / 115 / 145</abilityDetails>
             <abilityDetails>JUMPS:  5 / 7 / 9 / 15</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4482,8 +4524,8 @@
                 <description>mini-stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4499,6 +4541,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RANGE:  1200</abilityDetails>
             <abilityDetails>HEALTH REDUCTION:  4% / 6% / 8% / 10%</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4518,6 +4561,7 @@
             <abilityDetails>DURATION:  3 / 3 / 3 / 3</abilityDetails>
             <abilityDetails>DAMAGE:  225 / 325 / 425</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 440 / 540 / 640</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4546,6 +4590,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  110 / 180 / 250 / 320</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4569,8 +4614,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4606,8 +4651,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4637,6 +4682,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>TARGETS:  1 / 3 / 5 / 7</abilityDetails>
             <abilityDetails>DAMAGE:  140 / 200 / 260 / 320</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4657,8 +4703,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4681,8 +4727,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4739,8 +4785,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4759,6 +4805,7 @@
             <abilityDetails>DAMAGE:  125 / 200 / 275 / 350</abilityDetails>
             <abilityDetails>TARGETS:  2 / 2 / 2 / 2</abilityDetails>
             <abilityDetails> SCEPTER TARGETS: 4 / 4 / 4 / 4</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4777,6 +4824,7 @@
             <abilityDetails>DAMAGE:  16 / 24 / 32 / 40</abilityDetails>
             <abilityDetails>RADIUS:  900</abilityDetails>
             <abilityDetails>DURATION:  6</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4818,6 +4866,7 @@
             <abilityDetails>AFFECTS:  Heroes</abilityDetails>
             <abilityDetails>DURATION:  3 / 4 / 5 / 6</abilityDetails>
             <abilityDetails>CAST RANGE:  625 / 700 / 775 / 850</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4871,8 +4920,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4900,8 +4949,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4923,8 +4972,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -4959,6 +5008,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DISTANCE DAMAGE:  14% / 18% / 22%</abilityDetails>
             <abilityDetails> SCEPTER BONUS RANGE: 190 / 190 / 190</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -4995,8 +5045,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5021,8 +5071,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5045,8 +5095,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5070,6 +5120,7 @@
             <abilityDetails> SCEPTER DAMAGE PER SECOND: 125 / 175 / 225</abilityDetails>
             <abilityDetails> SCEPTER FLAME LENGTH: 1800</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 30</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -5102,8 +5153,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5122,6 +5173,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE MIN:  50 / 100 / 150 / 200</abilityDetails>
             <abilityDetails>DAMAGE MAX:  100 / 200 / 300 / 400</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5153,6 +5205,7 @@
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>MAX UNITS:  1 / 2 / 3 / 4</abilityDetails>
             <abilityDetails>HEALTH MINIMUM:  700 / 800 / 900 / 1000</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5203,8 +5256,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5221,6 +5274,7 @@
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>INT TO DAMAGE:  35% / 50% / 65% / 80%</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5244,8 +5298,8 @@
                 <description>initial debuff &amp; silence/slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5264,8 +5318,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -5299,8 +5353,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5323,8 +5377,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5365,8 +5419,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5387,6 +5441,7 @@
             <abilityDetails>2X CAST CHANCE:  40% / 50% / 60%</abilityDetails>
             <abilityDetails>3X CAST CHANCE:  0% / 20% / 25%</abilityDetails>
             <abilityDetails>4X CAST CHANCE:  0% / 0% / 12.5%</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -5422,8 +5477,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5456,8 +5511,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5488,6 +5543,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  180 / 240 / 300</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 2</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -5522,8 +5578,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5543,8 +5599,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5562,6 +5618,7 @@
             <abilityDetails>RADIUS:  340</abilityDetails>
             <abilityDetails>FORMATION DELAY:  1.2 / 1.2 / 1.2 / 1.2</abilityDetails>
             <abilityDetails>DURATION:  2.6 / 3.2 / 3.8 / 4.4</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5586,8 +5643,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -5618,6 +5675,7 @@
             <abilityDetails>MAX CHANNEL TIME:  2 / 3 / 4 / 5</abilityDetails>
             <abilityDetails>WIDTH:  375</abilityDetails>
             <abilityDetails>RANGE:  1550</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5642,8 +5700,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5700,8 +5758,8 @@
                 <description>knockback/blind</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5774,6 +5832,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>BASE DAMAGE:  60 / 80 / 100 / 120</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5797,8 +5856,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5819,8 +5878,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5841,6 +5900,7 @@
             <abilityDetails>DAMAGE:  600 / 1000 / 1400</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 20 / 10 / 5</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 12</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -5876,8 +5936,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5896,8 +5956,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5908,7 +5968,7 @@
             <imageName>oracle_purifying_flames_hp2</imageName>
             <name>Purifying Flames</name>
             <description>Burns away impurities, dealing heavy magic damage to the target before causing them to regenerate health over time. The amount of health regenerated over its duration exceeds the amount of initial damage. Can be cast on enemies and allies. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>50/60/70/80</manaCost>
+            <manaCost>80/85/90/95</manaCost>
             <cooldown>2.25</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -5918,6 +5978,7 @@
             <abilityDetails>TOTAL HEAL:  99 / 198 / 297 / 396</abilityDetails>
             <abilityDetails>DURATION:  9</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 1</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5964,6 +6025,7 @@
             <abilityDetails>HALF DAMAGE RADIUS:  500</abilityDetails>
             <abilityDetails>MINE ACTIVATION TIME:  0.5</abilityDetails>
             <abilityDetails>MINE FADE TIME:  2</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -5988,8 +6050,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6010,6 +6072,7 @@
             <abilityDetails>PARTIAL DAMAGE RADIUS:  500</abilityDetails>
             <abilityDetails>FULL DAMAGE:  500 / 650 / 850 / 1150</abilityDetails>
             <abilityDetails>PARTIAL DAMAGE:  260 / 300 / 340 / 380</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6060,6 +6123,7 @@
             <abilityDetails>CAST RANGE:  500</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 450 / 600 / 750</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 700</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6094,8 +6158,8 @@
                 <description>forced attack</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6119,8 +6183,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6138,6 +6202,7 @@
             <abilityDetails>DAMAGE:  75 / 110 / 145 / 180</abilityDetails>
             <abilityDetails>RADIUS:  275</abilityDetails>
             <abilityDetails>CHANCE TO HELIX:  20%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -6163,6 +6228,7 @@
             <abilityDetails> SCEPTER COOLDOWN: 6 / 6 / 6</abilityDetails>
             <abilityDetails> SCEPTER KILL THRESHOLD: 300 / 425 / 550</abilityDetails>
             <abilityDetails> SCEPTER SPEED DURATION: 10</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6196,8 +6262,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6217,8 +6283,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6255,8 +6321,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6292,8 +6358,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6313,6 +6379,7 @@
             <abilityDetails>INVISIBILITY DELAY:  1.5</abilityDetails>
             <abilityDetails>RADIUS:  525</abilityDetails>
             <abilityDetails>DURATION:  50</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6336,8 +6403,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -6362,8 +6429,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6416,8 +6483,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6438,8 +6505,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -6460,8 +6527,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6498,8 +6565,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6536,8 +6603,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -6560,8 +6627,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6599,8 +6666,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6654,8 +6721,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6695,6 +6762,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>LIFE LEECH:  4.5% / 5.5% / 6.5% / 7.5%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6717,8 +6785,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -6750,6 +6818,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>ERUPT DAMAGE:  300</abilityDetails>
             <abilityDetails>ERUPT RADIUS:  700 / 700 / 700</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6767,6 +6836,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE RADIUS:  700 / 700 / 700</abilityDetails>
             <abilityDetails>DAMAGE:  150 / 275 / 400</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6789,6 +6859,7 @@
             <name>Consume</name>
             <description>Lifestealer eats the host body from the inside out, exploding from within.</description>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6825,8 +6896,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6849,8 +6920,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6883,8 +6954,8 @@
                 <description>vision reduction</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -6914,8 +6985,8 @@
                 <description>self buff</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6935,6 +7006,7 @@
             <abilityDetails>RADIUS:  600 / 600 / 600 / 600</abilityDetails>
             <abilityDetails>BONUS MOVE SPEED:  14%</abilityDetails>
             <abilityDetails>DURATION:  10 / 12 / 14 / 16</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -6959,8 +7031,8 @@
                 <description>mini-stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -6983,8 +7055,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7018,8 +7090,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7062,8 +7134,8 @@
                 <description>knockback/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7085,6 +7157,7 @@
             <abilityDetails> SCEPTER RANGE: 850</abilityDetails>
             <abilityDetails> SCEPTER BASH RADIUS: 250 / 250 / 250</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 20 / 20 / 20</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7197,8 +7270,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7217,6 +7290,7 @@
             <abilityDetails>RANGE:  550 / 600 / 650 / 700</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  60 / 100 / 140 / 180</abilityDetails>
             <abilityDetails>BONUS DURATION:  1.2</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7235,8 +7309,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7290,8 +7364,8 @@
                 <description>lost strength</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7311,6 +7385,7 @@
             <abilityDetails>MAX UNITS:  10 / 12 / 14 / 16</abilityDetails>
             <abilityDetails>RIP RADIUS:  1300</abilityDetails>
             <abilityDetails>TOMBSTONE HEAL:  2 / 4 / 6 / 8</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7331,6 +7406,7 @@
             <abilityDetails>DEATHLUST FLAT HEALTH THRESHOLD:  100 / 200 / 300 / 400</abilityDetails>
             <abilityDetails>DEATHLUST PCT HEALTH THRESHOLD:  20% / 25% / 30% / 35%</abilityDetails>
             <abilityDetails>ZOMBIE SPAWN INTERVAL:  3</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7356,8 +7432,8 @@
                 <description>area debuff</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7386,6 +7462,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7405,6 +7482,7 @@
             <abilityDetails>BONUS DAMAGE:  20% / 30% / 40% / 50%</abilityDetails>
             <abilityDetails>CLEAVE DAMAGE:  20% / 30% / 40% / 50%</abilityDetails>
             <abilityDetails>CLEAVE RADIUS:  240</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7429,8 +7507,8 @@
                 <description>drag/disable</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7454,8 +7532,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7485,6 +7563,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>SELF DAMAGE:  75 / 100 / 125 / 150</abilityDetails>
             <abilityDetails>DAMAGE/HEAL:  100 / 150 / 200 / 250</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7503,6 +7582,7 @@
             <abilityDetails>DURATION:  15</abilityDetails>
             <abilityDetails>MAX DAMAGE ABSORBED:  110 / 140 / 170 / 200</abilityDetails>
             <abilityDetails>BURST RADIUS:  675</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7525,8 +7605,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7579,8 +7659,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7604,8 +7684,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7619,15 +7699,15 @@
             <abilityDetails>ABILITY:  Passive, Aura</abilityDetails>
             <abilityDetails>AFFECTS:  Enemies</abilityDetails>
             <abilityDetails>RADIUS:  900</abilityDetails>
-            <abilityDetails>DAMAGE REDUCTION:  18% / 26% / 34% / 42%</abilityDetails>
+            <abilityDetails>DAMAGE REDUCTION:  10% / 20% / 30% / 40%</abilityDetails>
             <abilityDetails>BONUS DAMAGE(CREEP):  5</abilityDetails>
             <abilityDetails>BONUS DAMAGE(HERO):  30 / 35 / 40 / 45</abilityDetails>
             <abilityDetails>DURATION:  30 / 40 / 50 / 60</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7686,8 +7766,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7709,8 +7789,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7730,8 +7810,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7756,8 +7836,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7786,6 +7866,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 175 / 250 / 325</abilityDetails>
             <abilityDetails>RANGE:  200</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7818,8 +7899,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7846,8 +7927,8 @@
                 <description>slow/attack damage reduction</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7877,6 +7958,7 @@
             <abilityDetails>DAMAGE MIN:  30 / 50 / 70 / 90</abilityDetails>
             <abilityDetails>DAMAGE MAX:  160 / 230 / 300 / 370</abilityDetails>
             <abilityDetails>RADIUS:  700</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7898,8 +7980,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7920,8 +8002,8 @@
                 <description>root/slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -7947,8 +8029,8 @@
                 <description>armor reduction</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -7982,8 +8064,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8003,8 +8085,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8046,8 +8128,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8059,7 +8141,7 @@
         <strength>23 + 1.80</strength>
         <attack>33 - 39</attack>
         <speed>300</speed>
-        <defence>4.22</defence>
+        <defence>3.22</defence>
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
@@ -8094,8 +8176,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8116,8 +8198,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -8138,8 +8220,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8174,8 +8256,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8193,6 +8275,7 @@
             <abilityDetails>BONUS ATTACK SPEED:  130</abilityDetails>
             <abilityDetails>MAX ATTACKS:  4</abilityDetails>
             <abilityDetails>RANGE:  1000 / 1000 / 1000 / 1000</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8206,6 +8289,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>EVASION:  20% / 30% / 40% / 50%</abilityDetails>
             <abilityDetails>MAP VANISH RADIUS:  1600 / 1600 / 1600 / 1600</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -8255,8 +8339,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8273,6 +8357,7 @@
             <abilityDetails>BASE BONUS DAMAGE:  2.5 / 5 / 7.5 / 10</abilityDetails>
             <abilityDetails>NON-HERO DAMAGE:  50% / 50% / 50% / 50%</abilityDetails>
             <abilityDetails>MAX BONUS DAMAGE:  40 / 80 / 120 / 160</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8295,8 +8380,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -8323,8 +8408,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8368,6 +8453,7 @@
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  30 / 40 / 50 / 60</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8400,6 +8486,7 @@
             <abilityDetails>DURATION:  35</abilityDetails>
             <abilityDetails>HEALTH GAIN:  50% / 65% / 80%</abilityDetails>
             <abilityDetails>DAMAGE GAIN:  5% / 6.5% / 8%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8434,8 +8521,8 @@
                 <description>infestation debuff</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8471,8 +8558,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -8524,8 +8611,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8545,6 +8632,7 @@
             <abilityDetails>RADIUS:  175 / 175 / 175 / 175</abilityDetails>
             <abilityDetails>FADE TIME:  0.25 / 0.25 / 0.25 / 0.25</abilityDetails>
             <abilityDetails>DURATION:  4 / 4 / 4 / 4</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8558,6 +8646,7 @@
             <cooldown>6/5/4/3</cooldown>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -8607,8 +8696,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8624,6 +8713,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  20 / 35 / 50 / 65</abilityDetails>
             <abilityDetails>RADIUS:  325</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8639,6 +8729,7 @@
             <abilityDetails>DAMAGE REFLECTED:  10% / 14% / 18% / 22%</abilityDetails>
             <abilityDetails>MIN RADIUS:  300 / 300 / 300 / 300</abilityDetails>
             <abilityDetails>MAX RADIUS:  1000 / 1000 / 1000 / 1000</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8667,6 +8758,7 @@
             <abilityDetails>HAUNT DURATION:  5 / 6 / 7</abilityDetails>
             <abilityDetails>HAUNT DAMAGE:  30%</abilityDetails>
             <abilityDetails>HAUNT DAMAGE TAKEN:  200% / 200% / 200%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8699,8 +8791,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8719,6 +8811,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  80 / 100 / 120 / 140</abilityDetails>
             <abilityDetails>RADIUS:  375</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8738,8 +8831,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -8785,8 +8878,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8804,6 +8897,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>INTELLIGENCE MULTIPLIER:  3.5 / 4 / 4.5 / 5</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8826,8 +8920,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8875,6 +8969,7 @@
             <abilityDetails>DURATION:  40 / 50 / 60</abilityDetails>
             <abilityDetails>MOVEMENT SPEED:  16% / 18% / 20%</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  250 / 400 / 550</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8904,6 +8999,7 @@
             <abilityDetails>DELAY:  1.5</abilityDetails>
             <abilityDetails>RADIUS:  325</abilityDetails>
             <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8927,8 +9023,8 @@
                 <description>leash</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8948,8 +9044,8 @@
                 <description>lost attributes</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -8966,6 +9062,7 @@
             <abilityDetails>DURATION:  4</abilityDetails>
             <abilityDetails>BONUS MOVEMENT SPEED:  30% / 35% / 40%</abilityDetails>
             <abilityDetails>HEALTH GAINED PER SECOND:  3% / 5% / 7%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -8992,6 +9089,7 @@
             <abilityDetails>OUTGOING DAMAGE:  80%</abilityDetails>
             <abilityDetails>TOTAL TARGETS:  2 / 3 / 4 / 5</abilityDetails>
             <abilityDetails>RANGE:  700</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9013,6 +9111,7 @@
             <abilityDetails>DAMAGE:  80 / 120 / 160 / 200</abilityDetails>
             <abilityDetails>MANA STEAL:  11% / 14% / 17% / 20%</abilityDetails>
             <abilityDetails>DAMAGE INCREASE PER JUMP:  35%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9050,8 +9149,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9086,8 +9185,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9140,6 +9239,7 @@
             <abilityDetails>AFFECTS:  Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>MINIMUM HP SWAP:  25%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9150,7 +9250,7 @@
         <agility>15 + 1.80</agility>
         <strength>24 + 2.30</strength>
         <attack>29 - 39</attack>
-        <speed>295</speed>
+        <speed>285</speed>
         <defence>0.1</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9175,8 +9275,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9216,6 +9316,7 @@
             <abilityDetails>WRAITH SPEED:  400</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 160 / 220 / 280</abilityDetails>
             <abilityDetails>PURGE DURATION:  0.4 / 0.5 / 0.6 / 0.7</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -9259,8 +9360,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9279,6 +9380,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  90 / 160 / 230 / 300</abilityDetails>
             <abilityDetails>HEAL AMOUNT:  90 / 160 / 230 / 300</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9303,8 +9405,8 @@
                 <description>sleep</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -9331,8 +9433,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9379,8 +9481,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9404,8 +9506,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9451,8 +9553,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9486,8 +9588,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9508,8 +9610,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9531,8 +9633,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -9557,8 +9659,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9595,8 +9697,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9635,8 +9737,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -9654,6 +9756,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE:  60 / 105 / 150</abilityDetails>
             <abilityDetails> SCEPTER BOUNCES: 4 / 4 / 4</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9689,8 +9792,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9712,8 +9815,8 @@
                 <description>Eidolons buff</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9732,6 +9835,7 @@
             <abilityDetails>RADIUS:  550</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  3% / 3.75% / 4.5% / 5.25%</abilityDetails>
             <abilityDetails>DURATION:  11</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -9754,8 +9858,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9785,6 +9889,7 @@
             <abilityDetails>DAMAGE:  125 / 175 / 225 / 275</abilityDetails>
             <abilityDetails>RADIUS:  475</abilityDetails>
             <abilityDetails>HEAL:  70 / 90 / 110 / 130</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9803,8 +9908,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9845,8 +9950,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9879,8 +9984,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9902,8 +10007,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9925,8 +10030,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -9956,8 +10061,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -9993,8 +10098,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10026,6 +10131,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
             <abilityDetails>RADIUS:  475</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10045,6 +10151,7 @@
             <abilityDetails>DAMAGE:  290 / 380 / 470</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 40</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 325 / 440 / 555</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -10074,6 +10181,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  75 / 150 / 225 / 300</abilityDetails>
             <abilityDetails>RANGE:  810 / 810 / 810 / 810</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10093,8 +10201,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10119,8 +10227,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10140,6 +10248,7 @@
             <abilityDetails>SPIRITS:  8 / 16 / 24</abilityDetails>
             <abilityDetails>LIFE DRAIN:  25% / 25% / 25%</abilityDetails>
             <abilityDetails>SPIRIT DAMAGE:  55 / 55 / 55</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -10169,6 +10278,7 @@
             <abilityDetails>DAMAGE:  100 / 175 / 250 / 325</abilityDetails>
             <abilityDetails>BLAST DELAY:  0.9 / 0.9 / 0.9 / 0.9</abilityDetails>
             <abilityDetails>RADIUS:  400 / 400 / 400 / 400</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10190,8 +10300,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10215,8 +10325,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10239,8 +10349,8 @@
                 <description>enemy/self debuff</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -10276,8 +10386,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10315,6 +10425,7 @@
             <abilityDetails>HEAL ARC RADIUS:  475</abilityDetails>
             <abilityDetails>DAMAGE RADIUS:  185</abilityDetails>
             <abilityDetails>MAX HEAL TARGETS:  4 / 5 / 6 / 7</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10337,8 +10448,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -10374,8 +10485,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10395,6 +10506,7 @@
             <abilityDetails>DAMAGE:  9 / 18 / 27 / 36</abilityDetails>
             <abilityDetails>EXPLOSIONS:  40</abilityDetails>
             <abilityDetails>RADIUS:  500</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10419,8 +10531,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10441,6 +10553,7 @@
             <abilityDetails>RADIUS:  450</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 130 / 160</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 160 / 190 / 220</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -10472,8 +10585,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10496,8 +10609,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10534,6 +10647,7 @@
             <abilityDetails>REPLICA DAMAGE:  60% / 75% / 90%</abilityDetails>
             <abilityDetails>CAST RANGE:  500 / 900 / 1300</abilityDetails>
             <abilityDetails> SCEPTER REPLICA DAMAGE: 100% / 120% / 140%</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -10567,13 +10681,13 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
-            <isDisable>true</isDisable>
+            <isStun>false</isStun>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>batrider_flamebreak_hp2</imageName>
@@ -10585,14 +10699,14 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  25 / 30 / 35 / 40</abilityDetails>
-            <abilityDetails>TOTAL DAMAGE:  75 / 120 / 175 / 240</abilityDetails>
+            <abilityDetails>TOTAL DAMAGE:  100 / 150 / 210 / 280</abilityDetails>
             <abilityDetails>RADIUS:  375 / 375 / 375 / 375</abilityDetails>
             <removableDebuffs>
                 <description>knockback/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10611,6 +10725,7 @@
             <abilityDetails>DAMAGE PER SECOND:  10 / 30 / 50 / 70</abilityDetails>
             <abilityDetails>RADIUS:  200 / 200 / 200 / 200</abilityDetails>
             <abilityDetails>DURATION:  18 / 18 / 18 / 18</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10634,8 +10749,8 @@
                 <description>disable/damage</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -10672,8 +10787,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10694,8 +10809,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10715,6 +10830,7 @@
             <abilityDetails>MAX ATTACKS:  3 / 4 / 5 / 6</abilityDetails>
             <abilityDetails>DAMAGE:  50 / 60 / 70 / 80</abilityDetails>
             <abilityDetails>ATTACK SPEED:  20</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10738,8 +10854,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10841,8 +10957,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10863,8 +10979,8 @@
                 <description>slow</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10885,8 +11001,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10904,6 +11020,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  675</abilityDetails>
             <abilityDetails>BURN DAMAGE:  50%</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10941,8 +11058,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10960,6 +11077,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DELAY:  1.7</abilityDetails>
             <abilityDetails>RADIUS:  175</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10993,8 +11111,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>false</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11015,8 +11133,8 @@
                 <description>knockback/stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -11026,7 +11144,7 @@
         <intelligence>26 + 2.70</intelligence>
         <agility>24 + 2.00</agility>
         <strength>19 + 2.30</strength>
-        <attack>20 - 35</attack>
+        <attack>14 - 29</attack>
         <speed>315</speed>
         <defence>3.86</defence>
         <abilities>
@@ -11050,8 +11168,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11075,8 +11193,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11111,6 +11229,7 @@
             <abilityDetails>INT DIFF DAMAGE MULTIPLIER:  8 / 9 / 10</abilityDetails>
             <abilityDetails>RADIUS:  375 / 475 / 575</abilityDetails>
             <abilityDetails>CAST RANGE:  700</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -11144,8 +11263,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11167,8 +11286,8 @@
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11179,7 +11298,7 @@
             <imageName>shadow_demon_shadow_poison_hp2</imageName>
             <name>Shadow Poison</name>
             <description>Deals damage in a line, and afflicts enemy units with a poison effect. The poison deals 1/2/4/8/16 times the stack damage based on the number of stacks on the target, up to 5 stacks. Additional stacks cause 50 damage each. This deferred damage is dealt when Shadow Poison's duration is expired, or the Release sub-ability is used.</description>
-            <manaCost>40</manaCost>
+            <manaCost>55</manaCost>
             <cooldown>2.50</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -11192,8 +11311,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11229,8 +11348,8 @@
                 <description>slow</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
     <heroInfo>
@@ -11264,8 +11383,8 @@
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11288,6 +11407,7 @@
             <abilityDetails>CHARGE DURATION:  6</abilityDetails>
             <abilityDetails>GATHER DAMAGE THRESHOLD:  110</abilityDetails>
             <abilityDetails>GATHER DAMAGE RADIUS:  1375</abilityDetails>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11359,8 +11479,8 @@
                 <description>damage/slow</description>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11384,8 +11504,8 @@
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11429,8 +11549,8 @@
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
-                <spellImmunity>true</spellImmunity>
             </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
         </abilities>
     </heroInfo>
 </listOfHeroInfo>
