@@ -82,12 +82,12 @@ public class AbilityDebuffPresenter implements IInfoPresenter_Data, IInfoPresent
         }
 
         showAbilities("Pierces spell immunity", "(Such as BKB)", piercesSpellImmunity, HeroAbilityInfo.SPELL_IMMUNITY);
-        showAbilities("Blocked by spell immunity", null, notPiercesSpellImmunity);
+        showAbilities("Blocked by spell immunity", null, notPiercesSpellImmunity, HeroAbilityInfo.SPELL_IMMUNITY);
 
-        showAbilities("Debuff removed by basic dispell", "(Such as Eul's Cyclone)",  removedByBasicDisepell);
+        showAbilities("Debuff removed by basic dispel", "(Such as Eul's Cyclone)",  removedByBasicDisepell);
 
-        showAbilities("Debuff removed by strong dispell", "(Such as Slark's Dark Pact)", removedByStrongDisepell);
-        showAbilities("Debuff immune to strong dispell", null, notRemovedByStrongDisepell);
+        showAbilities("Debuff removed by strong dispel", "(Such as Slark Dark Pact)", removedByStrongDisepell);
+        showAbilities("Debuff immune to all dispels", null, notRemovedByStrongDisepell);
     }
 
     public void setAdvantageData(List<HeroAndAdvantages> advantageData) {}
