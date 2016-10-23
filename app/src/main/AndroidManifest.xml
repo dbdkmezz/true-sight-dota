@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.carver.paul.dotavision">
+    package="com.carver.paul.truesight">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Ui.MainActivity"
+            android:name="com.carver.paul.truesight.Ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
@@ -26,32 +26,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Ui.DebugActivities.DebugLineDetectionActivity"
+            android:name="com.carver.paul.truesight.Ui.DebugActivities.DebugLineDetectionActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".Ui.MainActivity"
+            android:parentActivityName="com.carver.paul.truesight.Ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Ui.MainActivity" />
+                android:value="com.carver.paul.truesight.Ui.MainActivity" />
         </activity>
         <activity
-            android:name=".Ui.AboutActivity"
+            android:name="com.carver.paul.truesight.Ui.AboutActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".Ui.MainActivity"
+            android:parentActivityName="com.carver.paul.truesight.Ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Ui.MainActivity" />
+                android:value="com.carver.paul.truesight.Ui.MainActivity" />
         </activity>
-        <activity android:name=".Ui.DotaCamera.CameraActivity"
+        <activity android:name="com.carver.paul.truesight.Ui.DotaCamera.CameraActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".Ui.MainActivity"
+            android:parentActivityName="com.carver.paul.truesight.Ui.MainActivity"
             android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Ui.MainActivity" />
+                android:value="com.carver.paul.truesight.Ui.MainActivity" />
         </activity>
     </application>
 
