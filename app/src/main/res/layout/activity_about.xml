@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.carver.paul.dotavision.DebugActivities.DebugLineDetection">
+    tools:context="com.carver.paul.truesight.DebugActivities.DebugLineDetection">
 
     <include layout="@layout/partial_appbar_and_toolbar" />
 

@@ -7,7 +7,6 @@ The following files were *not* copied into the new Gradle project; you
 should evaluate whether these are still needed in your project and if
 so manually move them:
 
-* AndroidManifest.xml~
 * javadoc/
 * javadoc/allclasses-frame.html
 * javadoc/allclasses-noframe.html
@@ -97,6 +96,7 @@ so manually move them:
 * javadoc/org/opencv/imgproc/CLAHE.html
 * javadoc/org/opencv/imgproc/Imgproc.html
 * javadoc/org/opencv/imgproc/LineSegmentDetector.html
+* javadoc/org/opencv/imgproc/Moments.html
 * javadoc/org/opencv/imgproc/Subdiv2D.html
 * javadoc/org/opencv/imgproc/package-frame.html
 * javadoc/org/opencv/imgproc/package-summary.html
@@ -162,6 +162,7 @@ so manually move them:
 * javadoc/org/opencv/video/package-tree.html
 * javadoc/org/opencv/videoio/
 * javadoc/org/opencv/videoio/VideoCapture.html
+* javadoc/org/opencv/videoio/VideoWriter.html
 * javadoc/org/opencv/videoio/Videoio.html
 * javadoc/org/opencv/videoio/package-frame.html
 * javadoc/org/opencv/videoio/package-summary.html
@@ -170,22 +171,20 @@ so manually move them:
 * javadoc/overview-summary.html
 * javadoc/overview-tree.html
 * javadoc/package-list
-* javadoc/resources/
-* javadoc/resources/inherit.gif
+* javadoc/script.js
 * javadoc/serialized-form.html
 * javadoc/stylesheet.css
-* project.properties~
 
 Moved Files:
 ------------
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => openCVLibrary300/src/main/AndroidManifest.xml
-* lint.xml => openCVLibrary300/lint.xml
-* res/ => openCVLibrary300/src/main/res/
-* src/ => openCVLibrary300/src/main/java/
-* src/org/opencv/engine/OpenCVEngineInterface.aidl => openCVLibrary300/src/main/aidl/org/opencv/engine/OpenCVEngineInterface.aidl
+* AndroidManifest.xml => openCVLibrary310/src/main/AndroidManifest.xml
+* lint.xml => openCVLibrary310/lint.xml
+* res/ => openCVLibrary310/src/main/res/
+* src/ => openCVLibrary310/src/main/java/
+* src/org/opencv/engine/OpenCVEngineInterface.aidl => openCVLibrary310/src/main/aidl/org/opencv/engine/OpenCVEngineInterface.aidl
 
 Next Steps:
 -----------
