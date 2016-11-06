@@ -14,6 +14,9 @@ http://www.dota2.com/heroes/
 True Sight is built using the OpenCV (Open Source Computer Vision Library) library. OpenCV is a
 BSD-licensed project and is not covered by the GPL 3 library which covers the rest of this project.
 
+Descriptions of magic immunity ability interactions is taken from the Dota 2 wiki, http://dota2.gamepedia.com/ This text is copyright under Creative Commons license CC BY-NC-SA 3.0.
+
+
 
 To make tests work ensure the Build Variant Test Artifact is set to Unit Tests. (Set within "Build
 Variant" on the left of Android Studio.) Also ensure that instant run is turned off, otherwise
