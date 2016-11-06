@@ -43,6 +43,10 @@
         images and names are property of Valve Corporation. This app is not affiliated with Valve
         Corporation.</string>
 
+    <string name="dota_wiki_license">Descriptions of the more complicated magic immunity piercing
+        ability interactions is taken from the Dota 2 wiki, http://dota2.gamepedia.com/ This text is
+        copyright under Create Commons license CC BY-NC-SA 3.0. </string>
+
     <string name="counter_picker">Counter picker</string>
     <string name="hero_abilities">Hero abilities</string>
     <string name="dispells">Spell immunity</string>
