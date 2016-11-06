@@ -158,7 +158,8 @@ public class SimilarityTest {
                 new Pair<>(R.drawable.wisp_hphover, "wisp"),
                 new Pair<>(R.drawable.witch_doctor_hphover, "witch_doctor"),
                 new Pair<>(R.drawable.zuus_hphover, "zuus"),
-                new Pair<>(R.drawable.arc_warden_hphover, "arc_warden"));
+                new Pair<>(R.drawable.arc_warden_hphover, "arc_warden"),
+                new Pair<>(R.drawable.abyssal_underlord_full, "abyssal_underlord"));
                 //new Pair<>(R.drawable.blank_hero, "blank_hero"));
     }
 

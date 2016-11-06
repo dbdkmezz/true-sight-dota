@@ -555,6 +555,11 @@ public class Variables {
                 new Pair<>(R.drawable.arc_warden_flux_hp2, "arc_warden_flux_hp2"),
                 new Pair<>(R.drawable.arc_warden_magnetic_field_hp2, "arc_warden_magnetic_field_hp2"),
                 new Pair<>(R.drawable.arc_warden_spark_wraith_hp2, "arc_warden_spark_wraith_hp2"),
-                new Pair<>(R.drawable.arc_warden_tempest_double_hp2, "arc_warden_tempest_double_hp2"));
+                new Pair<>(R.drawable.arc_warden_tempest_double_hp2, "arc_warden_tempest_double_hp2"),
+                new Pair<>(R.drawable.abyssal_underlord_atrophy_aura_hp2, "abyssal_underlord_atrophy_aura_hp2"),
+                new Pair<>(R.drawable.abyssal_underlord_cancel_dark_rift_hp2, "abyssal_underlord_cancel_dark_rift_hp2"),
+                new Pair<>(R.drawable.abyssal_underlord_dark_rift_hp2, "abyssal_underlord_dark_rift_hp2"),
+                new Pair<>(R.drawable.abyssal_underlord_firestorm_hp2, "abyssal_underlord_firestorm_hp2"),
+                new Pair<>(R.drawable.abyssal_underlord_pit_of_malice_hp2, "abyssal_underlord_pit_of_malice_hp2"));
     }
 }

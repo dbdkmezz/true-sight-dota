@@ -19,6 +19,7 @@
 package com.carver.paul.truesight.ImageRecognition;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.util.Pair;
 
 import com.carver.paul.truesight.R;
@@ -37,6 +38,8 @@ import static org.opencv.android.Utils.matToBitmap;
 public class ImageTools {
 
     private ImageTools() {}
+
+    private static final String TAG = "ImageTools";
 
     public static void MaskAColourFromImage(Mat image, Scalar lowerHsv, Scalar upperHsv, Mat mask) {
         Imgproc.cvtColor(image, mask, Imgproc.COLOR_BGR2HSV);
@@ -76,6 +79,8 @@ public class ImageTools {
             if (pair.second.equals(abilityImageName))
                 return pair.first;
         }
+
+        Log.d(TAG, "No image found for ability " + abilityImageName);
         return -1;
     }
 
@@ -88,6 +93,8 @@ public class ImageTools {
             if (pair.second.equals(heroImageName))
                 return pair.first;
         }
+
+        Log.d(TAG, "No image for hero " + heroImageName + " found");
         return -1;
     }
 
