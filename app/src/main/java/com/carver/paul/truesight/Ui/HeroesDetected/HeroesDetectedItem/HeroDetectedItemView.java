@@ -25,6 +25,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,8 @@ public class HeroDetectedItemView {
     // to choose a different hero.
     private RecyclerView mRecyclerView;
     private int mScreenWidth;
+
+    private static final String TAG = "HeroDetectedItemView";
 
     public HeroDetectedItemView(Context activityContext,
                                 LayoutInflater inflater,
@@ -130,6 +133,10 @@ public class HeroDetectedItemView {
     }
 
     protected void setUpperHeroImage(int resId) {
+        if(resId == -1) {
+            Log.d(TAG, "No image for setting hero image");
+            return;
+        }
         ImageView imageView = (ImageView) mLinearLayout.findViewById(R.id.image_upper_hero);
         imageView.setImageResource(resId);
     }
