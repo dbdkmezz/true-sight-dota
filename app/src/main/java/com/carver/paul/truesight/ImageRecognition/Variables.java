@@ -560,6 +560,13 @@ public class Variables {
                 new Pair<>(R.drawable.abyssal_underlord_cancel_dark_rift_hp2, "abyssal_underlord_cancel_dark_rift_hp2"),
                 new Pair<>(R.drawable.abyssal_underlord_dark_rift_hp2, "abyssal_underlord_dark_rift_hp2"),
                 new Pair<>(R.drawable.abyssal_underlord_firestorm_hp2, "abyssal_underlord_firestorm_hp2"),
-                new Pair<>(R.drawable.abyssal_underlord_pit_of_malice_hp2, "abyssal_underlord_pit_of_malice_hp2"));
+                new Pair<>(R.drawable.abyssal_underlord_pit_of_malice_hp2, "abyssal_underlord_pit_of_malice_hp2"),
+                new Pair<>(R.drawable.monkey_king_boundless_strike_hp2, "monkey_king_boundless_strike_hp2"),
+                new Pair<>(R.drawable.monkey_king_jingu_mastery_hp2, "monkey_king_jingu_mastery_hp2"),
+                new Pair<>(R.drawable.monkey_king_mischief_hp2, "monkey_king_mischief_hp2"),
+                new Pair<>(R.drawable.monkey_king_primal_spring_hp2, "monkey_king_primal_spring_hp2"),
+                new Pair<>(R.drawable.monkey_king_tree_dance_hp2, "monkey_king_tree_dance_hp2"),
+                new Pair<>(R.drawable.monkey_king_untransform_hp2, "monkey_king_untransform_hp2"),
+                new Pair<>(R.drawable.monkey_king_wukongs_command_hp2, "monkey_king_wukongs_command_hp2"));
     }
 }
