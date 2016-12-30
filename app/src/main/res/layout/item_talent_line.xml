@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/optionOwoTextView"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_spacing"
+        android:paddingRight="@dimen/activity_horizontal_spacing"
+        android:paddingTop="@dimen/activity_horizontal_spacing"
+        android:paddingBottom="@dimen/activity_vertical_spacing"
+        android:gravity="right|center_horizontal"/>
+
+    <TextView
+        android:id="@+id/levelTextView"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_width="32dp"
+        android:layout_height="fill_parent"
+        android:paddingLeft="@dimen/activity_horizontal_spacing"
+        android:paddingRight="@dimen/activity_horizontal_spacing"
+        android:paddingTop="@dimen/activity_horizontal_spacing"
+        android:paddingBottom="@dimen/activity_vertical_spacing"/>
+
+    <TextView
+        android:id="@+id/optionTwoTextView"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_spacing"
+        android:paddingRight="@dimen/activity_horizontal_spacing"
+        android:paddingTop="@dimen/activity_horizontal_spacing"
+        android:paddingBottom="@dimen/activity_vertical_spacing"
+        android:gravity="left|center_horizontal"/>
+
+</LinearLayout>

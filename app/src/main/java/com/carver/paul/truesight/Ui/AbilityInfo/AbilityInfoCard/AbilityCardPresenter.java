@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * The presenter behind AbilityCardView
  */
-class AbilityCardPresenter {
+class AbilityCardPresenter implements IAbilityCardPresenter {
     private AbilityCardView mView;
     private HeroAbilityInfo mAbility;
     private int mAbilityType;
@@ -55,7 +55,7 @@ class AbilityCardPresenter {
      * Toggles between showing the full card, with all the details on the ability, or just a small
      * two line preview.
      */
-    protected void toggleIsExtended() {
+    public void toggleIsExtended() {
         mIsExtended = !mIsExtended ;
         setupText();
     }

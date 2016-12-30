@@ -29,6 +29,8 @@ import android.widget.TextView;
 import com.carver.paul.truesight.Models.HeroAbilityInfo;
 import com.carver.paul.truesight.R;
 
+import java.util.List;
+
 /**
  * AbilityCardView is a card in which the information about an ability is shown.
  *
@@ -38,7 +40,7 @@ import com.carver.paul.truesight.R;
  */
 public class AbilityCardView extends FrameLayout {
 
-    private AbilityCardPresenter mPresenter;
+    private IAbilityCardPresenter mPresenter;
 
     /**
      *
@@ -52,6 +54,11 @@ public class AbilityCardView extends FrameLayout {
         super(context);
         init();
         mPresenter = new AbilityCardPresenter(this, ability, showHeroName, abilityType);
+    }
+    public AbilityCardView(Context context, List<HeroAbilityInfo.Talent> talents) {
+        super(context);
+        init();
+        mPresenter = new TalentsCardPresenter(this, talents);
     }
 
     protected void setIcon(int drawable) {

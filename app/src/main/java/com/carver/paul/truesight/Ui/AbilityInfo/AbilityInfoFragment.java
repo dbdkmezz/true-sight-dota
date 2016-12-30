@@ -30,6 +30,8 @@ import com.carver.paul.truesight.Models.HeroAbilityInfo;
 import com.carver.paul.truesight.R;
 import com.carver.paul.truesight.Ui.AbilityInfo.AbilityInfoCard.AbilityCardView;
 
+import java.util.List;
+
 /**
  * This is where the information about the individual abilities is shown.
  *
@@ -96,6 +98,11 @@ public class AbilityInfoFragment<T> extends Fragment {
 
     protected void addAbilityCard(HeroAbilityInfo ability, boolean showHeroName, int abilityType) {
         AbilityCardView card = new AbilityCardView(getActivity(), ability, showHeroName, abilityType);
+        mParentLinearLayout.addView(card);
+    }
+
+    protected void addTalentsCard(List<HeroAbilityInfo.Talent> talents) {
+        AbilityCardView card = new AbilityCardView(getActivity(), talents);
         mParentLinearLayout.addView(card);
     }
 

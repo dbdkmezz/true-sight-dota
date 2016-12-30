@@ -146,6 +146,7 @@ public class AbilityInfoPresenter implements IInfoPresenter_Data, IInfoPresenter
                 for (HeroAbilityInfo ability : hero.abilities) {
                     mView.addAbilityCard(ability, false);
                 }
+                mView.addTalentsCard(hero.talents);
             }
         }
     }

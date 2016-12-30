@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_vertical_spacing"
+    android:layout_marginLeft="@dimen/activity_horizontal_spacing"
+    android:layout_marginRight="@dimen/activity_horizontal_spacing">
+
+    <LinearLayout
+        android:id="@+id/talentsLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/talents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/activity_horizontal_spacing"
+            android:paddingRight="@dimen/activity_horizontal_spacing"
+            android:paddingTop="@dimen/activity_horizontal_spacing"
+            android:paddingBottom="@dimen/activity_vertical_spacing"/>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

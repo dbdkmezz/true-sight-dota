@@ -63,6 +63,7 @@
     <string name="silences">Silences</string>
     <string name="no_silences_found">No silences found!</string>
     <string name="ultimates">Ultimates</string>
+    <string name="talents">Talents</string>
 
     <string name="loading_counter_picker">Calculating counters...</string>
 
