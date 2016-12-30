@@ -118,4 +118,10 @@ public class HeroAbilityInfo {
         public boolean basicDispel;
         public boolean strongDispel;
     }
+
+    public static class Talent {
+        public int level;
+        public String optionOne;
+        public String optionTwo;
+    }
 }

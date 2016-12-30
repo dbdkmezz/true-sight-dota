@@ -106,6 +106,9 @@ public class LoadHeroXml {
             } else if (parser.getName().equals("abilities")) {
                 hero.abilities.add(LoadHeroAbilities(parser));
                 parser.require(XmlPullParser.END_TAG, sNullString, "abilities");
+            } else if (parser.getName().equals("talents")) {
+                hero.talents.add(LoadHeroTalent(parser));
+                parser.require(XmlPullParser.END_TAG, sNullString, "talents");
             } else {
                 throw new RuntimeException("Loading XML Error, in LoadIndividualHeroInfo. Name:" + parser.getName());
             }
@@ -206,6 +209,29 @@ public class LoadHeroXml {
         return debuff;
     }
 
+    static private HeroAbilityInfo.Talent LoadHeroTalent(XmlResourceParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, sNullString, "talents");
+        HeroAbilityInfo.Talent talent = new HeroAbilityInfo.Talent();
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getName().equals("optionOne")) {
+                talent.optionOne = readText(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "optionOne");
+            } else if (parser.getName().equals("optionTwo")) {
+                talent.optionTwo = readText(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "optionTwo");
+            } else if (parser.getName().equals("level")) {
+                talent.level = readInt(parser);
+                parser.require(XmlPullParser.END_TAG, sNullString, "level");
+            } else {
+                throw new RuntimeException("Loading XML Error, in LoadHeroTalents. Name:" + parser.getName());
+            }
+        }
+
+        parser.require(XmlPullParser.END_TAG, sNullString, "talents");
+        return talent;
+    }
+
     private static boolean readBoolean(XmlPullParser parser) throws IOException, XmlPullParserException {
         boolean result = false;
         if (parser.next() == XmlPullParser.TEXT) {
@@ -214,9 +240,19 @@ public class LoadHeroXml {
             }
             parser.nextTag();
         } else {
-            throw new RuntimeException("Loading XML Error, in realBoolean. Text not found!");
+            throw new RuntimeException("Loading XML Error, in readBoolean. Text not found!");
         }
         return result;
+    }
+
+    private static int readInt(XmlPullParser parser) throws IOException, XmlPullParserException {
+        if (parser.next() == XmlPullParser.TEXT) {
+            int result = Integer.parseInt(parser.getText());
+            parser.nextTag();
+            return result;
+        }
+
+        throw new RuntimeException("Loading XML Error, in readInt. Text not found!");
     }
 
     // Extracts text values. and goes to tag following the text

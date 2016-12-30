@@ -32,9 +32,11 @@ public class HeroInfo {
     public String speed;
     public String defence;
     public List<HeroAbilityInfo> abilities;
+    public List<HeroAbilityInfo.Talent> talents;
 
     public HeroInfo() {
         abilities = new ArrayList<>();
+        talents = new ArrayList<>();
     }
 
     public boolean hasName(String string) {
