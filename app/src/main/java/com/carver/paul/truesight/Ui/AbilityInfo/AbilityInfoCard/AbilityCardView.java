@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class AbilityCardView extends FrameLayout {
 
-    private IAbilityCardPresenter mPresenter;
+    private AbilityCardPresenter mPresenter;
 
     /**
      *
@@ -54,11 +54,6 @@ public class AbilityCardView extends FrameLayout {
         super(context);
         init();
         mPresenter = new AbilityCardPresenter(this, ability, showHeroName, abilityType);
-    }
-    public AbilityCardView(Context context, List<HeroAbilityInfo.Talent> talents) {
-        super(context);
-        init();
-        mPresenter = new TalentsCardPresenter(this, talents);
     }
 
     protected void setIcon(int drawable) {

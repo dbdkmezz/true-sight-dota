@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.carver.paul.truesight.Models.HeroAbilityInfo;
 import com.carver.paul.truesight.R;
 import com.carver.paul.truesight.Ui.AbilityInfo.AbilityInfoCard.AbilityCardView;
+import com.carver.paul.truesight.Ui.AbilityInfo.AbilityInfoCard.TalentsCardView;
 
 import java.util.List;
 
@@ -102,7 +103,7 @@ public class AbilityInfoFragment<T> extends Fragment {
     }
 
     protected void addTalentsCard(List<HeroAbilityInfo.Talent> talents) {
-        AbilityCardView card = new AbilityCardView(getActivity(), talents);
+        TalentsCardView card = new TalentsCardView(getActivity(), talents);
         mParentLinearLayout.addView(card);
     }
 
