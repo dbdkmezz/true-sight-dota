@@ -100,12 +100,12 @@
         </abilities>
         <talents>
             <optionOne>-2s Enchant Totem Cooldown</optionOne>
-            <optionTwo>+500 Health</optionTwo>
+            <optionTwo>+600 Health</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>-35s Respawn Time</optionOne>
-            <optionTwo>+10% Spell Amplification</optionTwo>
+            <optionTwo>+40 Echo Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -203,12 +203,12 @@
             <abilityDetails> SCEPTER ALLY BONUS DAMAGE: 75% / 100% / 125%</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>-5s Storm Hammer Cooldown</optionOne>
+            <optionOne>-6s Storm Hammer Cooldown</optionOne>
             <optionTwo>+65 Damage</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15% Evasion</optionOne>
+            <optionOne>15% Evasion</optionOne>
             <optionTwo>+30 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
@@ -336,12 +336,12 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
+            <optionOne>+20 Movement Speed</optionOne>
             <optionTwo>+45 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+10 Intelligence</optionOne>
+            <optionOne>+12 Intelligence</optionOne>
             <optionTwo>+6 Strength</optionTwo>
             <level>10</level>
         </talents>
@@ -469,7 +469,7 @@
         </abilities>
         <talents>
             <optionOne>+200 Torrent AoE</optionOne>
-            <optionTwo>+25% Magic Resistance</optionTwo>
+            <optionTwo>+35% Magic Resistance</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -483,8 +483,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+150 Mana</optionOne>
-            <optionTwo>+20 Damage</optionTwo>
+            <optionOne>+40 Torrent Damage</optionOne>
+            <optionTwo>+25 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -583,23 +583,23 @@
             <piercesSIDetail>Can target and stun spell immune enemies. Attempts to damage the primary target while spell immune. Can knock back secondary spell immune enemies. Does not slow and does not attempt to damage secondary spell immune enemies.</piercesSIDetail>
         </abilities>
         <talents>
-            <optionOne>+175 Wild Axes Damage</optionOne>
+            <optionOne>+250 Wild Axes Damage</optionOne>
             <optionTwo>+120 Damage</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+300 Health</optionOne>
+            <optionOne>+350 Health</optionOne>
             <optionTwo>12% Cooldown Reduction</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
+            <optionOne>-35s Respawn Time</optionOne>
             <optionTwo>+12 Strength</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+20 Movement Speed</optionOne>
-            <optionTwo>+15% XP Gain</optionTwo>
+            <optionTwo>+20% XP Gain</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -693,7 +693,7 @@
         </abilities>
         <talents>
             <optionOne>2x Dragon Blood Regen/Armor</optionOne>
-            <optionTwo>+50 Movement Speed</optionTwo>
+            <optionTwo>+60 Movement Speed</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -703,12 +703,12 @@
         </talents>
         <talents>
             <optionOne>+40 Damage</optionOne>
-            <optionTwo>+25% XP Gain</optionTwo>
+            <optionTwo>+35% XP Gain</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+20 Attack Speed</optionOne>
-            <optionTwo>+6 Strength</optionTwo>
+            <optionTwo>+7 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -826,8 +826,8 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
-            <optionTwo>+40 Damage</optionTwo>
+            <optionOne>+75 Rocket Flare Damage</optionOne>
+            <optionTwo>+50 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -932,7 +932,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15% XP Gain</optionOne>
+            <optionOne>+20% XP Gain</optionOne>
             <optionTwo>+60 Gold/Min</optionTwo>
             <level>10</level>
         </talents>
@@ -1045,8 +1045,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
-            <optionTwo>+150 Health</optionTwo>
+            <optionOne>+5 Burning Spear DPS</optionOne>
+            <optionTwo>+175 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -1157,8 +1157,8 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+4 Acid Spray Armor Reduction</optionOne>
-            <optionTwo>+30% Lifesteal</optionTwo>
+            <optionOne>-5 Acid Spray Armor</optionOne>
+            <optionTwo>30% Lifesteal</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -1168,7 +1168,7 @@
         </talents>
         <talents>
             <optionOne>+6 All Stats</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionTwo>+80 Unstable Concoction Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -1266,23 +1266,23 @@
             <abilityDetails>DURATION:  16 / 18 / 20</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+14 Primal Split Unit Armor</optionOne>
+            <optionOne>+20 Primal Split Unit Armor</optionOne>
             <optionTwo>+75 Damage</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>+20 Strength</optionOne>
-            <optionTwo>-25s Respawn Time</optionTwo>
+            <optionTwo>-35s Respawn Time</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+10% Magic Resistance</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionTwo>+75 Thunder Clap Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+3 Mana Regen</optionOne>
-            <optionTwo>+25 Attack Speed</optionTwo>
+            <optionTwo>+30 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -1298,18 +1298,26 @@
         <defence>1.1</defence>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>false</isStun>
-            <isDisable>false</isDisable>
+            <isStun>true</isStun>
+            <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>treant_natures_guise_hp2</imageName>
             <name>Nature's Guise</name>
-            <description>Turns you invis when you are within 265 radius of a tree for 6 seconds. Increasing movement speed by 16 while invisible, and causes a 0.7 seconds bash when attacking out of invisibility.</description>
+            <description>Turns you invis when you are within 265 radius of a tree for 6 seconds. Increasing movement speed by 10 while invisible, and causes a 0.4 seconds bash when attacking out of invisibility.</description>
+            <disableDuration>BASH DURATION:  0.4 / 1 / 1.6 / 2.2</disableDuration>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>FADE TIME:  6 / 5 / 4 / 3</abilityDetails>
             <abilityDetails>TREE RADIUS:  265</abilityDetails>
-            <abilityDetails>MOVEMENT SPEED:  16% / 22% / 28% / 34%</abilityDetails>
-            <abilityDetails>BASH DURATION:  0.7 / 1.2 / 1.7 / 2.2</abilityDetails>
+            <abilityDetails>MOVEMENT SPEED:  10% / 18% / 26% / 34%</abilityDetails>
+            <abilityDetails>BASH DURATION:  0.4 / 1 / 1.6 / 2.2</abilityDetails>
+            <removableDebuffs>
+                <description>stun</description>
+                <basicDispel>false</basicDispel>
+                <strongDispel>true</strongDispel>
+            </removableDebuffs>
+            <piercesSpellImmunity>true</piercesSpellImmunity>
+            <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1327,7 +1335,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE PER PULSE:  15 / 30 / 45 / 60</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  28%</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  22% / 24% / 26% / 28%</abilityDetails>
             <abilityDetails>RADIUS:  500</abilityDetails>
             <abilityDetails>DURATION:  4.5</abilityDetails>
             <removableDebuffs>
@@ -1401,8 +1409,8 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+65 Damage</optionOne>
-            <optionTwo>+15% Cooldown Reduction</optionTwo>
+            <optionOne>+90 Damage</optionOne>
+            <optionTwo>15% Cooldown Reduction</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -1538,7 +1546,7 @@
         </abilities>
         <talents>
             <optionOne>+150 Spirits Damage</optionOne>
-            <optionTwo>-40s Respawn Time</optionTwo>
+            <optionTwo>-50s Respawn Time</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -1664,7 +1672,7 @@
         </talents>
         <talents>
             <optionOne>+2 Mana Regen</optionOne>
-            <optionTwo>+30 Damage</optionTwo>
+            <optionTwo>+35 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -1807,17 +1815,17 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+125 Cast Range</optionOne>
+            <optionOne>+150 Cast Range</optionOne>
             <optionTwo>+5% Spell Amplification</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15 Intelligence</optionOne>
+            <optionOne>+20 Intelligence</optionOne>
             <optionTwo>+14 Health Regen</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+10% XP Gain</optionOne>
+            <optionOne>+20% XP Gain</optionOne>
             <optionTwo>+150 Health</optionTwo>
             <level>10</level>
         </talents>
@@ -1851,7 +1859,7 @@
             <abilityDetails>BASE MOVEMENT SLOW:  20%</abilityDetails>
             <abilityDetails>MOVE SLOW PER STACK:  3% / 6% / 9% / 12%</abilityDetails>
             <abilityDetails>STACK LIMIT:  4</abilityDetails>
-            <abilityDetails> SCEPTER RADIUS: 700</abilityDetails>
+            <abilityDetails> SCEPTER RADIUS: 750</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
@@ -1875,7 +1883,7 @@
             <abilityDetails>RADIUS:  625</abilityDetails>
             <abilityDetails>QUILL BASE DAMAGE:  20 / 40 / 60 / 80</abilityDetails>
             <abilityDetails>QUILL STACK DAMAGE:  30 / 32 / 34 / 36</abilityDetails>
-            <abilityDetails>MAX DAMAGE:  450</abilityDetails>
+            <abilityDetails>MAX DAMAGE:  550</abilityDetails>
             <removableDebuffs>
                 <description>stack debuff</description>
                 <basicDispel>false</basicDispel>
@@ -1914,18 +1922,18 @@
             <abilityDetails>MAX STACKS:  5 / 7 / 9</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+4 Max Viscous Nasal Goo Stacks</optionOne>
+            <optionOne>+20 Quill Spray Stack Damage</optionOne>
             <optionTwo>+25 Health Regen</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
+            <optionOne>-35s Respawn Time</optionOne>
             <optionTwo>+45 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+200 Health</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionTwo>+4 Max Goo Stacks</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -2082,23 +2090,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+500 Health</optionOne>
-            <optionTwo>+150% Walrus PUNCH! Crit</optionTwo>
+            <optionOne>+150% Walrus PUNCH! Crit</optionOne>
+            <optionTwo>+700 Health</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+6 Armor</optionOne>
-            <optionTwo>+10% Magic Resistance</optionTwo>
+            <optionOne>+12% Magic Resistance</optionOne>
+            <optionTwo>+6 Armor</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15 Strength</optionOne>
-            <optionTwo>+90 Gold/Min</optionTwo>
+            <optionOne>+90 Gold/Min</optionOne>
+            <optionTwo>+150 Snowball Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+20% XP Gain</optionOne>
-            <optionTwo>+30 Damage</optionTwo>
+            <optionOne>+35 Damage</optionOne>
+            <optionTwo>+35% XP Gain</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -2226,7 +2234,7 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+80 Astral Spirit Hero Attack</optionOne>
+            <optionOne>+100 Astral Spirit Hero Attack</optionOne>
             <optionTwo>+15 Armor</optionTwo>
             <level>25</level>
         </talents>
@@ -2236,7 +2244,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+25% XP Gain</optionOne>
+            <optionOne>+30 Echo Stomp Damage</optionOne>
             <optionTwo>+275 Health</optionTwo>
             <level>15</level>
         </talents>
@@ -2353,7 +2361,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15% XP Gain</optionOne>
+            <optionOne>+20% XP Gain</optionOne>
             <optionTwo>+7 Strength</optionTwo>
             <level>10</level>
         </talents>
@@ -2460,7 +2468,7 @@
             <isMute>false</isMute>
             <imageName>earth_spirit_stone_caller_hp2</imageName>
             <name>Stone Remnant</name>
-            <description>Call a Stone Remnant to the target location. Stones Remnants have no vision and are invulnerable, and can be used with Earth Spirit's abilities. Calling a Stone Remnant consumes a charge, which recharge over time.</description>
+            <description>Call a Stone Remnant to the target location. Stone Remnants have no vision and are invulnerable, and can be used with Earth Spirit's abilities. Calling a Stone Remnant consumes a charge, which recharge over time.</description>
             <cooldown>0</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>MAX CHARGES:  6</abilityDetails>
@@ -2519,7 +2527,7 @@
         </abilities>
         <talents>
             <optionOne>+300 Rolling Boulder Damage</optionOne>
-            <optionTwo>-35s Respawn Time</optionTwo>
+            <optionTwo>-45s Respawn Time</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -2603,7 +2611,7 @@
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
-            <isDisable>true</isDisable>
+            <isDisable>false</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
             <imageName>phoenix_sun_ray_hp2</imageName>
@@ -2611,7 +2619,6 @@
             <description>Phoenix expels a beam of light at the cost of its own health. The beam damages enemies and heals allies for a base amount plus a percentage of their health. The percentage increases as the beam continues to fire.</description>
             <manaCost>100</manaCost>
             <cooldown>26</cooldown>
-            <disableDuration>DURATION:  6</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -2706,18 +2713,18 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+2 Supernova Hit Count</optionOne>
-            <optionTwo>+1s Supernova Stun Duration</optionTwo>
+            <optionOne>+1s Supernova Stun Duration</optionOne>
+            <optionTwo>+2 Supernova Hit Count</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+10 Armor</optionOne>
-            <optionTwo>+8% Spell Amplification</optionTwo>
+            <optionOne>+8% Spell Amplification</optionOne>
+            <optionTwo>+10 Armor</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+90 Gold/Min</optionOne>
-            <optionTwo>+12 Strength</optionTwo>
+            <optionTwo>+50 Fire Spirits DPS</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -2804,23 +2811,23 @@
             <piercesSIType>Pierces without damage</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>-2s Blink Cooldown</optionOne>
+            <optionOne>-50 Mana Void Cooldown</optionOne>
             <optionTwo>+25 Agility</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>+10 All Stats</optionOne>
-            <optionTwo>+15% Evasion</optionTwo>
+            <optionTwo>15% Evasion</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+250 HP</optionOne>
+            <optionOne>-1s Blink Cooldown</optionOne>
             <optionTwo>+20 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+20 Damage</optionOne>
-            <optionTwo>+6 Strength</optionTwo>
+            <optionTwo>+150 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -2910,7 +2917,7 @@
         </abilities>
         <talents>
             <optionOne>+25 Marksmanship Agility</optionOne>
-            <optionTwo>+350 Gust Distance/Knockback</optionTwo>
+            <optionTwo>+400 Gust Distance/Knockback</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -3016,13 +3023,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+6 Armor</optionOne>
+            <optionOne>+7 Armor</optionOne>
             <optionTwo>+20 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+20 Damage</optionOne>
-            <optionTwo>+150 Health</optionTwo>
+            <optionTwo>+175 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3119,8 +3126,8 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+8 Armor</optionOne>
-            <optionTwo>+40 Damage</optionTwo>
+            <optionOne>-4s Sacred Arrow cooldown</optionOne>
+            <optionTwo>+50 Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -3268,23 +3275,23 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+400 Waveform Range</optionOne>
-            <optionTwo>+30% Replicate Damage</optionTwo>
+            <optionOne>+50% Replicate Damage</optionOne>
+            <optionTwo>+400 Waveform Range</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+25 Movement Speed</optionOne>
-            <optionTwo>+40 Damage</optionTwo>
+            <optionOne>+40 Damage</optionOne>
+            <optionTwo>+25 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+25 Attack Speed</optionOne>
-            <optionTwo>12% Cooldown Reduction</optionTwo>
+            <optionOne>12% Cooldown Reduction</optionOne>
+            <optionTwo>+25 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+8 Agility</optionOne>
-            <optionTwo>+200 Mana</optionTwo>
+            <optionOne>+200 Mana</optionOne>
+            <optionTwo>+8 Agility</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3396,7 +3403,7 @@
         </talents>
         <talents>
             <optionOne>+20 Attack Speed</optionOne>
-            <optionTwo>+150 Health</optionTwo>
+            <optionTwo>+75 Spirit Lance Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3500,13 +3507,13 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+20% Vengeance Aura Damage</optionOne>
-            <optionTwo>Magic Missile Pierces Spell Immunity</optionTwo>
+            <optionOne>Magic Missile Pierces Spell Immunity</optionOne>
+            <optionTwo>+20% Vengeance Aura Damage</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+50 Damage</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionOne>+35 Movement Speed</optionOne>
+            <optionTwo>+65 Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -3515,8 +3522,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+8% Magic Resistance</optionOne>
-            <optionTwo>+25 Attack Speed</optionTwo>
+            <optionOne>+25 Attack Speed</optionOne>
+            <optionTwo>+8% Magic Resistance</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3608,18 +3615,18 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+0.4 Cloak and Dagger Backstab Multiplier</optionOne>
-            <optionTwo>-4s Smoke Screen Cooldown</optionTwo>
+            <optionOne>-4s Smoke Screen Cooldown</optionOne>
+            <optionTwo>+0.4 Cloak and Dagger Backstab Multiplier</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+250 Cast Range</optionOne>
-            <optionTwo>+8 All Stats</optionTwo>
+            <optionOne>+8 All Stats</optionOne>
+            <optionTwo>+250 Cast Range</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+10 Agility</optionOne>
-            <optionTwo>+20% XP Gain</optionTwo>
+            <optionOne>+30% XP Gain</optionOne>
+            <optionTwo>+10 Agility</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -3646,7 +3653,7 @@
             <isMute>false</isMute>
             <imageName>sniper_shrapnel_hp2</imageName>
             <name>Shrapnel</name>
-            <description>Consumes a charge to launch a ball of shrapnel that showers the target area in explosive pellets. Enemies are subject to damage and slowed movement. Reveals the targeted area. Shrapnel charges restore every %dcharge_restore_time% seconds.</description>
+            <description>Consumes a charge to launch a ball of shrapnel that showers the target area in explosive pellets. Enemies are subject to damage and slowed movement. Reveals the targeted area. Shrapnel charges restore every 55 seconds.</description>
             <manaCost>50</manaCost>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -3721,23 +3728,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+100 Attack Range</optionOne>
-            <optionTwo>+4 Shrapnel Charges</optionTwo>
+            <optionOne>+4 Shrapnel Charges</optionOne>
+            <optionTwo>+100 Attack Range</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+8 Armor</optionOne>
-            <optionTwo>+25% Cooldown Reduction</optionTwo>
+            <optionOne>25% Cooldown Reduction</optionOne>
+            <optionTwo>+8 Armor</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Shrapnel DPS</optionOne>
-            <optionTwo>+200 Health</optionTwo>
+            <optionOne>+200 Health</optionOne>
+            <optionTwo>+20 Shrapnel DPS</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+4 Mana Regen</optionOne>
-            <optionTwo>+15 Attack Speed</optionTwo>
+            <optionOne>+15 Attack Speed</optionOne>
+            <optionTwo>+5 Mana Regen</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3852,18 +3859,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+250 Health</optionOne>
-            <optionTwo>+40 Damage</optionTwo>
+            <optionOne>+40 Damage</optionOne>
+            <optionTwo>+275 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+6 All Stats</optionOne>
-            <optionTwo>+12% Evasion</optionTwo>
+            <optionOne>12% Evasion</optionOne>
+            <optionTwo>+6 All Stats</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+25 Attack Speed</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>+20 Movement Speed</optionOne>
+            <optionTwo>+25 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3874,7 +3881,7 @@
         <intelligence>16 + 1.85</intelligence>
         <agility>18 + 3.30</agility>
         <strength>15 + 2.20</strength>
-        <attack>26 - 32</attack>
+        <attack>20 - 26</attack>
         <speed>335</speed>
         <defence>2.52</defence>
         <abilities>
@@ -3929,7 +3936,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>BLESSING RADIUS:  900 / 900 / 900 / 900</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  14 / 22 / 30 / 38</abilityDetails>
-            <abilityDetails>BONUS NIGHT VISION:  1000 / 1000 / 1000 / 1000</abilityDetails>
+            <abilityDetails>BONUS NIGHT VISION:  250 / 500 / 750 / 1000</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3971,7 +3978,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+4 Armor</optionOne>
+            <optionOne>+15 Movement Speed</optionOne>
             <optionTwo>+15 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -4083,12 +4090,12 @@
         </abilities>
         <talents>
             <optionOne>-5s Jinada Cooldown</optionOne>
-            <optionTwo>20% Evasion</optionTwo>
+            <optionTwo>25% Evasion</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+100 Damage</optionOne>
-            <optionTwo>+8% Spell Amplification</optionTwo>
+            <optionOne>+120 Damage</optionOne>
+            <optionTwo>+75 Shuriken Toss Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -4097,7 +4104,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15% XP Gain</optionOne>
+            <optionOne>+20% XP Gain</optionOne>
             <optionTwo>+175 Health</optionTwo>
             <level>10</level>
         </talents>
@@ -4196,18 +4203,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
-            <optionTwo>+250 Health</optionTwo>
+            <optionOne>+250 Health</optionOne>
+            <optionTwo>+15 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+5 Armor</optionOne>
-            <optionTwo>+20 Attack Speed</optionTwo>
+            <optionOne>+20 Attack Speed</optionOne>
+            <optionTwo>+5 Armor</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+25 Damage</optionOne>
-            <optionTwo>+8% Magic Resistance</optionTwo>
+            <optionOne>+10% Magic Resistance</optionOne>
+            <optionTwo>+25 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -4313,21 +4320,21 @@
         </abilities>
         <talents>
             <optionOne>+4 Flak Cannon Attacks</optionOne>
-            <optionTwo>+3 Homing Missile Charges</optionTwo>
+            <optionTwo>3 Homing Missile Charges</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>20% Cooldown Reduction</optionOne>
-            <optionTwo>+25 Movement Speed</optionTwo>
+            <optionTwo>+35 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+30 Damage</optionOne>
-            <optionTwo>+10% Magic Resistance</optionTwo>
+            <optionTwo>+12% Magic Resistance</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+150 Health</optionOne>
+            <optionOne>+200 Health</optionOne>
             <optionTwo>+6% Spell Amplification</optionTwo>
             <level>10</level>
         </talents>
@@ -4449,23 +4456,23 @@
             <abilityDetails>TRANSFORM TIME:  0.8</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+1.5s Entangling Claws Duration</optionOne>
-            <optionTwo>-10s Savage Roar Cooldown</optionTwo>
+            <optionOne>-10s Savage Roar Cooldown</optionOne>
+            <optionTwo>+1.5s Entangling Claws Duration</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+7 Spirit Bear Armor</optionOne>
-            <optionTwo>-50s Respawn Time</optionTwo>
+            <optionOne>-40s Respawn Time</optionOne>
+            <optionTwo>+12 Spirit Bear Armor</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+65 Damage</optionOne>
-            <optionTwo>+30 Spirit Bear Damage</optionTwo>
+            <optionOne>+30 Spirit Bear Damage</optionOne>
+            <optionTwo>+55 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+250 Health</optionOne>
-            <optionTwo>+200 Attack Range</optionTwo>
+            <optionOne>+175 Attack Range</optionOne>
+            <optionTwo>+250 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -4583,18 +4590,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15 Agility</optionOne>
-            <optionTwo>+20 Strength</optionTwo>
+            <optionOne>+20 Strength</optionOne>
+            <optionTwo>+15 Agility</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+30 Attack Speed</optionOne>
-            <optionTwo>15% Evasion</optionTwo>
+            <optionOne>-3s Ensnare Cooldown</optionOne>
+            <optionTwo>+30 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+250 Mana</optionOne>
-            <optionTwo>+125 Health</optionTwo>
+            <optionOne>+125 Health</optionOne>
+            <optionTwo>+250 Mana</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -4706,18 +4713,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+300 Health</optionOne>
-            <optionTwo>+40 Damage</optionTwo>
+            <optionOne>+40 Damage</optionOne>
+            <optionTwo>+350 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
-            <optionTwo>+6 Armor</optionTwo>
+            <optionOne>+6 Armor</optionOne>
+            <optionTwo>+15 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+6 Strength</optionOne>
-            <optionTwo>+10 Agility</optionTwo>
+            <optionOne>+10 Agility</optionOne>
+            <optionTwo>+7 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -4850,7 +4857,7 @@
         </talents>
         <talents>
             <optionOne>+20 Damage</optionOne>
-            <optionTwo>+15% Spell Amplification</optionTwo>
+            <optionTwo>+12% Spell Amplification</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -4863,7 +4870,7 @@
         <strength>18 + 2.20</strength>
         <attack>30 - 36</attack>
         <speed>305</speed>
-        <defence>3.08</defence>
+        <defence>0.08</defence>
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>true</isStun>
@@ -4880,7 +4887,6 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>STUN DURATION:  0.5 / 1 / 1.5 / 2</abilityDetails>
-            <abilityDetails>CRIT MULTIPLIER:  140% / 160% / 180% / 200%</abilityDetails>
             <removableDebuffs>
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
@@ -4896,7 +4902,7 @@
             <isMute>false</isMute>
             <imageName>monkey_king_tree_dance_hp2</imageName>
             <name>Tree Dance</name>
-            <description>Monkey King jumps to a tree and perches atop it. While perched, he gains the Primal Spring ability�a channeled leap attack. If Monkey King's tree is destroyed, he falls and is stunned for 4 seconds. Taking damage from player controlled units or Roshan while on the ground puts Tree Dance on cooldown.</description>
+            <description>Monkey King jumps to a tree and perches atop it. While perched, he gains the Primal Spring ability-a channeled leap attack. If Monkey King's tree is destroyed, he falls and is stunned for 4 seconds. Taking damage from player controlled units or Roshan while on the ground puts Tree Dance on cooldown.</description>
             <cooldown>1.40</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemies</abilityDetails>
@@ -4946,11 +4952,11 @@
             <description>Monkey King's attacks awaken the Jingu Bang's power. Upon the fourth hit on the same enemy hero, Monkey King earns four charged attacks that have bonus damage and lifesteal.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>REQUIRED HITS  4</abilityDetails>
+            <abilityDetails>REQUIRED HITS:  4</abilityDetails>
             <abilityDetails>COUNTER DURATION:  10</abilityDetails>
             <abilityDetails>CHARGES:  4</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  80 / 120 / 160 / 200</abilityDetails>
-            <abilityDetails>BONUS LIFESTEAL:  20% / 30% / 40% / 50%</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  75 / 100 / 125 / 150</abilityDetails>
+            <abilityDetails>BONUS LIFESTEAL:  15% / 30% / 45% / 60%</abilityDetails>
             <removableDebuffs>
                 <description>stacks</description>
                 <basicDispel>false</basicDispel>
@@ -5007,16 +5013,16 @@
         </abilities>
         <talents>
             <optionOne>+100% Boundless Strike Crit</optionOne>
-            <optionTwo>+25% Magic Resistance</optionTwo>
+            <optionTwo>+25 Strength</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15 Strength</optionOne>
+            <optionOne>+20% Magic Resistance</optionOne>
             <optionTwo>+40 Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Movement Speed</optionOne>
+            <optionOne>+75 Jingu Mastery Damage</optionOne>
             <optionTwo>+275 Health</optionTwo>
             <level>15</level>
         </talents>
@@ -5128,7 +5134,7 @@
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <talents>
-            <optionOne>+200 Crystal Nova Damage</optionOne>
+            <optionOne>+250 Crystal Nova Damage</optionOne>
             <optionTwo>+1.5s Frostbite Duration</optionTwo>
             <level>25</level>
         </talents>
@@ -5138,12 +5144,12 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+200 Health</optionOne>
+            <optionOne>+250 Health</optionOne>
             <optionTwo>+125 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+50 Damage</optionOne>
+            <optionOne>+60 Damage</optionOne>
             <optionTwo>+15% Magic Resistance</optionTwo>
             <level>10</level>
         </talents>
@@ -5256,23 +5262,23 @@
             <piercesSIDetail>Latches on spell immune enemies. Attempts to damage spell immune enemies. Does not stun spell immune enemies. When upgraded, leash break stun pierces spell immunity.</piercesSIDetail>
         </abilities>
         <talents>
-            <optionOne>+300 Gold/ Min</optionOne>
-            <optionTwo>+75% Illusory Orb Distance/Speed</optionTwo>
+            <optionOne>+75% Illusory Orb Distance/Speed</optionOne>
+            <optionTwo>+300 Gold/Min</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+8% Spell Amplification</optionOne>
-            <optionTwo>+20% Magic Resistance</optionTwo>
+            <optionOne>-3s Waning Rift Cooldown</optionOne>
+            <optionTwo>+10% Spell Amplification</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+40 Damage</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionOne>+15% Magic Resistance</optionOne>
+            <optionTwo>+40 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+8 Intelligence</optionOne>
-            <optionTwo>+150 Health</optionTwo>
+            <optionOne>+175 Health</optionOne>
+            <optionTwo>+8 Intelligence</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -5381,13 +5387,13 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+7 Armor</optionOne>
+            <optionOne>+8 Armor</optionOne>
             <optionTwo>+40 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+10 Intelligence</optionOne>
-            <optionTwo>+175 Health</optionTwo>
+            <optionTwo>+200 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -5439,11 +5445,11 @@
             <name>Powershot</name>
             <description>Windranger charges her bow for up to 1 second for a single powerful shot, which deals more damage the longer it is charged. The arrow damages enemies and destroys trees along its path. For each enemy that Powershot hits, its damage is reduced by 20%.</description>
             <manaCost>90/100/110/120</manaCost>
-            <cooldown>9</cooldown>
+            <cooldown>12/11/10/9</cooldown>
             <abilityDetails>ABILITY:  Channeled, Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  120 / 220 / 320 / 420</abilityDetails>
+            <abilityDetails>DAMAGE:  180 / 260 / 340 / 420</abilityDetails>
             <abilityDetails>RANGE:  2600</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
@@ -5456,14 +5462,14 @@
             <imageName>windrunner_windrun_hp2</imageName>
             <name>Windrun</name>
             <description>Increases movement speed and adds evasion from all physical attacks, while slowing movement of nearby enemies.</description>
-            <manaCost>100/100/100/100</manaCost>
+            <manaCost>75</manaCost>
             <cooldown>13</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MOVE SPEED BONUS:  50% / 50% / 50% / 50%</abilityDetails>
             <abilityDetails>EVASION:  100%</abilityDetails>
             <abilityDetails>ENEMY SLOW:  8% / 16% / 24% / 30%</abilityDetails>
-            <abilityDetails>ENEMY SLOW RADIUS:  300 / 300 / 300 / 300</abilityDetails>
+            <abilityDetails>ENEMY SLOW RADIUS:  325</abilityDetails>
             <abilityDetails>DURATION:  3 / 4 / 5 / 6</abilityDetails>
             <removableDebuffs>
                 <description>slow</description>
@@ -5495,23 +5501,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>-5s Powershot Cooldown</optionOne>
+            <optionOne>-6s Powershot Cooldown</optionOne>
             <optionTwo>+100 Attack Range</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+12% Magic Resistance</optionOne>
-            <optionTwo>+12% Spell Amplification</optionTwo>
+            <optionOne>+20% Magic Resistance</optionOne>
+            <optionTwo>+15% Spell Amplification</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+16 Intelligence</optionOne>
-            <optionTwo>+200 Health</optionTwo>
+            <optionOne>+20 Intelligence</optionOne>
+            <optionTwo>+40 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+4 Mana Regen</optionOne>
-            <optionTwo>+15 Damage</optionTwo>
+            <optionTwo>+25% Windrun Slow</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -5594,12 +5600,12 @@
             <name>Nimbus</name>
             <description>Creates a storm cloud anywhere on the map that automatically casts Lightning Bolt on nearby enemies.</description>
             <manaCost>275</manaCost>
-            <cooldown>50</cooldown>
+            <cooldown>40</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DURATION:  50</abilityDetails>
-            <abilityDetails>LIGHTNING BOLT BASE COOLDOWN:  2.5</abilityDetails>
+            <abilityDetails>DURATION:  40</abilityDetails>
+            <abilityDetails>LIGHTNING BOLT BASE COOLDOWN:  2.25</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -5626,7 +5632,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-40 Respawn Time</optionOne>
+            <optionOne>-40s Respawn Time</optionOne>
             <optionTwo>+35 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
@@ -5636,7 +5642,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+150 Health</optionOne>
+            <optionOne>+175 Health</optionOne>
             <optionTwo>+2 Mana Regen</optionTwo>
             <level>10</level>
         </talents>
@@ -5702,7 +5708,7 @@
             <isMute>false</isMute>
             <imageName>lina_fiery_soul_hp2</imageName>
             <name>Fiery Soul</name>
-            <description>Grants bonus attack and movement speed each time Lina casts a spell. Stacks with itself. Lasts %duration_tooltip% seconds.</description>
+            <description>Grants bonus attack and movement speed each time Lina casts a spell. Stacks with itself. Lasts 10 seconds.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>ATTACK SPEED BONUS:  40 / 55 / 70 / 85</abilityDetails>
             <abilityDetails>MOVE SPEED BONUS:  5% / 6% / 7% / 8%</abilityDetails>
@@ -5737,18 +5743,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+6% Spell Amplification</optionOne>
-            <optionTwo>+150 Attack Range</optionTwo>
+            <optionOne>+150 Attack Range</optionOne>
+            <optionTwo>+6% Spell Amplification</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
-            <optionTwo>+125 Cast Range</optionTwo>
+            <optionOne>+125 Cast Range</optionOne>
+            <optionTwo>+40 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+250 Mana</optionOne>
-            <optionTwo>+20 Damage</optionTwo>
+            <optionOne>-25s Respawn Time</optionOne>
+            <optionTwo>+60 Light Strike Array Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -5844,23 +5850,23 @@
             <abilityDetails>SCEPTER BONUS ATTACK RANGE:  225</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+1 Mass Serpent Ward Attacks Health</optionOne>
-            <optionTwo>+3s Shackles Duration</optionTwo>
+            <optionOne>+3s Shackles Duration</optionOne>
+            <optionTwo>+1 Mass Serpent Ward Attacks Health</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
-            <optionTwo>+20% Magic Resistance</optionTwo>
+            <optionOne>+20% Magic Resistance</optionOne>
+            <optionTwo>-30s Respawn Time</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+100 Cast Range</optionOne>
-            <optionTwo>+20% XP Gain</optionTwo>
+            <optionOne>+30% XP Gain</optionOne>
+            <optionTwo>+100 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+150 Health</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>+15 Movement Speed</optionOne>
+            <optionTwo>+150 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -5955,7 +5961,7 @@
         </abilities>
         <talents>
             <optionOne>+100 Laser Damage</optionOne>
-            <optionTwo>+20% Spell Lifesteal (1/5 for non-heroes)</optionTwo>
+            <optionTwo>20% Spell Lifesteal</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -5965,11 +5971,11 @@
         </talents>
         <talents>
             <optionOne>+4% Spell Amplification</optionOne>
-            <optionTwo>+200 Health</optionTwo>
+            <optionTwo>+225 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 Armor</optionOne>
+            <optionOne>+6 Armor</optionOne>
             <optionTwo>+8 Intelligence</optionTwo>
             <level>10</level>
         </talents>
@@ -6062,7 +6068,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+8 Armor</optionOne>
+            <optionOne>+10 Armor</optionOne>
             <optionTwo>+35 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
@@ -6072,8 +6078,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
-            <optionTwo>+20 Damage</optionTwo>
+            <optionOne>+225 Health</optionOne>
+            <optionTwo>+30 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -6166,23 +6172,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+10 Nature's Attendants Wisps</optionOne>
-            <optionTwo>+25 Intelligence</optionTwo>
+            <optionOne>+12 Nature's Attendants Wisps</optionOne>
+            <optionTwo>-50s Respawn Time</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
+            <optionOne>+60 Untouchable Slow</optionOne>
             <optionTwo>+12% Magic Resistance</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+40 Damage</optionOne>
-            <optionTwo>+8s Nature's Attendants Duration</optionTwo>
+            <optionOne>+50 Damage</optionOne>
+            <optionTwo>+10s Nature's Attendants Duration</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+20 Movement Speed</optionOne>
-            <optionTwo>+5 All Stats</optionTwo>
+            <optionOne>+25 Movement Speed</optionOne>
+            <optionTwo>+6 All Stats</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -6308,13 +6314,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+250 Health</optionOne>
+            <optionOne>+25 Dual Breath Burn Damage</optionOne>
             <optionTwo>+125 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+8% Spell Amplification</optionOne>
-            <optionTwo>+15% XP Gain</optionTwo>
+            <optionTwo>+20% XP Gain</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -6428,13 +6434,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+25% Spell Amplification</optionOne>
-            <optionTwo>+200 Health</optionTwo>
+            <optionOne>-10s Test of Faith Cooldown</optionOne>
+            <optionTwo>+250 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+125 Cast Range</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionTwo>+25 Movement Speed</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -6536,7 +6542,7 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+20% Arcane Curse Slow</optionOne>
+            <optionOne>+25% Arcane Curse Slow</optionOne>
             <optionTwo>+200 Attack Range</optionTwo>
             <level>25</level>
         </talents>
@@ -6560,7 +6566,7 @@
         <name>Ogre Magi</name>
         <imageName>ogre_magi</imageName>
         <bioRoles>Melee - Support - Nuker - Disabler - Durable - Initiator</bioRoles>
-        <intelligence>17 + 2.40</intelligence>
+        <intelligence>17 + 2.00</intelligence>
         <agility>14 + 1.55</agility>
         <strength>23 + 3.20</strength>
         <attack>41 - 47</attack>
@@ -6677,23 +6683,23 @@
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <talents>
-            <optionOne>+15% Spell Amplification</optionOne>
-            <optionTwo>+40 Bloodlust Attack Speed</optionTwo>
+            <optionOne>+40 Bloodlust Attack Speed</optionOne>
+            <optionTwo>+15% Spell Amplification</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+250 Health</optionOne>
-            <optionTwo>+25 Movement Speed</optionTwo>
+            <optionOne>+25 Movement Speed</optionOne>
+            <optionTwo>+250 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+40 Damage</optionOne>
-            <optionTwo>+8% Magic Resistance</optionTwo>
+            <optionOne>+8% Magic Resistance</optionOne>
+            <optionTwo>+50 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+60 Gold/Min</optionOne>
-            <optionTwo>+100 Cast Range</optionTwo>
+            <optionOne>+100 Cast Range</optionOne>
+            <optionTwo>+60 Gold/Min</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -6801,7 +6807,7 @@
         </abilities>
         <talents>
             <optionOne>+400 Telekinesis Land Distance</optionOne>
-            <optionTwo>+20% Cooldown Reduction</optionTwo>
+            <optionTwo>20% Cooldown Reduction</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -6815,7 +6821,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+50 Damage</optionOne>
+            <optionOne>+60 Damage</optionOne>
             <optionTwo>+60 Gold/Min</optionTwo>
             <level>10</level>
         </talents>
@@ -6926,12 +6932,12 @@
         </talents>
         <talents>
             <optionOne>+10% Spell Amplification</optionOne>
-            <optionTwo>+15% Cooldown Reduction</optionTwo>
+            <optionTwo>+400 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>-30s Respawn Time</optionOne>
-            <optionTwo>+200 Health</optionTwo>
+            <optionTwo>-3s Kinetic Field Cooldown</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -7100,7 +7106,7 @@
         </abilities>
         <talents>
             <optionOne>+200 Illuminate Damage/Heal</optionOne>
-            <optionTwo>+300 Cast Range</optionTwo>
+            <optionTwo>+400 Cast Range</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -7115,7 +7121,7 @@
         </talents>
         <talents>
             <optionOne>+20 Movement Speed</optionOne>
-            <optionTwo>+6 Strength</optionTwo>
+            <optionTwo>+7 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -7226,8 +7232,8 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+60 Gold/Min</optionOne>
-            <optionTwo>+50 Damage</optionTwo>
+            <optionOne>+90 Gold/Min</optionOne>
+            <optionTwo>+75 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -7333,18 +7339,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+25 Movement Speed</optionOne>
-            <optionTwo>+20 Intelligence</optionTwo>
+            <optionOne>+20 Intelligence</optionOne>
+            <optionTwo>+25 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+200 Health</optionOne>
-            <optionTwo>+60 Gold/Min</optionTwo>
+            <optionOne>+60 Gold/Min</optionOne>
+            <optionTwo>+200 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>-20s Respawn Time</optionOne>
-            <optionTwo>+15% XP gain</optionTwo>
+            <optionOne>+20% XP Gain</optionOne>
+            <optionTwo>-20s Respawn Time</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -7380,7 +7386,7 @@
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
-            <isStun>true</isStun>
+            <isStun>false</isStun>
             <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
@@ -7406,7 +7412,7 @@
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
             <isDisable>false</isDisable>
-            <isSilence>false</isSilence>
+            <isSilence>true</isSilence>
             <isMute>false</isMute>
             <imageName>techies_suicide_hp2</imageName>
             <name>Blast Off!</name>
@@ -7477,7 +7483,7 @@
         </abilities>
         <talents>
             <optionOne>+400 Blast Off! Damage</optionOne>
-            <optionTwo>+25% Cooldown Reduction</optionTwo>
+            <optionTwo>+20% Cooldown Reduction</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -7487,7 +7493,7 @@
         </talents>
         <talents>
             <optionOne>+200 Cast Range</optionOne>
-            <optionTwo>+25% XP Gain</optionTwo>
+            <optionTwo>+30% XP Gain</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -7608,7 +7614,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+30 Movement Speed</optionOne>
+            <optionOne>+35 Movement Speed</optionOne>
             <optionTwo>+25 Health Regen</optionTwo>
             <level>20</level>
         </talents>
@@ -7631,7 +7637,7 @@
         <agility>14 + 1.50</agility>
         <strength>25 + 3.20</strength>
         <attack>27 - 33</attack>
-        <speed>285</speed>
+        <speed>280</speed>
         <defence>0.96</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -7723,7 +7729,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-35s Respawn Time</optionOne>
+            <optionOne>-40s Respawn Time</optionOne>
             <optionTwo>+150 Gold/Min</optionTwo>
             <level>20</level>
         </talents>
@@ -7851,18 +7857,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+350 Health</optionOne>
-            <optionTwo>+120 Gold/Min</optionTwo>
+            <optionOne>+120 Gold/Min</optionOne>
+            <optionTwo>+350 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+12% Magic Resistance</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>-30s Respawn Time</optionOne>
+            <optionTwo>+50 Sand Storm DPS</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+200 Mana</optionOne>
-            <optionTwo>+5 Armor</optionTwo>
+            <optionOne>+5 Armor</optionOne>
+            <optionTwo>+10% Magic Resistance</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -7902,7 +7908,7 @@
             <description>Slams the ground, stunning and damaging nearby enemy land units. After the stun, the affected units are slowed.</description>
             <manaCost>80/95/105/115</manaCost>
             <cooldown>8</cooldown>
-            <disableDuration>STUN DURATION:  1.6 / 1.9 / 2.2 / 2.5</disableDuration>
+            <disableDuration>STUN DURATION:  1.5 / 1.75 / 2 / 2.25</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -7911,7 +7917,7 @@
             <abilityDetails>MOVEMENT SLOW:  20%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  20</abilityDetails>
             <abilityDetails>SLOW DURATION:  2</abilityDetails>
-            <abilityDetails>STUN DURATION:  1.6 / 1.9 / 2.2 / 2.5</abilityDetails>
+            <abilityDetails>STUN DURATION:  1.5 / 1.75 / 2 / 2.25</abilityDetails>
             <removableDebuffs>
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
@@ -7950,7 +7956,7 @@
             <imageName>slardar_amplify_damage_hp2</imageName>
             <name>Corrosive Haze</name>
             <description>Reduces enemy armor to amplify physical damage and provides True Sight of the targeted unit, revealing invisibility.</description>
-            <manaCost>25/25/25</manaCost>
+            <manaCost>25</manaCost>
             <cooldown>5</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -7965,23 +7971,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+20 Strength</optionOne>
-            <optionTwo>+10% Bash of the Deep Chance</optionTwo>
+            <optionOne>+10% Bash of the Deep Chance</optionOne>
+            <optionTwo>+20 Strength</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+35 Damage</optionOne>
-            <optionTwo>+7 Armor</optionTwo>
+            <optionOne>+7 Armor</optionOne>
+            <optionTwo>+35 Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+200 Health</optionOne>
-            <optionTwo>+25 Attack Speed</optionTwo>
+            <optionOne>+25 Attack Speed</optionOne>
+            <optionTwo>+225 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+6 Health Regen</optionOne>
-            <optionTwo>+175 Mana</optionTwo>
+            <optionOne>+175 Mana</optionOne>
+            <optionTwo>+6 Health Regen</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -8085,8 +8091,8 @@
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <talents>
-            <optionOne>-5 Gush Armor</optionOne>
-            <optionTwo>+20% Cooldown Reduction</optionTwo>
+            <optionOne>-6 Gush Armor</optionOne>
+            <optionTwo>20% Cooldown Reduction</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -8095,7 +8101,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+30% XP Gain</optionOne>
+            <optionOne>+35% XP Gain</optionOne>
             <optionTwo>+7 Armor</optionTwo>
             <level>15</level>
         </talents>
@@ -8198,23 +8204,23 @@
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <talents>
-            <optionOne>No Reincarnation mana cost</optionOne>
-            <optionTwo>+20% Vampiric Aura Lifesteal</optionTwo>
+            <optionOne>+20% Vampiric Aura Lifesteal</optionOne>
+            <optionTwo>No Reincarnation Mana Cost</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+40 Attack Speed</optionOne>
-            <optionTwo>+20 Strength</optionTwo>
+            <optionOne>+20 Strength</optionOne>
+            <optionTwo>+40 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
-            <optionTwo>+200 Health</optionTwo>
+            <optionOne>+50 Wraithfire Blast DPS</optionOne>
+            <optionTwo>+15 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15 Damage</optionOne>
-            <optionTwo>+8 Intelligence</optionTwo>
+            <optionOne>+10 Intelligence</optionOne>
+            <optionTwo>+15 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -8361,18 +8367,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>15% Evasion</optionOne>
-            <optionTwo>+25 Movement Speed</optionTwo>
+            <optionOne>+25 Movement Speed</optionOne>
+            <optionTwo>15% Evasion</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+200 Health</optionOne>
-            <optionTwo>+25 Damage</optionTwo>
+            <optionOne>+25 Damage</optionOne>
+            <optionTwo>+250 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 All Stats</optionOne>
-            <optionTwo>+15 Attack Speed</optionTwo>
+            <optionOne>+15 Attack Speed</optionOne>
+            <optionTwo>+5 All Stats</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -8473,23 +8479,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+12 Armor</optionOne>
-            <optionTwo>-6s Crippling Fear Cooldown</optionTwo>
+            <optionOne>-8s Crippling Fear Cooldown</optionOne>
+            <optionTwo>+12 Armor</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+30 Movement Speed</optionOne>
-            <optionTwo>+50 Damage</optionTwo>
+            <optionOne>+50 Damage</optionOne>
+            <optionTwo>+30 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+300 Mana</optionOne>
-            <optionTwo>+25 Attack Speed</optionTwo>
+            <optionOne>+25 Attack Speed</optionOne>
+            <optionTwo>+300 Mana</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+7 Strength</optionOne>
-            <optionTwo>+100 Cast Range</optionTwo>
+            <optionOne>+100 Cast Range</optionOne>
+            <optionTwo>+7 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -8601,17 +8607,17 @@
         </talents>
         <talents>
             <optionOne>+25 Health Regen</optionOne>
-            <optionTwo>+65 Damage</optionTwo>
+            <optionTwo>+35 Doom DPS</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+6 Armor</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>+15 Scorched Earth Damage/Heal</optionOne>
+            <optionTwo>+20 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+8 Intelligence</optionOne>
-            <optionTwo>+150 Health</optionTwo>
+            <optionOne>+80 Devour Bonus Gold</optionOne>
+            <optionTwo>+250 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -8716,23 +8722,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+17% Greater Bash Chance</optionOne>
-            <optionTwo>+500 Charge of Darkness Speed</optionTwo>
+            <optionOne>+500 Charge of Darkness Speed</optionOne>
+            <optionTwo>+17% Greater Bash Chance</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+120 Gold/Min</optionOne>
-            <optionTwo>-40s Respawn Time</optionTwo>
+            <optionOne>-40s Respawn Time</optionOne>
+            <optionTwo>+120 Gold/Min</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Damage</optionOne>
-            <optionTwo>+5 Armor</optionTwo>
+            <optionOne>+5 Armor</optionOne>
+            <optionTwo>+20 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 All Stats</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>+20 Movement Speed</optionOne>
+            <optionTwo>+5 All Stats</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -8741,7 +8747,7 @@
         <imageName>lycan</imageName>
         <bioRoles>Melee - Carry - Pusher - Jungler - Durable - Escape</bioRoles>
         <intelligence>17 + 1.55</intelligence>
-        <agility>16 + 1.50</agility>
+        <agility>16 + 1.00</agility>
         <strength>22 + 3.00</strength>
         <attack>36 - 41</attack>
         <speed>305</speed>
@@ -8772,7 +8778,7 @@
             <imageName>lycan_howl_hp2</imageName>
             <name>Howl</name>
             <description>Grants bonus damage and bonus health to Lycan, all allied heroes and all units under their control. Howl has double effect during night.</description>
-            <manaCost>30</manaCost>
+            <manaCost>40</manaCost>
             <cooldown>55/50/45/40</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DURATION:  13</abilityDetails>
@@ -8825,7 +8831,7 @@
         </talents>
         <talents>
             <optionOne>+12 Strength</optionOne>
-            <optionTwo>-20s Respawn Time</optionTwo>
+            <optionTwo>-25s Respawn Time</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -8933,8 +8939,8 @@
             <abilityDetails> SCEPTER COOLDOWN: 110</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>Reality Rift pierces Spell Immunity</optionOne>
-            <optionTwo>+20% Cooldown Reduction</optionTwo>
+            <optionOne>Reality Rift Pierces Spell Immunity</optionOne>
+            <optionTwo>20% Cooldown Reduction</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -8944,11 +8950,11 @@
         </talents>
         <talents>
             <optionOne>+10 Strength</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionTwo>+20 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+7 Intelligence</optionOne>
+            <optionOne>+8 Intelligence</optionOne>
             <optionTwo>+15 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -9060,23 +9066,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+40 Tombstone Zombie Damage</optionOne>
-            <optionTwo>+12 Armor</optionTwo>
+            <optionOne>-2s Decay Cooldown</optionOne>
+            <optionTwo>+15 Armor</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+10 All Stats</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionOne>+25 Movement Speed</optionOne>
+            <optionTwo>+50 Tombstone Zombie Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+30% XP Gain</optionOne>
-            <optionTwo>+300 Health</optionTwo>
+            <optionOne>+300 Health</optionOne>
+            <optionTwo>+35% XP Gain</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
-            <optionTwo>+90 Gold/Min</optionTwo>
+            <optionOne>+90 Gold/Min</optionOne>
+            <optionTwo>-30s Respawn Time</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -9184,22 +9190,22 @@
         </abilities>
         <talents>
             <optionOne>-4s Shockwave Cooldown</optionOne>
-            <optionTwo>-35 Respawn Time</optionTwo>
+            <optionTwo>-35s Respawn Time</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15 Strength</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionOne>+40 Movement Speed</optionOne>
+            <optionTwo>+15% Empower Damage/Cleave</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+90 Gold/Min</optionOne>
-            <optionTwo>+50 Damage</optionTwo>
+            <optionOne>+12 Strength</optionOne>
+            <optionTwo>+90 Gold/Min</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+25 Attack Speed</optionOne>
-            <optionTwo>+15% Spell Amplification</optionTwo>
+            <optionOne>+15% Spell Amplification</optionOne>
+            <optionTwo>+25 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -9299,7 +9305,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15% Cooldown Reduction</optionOne>
+            <optionOne>15% Cooldown Reduction</optionOne>
             <optionTwo>+25 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
@@ -9309,7 +9315,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15% XP Gain</optionOne>
+            <optionOne>+20% XP Gain</optionOne>
             <optionTwo>+25 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -9322,7 +9328,7 @@
         <agility>12 + 1.30</agility>
         <strength>25 + 2.60</strength>
         <attack>37 - 43</attack>
-        <speed>305</speed>
+        <speed>290</speed>
         <defence>3.68</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9371,8 +9377,7 @@
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
-            <piercesSpellImmunity>true</piercesSpellImmunity>
-            <piercesSIType>Fully pierces spell immunity</piercesSIType>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -9386,7 +9391,7 @@
             <abilityDetails>ABILITY:  Passive, Aura</abilityDetails>
             <abilityDetails>AFFECTS:  Enemies</abilityDetails>
             <abilityDetails>RADIUS:  900</abilityDetails>
-            <abilityDetails>DAMAGE REDUCTION:  10% / 20% / 30% / 40%</abilityDetails>
+            <abilityDetails>DAMAGE REDUCTION:  4% / 16% / 28% / 40%</abilityDetails>
             <abilityDetails>BONUS DAMAGE(CREEP):  5</abilityDetails>
             <abilityDetails>BONUS DAMAGE(HERO):  30 / 35 / 40 / 45</abilityDetails>
             <abilityDetails>DURATION:  30 / 40 / 50 / 60</abilityDetails>
@@ -9430,13 +9435,13 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+100 Cast Range</optionOne>
-            <optionTwo>+50 Attack Speed</optionTwo>
+            <optionOne>+125 Cast Range</optionOne>
+            <optionTwo>+60 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+10% Spell Amplification</optionOne>
-            <optionTwo>+200 Health</optionTwo>
+            <optionTwo>+35 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -9557,17 +9562,17 @@
         </talents>
         <talents>
             <optionOne>+10 All Stats</optionOne>
-            <optionTwo>-30s Respawn Time</optionTwo>
+            <optionTwo>+14% Rupture Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+250 Health</optionOne>
+            <optionOne>+75 Blood Rite Damage</optionOne>
             <optionTwo>+30 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+25 Damage</optionOne>
-            <optionTwo>+5 Armor</optionTwo>
+            <optionTwo>+200 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -9668,8 +9673,8 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+2 Damage Per Soul</optionOne>
-            <optionTwo>15% Evasion</optionTwo>
+            <optionOne>+2 Damage per Necromastery Soul</optionOne>
+            <optionTwo>15% Lifesteal</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -9793,12 +9798,12 @@
         </talents>
         <talents>
             <optionOne>+30 Attack Speed</optionOne>
-            <optionTwo>+250 Health</optionTwo>
+            <optionTwo>+275 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+150 Cast Range</optionOne>
-            <optionTwo>+5 Armor</optionTwo>
+            <optionTwo>+130 Unstable Current Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -9918,13 +9923,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
-            <optionTwo>+150 Cast Range</optionTwo>
+            <optionOne>+150 Cast Range</optionOne>
+            <optionTwo>+200 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+20% XP Gain</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionOne>+20 Movement Speed</optionOne>
+            <optionTwo>+20% XP Gain</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10021,7 +10026,7 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+600 Time Walk cast range</optionOne>
+            <optionOne>+600 Time Walk Cast Range</optionOne>
             <optionTwo>20% Evasion</optionTwo>
             <level>25</level>
         </talents>
@@ -10036,7 +10041,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 Strength</optionOne>
+            <optionOne>+7 Strength</optionOne>
             <optionTwo>+15 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -10126,7 +10131,7 @@
             <abilityDetails>CRITICAL CHANCE:  15%</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>Two Stifling Dagger</optionOne>
+            <optionOne>Double Strike Stifling Dagger</optionOne>
             <optionTwo>+25 Agility</optionTwo>
             <level>25</level>
         </talents>
@@ -10136,8 +10141,8 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
-            <optionTwo>+10% Lifesteal</optionTwo>
+            <optionOne>+20 Movement Speed</optionOne>
+            <optionTwo>10% Lifesteal</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -10253,23 +10258,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>Poison Attack Affects Buildings</optionOne>
-            <optionTwo>+80 Viper Strike DPS</optionTwo>
+            <optionOne>+80 Viper Strike DPS</optionOne>
+            <optionTwo>Poison Attack Affects Buildings</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+7 Armor</optionOne>
-            <optionTwo>+75 Attack Range</optionTwo>
+            <optionOne>+75 Attack Range</optionOne>
+            <optionTwo>+7 Armor</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+7 Strength</optionOne>
-            <optionTwo>+14 Agility</optionTwo>
+            <optionOne>+14 Agility</optionOne>
+            <optionTwo>+7 Strength</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15 Damage</optionOne>
-            <optionTwo>+125 Health</optionTwo>
+            <optionOne>+150 Health</optionOne>
+            <optionTwo>+15 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10361,7 +10366,7 @@
         </talents>
         <talents>
             <optionOne>+30 Searing Arrows Damage</optionOne>
-            <optionTwo>+12 Strength</optionTwo>
+            <optionTwo>+15 Strength</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -10458,23 +10463,23 @@
             <abilityDetails>DURATION:  14 / 14 / 14</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+200 Spiderlings Health</optionOne>
+            <optionOne>+200 Spiders Health</optionOne>
             <optionTwo>+8 Max Webs</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>+50 Attack Speed</optionOne>
-            <optionTwo>+300 Health</optionTwo>
+            <optionTwo>+8 Spiders Attack Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+7 Armor</optionOne>
+            <optionOne>+250 Health</optionOne>
             <optionTwo>20% Cooldown Reduction</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15% XP Gain</optionOne>
-            <optionTwo>+10 Agility</optionTwo>
+            <optionOne>+25% XP Gain</optionOne>
+            <optionTwo>+60 Spawn Spiderlings Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10485,7 +10490,7 @@
         <intelligence>15 + 1.80</intelligence>
         <agility>14 + 2.80</agility>
         <strength>15 + 1.50</strength>
-        <attack>41 - 51</attack>
+        <attack>39 - 49</attack>
         <speed>290</speed>
         <defence>0.96</defence>
         <abilities>
@@ -10502,7 +10507,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>ATTACK DAMAGE:  20</abilityDetails>
+            <abilityDetails>ATTACK DAMAGE:  14 / 16 / 18 / 20</abilityDetails>
             <abilityDetails>ATTACK FREQUENCY:  1.25 / 1.1 / 0.95 / 0.8</abilityDetails>
             <abilityDetails>COUNT:  12 / 12 / 12 / 12</abilityDetails>
             <abilityDetails>ARMOR REDUCTION:  1 / 1 / 1 / 1</abilityDetails>
@@ -10568,7 +10573,7 @@
         </abilities>
         <talents>
             <optionOne>+200 Shukuchi Movement Speed</optionOne>
-            <optionTwo>+20% Magic Resistance</optionTwo>
+            <optionTwo>+25% Magic Resistance</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -10693,18 +10698,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+25 Attack Speed</optionOne>
-            <optionTwo>+12 Strength</optionTwo>
+            <optionOne>+15 Strength</optionOne>
+            <optionTwo>+25 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+6 All Stats</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>+15 Movement Speed</optionOne>
+            <optionTwo>+6 All Stats</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+20 Damage</optionOne>
-            <optionTwo>+5 Armor</optionTwo>
+            <optionOne>+5 Armor</optionOne>
+            <optionTwo>+20 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10717,7 +10722,7 @@
         <strength>23 + 1.30</strength>
         <attack>20 - 26</attack>
         <speed>315</speed>
-        <defence>4.22</defence>
+        <defence>2.22</defence>
         <abilities>
             <isUltimate>false</isUltimate>
             <isStun>false</isStun>
@@ -10804,7 +10809,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Movement Speed</optionOne>
+            <optionOne>+25 Movement Speed</optionOne>
             <optionTwo>15% Lifesteal</optionTwo>
             <level>15</level>
         </talents>
@@ -10940,23 +10945,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+40 Movement Speed</optionOne>
-            <optionTwo>200% Spiked Carapace Damage</optionTwo>
+            <optionOne>200% Spiked Carapace Damage</optionOne>
+            <optionTwo>+40 Movement Speed</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+120 Gold/Min</optionOne>
-            <optionTwo>+15% Magic Resistance</optionTwo>
+            <optionOne>+40 Agility</optionOne>
+            <optionTwo>+120 Gold/Min</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+25 Agility</optionOne>
-            <optionTwo>+10 Strength</optionTwo>
+            <optionOne>+50 Impale Damage</optionOne>
+            <optionTwo>+12% Magic Resistance</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5% Spell Amplification</optionOne>
-            <optionTwo>+175 Health</optionTwo>
+            <optionOne>+175 Health</optionOne>
+            <optionTwo>+5% Spell Amplification</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10968,7 +10973,7 @@
         <agility>21 + 1.50</agility>
         <strength>20 + 1.60</strength>
         <attack>33 - 41</attack>
-        <speed>305</speed>
+        <speed>300</speed>
         <defence>1.94</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -11055,23 +11060,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+12 All Stats</optionOne>
-            <optionTwo>+3s Pounce Leash</optionTwo>
+            <optionOne>+3s Pounce Leash</optionOne>
+            <optionTwo>+12 All Stats</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>+25 Attack Speed</optionOne>
-            <optionTwo>+250 Health</optionTwo>
+            <optionTwo>+10% Cooldown Reduction</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+10 Strength</optionOne>
+            <optionOne>+15 Strength</optionOne>
             <optionTwo>+15 Agility</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+15 Damage</optionOne>
-            <optionTwo>+10% Lifesteal</optionTwo>
+            <optionTwo>10% Lifesteal</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -11171,18 +11176,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15 Agility</optionOne>
-            <optionTwo>+500 Mana</optionTwo>
+            <optionOne>+600 Mana</optionOne>
+            <optionTwo>+1 Split Shot Target</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Attack Speed</optionOne>
-            <optionTwo>10% Evasion</optionTwo>
+            <optionOne>15% Evasion</optionOne>
+            <optionTwo>+20 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+10 Intelligence</optionOne>
-            <optionTwo>+15 Damage</optionTwo>
+            <optionOne>+15 Damage</optionOne>
+            <optionTwo>+12 Intelligence</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -11281,12 +11286,12 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
+            <optionOne>+25 Movement Speed</optionOne>
             <optionTwo>+15 Agility</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
+            <optionOne>+200 Health</optionOne>
             <optionTwo>+25 Damage</optionTwo>
             <level>15</level>
         </talents>
@@ -11386,22 +11391,22 @@
         </abilities>
         <talents>
             <optionOne>+175 Spark Wraith Damage</optionOne>
-            <optionTwo>+30% Lifesteal</optionTwo>
+            <optionTwo>30% Lifesteal</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>+100 Attack Range</optionOne>
-            <optionTwo>+10% Cooldown Reduction</optionTwo>
+            <optionTwo>10% Cooldown Reduction</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+8 Strength</optionOne>
+            <optionOne>+200 Health</optionOne>
             <optionTwo>+30 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+25 Attack Speed</optionOne>
-            <optionTwo>+125 Health</optionTwo>
+            <optionTwo>+20 Flux DPS</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -11520,12 +11525,12 @@
         </abilities>
         <talents>
             <optionOne>+200 Brain Sap Damage/Heal</optionOne>
-            <optionTwo>+120 Enfeeble Damage Reduction</optionTwo>
+            <optionTwo>+75 Movement Speed</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>+175 Cast Range</optionOne>
-            <optionTwo>+35 Movement Speed</optionTwo>
+            <optionTwo>+75 Enfeeble Damage Reduction</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -11650,23 +11655,23 @@
             <piercesSIDetail>Can target, mini-stun and bounce to spell immune enemies. Does not slow or attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <talents>
-            <optionOne>+25 Ice Armor Structure Armor</optionOne>
-            <optionTwo>Attacks Apply 30% MS and AS slow</optionTwo>
+            <optionOne>Attacks Apply 30% MS and AS slow</optionOne>
+            <optionTwo>+35 Ice Armor Structure Armor</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+150 Damage</optionOne>
-            <optionTwo>+120 Gold/Min</optionTwo>
+            <optionOne>+120 Gold/Min</optionOne>
+            <optionTwo>+150 Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+100 Cast Range</optionOne>
-            <optionTwo>+5 All Stats</optionTwo>
+            <optionOne>-3s Frost Blast Cooldown</optionOne>
+            <optionTwo>+125 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+125 Health</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>+15 Movement Speed</optionOne>
+            <optionTwo>+125 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -11781,18 +11786,18 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+20% Magic Resistance</optionOne>
-            <optionTwo>+8% Spell Amplification</optionTwo>
+            <optionOne>+8% Spell Amplification</optionOne>
+            <optionTwo>+20% Magic Resistance</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+90 Gold/Min</optionOne>
-            <optionTwo>-30s Respawn Time</optionTwo>
+            <optionTwo>+80 Earth Spike Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
-            <optionTwo>+45 Damage</optionTwo>
+            <optionOne>+45 Damage</optionOne>
+            <optionTwo>-25s Respawn Time</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -11905,12 +11910,12 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>-35s Respawn Time</optionOne>
-            <optionTwo>+75 Damage</optionTwo>
+            <optionOne>-40s Respawn Time</optionOne>
+            <optionTwo>+90 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+20% XP Gain</optionOne>
+            <optionOne>+25% XP Gain</optionOne>
             <optionTwo>+200 Health</optionTwo>
             <level>10</level>
         </talents>
@@ -12025,7 +12030,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
+            <optionOne>-40s Respawn Time</optionOne>
             <optionTwo>+300 Health</optionTwo>
             <level>20</level>
         </talents>
@@ -12045,10 +12050,10 @@
         <imageName>necrolyte</imageName>
         <bioRoles>Ranged - Carry - Nuker - Durable - Disabler</bioRoles>
         <intelligence>22 + 2.50</intelligence>
-        <agility>15 + 1.70</agility>
+        <agility>15 + 1.20</agility>
         <strength>16 + 2.00</strength>
         <attack>22 - 26</attack>
-        <speed>290</speed>
+        <speed>285</speed>
         <defence>3.1</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -12066,7 +12071,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  80 / 120 / 160 / 200</abilityDetails>
             <abilityDetails>RADIUS:  475</abilityDetails>
-            <abilityDetails>HEAL:  70 / 90 / 110 / 130</abilityDetails>
+            <abilityDetails>HEAL:  60 / 80 / 100 / 120</abilityDetails>
             <abilityDetails>HEALTH REGEN PER KILL:  1 / 3 / 5 / 7</abilityDetails>
             <abilityDetails>MANA REGEN PER KILL:  1 / 3 / 5 / 7</abilityDetails>
             <abilityDetails>REGEN DURATION:  7</abilityDetails>
@@ -12082,7 +12087,7 @@
             <isMute>false</isMute>
             <imageName>necrolyte_sadist_hp2</imageName>
             <name>Ghost Shroud</name>
-            <description>Necrophos slips into the realm that separates the living from the dead, emitting an aura that slows enemies around him. He takes additional magic damage in this form, but his restorative powers are amplified.</description>
+            <description>Necrophos slips into the realm that separates the living from the dead. Unable to attack or be attacked, he emits an aura that slows enemies around him. He takes additional magic damage in this form, but his restorative powers are amplified.</description>
             <manaCost>50</manaCost>
             <cooldown>28/24/20/16</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -12142,23 +12147,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+400 Health</optionOne>
-            <optionTwo>-1s Death Pulse Cooldown</optionTwo>
+            <optionOne>-1s Death Pulse Cooldown</optionOne>
+            <optionTwo>+400 Health</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+5% Spell Amplification</optionOne>
-            <optionTwo>+10% Magic Resistance</optionTwo>
+            <optionOne>+10% Magic Resistance</optionOne>
+            <optionTwo>+5% Spell Amplification</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+6 All Stats</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionOne>+20 Movement Speed</optionOne>
+            <optionTwo>+6 All Stats</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+40 Damage</optionOne>
-            <optionTwo>+6 Strength</optionTwo>
+            <optionOne>+6 Strength</optionOne>
+            <optionTwo>+40 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -12283,13 +12288,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Movement Speed</optionOne>
-            <optionTwo>+125 Cast Range</optionTwo>
+            <optionOne>-4s Shadow Word Cooldown</optionOne>
+            <optionTwo>+150 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+6 All Stats</optionOne>
-            <optionTwo>+15% XP Gain</optionTwo>
+            <optionTwo>+20% XP Gain</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -12383,8 +12388,8 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+70% Spell Lifesteal</optionOne>
-            <optionTwo>+35 Intelligence</optionTwo>
+            <optionOne>70% Spell Lifesteal</optionOne>
+            <optionTwo>-3s Shadow Strike Cooldown</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -12394,11 +12399,11 @@
         </talents>
         <talents>
             <optionOne>+90 Gold/Min</optionOne>
-            <optionTwo>+12% Cooldown Reduction</optionTwo>
+            <optionTwo>12% Cooldown Reduction</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 Strength</optionOne>
+            <optionOne>+6 Strength</optionOne>
             <optionTwo>+20 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -12510,12 +12515,12 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+75 Cast Range</optionOne>
-            <optionTwo>+8% Magic Resistance</optionTwo>
+            <optionOne>+100 Cast Range</optionOne>
+            <optionTwo>-1s Crypt Swarm Cooldown</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+7 Strength</optionOne>
+            <optionOne>+8% Magic Resistance</optionOne>
             <optionTwo>+4% Spell Amplification</optionTwo>
             <level>10</level>
         </talents>
@@ -12623,23 +12628,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+50% Life Drain Heal</optionOne>
-            <optionTwo>+100 Nether Blast Damage</optionTwo>
+            <optionOne>+125 Nether Blast Damage</optionOne>
+            <optionTwo>+50% Life Drain Heal</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+10 All Stats</optionOne>
-            <optionTwo>+100 Cast Range</optionTwo>
+            <optionOne>+150 Cast Range</optionOne>
+            <optionTwo>+0.5 Nether Ward Damage per Mana</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>-25 Respawn Time</optionOne>
-            <optionTwo>+10 Strength</optionTwo>
+            <optionOne>+12 Strength</optionOne>
+            <optionTwo>-25s Respawn Time</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+3 Mana Regen</optionOne>
-            <optionTwo>+150 Health</optionTwo>
+            <optionOne>+150 Health</optionOne>
+            <optionTwo>+3 Mana Regen</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -12753,7 +12758,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+40 Damage</optionOne>
+            <optionOne>+60 Damage</optionOne>
             <optionTwo>+100 Cast Range</optionTwo>
             <level>15</level>
         </talents>
@@ -12871,12 +12876,12 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+12 Strength</optionOne>
+            <optionOne>+15 Strength</optionOne>
             <optionTwo>+5% Spell Amplification</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+8% Magic Resistance</optionOne>
+            <optionOne>+10% Magic Resistance</optionOne>
             <optionTwo>+400 Mana</optionTwo>
             <level>15</level>
         </talents>
@@ -12894,7 +12899,7 @@
         <agility>12 + 1.20</agility>
         <strength>22 + 2.30</strength>
         <attack>31 - 37</attack>
-        <speed>300</speed>
+        <speed>295</speed>
         <defence>6.68</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -12927,7 +12932,7 @@
             <imageName>dark_seer_ion_shell_hp2</imageName>
             <name>Ion Shell</name>
             <description>Surrounds the target unit with a bristling shield that damages enemy units in an area around it.</description>
-            <manaCost>70/90/110/130</manaCost>
+            <manaCost>100/110/120/130</manaCost>
             <cooldown>9</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Heroes</abilityDetails>
@@ -12981,18 +12986,18 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+70 Ion Shell Damage</optionOne>
-            <optionTwo>12% Cooldown Reduction</optionTwo>
+            <optionOne>+80 Ion Shell Damage</optionOne>
+            <optionTwo>+25 Strength</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+25 Intelligence</optionOne>
-            <optionTwo>+12 Strength</optionTwo>
+            <optionOne>+75 Vacuum AoE</optionOne>
+            <optionTwo>10% Cooldown Reduction</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+14 Health Regen</optionOne>
-            <optionTwo>+90 Damage</optionTwo>
+            <optionTwo>+120 Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -13112,7 +13117,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
+            <optionOne>+200 Health</optionOne>
             <optionTwo>+5% Spell Amplification</optionTwo>
             <level>15</level>
         </talents>
@@ -13241,17 +13246,17 @@
         </abilities>
         <talents>
             <optionOne>+80 Chilling Touch Damage</optionOne>
-            <optionTwo>+3 Charges of Cold Feet</optionTwo>
+            <optionTwo>3 Charges of Cold Feet</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
+            <optionOne>-35s Respawn Time</optionOne>
             <optionTwo>+35 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+25 Health Regen</optionOne>
-            <optionTwo>+15 Intelligence</optionTwo>
+            <optionOne>+30 Health Regen</optionOne>
+            <optionTwo>-1s Ice Vortex Cooldown</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -13524,7 +13529,7 @@
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <talents>
-            <optionOne>-15s Tornado Cooldown</optionOne>
+            <optionOne>-18s Tornado Cooldown</optionOne>
             <optionTwo>AoE Deafening Blast</optionTwo>
             <level>25</level>
         </talents>
@@ -13534,7 +13539,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+25% XP Gain</optionOne>
+            <optionOne>+30% XP Gain</optionOne>
             <optionTwo>+1 Forge Spirit Summoned</optionTwo>
             <level>15</level>
         </talents>
@@ -13643,7 +13648,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+250 Health</optionOne>
+            <optionOne>+275 Health</optionOne>
             <optionTwo>+15 Intelligence</optionTwo>
             <level>20</level>
         </talents>
@@ -13685,7 +13690,7 @@
             <abilityDetails>BANISH DURATION:  2.5 / 2.5 / 2.5 / 2.5</abilityDetails>
             <abilityDetails>ILLUSION DURATION:  8 / 10 / 12 / 14</abilityDetails>
             <abilityDetails>ILLUSION DAMAGE:  30% / 45% / 60% / 75%</abilityDetails>
-            <abilityDetails>ILLUSION DAMAGE TAKEN:  200%</abilityDetails>
+            <abilityDetails>ILLUSION DAMAGE TAKEN:  300%</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
@@ -13779,23 +13784,23 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+400 Demonic Purge Damage</optionOne>
-            <optionTwo>-1s Shadow Poison Cooldown</optionTwo>
+            <optionOne>-6s Soul Catcher Cooldown</optionOne>
+            <optionTwo>+400 Demonic Purge Damage</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+10% Magic Resistance</optionOne>
-            <optionTwo>-25s Respawn Time</optionTwo>
+            <optionOne>-25s Respawn Time</optionOne>
+            <optionTwo>+10% Magic Resistance</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+75 Cast Range</optionOne>
-            <optionTwo>+6% Spell Amplification</optionTwo>
+            <optionOne>+6% Spell Amplification</optionOne>
+            <optionTwo>+75 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+6 Strength</optionOne>
-            <optionTwo>+10 Movement Speed</optionTwo>
+            <optionOne>+10 Movement Speed</optionOne>
+            <optionTwo>+6 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -13895,8 +13900,8 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-30s Respawn Time</optionOne>
-            <optionTwo>+250 Health</optionTwo>
+            <optionOne>-40s Respawn Time</optionOne>
+            <optionTwo>+300 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -13905,8 +13910,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15% XP Gain</optionOne>
-            <optionTwo>+60 Gold/Min</optionTwo>
+            <optionOne>+25% XP Gain</optionOne>
+            <optionTwo>+90 Gold/Min</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -14037,7 +14042,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 Strength</optionOne>
+            <optionOne>+6 Strength</optionOne>
             <optionTwo>+8 Intelligence</optionTwo>
             <level>10</level>
         </talents>
