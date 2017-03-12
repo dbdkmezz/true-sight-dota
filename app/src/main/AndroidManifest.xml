@@ -45,6 +45,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.carver.paul.truesight.Ui.MainActivity" />
         </activity>
+        <activity
+            android:name="com.carver.paul.truesight.Ui.PrivacyPolicyActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.carver.paul.truesight.Ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.carver.paul.truesight.Ui.MainActivity" />
+        </activity>
         <activity android:name="com.carver.paul.truesight.Ui.DotaCamera.CameraActivity"
             android:label="@string/app_name"
             android:parentActivityName="com.carver.paul.truesight.Ui.MainActivity"

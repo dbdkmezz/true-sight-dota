@@ -192,6 +192,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.use_last_photo:
                 mPresenter.useLastPhoto();
                 break;
+            case R.id.privacy_poicy:
+                startPrivacyPolicyActivity();
+                break;
         }
 
 /*        } else if (id == R.id.debug_specific_hue) {
@@ -241,6 +244,11 @@ public class MainActivity extends AppCompatActivity
 
     public void startAboutActivity() {
         Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
+
+    public void startPrivacyPolicyActivity() {
+        Intent intent = new Intent(this, PrivacyPolicyActivity.class);
         startActivity(intent);
     }
 
