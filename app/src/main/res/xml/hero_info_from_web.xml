@@ -5008,7 +5008,7 @@
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  50 / 70 / 90</abilityDetails>
             <abilityDetails>SOLDIER ATK SPEED:  2</abilityDetails>
-            <abilityDetails>DURATION:  13 / 14 / 15</abilityDetails>
+            <abilityDetails>DURATION:  13</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
