@@ -478,13 +478,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Movement Speed</optionOne>
+            <optionOne>+30 Movement Speed</optionOne>
             <optionTwo>+15 Health Regen</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+40 Torrent Damage</optionOne>
-            <optionTwo>+25 Damage</optionTwo>
+            <optionTwo>+30 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -1249,7 +1249,7 @@
             <abilityDetails>DODGE CHANCE:  10% / 15% / 20% / 25%</abilityDetails>
             <abilityDetails>CRIT CHANCE:  10% / 15% / 20% / 25%</abilityDetails>
             <abilityDetails>CRIT DAMAGE:  200%</abilityDetails>
-            <abilityDetails>CERTAIN TRIGGER TIMER:  16 / 14 / 12 / 10</abilityDetails>
+            <abilityDetails>CERTAIN TRIGGER TIMER:  13 / 12 / 11 / 10</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -1647,7 +1647,7 @@
             <abilityDetails>STAMPEDE DURATION:  4</abilityDetails>
             <abilityDetails>STOP DURATION:  1.8</abilityDetails>
             <abilityDetails>TRAMPLE RADIUS:  105</abilityDetails>
-            <abilityDetails> SCEPTER DAMAGE REDUCTION: 50%</abilityDetails>
+            <abilityDetails> SCEPTER DAMAGE REDUCTION: 40%</abilityDetails>
             <removableDebuffs>
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
@@ -1880,7 +1880,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>RADIUS:  625</abilityDetails>
+            <abilityDetails>RADIUS:  650</abilityDetails>
             <abilityDetails>QUILL BASE DAMAGE:  20 / 40 / 60 / 80</abilityDetails>
             <abilityDetails>QUILL STACK DAMAGE:  30 / 32 / 34 / 36</abilityDetails>
             <abilityDetails>MAX DAMAGE:  550</abilityDetails>
@@ -2181,7 +2181,7 @@
             <abilityDetails>ABILITY:  Passive, Aura</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>RADIUS:  325</abilityDetails>
+            <abilityDetails>RADIUS:  350</abilityDetails>
             <abilityDetails>BASE ARMOR REDUCTION:  40% / 60% / 80% / 100%</abilityDetails>
             <abilityDetails>BASE RESIST REDUCTION:  40% / 60% / 80% / 100%</abilityDetails>
             <removableDebuffs>
@@ -2724,8 +2724,8 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+120 Gold/Min</optionOne>
-            <optionTwo>+50 Fire Spirits DPS</optionTwo>
+            <optionOne>+150 Gold/Min</optionOne>
+            <optionTwo>+65 Fire Spirits DPS</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -4467,7 +4467,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+30 Spirit Bear Damage</optionOne>
+            <optionOne>+50 Spirit Bear Damage</optionOne>
             <optionTwo>+50 Damage</optionTwo>
             <level>15</level>
         </talents>
@@ -4910,7 +4910,7 @@
             <abilityDetails>DISTANCE:  1000</abilityDetails>
             <abilityDetails>DAMAGE COOLDOWN:  3</abilityDetails>
             <abilityDetails>PRIMAL SPRING DAMAGE:  100 / 180 / 260 / 340</abilityDetails>
-            <abilityDetails>PRIMAL SPRING SLOW:  40% / 50% / 60% / 70%</abilityDetails>
+            <abilityDetails>PRIMAL SPRING SLOW:  30% / 45% / 60% / 75%</abilityDetails>
             <removableDebuffs>
                 <description>self-stun</description>
                 <basicDispel>false</basicDispel>
@@ -4932,7 +4932,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 180 / 260 / 340</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  40% / 50% / 60% / 70%</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  30% / 45% / 60% / 75%</abilityDetails>
             <abilityDetails>SLOW DURATION:  4</abilityDetails>
             <abilityDetails>MAX DISTANCE:  1000</abilityDetails>
             <removableDebuffs>
@@ -5162,7 +5162,7 @@
         <intelligence>25 + 2.40</intelligence>
         <agility>22 + 1.70</agility>
         <strength>15 + 1.70</strength>
-        <attack>25 - 36</attack>
+        <attack>28 - 39</attack>
         <speed>295</speed>
         <defence>2.08</defence>
         <abilities>
@@ -6075,12 +6075,12 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+35 Movement Speed</optionOne>
+            <optionOne>+4 Treants Summoned</optionOne>
             <optionTwo>+20 Intelligence</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+225 Health</optionOne>
+            <optionOne>+250 Health</optionOne>
             <optionTwo>+30 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -6955,7 +6955,7 @@
         <intelligence>25 + 2.80</intelligence>
         <agility>15 + 1.60</agility>
         <strength>14 + 1.80</strength>
-        <attack>18 - 32</attack>
+        <attack>18 - 25</attack>
         <speed>335</speed>
         <defence>1.1</defence>
         <abilities>
@@ -7910,7 +7910,7 @@
             <description>Slams the ground, stunning and damaging nearby enemy land units. After the stun, the affected units are slowed.</description>
             <manaCost>80/95/105/115</manaCost>
             <cooldown>8</cooldown>
-            <disableDuration>STUN DURATION:  1.5 / 1.75 / 2 / 2.25</disableDuration>
+            <disableDuration>STUN DURATION:  1.25 / 1.5 / 1.75 / 2</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -7919,7 +7919,7 @@
             <abilityDetails>MOVEMENT SLOW:  20%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  20</abilityDetails>
             <abilityDetails>SLOW DURATION:  2</abilityDetails>
-            <abilityDetails>STUN DURATION:  1.5 / 1.75 / 2 / 2.25</abilityDetails>
+            <abilityDetails>STUN DURATION:  1.25 / 1.5 / 1.75 / 2</abilityDetails>
             <removableDebuffs>
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
@@ -8233,7 +8233,7 @@
         <intelligence>15 + 1.75</intelligence>
         <agility>18 + 1.90</agility>
         <strength>25 + 3.00</strength>
-        <attack>29 - 39</attack>
+        <attack>27 - 37</attack>
         <speed>315</speed>
         <defence>1.52</defence>
         <abilities>
@@ -8750,7 +8750,7 @@
         <bioRoles>Melee - Carry - Pusher - Jungler - Durable - Escape</bioRoles>
         <intelligence>17 + 1.55</intelligence>
         <agility>16 + 1.00</agility>
-        <strength>22 + 3.00</strength>
+        <strength>25 + 3.00</strength>
         <attack>36 - 41</attack>
         <speed>305</speed>
         <defence>3.24</defence>
@@ -9174,7 +9174,7 @@
             <name>Reverse Polarity</name>
             <description>Magnus changes properties of matter, sucking all nearby enemies in front of him and stunning them with a powerful slam and dealing damage.</description>
             <manaCost>200/250/300</manaCost>
-            <cooldown>120/110/100</cooldown>
+            <cooldown>120</cooldown>
             <disableDuration>HERO STUN DURATION:  2.25 / 3 / 3.75</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -9217,7 +9217,7 @@
         <bioRoles>Melee - Support - Carry - Durable</bioRoles>
         <intelligence>21 + 2.00</intelligence>
         <agility>17 + 1.50</agility>
-        <strength>23 + 2.70</strength>
+        <strength>23 + 2.50</strength>
         <attack>32 - 42</attack>
         <speed>310</speed>
         <defence>1.38</defence>
@@ -9799,8 +9799,8 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+30 Attack Speed</optionOne>
-            <optionTwo>+275 Health</optionTwo>
+            <optionOne>+40 Attack Speed</optionOne>
+            <optionTwo>+325 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -10460,8 +10460,8 @@
             <manaCost>100/100/100</manaCost>
             <cooldown>45</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  60 / 90 / 120</abilityDetails>
-            <abilityDetails>LIFESTEAL:  60% / 90% / 120%</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  60 / 100 / 140</abilityDetails>
+            <abilityDetails>LIFESTEAL:  60% / 100% / 140%</abilityDetails>
             <abilityDetails>DURATION:  14 / 14 / 14</abilityDetails>
         </abilities>
         <talents>
@@ -11309,7 +11309,7 @@
         <bioRoles>Ranged - Carry - Escape - Nuker</bioRoles>
         <intelligence>24 + 2.60</intelligence>
         <agility>15 + 1.80</agility>
-        <strength>24 + 2.30</strength>
+        <strength>24 + 2.70</strength>
         <attack>29 - 39</attack>
         <speed>285</speed>
         <defence>0.1</defence>
@@ -11632,7 +11632,7 @@
             <name>Chain Frost</name>
             <description>Releases an orb of frost that bounces between nearby enemy units up to 10 times, slowing and damaging each time it hits. The first target is mini-stunned. Upgradable by Aghanim's Scepter.</description>
             <manaCost>200/325/500</manaCost>
-            <cooldown>120/90/60</cooldown>
+            <cooldown>100/80/60</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -12502,7 +12502,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  700 / 700 / 700</abilityDetails>
             <abilityDetails>LIFE DRAIN:  25% / 25% / 25%</abilityDetails>
-            <abilityDetails>SPIRIT DAMAGE:  55 / 55 / 55</abilityDetails>
+            <abilityDetails>SPIRIT DAMAGE:  58</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -12522,7 +12522,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+10% Magic Resistance</optionOne>
+            <optionOne>+12% Magic Resistance</optionOne>
             <optionTwo>+5% Spell Amplification</optionTwo>
             <level>10</level>
         </talents>
@@ -13148,7 +13148,7 @@
             <imageName>ancient_apparition_cold_feet_hp2</imageName>
             <name>Cold Feet</name>
             <description>Places a frozen hex on an enemy unit that deals damage over time, but can be dispelled by moving away from the initial cast point. If the enemy unit doesn't move outside of the given range, it will be stunned and frozen in place after 4 seconds.</description>
-            <manaCost>150/150/150/150</manaCost>
+            <manaCost>125</manaCost>
             <cooldown>13/11/9/7</cooldown>
             <disableDuration>STUN DURATION:  1.25 / 2 / 2.75 / 3.5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
