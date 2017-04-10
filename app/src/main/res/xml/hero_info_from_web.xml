@@ -4883,7 +4883,7 @@
             <description>Monkey King enlarges his staff and slams it against the ground, stunning enemies in a line and damaging them with a critical hit based on his attack. Has True Strike.</description>
             <manaCost>100</manaCost>
             <cooldown>25</cooldown>
-            <disableDuration>STUN DURATION:  0.5 / 1 / 1.5 / 2</disableDuration>
+            <disableDuration>STUN DURATION:  0.4 / 0.8 / 1.2 / 1.6</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
@@ -4926,13 +4926,13 @@
             <imageName>monkey_king_primal_spring_hp2</imageName>
             <name>Primal Spring</name>
             <description>Monkey King springs out from his tree perch, damaging and slowing enemies in the area where he lands. Damage and slow amounts are in proportion to channel duration.</description>
-            <manaCost>100/110/120/130</manaCost>
-            <cooldown>16</cooldown>
+            <manaCost>130/120/110/100</manaCost>
+            <cooldown>19/17/15/13</cooldown>
             <abilityDetails>ABILITY:  Channeled, Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  100 / 180 / 260 / 340</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  30% / 45% / 60% / 75%</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  20% / 40% / 60% / 80%</abilityDetails>
             <abilityDetails>SLOW DURATION:  4</abilityDetails>
             <abilityDetails>MAX DISTANCE:  1000</abilityDetails>
             <removableDebuffs>
@@ -5003,7 +5003,7 @@
             <name>Wukong's Command</name>
             <description>Monkey King creates a circular formation of soldiers that spread out from his position. If Monkey King leaves the area his soldiers disperse. The soldiers have Monkey King's attack and only target heroes. Monkey King and all his soldiers receive bonus damage for the spell's duration.</description>
             <manaCost>100</manaCost>
-            <cooldown>100/85/70</cooldown>
+            <cooldown>130/110/90</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  50 / 70 / 90</abilityDetails>
