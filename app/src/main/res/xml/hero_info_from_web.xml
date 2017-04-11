@@ -1074,7 +1074,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>RADIUS:  625</abilityDetails>
+            <abilityDetails>RADIUS:  400 / 475 / 550 / 625</abilityDetails>
             <abilityDetails>DURATION:  16</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  15 / 20 / 25 / 30</abilityDetails>
             <removableDebuffs>
@@ -1135,7 +1135,7 @@
             <name>Chemical Rage</name>
             <description>Alchemist causes his Ogre to enter a chemically induced rage, reducing base attack cooldown and increasing movement speed and regeneration.</description>
             <manaCost>50/100/150</manaCost>
-            <cooldown>45</cooldown>
+            <cooldown>55</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DURATION:  25</abilityDetails>
             <abilityDetails>BASE ATTACK TIME:  1.4 / 1.2 / 1</abilityDetails>
@@ -1335,7 +1335,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE PER PULSE:  15 / 30 / 45 / 60</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  22% / 24% / 26% / 28%</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  16% / 20% / 24% / 28%</abilityDetails>
             <abilityDetails>RADIUS:  500</abilityDetails>
             <abilityDetails>DURATION:  4.5</abilityDetails>
             <removableDebuffs>
@@ -1389,7 +1389,7 @@
             <name>Overgrowth</name>
             <description>Summons an overgrowth of vines and branches around Treant that prevent afflicted enemies from moving, blinking, going invisible, or attacking.</description>
             <manaCost>150/175/200</manaCost>
-            <cooldown>70</cooldown>
+            <cooldown>100/85/0</cooldown>
             <disableDuration>DURATION:  3 / 3.75 / 4.5</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -2417,7 +2417,7 @@
             <description>Earth Spirit gathers himself into a boulder and, after a 0.6s delay, rolls toward the target location, damaging enemy units. He will stop if he collides with an enemy hero or is stunned. If he rolls over a Stone Remnant, he will travel further and faster, and enemies hit by the boulder will have their movement speed slowed.</description>
             <manaCost>50</manaCost>
             <cooldown>16/12/8/4</cooldown>
-            <disableDuration>SLOW DURATION:  1.4 / 1.6 / 1.8 / 2</disableDuration>
+            <disableDuration>SLOW DURATION:  0.8 / 1.2 / 1.68 / 2</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -3365,7 +3365,7 @@
             <cooldown>16/12/8/4</cooldown>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>MIN RUSH DISTANCE:  250</abilityDetails>
-            <abilityDetails>BONUS AGILITY:  6 / 12 / 18 / 24</abilityDetails>
+            <abilityDetails>BONUS AGILITY:  6 / 14 / 22 / 30</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -4887,7 +4887,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
-            <abilityDetails>STUN DURATION:  0.5 / 1 / 1.5 / 2</abilityDetails>
+            <abilityDetails>STUN DURATION:  0.4 / 0.8 / 1.2 / 1.6</abilityDetails>
             <removableDebuffs>
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
@@ -8248,7 +8248,7 @@
             <manaCost>75/75/75/75</manaCost>
             <cooldown>16</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>ATTACK SPEED BONUS:  50 / 60 / 70 / 80</abilityDetails>
+            <abilityDetails>ATTACK SPEED BONUS:  40 / 50 / 60 / 70</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -8274,7 +8274,7 @@
             <imageName>life_stealer_open_wounds_hp2</imageName>
             <name>Open Wounds</name>
             <description>Lifestealer rends an enemy unit, slowing the victim's movement speed and allowing all allies to regain health for a percentage of the damage they deal to that unit. All damage dealt will steal life, including damage from spells. The victim recovers movement speed over the duration.</description>
-            <manaCost>110/110/110/110</manaCost>
+            <manaCost>140/130/120/110</manaCost>
             <cooldown>24/20/16/12</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -8593,7 +8593,7 @@
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  15</abilityDetails>
-            <abilityDetails>DAMAGE PER SECOND:  20 / 35 / 50</abilityDetails>
+            <abilityDetails>DAMAGE PER SECOND:  25 / 40 / 55</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 16</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
@@ -8819,7 +8819,7 @@
             <abilityDetails>BONUS NIGHT VISION:  1000</abilityDetails>
             <abilityDetails>TRANSFORM TIME:  1.5</abilityDetails>
             <abilityDetails>CRITICAL CHANCE:  40%</abilityDetails>
-            <abilityDetails>CRITICAL DAMAGE:  140% / 160% / 180%</abilityDetails>
+            <abilityDetails>CRITICAL DAMAGE:  160% / 180% / 200%</abilityDetails>
         </abilities>
         <talents>
             <optionOne>+2 Wolves summoned</optionOne>
@@ -9125,7 +9125,7 @@
             <imageName>magnataur_empower_hp2</imageName>
             <name>Empower</name>
             <description>Gives an allied unit bonus damage and cleave on attack. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>30/40/50/60</manaCost>
+            <manaCost>30/50/70/90</manaCost>
             <cooldown>8</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
@@ -10440,7 +10440,7 @@
             <description>Broodmother's venom cripples enemy units, causing her attacks to slow and giving the affected unit a chance to miss its attacks.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>MISS CHANCE:  30% / 40% / 50% / 60%</abilityDetails>
-            <abilityDetails>MOVE SLOW:  14% / 24% / 34% / 44%</abilityDetails>
+            <abilityDetails>MOVE SLOW:  16% / 24% / 34% / 44%</abilityDetails>
             <abilityDetails>DURATION:  2 / 2 / 2 / 2</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
@@ -11617,7 +11617,7 @@
             <name>Sacrifice</name>
             <description>Sacrifices a friendly creep and converts its current hit points into mana for Lich.</description>
             <manaCost>25/25/25/25</manaCost>
-            <cooldown>60/50/40/30</cooldown>
+            <cooldown>60/48/36/24</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
             <abilityDetails>HEALTH CONVERSION:  30% / 50% / 70% / 90%</abilityDetails>
@@ -11640,9 +11640,9 @@
             <abilityDetails>DAMAGE EACH BOUNCE:  280 / 370 / 460</abilityDetails>
             <abilityDetails>BOUNCES:  10 / 10 / 10</abilityDetails>
             <abilityDetails>BOUNCE RANGE:  575 / 575 / 575</abilityDetails>
-            <abilityDetails>MOVEMENT SLOW:  30%</abilityDetails>
+            <abilityDetails>MOVEMENT SLOW:  50%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  30</abilityDetails>
-            <abilityDetails>SLOW DURATION:  4 / 4 / 4</abilityDetails>
+            <abilityDetails>SLOW DURATION:  2.5</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 370 / 460 / 550</abilityDetails>
             <abilityDetails> SCEPTER CAST RANGE: 850 / 850 / 850</abilityDetails>
             <abilityDetails> MOVEMENT SLOW: 50%</abilityDetails>
@@ -12326,9 +12326,9 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>INITIAL DAMAGE:  50 / 75 / 100 / 125</abilityDetails>
-            <abilityDetails>DAMAGE PER TICK:  30 / 40 / 50 / 60</abilityDetails>
+            <abilityDetails>DAMAGE PER TICK:  30 / 45 / 60 / 75</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  20% / 30% / 40% / 50%</abilityDetails>
-            <abilityDetails>CAST RANGE:  450 / 475 / 500 / 525</abilityDetails>
+            <abilityDetails>CAST RANGE:  450 / 500 / 550 / 600</abilityDetails>
             <abilityDetails>DURATION:  15</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
@@ -13149,13 +13149,13 @@
             <name>Cold Feet</name>
             <description>Places a frozen hex on an enemy unit that deals damage over time, but can be dispelled by moving away from the initial cast point. If the enemy unit doesn't move outside of the given range, it will be stunned and frozen in place after 4 seconds.</description>
             <manaCost>125</manaCost>
-            <cooldown>13/11/9/7</cooldown>
+            <cooldown>10/9/8/7</cooldown>
             <disableDuration>STUN DURATION:  1.25 / 2 / 2.75 / 3.5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE PER TICK:  37.5 / 50 / 62.5 / 75</abilityDetails>
+            <abilityDetails>DAMAGE PER TICK:  30 / 50 / 70 / 90</abilityDetails>
             <abilityDetails>BREAK DISTANCE:  740 / 740 / 740 / 740</abilityDetails>
             <abilityDetails>STUN DURATION:  1.25 / 2 / 2.75 / 3.5</abilityDetails>
             <abilityDetails>CAST RANGE:  700 / 800 / 900 / 1000</abilityDetails>
