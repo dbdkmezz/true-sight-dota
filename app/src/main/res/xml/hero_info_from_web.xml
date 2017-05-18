@@ -1304,7 +1304,7 @@
             <isMute>false</isMute>
             <imageName>treant_natures_guise_hp2</imageName>
             <name>Nature's Guise</name>
-            <description>Turns you invis when you are within 265 radius of a tree for 7 seconds. Increasing movement speed by 10 while invisible, and causes a 0.4 seconds bash when attacking out of invisibility.</description>
+            <description>Turns you invis when you are within 265 radius of a tree for 7 seconds. Increasing movement speed by 10 while invisible, and causes a 0.4 second full disarming root when attacking out of invisibility.</description>
             <disableDuration>BASH DURATION:  0.4 / 1 / 1.6 / 2.2</disableDuration>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>FADE TIME:  7 / 6 / 5 / 3</abilityDetails>
@@ -2850,7 +2850,7 @@
             <isMute>false</isMute>
             <imageName>drow_ranger_frost_arrows_hp2</imageName>
             <name>Frost Arrows</name>
-            <description>Adds a freezing effect to Drow's attacks, slowing enemy movement. Lasts 1.5 seconds on Heroes, and 7 seconds on creeps. Frost Arrows is a Unique Attack Modifier, and does not stack with other Unique Attack Modifiers.</description>
+            <description>Adds a freezing effect to Drow's attacks, slowing enemy movement. Lasts 1.5 seconds on Heroes, and 7 seconds on creeps. Frost Arrows are no a Unique Attack Modifier.</description>
             <manaCost>12/12/12/12</manaCost>
             <cooldown>0</cooldown>
             <abilityDetails>ABILITY:  Auto-Cast, Unit Target</abilityDetails>
@@ -5001,12 +5001,12 @@
             <isMute>false</isMute>
             <imageName>monkey_king_wukongs_command_hp2</imageName>
             <name>Wukong's Command</name>
-            <description>Monkey King creates a circular formation of soldiers that spread out from his position. If Monkey King leaves the area his soldiers disperse. The soldiers have Monkey King's attack and only target heroes. Monkey King and all his soldiers receive bonus damage for the spell's duration.</description>
+            <description>Monkey King creates a circular formation of soldiers that spread out from his position. If Monkey King leaves the area his soldiers disperse. The soldiers have Monkey King's attack and only target heroes. Monkey King receive bonus armour for the spell's duration.</description>
             <manaCost>100</manaCost>
             <cooldown>130/110/90</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
-            <abilityDetails>SOLDIER ATK SPEED:  1.7</abilityDetails>
+            <abilityDetails>SOLDIER ATK SPEED:  2.0</abilityDetails>
             <abilityDetails>DURATION:  13</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
@@ -7261,7 +7261,7 @@
             <isMute>false</isMute>
             <imageName>oracle_fortunes_end_hp2</imageName>
             <name>Fortune's End</name>
-            <description>CHANNELED - Gathers Oracle's power into a bolt of scouring energy that, when released, damages, stops movement, and purges enemies of buffs in an area around the target. If target is an ally it will only purge. Can be channeled for up to 2.5 seconds. The stop duration is equal to the time spent channeling. DISPEL TYPE: Basic Dispel</description>
+            <description>CHANNELED - Gathers Oracle's power into a bolt of scouring energy that, when released, damages, root's the target, and purges enemies of buffs in an area around the target. If target is an ally it will only purge. Can be channeled for up to 2.5 seconds. The stop duration is equal to the time spent channeling. DISPEL TYPE: Basic Dispel</description>
             <manaCost>110</manaCost>
             <cooldown>15/12/9/6</cooldown>
             <disableDuration>MAX STOP DURATION:  2.5</disableDuration>
@@ -7806,7 +7806,7 @@
             <isMute>false</isMute>
             <imageName>sandking_caustic_finale_hp2</imageName>
             <name>Caustic Finale</name>
-            <description>Sand King's attacks inject a venom that causes enemy units to violently explode when its timer expires, or when the unit dies, damaging and slowing nearby enemies. Deals 50% damage if its timer expires. Caustic Finale is a Unique Attack Modifier, and does not stack with other Unique Attack Modifier.</description>
+            <description>Sand King's attacks inject a venom that causes enemy units to violently explode when its timer expires, or when the unit dies, damaging and slowing nearby enemies. Deals 50% damage if its timer expires. Caustic Finale is not a Unique Attack Modifier.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
