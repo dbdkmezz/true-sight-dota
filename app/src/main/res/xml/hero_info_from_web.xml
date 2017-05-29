@@ -1505,7 +1505,7 @@
             <abilityDetails>ABILITY:  No Target, Toggle</abilityDetails>
             <abilityDetails>ATTACK SPEED:  40 / 50 / 60 / 70</abilityDetails>
             <abilityDetails>INCOMING DAMAGE REDUCTION:  5% / 10% / 15% / 20%</abilityDetails>
-            <abilityDetails>HEALTH/MANA DRAIN:  4.5% / 4.5% / 4.5% / 4.5%</abilityDetails>
+            <abilityDetails>HEALTH/MANA DRAIN:  6%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -3104,7 +3104,7 @@
             <cooldown>30/26/22/18</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DISTANCE:  600 / 700 / 800 / 900</abilityDetails>
-            <abilityDetails>MOVEMENT BONUS:  4% / 8% / 12% / 16%</abilityDetails>
+            <abilityDetails>MOVEMENT BONUS:  8% / 12% / 16% / 20%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -4259,7 +4259,7 @@
             <description>Fires a homing missile to seek the targeted enemy unit. The missile gains speed over time, dealing damage and stunning when it impacts the target. Homing Missile deals greater damage the further it has traveled. Enemy units can destroy the missile before it reaches its target.</description>
             <manaCost>120/130/140/150</manaCost>
             <cooldown>20/17/14/11</cooldown>
-            <disableDuration>STUN DURATION:  2.2 / 2.4 / 2.6 / 2.8</disableDuration>
+            <disableDuration>STUN DURATION:  2.25 / 2.25 / 2.75 / 3.0</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -4267,7 +4267,7 @@
             <abilityDetails>DAMAGE:  125 / 250 / 375 / 500</abilityDetails>
             <abilityDetails>HITS TO DESTROY:  3 / 3 / 4 / 5</abilityDetails>
             <abilityDetails>TOWER HITS TO DESTROY:  6 / 6 / 8 / 10</abilityDetails>
-            <abilityDetails>STUN DURATION:  2.2 / 2.4 / 2.6 / 2.8</abilityDetails>
+            <abilityDetails>STUN DURATION:  2.25 / 2.25 / 2.75 / 3.0</abilityDetails>
             <abilityDetails>MINIMUM DAMAGE:  50</abilityDetails>
             <removableDebuffs>
                 <description>stun</description>
@@ -4290,7 +4290,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>RADIUS:  1000</abilityDetails>
+            <abilityDetails>RADIUS:  1250</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -4364,7 +4364,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>BEAR HP:  1400 / 1800 / 2300 / 2700</abilityDetails>
             <abilityDetails>BEAR HP REGEN:  2 / 3 / 4 / 5</abilityDetails>
-            <abilityDetails>BEAR BASE ATTACK TIME:  1.75 / 1.65 / 1.55 / 1.45</abilityDetails>
+            <abilityDetails>BEAR BASE ATTACK TIME:  1.65 / 1.55 / 1.45 / 1.35</abilityDetails>
             <abilityDetails>BEAR ARMOR:  3 / 4 / 5 / 6</abilityDetails>
             <abilityDetails>BACKLASH PURE DAMAGE:  10%</abilityDetails>
         </abilities>
@@ -4703,7 +4703,7 @@
             <name>Battle Trance</name>
             <description>Troll's presence on the battlefield increases the attack speed of himself and all allied heroes.</description>
             <manaCost>75/75/75</manaCost>
-            <cooldown>30</cooldown>
+            <cooldown>35</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>TRANCE DURATION:  5</abilityDetails>
             <abilityDetails>ATTACK SPEED:  60 / 120 / 180</abilityDetails>
@@ -4857,8 +4857,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+25 Damage</optionOne>
-            <optionTwo>+10% Spell Amplification</optionTwo>
+            <optionOne>+30 Damage</optionOne>
+            <optionTwo>+8% Spell Amplification</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -4904,7 +4904,7 @@
             <imageName>monkey_king_tree_dance_hp2</imageName>
             <name>Tree Dance</name>
             <description>Monkey King jumps to a tree and perches atop it. While perched, he gains the Primal Spring ability-a channeled leap attack. If Monkey King's tree is destroyed, he falls and is stunned for 4 seconds. Taking damage from player controlled units or Roshan while on the ground puts Tree Dance on cooldown.</description>
-            <cooldown>1.40</cooldown>
+            <cooldown>1.2</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemies</abilityDetails>
             <abilityDetails>DISTANCE:  1000</abilityDetails>
@@ -5027,7 +5027,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 Armor</optionOne>
+            <optionOne>+10% Evasion</optionOne>
             <optionTwo>+20 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -7228,8 +7228,8 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15% Magic Resistance</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionOne>+20% Magic Resistance</optionOne>
+            <optionTwo>+40 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -8567,7 +8567,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>BASE BURN DAMAGE:  25 / 30 / 35 / 40</abilityDetails>
             <abilityDetails>BURN DURATION:  4</abilityDetails>
-            <abilityDetails>STUN DURATION:  0.4</abilityDetails>
+            <abilityDetails>STUN DURATION:  0.6</abilityDetails>
             <removableDebuffs>
                 <description>mini-stun</description>
                 <basicDispel>false</basicDispel>
@@ -9857,7 +9857,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  6 / 9 / 12 / 15</abilityDetails>
-            <abilityDetails>DAMAGE PER SECOND:  6 / 12 / 18 / 24</abilityDetails>
+            <abilityDetails>DAMAGE PER SECOND:  6 / 14 / 22 / 30</abilityDetails>
             <abilityDetails>SLOW:  11% / 12% / 13% / 14%</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
@@ -10267,7 +10267,7 @@
         </talents>
         <talents>
             <optionOne>+16 Agility</optionOne>
-            <optionTwo>+10 Strength</optionTwo>
+            <optionTwo>+15 Strength</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -10331,7 +10331,7 @@
             <cooldown>20/19/18/17</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DURATION:  20 / 25 / 30 / 35</abilityDetails>
-            <abilityDetails>BONUS MOVEMENT SPEED:  11% / 22% / 33% / 44%</abilityDetails>
+            <abilityDetails>BONUS MOVEMENT SPEED:  15% / 24% / 35% / 45%</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -10347,8 +10347,8 @@
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Units</abilityDetails>
             <abilityDetails>DURATION:  65</abilityDetails>
-            <abilityDetails>HEALTH GAIN:  50% / 65% / 80%</abilityDetails>
-            <abilityDetails>DAMAGE GAIN:  5% / 6.5% / 8%</abilityDetails>
+            <abilityDetails>HEALTH GAIN:  50% / 70% / 90%</abilityDetails>
+            <abilityDetails>DAMAGE GAIN:  5% / 7% / 9%</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -10420,7 +10420,7 @@
             <manaCost>50</manaCost>
             <cooldown>0</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
-            <abilityDetails>HEALTH REGEN:  2 / 4 / 6 / 8</abilityDetails>
+            <abilityDetails>HEALTH REGEN:  3 / 5 / 7 / 9</abilityDetails>
             <abilityDetails>MOVE INCREASE:  40% / 50% / 60% / 70%</abilityDetails>
             <abilityDetails>MAX WEB CHARGES:  1 / 2 / 3 / 4</abilityDetails>
             <abilityDetails>CHARGE RESTORE TIME:  40</abilityDetails>
@@ -10837,7 +10837,7 @@
             <name>Impale</name>
             <description>Rock spikes burst from the earth along a straight path. Enemy units are hurled into the air, then are stunned and take damage when they fall.</description>
             <manaCost>95/115/135/155</manaCost>
-            <cooldown>13</cooldown>
+            <cooldown>14</cooldown>
             <disableDuration>STUN DURATION:  1.6 / 2 / 2.4 / 2.8</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -11610,7 +11610,7 @@
             <name>Sacrifice</name>
             <description>Sacrifices a friendly creep and converts its current hit points into mana for Lich.</description>
             <manaCost>25/25/25/25</manaCost>
-            <cooldown>60/48/36/24</cooldown>
+            <cooldown>60/46/32/18</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
             <abilityDetails>HEALTH CONVERSION:  30% / 50% / 70% / 90%</abilityDetails>
@@ -12087,7 +12087,7 @@
             <abilityDetails>DURATION:  3 / 3.5 / 4 / 4.5</abilityDetails>
             <abilityDetails>RESTORATION AMPLIFICATION:  75%</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  12% / 20% / 28% / 36%</abilityDetails>
-            <abilityDetails>SLOW RADIUS:  600</abilityDetails>
+            <abilityDetails>SLOW RADIUS:  750</abilityDetails>
             <abilityDetails>INCREASED MAGIC DAMAGE:  20%</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
@@ -12248,8 +12248,8 @@
             <imageName>warlock_rain_of_chaos_hp2</imageName>
             <name>Chaotic Offering</name>
             <description>Summons a Golem from the depths, stunning enemies for one second. The Golem lives 60 seconds, takes reduced damage from spells, has Permanent Immolation and Flaming Fists on attack. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>250/350/450</manaCost>
-            <cooldown>165</cooldown>
+            <manaCost>250/375/500</manaCost>
+            <cooldown>170</cooldown>
             <disableDuration>STUN DURATION: 1</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -12627,7 +12627,7 @@
         </talents>
         <talents>
             <optionOne>+150 Cast Range</optionOne>
-            <optionTwo>+0.5 Nether Ward Damage per Mana</optionTwo>
+            <optionTwo>+0.75 Nether Ward Damage per Mana</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -13146,7 +13146,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE PER TICK:  30 / 50 / 70 / 90</abilityDetails>
             <abilityDetails>BREAK DISTANCE:  740 / 740 / 740 / 740</abilityDetails>
-            <abilityDetails>STUN DURATION:  1.25 / 2 / 2.75 / 3.5</abilityDetails>
+            <abilityDetails>STUN DURATION:  2 / 2.5 / 3 / 3.5</abilityDetails>
             <abilityDetails>CAST RANGE:  700 / 800 / 900 / 1000</abilityDetails>
             <removableDebuffs>
                 <description>stun</description>
@@ -13781,17 +13781,17 @@
         </talents>
         <talents>
             <optionOne>-1.5s Shadow Poison Cooldown</optionOne>
-            <optionTwo>+10% Magic Resistance</optionTwo>
+            <optionTwo>+15% Magic Resistance</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+6% Spell Amplification</optionOne>
+            <optionOne>+8% Spell Amplification</optionOne>
             <optionTwo>+75 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+10 Movement Speed</optionOne>
-            <optionTwo>+6 Strength</optionTwo>
+            <optionOne>+20 Movement Speed</optionOne>
+            <optionTwo>+10 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -13930,7 +13930,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>FLIGHT DURATION:  6</abilityDetails>
+            <abilityDetails>FLIGHT DURATION:  8</abilityDetails>
             <abilityDetails>BONUS ATTACK RANGE:  275 / 375 / 475 / 575</abilityDetails>
             <abilityDetails>HEALTH BURN:  8%</abilityDetails>
             <abilityDetails>BURN DURATION:  5</abilityDetails>
