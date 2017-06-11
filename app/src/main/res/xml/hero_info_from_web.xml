@@ -297,7 +297,7 @@
             <abilityDetails>CHANCE TO STUN:  25%</abilityDetails>
             <abilityDetails>STUN DURATION:  0.5 / 1 / 1.5 / 2</abilityDetails>
             <abilityDetails>ARMOR:  3 / 4 / 5 / 6</abilityDetails>
-            <abilityDetails>DAMAGE:  40 / 50 / 60 / 70</abilityDetails>
+            <abilityDetails>DAMAGE:  60 / 80 / 100 / 120</abilityDetails>
             <removableDebuffs>
                 <description>stun</description>
                 <basicDispel>false</basicDispel>
@@ -342,8 +342,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+12 Intelligence</optionOne>
-            <optionTwo>+6 Strength</optionTwo>
+            <optionOne>+14 Intelligence</optionOne>
+            <optionTwo>+8 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -806,7 +806,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>STUN DURATION:  1 / 1.5 / 2</abilityDetails>
             <abilityDetails>RANGE:  2000 / 2500 / 3000</abilityDetails>
-            <abilityDetails>DAMAGE:  100 / 200 / 300</abilityDetails>
+            <abilityDetails>DAMAGE:  75 / 175 / 275</abilityDetails>
             <abilityDetails> SCEPTER COOLDOWN: 12 / 12 / 12</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
@@ -1142,7 +1142,7 @@
             <abilityDetails>BASE ATTACK TIME:  1.4 / 1.2 / 1</abilityDetails>
             <abilityDetails>BONUS HEALTH REGEN:  50 / 75 / 100</abilityDetails>
             <abilityDetails>BONUS MANA REGEN:  3 / 7.5 / 12</abilityDetails>
-            <abilityDetails>BONUS MOVE SPEED:  30 / 40 / 60</abilityDetails>
+            <abilityDetails>BONUS MOVE SPEED:  40 / 50 / 60</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1169,7 +1169,7 @@
         </talents>
         <talents>
             <optionOne>+6 All Stats</optionOne>
-            <optionTwo>+80 Unstable Concoction Damage</optionTwo>
+            <optionTwo>+100 Unstable Concoction Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -1450,7 +1450,7 @@
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MAX TETHER DISTANCE:  900 / 900 / 900 / 900</abilityDetails>
-            <abilityDetails>MOVEMENT SPEED BONUS:  13% / 14% / 15% / 16%</abilityDetails>
+            <abilityDetails>MOVEMENT SPEED BONUS:  10% / 12% / 14% / 16%</abilityDetails>
             <abilityDetails>TETHER DURATION:  12 / 12 / 12 / 12</abilityDetails>
             <abilityDetails>ENEMY MOVEMENT SLOW:  100%</abilityDetails>
             <abilityDetails>ENEMY ATTACK SLOW:  100</abilityDetails>
@@ -1917,7 +1917,7 @@
             <name>Warpath</name>
             <description>Bristleback works himself up into a fury every time he casts a spell, increasing his movement speed and damage. Upgradable by Aghanim's Scepter.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>DAMAGE PER STACK:  20 / 25 / 30</abilityDetails>
+            <abilityDetails>DAMAGE PER STACK:  18 / 24 / 30</abilityDetails>
             <abilityDetails>MOVEMENT PER STACK:  3% / 4% / 5%</abilityDetails>
             <abilityDetails>STACK DURATION:  14</abilityDetails>
             <abilityDetails>MAX STACKS:  5 / 7 / 9</abilityDetails>
@@ -4935,7 +4935,7 @@
             <abilityDetails>ABILITY:  Channeled, Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  100 / 180 / 260 / 340</abilityDetails>
+            <abilityDetails>DAMAGE:  140 / 210 / 280 / 350</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  20% / 40% / 60% / 80%</abilityDetails>
             <abilityDetails>SLOW DURATION:  4</abilityDetails>
             <abilityDetails>MAX DISTANCE:  1000</abilityDetails>
@@ -5032,7 +5032,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>10% Evasion</optionOne>
+            <optionOne>12% Evasion</optionOne>
             <optionTwo>+20 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -5080,7 +5080,7 @@
             <imageName>crystal_maiden_frostbite_hp2</imageName>
             <name>Frostbite</name>
             <description>Encases an enemy unit in ice, prohibiting movement and attack, while dealing 50 damage every half-second. Lasts 10 seconds on creeps level 6 or lower.</description>
-            <manaCost>115/125/140/150</manaCost>
+            <manaCost>140/145/150/155</manaCost>
             <cooldown>9/8/7/6</cooldown>
             <disableDuration>CREEP DURATION:  10 / 10 / 10 / 10</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -5473,7 +5473,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MOVE SPEED BONUS:  50% / 50% / 50% / 50%</abilityDetails>
             <abilityDetails>EVASION:  100%</abilityDetails>
-            <abilityDetails>ENEMY SLOW:  8% / 16% / 24% / 30%</abilityDetails>
+            <abilityDetails>ENEMY SLOW:  15% / 20% / 25% / 30%</abilityDetails>
             <abilityDetails>ENEMY SLOW RADIUS:  325</abilityDetails>
             <abilityDetails>DURATION:  3 / 4 / 5 / 6</abilityDetails>
             <removableDebuffs>
@@ -6429,6 +6429,7 @@
             <manaCost>200/300/400</manaCost>
             <cooldown>160/140/120</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
+            <abilityDetails>HEAL:  225 / 325 / 425</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>SCEPTER HOLY PERSUASION ANCIENTS: 1 / 2 / 3</abilityDetails>
         </abilities>
@@ -7180,7 +7181,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>SHOT RANGE:  1600</abilityDetails>
             <abilityDetails>DAMAGE RADIUS:  250</abilityDetails>
-            <abilityDetails>DAMAGE:  60 / 120 / 180 / 240</abilityDetails>
+            <abilityDetails>DAMAGE:  70 / 140 / 210 / 280</abilityDetails>
             <abilityDetails>SLOW DURATION:  4</abilityDetails>
             <abilityDetails>SLOW:  30% / 35% / 40% / 45%</abilityDetails>
             <removableDebuffs>
@@ -8417,7 +8418,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  90 / 160 / 255 / 335</abilityDetails>
-            <abilityDetails>DAY DURATION:  2 / 2 / 2 / 2</abilityDetails>
+            <abilityDetails>DAY DURATION:  1.25</abilityDetails>
             <abilityDetails>NIGHT DURATION:  2.5 / 3 / 3.5 / 4</abilityDetails>
             <abilityDetails>MOVE SLOW:  50% / 50% / 50% / 50%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  50 / 50 / 50 / 50</abilityDetails>
@@ -8461,7 +8462,7 @@
             <imageName>night_stalker_hunter_in_the_night_hp2</imageName>
             <name>Hunter in the Night</name>
             <description>Night Stalker is in his element at night, attacking and moving with great swiftness. Can be activated during night to grant Night Stalker flying movement for 2 seconds.</description>
-            <manaCost>50</manaCost>
+            <manaCost>80</manaCost>
             <cooldown>26/22/18/14</cooldown>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>MOVE SPEED:  20% / 25% / 30% / 35%</abilityDetails>
@@ -8601,7 +8602,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>DURATION:  15</abilityDetails>
+            <abilityDetails>DURATION:  17</abilityDetails>
             <abilityDetails>DAMAGE PER SECOND:  25 / 40 / 55</abilityDetails>
             <abilityDetails> SCEPTER DURATION: 16</abilityDetails>
             <removableDebuffs>
@@ -10255,7 +10256,7 @@
             <name>Viper Strike</name>
             <description>Viper slows the targeted enemy unit's movement and attack speed while also dealing poison damage over time. The slowing effect reduces over the duration of the poison. Upgradable by Aghanim's Scepter.</description>
             <manaCost>125/175/250</manaCost>
-            <cooldown>60/45/30</cooldown>
+            <cooldown>50/40/30</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -11655,7 +11656,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE EACH BOUNCE:  280 / 370 / 460</abilityDetails>
             <abilityDetails>BOUNCES:  10 / 10 / 10</abilityDetails>
-            <abilityDetails>BOUNCE RANGE:  575 / 575 / 575</abilityDetails>
+            <abilityDetails>BOUNCE RANGE:  600</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  65%</abilityDetails>
             <abilityDetails>ATTACK SLOW:  65</abilityDetails>
             <abilityDetails>SLOW DURATION:  2.5</abilityDetails>
@@ -12144,7 +12145,7 @@
             <name>Reaper's Scythe</name>
             <description>Stuns the target enemy hero, then deals damage based on how much life it is missing. Heroes killed by Reaper's Scythe will have 10 seconds added to their respawn timer. Any kill under this effect is credited to Necrophos. Upgradable by Aghanim's Scepter.</description>
             <manaCost>175/340/500</manaCost>
-            <cooldown>100/85/70</cooldown>
+            <cooldown>90/80/70</cooldown>
             <disableDuration>STUN DURATION:  1.5 / 1.5 / 1.5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
@@ -12177,7 +12178,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+6 Strength</optionOne>
+            <optionOne>+8 Strength</optionOne>
             <optionTwo>+40 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -12901,8 +12902,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
-            <optionTwo>+125 Health</optionTwo>
+            <optionOne>+25 Movement Speed</optionOne>
+            <optionTwo>+175 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -12996,7 +12997,7 @@
             <abilityDetails>CAST RANGE:  500 / 900 / 1300</abilityDetails>
             <abilityDetails> SCEPTER REPLICA DAMAGE: 100% / 120% / 140%</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  75%</abilityDetails>
-            <abilityDetails>SLOW DURATION:  0.6 / 0.8 / 1</abilityDetails>
+            <abilityDetails>SLOW DURATION:  0.5 / 0.75 / 1</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -13905,7 +13906,7 @@
             <name>Summon Familiars</name>
             <description>Conjures two blind Familiars to fight for Visage. Familiars have high attack power, but each attack drains a charge of damage that recharges slowly over time. Familiars possess the Stone Form ability, that allows them to turn into stone, stunning enemies upon landing. While in Stone Form, Familiars are invulnerable, and rapidly regenerate their health. Familiars grant high bounty when killed. Upgradable by Aghanim's Scepter.</description>
             <manaCost>150/150/150</manaCost>
-            <cooldown>160/145/130</cooldown>
+            <cooldown>130</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>HP:  400 / 550 / 700</abilityDetails>
             <abilityDetails>FAMILIAR DAMAGE:  56 / 112 / 168</abilityDetails>
@@ -13950,7 +13951,7 @@
             <isMute>false</isMute>
             <imageName>winter_wyvern_arctic_burn_hp2</imageName>
             <name>Arctic Burn</name>
-            <description>Winter Wyvern soars upon an arctic wind, granting her unobstructed movement and allowing her to exhale a blistering chill into each attack. While soaring, her attacks travel further and faster, and slow enemies with a magical freeze that strips them of 8% of their current health each second. Her sight is also hardened against night's chill, granting her 400 additional vision range at night while soaring. Upgradable by Aghanim's Scepter.</description>
+            <description>Winter Wyvern soars upon an arctic wind, granting her unobstructed movement and allowing her to exhale a blistering chill into each attack. While soaring, her attacks travel further and faster, and slow enemies with a magical freeze that strips them of 9% of their current health each second. Her sight is also hardened against night's chill, granting her 400 additional vision range at night while soaring. Upgradable by Aghanim's Scepter.</description>
             <manaCost>120/110/100/90</manaCost>
             <cooldown>50/40/30/20</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -13958,7 +13959,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>FLIGHT DURATION:  8</abilityDetails>
             <abilityDetails>BONUS ATTACK RANGE:  275 / 375 / 475 / 575</abilityDetails>
-            <abilityDetails>HEALTH BURN:  8%</abilityDetails>
+            <abilityDetails>HEALTH BURN:  9%</abilityDetails>
             <abilityDetails>BURN DURATION:  5</abilityDetails>
             <abilityDetails>ADDED NIGHT VISION RANGE:  400</abilityDetails>
             <abilityDetails> SCEPTER MANA PER SECOND: 40</abilityDetails>
