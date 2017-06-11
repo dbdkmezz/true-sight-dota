@@ -63,7 +63,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:elevation="2dp"
             android:visibility="gone" />
 
         <com.carver.paul.truesight.Ui.widget.ExpandingViewPager

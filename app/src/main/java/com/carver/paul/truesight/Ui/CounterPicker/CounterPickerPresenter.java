@@ -48,7 +48,9 @@ public class CounterPickerPresenter implements IInfoPresenter_Data, IInfoPresent
     private List<HeroInfo> mEnemyHeroes = new ArrayList<>();
     private Subscriber<HeroAndAdvantages> mRowAdderRx;
 
-    CounterPickerPresenter(CounterPickerFragment view) {
+    public void CounterPickerPresenter() { }
+
+    public void setView(CounterPickerFragment view) {
         mView = view;
     }
 

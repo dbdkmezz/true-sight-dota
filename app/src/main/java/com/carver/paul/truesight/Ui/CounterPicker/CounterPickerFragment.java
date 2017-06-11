@@ -59,7 +59,7 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
 
     static private final String TAG = "CounterPickerFragment";
 
-    private CounterPickerPresenter mPresenter = new CounterPickerPresenter(this);
+    private CounterPickerPresenter mPresenter = null;
 
     private LinearLayout mMainLinearLayout;
     private LinearLayout mCountersLinearLayout;
@@ -80,6 +80,10 @@ public class CounterPickerFragment extends Fragment implements AdapterView.OnIte
         setupRolesSpinner(inflater, inflateView);
 
         return inflateView;
+    }
+
+    public void setPresenter(CounterPickerPresenter presenter) {
+        mPresenter = presenter;
     }
 
     // This is called when an item in the role spinner is selected
