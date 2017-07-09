@@ -179,7 +179,7 @@
             <name>Warcry</name>
             <description>Sven's Warcry heartens his allies for battle, increasing their movement speed and armor. Lasts 8 seconds.</description>
             <manaCost>25/25/25/25</manaCost>
-            <cooldown>32/26/20/14</cooldown>
+            <cooldown>34/28/22/16</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>BONUS ARMOR:  5 / 10 / 15 / 20</abilityDetails>
             <abilityDetails>BONUS SPEED:  12%</abilityDetails>
@@ -732,7 +732,7 @@
             <imageName>rattletrap_battery_assault_hp2</imageName>
             <name>Battery Assault</name>
             <description>Discharges high-powered shrapnel at random nearby enemy units, dealing minor magical damage and ministun.</description>
-            <manaCost>75/75/75/75</manaCost>
+            <manaCost>100</manaCost>
             <cooldown>32/28/24/20</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -1124,7 +1124,7 @@
             <abilityDetails>BASE BONUS GOLD:  4</abilityDetails>
             <abilityDetails>EXTRA BONUS GOLD:  4</abilityDetails>
             <abilityDetails>MAX BONUS GOLD PER KILL:  16 / 20 / 24 / 28</abilityDetails>
-            <abilityDetails>BOUNTY RUNE MULTIPLIER:  2</abilityDetails>
+            <abilityDetails>BOUNTY RUNE MULTIPLIER:  2.5</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>true</isUltimate>
@@ -1268,7 +1268,7 @@
         </abilities>
         <talents>
             <optionOne>+2000 Primal Split Unit Health</optionOne>
-            <optionTwo>+120 Damage</optionTwo>
+            <optionTwo>+140 Attack Speed</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -1283,7 +1283,7 @@
         </talents>
         <talents>
             <optionOne>+3 Mana Regen</optionOne>
-            <optionTwo>+30 Attack Speed</optionTwo>
+            <optionTwo>+30 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -1482,7 +1482,7 @@
             <imageName>wisp_spirits_hp2</imageName>
             <name>Spirits</name>
             <description>Summon five particle spirits that dance in a circle around Io. If a particle collides with an enemy hero, it explodes, damaging all enemy units in an area around it. Creeps take minor damage from touching a particle spirit, but do not cause them to explode. When its duration ends, any remaining Spirits explode.</description>
-            <manaCost>120/130/140/150</manaCost>
+            <manaCost>150</manaCost>
             <cooldown>20/18/16/14</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -2730,7 +2730,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
+            <optionOne>+200 Health</optionOne>
             <optionTwo>+20% XP Gain</optionTwo>
             <level>10</level>
         </talents>
@@ -3970,7 +3970,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+10% Magic Resistance</optionOne>
+            <optionOne>+15% Magic Resistance</optionOne>
             <optionTwo>+25 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
@@ -3980,7 +3980,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+15 Movement Speed</optionOne>
+            <optionOne>+20 Movement Speed</optionOne>
             <optionTwo>+15 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -4885,7 +4885,7 @@
             <name>Boundless Strike</name>
             <description>Monkey King enlarges his staff and slams it against the ground, stunning enemies in a line and damaging them with a critical hit based on his attack. Has True Strike.</description>
             <manaCost>100</manaCost>
-            <cooldown>25</cooldown>
+            <cooldown>22</cooldown>
             <disableDuration>STUN DURATION:  0.4 / 0.8 / 1.2 / 1.6</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -5011,7 +5011,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>BONUS ARMOR:  8 / 14 / 20</abilityDetails>
-            <abilityDetails>SOLDIER ATK SPEED:  1.6</abilityDetails>
+            <abilityDetails>SOLDIER ATK SPEED:  1.4</abilityDetails>
             <abilityDetails>DURATION:  13</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
@@ -5467,7 +5467,7 @@
             <imageName>windrunner_windrun_hp2</imageName>
             <name>Windrun</name>
             <description>Increases movement speed and adds evasion from all physical attacks, while slowing movement of nearby enemies.</description>
-            <manaCost>75</manaCost>
+            <manaCost>60</manaCost>
             <cooldown>12</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -5677,7 +5677,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  110 / 180 / 250 / 320</abilityDetails>
+            <abilityDetails>DAMAGE:  85 / 160 / 235 / 310</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
@@ -5745,7 +5745,7 @@
             <piercesSIDetail>Cannot target spell immune enemies. Attempts to damage spell immune enemies. When upgraded, can target spell immune enemies.</piercesSIDetail>
         </abilities>
         <talents>
-            <optionOne>+40/4% Fiery Soul Per Stack</optionOne>
+            <optionOne>+35/3% Fiery Soul Per Stack</optionOne>
             <optionTwo>-4s Dragon Slave Cooldown</optionTwo>
             <level>25</level>
         </talents>
@@ -6152,7 +6152,7 @@
             <imageName>enchantress_natures_attendants_hp2</imageName>
             <name>Nature's Attendants</name>
             <description>A cloud of wisps heals Enchantress and any friendly units nearby. Lasts 11 seconds.</description>
-            <manaCost>125/140/155/170</manaCost>
+            <manaCost>125</manaCost>
             <cooldown>45</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>HEAL PER SECOND:  10 / 10 / 10 / 10</abilityDetails>
@@ -6429,7 +6429,7 @@
             <manaCost>200/300/400</manaCost>
             <cooldown>160/140/120</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>HEAL:  225 / 325 / 425</abilityDetails>
+            <abilityDetails>HEAL:  225 / 350 / 475</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>SCEPTER HOLY PERSUASION ANCIENTS: 1 / 2 / 3</abilityDetails>
         </abilities>
@@ -6440,7 +6440,7 @@
         </talents>
         <talents>
             <optionOne>+1000 Creep Min Health</optionOne>
-            <optionTwo>+90 Gold/Min</optionTwo>
+            <optionTwo>+120 Gold/Min</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -6700,12 +6700,12 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+25 Movement Speed</optionOne>
-            <optionTwo>+250 Health</optionTwo>
+            <optionOne>+30 Movement Speed</optionOne>
+            <optionTwo>+350 Health</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+8% Magic Resistance</optionOne>
+            <optionOne>+12% Magic Resistance</optionOne>
             <optionTwo>+50 Damage</optionTwo>
             <level>15</level>
         </talents>
@@ -7824,7 +7824,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>EXPLODE RADIUS:  400</abilityDetails>
             <abilityDetails>EXPLODE DEATH DAMAGE:  90 / 130 / 170 / 220</abilityDetails>
-            <abilityDetails>EXPLODE TIMER DAMAGE:  45 / 65 / 85 / 110</abilityDetails>
+            <abilityDetails>EXPLODE TIMER DAMAGE:  20 / 50 / 80 / 110</abilityDetails>
             <abilityDetails>EXPLODE TIMER:  6</abilityDetails>
             <abilityDetails>MOVE SLOW:  30%</abilityDetails>
             <abilityDetails>SLOW DURATION:  3</abilityDetails>
@@ -8463,7 +8463,7 @@
             <name>Hunter in the Night</name>
             <description>Night Stalker is in his element at night, attacking and moving with great swiftness. Can be activated during night to grant Night Stalker flying movement for 2 seconds.</description>
             <manaCost>80</manaCost>
-            <cooldown>26/22/18/14</cooldown>
+            <cooldown>30/26/22/18</cooldown>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>MOVE SPEED:  20% / 25% / 30% / 35%</abilityDetails>
             <abilityDetails>ATTACK SPEED:  45 / 60 / 75 / 90</abilityDetails>
@@ -8791,7 +8791,7 @@
             <name>Howl</name>
             <description>Grants bonus damage and bonus health to Lycan, all allied heroes and all units under their control. Howl has double effect during night.</description>
             <manaCost>40</manaCost>
-            <cooldown>55/50/45/40</cooldown>
+            <cooldown>60/55/50/45</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DURATION:  13</abilityDetails>
             <abilityDetails>HERO BONUS DAMAGE:  10 / 15 / 20 / 25</abilityDetails>
@@ -10486,7 +10486,7 @@
         </talents>
         <talents>
             <optionOne>+70 Attack Speed</optionOne>
-            <optionTwo>+12 Spiders Attack Damage</optionTwo>
+            <optionTwo>+14 Spiders Attack Damage</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -10720,7 +10720,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Movement Speed</optionOne>
+            <optionOne>+25 Movement Speed</optionOne>
             <optionTwo>+8 All Stats</optionTwo>
             <level>15</level>
         </talents>
@@ -12404,7 +12404,7 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>70% Spell Lifesteal</optionOne>
+            <optionOne>60% Spell Lifesteal</optionOne>
             <optionTwo>550 AoE Shadow Strike</optionTwo>
             <level>25</level>
         </talents>
@@ -12644,7 +12644,7 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+150 Nether Blast Damage</optionOne>
+            <optionOne>+200 Nether Blast Damage</optionOne>
             <optionTwo>+50% Life Drain Heal</optionTwo>
             <level>25</level>
         </talents>
@@ -12883,7 +12883,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MANA/SEC:  20 / 40 / 60</abilityDetails>
             <abilityDetails>RADIUS:  450</abilityDetails>
-            <abilityDetails>DAMAGE:  100 / 130 / 160</abilityDetails>
+            <abilityDetails>DAMAGE:  100 / 140 / 180</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <talents>
@@ -12897,7 +12897,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+10% Magic Resistance</optionOne>
+            <optionOne>+15% Magic Resistance</optionOne>
             <optionTwo>+400 Mana</optionTwo>
             <level>15</level>
         </talents>
@@ -12972,7 +12972,7 @@
             <name>Surge</name>
             <description>Charges a target friendly unit with power, giving it a brief burst of maximum movement speed.</description>
             <manaCost>50</manaCost>
-            <cooldown>12/11/10/9</cooldown>
+            <cooldown>13/12/11/10</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
@@ -13106,7 +13106,7 @@
             <name>Flaming Lasso</name>
             <description>Lassoes an enemy and drags them in Batrider's wake. Victims cannot be dragged over impassable terrain. Dragged units cannot move, attack, or use abilities. Teleporting or blinking will break the lasso. Upgradable by Aghanim's Scepter.</description>
             <manaCost>225</manaCost>
-            <cooldown>90/75/60</cooldown>
+            <cooldown>100/80/60</cooldown>
             <disableDuration>DURATION:  3 / 3.5 / 4</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -13785,7 +13785,7 @@
             <name>Demonic Purge</name>
             <description>Purges the target enemy unit, removing positive buffs, and slowing the target for the duration. The unit slowly regains its speed until the end of the duration, upon which damage is dealt. Units under the effect of Disruption can still be affected by Demonic Purge. Upgradable by Aghanim's Scepter. DISPEL TYPE: Basic Dispel</description>
             <manaCost>200/200/200</manaCost>
-            <cooldown>50</cooldown>
+            <cooldown>40</cooldown>
             <disableDuration>DURATION:  5 / 5 / 5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -13841,7 +13841,7 @@
             <imageName>visage_grave_chill_hp2</imageName>
             <name>Grave Chill</name>
             <description>Visage drains the movement and attack speed of the targeted unit, gaining it for itself.</description>
-            <manaCost>100</manaCost>
+            <manaCost>90</manaCost>
             <cooldown>16/14/12/10</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -14013,7 +14013,7 @@
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  4</abilityDetails>
-            <abilityDetails>BASE HEALTH REGEN:  20</abilityDetails>
+            <abilityDetails>BASE HEALTH REGEN:  25</abilityDetails>
             <abilityDetails>MAX HEALTH REGEN:  3% / 4% / 5% / 6%</abilityDetails>
         </abilities>
         <abilities>
