@@ -20,7 +20,7 @@
             <name>Fissure</name>
             <description>Slams the ground with a mighty totem, creating an impassable ridge of stone while stunning and damaging enemy units along its line.</description>
             <manaCost>125/140/155/170</manaCost>
-            <cooldown>15</cooldown>
+            <cooldown>18/17/16/15</cooldown>
             <disableDuration>STUN DURATION:  1 / 1.25 / 1.5 / 1.75</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -47,7 +47,7 @@
             <imageName>earthshaker_enchant_totem_hp2</imageName>
             <name>Enchant Totem</name>
             <description>Empowers Earthshaker's totem, causing it to deal extra damage on the next attack. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>20/30/40/50</manaCost>
+            <manaCost>35/40/45/50</manaCost>
             <cooldown>5</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -140,7 +140,7 @@
             <description>Sven unleashes his magical gauntlet that deals damage and stuns enemy units.</description>
             <manaCost>140</manaCost>
             <cooldown>13</cooldown>
-            <disableDuration>DURATION:  2</disableDuration>
+            <disableDuration>DURATION:  1.7 / 1.8 / 1.9 / 2.0</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -179,7 +179,7 @@
             <name>Warcry</name>
             <description>Sven's Warcry heartens his allies for battle, increasing their movement speed and armor. Lasts 8 seconds.</description>
             <manaCost>25/25/25/25</manaCost>
-            <cooldown>34/28/22/16</cooldown>
+            <cooldown>35/30/25/20</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>BONUS ARMOR:  5 / 10 / 15 / 20</abilityDetails>
             <abilityDetails>BONUS SPEED:  12%</abilityDetails>
@@ -266,7 +266,7 @@
             <imageName>tiny_toss_hp2</imageName>
             <name>Toss</name>
             <description>Grabs the nearest unit in a 275 radius around Tiny, ally or enemy, and launches it at the target unit or rune to deal damage where they land. If the tossed unit is an enemy, it will take an extra 20% damage. Toss does more damage with each level in Grow.</description>
-            <manaCost>120/120/120/120</manaCost>
+            <manaCost>90/100/110/120</manaCost>
             <cooldown>8</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -319,7 +319,7 @@
             <abilityDetails>ATTACK SPEED LOSS:  20 / 35 / 50</abilityDetails>
             <abilityDetails>ADDED MOVE SPEED:  40 / 50 / 60</abilityDetails>
             <abilityDetails>TOSS BONUS:  35% / 50% / 65%</abilityDetails>
-            <abilityDetails> SCEPTER BONUS RANGE: 85</abilityDetails>
+            <abilityDetails> SCEPTER BONUS RANGE: 150</abilityDetails>
             <abilityDetails> SCEPTER CLEAVE DAMAGE: 50%</abilityDetails>
             <abilityDetails> SCEPTER BONUS BUILDING DAMAGE: 75%</abilityDetails>
             <abilityDetails> SCEPTER TOSS BONUS: 50% / 65% / 80%</abilityDetails>
@@ -5427,8 +5427,8 @@
             <name>Shackleshot</name>
             <description>Shackles the target to an enemy unit or tree in a line directly behind it. If no unit or tree is present, the stun duration is reduced to 0.75.</description>
             <manaCost>90/100/110/120</manaCost>
-            <cooldown>12</cooldown>
-            <disableDuration>SHACKLE DURATION:  1.5 / 2.25 / 3 / 3.75</disableDuration>
+            <cooldown>18/16/14/12</cooldown>
+            <disableDuration>SHACKLE DURATION:  2.0 / 2.6 / 3.2 / 3.8</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -6429,7 +6429,7 @@
             <manaCost>200/300/400</manaCost>
             <cooldown>160/140/120</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>HEAL:  225 / 350 / 475</abilityDetails>
+            <abilityDetails>HEAL:  250 / 375 / 500</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>SCEPTER HOLY PERSUASION ANCIENTS: 1 / 2 / 3</abilityDetails>
         </abilities>
@@ -7223,7 +7223,7 @@
             <imageName>skywrath_mage_mystic_flare_hp2</imageName>
             <name>Mystic Flare</name>
             <description>Skywrath Mage uses his ultimate magical ability to conjure a precise and violent mystical field that lays waste to his adversaries. Deals massive damage distributed evenly among any Heroes in the area over 2.4 seconds. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>350/575/800</manaCost>
+            <manaCost>300/550/800</manaCost>
             <cooldown>60/40/20</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -7245,7 +7245,7 @@
         </talents>
         <talents>
             <optionOne>+90 Gold/Min</optionOne>
-            <optionTwo>10% Spell Lifesteal</optionTwo>
+            <optionTwo>15% Spell Lifesteal</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -8196,7 +8196,7 @@
             <name>Reincarnation</name>
             <description>Wraith King's form regroups after death, allowing him to resurrect when killed in battle. Upon death, enemy units in a 900 radius will be slowed. Upgradable by Aghanim's Scepter.</description>
             <manaCost>160</manaCost>
-            <cooldown>240/140/40</cooldown>
+            <cooldown>200/120/40</cooldown>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Heroes</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -8225,7 +8225,7 @@
         </talents>
         <talents>
             <optionOne>+50 Wraithfire Blast DPS</optionOne>
-            <optionTwo>+15 Movement Speed</optionTwo>
+            <optionTwo>+30 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -8480,7 +8480,7 @@
             <manaCost>0/0/0</manaCost>
             <cooldown>160/120/80</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>DURATION:  50</abilityDetails>
+            <abilityDetails>DURATION:  40</abilityDetails>
             <abilityDetails>ENEMY VISION RANGE:  675</abilityDetails>
             <removableDebuffs>
                 <description>vision reduction</description>
@@ -9040,7 +9040,7 @@
             <cooldown>70</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>ATTACKS TO DESTROY:  3 / 4 / 5 / 7</abilityDetails>
+            <abilityDetails>ATTACKS TO DESTROY:   4 / 5 / 6 / 7</abilityDetails>
             <abilityDetails>TOMBSTONE DURATION:  15 / 20 / 25 / 30</abilityDetails>
             <abilityDetails>ZOMBIE SPAWN RADIUS:  600 / 800 / 1000 / 1200</abilityDetails>
             <abilityDetails>DEATHLUST FLAT HEALTH THRESHOLD:  100 / 200 / 300 / 400</abilityDetails>
@@ -9554,7 +9554,7 @@
             <imageName>bloodseeker_rupture_hp2</imageName>
             <name>Rupture</name>
             <description>Causes an enemy unit's skin to rupture. If the unit moves, it takes a percentage of the distance traveled as damage. The damage is dealt through spell immunity. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>150/200/250</manaCost>
+            <manaCost>200/225/250</manaCost>
             <cooldown>60</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -10704,7 +10704,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>HAUNT DURATION:  5 / 6 / 7</abilityDetails>
-            <abilityDetails>HAUNT DAMAGE:  30%</abilityDetails>
+            <abilityDetails>HAUNT DAMAGE:  40%</abilityDetails>
             <abilityDetails>HAUNT DAMAGE TAKEN:  200% / 200% / 200%</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
@@ -11647,7 +11647,7 @@
             <isMute>false</isMute>
             <imageName>lich_chain_frost_hp2</imageName>
             <name>Chain Frost</name>
-            <description>Releases an orb of frost that bounces between nearby enemy units up to 10 times, slowing and damaging each time it hits. The first target is mini-stunned. Upgradable by Aghanim's Scepter.</description>
+            <description>Releases an orb of frost that bounces between nearby enemy units up to 10 times, slowing and damaging each time it hits. Upgradable by Aghanim's Scepter.</description>
             <manaCost>200/325/500</manaCost>
             <cooldown>100/80/60</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -11661,14 +11661,9 @@
             <abilityDetails>ATTACK SLOW:  65</abilityDetails>
             <abilityDetails>SLOW DURATION:  2.5</abilityDetails>
             <abilityDetails> SCEPTER DAMAGE: 370 / 460 / 550</abilityDetails>
-            <removableDebuffs>
-                <description>stun</description>
-                <basicDispel>false</basicDispel>
-                <strongDispel>true</strongDispel>
-            </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Partially (see detail)</piercesSIType>
-            <piercesSIDetail>Can target, mini-stun and bounce to spell immune enemies. Does not slow or attempt to damage spell immune enemies.</piercesSIDetail>
+            <piercesSIDetail>Can target and bounce to spell immune enemies. Does not slow or attempt to damage spell immune enemies.</piercesSIDetail>
         </abilities>
         <talents>
             <optionOne>Attacks Apply 30% MS and AS Slow</optionOne>
@@ -11712,7 +11707,7 @@
             <description>Rock spikes burst from the earth along a straight path. Enemy units are hurled into the air, then are stunned and take damage when they fall.</description>
             <manaCost>100/120/140/160</manaCost>
             <cooldown>12</cooldown>
-            <disableDuration>STUN DURATION:  1.1 / 1.6 / 2.1 / 2.6</disableDuration>
+            <disableDuration>STUN DURATION:  1.4 / 1.8 / 2.2 / 2.6</disableDuration>
             <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -11802,7 +11797,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+8% Spell Amplification</optionOne>
+            <optionOne>+300 Finger of Death Damage</optionOne>
             <optionTwo>+20% Magic Resistance</optionTwo>
             <level>20</level>
         </talents>
@@ -12111,7 +12106,7 @@
             <abilityDetails>RESTORATION AMPLIFICATION:  75%</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  12% / 20% / 28% / 36%</abilityDetails>
             <abilityDetails>SLOW RADIUS:  750</abilityDetails>
-            <abilityDetails>INCREASED MAGIC DAMAGE:  20%</abilityDetails>
+            <abilityDetails>INCREASED MAGIC DAMAGE:  25%</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
@@ -12145,7 +12140,7 @@
             <name>Reaper's Scythe</name>
             <description>Stuns the target enemy hero, then deals damage based on how much life it is missing. Heroes killed by Reaper's Scythe will have 10 seconds added to their respawn timer. Any kill under this effect is credited to Necrophos. Upgradable by Aghanim's Scepter.</description>
             <manaCost>175/340/500</manaCost>
-            <cooldown>90/80/70</cooldown>
+            <cooldown>100</cooldown>
             <disableDuration>STUN DURATION:  1.5 / 1.5 / 1.5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
@@ -13087,7 +13082,7 @@
             <imageName>batrider_firefly_hp2</imageName>
             <name>Firefly</name>
             <description>Batrider takes to the skies, laying down a trail of flames from the air. The fire damages any enemies it touches, and destroys trees below Batrider. While flying, Batrider gains unobstructed movement and vision.</description>
-            <manaCost>100/100/100/100</manaCost>
+            <manaCost>125</manaCost>
             <cooldown>40</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -13231,7 +13226,7 @@
             <imageName>ancient_apparition_ice_blast_hp2</imageName>
             <name>Ice Blast</name>
             <description>Launches a tracer toward any location on the battlefield, which must be triggered again to mark the area to be blasted by a damaging explosion of hail. The further the tracer travels, the larger the explosion will be. Enemies caught in the explosion, or who touch the icy ball of hail as it travels, are Frostbitten, taking damage and prevented from regenerating or healing. If a Frostbitten unit's health drops below a certain percentage, they will instantly shatter. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>100/125/150</manaCost>
+            <manaCost>150</manaCost>
             <cooldown>40</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -13812,8 +13807,8 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+8% Spell Amplification</optionOne>
-            <optionTwo>+75 Cast Range</optionTwo>
+            <optionOne>+10% Spell Amplification</optionOne>
+            <optionTwo>+100 Cast Range</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -14055,8 +14050,8 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+50 Damage</optionOne>
-            <optionTwo>+20 Movement Speed</optionTwo>
+            <optionOne>+75 Damage</optionOne>
+            <optionTwo>+35 Movement Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
