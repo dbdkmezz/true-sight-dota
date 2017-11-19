@@ -567,6 +567,16 @@ public class Variables {
                 new Pair<>(R.drawable.monkey_king_primal_spring_hp2, "monkey_king_primal_spring_hp2"),
                 new Pair<>(R.drawable.monkey_king_tree_dance_hp2, "monkey_king_tree_dance_hp2"),
                 new Pair<>(R.drawable.monkey_king_untransform_hp2, "monkey_king_untransform_hp2"),
-                new Pair<>(R.drawable.monkey_king_wukongs_command_hp2, "monkey_king_wukongs_command_hp2"));
+                new Pair<>(R.drawable.monkey_king_wukongs_command_hp2, "monkey_king_wukongs_command_hp2"),
+                new Pair<>(R.drawable.dark_willow_bramble_maze_hp2, "dark_willow_bramble_maze_hp2"),
+                new Pair<>(R.drawable.dark_willow_cursed_crown_hp2, "dark_willow_cursed_crown_hp2"),
+                new Pair<>(R.drawable.pangolier_gyroshell_hp2, "pangolier_gyroshell_hp2"),
+                new Pair<>(R.drawable.pangolier_heartpiercer_hp2, "pangolier_heartpiercer_hp2"),
+                new Pair<>(R.drawable.dark_willow_shadow_realm_hp2, "dark_willow_shadow_realm_hp2"),
+                new Pair<>(R.drawable.pangolier_shield_crash_hp2, "pangolier_shield_crash_hp2"),
+                new Pair<>(R.drawable.dark_willow_terrorize_hp2, "dark_willow_terrorize_hp2"),
+                new Pair<>(R.drawable.dark_willow_bedlam_hp2, "dark_willow_bedlam_hp2"),
+                new Pair<>(R.drawable.pangolier_swashbuckle_hp2, "pangolier_swashbuckle_hp2"));
+
     }
 }

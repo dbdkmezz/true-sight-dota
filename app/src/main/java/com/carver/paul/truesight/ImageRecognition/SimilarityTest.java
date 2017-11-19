@@ -160,7 +160,10 @@ public class SimilarityTest {
                 new Pair<>(R.drawable.zuus_hphover, "zuus"),
                 new Pair<>(R.drawable.arc_warden_hphover, "arc_warden"),
                 new Pair<>(R.drawable.abyssal_underlord_full, "abyssal_underlord"),
+                new Pair<>(R.drawable.pangolier_full, "pangolier"),
+                new Pair<>(R.drawable.dark_willow_full, "dark_willow"),
                 new Pair<>(R.drawable.monkey_king_hphover, "monkey_king"));
+
                 //new Pair<>(R.drawable.blank_hero, "blank_hero"));
     }
 
