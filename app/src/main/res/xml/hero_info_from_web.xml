@@ -7035,6 +7035,27 @@
         <abilities>
             <isUltimate>true</isUltimate>
             <isStun>false</isStun>
+            <isDisable>false</isDisable>
+            <isSilence>false</isSilence>
+            <isMute>false</isMute>
+            <imageName>dark_willow_bedlam_hp2</imageName>
+            <name>Bedlam</name>
+            <description>Dark Willow's pet wisp roams around her for the duration, rapidly attacking nearby enemies. Bedlam cannot be used while Terrorize is active.</description>
+            <manaCost>100/150/200</manaCost>
+            <cooldown>40/30/20</cooldown>
+            <abilityDetails>AFFECTS:  Enemies</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>ROAM RADIUS: 200</abilityDetails>
+            <abilityDetails>ATTACK RADIUS: 300</abilityDetails>
+            <abilityDetails>ATTACK INTERVAL: 0.25</abilityDetails>
+            <abilityDetails>DAMAGE PER ATTACK: 60/140/220</abilityDetails>
+            <abilityDetails>SECONDS PER ROTATION: 1.5</abilityDetails>
+            <abilityDetails>DURATION: 4</abilityDetails>
+            <piercesSpellImmunity>false</piercesSpellImmunity>
+        </abilities>
+        <abilities>
+            <isUltimate>true</isUltimate>
+            <isStun>false</isStun>
             <isDisable>true</isDisable>
             <isSilence>false</isSilence>
             <isMute>false</isMute>
