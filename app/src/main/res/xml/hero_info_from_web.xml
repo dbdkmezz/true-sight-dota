@@ -287,13 +287,13 @@
             <name>Tree Grab</name>
             <description>Grabs a tree to whack enemies on the head for a limited number of times. Grants bonus attack range. Attacks deal more damage (increased vs. buildings) and fully splash on units along the way. The tree can be thrown, expending all the charges, to deal your attack to a unit at a distance.</description>
             <manaCost>20/30/40/50</manaCost>
-            <cooldown>15</cooldown>
+            <cooldown>18/16/14/12</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>ATTACK COUNT:  2 / 3 / 4 / 6</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  30%</abilityDetails>
-            <abilityDetails>BONUS BUILDING DAMAGE:  75%</abilityDetails>
+            <abilityDetails>ATTACK COUNT:  5</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  10% / 20% / 30% / 40%</abilityDetails>
+            <abilityDetails>BONUS BUILDING DAMAGE:  60% / 80% / 100% / 120%</abilityDetails>
             <abilityDetails>ATTACK RANGE:  350</abilityDetails>
         </abilities>
         <abilities>
@@ -307,9 +307,8 @@
             <description>Tiny gains craggy mass, increases his power and causes his to shrug off debuffs.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>STATUS RESISTANCE:  20% / 30% / 40%</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  40 / 80 / 120</abilityDetails>
-            <abilityDetails>ATTACK SPEED REDUCTION:  20 / 25 / 30</abilityDetails>
-            <abilityDetails>MOVEMENT SPEED:  40 / 50 / 60</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  30 / 45 / 60</abilityDetails>
+            <abilityDetails>ATTACK SPEED REDUCTION:  20 / 30 / 40</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -320,7 +319,7 @@
         </talents>
         <talents>
             <optionOne>Toss Requires No Target</optionOne>
-            <optionTwo>-10s Tree Grab Cooldown</optionTwo>
+            <optionTwo>-7s Tree Grab Cooldown</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -489,6 +488,10 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RANGE:  1500</abilityDetails>
             <abilityDetails>DAMAGE AMP PER STACK:  6 / 8 / 10 / 12</abilityDetails>
+            <removableDebuffs>
+                <basicDispel>true</basicDispel>
+                <strongDispel>true</strongDispel>
+            </removableDebuffs>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -668,7 +671,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>2x Dragon Blood Regen/Armor</optionOne>
+            <optionOne>2x Dragon Blood HP Regen/Armor</optionOne>
             <optionTwo>+150 Gold/Min</optionTwo>
             <level>20</level>
         </talents>
@@ -733,7 +736,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DURATION:  5 / 6 / 7 / 8</abilityDetails>
             <abilityDetails>MANA/HEALTH DRAIN:  80 / 120 / 160 / 200</abilityDetails>
-            <abilityDetails>ATTACKS REQUIRED:  2 / 2 / 2 / 3</abilityDetails>
+            <abilityDetails>ATTACKS REQUIRED:  2</abilityDetails>
             <removableDebuffs>
                 <description>knockback/stun</description>
                 <basicDispel>false</basicDispel>
@@ -811,7 +814,7 @@
         <name>Omniknight</name>
         <imageName>omniknight</imageName>
         <bioRoles>Melee - Support - Durable - Nuker</bioRoles>
-        <intelligence>17 + 1.80</intelligence>
+        <intelligence>15 + 1.80</intelligence>
         <agility>15 + 1.75</agility>
         <strength>22 + 3.10</strength>
         <attack>31 - 41</attack>
@@ -862,7 +865,7 @@
             <abilityDetails>ABILITY:  Passive, Aura</abilityDetails>
             <abilityDetails>AFFECTS:  Enemies</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RADIUS:  350</abilityDetails>
+            <abilityDetails>RADIUS:  300</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
@@ -892,7 +895,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+6 Mana Regen</optionOne>
+            <optionOne>+4 Mana Regen</optionOne>
             <optionTwo>-12% Degen Aura</optionTwo>
             <level>20</level>
         </talents>
@@ -915,7 +918,7 @@
         <agility>15 + 1.40</agility>
         <strength>21 + 2.70</strength>
         <attack>21 - 30</attack>
-        <speed>300</speed>
+        <speed>295</speed>
         <defence>1.1</defence>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -1107,27 +1110,26 @@
             <cooldown>55</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DURATION:  25</abilityDetails>
-            <abilityDetails>BONUS HEALTH REGEN:  40 / 48 / 56</abilityDetails>
             <abilityDetails>BONUS MANA REGEN:  3 / 7.5 / 12</abilityDetails>
             <abilityDetails>BONUS MOVE SPEED:  40 / 50 / 60</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>-8s Unstable Concoction Cooldown</optionOne>
+            <optionOne>+30 Chemical Rage Regeneration</optionOne>
             <optionTwo>-0.2 Chemical Rage Base Attack Time</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+200 Unstable Concoction Damage</optionOne>
+            <optionOne>+360 Unstable Concoction Damage</optionOne>
             <optionTwo>+25% Cleave</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+50 Damage</optionOne>
-            <optionTwo>+250 Health</optionTwo>
+            <optionTwo>+350 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+5 Armor</optionOne>
+            <optionOne>-5s Unstable Concoction Cooldown</optionOne>
             <optionTwo>+25 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -1465,7 +1467,7 @@
         <imageName>centaur</imageName>
         <bioRoles>Melee - Durable - Initiator - Disabler - Nuker - Escape</bioRoles>
         <intelligence>15 + 1.60</intelligence>
-        <agility>15 + 1.60</agility>
+        <agility>15 + 1.00</agility>
         <strength>23 + 4.30</strength>
         <attack>32 - 34</attack>
         <speed>300</speed>
@@ -1794,7 +1796,7 @@
         <bioRoles>Melee - Initiator - Disabler - Nuker</bioRoles>
         <intelligence>18 + 1.70</intelligence>
         <agility>23 + 2.10</agility>
-        <strength>23 + 2.60</strength>
+        <strength>23 + 3.00</strength>
         <attack>27 - 31</attack>
         <speed>300</speed>
         <defence>3.22</defence>
@@ -2239,7 +2241,7 @@
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>SILENCE DURATION:  2.5 / 3 / 3.5 / 4</abilityDetails>
+            <abilityDetails>SILENCE DURATION:  2 / 2.5 / 3 / 3.5</abilityDetails>
             <abilityDetails>HERO PULL SPEED:  600</abilityDetails>
             <abilityDetails>REMNANT DAMAGE:  50 / 100 / 150 / 200</abilityDetails>
             <abilityDetails>REMNANT PULL SPEED:  1000</abilityDetails>
@@ -2463,7 +2465,7 @@
             <name>Blink</name>
             <description>Short distance teleportation that allows Anti-Mage to move in and out of combat.</description>
             <manaCost>60</manaCost>
-            <cooldown>12/9/7/5</cooldown>
+            <cooldown>15/12/9/6</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
         </abilities>
         <abilities>
@@ -2515,7 +2517,7 @@
         </talents>
         <talents>
             <optionOne>+15 Agility</optionOne>
-            <optionTwo>-1s Blink Cooldown</optionTwo>
+            <optionTwo>-2s Blink Cooldown</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -2618,7 +2620,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+300 Gust Distance/Knockback</optionOne>
+            <optionOne>+400 Gust Distance/Knockback</optionOne>
             <optionTwo>+25 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
@@ -2942,7 +2944,6 @@
             <cooldown>160/100/40</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>DURATION:  30</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -2952,7 +2953,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-25s Morph cooldown</optionOne>
+            <optionOne>+15s Morph Duration</optionOne>
             <optionTwo>Morph Targets Allies</optionTwo>
             <level>20</level>
         </talents>
@@ -3179,7 +3180,7 @@
         </talents>
         <talents>
             <optionOne>+15% Vengeance Aura Damage</optionOne>
-            <optionTwo>-4s Magic Missile Cooldown</optionTwo>
+            <optionTwo>-5s Magic Missile Cooldown</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -3305,7 +3306,7 @@
         <bioRoles>Ranged - Carry - Nuker</bioRoles>
         <intelligence>15 + 2.60</intelligence>
         <agility>21 + 2.70</agility>
-        <strength>16 + 2.00</strength>
+        <strength>16 + 1.70</strength>
         <attack>15 - 21</attack>
         <speed>285</speed>
         <defence>1.94</defence>
@@ -3402,13 +3403,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+20 Shrapnel DPS</optionOne>
+            <optionOne>+25 Shrapnel DPS</optionOne>
             <optionTwo>+40 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+20 Damage</optionOne>
-            <optionTwo>12% Cooldown Reduction</optionTwo>
+            <optionTwo>15% Cooldown Reduction</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3493,11 +3494,8 @@
             <cooldown>11/8/5</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>MAX TRAPS:  5 / 8 / 11</abilityDetails>
-            <abilityDetails>MIN MOVEMENT SLOW:  30%</abilityDetails>
-            <abilityDetails>MAX MOVEMENT SLOW:  60%</abilityDetails>
             <abilityDetails>SLOW DURATION:  5</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  175 / 250 / 325</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  250 / 350 / 450</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
@@ -3520,7 +3518,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+250 Health</optionOne>
+            <optionOne>+3 Psionic Traps</optionOne>
             <optionTwo>+25 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -3531,7 +3529,7 @@
         <bioRoles>Ranged - Carry - Nuker - Pusher</bioRoles>
         <intelligence>16 + 1.85</intelligence>
         <agility>18 + 3.30</agility>
-        <strength>15 + 2.50</strength>
+        <strength>15 + 2.20</strength>
         <attack>20 - 26</attack>
         <speed>330</speed>
         <defence>2.52</defence>
@@ -3624,11 +3622,11 @@
         </talents>
         <talents>
             <optionOne>+24 Lunar Blessing Damage</optionOne>
-            <optionTwo>-2 Lucent Beam Cooldown</optionTwo>
+            <optionTwo>-3 Lucent Beam Cooldown</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+150 Cast Range</optionOne>
+            <optionOne>+200 Cast Range</optionOne>
             <optionTwo>+20 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -4006,7 +4004,7 @@
             <manaCost>75/75/75/75</manaCost>
             <cooldown>120</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>BEAR HP:  1400 / 1800 / 2300 / 2700</abilityDetails>
+            <abilityDetails>BEAR HP:  1500 / 2000 / 2500 / 3000</abilityDetails>
             <abilityDetails>BEAR HP REGEN:  4 / 5 / 6 / 7</abilityDetails>
             <abilityDetails>BEAR BASE ATTACK TIME:  1.75 / 1.65 / 1.55 / 1.45</abilityDetails>
             <abilityDetails>BEAR ARMOR:  3 / 4 / 5 / 6</abilityDetails>
@@ -4094,7 +4092,7 @@
         <imageName>naga_siren</imageName>
         <bioRoles>Melee - Carry - Support - Pusher - Disabler - Initiator - Escape</bioRoles>
         <intelligence>21 + 2.00</intelligence>
-        <agility>21 + 2.75</agility>
+        <agility>21 + 3.20</agility>
         <strength>21 + 2.80</strength>
         <attack>23 - 25</attack>
         <speed>315</speed>
@@ -4112,7 +4110,6 @@
             <cooldown>40</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>IMAGE DURATION:  30 / 30 / 30 / 30</abilityDetails>
-            <abilityDetails>IMAGE DAMAGE:  25% / 30% / 35% / 40%</abilityDetails>
             <abilityDetails>IMAGE DAMAGE TAKEN:  550% / 500% / 450% / 400%</abilityDetails>
         </abilities>
         <abilities>
@@ -4200,7 +4197,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
+            <optionOne>+10% Mirror Image Damage</optionOne>
             <optionTwo>+25 Movement Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -4432,12 +4429,12 @@
         </talents>
         <talents>
             <optionOne>+1s Searing Chains</optionOne>
-            <optionTwo>+30 Flame Guard DPS</optionTwo>
+            <optionTwo>+50 Flame Guard DPS</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+150 Flame Guard Absorption</optionOne>
-            <optionTwo>+20 Damage</optionTwo>
+            <optionOne>+200 Flame Guard Absorption</optionOne>
+            <optionTwo>+25 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -4788,7 +4785,7 @@
         </talents>
         <talents>
             <optionOne>+90 Gold/Min</optionOne>
-            <optionTwo>+14% Mana cost/Manaloss Reduction Aura</optionTwo>
+            <optionTwo>+14% Manacost/Manaloss Reduction Aura</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -4838,7 +4835,6 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  100 / 160 / 220 / 280</abilityDetails>
             <abilityDetails>RADIUS:  400 / 400 / 400 / 400</abilityDetails>
             <abilityDetails>DURATION:  0.75 / 1.5 / 2.25 / 3</abilityDetails>
             <removableDebuffs>
@@ -4918,7 +4914,7 @@
         <imageName>storm_spirit</imageName>
         <bioRoles>Ranged - Carry - Escape - Nuker - Initiator - Disabler</bioRoles>
         <intelligence>24 + 3.00</intelligence>
-        <agility>22 + 1.80</agility>
+        <agility>22 + 1.50</agility>
         <strength>19 + 1.80</strength>
         <attack>22 - 32</attack>
         <speed>285</speed>
@@ -5017,7 +5013,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+40 Attack Speed</optionOne>
+            <optionOne>+30 Attack Speed</optionOne>
             <optionTwo>+0.5s Electric Vortex</optionTwo>
             <level>20</level>
         </talents>
@@ -5095,7 +5091,7 @@
             <cooldown>12</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>MOVE SPEED BONUS:  50% / 50% / 50% / 50%</abilityDetails>
+            <abilityDetails>MOVE SPEED BONUS:  60%</abilityDetails>
             <abilityDetails>EVASION:  100%</abilityDetails>
             <abilityDetails>ENEMY SLOW RADIUS:  325</abilityDetails>
             <abilityDetails>DURATION:  3 / 4 / 5 / 6</abilityDetails>
@@ -5129,18 +5125,18 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>+1 Shackleshot Target</optionOne>
-            <optionTwo>+20% Ministun Focus Fire</optionTwo>
+            <optionOne>30% Cooldown Reduction</optionOne>
+            <optionTwo>+30% Ministun Focus Fire</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>Windrun Grants Invisibility</optionOne>
-            <optionTwo>25% Cooldown Reduction</optionTwo>
+            <optionTwo>+1 Shackleshot Target</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+75 Attack Range</optionOne>
-            <optionTwo>+90 Powershot Damage</optionTwo>
+            <optionOne>+100 Attack Range</optionOne>
+            <optionTwo>+100 Powershot Damage</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -5991,7 +5987,7 @@
             <imageName>chen_holy_persuasion_hp2</imageName>
             <name>Holy Persuasion</name>
             <description>Chen takes control of an enemy or neutral creep. If the persuaded creep's base health is naturally below the health minimum, its base health will be raised to the health minimum. Can be cast on allies to teleport them back to base. If cast on Chen, all units controlled by Chen through Holy Persuasion will be teleported to him. Upgradable by Aghanim's Scepter, allowing Chen to persuade Ancient Creeps. The number of Ancient Creeps that can be persuaded is based on the level of Hand of God.</description>
-            <manaCost>100/110/120/130</manaCost>
+            <manaCost>70/90/110/130</manaCost>
             <cooldown>10</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>TELEPORT DELAY:  6 / 5 / 4 / 3</abilityDetails>
@@ -6029,8 +6025,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+125 Cast Range</optionOne>
-            <optionTwo>+20% XP Gain</optionTwo>
+            <optionOne>+200 Cast Range</optionOne>
+            <optionTwo>+35% XP Gain</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -7030,27 +7026,6 @@
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
-            <piercesSpellImmunity>false</piercesSpellImmunity>
-        </abilities>
-        <abilities>
-            <isUltimate>true</isUltimate>
-            <isStun>false</isStun>
-            <isDisable>false</isDisable>
-            <isSilence>false</isSilence>
-            <isMute>false</isMute>
-            <imageName>dark_willow_bedlam_hp2</imageName>
-            <name>Bedlam</name>
-            <description>Dark Willow's pet wisp roams around her for the duration, rapidly attacking nearby enemies. Bedlam cannot be used while Terrorize is active.</description>
-            <manaCost>100/150/200</manaCost>
-            <cooldown>40/30/20</cooldown>
-            <abilityDetails>AFFECTS:  Enemies</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>ROAM RADIUS: 200</abilityDetails>
-            <abilityDetails>ATTACK RADIUS: 300</abilityDetails>
-            <abilityDetails>ATTACK INTERVAL: 0.25</abilityDetails>
-            <abilityDetails>DAMAGE PER ATTACK: 60/140/220</abilityDetails>
-            <abilityDetails>SECONDS PER ROTATION: 1.5</abilityDetails>
-            <abilityDetails>DURATION: 4</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
@@ -8192,9 +8167,8 @@
             <cooldown>12</cooldown>
             <abilityDetails>ABILITY:  No Target, Aura</abilityDetails>
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
-            <abilityDetails>BONUS MOVE SPEED:  6% / 10% / 14% / 18%</abilityDetails>
             <abilityDetails>AURA RADIUS:  900 / 900 / 900 / 900</abilityDetails>
-            <abilityDetails>CAST ADDED BONUS SPEED:  3% / 5% / 7% / 9%</abilityDetails>
+            <abilityDetails>CAST ADDED BONUS SPEED:  3% / 4% / 5% / 6%</abilityDetails>
             <abilityDetails>CAST ADDED SPEED DURATION:  6</abilityDetails>
         </abilities>
         <abilities>
@@ -8257,7 +8231,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+30 Damage</optionOne>
+            <optionOne>+40 Damage</optionOne>
             <optionTwo>+10 Health Regen</optionTwo>
             <level>15</level>
         </talents>
@@ -8448,7 +8422,7 @@
             <name>Phantasm</name>
             <description>Summons several phantasmal copies of the Chaos Knight from alternate dimensions. There is a 50% chance an extra phantasm will be summoned. The phantasms deal 100% damage, but take 260% damage. Upgradeable by Aghanim's Scepter. DISPEL TYPE: Basic Dispel</description>
             <manaCost>125/200/275</manaCost>
-            <cooldown>130</cooldown>
+            <cooldown>145</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Heroes</abilityDetails>
             <abilityDetails>NUMBER OF PHANTASMS:  1 / 2 / 3</abilityDetails>
@@ -8936,7 +8910,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+30 Health Regen</optionOne>
+            <optionOne>+20 Health Regen</optionOne>
             <optionTwo>+70 Attack Speed</optionTwo>
             <level>20</level>
         </talents>
@@ -9098,7 +9072,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RANGE:  200</abilityDetails>
-            <abilityDetails>BONUS PER STACK:  60</abilityDetails>
+            <abilityDetails>BONUS PER STACK:  80</abilityDetails>
             <abilityDetails>STACK DURATION:  8</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
@@ -9754,7 +9728,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+6 Corrosive Skin DPS</optionOne>
+            <optionOne>+6 Corrosive Skin Stats</optionOne>
             <optionTwo>+100 Attack Range</optionTwo>
             <level>15</level>
         </talents>
@@ -9948,11 +9922,11 @@
         </abilities>
         <talents>
             <optionOne>+350 Spiders Health</optionOne>
-            <optionTwo>+75 Max Insatiable Hunger Damage/Lifesteal</optionTwo>
+            <optionTwo>+60 Insatiable Hunger Damage/Lifesteal</optionTwo>
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+60 Attack Speed</optionOne>
+            <optionOne>+50 Attack Speed</optionOne>
             <optionTwo>+20 Spiders Attack Damage</optionTwo>
             <level>20</level>
         </talents>
@@ -9963,7 +9937,7 @@
         </talents>
         <talents>
             <optionOne>+200 Health</optionOne>
-            <optionTwo>+60 Spawn Spiderlings Damage</optionTwo>
+            <optionTwo>+75 Spawn Spiderlings Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10121,7 +10095,7 @@
             <description>Deals bonus damage whenever Spectre attacks an enemy who is alone. Reduces the enemy vision for 5 seconds.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
-            <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
+            <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>RADIUS:  325</abilityDetails>
             <abilityDetails>VISION REDUCTION:  40% / 50% / 60% / 70%</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
@@ -10267,23 +10241,23 @@
             <abilityDetails>NUMBER OF MEEPOES:  1 / 2 / 3</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>-4s Poof Cooldown</optionOne>
-            <optionTwo>+700 Health</optionTwo>
+            <optionOne>-5s Poof Cooldown</optionOne>
+            <optionTwo>+600 Health</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>15% Evasion</optionOne>
-            <optionTwo>+40 Damage</optionTwo>
+            <optionTwo>-4s Earthbind Cooldown</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+40 Poof Damage</optionOne>
-            <optionTwo>+10 Strength</optionTwo>
+            <optionTwo>10% Lifesteal</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+30 Movement Speed</optionOne>
-            <optionTwo>10% Lifesteal</optionTwo>
+            <optionOne>+20 Damage</optionOne>
+            <optionTwo>+7 Strength</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10628,7 +10602,7 @@
         <name>Terrorblade</name>
         <imageName>terrorblade</imageName>
         <bioRoles>Melee - Carry - Pusher - Nuker</bioRoles>
-        <intelligence>19 + 1.75</intelligence>
+        <intelligence>19 + 1.60</intelligence>
         <agility>22 + 3.20</agility>
         <strength>15 + 1.70</strength>
         <attack>26 - 32</attack>
@@ -10685,14 +10659,14 @@
             <name>Metamorphosis</name>
             <description>Terrorblade transforms into a powerful demon with a ranged attack. Any of Terrorblade's illusions that are within 900 range will also be transformed by Metamorphosis.</description>
             <manaCost>100</manaCost>
-            <cooldown>140</cooldown>
+            <cooldown>155</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DURATION:  40 / 44 / 48 / 52</abilityDetails>
             <abilityDetails>TRANSFORMATION TIME:  0.35</abilityDetails>
             <abilityDetails>BASE ATTACK TIME:  1.5</abilityDetails>
             <abilityDetails>ATTACK RANGE:  550</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  20 / 40 / 60 / 80</abilityDetails>
-            <abilityDetails>MOVEMENT SPEED LOSS:  30</abilityDetails>
+            <abilityDetails>MOVEMENT SPEED LOSS:  25</abilityDetails>
             <abilityDetails>ILLUSION AURA RADIUS:  900</abilityDetails>
         </abilities>
         <abilities>
@@ -10719,7 +10693,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>-8s Reflection Cooldown</optionOne>
+            <optionOne>-10s Reflection Cooldown</optionOne>
             <optionTwo>+10 All Stats</optionTwo>
             <level>20</level>
         </talents>
@@ -10909,7 +10883,7 @@
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DURATION:  4 / 5 / 6 / 7</abilityDetails>
-            <abilityDetails>CAST RANGE:  500 / 550 / 600 / 650</abilityDetails>
+            <abilityDetails>CAST RANGE:  425 / 500 / 575 / 650</abilityDetails>
             <removableDebuffs>
                 <description>sleep</description>
                 <basicDispel>true</basicDispel>
@@ -11559,7 +11533,7 @@
         </abilities>
         <talents>
             <optionOne>-1.5s Death Pulse Cooldown</optionOne>
-            <optionTwo>+0.6% Heartstopper Aura</optionTwo>
+            <optionTwo>+0.6 Heartstopper Aura</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -12086,8 +12060,7 @@
             <abilityDetails>DURATION:  4 / 5 / 6 / 7</abilityDetails>
             <abilityDetails>RANGE:  600 / 700 / 800 / 900</abilityDetails>
             <removableDebuffs>
-                <description>stun</description>
-                <basicDispel>false</basicDispel>
+                <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
             </removableDebuffs>
             <piercesSpellImmunity>false</piercesSpellImmunity>
@@ -13089,7 +13062,7 @@
         <intelligence>25 + 3.10</intelligence>
         <agility>16 + 1.90</agility>
         <strength>24 + 2.40</strength>
-        <attack>13 - 20</attack>
+        <attack>10 - 17</attack>
         <speed>285</speed>
         <defence>1.24</defence>
         <abilities>
@@ -13100,7 +13073,7 @@
             <isMute>false</isMute>
             <imageName>winter_wyvern_arctic_burn_hp2</imageName>
             <name>Arctic Burn</name>
-            <description>Winter Wyvern soars upon an arctic wind, granting her unobstructed movement and allowing her to exhale a blistering chill into each attack. While soaring, her attacks travel further and faster, and slow enemies with a magical freeze that strips them of 9% of their current health each second. Her sight is also hardened against night's chill, granting her 400 additional vision range at night while soaring. Upgradable by Aghanim's Scepter.</description>
+            <description>Winter Wyvern soars upon an arctic wind, granting her unobstructed movement and allowing her to exhale a blistering chill into each attack. While soaring, her attacks travel further and faster, and slow enemies with a magical freeze that strips them of 7.5% of their current health each second. Her sight is also hardened against night's chill, granting her 400 additional vision range at night while soaring. Upgradable by Aghanim's Scepter.</description>
             <manaCost>120/110/100/90</manaCost>
             <cooldown>50/40/30/20</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -13108,7 +13081,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>FLIGHT DURATION:  8</abilityDetails>
             <abilityDetails>BONUS ATTACK RANGE:  275 / 375 / 475 / 575</abilityDetails>
-            <abilityDetails>HEALTH BURN:  9%</abilityDetails>
+            <abilityDetails>HEALTH BURN:  7.5% / 8% / 8.5% / 9%</abilityDetails>
             <abilityDetails>BURN DURATION:  5</abilityDetails>
             <abilityDetails>ADDED NIGHT VISION RANGE:  400</abilityDetails>
             <abilityDetails> SCEPTER MANA PER SECOND: 40</abilityDetails>
@@ -13204,7 +13177,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+600 Night Vision</optionOne>
+            <optionOne>+500 Night Vision</optionOne>
             <optionTwo>+350 Health</optionTwo>
             <level>15</level>
         </talents>
