@@ -7,7 +7,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 public class DataBaseHelper extends SQLiteAssetHelper {
 
     private static final String DATABASE_NAME = "advantages.db";
-    private static final int DATABASE_VERSION = 22;
+    private static final int DATABASE_VERSION = 23;
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
