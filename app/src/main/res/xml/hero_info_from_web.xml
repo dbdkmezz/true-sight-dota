@@ -308,7 +308,7 @@
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>STATUS RESISTANCE:  20% / 30% / 40%</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  30 / 45 / 60</abilityDetails>
-            <abilityDetails>ATTACK SPEED REDUCTION:  20 / 30 / 40</abilityDetails>
+            <abilityDetails>ATTACK SPEED REDUCTION:  20 / 35 / 50</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
@@ -882,7 +882,7 @@
             <name>Guardian Angel</name>
             <description>Omniknight summons a Guardian Angel that grants immunity from physical damage. Upgradable by Aghanim's Scepter</description>
             <manaCost>125/175/250</manaCost>
-            <cooldown>160</cooldown>
+            <cooldown>180/170/160</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  6 / 7 / 8</abilityDetails>
@@ -895,7 +895,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+4 Mana Regen</optionOne>
+            <optionOne>+3 Mana Regen</optionOne>
             <optionTwo>-12% Degen Aura</optionTwo>
             <level>20</level>
         </talents>
@@ -1178,7 +1178,7 @@
             <name>Drunken Haze</name>
             <description>Drenches a target in alcohol, causing their movement speed to be reduced, and causing their attacks to have a chance to miss.</description>
             <manaCost>25</manaCost>
-            <cooldown>8/7/6/5</cooldown>
+            <cooldown>11/9/7/5</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -2858,7 +2858,7 @@
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  100 / 175 / 250 / 325</abilityDetails>
+            <abilityDetails>DAMAGE:  75 / 150/ 225 / 300</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
         <abilities>
@@ -2953,13 +2953,13 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+15s Morph Duration</optionOne>
+            <optionOne>Waveform Attacks Targets</optionOne>
             <optionTwo>Morph Targets Allies</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+30 Attack Speed</optionOne>
-            <optionTwo>Waveform Attacks Targets</optionTwo>
+            <optionTwo>+15s Morph Duration</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -5003,7 +5003,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DAMAGE:  8 / 12 / 16</abilityDetails>
             <abilityDetails>SPEED:  1250 / 1875 / 2500</abilityDetails>
-            <abilityDetails>RADIUS:  125 / 200 / 275</abilityDetails>
+            <abilityDetails>RADIUS:  200</abilityDetails>
             <abilityDetails>MANA DRAIN PER UNIT:  0.7%</abilityDetails>
             <piercesSpellImmunity>false</piercesSpellImmunity>
         </abilities>
@@ -5023,7 +5023,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+2 Mana Regen</optionOne>
+            <optionOne>+1.75 Mana Regen</optionOne>
             <optionTwo>+20 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -5493,7 +5493,7 @@
             <name>Laser</name>
             <description>Fires an intense energy beam, dealing damage and blinding the target, causing it to miss all physical attacks. Upgradable by Aghanim's Scepter.</description>
             <manaCost>95/120/145/170</manaCost>
-            <cooldown>14</cooldown>
+            <cooldown>20/18/16/14</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
@@ -7233,7 +7233,7 @@
             <imageName>pudge_meat_hook_hp2</imageName>
             <name>Meat Hook</name>
             <description>Launches a bloody hook toward a unit or location. The hook will snag the first unit it encounters, dragging the unit back to Pudge and dealing damage if it is an enemy. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>110/120/130/140</manaCost>
+            <manaCost>140</manaCost>
             <cooldown>14/13/12/11</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Pure</abilityDetails>
@@ -7355,7 +7355,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>DAMAGE:  100 / 160 / 220 / 280</abilityDetails>
+            <abilityDetails>DAMAGE:  85 / 150 / 215 / 280</abilityDetails>
             <abilityDetails>STUN DURATION:  2.17</abilityDetails>
             <abilityDetails>RANGE:  350 / 450 / 550 / 650</abilityDetails>
             <abilityDetails> SCEPTER RANGE: 700 / 900 / 1100 / 1300</abilityDetails>
@@ -9219,7 +9219,7 @@
             <name>Static Link</name>
             <description>Creates a charged link between Razor and an enemy Hero, stealing damage from the target and giving it to Razor.</description>
             <manaCost>50</manaCost>
-            <cooldown>32/30/28/26</cooldown>
+            <cooldown>40/35/30/25</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Heroes</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
@@ -10615,7 +10615,7 @@
         </talents>
         <talents>
             <optionOne>12% Evasion</optionOne>
-            <optionTwo>+25 Damage</optionTwo>
+            <optionTwo>+20 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -10855,7 +10855,7 @@
             <isMute>false</isMute>
             <imageName>bane_enfeeble_hp2</imageName>
             <name>Enfeeble</name>
-            <description>Weakens an enemy unit, reducing its physical damage. Lasts 20 seconds.</description>
+            <description>Weakens an enemy unit, reducing its physical damage. Lasts 14/16/18/20 seconds.</description>
             <manaCost>95</manaCost>
             <cooldown>8</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -12163,8 +12163,8 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+175 Health</optionOne>
-            <optionTwo>+60 Damage</optionTwo>
+            <optionOne>+200 Health</optionOne>
+            <optionTwo>+75 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -13179,7 +13179,7 @@
         </talents>
         <talents>
             <optionOne>+25% XP Gain</optionOne>
-            <optionTwo>+10 Strength</optionTwo>
+            <optionTwo>Soul Catcher Creates Illusion On Death</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -13318,7 +13318,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>FLIGHT DURATION:  8</abilityDetails>
             <abilityDetails>BONUS ATTACK RANGE:  275 / 375 / 475 / 575</abilityDetails>
-            <abilityDetails>HEALTH BURN:  7.5% / 8% / 8.5% / 9%</abilityDetails>
+            <abilityDetails>HEALTH BURN:  6% / 7% / 8% / 9%</abilityDetails>
             <abilityDetails>BURN DURATION:  5</abilityDetails>
             <abilityDetails>ADDED NIGHT VISION RANGE:  400</abilityDetails>
             <abilityDetails> SCEPTER MANA PER SECOND: 40</abilityDetails>
@@ -13372,7 +13372,7 @@
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DURATION:  4</abilityDetails>
-            <abilityDetails>BASE HEALTH REGEN:  15</abilityDetails>
+            <abilityDetails>BASE HEALTH REGEN:  10</abilityDetails>
             <abilityDetails>MAX HEALTH REGEN:  3% / 4% / 5% / 6%</abilityDetails>
         </abilities>
         <abilities>
