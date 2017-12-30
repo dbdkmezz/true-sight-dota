@@ -38,7 +38,8 @@ public class Downloader {
     public static final int NO_DIFFERENCES_FOUND = 100;
     public static final int MULTIPLE_DIFFERENCES_FOUND = 101;
 
-    private static final String SERVICE_ENDPOINT = "https://test-truesight.rhcloud.com/";
+    private static final String SERVICE_ENDPOINT = "http://82.69.27.104:8001/hero_advantages/";
+
     private static final String TAG = "AdvantagesDownloader";
     private static final int FULL_QUERY_TIMEOUT = 3500;
     private static final int SINGlE_QUERY_TIMEOUT = 2000;
@@ -65,6 +66,7 @@ public class Downloader {
             // There's no network connection so we might as well give up now
             return Observable.error(new Throwable("No network available"));
         }
+
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(SERVICE_ENDPOINT)

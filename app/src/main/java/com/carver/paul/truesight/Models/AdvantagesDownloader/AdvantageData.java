@@ -55,8 +55,8 @@ public class AdvantageData {
             List<HeroAndAdvantages> oldAdvantages,
             AdvantageData newAdvantageData,
             int posOfNewAdvantage) {
-        if(newAdvantageData.getData().get(0).getAdvantages().size() != 0) {
-            throw new RuntimeException("ERROR, using advantages list with more than one advantage" +
+        if(newAdvantageData.getData().get(0).getAdvantages().size() != 1) {
+            throw new RuntimeException("ERROR, using advantages list with more than one advantage " +
                     "when just merging a single entry into a new list with mergeIntoAdvantagesList");
         }
         for(HeroAndAdvantages hero : oldAdvantages) {
