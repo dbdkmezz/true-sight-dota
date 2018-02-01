@@ -263,7 +263,7 @@
             <name>Toss</name>
             <description>Grabs the nearest unit in a 275 radius around Tiny, ally or enemy, and launches it at the target unit or rune to deal damage where they land. If the tossed unit is an enemy, it will take an extra 20% damage.</description>
             <manaCost>90/100/110/120</manaCost>
-            <cooldown>8</cooldown>
+            <cooldown>11</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
@@ -865,7 +865,7 @@
             <abilityDetails>ABILITY:  Passive, Aura</abilityDetails>
             <abilityDetails>AFFECTS:  Enemies</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>RADIUS:  300</abilityDetails>
+            <abilityDetails>RADIUS:  275</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
@@ -1119,17 +1119,17 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+360 Unstable Concoction Damage</optionOne>
+            <optionOne>+400 Unstable Concoction Damage</optionOne>
             <optionTwo>+25% Cleave</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+50 Damage</optionOne>
-            <optionTwo>+350 Health</optionTwo>
+            <optionTwo>+400 Health</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>-5s Unstable Concoction Cooldown</optionOne>
+            <optionOne>-8s Unstable Concoction Cooldown</optionOne>
             <optionTwo>+25 Attack Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -2940,7 +2940,7 @@
             <imageName>morphling_replicate_hp2</imageName>
             <name>Morph</name>
             <description>Morphling changes his form to match the targeted enemy, gaining their basic abilities.</description>
-            <manaCost>75/100/125</manaCost>
+            <manaCost>50</manaCost>
             <cooldown>160/100/40</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
@@ -4633,7 +4633,7 @@
             <name>Rolling Thunder</name>
             <description>Pangolier curls into a magic-immune ball and rolls out. When rolling, he moves at an increased speed and can move through trees, but has a decreased ability to turn. Striking enemies knocks them back, inflicting damage and stunning them when they land. Colliding with walls or cliffs will cause a temporary pause while Pangolier reverses in direction.</description>
             <manaCost>100</manaCost>
-            <cooldown>50/45/40</cooldown>
+            <cooldown>70/65/60</cooldown>
             <disableDuration>STUN DURATION:  1 / 1.25 / 1.5</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -5087,7 +5087,7 @@
             <imageName>windrunner_windrun_hp2</imageName>
             <name>Windrun</name>
             <description>Increases movement speed and adds evasion from all physical attacks, while slowing movement of nearby enemies.</description>
-            <manaCost>60</manaCost>
+            <manaCost>50</manaCost>
             <cooldown>12</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -5126,12 +5126,12 @@
         </abilities>
         <talents>
             <optionOne>30% Cooldown Reduction</optionOne>
-            <optionTwo>+30% Ministun Focus Fire</optionTwo>
+            <optionTwo>+35% Ministun Focus Fire</optionTwo>
             <level>25</level>
         </talents>
         <talents>
             <optionOne>Windrun Grants Invisibility</optionOne>
-            <optionTwo>+1 Shackleshot Target</optionTwo>
+            <optionTwo>+0.5s Shackleshot Duration</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -5383,7 +5383,7 @@
             <name>Ether Shock</name>
             <description>Creates a cone of ethereal energy that strikes multiple enemy units.</description>
             <manaCost>95/105/135/160</manaCost>
-            <cooldown>8</cooldown>
+            <cooldown>14/12/10/8</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -5428,7 +5428,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
-            <abilityDetails>TOTAL DAMAGE:  120 / 200 / 280 / 360</abilityDetails>
+            <abilityDetails>TOTAL DAMAGE:  60 / 160 / 260 / 360</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>true</strongDispel>
@@ -5648,7 +5648,7 @@
             <name>Wrath of Nature</name>
             <description>Damaging energy bounces around the map, striking enemies close to the cast point that are in vision. Each enemy hit beyond the first adds damage. Upgradable by Aghanim's Scepter.</description>
             <manaCost>175/225/275</manaCost>
-            <cooldown>90/75/60</cooldown>
+            <cooldown>70/65/60</cooldown>
             <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -6735,7 +6735,7 @@
             <imageName>oracle_fortunes_end_hp2</imageName>
             <name>Fortune's End</name>
             <description>CHANNELED - Gathers Oracle's power into a bolt of scouring energy that, when released, damages, roots, and purges enemies of buffs in an area around the target. If target is an ally it will only purge. Can be channeled for up to 2.5 seconds. The stop duration is equal to the time spent channeling. DISPEL TYPE: Basic Dispel</description>
-            <manaCost>110</manaCost>
+            <manaCost>75</manaCost>
             <cooldown>15/12/9/6</cooldown>
             <disableDuration>MAX STOP DURATION:  2.5</disableDuration>
             <abilityDetails>ABILITY:  Channeled, Unit Target</abilityDetails>
@@ -7263,7 +7263,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  250</abilityDetails>
-            <abilityDetails>MOVE SLOW:  30%</abilityDetails>
+            <abilityDetails>MOVE SLOW:  20/24/28/32%</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
                 <strongDispel>false</strongDispel>
@@ -8328,7 +8328,7 @@
             <name>Shapeshift</name>
             <description>Lycan assumes his lupine form, granting him and his units critical strikes and added vision at night. During Shapeshift, Lycan and all units under his control move at increased speed, cannot be slowed and have a 40% chance to deal a critical strike doing 160% damage.</description>
             <manaCost>100/100/100</manaCost>
-            <cooldown>120/90/60</cooldown>
+            <cooldown>130/105/80</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>SHAPESHIFT MOVE SPEED:  650</abilityDetails>
             <abilityDetails>BONUS NIGHT VISION:  1000</abilityDetails>
@@ -9107,7 +9107,7 @@
             <name>Necromastery</name>
             <description>Shadow Fiend steals the soul from units he kills, gaining bonus damage. If the killed unit is a hero, he gains 12 souls. On death, he releases half of them from bondage. Upgradable by Aghanim's Scepter.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>MAX SOULS:  18 / 24 / 30 / 36</abilityDetails>
+            <abilityDetails>MAX SOULS:  12 / 20 / 28 / 36</abilityDetails>
             <abilityDetails> SCEPTER MAX SOULS: 22 / 30 / 38 / 46</abilityDetails>
         </abilities>
         <abilities>
@@ -10605,16 +10605,16 @@
         </talents>
         <talents>
             <optionOne>+2.5s Stone Gaze Duration</optionOne>
-            <optionTwo>+800 Mana</optionTwo>
+            <optionTwo>+700 Mana</optionTwo>
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+15% Mystic Snake Mana Steal</optionOne>
+            <optionOne>+20% Mystic Snake Mana Steal</optionOne>
             <optionTwo>+30 Attack Speed</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>12% Evasion</optionOne>
+            <optionOne>15% Evasion</optionOne>
             <optionTwo>+20 Damage</optionTwo>
             <level>10</level>
         </talents>
@@ -11150,7 +11150,7 @@
             <isMute>false</isMute>
             <imageName>lion_mana_drain_hp2</imageName>
             <name>Mana Drain</name>
-            <description>CHANNELED - Absorbs the magical energies of a target enemy unit by taking mana from it every second.</description>
+            <description>CHANNELED - Slows, and absorbs the magical energies of a target enemy unit by taking mana from it every second.</description>
             <manaCost>10/10/10/10</manaCost>
             <cooldown>16/12/8/4</cooldown>
             <abilityDetails>ABILITY:  Channeled, Unit Target</abilityDetails>
@@ -11158,6 +11158,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>CHANNEL TIME:  5</abilityDetails>
             <abilityDetails>MANA PER SECOND:  20 / 40 / 60 / 120</abilityDetails>
+            <abilityDetails>SLOW: 14 / 16 / 18 / 20%</abilityDetails>
             <abilityDetails>BREAK DISTANCE:  1200</abilityDetails>
             <removableDebuffs>
                 <basicDispel>false</basicDispel>
@@ -12041,7 +12042,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+1 Nether Ward Health</optionOne>
+            <optionOne>+2 Nether Ward Health</optionOne>
             <optionTwo>-1s Nether Blast Cooldown</optionTwo>
             <level>15</level>
         </talents>
@@ -12187,7 +12188,7 @@
             <imageName>leshrac_split_earth_hp2</imageName>
             <name>Split Earth</name>
             <description>Splits the earth under enemies. Deals damage and stuns for a short duration.</description>
-            <manaCost>100/125/140/160</manaCost>
+            <manaCost>80/100/120/140</manaCost>
             <cooldown>9</cooldown>
             <disableDuration>STUN DURATION:  2</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
