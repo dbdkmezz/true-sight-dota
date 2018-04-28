@@ -30,7 +30,12 @@
     <string name="camera_example_text">For example:</string>
     <string name="request_permission">This app needs camera permission.</string>
     <string name="processing_image">Detecting heroes...</string>
-    <string name="opening_tip">Tip: press the camera button in the top-right to use a photo instead of typing.</string>
+
+    <string name="opening_tip">True Sight is now available for Google Assistant! Try saying:</string>
+    <string name="opening_tip_1">\u2022 Hey Google, ask True Sight who counters Tinker?</string>
+    <string name="opening_tip_2">\u2022 Hey Google, ask True Sight which supports are strong against Disruptor?</string>
+    <string name="opening_tip_3">\u2022 Hey Google, ask True Sight what is the cooldown of Tidehunter’s ultimate?</string>
+    <string name="opening_tip_4">\u2022 Hey Google, ask True Sight if Glimpse goes through BKB?</string>
 
     <string name="about_text">&appname; is free software. You can redistribute it and/or modify
         it under the terms of the GNU General Public License v3. The source code is freely
