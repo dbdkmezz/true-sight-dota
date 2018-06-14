@@ -9,8 +9,8 @@ android {
         applicationId "com.carver.paul.truesight"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 37
-        versionName "2.6.5"
+        versionCode 38
+        versionName "2.6.6"
     }
     buildTypes {
         release {

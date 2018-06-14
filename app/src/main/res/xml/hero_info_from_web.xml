@@ -135,7 +135,7 @@
             <imageName>sven_storm_bolt_hp2</imageName>
             <name>Storm Hammer</name>
             <description>Sven unleashes his magical gauntlet that deals damage and stuns enemy units.</description>
-            <manaCost>140</manaCost>
+            <manaCost>110/120/130/140</manaCost>
             <cooldown>13</cooldown>
             <disableDuration>DURATION:  1.7 / 1.8 / 1.9 / 2</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -306,7 +306,7 @@
             <name>Grow</name>
             <description>Tiny gains craggy mass, increases his power and causes his to shrug off debuffs.</description>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
-            <abilityDetails>STATUS RESISTANCE:  20% / 30% / 40%</abilityDetails>
+            <abilityDetails>STATUS RESISTANCE:  30% / 40% / 50%</abilityDetails>
             <abilityDetails>BONUS DAMAGE:  30 / 45 / 60</abilityDetails>
             <abilityDetails>ATTACK SPEED REDUCTION:  20 / 35 / 50</abilityDetails>
             <piercesSpellImmunity>true</piercesSpellImmunity>
@@ -1003,7 +1003,7 @@
         </abilities>
         <talents>
             <optionOne>0 Inner Vitality Cooldown</optionOne>
-            <optionTwo>+125 Attack Range</optionTwo>
+            <optionTwo>+150 Attack Range</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -1381,7 +1381,7 @@
             <abilityDetails>AFFECTS:  Allies</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MAX TETHER DISTANCE:  900 / 900 / 900 / 900</abilityDetails>
-            <abilityDetails>MOVEMENT SPEED BONUS:  10% / 12% / 14% / 16%</abilityDetails>
+            <abilityDetails>MOVEMENT SPEED BONUS:  5% / 8% / 11% / 14%</abilityDetails>
             <abilityDetails>TETHER DURATION:  14 / 14 / 14 / 14</abilityDetails>
         </abilities>
         <abilities>
@@ -1439,7 +1439,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>+20 Health Regen</optionOne>
+            <optionOne>+15 Health Regen</optionOne>
             <optionTwo>+150 Gold/Min</optionTwo>
             <level>20</level>
         </talents>
@@ -1449,7 +1449,7 @@
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+60 Damage</optionOne>
+            <optionOne>+45 Damage</optionOne>
             <optionTwo>+25% XP Gain</optionTwo>
             <level>10</level>
         </talents>
@@ -1697,7 +1697,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>DURATION:  5</abilityDetails>
-            <abilityDetails>ARMOR LOSS:  1 / 1.4 / 1.8 / 2.2</abilityDetails>
+            <abilityDetails>ARMOR LOSS:  2</abilityDetails>
             <abilityDetails>BASE MOVEMENT SLOW:  20%</abilityDetails>
             <abilityDetails>MOVE SLOW PER STACK:  3% / 6% / 9% / 12%</abilityDetails>
             <abilityDetails> SCEPTER RADIUS: 750</abilityDetails>
@@ -2806,7 +2806,7 @@
             <abilityDetails>DURATION:  18</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>-80 Moonlight Shadow Cooldown</optionOne>
+            <optionOne>-75 Moonlight Shadow Cooldown</optionOne>
             <optionTwo>+2 Multishot Sacred Arrows</optionTwo>
             <level>25</level>
         </talents>
@@ -3373,7 +3373,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
             <abilityDetails>DAMAGE:  320 / 485 / 650</abilityDetails>
-            <abilityDetails>RANGE:  2000 / 2500 / 3000</abilityDetails>
+            <abilityDetails>RANGE:  3000</abilityDetails>
             <abilityDetails>SCEPTER RADIUS:  400</abilityDetails>
             <abilityDetails>SCEPTER CRITICAL DAMAGE:  280%</abilityDetails>
             <removableDebuffs>
@@ -3401,7 +3401,7 @@
         </talents>
         <talents>
             <optionOne>+20 Damage</optionOne>
-            <optionTwo>15% Cooldown Reduction</optionTwo>
+            <optionTwo>25% Cooldown Reduction</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -3793,7 +3793,7 @@
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>ATTACKS:  3 / 4 / 5 / 6</abilityDetails>
             <abilityDetails>BONUS ATTACK SPEED:  400 / 400 / 400 / 400</abilityDetails>
-            <abilityDetails>DURATION:  15</abilityDetails>
+            <abilityDetails>DURATION:  20</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -3840,7 +3840,7 @@
         </talents>
         <talents>
             <optionOne>+12 Fury Swipes Damage</optionOne>
-            <optionTwo>+1s Enrage Duration</optionTwo>
+            <optionTwo>+1.5s Enrage Duration</optionTwo>
             <level>20</level>
         </talents>
         <talents>
@@ -3960,12 +3960,12 @@
         </talents>
         <talents>
             <optionOne>-25s Call Down Cooldown</optionOne>
-            <optionTwo>+45 Movement Speed</optionTwo>
+            <optionTwo>+40 Movement Speed</optionTwo>
             <level>20</level>
         </talents>
         <talents>
             <optionOne>+11 Rocket Barrage Damage</optionOne>
-            <optionTwo>+3 Flak Cannon Attacks</optionTwo>
+            <optionTwo>+0.5 Homing Missile Stun Duration</optionTwo>
             <level>15</level>
         </talents>
         <talents>
@@ -4158,7 +4158,7 @@
             <imageName>naga_siren_song_of_the_siren_hp2</imageName>
             <name>Song of the Siren</name>
             <description>All enemies in range of the Naga Siren are put into a magical stasis where they cannot act or be attacked. Using Song of the Siren again will end the duration early. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>100/150/200</manaCost>
+            <manaCost>150/175/200</manaCost>
             <cooldown>160/120/80</cooldown>
             <disableDuration>DURATION:  7 / 7 / 7</disableDuration>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
@@ -4685,7 +4685,7 @@
             <name>Crystal Nova</name>
             <description>A burst of damaging frost slows enemy movement and attack rate in the targeted area.</description>
             <manaCost>100/120/140/160</manaCost>
-            <cooldown>12/11/10/9</cooldown>
+            <cooldown>11/10/9/8</cooldown>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -4776,7 +4776,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+120 Gold/Min</optionOne>
+            <optionOne>+150 Gold/Min</optionOne>
             <optionTwo>+14% Manacost/Manaloss Reduction Aura</optionTwo>
             <level>15</level>
         </talents>
@@ -4828,7 +4828,7 @@
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  400 / 400 / 400 / 400</abilityDetails>
-            <abilityDetails>DURATION:  0.75 / 1.5 / 2.25 / 3</abilityDetails>
+            <abilityDetails>DURATION:  1.5 / 2 / 2.5 / 3</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
                 <strongDispel>true</strongDispel>
@@ -5175,7 +5175,7 @@
             <imageName>zuus_lightning_bolt_hp2</imageName>
             <name>Lightning Bolt</name>
             <description>Calls down a bolt of lightning to strike an enemy unit, causing damage and a mini-stun. When cast, Lightning Bolt briefly provides unobstructed vision and True Sight around the target in a 750 radius. Can be cast on the ground, affecting the closest enemy hero in 325 range.</description>
-            <manaCost>75/95/115/135</manaCost>
+            <manaCost>90/105/120/135</manaCost>
             <cooldown>6</cooldown>
             <abilityDetails>ABILITY:  Unit Target, Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -5393,7 +5393,7 @@
             <imageName>shadow_shaman_voodoo_hp2</imageName>
             <name>Hex</name>
             <description>Transforms an enemy unit into a harmless creature, disabling their attacks and abilities.</description>
-            <manaCost>110/140/170/200</manaCost>
+            <manaCost>70/110/150/190</manaCost>
             <cooldown>13</cooldown>
             <disableDuration>DURATION:  1.25 / 2 / 2.75 / 3.5</disableDuration>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
@@ -5446,7 +5446,7 @@
             <abilityDetails>SCEPTER BONUS ATTACK RANGE:  225</abilityDetails>
         </abilities>
         <talents>
-            <optionOne>+60 Wards Attack Damage</optionOne>
+            <optionOne>+50 Wards Attack Damage</optionOne>
             <optionTwo>+400 Ether Shock Damage</optionTwo>
             <level>25</level>
         </talents>
@@ -5456,7 +5456,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>-4s Hex Cooldown</optionOne>
+            <optionOne>-5s Hex Cooldown</optionOne>
             <optionTwo>+125 Cast Range</optionTwo>
             <level>15</level>
         </talents>
@@ -5721,7 +5721,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>CREEP ENCHANT DURATION:  50 / 60 / 70 / 80</abilityDetails>
             <abilityDetails>HERO MOVE SLOW:  55%</abilityDetails>
-            <abilityDetails>HERO SLOW DURATION:  3 / 4 / 5 / 6</abilityDetails>
+            <abilityDetails>HERO SLOW DURATION:  3.74 / 4.5 / 5.25 / 6</abilityDetails>
             <removableDebuffs>
                 <description>slow</description>
                 <basicDispel>true</basicDispel>
@@ -5741,7 +5741,7 @@
             <name>Nature's Attendants</name>
             <description>A cloud of wisps heals Enchantress and any friendly units nearby. Lasts 11 seconds.</description>
             <manaCost>110/120/130/140</manaCost>
-            <cooldown>45</cooldown>
+            <cooldown>35</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
             <abilityDetails>RADIUS:  275 / 275 / 275 / 275</abilityDetails>
         </abilities>
@@ -6049,7 +6049,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>RADIUS:  425</abilityDetails>
             <abilityDetails>BASE DURATION:  6</abilityDetails>
-            <abilityDetails>PENALTY DURATION:  4</abilityDetails>
+            <abilityDetails>PENALTY DURATION:  5</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  9% / 12% / 15% / 18%</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
@@ -6389,7 +6389,7 @@
             <name>Thunder Strike</name>
             <description>Repeatedly strikes the targeted unit with lightning. Each strike damages nearby enemy units in a small radius. Provides vision of its target.</description>
             <manaCost>130/130/130/130</manaCost>
-            <cooldown>15/13/11/9</cooldown>
+            <cooldown>18/15/12/9</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -6551,7 +6551,7 @@
             <imageName>keeper_of_the_light_chakra_magic_hp2</imageName>
             <name>Chakra Magic</name>
             <description>Restores mana to the target unit, increases its mana capacity, and reduces the cooldown of the next spell they cast.</description>
-            <manaCost>25/35/45/55</manaCost>
+            <manaCost>0</manaCost>
             <cooldown>17/16/15/14</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Allied Units</abilityDetails>
@@ -6812,7 +6812,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+90 Gold/Min</optionOne>
+            <optionOne>+120 Gold/Min</optionOne>
             <optionTwo>+150 Cast Range</optionTwo>
             <level>15</level>
         </talents>
@@ -6960,7 +6960,7 @@
             <name>Bramble Maze</name>
             <description>Dark Willow creates a maze of brambles in the target area. Enemies that walk into a bramble are rooted and take damage over time.</description>
             <manaCost>140/150/160/170</manaCost>
-            <cooldown>40/35/30/25</cooldown>
+            <cooldown>34/31/28/25</cooldown>
             <disableDuration>PLACEMENT DURATION:  15</disableDuration>
             <abilityDetails>ABILITY:  Point Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -7079,7 +7079,7 @@
         </talents>
         <talents>
             <optionOne>+125 Cast Range</optionOne>
-            <optionTwo>+20 Damage</optionTwo>
+            <optionTwo>+30 Damage</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -7312,13 +7312,13 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+75 Damage</optionOne>
+            <optionOne>+12% Rot Slow</optionOne>
             <optionTwo>13% Spell Lifesteal</optionTwo>
             <level>15</level>
         </talents>
         <talents>
             <optionOne>+35 Rot Damage</optionOne>
-            <optionTwo>+5 Armor</optionTwo>
+            <optionTwo>+30% XP</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -7393,7 +7393,7 @@
             <abilityDetails>EXPLODE DEATH DAMAGE:  90 / 130 / 170 / 220</abilityDetails>
             <abilityDetails>EXPLODE TIMER DAMAGE:  20 / 50 / 80 / 110</abilityDetails>
             <abilityDetails>EXPLODE TIMER:  6</abilityDetails>
-            <abilityDetails>MOVE SLOW:  21% / 24% / 27% / 30%</abilityDetails>
+            <abilityDetails>MOVE SLOW:  15% / 20% / 25% / 30%</abilityDetails>
             <abilityDetails>SLOW DURATION:  3</abilityDetails>
             <removableDebuffs>
                 <description>slow</description>
@@ -7786,7 +7786,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+25 Skeletons Attack Damage</optionOne>
+            <optionOne>+35 Skeletons Attack Damage</optionOne>
             <optionTwo>+15 Strength</optionTwo>
             <level>15</level>
         </talents>
@@ -7917,7 +7917,7 @@
             <name>Void</name>
             <description>Creates a damaging void that slows an enemy unit and deals damage. When cast at night Void also mini-stuns, interrupting channeling abilities. The slowing effect lasts longer at night.</description>
             <manaCost>80/90/100/110</manaCost>
-            <cooldown>8</cooldown>
+            <cooldown>11/10/9/8</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -7944,7 +7944,7 @@
             <name>Crippling Fear</name>
             <description>Night Stalker horrifies the target enemy Hero, causing it to miss attacks and become silenced. The effect lasts longer at night.</description>
             <manaCost>50</manaCost>
-            <cooldown>12</cooldown>
+            <cooldown>24/20/16/12</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
@@ -8194,11 +8194,11 @@
             <name>Greater Bash</name>
             <description>Gives a chance to stun and knockback an enemy unit on an attack, as well as gaining bonus movement speed after a bash occurs. Deals a percentage of movement speed as damage.</description>
             <cooldown>1.50</cooldown>
-            <disableDuration>STUN DURATION:  1 / 1.2 / 1.4 / 1.6</disableDuration>
+            <disableDuration>STUN DURATION:  1.2 / 1.4 / 1.6 / 1.8</disableDuration>
             <abilityDetails>ABILITY:  Passive</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>STUN DURATION:  1 / 1.2 / 1.4 / 1.6</abilityDetails>
+            <abilityDetails>STUN DURATION:  1.2 / 1.4 / 1.6 / 1.8</abilityDetails>
             <abilityDetails>KNOCKBACK DURATION:  0.5 / 0.5 / 0.5 / 0.5</abilityDetails>
             <abilityDetails>BONUS MOVE SPEED:  15% / 15% / 15% / 15%</abilityDetails>
             <abilityDetails>SPEED DURATION:  3 / 3 / 3 / 3</abilityDetails>
@@ -8225,7 +8225,7 @@
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  Yes</abilityDetails>
-            <abilityDetails>BONUS DAMAGE:  150 / 250 / 350</abilityDetails>
+            <abilityDetails>BONUS DAMAGE:  150 / 200 / 250</abilityDetails>
             <abilityDetails>RANGE:  700</abilityDetails>
             <abilityDetails> SCEPTER RANGE: 850</abilityDetails>
             <abilityDetails> SCEPTER BASH RADIUS: 250 / 250 / 250</abilityDetails>
@@ -8250,7 +8250,7 @@
         </talents>
         <talents>
             <optionOne>+5 Armor</optionOne>
-            <optionTwo>+400 Night Vision</optionTwo>
+            <optionTwo>+600 Night Vision</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -8658,7 +8658,7 @@
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>SPEED:  950</abilityDetails>
             <abilityDetails>SLOW:  25% / 30% / 35% / 40%</abilityDetails>
-            <abilityDetails>SLOW DURATION:  2.5 / 2.75 / 3 / 3.25</abilityDetails>
+            <abilityDetails>SLOW DURATION:  3.25</abilityDetails>
             <abilityDetails>DAMAGE:  70 / 140 / 210 / 280</abilityDetails>
             <removableDebuffs>
                 <description>drag/disable</description>
@@ -8811,12 +8811,12 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+60 Mist Coil Heal/Damage</optionOne>
-            <optionTwo>+6 Armor</optionTwo>
+            <optionOne>+75 Mist Coil Heal/Damage</optionOne>
+            <optionTwo>+8 Armor</optionTwo>
             <level>15</level>
         </talents>
         <talents>
-            <optionOne>+20% XP Gain</optionOne>
+            <optionOne>+25% XP Gain</optionOne>
             <optionTwo>+25 Movement Speed</optionTwo>
             <level>10</level>
         </talents>
@@ -9551,7 +9551,7 @@
             <abilityDetails>DAMAGE TYPE:  Physical</abilityDetails>
             <abilityDetails>PIERCES SPELL IMMUNITY:  No</abilityDetails>
             <abilityDetails>MOVE SLOW:  50%</abilityDetails>
-            <abilityDetails>SLOW DURATION:  1 / 2 / 3 / 4</abilityDetails>
+            <abilityDetails>SLOW DURATION:  1.75 / 2.5 / 3.25 / 4</abilityDetails>
             <abilityDetails>BASE DAMAGE:  65</abilityDetails>
             <abilityDetails>ATTACK DAMAGE:  25% / 40% / 55% / 70%</abilityDetails>
             <removableDebuffs>
@@ -9613,7 +9613,7 @@
             <level>25</level>
         </talents>
         <talents>
-            <optionOne>Double Strike Stifling Dagger</optionOne>
+            <optionOne>Triple Strike Stifling Dagger</optionOne>
             <optionTwo>20% Lifesteal</optionTwo>
             <level>20</level>
         </talents>
@@ -9774,7 +9774,7 @@
             <manaCost>90/90/90/90</manaCost>
             <cooldown>45/35/25/15</cooldown>
             <abilityDetails>ABILITY:  No Target</abilityDetails>
-            <abilityDetails>BONUS ATTACK SPEED:  80 / 140 / 200 / 260</abilityDetails>
+            <abilityDetails>BONUS ATTACK SPEED:  110 / 160 / 210 / 260</abilityDetails>
         </abilities>
         <abilities>
             <isUltimate>false</isUltimate>
@@ -10160,7 +10160,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>-8s Spectral Dagger Cooldown</optionOne>
+            <optionOne>-10s Spectral Dagger Cooldown</optionOne>
             <optionTwo>+8 All Stats</optionTwo>
             <level>15</level>
         </talents>
@@ -10868,7 +10868,7 @@
             <imageName>bane_brain_sap_hp2</imageName>
             <name>Brain Sap</name>
             <description>Feasts on the vital energies of an enemy unit, healing Bane and dealing damage. Upgradable by Aghanim's Scepter.</description>
-            <manaCost>70/100/130/160</manaCost>
+            <manaCost>90/115/140/165</manaCost>
             <cooldown>14/13/12/11</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
@@ -10969,7 +10969,7 @@
             <name>Frost Blast</name>
             <description>Blasts the target enemy unit with damaging frost, dealing area damage and slowing movement and attack rates for 4 seconds. The primary target takes the most damage.</description>
             <manaCost>125/150/170/190</manaCost>
-            <cooldown>8</cooldown>
+            <cooldown>7</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>AFFECTS:  Enemy Units</abilityDetails>
             <abilityDetails>DAMAGE TYPE:  Magical</abilityDetails>
@@ -10977,7 +10977,7 @@
             <abilityDetails>DAMAGE:  50 / 100 / 150 / 200</abilityDetails>
             <abilityDetails>RADIUS:  200 / 200 / 200 / 200</abilityDetails>
             <abilityDetails>MOVEMENT SLOW:  30% / 30% / 30% / 30%</abilityDetails>
-            <abilityDetails>ATTACK SLOW:  20 / 20 / 20 / 20</abilityDetails>
+            <abilityDetails>ATTACK SLOW:  30</abilityDetails>
             <abilityDetails>AREA DAMAGE:  75 / 100 / 125 / 150</abilityDetails>
             <removableDebuffs>
                 <basicDispel>true</basicDispel>
@@ -11074,7 +11074,7 @@
         </talents>
         <talents>
             <optionOne>+25 Movement Speed</optionOne>
-            <optionTwo>+175 Health</optionTwo>
+            <optionTwo>+200 Health</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
@@ -11366,7 +11366,7 @@
             <imageName>enigma_demonic_conversion_hp2</imageName>
             <name>Demonic Conversion</name>
             <description>Transforms a creep into three fragments of Enigma himself. These eidolons are all under Enigma's control, and repeated successful attacks cause them to multiply. When this happens, the eidolons have their health restored.</description>
-            <manaCost>170/170/170/170</manaCost>
+            <manaCost>140/150/160/170</manaCost>
             <cooldown>35</cooldown>
             <abilityDetails>ABILITY:  Unit Target</abilityDetails>
             <abilityDetails>ATTACKS TO MULTIPLY:  6 / 6 / 6 / 6</abilityDetails>
@@ -11546,8 +11546,8 @@
             <piercesSIType>Fully pierces spell immunity</piercesSIType>
         </abilities>
         <talents>
-            <optionOne>-1.5s Death Pulse Cooldown</optionOne>
-            <optionTwo>+0.6 Heartstopper Aura</optionTwo>
+            <optionOne>-2.5s Death Pulse Cooldown</optionOne>
+            <optionTwo>+0.8 Heartstopper Aura</optionTwo>
             <level>25</level>
         </talents>
         <talents>
@@ -11556,7 +11556,7 @@
             <level>20</level>
         </talents>
         <talents>
-            <optionOne>+16% Ghost Shroud Slow</optionOne>
+            <optionOne>+20% Ghost Shroud Slow</optionOne>
             <optionTwo>+40 Death Pulse Heal</optionTwo>
             <level>15</level>
         </talents>
@@ -12644,7 +12644,7 @@
         </talents>
         <talents>
             <optionOne>+10% Spell Amplification</optionOne>
-            <optionTwo>+60 Gold/Min</optionTwo>
+            <optionTwo>+90 Gold/Min</optionTwo>
             <level>10</level>
         </talents>
     </heroInfo>
